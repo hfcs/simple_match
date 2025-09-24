@@ -8,7 +8,14 @@ class OverallResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Overall Result')),
-      body: Center(child: Text('TODO: Implement Overall Result UI')),
+      body: Center(child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text('Overall Result'),
+          SizedBox(height: 16),
+          Text('TODO: Implement Overall Result UI'),
+        ],
+      )),
     );
   }
 }

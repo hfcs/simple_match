@@ -12,10 +12,22 @@ class MainMenuView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: () {}, child: const Text('Match Setup')),
-            ElevatedButton(onPressed: () {}, child: const Text('Shooter Setup')),
-            ElevatedButton(onPressed: () {}, child: const Text('Stage Input')),
-            ElevatedButton(onPressed: () {}, child: const Text('Clear All Data')),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/match-setup'),
+              child: const Text('Match Setup'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/shooter-setup'),
+              child: const Text('Shooter Setup'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/stage-input'),
+              child: const Text('Stage Input'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Clear All Data'),
+            ),
           ],
         ),
       ),

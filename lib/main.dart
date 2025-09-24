@@ -9,6 +9,10 @@ import 'viewmodel/shooter_setup_viewmodel.dart';
 import 'viewmodel/stage_input_viewmodel.dart';
 import 'viewmodel/overall_result_viewmodel.dart';
 import 'views/main_menu_view.dart';
+import 'views/match_setup_view.dart';
+import 'views/shooter_setup_view.dart';
+import 'views/stage_input_view.dart';
+import 'views/overall_result_view.dart';
 
 void main() {
   runApp(const MiniIPSCMatchApp());
@@ -40,7 +44,14 @@ class MiniIPSCMatchApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Mini IPSC Match',
-        home: MainMenuView(),
+        initialRoute: '/', 
+        routes: {
+          '/': (context) => MainMenuView(),
+          '/match-setup': (context) => const MatchSetupView(),
+          '/shooter-setup': (context) => const ShooterSetupView(),
+          '/stage-input': (context) => const StageInputView(),
+          '/overall-result': (context) => const OverallResultView(),
+        },
       ),
     );
   }

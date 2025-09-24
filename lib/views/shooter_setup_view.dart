@@ -8,7 +8,14 @@ class ShooterSetupView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Shooter Setup')),
-      body: Center(child: Text('TODO: Implement Shooter Setup UI')),
+      body: Center(child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text('Shooter Setup'),
+          SizedBox(height: 16),
+          Text('TODO: Implement Shooter Setup UI'),
+        ],
+      )),
     );
   }
 }

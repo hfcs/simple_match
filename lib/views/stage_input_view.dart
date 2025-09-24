@@ -8,7 +8,14 @@ class StageInputView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Stage Input')),
-      body: Center(child: Text('TODO: Implement Stage Input UI')),
+      body: Center(child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Text('Stage Input'),
+          SizedBox(height: 16),
+          Text('TODO: Implement Stage Input UI'),
+        ],
+      )),
     );
   }
 }

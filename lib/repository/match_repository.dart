@@ -6,6 +6,14 @@ import '../services/persistence_service.dart';
 
 /// Repository for managing match data (stages, shooters, results).
 class MatchRepository extends ChangeNotifier {
+  /// Clears all match, shooter, and result data and persists the change.
+  Future<void> clearAllData() async {
+    _stages.clear();
+    _shooters.clear();
+    _results.clear();
+    await saveAll();
+    notifyListeners();
+  }
   final List<MatchStage> _stages = [];
   final List<Shooter> _shooters = [];
   final List<StageResult> _results = [];

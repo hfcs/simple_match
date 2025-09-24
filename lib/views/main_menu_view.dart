@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../repository/match_repository.dart';
 
 /// Main menu view with navigation buttons.
 class MainMenuView extends StatelessWidget {
@@ -29,7 +31,32 @@ class MainMenuView extends StatelessWidget {
               child: const Text('Overall Result'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final confirmed = await showDialog<bool>(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Clear All Data'),
+                    content: const Text('Are you sure you want to clear all data? This cannot be undone.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        child: const Text('Confirm'),
+                      ),
+                    ],
+                  ),
+                );
+                if (confirmed == true) {
+                  final repo = context.read<MatchRepository>();
+                  await repo.clearAllData();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('All data cleared.')),
+                  );
+                }
+              },
               child: const Text('Clear All Data'),
             ),
           ],

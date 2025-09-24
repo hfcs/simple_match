@@ -51,6 +51,7 @@
 - **Hot Reload:** Supported for rapid UI iteration
 
 ## Project Conventions
+- **Test-Driven Development:** All new features and bug fixes must be implemented using a test-driven approach. Always generate or update tests in `test/` before writing or modifying any production code. No code should be added or changed without a corresponding test.
 - **Form Validation:** Input constraints enforced in ViewModels
 - **Error Handling:** Errors returned as strings, displayed via SnackBar
 - **State Updates:** All state changes trigger persistence updates

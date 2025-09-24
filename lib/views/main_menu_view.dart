@@ -25,6 +25,10 @@ class MainMenuView extends StatelessWidget {
               child: const Text('Stage Input'),
             ),
             ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/overall-result'),
+              child: const Text('Overall Result'),
+            ),
+            ElevatedButton(
               onPressed: () {},
               child: const Text('Clear All Data'),
             ),

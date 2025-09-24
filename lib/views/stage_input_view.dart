@@ -11,7 +11,6 @@ class StageInputView extends StatelessWidget {
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text('Stage Input'),
           SizedBox(height: 16),
           Text('TODO: Implement Stage Input UI'),
         ],

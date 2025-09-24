@@ -11,7 +11,6 @@ class OverallResultView extends StatelessWidget {
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text('Overall Result'),
           SizedBox(height: 16),
           Text('TODO: Implement Overall Result UI'),
         ],

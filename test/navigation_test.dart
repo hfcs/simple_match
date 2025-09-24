@@ -9,21 +9,21 @@ void main() {
     // Match Setup
     await tester.tap(find.text('Match Setup'));
     await tester.pumpAndSettle();
-    expect(find.text('Match Setup'), findsNWidgets(2)); // AppBar and body
+  expect(find.text('Match Setup'), findsOneWidget); // AppBar only
     await tester.pageBack();
     await tester.pumpAndSettle();
 
     // Shooter Setup
     await tester.tap(find.text('Shooter Setup'));
     await tester.pumpAndSettle();
-    expect(find.text('Shooter Setup'), findsNWidgets(2));
+  expect(find.text('Shooter Setup'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
 
     // Stage Input
     await tester.tap(find.text('Stage Input'));
     await tester.pumpAndSettle();
-    expect(find.text('Stage Input'), findsNWidgets(2));
+  expect(find.text('Stage Input'), findsOneWidget);
     await tester.pageBack();
     await tester.pumpAndSettle();
   });

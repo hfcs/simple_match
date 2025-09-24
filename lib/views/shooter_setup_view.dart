@@ -11,7 +11,6 @@ class ShooterSetupView extends StatelessWidget {
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          Text('Shooter Setup'),
           SizedBox(height: 16),
           Text('TODO: Implement Shooter Setup UI'),
         ],

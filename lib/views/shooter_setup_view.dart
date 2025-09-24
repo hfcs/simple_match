@@ -45,81 +45,109 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              key: const Key('nameField'),
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
-              enabled: _editingName == null,
-            ),
-            TextField(
-              key: const Key('handicapField'),
-              controller: _handicapController,
-              decoration: const InputDecoration(labelText: 'Handicap (0.00-1.00)'),
-              keyboardType: TextInputType.number,
-            ),
-            if (_error != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(_error!, style: const TextStyle(color: Colors.red)),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextField(
+                      key: const Key('nameField'),
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: _editingName == null,
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      key: const Key('handicapField'),
+                      controller: _handicapController,
+                      decoration: const InputDecoration(
+                        labelText: 'Handicap (0.00-1.00)',
+                        prefixIcon: Icon(Icons.percent),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    if (_error != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                      ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        if (_editingName == null)
+                          ElevatedButton.icon(
+                            key: const Key('addShooterButton'),
+                            icon: const Icon(Icons.add),
+                            onPressed: () {
+                              final name = _nameController.text.trim();
+                              final handicap = double.tryParse(_handicapController.text);
+                              final err = (handicap == null)
+                                  ? 'Invalid handicap.'
+                                  : widget.vm.addShooter(name, handicap);
+                              setState(() => _error = err);
+                              if (err == null) {
+                                _nameController.clear();
+                                _handicapController.clear();
+                              }
+                            },
+                            label: const Text('Add Shooter'),
+                          )
+                        else ...[
+                          ElevatedButton.icon(
+                            key: const Key('confirmEditButton'),
+                            icon: const Icon(Icons.check),
+                            onPressed: () {
+                              final handicap = double.tryParse(_handicapController.text);
+                              final err = (handicap == null)
+                                  ? 'Invalid handicap.'
+                                  : widget.vm.editShooter(_editingName!, handicap);
+                              setState(() => _error = err);
+                              if (err == null) {
+                                setState(() => _editingName = null);
+                                _nameController.clear();
+                                _handicapController.clear();
+                              }
+                            },
+                            label: const Text('Confirm Edit'),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton(
+                            onPressed: () {
+                              setState(() => _editingName = null);
+                              _nameController.clear();
+                              _handicapController.clear();
+                              _error = null;
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            Row(
-              children: [
-                if (_editingName == null)
-                  ElevatedButton(
-                    key: const Key('addShooterButton'),
-                    onPressed: () {
-                      final name = _nameController.text.trim();
-                      final handicap = double.tryParse(_handicapController.text);
-                      final err = (handicap == null)
-                          ? 'Invalid handicap.'
-                          : widget.vm.addShooter(name, handicap);
-                      setState(() => _error = err);
-                      if (err == null) {
-                        _nameController.clear();
-                        _handicapController.clear();
-                      }
-                    },
-                    child: const Text('Add Shooter'),
-                  )
-                else ...[
-                  ElevatedButton(
-                    key: const Key('confirmEditButton'),
-                    onPressed: () {
-                      final handicap = double.tryParse(_handicapController.text);
-                      final err = (handicap == null)
-                          ? 'Invalid handicap.'
-                          : widget.vm.editShooter(_editingName!, handicap);
-                      setState(() => _error = err);
-                      if (err == null) {
-                        setState(() => _editingName = null);
-                        _nameController.clear();
-                        _handicapController.clear();
-                      }
-                    },
-                    child: const Text('Confirm Edit'),
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    onPressed: () {
-                      setState(() => _editingName = null);
-                      _nameController.clear();
-                      _handicapController.clear();
-                      _error = null;
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                ],
-              ],
             ),
             const SizedBox(height: 24),
-            const Text('Shooters:'),
+            const Text('Shooters:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
             Expanded(
-              child: ListView(
-                children: [
-                  for (final s in shooters)
-                    ListTile(
+              child: ListView.separated(
+                itemCount: shooters.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (context, idx) {
+                  final s = shooters[idx];
+                  return Card(
+                    elevation: 1,
+                    child: ListTile(
+                      leading: const Icon(Icons.person),
                       title: Text(s.name),
-                      subtitle: Text(s.handicapFactor.toString()),
+                      subtitle: Text('Handicap: ${s.handicapFactor.toStringAsFixed(2)}'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -152,7 +180,8 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                         ],
                       ),
                     ),
-                ],
+                  );
+                },
               ),
             ),
           ],

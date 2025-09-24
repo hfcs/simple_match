@@ -11,53 +11,79 @@ class MainMenuView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Mini IPSC Match')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
           children: [
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/match-setup'),
-              child: const Text('Match Setup'),
+            Card(
+              elevation: 2,
+              child: ListTile(
+                leading: const Icon(Icons.settings),
+                title: const Text('Match Setup'),
+                onTap: () => Navigator.pushNamed(context, '/match-setup'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/shooter-setup'),
-              child: const Text('Shooter Setup'),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              child: ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Shooter Setup'),
+                onTap: () => Navigator.pushNamed(context, '/shooter-setup'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/stage-input'),
-              child: const Text('Stage Input'),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              child: ListTile(
+                leading: const Icon(Icons.input),
+                title: const Text('Stage Input'),
+                onTap: () => Navigator.pushNamed(context, '/stage-input'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/overall-result'),
-              child: const Text('Overall Result'),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              child: ListTile(
+                leading: const Icon(Icons.leaderboard),
+                title: const Text('Overall Result'),
+                onTap: () => Navigator.pushNamed(context, '/overall-result'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                final confirmed = await showDialog<bool>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Clear All Data'),
-                    content: const Text('Are you sure you want to clear all data? This cannot be undone.'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('Confirm'),
-                      ),
-                    ],
-                  ),
-                );
-                if (confirmed == true) {
-                  final repo = context.read<MatchRepository>();
-                  await repo.clearAllData();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('All data cleared.')),
+            const SizedBox(height: 16),
+            Card(
+              color: Colors.red[50],
+              elevation: 2,
+              child: ListTile(
+                leading: const Icon(Icons.delete_forever, color: Colors.red),
+                title: const Text('Clear All Data', style: TextStyle(color: Colors.red)),
+                onTap: () async {
+                  final confirmed = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Clear All Data'),
+                      content: const Text('Are you sure you want to clear all data? This cannot be undone.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: const Text('Confirm'),
+                        ),
+                      ],
+                    ),
                   );
-                }
-              },
-              child: const Text('Clear All Data'),
+                  if (confirmed == true) {
+                    final repo = context.read<MatchRepository>();
+                    await repo.clearAllData();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('All data cleared.')),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),

@@ -25,13 +25,27 @@ class OverallResultView extends StatelessWidget {
                       ? const Center(child: Text('No results yet.'))
                       : ListView.separated(
                           itemCount: results.length,
-                          separatorBuilder: (_, __) => const Divider(),
+                          separatorBuilder: (_, __) => const SizedBox(height: 8),
                           itemBuilder: (context, i) {
                             final r = results[i];
-                            return ListTile(
-                              leading: CircleAvatar(child: Text('${i + 1}')),
-                              title: Text(r.name),
-                              trailing: Text(r.totalPoints.toStringAsFixed(2)),
+                            return Card(
+                              elevation: 1,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: Colors.blue[100],
+                                  child: Text('${i + 1}', style: const TextStyle(color: Colors.black)),
+                                ),
+                                title: Text(r.name),
+                                subtitle: const Text('Total Adjusted Points'),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Icon(Icons.emoji_events, color: Colors.amber),
+                                    const SizedBox(width: 4),
+                                    Text(r.totalPoints.toStringAsFixed(2), style: const TextStyle(fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         ),

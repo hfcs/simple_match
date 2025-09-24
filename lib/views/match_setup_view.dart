@@ -35,81 +35,110 @@ class _MatchSetupViewState extends State<MatchSetupView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
-              key: const Key('stageField'),
-              controller: _stageController,
-              decoration: const InputDecoration(labelText: 'Stage (1-30)'),
-              keyboardType: TextInputType.number,
-              enabled: _editingStage == null,
-            ),
-            TextField(
-              key: const Key('scoringShootsField'),
-              controller: _shootsController,
-              decoration: const InputDecoration(labelText: 'Scoring Shoots (1-32)'),
-              keyboardType: TextInputType.number,
-            ),
-            if (_error != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(_error!, style: const TextStyle(color: Colors.red)),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextField(
+                      key: const Key('stageField'),
+                      controller: _stageController,
+                      decoration: const InputDecoration(
+                        labelText: 'Stage (1-30)',
+                        prefixIcon: Icon(Icons.flag),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      enabled: _editingStage == null,
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      key: const Key('scoringShootsField'),
+                      controller: _shootsController,
+                      decoration: const InputDecoration(
+                        labelText: 'Scoring Shoots (1-32)',
+                        prefixIcon: Icon(Icons.confirmation_number),
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    if (_error != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                      ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        if (_editingStage == null)
+                          ElevatedButton.icon(
+                            key: const Key('addStageButton'),
+                            icon: const Icon(Icons.add),
+                            onPressed: () {
+                              final stage = int.tryParse(_stageController.text);
+                              final shoots = int.tryParse(_shootsController.text);
+                              final err = (stage == null || shoots == null)
+                                  ? 'Invalid input.'
+                                  : vm.addStage(stage, shoots);
+                              setState(() => _error = err);
+                              if (err == null) {
+                                _stageController.clear();
+                                _shootsController.clear();
+                              }
+                            },
+                            label: const Text('Add Stage'),
+                          )
+                        else ...[
+                          ElevatedButton.icon(
+                            key: const Key('confirmEditButton'),
+                            icon: const Icon(Icons.check),
+                            onPressed: () {
+                              final shoots = int.tryParse(_shootsController.text);
+                              final err = (shoots == null)
+                                  ? 'Invalid input.'
+                                  : vm.editStage(_editingStage!, shoots);
+                              setState(() => _error = err);
+                              if (err == null) {
+                                setState(() => _editingStage = null);
+                                _stageController.clear();
+                                _shootsController.clear();
+                              }
+                            },
+                            label: const Text('Confirm Edit'),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton(
+                            onPressed: () {
+                              setState(() => _editingStage = null);
+                              _stageController.clear();
+                              _shootsController.clear();
+                              _error = null;
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            Row(
-              children: [
-                if (_editingStage == null)
-                  ElevatedButton(
-                    key: const Key('addStageButton'),
-                    onPressed: () {
-                      final stage = int.tryParse(_stageController.text);
-                      final shoots = int.tryParse(_shootsController.text);
-                      final err = (stage == null || shoots == null)
-                          ? 'Invalid input.'
-                          : vm.addStage(stage, shoots);
-                      setState(() => _error = err);
-                      if (err == null) {
-                        _stageController.clear();
-                        _shootsController.clear();
-                      }
-                    },
-                    child: const Text('Add Stage'),
-                  )
-                else ...[
-                  ElevatedButton(
-                    key: const Key('confirmEditButton'),
-                    onPressed: () {
-                      final shoots = int.tryParse(_shootsController.text);
-                      final err = (shoots == null)
-                          ? 'Invalid input.'
-                          : vm.editStage(_editingStage!, shoots);
-                      setState(() => _error = err);
-                      if (err == null) {
-                        setState(() => _editingStage = null);
-                        _stageController.clear();
-                        _shootsController.clear();
-                      }
-                    },
-                    child: const Text('Confirm Edit'),
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    onPressed: () {
-                      setState(() => _editingStage = null);
-                      _stageController.clear();
-                      _shootsController.clear();
-                      _error = null;
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                ],
-              ],
             ),
             const SizedBox(height: 24),
-            const Text('Stages:'),
+            const Text('Stages:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
             Expanded(
-              child: ListView(
-                children: [
-                  for (final s in stages)
-                    ListTile(
-                      title: Text('Stage ${s.stage}: ${s.scoringShoots} shoots'),
+              child: ListView.separated(
+                itemCount: stages.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (context, idx) {
+                  final s = stages[idx];
+                  return Card(
+                    elevation: 1,
+                    child: ListTile(
+                      leading: const Icon(Icons.flag),
+                      title: Text('Stage ${s.stage}'),
+                      subtitle: Text('${s.scoringShoots} shoots'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -142,7 +171,8 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                         ],
                       ),
                     ),
-                ],
+                  );
+                },
               ),
             ),
           ],

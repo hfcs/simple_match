@@ -72,182 +72,234 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<int>(
-                    key: const Key('stageSelector'),
-                    decoration: const InputDecoration(labelText: 'Stage'),
-                    value: selectedStage,
-                    items: stages
-                        .map((s) => DropdownMenuItem(
-                              value: s.stage,
-                              child: Text(s.stage.toString()),
-                            ))
-                        .toList(),
-                    onChanged: (v) {
-                      setState(() {
-                        widget.vm.selectStage(v!);
-                        _refreshFields();
-                      });
-                    },
-                  ),
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            key: const Key('stageSelector'),
+                            decoration: const InputDecoration(
+                              labelText: 'Stage',
+                              prefixIcon: Icon(Icons.flag),
+                              border: OutlineInputBorder(),
+                            ),
+                            value: selectedStage,
+                            items: stages
+                                .map((s) => DropdownMenuItem(
+                                      value: s.stage,
+                                      child: Text(s.stage.toString()),
+                                    ))
+                                .toList(),
+                            onChanged: (v) {
+                              setState(() {
+                                widget.vm.selectStage(v!);
+                                _refreshFields();
+                              });
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: DropdownButtonFormField<String>(
+                            key: const Key('shooterSelector'),
+                            decoration: const InputDecoration(
+                              labelText: 'Shooter',
+                              prefixIcon: Icon(Icons.person),
+                              border: OutlineInputBorder(),
+                            ),
+                            value: selectedShooter,
+                            items: shooters
+                                .map((s) => DropdownMenuItem(
+                                      value: s.name,
+                                      child: Text(s.name),
+                                    ))
+                                .toList(),
+                            onChanged: (v) {
+                              setState(() {
+                                widget.vm.selectShooter(v!);
+                                _refreshFields();
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            key: const Key('timeField'),
+                            controller: _timeController,
+                            decoration: const InputDecoration(
+                              labelText: 'Time (sec)',
+                              prefixIcon: Icon(Icons.timer),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.numberWithOptions(decimal: true),
+                            onChanged: (v) {
+                              final t = double.tryParse(v) ?? 0.0;
+                              setState(() => widget.vm.time = t);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextField(
+                            key: const Key('aField'),
+                            controller: _aController,
+                            decoration: const InputDecoration(
+                              labelText: 'A',
+                              prefixIcon: Icon(Icons.looks_one),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.a = n);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextField(
+                            key: const Key('cField'),
+                            controller: _cController,
+                            decoration: const InputDecoration(
+                              labelText: 'C',
+                              prefixIcon: Icon(Icons.looks_two),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.c = n);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextField(
+                            key: const Key('dField'),
+                            controller: _dController,
+                            decoration: const InputDecoration(
+                              labelText: 'D',
+                              prefixIcon: Icon(Icons.looks_3),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.d = n);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            key: const Key('missesField'),
+                            controller: _missesController,
+                            decoration: const InputDecoration(
+                              labelText: 'Misses',
+                              prefixIcon: Icon(Icons.close),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.misses = n);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextField(
+                            key: const Key('noShootsField'),
+                            controller: _noShootsController,
+                            decoration: const InputDecoration(
+                              labelText: 'No Shoots',
+                              prefixIcon: Icon(Icons.block),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.noShoots = n);
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: TextField(
+                            key: const Key('procErrorsField'),
+                            controller: _procErrorsController,
+                            decoration: const InputDecoration(
+                              labelText: 'Procedure Errors',
+                              prefixIcon: Icon(Icons.error),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: TextInputType.number,
+                            onChanged: (v) {
+                              final n = int.tryParse(v) ?? 0;
+                              setState(() => widget.vm.procErrors = n);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (validationError != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(validationError, style: const TextStyle(color: Colors.red)),
+                      ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Text('Hit Factor: ${widget.vm.hitFactor.toStringAsFixed(2)}'),
+                        const SizedBox(width: 16),
+                        Text('Adjusted: ${widget.vm.adjustedHitFactor.toStringAsFixed(2)}'),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      key: const Key('submitButton'),
+                      onPressed: isValid
+                          ? () {
+                              setState(() {
+                                widget.vm.submit();
+                                _editingKey = null;
+                                _refreshFields();
+                              });
+                            }
+                          : null,
+                      child: Text(_editingKey == null ? 'Submit' : 'Update'),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    key: const Key('shooterSelector'),
-                    decoration: const InputDecoration(labelText: 'Shooter'),
-                    value: selectedShooter,
-                    items: shooters
-                        .map((s) => DropdownMenuItem(
-                              value: s.name,
-                              child: Text(s.name),
-                            ))
-                        .toList(),
-                    onChanged: (v) {
-                      setState(() {
-                        widget.vm.selectShooter(v!);
-                        _refreshFields();
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    key: const Key('timeField'),
-                    controller: _timeController,
-                    decoration: const InputDecoration(labelText: 'Time (sec)'),
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
-                    onChanged: (v) {
-                      final t = double.tryParse(v) ?? 0.0;
-                      setState(() => widget.vm.time = t);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    key: const Key('aField'),
-                    controller: _aController,
-                    decoration: const InputDecoration(labelText: 'A'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.a = n);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    key: const Key('cField'),
-                    controller: _cController,
-                    decoration: const InputDecoration(labelText: 'C'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.c = n);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    key: const Key('dField'),
-                    controller: _dController,
-                    decoration: const InputDecoration(labelText: 'D'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.d = n);
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    key: const Key('missesField'),
-                    controller: _missesController,
-                    decoration: const InputDecoration(labelText: 'Misses'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.misses = n);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    key: const Key('noShootsField'),
-                    controller: _noShootsController,
-                    decoration: const InputDecoration(labelText: 'No Shoots'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.noShoots = n);
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: TextField(
-                    key: const Key('procErrorsField'),
-                    controller: _procErrorsController,
-                    decoration: const InputDecoration(labelText: 'Procedure Errors'),
-                    keyboardType: TextInputType.number,
-                    onChanged: (v) {
-                      final n = int.tryParse(v) ?? 0;
-                      setState(() => widget.vm.procErrors = n);
-                    },
-                  ),
-                ),
-              ],
-            ),
-            if (validationError != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(validationError, style: const TextStyle(color: Colors.red)),
               ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Text('Hit Factor: ${widget.vm.hitFactor.toStringAsFixed(2)}'),
-                const SizedBox(width: 16),
-                Text('Adjusted: ${widget.vm.adjustedHitFactor.toStringAsFixed(2)}'),
-              ],
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              key: const Key('submitButton'),
-              onPressed: isValid
-                  ? () {
-                      setState(() {
-                        widget.vm.submit();
-                        _editingKey = null;
-                        _refreshFields();
-                      });
-                    }
-                  : null,
-              child: Text(_editingKey == null ? 'Submit' : 'Update'),
             ),
             const SizedBox(height: 24),
-            const Text('Results:'),
+            const Text('Results:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
             Expanded(
-              child: ListView(
-                children: [
-                  for (final r in results)
-                    ListTile(
+              child: ListView.separated(
+                itemCount: results.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemBuilder: (context, idx) {
+                  final r = results[idx];
+                  return Card(
+                    elevation: 1,
+                    child: ListTile(
+                      leading: const Icon(Icons.person),
                       title: Text(r.shooter),
                       subtitle: Text('Stage: ${r.stage}, Time: ${r.time}'),
                       trailing: Row(
@@ -281,7 +333,8 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                         ],
                       ),
                     ),
-                ],
+                  );
+                },
               ),
             ),
           ],

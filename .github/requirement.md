@@ -6,9 +6,11 @@
     - Business logic in View Models
     - Repositories handle data model as source of truth
     - Services handles API calls, platform calls and local file
-- Use shared_preferences to persist data defined in the data model
 
 # Modules and Requirement
+
+## UI
+- Modern, visually appealing style (e.g., cards, spacing, icons)
 
 ## Data model
 
@@ -23,6 +25,7 @@ This program will set up a mini match of IPSC with following pages
 - Match set up
 - Shooter set up
 - Stage input
+- Overall result
 
 Also implement a single button clearing data input and persisted
 - Clear all data
@@ -41,6 +44,7 @@ We implement
     - Clear all data, a single button that ask user to confirm, allow user to cancel before proceeding to clear data model and the persistent storage
 
 ## Match set up
+- With back button returning to man menu
 - Input:
     - Stage, an interger between 1 - 30, reject input and remind user if they enter value out of range
         - Stage are unique, reject input and remind user if they enter a value already exist in the list from data model
@@ -52,6 +56,7 @@ We implement
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
 ## Shooter set up
+- With back button returning to man menu
 - Input:
     - Name, the name of the shooter participate in a match
         - Name for each shooters are unique, reject input and remind user if they enter a value already exist in the list from the data model
@@ -64,9 +69,7 @@ We implement
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
 ## Stage input
-
-Take a player's result in a certain stage as input
-
+- With back button returning to man menu
 - Input:
     - Stage: a selector that select from one of "stage" set up in the Match set up
     - Shooter: a select that select from one of the "shooters" set up in the Shooter setup
@@ -81,28 +84,35 @@ Take a player's result in a certain stage as input
     - Submit button
 - Function:
     - The input entry is stored in the data model
-    - Validate the record is a valid entry
+    - Calculate hit factor, adjusted hit factor, display them
+        - Definition of hit factor =  Time / Total score
+            - "Total score" is an integer defined below
+            - Each "A" scored is 5 points
+            - Each "C" scored is 3 points
+            - Each "D scored is 1 point
+            - Each "Misses" deduct 10 points
+            - Each "No Shoots" deduct 10 points
+            - Each "Procedure Errors" deduct 10 points
+        - Definition of adjusted hit factor =  hit factor * handicap factor of the shooter from data model
+    - When any input is changed, we validate if the record is valid
         - Read from data model Scoring shoots of the selected Stage
         - if A + C + D + Misses == Scoring shoots, this is a valid record
-        - If record is valid 
-            - then calculate hit factor, adjusted hit factor, display them and enable Submit button.
-                - Definition of hit factor =  Time / Total score
-                    - "Total score" is an integer defined below
-                    - Each "A" scored is 5 points
-                    - Each "C" scored is 3 points
-                    - Each "D scored is 1 point
-                    - Each "Misses" deduct 10 points
-                    - Each "No Shoots" deduct 10 points
-                    - Each "Procedure Errors" deduct 10 points
-                - Definition of adjusted hit factor =  hit factor * handicap factor of the shooter from data model
-            - else disable Submit button and display an error message indicating the Scoring shoots of the selected Sage
+            - then enable Submit button.
+            - else disable Submit button and display an error message indicating the Scoring shoots of the selected Stage
     - When either a Stage or Shooter is selected, this page will refresh it's input
         - If a corresponding record in data model exist, this page will load the value and refresh UI
         - If a corrpesonding record in data model does not exist, initialize this page with value specified in input section
-    - "Submit" button will be enabled when the record is a valid entry
-        - Hitting the "Submit" button will write this record to data model
+    - Hitting the "Submit" button will write this record to data model
     - The list from data model is displayed in the page and allow add, remove, edit of entries
 - Output:
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
-
+## Overall result
+- With back button returning to man menu
+- Function:
+    - For each shooter, calculate stage point in the stage
+        - Find out the highest adjusted hit factor ever scored in that stage
+        - stage point for shooter = (adjusted hit factor / highest adjust hit factor ever score d in that stage) x Scoring shotts in that stage x 5
+    - For each shooter, add up stage point of all stages as total adjusted stage point
+- Output:
+    -Rank the total adjusted stage point, highest first, and display a list of {Name, total adjusted stage point}

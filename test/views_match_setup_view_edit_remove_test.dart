@@ -7,7 +7,7 @@ import 'package:simple_match/views/match_setup_view.dart';
 
 Widget _wrap(Widget child) => MultiProvider(
       providers: [
-        Provider<MatchRepository>(create: (_) => MatchRepository()),
+        ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
         ProxyProvider<MatchRepository, MatchSetupViewModel>(
           update: (_, repo, __) => MatchSetupViewModel(repo),
         ),

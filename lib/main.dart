@@ -25,7 +25,7 @@ class MiniIPSCMatchApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<MatchRepository>(create: (_) => MatchRepository()),
+        ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
         ProxyProvider<MatchRepository, MainMenuViewModel>(
           update: (_, repo, __) => MainMenuViewModel(repo),
         ),

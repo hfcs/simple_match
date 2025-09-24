@@ -1,11 +1,11 @@
+import 'package:flutter/foundation.dart';
 import '../models/match_stage.dart';
 import '../models/shooter.dart';
 import '../models/stage_result.dart';
-
-/// Repository for managing match data (stages, shooters, results).
 import '../services/persistence_service.dart';
 
-class MatchRepository {
+/// Repository for managing match data (stages, shooters, results).
+class MatchRepository extends ChangeNotifier {
   final List<MatchStage> _stages = [];
   final List<Shooter> _shooters = [];
   final List<StageResult> _results = [];
@@ -76,11 +76,18 @@ class MatchRepository {
 
   // Results
   List<StageResult> get results => List.unmodifiable(_results);
-  void addResult(StageResult result) => _results.add(result);
-  void removeResult(int stage, String shooter) => _results.removeWhere((r) => r.stage == stage && r.shooter == shooter);
+  void addResult(StageResult result) {
+    _results.add(result);
+    notifyListeners();
+  }
+  void removeResult(int stage, String shooter) {
+    _results.removeWhere((r) => r.stage == stage && r.shooter == shooter);
+    notifyListeners();
+  }
   void updateResult(StageResult updated) {
     final idx = _results.indexWhere((r) => r.stage == updated.stage && r.shooter == updated.shooter);
     if (idx != -1) _results[idx] = updated;
+    notifyListeners();
   }
 
   // Getters for single items

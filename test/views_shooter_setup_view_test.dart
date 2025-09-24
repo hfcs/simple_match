@@ -7,7 +7,7 @@ import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/viewmodel/shooter_setup_viewmodel.dart';
 
 Widget _wrapWithProviders(Widget child) {
-  return Provider<MatchRepository>(
+  return ChangeNotifierProvider<MatchRepository>(
     create: (_) => MatchRepository(),
     child: Provider<ShooterSetupViewModel>(
       create: (context) => ShooterSetupViewModel(Provider.of<MatchRepository>(context, listen: false)),

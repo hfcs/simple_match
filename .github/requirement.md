@@ -41,6 +41,7 @@ We implement
     - Button to Match set up
     - Button to Shooter set up
     - Button to Stage input
+    - Button to Overall result
     - Clear all data, a single button that ask user to confirm, allow user to cancel before proceeding to clear data model and the persistent storage
 
 ## Match set up

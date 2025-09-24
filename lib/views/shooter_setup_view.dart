@@ -70,7 +70,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                         prefixIcon: Icon(Icons.percent),
                         border: OutlineInputBorder(),
                       ),
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                     ),
                     if (_error != null)
                       Padding(

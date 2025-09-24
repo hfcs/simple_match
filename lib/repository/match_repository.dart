@@ -3,10 +3,58 @@ import '../models/shooter.dart';
 import '../models/stage_result.dart';
 
 /// Repository for managing match data (stages, shooters, results).
+import '../services/persistence_service.dart';
+
 class MatchRepository {
   final List<MatchStage> _stages = [];
   final List<Shooter> _shooters = [];
   final List<StageResult> _results = [];
+  final PersistenceService? persistence;
+
+  MatchRepository({this.persistence});
+  // Persistence integration (stub)
+  Future<void> saveAll() async {
+    if (persistence == null) return;
+    await persistence!.saveList('stages', _stages.map((e) => {'stage': e.stage, 'scoringShoots': e.scoringShoots}).toList());
+    await persistence!.saveList('shooters', _shooters.map((e) => {'name': e.name, 'handicapFactor': e.handicapFactor}).toList());
+    await persistence!.saveList('results', _results.map((e) => {
+      'stage': e.stage,
+      'shooter': e.shooter,
+      'time': e.time,
+      'a': e.a,
+      'c': e.c,
+      'd': e.d,
+      'misses': e.misses,
+      'noShoots': e.noShoots,
+      'procedureErrors': e.procedureErrors,
+    }).toList());
+  }
+
+  Future<void> loadAll() async {
+    if (persistence == null) return;
+    final stageList = await persistence!.loadList('stages');
+    _stages
+      ..clear()
+      ..addAll(stageList.map((e) => MatchStage(stage: e['stage'], scoringShoots: e['scoringShoots'])));
+    final shooterList = await persistence!.loadList('shooters');
+    _shooters
+      ..clear()
+      ..addAll(shooterList.map((e) => Shooter(name: e['name'], handicapFactor: (e['handicapFactor'] as num).toDouble())));
+    final resultList = await persistence!.loadList('results');
+    _results
+      ..clear()
+      ..addAll(resultList.map((e) => StageResult(
+        stage: e['stage'],
+        shooter: e['shooter'],
+        time: (e['time'] as num).toDouble(),
+        a: e['a'],
+        c: e['c'],
+        d: e['d'],
+        misses: e['misses'],
+        noShoots: e['noShoots'],
+        procedureErrors: e['procedureErrors'],
+      )));
+  }
 
   // Stages
   List<MatchStage> get stages => List.unmodifiable(_stages);

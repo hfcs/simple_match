@@ -1,23 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'views/main_menu_view.dart';
 
 void main() {
-  runApp(const AppSkeleton());
+  runApp(const MiniIPSCMatchApp());
 }
 
-/// Blank skeleton for MVVM Flutter app. Implement views, viewmodels, models, and services per requirements.
-class AppSkeleton extends StatelessWidget {
-  const AppSkeleton({super.key});
+class MiniIPSCMatchApp extends StatelessWidget {
+  const MiniIPSCMatchApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mini IPSC Match',
-      home: Scaffold(
-        body: Center(
-          child: Text('TODO: Implement MVVM app skeleton'),
-        ),
-      ),
+      home: MainMenuView(),
     );
   }
 }

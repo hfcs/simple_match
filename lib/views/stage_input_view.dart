@@ -146,53 +146,134 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             },
                           ),
                           const SizedBox(height: 12),
-                          TextField(
-                            key: const Key('aField'),
-                            controller: _aController,
-                            decoration: const InputDecoration(
-                              labelText: 'A',
-                              prefixIcon: Icon(Icons.looks_one),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.a = n);
-                            },
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_aController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _aController.text = newVal.toString();
+                                  setState(() => widget.vm.a = newVal);
+                                },
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('aField'),
+                                  controller: _aController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'A',
+                                    prefixIcon: Icon(Icons.looks_one),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.a = n);
+                                  },
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_aController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _aController.text = newVal.toString();
+                                  setState(() => widget.vm.a = newVal);
+                                },
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 12),
-                          TextField(
-                            key: const Key('cField'),
-                            controller: _cController,
-                            decoration: const InputDecoration(
-                              labelText: 'C',
-                              prefixIcon: Icon(Icons.looks_two),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.c = n);
-                            },
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_cController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _cController.text = newVal.toString();
+                                  setState(() => widget.vm.c = newVal);
+                                },
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('cField'),
+                                  controller: _cController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'C',
+                                    prefixIcon: Icon(Icons.looks_two),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.c = n);
+                                  },
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_cController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _cController.text = newVal.toString();
+                                  setState(() => widget.vm.c = newVal);
+                                },
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 12),
-                          TextField(
-                            key: const Key('dField'),
-                            controller: _dController,
-                            decoration: const InputDecoration(
-                              labelText: 'D',
-                              prefixIcon: Icon(Icons.looks_3),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.d = n);
-                            },
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_dController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _dController.text = newVal.toString();
+                                  setState(() => widget.vm.d = newVal);
+                                },
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('dField'),
+                                  controller: _dController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'D',
+                                    prefixIcon: Icon(Icons.looks_3),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.d = n);
+                                  },
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_dController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _dController.text = newVal.toString();
+                                  setState(() => widget.vm.d = newVal);
+                                },
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 16),
                           Row(
                             children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_missesController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _missesController.text = newVal.toString();
+                                  setState(() => widget.vm.misses = newVal);
+                                },
+                              ),
                               Expanded(
                                 child: TextField(
                                   key: const Key('missesField'),
@@ -209,7 +290,25 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   },
                                 ),
                               ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_missesController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _missesController.text = newVal.toString();
+                                  setState(() => widget.vm.misses = newVal);
+                                },
+                              ),
                               const SizedBox(width: 12),
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_noShootsController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _noShootsController.text = newVal.toString();
+                                  setState(() => widget.vm.noShoots = newVal);
+                                },
+                              ),
                               Expanded(
                                 child: TextField(
                                   key: const Key('noShootsField'),
@@ -226,11 +325,29 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   },
                                 ),
                               ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_noShootsController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _noShootsController.text = newVal.toString();
+                                  setState(() => widget.vm.noShoots = newVal);
+                                },
+                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
                           Row(
                             children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final n = int.tryParse(_procErrorsController.text) ?? 0;
+                                  final newVal = (n - 1).clamp(0, 999);
+                                  _procErrorsController.text = newVal.toString();
+                                  setState(() => widget.vm.procErrors = newVal);
+                                },
+                              ),
                               Expanded(
                                 child: TextField(
                                   key: const Key('procErrorsField'),
@@ -246,6 +363,15 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                     setState(() => widget.vm.procErrors = n);
                                   },
                                 ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final n = int.tryParse(_procErrorsController.text) ?? 0;
+                                  final newVal = (n + 1).clamp(0, 999);
+                                  _procErrorsController.text = newVal.toString();
+                                  setState(() => widget.vm.procErrors = newVal);
+                                },
                               ),
                               const SizedBox(width: 12),
                               Expanded(

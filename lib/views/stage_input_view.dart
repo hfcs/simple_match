@@ -299,7 +299,20 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                       child: ListTile(
                         leading: const Icon(Icons.person),
                         title: Text(r.shooter),
-                        subtitle: Text('Stage: ${r.stage}, Time: ${r.time}'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Stage: ${r.stage}, Time: ${r.time.toStringAsFixed(2)}'),
+                            Text('A: ${r.a}, C: ${r.c}, D: ${r.d}, Misses: ${r.misses}, No Shoots: ${r.noShoots}, Proc Err: ${r.procedureErrors}'),
+                            Builder(
+                              builder: (context) {
+                                final shooter = repo.getShooter(r.shooter);
+                                final scale = shooter?.scaleFactor ?? 1.0;
+                                return Text('Hit Factor: ${r.hitFactor.toStringAsFixed(2)}, Adjusted: ${r.adjustedHitFactor(scale).toStringAsFixed(2)}');
+                              },
+                            ),
+                          ],
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

@@ -30,6 +30,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
   final _missesController = TextEditingController();
   final _noShootsController = TextEditingController();
   final _procErrorsController = TextEditingController();
+
   String? _editingKey;
 
   @override
@@ -130,74 +131,66 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Row(
+                    Column(
                       children: [
-                        Expanded(
-                          child: TextField(
-                            key: const Key('timeField'),
-                            controller: _timeController,
-                            decoration: const InputDecoration(
-                              labelText: 'Time (sec)',
-                              prefixIcon: Icon(Icons.timer),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.numberWithOptions(decimal: true),
-                            onChanged: (v) {
-                              final t = double.tryParse(v) ?? 0.0;
-                              setState(() => widget.vm.time = t);
-                            },
+                        TextField(
+                          key: const Key('timeField'),
+                          controller: _timeController,
+                          decoration: const InputDecoration(
+                            labelText: 'Time (sec)',
+                            prefixIcon: Icon(Icons.timer),
+                            border: OutlineInputBorder(),
                           ),
+                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                          onChanged: (v) {
+                            final t = double.tryParse(v) ?? 0.0;
+                            setState(() => widget.vm.time = t);
+                          },
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextField(
-                            key: const Key('aField'),
-                            controller: _aController,
-                            decoration: const InputDecoration(
-                              labelText: 'A',
-                              prefixIcon: Icon(Icons.looks_one),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.a = n);
-                            },
+                        const SizedBox(height: 12),
+                        TextField(
+                          key: const Key('aField'),
+                          controller: _aController,
+                          decoration: const InputDecoration(
+                            labelText: 'A',
+                            prefixIcon: Icon(Icons.looks_one),
+                            border: OutlineInputBorder(),
                           ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (v) {
+                            final n = int.tryParse(v) ?? 0;
+                            setState(() => widget.vm.a = n);
+                          },
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextField(
-                            key: const Key('cField'),
-                            controller: _cController,
-                            decoration: const InputDecoration(
-                              labelText: 'C',
-                              prefixIcon: Icon(Icons.looks_two),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.c = n);
-                            },
+                        const SizedBox(height: 12),
+                        TextField(
+                          key: const Key('cField'),
+                          controller: _cController,
+                          decoration: const InputDecoration(
+                            labelText: 'C',
+                            prefixIcon: Icon(Icons.looks_two),
+                            border: OutlineInputBorder(),
                           ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (v) {
+                            final n = int.tryParse(v) ?? 0;
+                            setState(() => widget.vm.c = n);
+                          },
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextField(
-                            key: const Key('dField'),
-                            controller: _dController,
-                            decoration: const InputDecoration(
-                              labelText: 'D',
-                              prefixIcon: Icon(Icons.looks_3),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (v) {
-                              final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.d = n);
-                            },
+                        const SizedBox(height: 12),
+                        TextField(
+                          key: const Key('dField'),
+                          controller: _dController,
+                          decoration: const InputDecoration(
+                            labelText: 'D',
+                            prefixIcon: Icon(Icons.looks_3),
+                            border: OutlineInputBorder(),
                           ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (v) {
+                            final n = int.tryParse(v) ?? 0;
+                            setState(() => widget.vm.d = n);
+                          },
                         ),
                       ],
                     ),
@@ -220,7 +213,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 12),
                         Expanded(
                           child: TextField(
                             key: const Key('noShootsField'),
@@ -237,7 +230,11 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
                         Expanded(
                           child: TextField(
                             key: const Key('procErrorsField'),
@@ -254,6 +251,22 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             },
                           ),
                         ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            key: const Key('submitButton'),
+                            onPressed: isValid
+                                ? () {
+                                    setState(() {
+                                      widget.vm.submit();
+                                      _editingKey = null;
+                                      _refreshFields();
+                                    });
+                                  }
+                                : null,
+                            child: Text(_editingKey == null ? 'Submit' : 'Update'),
+                          ),
+                        ),
                       ],
                     ),
                     if (validationError != null)
@@ -268,20 +281,6 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                         const SizedBox(width: 16),
                         Text('Adjusted: ${widget.vm.adjustedHitFactor.toStringAsFixed(2)}'),
                       ],
-                    ),
-                    const SizedBox(height: 12),
-                    ElevatedButton(
-                      key: const Key('submitButton'),
-                      onPressed: isValid
-                          ? () {
-                              setState(() {
-                                widget.vm.submit();
-                                _editingKey = null;
-                                _refreshFields();
-                              });
-                            }
-                          : null,
-                      child: Text(_editingKey == null ? 'Submit' : 'Update'),
                     ),
                   ],
                 ),

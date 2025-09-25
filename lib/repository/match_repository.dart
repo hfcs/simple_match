@@ -66,35 +66,58 @@ class MatchRepository extends ChangeNotifier {
 
   // Stages
   List<MatchStage> get stages => List.unmodifiable(_stages);
-  void addStage(MatchStage stage) => _stages.add(stage);
-  void removeStage(int stageNumber) => _stages.removeWhere((s) => s.stage == stageNumber);
-  void updateStage(MatchStage updated) {
+  Future<void> addStage(MatchStage stage) async {
+    _stages.add(stage);
+    await saveAll();
+    notifyListeners();
+  }
+  Future<void> removeStage(int stageNumber) async {
+    _stages.removeWhere((s) => s.stage == stageNumber);
+    await saveAll();
+    notifyListeners();
+  }
+  Future<void> updateStage(MatchStage updated) async {
     final idx = _stages.indexWhere((s) => s.stage == updated.stage);
     if (idx != -1) _stages[idx] = updated;
+    await saveAll();
+    notifyListeners();
   }
 
   // Shooters
   List<Shooter> get shooters => List.unmodifiable(_shooters);
-  void addShooter(Shooter shooter) => _shooters.add(shooter);
-  void removeShooter(String name) => _shooters.removeWhere((s) => s.name == name);
-  void updateShooter(Shooter updated) {
+  Future<void> addShooter(Shooter shooter) async {
+    _shooters.add(shooter);
+    await saveAll();
+    notifyListeners();
+  }
+  Future<void> removeShooter(String name) async {
+    _shooters.removeWhere((s) => s.name == name);
+    await saveAll();
+    notifyListeners();
+  }
+  Future<void> updateShooter(Shooter updated) async {
     final idx = _shooters.indexWhere((s) => s.name == updated.name);
     if (idx != -1) _shooters[idx] = updated;
+    await saveAll();
+    notifyListeners();
   }
 
   // Results
   List<StageResult> get results => List.unmodifiable(_results);
-  void addResult(StageResult result) {
+  Future<void> addResult(StageResult result) async {
     _results.add(result);
+    await saveAll();
     notifyListeners();
   }
-  void removeResult(int stage, String shooter) {
+  Future<void> removeResult(int stage, String shooter) async {
     _results.removeWhere((r) => r.stage == stage && r.shooter == shooter);
+    await saveAll();
     notifyListeners();
   }
-  void updateResult(StageResult updated) {
+  Future<void> updateResult(StageResult updated) async {
     final idx = _results.indexWhere((r) => r.stage == updated.stage && r.shooter == updated.shooter);
     if (idx != -1) _results[idx] = updated;
+    await saveAll();
     notifyListeners();
   }
 

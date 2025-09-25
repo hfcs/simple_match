@@ -14,18 +14,25 @@ import 'views/shooter_setup_view.dart';
 import 'views/stage_input_view.dart';
 import 'views/overall_result_view.dart';
 
-void main() {
-  runApp(const MiniIPSCMatchApp());
+
+import 'services/persistence_service.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final repo = MatchRepository(persistence: PersistenceService());
+  await repo.loadAll();
+  runApp(MiniIPSCMatchApp(repository: repo));
 }
 
 class MiniIPSCMatchApp extends StatelessWidget {
-  const MiniIPSCMatchApp({super.key});
+  final MatchRepository repository;
+  const MiniIPSCMatchApp({super.key, required this.repository});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
+        ChangeNotifierProvider<MatchRepository>.value(value: repository),
         ProxyProvider<MatchRepository, MainMenuViewModel>(
           update: (_, repo, __) => MainMenuViewModel(repo),
         ),
@@ -44,7 +51,7 @@ class MiniIPSCMatchApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Mini IPSC Match',
-        initialRoute: '/', 
+        initialRoute: '/',
         routes: {
           '/': (context) => MainMenuView(),
           '/match-setup': (context) => const MatchSetupView(),

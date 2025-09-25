@@ -1,16 +1,16 @@
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for data persistence (e.g., local storage).
+/// Service for data persistence using SharedPreferences.
 class PersistenceService {
-  // Simulate persistent storage with a map (replace with SharedPreferences in real app)
-  final Map<String, String> _storage = {};
-
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
-    _storage[key] = jsonEncode(list);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, jsonEncode(list));
   }
 
   Future<List<Map<String, dynamic>>> loadList(String key) async {
-    final jsonStr = _storage[key];
+    final prefs = await SharedPreferences.getInstance();
+    final jsonStr = prefs.getString(key);
     if (jsonStr == null) return [];
     final decoded = jsonDecode(jsonStr) as List;
     return decoded.cast<Map<String, dynamic>>();

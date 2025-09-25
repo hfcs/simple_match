@@ -64,7 +64,7 @@ We implement
 - Input:
     - Name, the name of the shooter participate in a match
         - Name for each shooters are unique, reject input and remind user if they enter a value already exist in the list from the data model
-    - Scale factor, a scaling factor between 0 - 1 in 2 digits decimals
+    - Scale factor, a scaling factor between 0 - 2 in 2 digits decimals
         - Scale factor is initialize to 1 and allow user input of a new value, any removal of input value would reset the value to 1
 - Function:
     - The input entry is stored in the data model

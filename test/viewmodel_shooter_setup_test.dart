@@ -29,13 +29,13 @@ void main() {
     });
 
   test('addShooter fails for invalid scale', () {
-      final repo = MatchRepository();
-      final vm = ShooterSetupViewModel(repo);
-      final errorLow = vm.addShooter('Charlie', -0.1);
-      final errorHigh = vm.addShooter('Charlie', 1.5);
-      expect(errorLow, isNotNull);
-      expect(errorHigh, isNotNull);
-      expect(repo.shooters, isEmpty);
+  final repo = MatchRepository();
+  final vm = ShooterSetupViewModel(repo);
+  final errorLow = vm.addShooter('Charlie', 0.05); // too low
+  final errorHigh = vm.addShooter('Charlie', 2.5); // too high
+  expect(errorLow, isNotNull);
+  expect(errorHigh, isNotNull);
+  expect(repo.shooters, isEmpty);
     });
 
   test('editShooter updates scale', () {

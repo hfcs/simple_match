@@ -57,68 +57,64 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    final repo = widget.vm.repository;
-    final stages = repo.stages;
-    final shooters = repo.shooters;
-    final results = repo.results;
-    final selectedStage = widget.vm.selectedStage;
-    final selectedShooter = widget.vm.selectedShooter;
-    final isValid = widget.vm.isValid;
-    final validationError = widget.vm.validationError;
-
+  final repo = widget.vm.repository;
+  final results = repo.results;
+  final stages = repo.stages;
+  final shooters = repo.shooters;
+  final isValid = widget.vm.isValid;
+  final validationError = widget.vm.validationError;
     return Scaffold(
       appBar: AppBar(title: const Text('Stage Input')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-            Card(
-              elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonFormField<int>(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (stages.isEmpty || shooters.isEmpty)
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'Please add at least one stage and one shooter first.',
+                    style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            else ...[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Card(
+                    elevation: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          // ...existing code for selectors and fields...
+                          DropdownButtonFormField<int>(
                             key: const Key('stageSelector'),
-                            decoration: const InputDecoration(
-                              labelText: 'Stage',
-                              prefixIcon: Icon(Icons.flag),
-                              border: OutlineInputBorder(),
-                            ),
-                            value: selectedStage,
+                            value: stages.any((s) => s.stage == widget.vm.selectedStage)
+                                ? widget.vm.selectedStage
+                                : null,
                             items: stages
                                 .map((s) => DropdownMenuItem(
                                       value: s.stage,
-                                      child: Text(s.stage.toString()),
+                                      child: Text('Stage ${s.stage}'),
                                     ))
                                 .toList(),
                             onChanged: (v) {
-                              setState(() {
-                                widget.vm.selectStage(v!);
-                                _refreshFields();
-                              });
+                              if (v != null) setState(() => widget.vm.selectStage(v));
                             },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: DropdownButtonFormField<String>(
-                            key: const Key('shooterSelector'),
                             decoration: const InputDecoration(
-                              labelText: 'Shooter',
-                              prefixIcon: Icon(Icons.person),
+                              labelText: 'Stage',
                               border: OutlineInputBorder(),
                             ),
-                            value: selectedShooter,
+                          ),
+                          const SizedBox(height: 12),
+                          DropdownButtonFormField<String>(
+                            key: const Key('shooterSelector'),
+                            value: shooters.any((s) => s.name == widget.vm.selectedShooter)
+                                ? widget.vm.selectedShooter
+                                : null,
                             items: shooters
                                 .map((s) => DropdownMenuItem(
                                       value: s.name,
@@ -126,229 +122,221 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                     ))
                                 .toList(),
                             onChanged: (v) {
-                              setState(() {
-                                widget.vm.selectShooter(v!);
-                                _refreshFields();
-                              });
+                              if (v != null) setState(() => widget.vm.selectShooter(v));
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Shooter',
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          // ...existing code for all input fields and submit...
+                          TextField(
+                            key: const Key('timeField'),
+                            controller: _timeController,
+                            decoration: const InputDecoration(
+                              labelText: 'Time',
+                              prefixIcon: Icon(Icons.timer),
+                              border: OutlineInputBorder(),
+                            ),
+                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                            onChanged: (v) {
+                              final t = double.tryParse(v) ?? 0.0;
+                              setState(() => widget.vm.time = t);
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Column(
-                      children: [
-                        TextField(
-                          key: const Key('timeField'),
-                          controller: _timeController,
-                          decoration: const InputDecoration(
-                            labelText: 'Time (sec)',
-                            prefixIcon: Icon(Icons.timer),
-                            border: OutlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                          onChanged: (v) {
-                            final t = double.tryParse(v) ?? 0.0;
-                            setState(() => widget.vm.time = t);
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          key: const Key('aField'),
-                          controller: _aController,
-                          decoration: const InputDecoration(
-                            labelText: 'A',
-                            prefixIcon: Icon(Icons.looks_one),
-                            border: OutlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.number,
-                          onChanged: (v) {
-                            final n = int.tryParse(v) ?? 0;
-                            setState(() => widget.vm.a = n);
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          key: const Key('cField'),
-                          controller: _cController,
-                          decoration: const InputDecoration(
-                            labelText: 'C',
-                            prefixIcon: Icon(Icons.looks_two),
-                            border: OutlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.number,
-                          onChanged: (v) {
-                            final n = int.tryParse(v) ?? 0;
-                            setState(() => widget.vm.c = n);
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        TextField(
-                          key: const Key('dField'),
-                          controller: _dController,
-                          decoration: const InputDecoration(
-                            labelText: 'D',
-                            prefixIcon: Icon(Icons.looks_3),
-                            border: OutlineInputBorder(),
-                          ),
-                          keyboardType: TextInputType.number,
-                          onChanged: (v) {
-                            final n = int.tryParse(v) ?? 0;
-                            setState(() => widget.vm.d = n);
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            key: const Key('missesField'),
-                            controller: _missesController,
+                          const SizedBox(height: 12),
+                          TextField(
+                            key: const Key('aField'),
+                            controller: _aController,
                             decoration: const InputDecoration(
-                              labelText: 'Misses',
-                              prefixIcon: Icon(Icons.close),
+                              labelText: 'A',
+                              prefixIcon: Icon(Icons.looks_one),
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (v) {
                               final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.misses = n);
+                              setState(() => widget.vm.a = n);
                             },
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            key: const Key('noShootsField'),
-                            controller: _noShootsController,
+                          const SizedBox(height: 12),
+                          TextField(
+                            key: const Key('cField'),
+                            controller: _cController,
                             decoration: const InputDecoration(
-                              labelText: 'No Shoots',
-                              prefixIcon: Icon(Icons.block),
+                              labelText: 'C',
+                              prefixIcon: Icon(Icons.looks_two),
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (v) {
                               final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.noShoots = n);
+                              setState(() => widget.vm.c = n);
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            key: const Key('procErrorsField'),
-                            controller: _procErrorsController,
+                          const SizedBox(height: 12),
+                          TextField(
+                            key: const Key('dField'),
+                            controller: _dController,
                             decoration: const InputDecoration(
-                              labelText: 'Procedure Errors',
-                              prefixIcon: Icon(Icons.error),
+                              labelText: 'D',
+                              prefixIcon: Icon(Icons.looks_3),
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (v) {
                               final n = int.tryParse(v) ?? 0;
-                              setState(() => widget.vm.procErrors = n);
+                              setState(() => widget.vm.d = n);
                             },
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: ElevatedButton(
-                            key: const Key('submitButton'),
-                            onPressed: isValid
-                                ? () {
-                                    setState(() {
-                                      widget.vm.submit();
-                                      _editingKey = null;
-                                      _refreshFields();
-                                    });
-                                  }
-                                : null,
-                            child: Text(_editingKey == null ? 'Submit' : 'Update'),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('missesField'),
+                                  controller: _missesController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Misses',
+                                    prefixIcon: Icon(Icons.close),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.misses = n);
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('noShootsField'),
+                                  controller: _noShootsController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'No Shoots',
+                                    prefixIcon: Icon(Icons.block),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.noShoots = n);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    if (validationError != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Text(validationError, style: const TextStyle(color: Colors.red)),
-                      ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Text('Hit Factor: ${widget.vm.hitFactor.toStringAsFixed(2)}'),
-                        const SizedBox(width: 16),
-                        Text('Adjusted: ${widget.vm.adjustedHitFactor.toStringAsFixed(2)}'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            const Text('Results:', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 300,
-              child: ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: results.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (context, idx) {
-                  final r = results[idx];
-                  return Card(
-                    elevation: 1,
-                    child: ListTile(
-                      leading: const Icon(Icons.person),
-                      title: Text(r.shooter),
-                      subtitle: Text('Stage: ${r.stage}, Time: ${r.time}'),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            key: Key('editResult-${r.stage}-${r.shooter}'),
-                            icon: const Icon(Icons.edit),
-                            onPressed: () {
-                              setState(() {
-                                widget.vm.selectStage(r.stage);
-                                widget.vm.selectShooter(r.shooter);
-                                _editingKey = '${r.stage}-${r.shooter}';
-                                _refreshFields();
-                              });
-                            },
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('procErrorsField'),
+                                  controller: _procErrorsController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Procedure Errors',
+                                    prefixIcon: Icon(Icons.error),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  onChanged: (v) {
+                                    final n = int.tryParse(v) ?? 0;
+                                    setState(() => widget.vm.procErrors = n);
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: ElevatedButton(
+                                  key: const Key('submitButton'),
+                                  onPressed: isValid
+                                      ? () {
+                                          setState(() {
+                                            widget.vm.submit();
+                                            _editingKey = null;
+                                            _refreshFields();
+                                          });
+                                        }
+                                      : null,
+                                  child: Text(_editingKey == null ? 'Submit' : 'Update'),
+                                ),
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            key: Key('removeResult-${r.stage}-${r.shooter}'),
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              setState(() {
-                                widget.vm.selectStage(r.stage);
-                                widget.vm.selectShooter(r.shooter);
-                                widget.vm.remove();
-                                _editingKey = null;
-                                _refreshFields();
-                              });
-                            },
+                          if (validationError != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(validationError, style: const TextStyle(color: Colors.red)),
+                            ),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              Text('Hit Factor: ${widget.vm.hitFactor.toStringAsFixed(2)}'),
+                              const SizedBox(width: 16),
+                              Text('Adjusted: ${widget.vm.adjustedHitFactor.toStringAsFixed(2)}'),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
+              const SizedBox(height: 24),
+              const Text('Results:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              Expanded(
+                child: ListView.separated(
+                  key: const Key('resultsList'),
+                  itemCount: results.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  itemBuilder: (context, idx) {
+                    final r = results[idx];
+                    return Card(
+                      elevation: 1,
+                      child: ListTile(
+                        leading: const Icon(Icons.person),
+                        title: Text(r.shooter),
+                        subtitle: Text('Stage: ${r.stage}, Time: ${r.time}'),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              key: Key('editResult-${r.stage}-${r.shooter}'),
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                setState(() {
+                                  widget.vm.selectStage(r.stage);
+                                  widget.vm.selectShooter(r.shooter);
+                                  _editingKey = '${r.stage}-${r.shooter}';
+                                  _refreshFields();
+                                });
+                              },
+                            ),
+                            IconButton(
+                              key: Key('removeResult-${r.stage}-${r.shooter}'),
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                setState(() {
+                                  widget.vm.selectStage(r.stage);
+                                  widget.vm.selectShooter(r.shooter);
+                                  widget.vm.remove();
+                                  _editingKey = null;
+                                  _refreshFields();
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ],
         ),
       ),
     );

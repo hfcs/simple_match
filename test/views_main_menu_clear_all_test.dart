@@ -22,8 +22,8 @@ void main() {
       ),
     );
 
-    // Tap Clear All Data
-    await tester.tap(find.widgetWithText(ElevatedButton, 'Clear All Data'));
+  // Tap Clear All Data
+  await tester.tap(find.widgetWithText(ListTile, 'Clear All Data'));
     await tester.pumpAndSettle();
     // Confirm dialog appears
     expect(find.text('Are you sure you want to clear all data? This cannot be undone.'), findsOneWidget);

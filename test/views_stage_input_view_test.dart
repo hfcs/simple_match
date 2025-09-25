@@ -28,9 +28,9 @@ void main() {
     repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
     await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
     // Select stage and shooter
-    await tester.tap(find.byKey(const Key('stageSelector')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('1').last);
+  await tester.tap(find.byKey(const Key('stageSelector')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Stage 1').last);
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('shooterSelector')));
     await tester.pumpAndSettle();
@@ -80,9 +80,9 @@ void main() {
     testWidgets('disables submit if input is invalid', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('1').last);
+  await tester.tap(find.byKey(const Key('stageSelector')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -102,9 +102,9 @@ void main() {
     testWidgets('enables submit and displays hit factors when valid', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('1').last);
+  await tester.tap(find.byKey(const Key('stageSelector')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -128,9 +128,9 @@ void main() {
     testWidgets('submits and displays in result list', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('1').last);
+  await tester.tap(find.byKey(const Key('stageSelector')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -143,21 +143,28 @@ void main() {
       await tester.enterText(find.byKey(const Key('dField')), '2');
       await tester.enterText(find.byKey(const Key('missesField')), '0');
       await tester.enterText(find.byKey(const Key('noShootsField')), '0');
-      await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
-      await tester.pump();
-      await tester.tap(find.byKey(const Key('submitButton')));
-      await tester.pump();
-      expect(find.text('Alice'), findsWidgets);
-      expect(find.text('1'), findsWidgets); // Stage number
-      expect(find.text('10.0'), findsWidgets); // Time
+  await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
+  await tester.pump();
+  // Ensure submit button is visible before tapping
+  await tester.ensureVisible(find.byKey(const Key('submitButton')));
+  await tester.tap(find.byKey(const Key('submitButton')));
+  await tester.pump();
+  // Ensure results list is visible before checking
+  await tester.ensureVisible(find.byKey(const Key('resultsList')));
+  expect(find.text('Alice'), findsWidgets);
+  expect(find.textContaining('Stage: 1'), findsWidgets); // Stage number in subtitle
+  expect(find.textContaining('Time: 10.0'), findsWidgets); // Time in subtitle
     });
 
     testWidgets('can edit and remove a result', (tester) async {
+  // Increase test environment size to avoid off-screen widget issues
+  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
+  tester.binding.window.devicePixelRatioTestValue = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('1').last);
+  await tester.tap(find.byKey(const Key('stageSelector')));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -173,20 +180,30 @@ void main() {
       await tester.pump();
       await tester.tap(find.byKey(const Key('submitButton')));
       await tester.pump();
+  // Ensure results list is visible
+      await tester.ensureVisible(find.byKey(const Key('resultsList')));
       // Tap edit
+      await tester.ensureVisible(find.byKey(const Key('editResult-1-Alice')));
       await tester.tap(find.byKey(const Key('editResult-1-Alice')));
       await tester.pump();
       await tester.enterText(find.byKey(const Key('aField')), '4');
       await tester.pump();
+      await tester.ensureVisible(find.byKey(const Key('submitButton')));
       await tester.tap(find.byKey(const Key('submitButton')));
       await tester.pump();
       expect(find.text('4'), findsWidgets);
       // Tap remove
-  await tester.tap(find.byKey(const Key('removeResult-1-Alice')));
-  await tester.pump();
-  // Only check that Alice is not present in the results list (no ListTile with her name)
-  final resultTiles = tester.widgetList<ListTile>(find.byType(ListTile));
-  expect(resultTiles.where((tile) => (tile.title as Text).data == 'Alice'), isEmpty);
+      await tester.ensureVisible(find.byKey(const Key('removeResult-1-Alice')));
+      await tester.tap(find.byKey(const Key('removeResult-1-Alice')));
+      await tester.pumpAndSettle();
+      // Only check that Alice is not present in the results list (no ListTile with her name)
+      final resultTiles = tester.widgetList<ListTile>(find.byType(ListTile));
+      expect(resultTiles.where((tile) => (tile.title as Text).data == 'Alice'), isEmpty);
+      // Reset test environment size
+      addTearDown(() {
+        tester.binding.window.clearPhysicalSizeTestValue();
+        tester.binding.window.clearDevicePixelRatioTestValue();
+      });
     });
   });
 }

@@ -137,8 +137,7 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                     elevation: 1,
                     child: ListTile(
                       leading: const Icon(Icons.flag),
-                      title: Text('Stage ${s.stage}'),
-                      subtitle: Text('${s.scoringShoots} shoots'),
+                      title: Text('Stage ${s.stage}: ${s.scoringShoots} shoots'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

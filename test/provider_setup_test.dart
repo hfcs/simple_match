@@ -11,7 +11,8 @@ import 'package:simple_match/views/main_menu_view.dart';
 
 void main() {
   testWidgets('Provider tree is set up and provides all viewmodels', (tester) async {
-    await tester.pumpWidget(const MiniIPSCMatchApp());
+    final repo = MatchRepository();
+    await tester.pumpWidget(MiniIPSCMatchApp(repository: repo));
     // Find a widget below the MultiProvider (MainMenuView)
     final context = tester.element(find.byType(MainMenuView));
     expect(Provider.of<MatchRepository>(context, listen: false), isA<MatchRepository>());

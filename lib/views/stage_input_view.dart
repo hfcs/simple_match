@@ -70,9 +70,14 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
       appBar: AppBar(title: const Text('Stage Input')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
             Card(
               elevation: 2,
               child: Padding(
@@ -289,8 +294,11 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
             const SizedBox(height: 24),
             const Text('Results:', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            Expanded(
+            SizedBox(
+              height: 300,
               child: ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: results.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, idx) {
@@ -336,7 +344,11 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                 },
               ),
             ),
-          ],
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

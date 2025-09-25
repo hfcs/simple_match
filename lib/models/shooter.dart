@@ -1,7 +1,7 @@
 /// Model for a shooter.
 class Shooter {
   final String name;
-  double handicapFactor;
+  double scaleFactor;
 
-  Shooter({required this.name, this.handicapFactor = 1.0});
+  Shooter({required this.name, this.scaleFactor = 1.0});
 }

@@ -77,7 +77,7 @@ class StageInputViewModel {
 
   double get adjustedHitFactor {
     final shooter = repository.getShooter(_selectedShooter ?? '');
-    return shooter != null ? hitFactor * shooter.handicapFactor : 0.0;
+  return shooter != null ? hitFactor * shooter.scaleFactor : 0.0;
   }
 
   bool get isValid {

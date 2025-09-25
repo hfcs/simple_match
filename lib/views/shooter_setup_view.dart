@@ -24,14 +24,14 @@ class _ShooterSetupViewBody extends StatefulWidget {
 
 class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
   final _nameController = TextEditingController();
-  final _handicapController = TextEditingController();
+  final _scaleController = TextEditingController();
   String? _error;
   String? _editingName;
 
   @override
   void dispose() {
     _nameController.dispose();
-    _handicapController.dispose();
+    _scaleController.dispose();
     super.dispose();
   }
 
@@ -63,10 +63,10 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                     ),
                     const SizedBox(height: 12),
                     TextField(
-                      key: const Key('handicapField'),
-                      controller: _handicapController,
+                      key: const Key('scaleField'),
+                      controller: _scaleController,
                       decoration: const InputDecoration(
-                        labelText: 'Handicap (0.00-1.00)',
+                        labelText: 'Scale (0.00-1.00)',
                         prefixIcon: Icon(Icons.percent),
                         border: OutlineInputBorder(),
                       ),
@@ -86,14 +86,14 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                             icon: const Icon(Icons.add),
                             onPressed: () {
                               final name = _nameController.text.trim();
-                              final handicap = double.tryParse(_handicapController.text);
-                              final err = (handicap == null)
-                                  ? 'Invalid handicap.'
-                                  : widget.vm.addShooter(name, handicap);
+                              final scale = double.tryParse(_scaleController.text);
+                              final err = (scale == null)
+                                  ? 'Invalid scale.'
+                                  : widget.vm.addShooter(name, scale);
                               setState(() => _error = err);
                               if (err == null) {
                                 _nameController.clear();
-                                _handicapController.clear();
+                                _scaleController.clear();
                               }
                             },
                             label: const Text('Add Shooter'),
@@ -103,15 +103,15 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                             key: const Key('confirmEditButton'),
                             icon: const Icon(Icons.check),
                             onPressed: () {
-                              final handicap = double.tryParse(_handicapController.text);
-                              final err = (handicap == null)
-                                  ? 'Invalid handicap.'
-                                  : widget.vm.editShooter(_editingName!, handicap);
+                              final scale = double.tryParse(_scaleController.text);
+                              final err = (scale == null)
+                                  ? 'Invalid scale.'
+                                  : widget.vm.editShooter(_editingName!, scale);
                               setState(() => _error = err);
                               if (err == null) {
                                 setState(() => _editingName = null);
                                 _nameController.clear();
-                                _handicapController.clear();
+                                _scaleController.clear();
                               }
                             },
                             label: const Text('Confirm Edit'),
@@ -121,7 +121,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                             onPressed: () {
                               setState(() => _editingName = null);
                               _nameController.clear();
-                              _handicapController.clear();
+                              _scaleController.clear();
                               _error = null;
                             },
                             child: const Text('Cancel'),
@@ -146,8 +146,14 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                     elevation: 1,
                     child: ListTile(
                       leading: const Icon(Icons.person),
-                      title: Text(s.name),
-                      subtitle: Text('Handicap: ${s.handicapFactor.toStringAsFixed(2)}'),
+                      title: Row(
+                        children: [
+                          Text(s.name),
+                          const SizedBox(width: 12),
+                          Text(s.scaleFactor.toStringAsFixed(2), key: Key('scaleValue-${s.name}'), style: const TextStyle(color: Colors.blueGrey)),
+                        ],
+                      ),
+                      subtitle: Text('Scale: ${s.scaleFactor.toStringAsFixed(2)}'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -158,7 +164,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                               setState(() {
                                 _editingName = s.name;
                                 _nameController.text = s.name;
-                                _handicapController.text = s.handicapFactor.toString();
+                                _scaleController.text = s.scaleFactor.toString();
                                 _error = null;
                               });
                             },
@@ -172,7 +178,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                                 if (_editingName == s.name) {
                                   _editingName = null;
                                   _nameController.clear();
-                                  _handicapController.clear();
+                                  _scaleController.clear();
                                 }
                               });
                             },

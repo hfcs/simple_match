@@ -16,7 +16,7 @@ void main() {
       expect(error, isNull);
       expect(repo.shooters.length, 1);
       expect(repo.shooters.first.name, 'Alice');
-      expect(repo.shooters.first.handicapFactor, 0.95);
+  expect(repo.shooters.first.scaleFactor, 0.95);
     });
 
     test('addShooter fails for duplicate name', () {
@@ -28,7 +28,7 @@ void main() {
       expect(repo.shooters.length, 1);
     });
 
-    test('addShooter fails for invalid handicap', () {
+  test('addShooter fails for invalid scale', () {
       final repo = MatchRepository();
       final vm = ShooterSetupViewModel(repo);
       final errorLow = vm.addShooter('Charlie', -0.1);
@@ -38,13 +38,13 @@ void main() {
       expect(repo.shooters, isEmpty);
     });
 
-    test('editShooter updates handicap', () {
+  test('editShooter updates scale', () {
       final repo = MatchRepository();
       final vm = ShooterSetupViewModel(repo);
       vm.addShooter('Dana', 1.0);
       final error = vm.editShooter('Dana', 0.8);
       expect(error, isNull);
-      expect(repo.shooters.first.handicapFactor, 0.8);
+  expect(repo.shooters.first.scaleFactor, 0.8);
     });
 
     test('editShooter fails for missing shooter', () {

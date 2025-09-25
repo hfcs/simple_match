@@ -6,6 +6,9 @@
     - Business logic in View Models
     - Repositories handle data model as source of truth
     - Services handles API calls, platform calls and local file
+    - All state changes must trigger persistence (using SharedPreferences)
+    - All features must be implemented with logic and widget tests (test-driven development)
+    
 
 # Modules and Requirement
 
@@ -15,7 +18,7 @@
 ## Data model
 
 - Match set up: A list of {Stage, Scoring shoots}
-- Shooter set up: A list of {Name, Handicap factor}
+- Shooter set up: A list of {Name, Scale factor}
 - Stage input: A list of {Stage, Shooter, Time, A, C, D, Misses, No Shoots, Procedure Errors}
 
 ## Scope
@@ -61,8 +64,8 @@ We implement
 - Input:
     - Name, the name of the shooter participate in a match
         - Name for each shooters are unique, reject input and remind user if they enter a value already exist in the list from the data model
-    - Handicap factor, a scaling factor between 0 - 1 in 2 digits decimals
-        - Handicap factor is initialize to 1 and allow user input of a new value, any removal of input value would reset the value to 1
+    - Scale factor, a scaling factor between 0 - 1 in 2 digits decimals
+        - Scale factor is initialize to 1 and allow user input of a new value, any removal of input value would reset the value to 1
 - Function:
     - The input entry is stored in the data model
     - The list from data model is displayed in the page and allow add, remove, edit of entries
@@ -83,6 +86,7 @@ We implement
     - Procedure Errors: integer, initialize to 0
     - Any removal of input value would reset the value to 0
     - Submit button
+    - Input fields for Time, A, C, D are arranged vertically; Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row
 - Function:
     - The input entry is stored in the data model
     - Calculate hit factor, adjusted hit factor, display them
@@ -94,7 +98,7 @@ We implement
             - Each "Misses" deduct 10 points
             - Each "No Shoots" deduct 10 points
             - Each "Procedure Errors" deduct 10 points
-        - Definition of adjusted hit factor =  hit factor * handicap factor of the shooter from data model
+        - Definition of adjusted hit factor =  hit factor * scale factor of the shooter from data model
     - When any input is changed, we validate if the record is valid
         - Read from data model Scoring shoots of the selected Stage
         - if A + C + D + Misses == Scoring shoots, this is a valid record

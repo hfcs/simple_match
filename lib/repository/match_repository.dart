@@ -24,7 +24,7 @@ class MatchRepository extends ChangeNotifier {
   Future<void> saveAll() async {
     if (persistence == null) return;
     await persistence!.saveList('stages', _stages.map((e) => {'stage': e.stage, 'scoringShoots': e.scoringShoots}).toList());
-    await persistence!.saveList('shooters', _shooters.map((e) => {'name': e.name, 'handicapFactor': e.handicapFactor}).toList());
+  await persistence!.saveList('shooters', _shooters.map((e) => {'name': e.name, 'scaleFactor': e.scaleFactor}).toList());
     await persistence!.saveList('results', _results.map((e) => {
       'stage': e.stage,
       'shooter': e.shooter,
@@ -47,7 +47,7 @@ class MatchRepository extends ChangeNotifier {
     final shooterList = await persistence!.loadList('shooters');
     _shooters
       ..clear()
-      ..addAll(shooterList.map((e) => Shooter(name: e['name'], handicapFactor: (e['handicapFactor'] as num).toDouble())));
+  ..addAll(shooterList.map((e) => Shooter(name: e['name'], scaleFactor: (e['scaleFactor'] as num).toDouble())));
     final resultList = await persistence!.loadList('results');
     _results
       ..clear()

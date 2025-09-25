@@ -10,8 +10,8 @@ void main() {
     late StageInputViewModel vm;
     setUp(() {
       repo = MatchRepository();
-  repo.addShooter(Shooter(name: 'Alice', handicapFactor: 0.9));
-  repo.addShooter(Shooter(name: 'Bob', handicapFactor: 1.0));
+  repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
+  repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
   repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
   repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
       vm = StageInputViewModel(repo);

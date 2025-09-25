@@ -13,8 +13,8 @@ void main() {
     });
     test('calculates and ranks overall results correctly', () {
       final repo = MatchRepository();
-      repo.addShooter(Shooter(name: 'Alice', handicapFactor: 1.0));
-      repo.addShooter(Shooter(name: 'Bob', handicapFactor: 0.9));
+  repo.addShooter(Shooter(name: 'Alice', scaleFactor: 1.0));
+  repo.addShooter(Shooter(name: 'Bob', scaleFactor: 0.9));
       repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
       repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
       // Stage 1 results

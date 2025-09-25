@@ -24,7 +24,7 @@ class OverallResultViewModel {
         final shooter = shooters.firstWhere((s) => s.name == r.shooter, orElse: () => Shooter(name: r.shooter));
         final totalScore = r.a * 5 + r.c * 3 + r.d * 1 - r.misses * 10 - r.noShoots * 10 - r.procedureErrors * 10;
         final hitFactor = r.time > 0 ? totalScore / r.time : 0.0;
-        final adjHitFactor = hitFactor * shooter.handicapFactor;
+  final adjHitFactor = hitFactor * shooter.scaleFactor;
         adjHitFactors[r.shooter] = adjHitFactor;
       }
       // Find highest adjusted hit factor in this stage

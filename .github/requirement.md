@@ -28,6 +28,7 @@ This program will set up a mini match of IPSC with following pages
 - Match set up
 - Shooter set up
 - Stage input
+- Stage result
 - Overall result
 
 Also implement a single button clearing data input and persisted
@@ -48,7 +49,7 @@ We implement
     - Clear all data, a single button that ask user to confirm, allow user to cancel before proceeding to clear data model and the persistent storage
 
 ## Match set up
-- With back button returning to man menu
+- With back button returning to main menu
 - Input:
     - Stage, an interger between 1 - 30, reject input and remind user if they enter value out of range
         - Stage are unique, reject input and remind user if they enter a value already exist in the list from data model
@@ -60,7 +61,7 @@ We implement
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
 ## Shooter set up
-- With back button returning to man menu
+- With back button returning to main menu
 - Input:
     - Name, the name of the shooter participate in a match
         - Name for each shooters are unique, reject input and remind user if they enter a value already exist in the list from the data model
@@ -73,7 +74,7 @@ We implement
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
 ## Stage input
-- With back button returning to man menu
+- With back button returning to main menu
 - Input:
     - Stage: a selector that select from one of "stage" set up in the Match set up
     - Shooter: a select that select from one of the "shooters" set up in the Shooter setup
@@ -112,8 +113,16 @@ We implement
 - Output:
     - entries add, update deleted on the list in data model is written to data presistence layer immediately
 
+## Stage result
+- With back button returning to main
+- Function:
+    - For each stage, calculate hit factor for each shooters, as well as adjusted hit factor
+- Output:
+    - For each stage
+        - Rank the hit factor, highest first, and display a list of {Name, hit factor, adjusted hit factor}
+
 ## Overall result
-- With back button returning to man menu
+- With back button returning to main menu
 - Function:
     - For each shooter, calculate stage point in the stage
         - Find out the highest adjusted hit factor ever scored in that stage

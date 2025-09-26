@@ -12,6 +12,9 @@ import 'views/main_menu_view.dart';
 import 'views/match_setup_view.dart';
 import 'views/shooter_setup_view.dart';
 import 'views/stage_input_view.dart';
+
+import 'views/stage_result_view.dart';
+import 'viewmodel/stage_result_viewmodel.dart';
 import 'views/overall_result_view.dart';
 
 
@@ -58,6 +61,13 @@ class MiniIPSCMatchApp extends StatelessWidget {
           '/shooter-setup': (context) => const ShooterSetupView(),
           '/stage-input': (context) => const StageInputView(),
           '/overall-result': (context) => const OverallResultView(),
+          '/stage-result': (context) {
+            final repo = Provider.of<MatchRepository>(context, listen: false);
+            final persistence = repo.persistence ?? PersistenceService();
+            return StageResultView(
+              viewModel: StageResultViewModel(persistenceService: persistence),
+            );
+          },
         },
       ),
     );

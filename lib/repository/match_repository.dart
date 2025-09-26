@@ -40,6 +40,7 @@ class MatchRepository extends ChangeNotifier {
 
   Future<void> loadAll() async {
     if (persistence == null) return;
+    await persistence!.ensureSchemaUpToDate();
     final stageList = await persistence!.loadList('stages');
     _stages
       ..clear()

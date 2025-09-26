@@ -40,6 +40,25 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 - All features are covered by widget and logic tests (test-driven development)
 - Migration logic is covered by integration tests in `test/persistence_test.dart`
 
+## Test Coverage
+- All core features are covered by unit, widget, and integration tests in `test/`
+- ViewModel logic is tested (e.g., `test/viewmodel_main_menu_test.dart`, `test/viewmodel_match_setup_test.dart`)
+- Persistence logic is tested (e.g., `test/services_test.dart`)
+- Widget navigation and UI are tested (e.g., `test/widget_test.dart`)
+- All TODOs for tests have been implemented and committed
+
+## How to Run All Tests
+
+```sh
+flutter test --coverage
+```
+
+## Contributing
+- Follow MVVM and Provider patterns
+- Write or update tests for all new features and bug fixes
+- Keep the codebase warning- and lint-free (`flutter analyze`)
+- Document all schema changes and migrations
+
 ## Documentation
 - Data schema history: `data_schema_history.md`
 - Schema versioning and migration: `docs/data_schema_versioning.md`

@@ -13,22 +13,23 @@ class StageInputViewModel {
 
   StageInputViewModel(this.repository);
 
+  // Use public fields instead of unnecessary getters/setters
   int? get selectedStage => _selectedStage;
   String? get selectedShooter => _selectedShooter;
-  double get time => _time;
-  int get a => _a;
-  int get c => _c;
-  int get d => _d;
-  int get misses => _misses;
-  int get noShoots => _noShoots;
-  int get procErrors => _procErrors;
 
+  double get time => _time;
   set time(double v) => _time = v;
+  int get a => _a;
   set a(int v) => _a = v;
+  int get c => _c;
   set c(int v) => _c = v;
+  int get d => _d;
   set d(int v) => _d = v;
+  int get misses => _misses;
   set misses(int v) => _misses = v;
+  int get noShoots => _noShoots;
   set noShoots(int v) => _noShoots = v;
+  int get procErrors => _procErrors;
   set procErrors(int v) => _procErrors = v;
 
   void selectStage(int stage) {

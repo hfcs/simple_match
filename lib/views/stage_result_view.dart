@@ -6,7 +6,7 @@ import '../viewmodel/stage_result_viewmodel.dart';
 
 class StageResultView extends StatelessWidget {
   final StageResultViewModel viewModel;
-  const StageResultView({Key? key, required this.viewModel}) : super(key: key);
+  const StageResultView({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,9 @@ class StageResultView extends StatelessWidget {
 }
 
 
+
 class StageResultViewBody extends StatefulWidget {
+  const StageResultViewBody({super.key});
   @override
   State<StageResultViewBody> createState() => StageResultViewBodyState();
 }
@@ -66,7 +68,7 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: DropdownButtonFormField<int>(
-                    value: selected,
+                        initialValue: selected,
                     items: stages
                         .map((s) => DropdownMenuItem(
                               value: s.stage,

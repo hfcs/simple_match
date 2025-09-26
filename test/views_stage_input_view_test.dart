@@ -20,6 +20,7 @@ void main() {
   group('StageInputView', () {
     late MatchRepository repo;
     setUp(() {
+      TestWidgetsFlutterBinding.ensureInitialized();
       repo = MatchRepository();
       repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
       repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
@@ -128,9 +129,9 @@ void main() {
     });
 
     testWidgets('can edit and remove a result', (tester) async {
-  // Increase test environment size to avoid off-screen widget issues
-  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
-  tester.binding.window.devicePixelRatioTestValue = 1.0;
+    // Increase test environment size to avoid off-screen widget issues
+    tester.view.physicalSize = const Size(1200, 1600);
+    tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
   await tester.tap(find.byKey(const Key('stageSelector')));
@@ -172,8 +173,8 @@ void main() {
       expect(resultTiles.where((tile) => (tile.title as Text).data == 'Alice'), isEmpty);
       // Reset test environment size
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
   });

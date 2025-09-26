@@ -91,7 +91,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                         children: [
                           DropdownButtonFormField<int>(
                             key: const Key('stageSelector'),
-                            value: stages.any((s) => s.stage == widget.vm.selectedStage)
+                                initialValue: stages.any((s) => s.stage == widget.vm.selectedStage)
                                 ? widget.vm.selectedStage
                                 : null,
                             items: stages
@@ -116,7 +116,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                           const SizedBox(height: 12),
                           DropdownButtonFormField<String>(
                             key: const Key('shooterSelector'),
-                            value: shooters.any((s) => s.name == widget.vm.selectedShooter)
+                                initialValue: shooters.any((s) => s.name == widget.vm.selectedShooter)
                                 ? widget.vm.selectedShooter
                                 : null,
                             items: shooters

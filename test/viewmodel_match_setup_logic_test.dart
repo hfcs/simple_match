@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/viewmodel/match_setup_viewmodel.dart';
 

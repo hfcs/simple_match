@@ -84,9 +84,11 @@ class MainMenuView extends StatelessWidget {
                       ],
                     ),
                   );
+                  if (!context.mounted) return;
                   if (confirmed == true) {
                     final repo = context.read<MatchRepository>();
                     await repo.clearAllData();
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('All data cleared.')),
                     );

@@ -13,8 +13,11 @@ class PersistenceService {
   /// Loads and migrates data if needed. Call this on app startup before loading any lists.
   Future<void> ensureSchemaUpToDate() async {
     final prefs = await SharedPreferences.getInstance();
-    final int storedVersion = prefs.getInt(kDataSchemaVersionKey) ?? 1;
-    if (storedVersion < kDataSchemaVersion) {
+    final int? storedVersionRaw = prefs.getInt(kDataSchemaVersionKey);
+    final int storedVersion = storedVersionRaw ?? 0;
+    if (storedVersionRaw == null) {
+      await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
+    } else if (storedVersion < kDataSchemaVersion) {
       await _migrateSchema(storedVersion, kDataSchemaVersion, prefs);
       await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
     } else if (storedVersion > kDataSchemaVersion) {
@@ -70,12 +73,8 @@ class PersistenceService {
   }
 
   Future<List<Map<String, dynamic>>> loadList(String key) async {
+    await ensureSchemaUpToDate();
     final prefs = await SharedPreferences.getInstance();
-    // Optionally, ensure schema is up to date before loading
-    final int storedVersion = prefs.getInt(kDataSchemaVersionKey) ?? 1;
-    if (storedVersion < kDataSchemaVersion) {
-      await ensureSchemaUpToDate();
-    }
     final jsonStr = prefs.getString(key);
     if (jsonStr == null) return [];
     final decoded = jsonDecode(jsonStr) as List;

@@ -120,6 +120,7 @@ We implement
 - Output:
     - For each stage
         - Rank the hit factor, highest first, and display a list of {Name, hit factor, adjusted hit factor}
+    - Export to PDF: A button that export a single PDF of all stages, of the report above
 
 ## Overall result
 - With back button returning to main menu

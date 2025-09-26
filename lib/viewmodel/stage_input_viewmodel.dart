@@ -8,29 +8,14 @@ class StageInputViewModel {
   final MatchRepository repository;
   int? _selectedStage;
   String? _selectedShooter;
-  double _time = 0.0;
-  int _a = 0, _c = 0, _d = 0, _misses = 0, _noShoots = 0, _procErrors = 0;
+  double time = 0.0;
+  int a = 0, c = 0, d = 0, misses = 0, noShoots = 0, procErrors = 0;
 
   StageInputViewModel(this.repository);
 
   // Use public fields instead of unnecessary getters/setters
   int? get selectedStage => _selectedStage;
   String? get selectedShooter => _selectedShooter;
-
-  double get time => _time;
-  set time(double v) => _time = v;
-  int get a => _a;
-  set a(int v) => _a = v;
-  int get c => _c;
-  set c(int v) => _c = v;
-  int get d => _d;
-  set d(int v) => _d = v;
-  int get misses => _misses;
-  set misses(int v) => _misses = v;
-  int get noShoots => _noShoots;
-  set noShoots(int v) => _noShoots = v;
-  int get procErrors => _procErrors;
-  set procErrors(int v) => _procErrors = v;
 
   void selectStage(int stage) {
     _selectedStage = stage;
@@ -49,50 +34,51 @@ class StageInputViewModel {
     }
     final result = repository.getResult(_selectedStage!, _selectedShooter!);
     if (result != null) {
-      _time = result.time;
-      _a = result.a;
-      _c = result.c;
-      _d = result.d;
-      _misses = result.misses;
-      _noShoots = result.noShoots;
-      _procErrors = result.procedureErrors;
+      time = result.time;
+      a = result.a;
+      c = result.c;
+      d = result.d;
+      misses = result.misses;
+      noShoots = result.noShoots;
+      procErrors = result.procedureErrors;
     } else {
       _reset();
     }
   }
 
   void _reset() {
-    _time = 0.0;
-    _a = 0;
-    _c = 0;
-    _d = 0;
-    _misses = 0;
-    _noShoots = 0;
-    _procErrors = 0;
+  time = 0.0;
+  a = 0;
+  c = 0;
+  d = 0;
+  misses = 0;
+  noShoots = 0;
+  procErrors = 0;
   }
 
   int get totalScore =>
-      5 * _a + 3 * _c + 1 * _d - 10 * _misses - 10 * _noShoots - 10 * _procErrors;
+  5 * a + 3 * c + 1 * d - 10 * misses - 10 * noShoots - 10 * procErrors;
 
-  double get hitFactor => _time > 0 ? totalScore / _time : 0.0;
+  // Removed duplicate hitFactor getter; see below for correct version using 'time'.
+  double get hitFactor => time > 0 ? totalScore / time : 0.0;
 
   double get adjustedHitFactor {
     final shooter = repository.getShooter(_selectedShooter ?? '');
-  return shooter != null ? hitFactor * shooter.scaleFactor : 0.0;
+    return shooter != null ? hitFactor * shooter.scaleFactor : 0.0;
   }
 
   bool get isValid {
-    if (_selectedStage == null) return false;
-    final stage = repository.getStage(_selectedStage!);
-    if (stage == null) return false;
-    return (_a + _c + _d + _misses) == stage.scoringShoots;
+  if (_selectedStage == null) return false;
+  final stage = repository.getStage(_selectedStage!);
+  if (stage == null) return false;
+  return (a + c + d + misses) == stage.scoringShoots;
   }
 
   String? get validationError {
     if (_selectedStage == null) return null;
     final stage = repository.getStage(_selectedStage!);
     if (stage == null) return null;
-    if ((_a + _c + _d + _misses) != stage.scoringShoots) {
+    if ((a + c + d + misses) != stage.scoringShoots) {
       return 'A + C + D + Misses must equal ${stage.scoringShoots}';
     }
     return null;
@@ -103,13 +89,13 @@ class StageInputViewModel {
     final result = StageResult(
       stage: _selectedStage!,
       shooter: _selectedShooter!,
-      time: _time,
-      a: _a,
-      c: _c,
-      d: _d,
-      misses: _misses,
-      noShoots: _noShoots,
-      procedureErrors: _procErrors,
+      time: time,
+      a: a,
+      c: c,
+      d: d,
+      misses: misses,
+      noShoots: noShoots,
+      procedureErrors: procErrors,
     );
     final existing = repository.getResult(_selectedStage!, _selectedShooter!);
     if (existing == null) {
@@ -121,7 +107,7 @@ class StageInputViewModel {
 
   void remove() {
     if (_selectedStage == null || _selectedShooter == null) return;
-  repository.removeResult(_selectedStage!, _selectedShooter!);
+    repository.removeResult(_selectedStage!, _selectedShooter!);
     _reset();
   }
 }

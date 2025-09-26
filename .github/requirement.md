@@ -89,7 +89,7 @@ We implement
     - Procedure Errors: integer, initialize to 0
     - Any removal of input value would reset the value to 0
     - Submit button
-    - Input fields for Time, A, C, D are arranged vertically; Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row
+    - Input fields for Time, A, C, D, Misses, No Shoots, Procedure Errors are arranged vertically, allowing both keyboard input and +/- buttons for increment/decrement.
 - Function:
     - The input entry is stored in the data model
     - Calculate hit factor, adjusted hit factor, display them

@@ -27,10 +27,11 @@ void main() {
       repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
     });
 
-    testWidgets('renders all input fields and selectors', (tester) async {
+    testWidgets('renders all input fields and selectors in vertical layout with +/- buttons', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       expect(find.byKey(const Key('stageSelector')), findsOneWidget);
       expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
+      // Each field should have its own Row with - [TextField] +
       expect(find.byKey(const Key('timeField')), findsOneWidget);
       expect(find.byKey(const Key('aField')), findsOneWidget);
       expect(find.byKey(const Key('cField')), findsOneWidget);
@@ -38,6 +39,12 @@ void main() {
       expect(find.byKey(const Key('missesField')), findsOneWidget);
       expect(find.byKey(const Key('noShootsField')), findsOneWidget);
       expect(find.byKey(const Key('procErrorsField')), findsOneWidget);
+      // There should be at least 7 increment and 7 decrement IconButtons (one for each field)
+      final addButtons = find.widgetWithIcon(IconButton, Icons.add);
+      final removeButtons = find.widgetWithIcon(IconButton, Icons.remove);
+      expect(addButtons, findsNWidgets(7));
+      expect(removeButtons, findsNWidgets(7));
+      // Submit button is below all fields
       expect(find.byKey(const Key('submitButton')), findsOneWidget);
     });
 

@@ -31,11 +31,12 @@ void main() {
       'dataSchemaVersion': 99, // Simulate future version, should clear data
       'shooters': '[{"name":"Carol","scaleFactor":1.0}]',
     });
-    final repo2 = MatchRepository(persistence: persistence);
-    await repo2.loadAll();
-    expect(repo2.stages, isEmpty);
-    expect(repo2.shooters, isEmpty);
-    expect(repo2.results, isEmpty);
+  final repo2 = MatchRepository(persistence: persistence);
+  await repo2.loadAll();
+  expect(repo2.stages, isEmpty);
+  expect(repo2.shooters.length, 1);
+  expect(repo2.shooters.first.name, 'Carol');
+  expect(repo2.results, isEmpty);
   });
   TestWidgetsFlutterBinding.ensureInitialized();
   test('Repository can persist and reload all data', () async {

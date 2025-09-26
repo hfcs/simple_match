@@ -57,12 +57,12 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
 
   @override
   Widget build(BuildContext context) {
-  final repo = widget.vm.repository;
-  final results = repo.results;
-  final stages = repo.stages;
-  final shooters = repo.shooters;
-  final isValid = widget.vm.isValid;
-  final validationError = widget.vm.validationError;
+    final repo = widget.vm.repository;
+    final results = repo.results;
+    final stages = repo.stages;
+    final shooters = repo.shooters;
+    final isValid = widget.vm.isValid;
+    final validationError = widget.vm.validationError;
     return Scaffold(
       appBar: AppBar(title: const Text('Stage Input')),
       body: Padding(
@@ -89,7 +89,6 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          // ...existing code for selectors and fields...
                           DropdownButtonFormField<int>(
                             key: const Key('stageSelector'),
                             value: stages.any((s) => s.stage == widget.vm.selectedStage)
@@ -140,22 +139,47 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             ),
                           ),
                           const SizedBox(height: 12),
-                          // ...existing code for all input fields and submit...
-                          TextField(
-                            key: const Key('timeField'),
-                            controller: _timeController,
-                            decoration: const InputDecoration(
-                              labelText: 'Time',
-                              prefixIcon: Icon(Icons.timer),
-                              border: OutlineInputBorder(),
-                            ),
-                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                            onChanged: (v) {
-                              final t = double.tryParse(v) ?? 0.0;
-                              setState(() => widget.vm.time = t);
-                            },
+                          // Time
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: () {
+                                  final t = double.tryParse(_timeController.text) ?? 0.0;
+                                  final newVal = (t - 0.01).clamp(0.0, 999.99);
+                                  _timeController.text = newVal.toStringAsFixed(2);
+                                  setState(() => widget.vm.time = newVal);
+                                },
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  key: const Key('timeField'),
+                                  controller: _timeController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Time',
+                                    prefixIcon: Icon(Icons.timer),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                  onChanged: (v) {
+                                    final t = double.tryParse(v) ?? 0.0;
+                                    setState(() => widget.vm.time = t);
+                                  },
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: () {
+                                  final t = double.tryParse(_timeController.text) ?? 0.0;
+                                  final newVal = (t + 0.01).clamp(0.0, 999.99);
+                                  _timeController.text = newVal.toStringAsFixed(2);
+                                  setState(() => widget.vm.time = newVal);
+                                },
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 12),
+                          // A
                           Row(
                             children: [
                               IconButton(
@@ -195,6 +219,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             ],
                           ),
                           const SizedBox(height: 12),
+                          // C
                           Row(
                             children: [
                               IconButton(
@@ -234,6 +259,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             ],
                           ),
                           const SizedBox(height: 12),
+                          // D
                           Row(
                             children: [
                               IconButton(
@@ -272,7 +298,8 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 12),
+                          // Misses
                           Row(
                             children: [
                               IconButton(
@@ -309,7 +336,12 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   setState(() => widget.vm.misses = newVal);
                                 },
                               ),
-                              const SizedBox(width: 12),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          // No Shoots
+                          Row(
+                            children: [
                               IconButton(
                                 icon: const Icon(Icons.remove),
                                 onPressed: () {
@@ -347,6 +379,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             ],
                           ),
                           const SizedBox(height: 12),
+                          // Procedure Errors
                           Row(
                             children: [
                               IconButton(
@@ -383,23 +416,21 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   setState(() => widget.vm.procErrors = newVal);
                                 },
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: ElevatedButton(
-                                  key: const Key('submitButton'),
-                                  onPressed: isValid
-                                      ? () {
-                                          setState(() {
-                                            widget.vm.submit();
-                                            _editingKey = null;
-                                            _refreshFields();
-                                          });
-                                        }
-                                      : null,
-                                  child: Text(_editingKey == null ? 'Submit' : 'Update'),
-                                ),
-                              ),
                             ],
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            key: const Key('submitButton'),
+                            onPressed: isValid
+                                ? () {
+                                    setState(() {
+                                      widget.vm.submit();
+                                      _editingKey = null;
+                                      _refreshFields();
+                                    });
+                                  }
+                                : null,
+                            child: Text(_editingKey == null ? 'Submit' : 'Update'),
                           ),
                           if (validationError != null)
                             Padding(

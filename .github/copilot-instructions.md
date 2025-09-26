@@ -50,7 +50,7 @@
 ## Key Features
 - **Match Setup:** Configure stages and scoring shoots (stage number 1-30, scoring shoots 1-32, unique per match)
 - **Shooter Management:** Track participants and scale factor (unique name, scale factor 0.10-2.00)
-- **Stage Input:** Record and calculate scores with validation. All numeric fields (Time, A, C, D, Misses, No Shoots, Procedure Errors) must support multi-digit input and be mobile-friendly. Input fields for Time, A, C, D are arranged vertically; Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row.
+- **Stage Input:** Record and calculate scores with validation. All numeric fields (Time, A, C, D, Misses, No Shoots, Procedure Errors) must support multi-digit input and be mobile-friendly. Input fields for Time, A, C, D, Misses, No Shoots, Procedure Errors are arranged vertically
 - **Overall Result:** Calculate and display hit factor and adjusted hit factor for each shooter, and rank shooters by total adjusted stage point.
 - **Data Persistence:** Auto-saves all changes to local storage using SharedPreferences. All data (stages, shooters, results) must persist to disk and restore on app relaunch.
 - **Clear All Data:** User can clear all match data with confirmation.

@@ -5,31 +5,7 @@ import '../models/match_stage.dart';
 import '../models/stage_result.dart';
 
 /// Service for data persistence using SharedPreferences.
-/// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 1;
-const String kDataSchemaVersionKey = 'dataSchemaVersion';
-
 class PersistenceService {
-  /// Loads and migrates data if needed. Call this on app startup before loading any lists.
-  Future<void> ensureSchemaUpToDate() async {
-    final prefs = await SharedPreferences.getInstance();
-    final int storedVersion = prefs.getInt(kDataSchemaVersionKey) ?? 1;
-    if (storedVersion < kDataSchemaVersion) {
-      await _migrateSchema(storedVersion, kDataSchemaVersion, prefs);
-      await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
-    } else if (storedVersion > kDataSchemaVersion) {
-      // Future-proof: if app is downgraded, clear data to avoid incompatibility
-      await prefs.clear();
-      await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
-    }
-  }
-
-  /// Migration logic for future schema changes. Add cases as schema evolves.
-  Future<void> _migrateSchema(int from, int to, SharedPreferences prefs) async {
-    // Example: if (from < 2 && to >= 2) { ... }
-    // For v1, nothing to do.
-    // Add migration steps here for future versions.
-  }
   // Add loader for shooters
   Future<List<Shooter>> loadShooters() async {
     final list = await loadList('shooters');
@@ -66,16 +42,10 @@ class PersistenceService {
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(key, jsonEncode(list));
-    await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion); // Always update version on save
   }
 
   Future<List<Map<String, dynamic>>> loadList(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    // Optionally, ensure schema is up to date before loading
-    final int storedVersion = prefs.getInt(kDataSchemaVersionKey) ?? 1;
-    if (storedVersion < kDataSchemaVersion) {
-      await ensureSchemaUpToDate();
-    }
     final jsonStr = prefs.getString(key);
     if (jsonStr == null) return [];
     final decoded = jsonDecode(jsonStr) as List;

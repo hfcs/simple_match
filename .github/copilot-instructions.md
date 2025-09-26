@@ -15,14 +15,24 @@
 - `test/` — Widget tests using `flutter_test`
 - Platform-specific folders (`android/`, `ios/`, etc.) — Auto-generated runners
 
+
 ## Architecture
 - **MVVM Pattern:**
-  - Views (`lib/views/`) handle only UI and user input
-  - ViewModels (`lib/viewmodel/`) manage business logic and state
-  - Models (`lib/models/`) define data structures
-  - Services (`lib/services/`) handle persistence
+   - Views (`lib/views/`) handle only UI and user input
+   - ViewModels (`lib/viewmodel/`) manage business logic and state
+   - Models (`lib/models/`) define data structures
+   - Services (`lib/services/`) handle persistence
 - **State Management:** Uses Provider pattern (see `main.dart` for setup)
-- **Persistence:** Uses `shared_preferences` for local data storage
+- **Persistence:**
+   - Uses `shared_preferences` for local data storage
+   - **Data schema is versioned and backward compatible:**
+      - The current schema version is stored in SharedPreferences under `dataSchemaVersion`.
+      - Any change to persisted data structure, keys, or logic must increment the schema version.
+      - On app startup, the stored schema version is checked. If it is less than the current version, migration logic is run to convert old data to the new format before loading.
+      - No key or structure should be changed or removed without migration logic for backward compatibility.
+      - Migration logic is implemented in `PersistenceService._migrateSchema()`.
+      - All migration logic must be covered by integration tests simulating loading old data and verifying correctness.
+      - All schema versions and changes are documented in `data_schema_history.md` and `docs/data_schema_versioning.md`.
 - **Data Flow:** ViewModels update state, Views observe changes via `Consumer`
 
 ## Data Models
@@ -46,11 +56,17 @@
 - **Clear All Data:** User can clear all match data with confirmation.
 - **Modern UI:** All pages use cards, icons, and spacing for a visually appealing, mobile-optimized experience.
 
+
 ## Developer Workflows
 - **Run app:** `flutter run`
 - **Add dependency:** `flutter pub add <package>`
 - **Tests:** `flutter test`
 - **Hot Reload:** Supported for rapid UI iteration
+- **Schema changes:**
+   - Increment schema version in `PersistenceService` if making breaking changes to persisted data.
+   - Add migration logic for any schema change.
+   - Update `data_schema_history.md` and `docs/data_schema_versioning.md` with details of the change.
+   - Add/Update integration tests to cover migration and backward compatibility.
 
 ## Project Conventions
 - **Test-Driven Development:** All new features and bug fixes must be implemented using a test-driven approach. Always generate or update tests in `test/` before writing or modifying any production code. No code should be added or changed without a corresponding test.

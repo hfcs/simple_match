@@ -7,7 +7,9 @@
     - Repositories handle data model as source of truth
     - Services handles API calls, platform calls and local file
     - All state changes must trigger persistence (using SharedPreferences)
+        - Stored SharedPerfences data are versioned and backward compatbile, see copilot-instructions for implementation details
     - All features must be implemented with logic and widget tests (test-driven development)
+
     
 
 # Modules and Requirement

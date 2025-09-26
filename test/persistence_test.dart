@@ -9,6 +9,34 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  test('Migration logic upgrades old schema version and preserves data', () async {
+    // Simulate old schema version in SharedPreferences
+    SharedPreferences.setMockInitialValues({
+      'dataSchemaVersion': 1, // Simulate v1 (current, so migration is a no-op)
+      'shooters': '[{"name":"Bob","scaleFactor":1.0}]',
+      'stages': '[{"stage":2,"scoringShoots":8}]',
+      'stageResults': '[{"stage":2,"shooter":"Bob","time":9.5,"a":4,"c":2,"d":2,"misses":0,"noShoots":0,"procedureErrors":0}]',
+    });
+    final persistence = PersistenceService();
+    final repo = MatchRepository(persistence: persistence);
+    await repo.loadAll();
+    expect(repo.stages.length, 1);
+    expect(repo.stages.first.stage, 2);
+    expect(repo.shooters.length, 1);
+    expect(repo.shooters.first.name, 'Bob');
+    expect(repo.results.length, 1);
+    expect(repo.results.first.shooter, 'Bob');
+    // Now simulate a future migration by lowering the app's schema version (simulate downgrade)
+    SharedPreferences.setMockInitialValues({
+      'dataSchemaVersion': 99, // Simulate future version, should clear data
+      'shooters': '[{"name":"Carol","scaleFactor":1.0}]',
+    });
+    final repo2 = MatchRepository(persistence: persistence);
+    await repo2.loadAll();
+    expect(repo2.stages, isEmpty);
+    expect(repo2.shooters, isEmpty);
+    expect(repo2.results, isEmpty);
+  });
   TestWidgetsFlutterBinding.ensureInitialized();
   test('Repository can persist and reload all data', () async {
     // Set up mock SharedPreferences

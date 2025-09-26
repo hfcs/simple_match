@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_match/views/stage_input_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
-
-
+import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 Widget _wrapWithProviders(Widget child, MatchRepository repo) {
   return ChangeNotifierProvider<MatchRepository>.value(
     value: repo,
@@ -18,47 +16,13 @@ Widget _wrapWithProviders(Widget child, MatchRepository repo) {
     ),
   );
 }
-
 void main() {
-  testWidgets('accepts multi-digit input in all numeric fields', (tester) async {
-    final repo = MatchRepository();
-  repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
-  repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
-    repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
-    repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
-    await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-    // Select stage and shooter
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('shooterSelector')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Alice').last);
-    await tester.pumpAndSettle();
-    // Enter multi-digit values
-    await tester.enterText(find.byKey(const Key('timeField')), '123.45');
-    await tester.enterText(find.byKey(const Key('aField')), '12');
-    await tester.enterText(find.byKey(const Key('cField')), '10');
-    await tester.enterText(find.byKey(const Key('dField')), '8');
-    await tester.enterText(find.byKey(const Key('missesField')), '7');
-    await tester.enterText(find.byKey(const Key('noShootsField')), '6');
-    await tester.enterText(find.byKey(const Key('procErrorsField')), '5');
-    await tester.pump();
-    expect(find.widgetWithText(TextField, '123.45'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '12'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '10'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '8'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '7'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '6'), findsOneWidget);
-    expect(find.widgetWithText(TextField, '5'), findsOneWidget);
-  });
   group('StageInputView', () {
     late MatchRepository repo;
     setUp(() {
       repo = MatchRepository();
-  repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
-  repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
+      repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
+      repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
       repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
       repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
     });

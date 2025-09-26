@@ -46,13 +46,13 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
   }
 
   void _refreshFields() {
-    _timeController.text = widget.vm.time.toString();
-    _aController.text = widget.vm.a.toString();
-    _cController.text = widget.vm.c.toString();
-    _dController.text = widget.vm.d.toString();
-    _missesController.text = widget.vm.misses.toString();
-    _noShootsController.text = widget.vm.noShoots.toString();
-    _procErrorsController.text = widget.vm.procErrors.toString();
+    _timeController.text = widget.vm.time == 0.0 ? '' : widget.vm.time.toString();
+    _aController.text = widget.vm.a == 0 ? '' : widget.vm.a.toString();
+    _cController.text = widget.vm.c == 0 ? '' : widget.vm.c.toString();
+    _dController.text = widget.vm.d == 0 ? '' : widget.vm.d.toString();
+    _missesController.text = widget.vm.misses == 0 ? '' : widget.vm.misses.toString();
+    _noShootsController.text = widget.vm.noShoots == 0 ? '' : widget.vm.noShoots.toString();
+    _procErrorsController.text = widget.vm.procErrors == 0 ? '' : widget.vm.procErrors.toString();
   }
 
   @override
@@ -102,7 +102,12 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                     ))
                                 .toList(),
                             onChanged: (v) {
-                              if (v != null) setState(() => widget.vm.selectStage(v));
+                              if (v != null) {
+                                setState(() {
+                                  widget.vm.selectStage(v);
+                                  _refreshFields();
+                                });
+                              }
                             },
                             decoration: const InputDecoration(
                               labelText: 'Stage',
@@ -122,7 +127,12 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                     ))
                                 .toList(),
                             onChanged: (v) {
-                              if (v != null) setState(() => widget.vm.selectShooter(v));
+                              if (v != null) {
+                                setState(() {
+                                  widget.vm.selectShooter(v);
+                                  _refreshFields();
+                                });
+                              }
                             },
                             decoration: const InputDecoration(
                               labelText: 'Shooter',

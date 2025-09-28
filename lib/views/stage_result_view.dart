@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+// PDF export removed; no longer needed here.
 import '../viewmodel/stage_result_viewmodel.dart';
 
 class StageResultView extends StatelessWidget {
@@ -49,17 +48,6 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Stage Result'),
-        actions: [
-          if (stageRanks.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.picture_as_pdf),
-              tooltip: 'Export all stages to PDF',
-              onPressed: () async {
-                final pdf = await StageResultViewBodyState.buildAllStagesResultPdf(stageRanks);
-                await Printing.layoutPdf(onLayout: (format) async => pdf.save());
-              },
-            ),
-        ],
       ),
       body: stages.isEmpty
           ? const Center(child: Text('No stages available.'))
@@ -134,62 +122,5 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
               ],
             ),
     );
-  }
-
-  static Future<pw.Document> buildAllStagesResultPdf(Map<int, List> stageRanks) async {
-    final pdf = pw.Document();
-    stageRanks.forEach((stage, ranks) {
-      if (ranks.isEmpty) return;
-      pdf.addPage(
-        pw.Page(
-          build: (context) => pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text('Stage $stage Results', style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 16),
-              pw.Table(
-                border: pw.TableBorder.all(),
-                children: [
-                  pw.TableRow(
-                    children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text('Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text('Hit Factor', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text('Adjusted', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  ...ranks.map<pw.TableRow>((e) => pw.TableRow(
-                    children: [
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text(e.name),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text(e.hitFactor.toStringAsFixed(2)),
-                      ),
-                      pw.Padding(
-                        padding: const pw.EdgeInsets.all(4),
-                        child: pw.Text(e.adjustedHitFactor.toStringAsFixed(2)),
-                      ),
-                    ],
-                  )),
-                ],
-              ),
-              pw.SizedBox(height: 24),
-            ],
-          ),
-        ),
-      );
-    });
-    return pdf;
   }
 }

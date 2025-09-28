@@ -1,17 +1,32 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import '../viewmodel/overall_result_viewmodel.dart';
-
 class OverallResultView extends StatelessWidget {
   const OverallResultView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<OverallResultViewModel>(
+  return Consumer<OverallResultViewModel>(
       builder: (context, vm, _) {
         final results = vm.getOverallResults();
         return Scaffold(
-          appBar: AppBar(title: const Text('Overall Result')),
+          appBar: AppBar(
+            title: const Text('Overall Result'),
+            actions: [
+              if (results.isNotEmpty)
+                IconButton(
+                  icon: const Icon(Icons.picture_as_pdf),
+                  tooltip: 'Export overall results to PDF',
+                  onPressed: () async {
+                    final pdf = await buildOverallResultPdf(results);
+                    await Printing.layoutPdf(onLayout: (format) async => pdf.save());
+                  },
+                ),
+            ],
+          ),
           body: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -57,4 +72,61 @@ class OverallResultView extends StatelessWidget {
       },
     );
   }
+}
+
+Future<pw.Document> buildOverallResultPdf(List results) async {
+  final pdf = pw.Document();
+  pdf.addPage(
+    pw.Page(
+      build: (context) => pw.Column(
+        crossAxisAlignment: pw.CrossAxisAlignment.start,
+        children: [
+          pw.Text('Overall Shooter Results', style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+          pw.SizedBox(height: 16),
+          pw.Table(
+            border: pw.TableBorder.all(),
+            children: [
+              pw.TableRow(
+                children: [
+                  pw.Padding(
+                    padding: const pw.EdgeInsets.all(4),
+                    child: pw.Text('Rank', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ),
+                  pw.Padding(
+                    padding: const pw.EdgeInsets.all(4),
+                    child: pw.Text('Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ),
+                  pw.Padding(
+                    padding: const pw.EdgeInsets.all(4),
+                    child: pw.Text('Total Adjusted Points', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  ),
+                ],
+              ),
+              ...List.generate(results.length, (i) {
+                final r = results[i];
+                return pw.TableRow(
+                  children: [
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.all(4),
+                      child: pw.Text('${i + 1}'),
+                    ),
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.all(4),
+                      child: pw.Text(r.name),
+                    ),
+                    pw.Padding(
+                      padding: const pw.EdgeInsets.all(4),
+                      child: pw.Text(r.totalPoints.toStringAsFixed(2)),
+                    ),
+                  ],
+                );
+              }),
+            ],
+          ),
+          pw.SizedBox(height: 24),
+        ],
+      ),
+    ),
+  );
+  return pdf;
 }

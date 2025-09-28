@@ -88,25 +88,84 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                 children: [
                                   Text('Stage $selected', style: Theme.of(context).textTheme.titleLarge),
                                   const SizedBox(height: 8),
+                                  // Table header
                                   Row(
                                     children: const [
-                                      Expanded(child: Text('Name', style: TextStyle(fontWeight: FontWeight.bold))),
-                                      SizedBox(width: 12),
-                                      Expanded(child: Text('Hit Factor', style: TextStyle(fontWeight: FontWeight.bold))),
-                                      SizedBox(width: 12),
-                                      Expanded(child: Text('Adjusted', style: TextStyle(fontWeight: FontWeight.bold))),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Raw HF', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Scaled HF', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Time', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('A', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('C', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('D', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Misses', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('No Shoots', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
+                                      SizedBox(width: 8),
+                                      Expanded(child: RotatedBox(
+                                        quarterTurns: 3,
+                                        child: Text('Proc Err', style: TextStyle(fontWeight: FontWeight.bold)),
+                                      )),
                                     ],
                                   ),
                                   const Divider(),
-                                  ...ranks.asMap().entries.map((e) => Padding(
+                                  ...ranks.map((e) => Padding(
                                         padding: const EdgeInsets.symmetric(vertical: 4),
                                         child: Row(
                                           children: [
-                                            Expanded(child: Text(e.value.name)),
-                                            const SizedBox(width: 12),
-                                            Expanded(child: Text(e.value.hitFactor.toStringAsFixed(2))),
-                                            const SizedBox(width: 12),
-                                            Expanded(child: Text(e.value.adjustedHitFactor.toStringAsFixed(2))),
+                                            Expanded(child: Text(e.name)),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.hitFactor.toStringAsFixed(2))),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.adjustedHitFactor.toStringAsFixed(2))),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.time.toStringAsFixed(2))),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.a.toString())),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.c.toString())),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.d.toString())),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.misses.toString())),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.noShoots.toString())),
+                                            const SizedBox(width: 8),
+                                            Expanded(child: Text(e.procedureErrors.toString())),
                                           ],
                                         ),
                                       )),

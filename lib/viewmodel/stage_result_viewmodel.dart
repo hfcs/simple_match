@@ -26,32 +26,59 @@ class StageResultViewModel extends ChangeNotifier {
   List<Shooter> get shooters => _shooters;
   List<MatchStage> get stages => _stages;
 
-  /// Returns a map of stage number to ranked list of {name, hitFactor, adjusted hit factor}
-  Map<int, List<StageResultRank>> getStageRanks() {
-    final Map<int, List<StageResultRank>> stageRanks = {};
+  /// Returns a map of stage number to ranked list of StageResultFullRank (sorted by scaled hit factor)
+  Map<int, List<StageResultFullRank>> getStageRanks() {
+    final Map<int, List<StageResultFullRank>> stageRanks = {};
     for (final stage in _stages) {
       final stageResults = _results.where((r) => r.stage == stage.stage).toList();
-      final List<StageResultRank> ranks = stageResults.map((r) {
+      final List<StageResultFullRank> ranks = stageResults.map((r) {
         final shooter = _shooters.firstWhere(
           (s) => s.name == r.shooter,
           orElse: () => Shooter(name: r.shooter, scaleFactor: 1.0),
         );
-        return StageResultRank(
+        return StageResultFullRank(
           name: r.shooter,
           hitFactor: r.hitFactor,
           adjustedHitFactor: r.adjustedHitFactor(shooter.scaleFactor),
+          time: r.time,
+          a: r.a,
+          c: r.c,
+          d: r.d,
+          misses: r.misses,
+          noShoots: r.noShoots,
+          procedureErrors: r.procedureErrors,
         );
       }).toList();
-      ranks.sort((a, b) => b.hitFactor.compareTo(a.hitFactor));
+      // Sort by scaled (adjusted) hit factor descending
+      ranks.sort((a, b) => b.adjustedHitFactor.compareTo(a.adjustedHitFactor));
       stageRanks[stage.stage] = ranks;
     }
     return stageRanks;
   }
 }
 
-class StageResultRank {
+
+class StageResultFullRank {
   final String name;
   final double hitFactor;
   final double adjustedHitFactor;
-  StageResultRank({required this.name, required this.hitFactor, required this.adjustedHitFactor});
+  final double time;
+  final int a;
+  final int c;
+  final int d;
+  final int misses;
+  final int noShoots;
+  final int procedureErrors;
+  StageResultFullRank({
+    required this.name,
+    required this.hitFactor,
+    required this.adjustedHitFactor,
+    required this.time,
+    required this.a,
+    required this.c,
+    required this.d,
+    required this.misses,
+    required this.noShoots,
+    required this.procedureErrors,
+  });
 }

@@ -48,16 +48,22 @@
    - Score calculation logic
 
 
+
 ## Key Features
 - **Match Setup:** Configure stages and scoring shoots (stage number 1-30, scoring shoots 1-32, unique per match)
 - **Shooter Management:** Track participants and scale factor (unique name, scale factor 0.10-2.00)
 - **Stage Input:** Record and calculate scores with validation. All numeric fields (Time, A, C, D, Misses, No Shoots, Procedure Errors) must support multi-digit input and be mobile-friendly. Input fields for Time, A, C, D, Misses and No Shoots are arranged vertically. Procedure Errors and Submit button are on the same row.
+- **Stage Result Table (Mobile-Friendly):**
+   - The Stage Result view displays a detailed table with columns: Name, raw hit factor, scaled hit factor, time, A, C, D, misses, no shoots, procedure errors.
+   - Table header titles are rotated 90 degrees (vertical) to maximize horizontal space and improve readability on mobile devices.
+   - Table rows are sorted by scaled hit factor (descending).
+   - Table remains visually clear, modern, and mobile-optimized.
 - **Overall Result:** Calculate and display hit factor and adjusted hit factor for each shooter, and rank shooters by total adjusted stage point. The PDF export from the Overall Result view must include:
    - An overall ranking table as above
    - For each stage, a detailed table listing all shooters' results for that stage, with columns: Name, raw hit factor, scaled hit factor, time, A, C, D, misses, no shoots, procedure errors
 - **Data Persistence:** Auto-saves all changes to local storage using SharedPreferences. All data (stages, shooters, results) must persist to disk and restore on app relaunch.
 - **Clear All Data:** User can clear all match data with confirmation.
-- **Modern UI:** All pages use cards, icons, and spacing for a visually appealing, mobile-optimized experience.
+- **Modern UI:** All pages use cards, icons, and spacing for a visually appealing, mobile-optimized experience. Stage Result table headers are rotated for mobile usability.
 
 
 ## Developer Workflows

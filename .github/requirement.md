@@ -124,12 +124,16 @@ We implement
         - Rank the hit factor, highest first, and display a list of {Name, hit factor, adjusted hit factor}
     - Export to PDF: A button that export a single PDF of all stages, of the report above
 
+
 ## Overall result
 - With back button returning to main menu
 - Function:
     - For each shooter, calculate stage point in the stage
         - Find out the highest adjusted hit factor ever scored in that stage
-        - stage point for shooter = (adjusted hit factor / highest adjust hit factor ever score d in that stage) x Scoring shotts in that stage x 5
+        - stage point for shooter = (adjusted hit factor / highest adjust hit factor ever scored in that stage) x Scoring shots in that stage x 5
     - For each shooter, add up stage point of all stages as total adjusted stage point
 - Output:
-    -Rank the total adjusted stage point, highest first, and display a list of {Name, total adjusted stage point}
+    - Rank the total adjusted stage point, highest first, and display a list of {Name, total adjusted stage point}
+    - PDF Export: The Overall Result view must provide a PDF export button. The exported PDF must include:
+        - An overall ranking table as above
+        - For each stage, a detailed table listing all shooters' results for that stage, with columns: Name, raw hit factor, scaled hit factor, time, A, C, D, misses, no shoots, procedure errors

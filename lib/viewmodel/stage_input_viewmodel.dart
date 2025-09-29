@@ -1,17 +1,33 @@
 
+
+import 'package:flutter/foundation.dart';
 import '../repository/match_repository.dart';
 import '../models/stage_result.dart';
 
 
 /// ViewModel for stage input page.
-class StageInputViewModel {
+class StageInputViewModel extends ChangeNotifier {
+  /// Reloads the current result from the repository into the ViewModel fields.
+  void reload() {
+    _loadOrReset();
+    notifyListeners();
+  }
   final MatchRepository repository;
+  late final VoidCallback _repoListener;
   int? _selectedStage;
   String? _selectedShooter;
   double time = 0.0;
   int a = 0, c = 0, d = 0, misses = 0, noShoots = 0, procErrors = 0;
 
-  StageInputViewModel(this.repository);
+  StageInputViewModel(this.repository) {
+    _repoListener = () => notifyListeners();
+    repository.addListener(_repoListener);
+  }
+
+  void dispose() {
+    repository.removeListener(_repoListener);
+    super.dispose();
+  }
 
   // Use public fields instead of unnecessary getters/setters
   int? get selectedStage => _selectedStage;
@@ -78,13 +94,17 @@ class StageInputViewModel {
     if (_selectedStage == null) return null;
     final stage = repository.getStage(_selectedStage!);
     if (stage == null) return null;
+    // Negative value check
+    if (a < 0 || c < 0 || d < 0 || misses < 0 || noShoots < 0 || procErrors < 0 || time < 0) {
+      return 'Values cannot be negative';
+    }
     if ((a + c + d + misses) != stage.scoringShoots) {
       return 'A + C + D + Misses must equal ${stage.scoringShoots}';
     }
     return null;
   }
 
-  void submit() {
+  Future<void> submit() async {
     if (_selectedStage == null || _selectedShooter == null) return;
     final result = StageResult(
       stage: _selectedStage!,
@@ -99,15 +119,18 @@ class StageInputViewModel {
     );
     final existing = repository.getResult(_selectedStage!, _selectedShooter!);
     if (existing == null) {
-      repository.addResult(result);
+      await repository.addResult(result);
     } else {
-      repository.updateResult(result);
+      await repository.updateResult(result);
     }
+  // After submit, reload fields from repository to update UI in-place
+  _loadOrReset();
+  notifyListeners();
   }
 
-  void remove() {
+  Future<void> remove() async {
     if (_selectedStage == null || _selectedShooter == null) return;
-    repository.removeResult(_selectedStage!, _selectedShooter!);
+    await repository.removeResult(_selectedStage!, _selectedShooter!);
     _reset();
   }
 }

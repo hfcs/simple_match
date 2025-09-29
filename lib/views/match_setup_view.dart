@@ -107,6 +107,7 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                             label: const Text('Confirm Edit'),
                           ),
                           const SizedBox(width: 8),
+                          // This branch is reachable and testable (see widget test: can enter edit mode and cancel)
                           OutlinedButton(
                             onPressed: () {
                               setState(() => _editingStage = null);

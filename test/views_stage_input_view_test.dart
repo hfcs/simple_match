@@ -8,12 +8,14 @@ import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 Widget _wrapWithProviders(Widget child, MatchRepository repo) {
-  return ChangeNotifierProvider<MatchRepository>.value(
-    value: repo,
-    child: Provider<StageInputViewModel>(
-      create: (context) => StageInputViewModel(repo),
-      child: MaterialApp(home: child),
-    ),
+  return MultiProvider(
+    providers: [
+      ChangeNotifierProvider<MatchRepository>.value(value: repo),
+      ChangeNotifierProvider<StageInputViewModel>(
+        create: (context) => StageInputViewModel(repo),
+      ),
+    ],
+    child: MaterialApp(home: child),
   );
 }
 void main() {

@@ -46,13 +46,45 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
   }
 
   void _refreshFields() {
-    _timeController.text = widget.vm.time == 0.0 ? '' : widget.vm.time.toString();
-    _aController.text = widget.vm.a == 0 ? '' : widget.vm.a.toString();
-    _cController.text = widget.vm.c == 0 ? '' : widget.vm.c.toString();
-    _dController.text = widget.vm.d == 0 ? '' : widget.vm.d.toString();
-    _missesController.text = widget.vm.misses == 0 ? '' : widget.vm.misses.toString();
-    _noShootsController.text = widget.vm.noShoots == 0 ? '' : widget.vm.noShoots.toString();
-    _procErrorsController.text = widget.vm.procErrors == 0 ? '' : widget.vm.procErrors.toString();
+    _timeController.text = widget.vm.time.toString();
+    _aController.text = widget.vm.a.toString();
+    _cController.text = widget.vm.c.toString();
+    _dController.text = widget.vm.d.toString();
+    _missesController.text = widget.vm.misses.toString();
+    _noShootsController.text = widget.vm.noShoots.toString();
+    _procErrorsController.text = widget.vm.procErrors.toString();
+  }
+
+  void _clearEditing() {
+    setState(() {
+      _editingKey = null;
+      _refreshFields();
+    });
+  }
+
+  void _setA(int value) {
+    _aController.text = value.toString();
+    setState(() => widget.vm.a = value);
+  }
+  void _setC(int value) {
+    _cController.text = value.toString();
+    setState(() => widget.vm.c = value);
+  }
+  void _setD(int value) {
+    _dController.text = value.toString();
+    setState(() => widget.vm.d = value);
+  }
+  void _setMisses(int value) {
+    _missesController.text = value.toString();
+    setState(() => widget.vm.misses = value);
+  }
+  void _setNoShoots(int value) {
+    _noShootsController.text = value.toString();
+    setState(() => widget.vm.noShoots = value);
+  }
+  void _setProcErrors(int value) {
+    _procErrorsController.text = value.toString();
+    setState(() => widget.vm.procErrors = value);
   }
 
   @override
@@ -187,8 +219,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_aController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _aController.text = newVal.toString();
-                                  setState(() => widget.vm.a = newVal);
+                                  _setA(newVal);
                                 },
                               ),
                               Expanded(
@@ -203,6 +234,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _aController.text = n.toString();
                                     setState(() => widget.vm.a = n);
                                   },
                                 ),
@@ -211,9 +243,10 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 icon: const Icon(Icons.add),
                                 onPressed: () {
                                   final n = int.tryParse(_aController.text) ?? 0;
+                                  debugPrint('A before increment: $n');
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _aController.text = newVal.toString();
-                                  setState(() => widget.vm.a = newVal);
+                                  _setA(newVal);
+                                  debugPrint('A after increment: ${_aController.text}');
                                 },
                               ),
                             ],
@@ -227,8 +260,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_cController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _cController.text = newVal.toString();
-                                  setState(() => widget.vm.c = newVal);
+                                  _setC(newVal);
                                 },
                               ),
                               Expanded(
@@ -243,6 +275,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _cController.text = n.toString();
                                     setState(() => widget.vm.c = n);
                                   },
                                 ),
@@ -252,8 +285,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_cController.text) ?? 0;
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _cController.text = newVal.toString();
-                                  setState(() => widget.vm.c = newVal);
+                                  _setC(newVal);
                                 },
                               ),
                             ],
@@ -267,8 +299,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_dController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _dController.text = newVal.toString();
-                                  setState(() => widget.vm.d = newVal);
+                                  _setD(newVal);
                                 },
                               ),
                               Expanded(
@@ -283,6 +314,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _dController.text = n.toString();
                                     setState(() => widget.vm.d = n);
                                   },
                                 ),
@@ -292,8 +324,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_dController.text) ?? 0;
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _dController.text = newVal.toString();
-                                  setState(() => widget.vm.d = newVal);
+                                  _setD(newVal);
                                 },
                               ),
                             ],
@@ -307,8 +338,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_missesController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _missesController.text = newVal.toString();
-                                  setState(() => widget.vm.misses = newVal);
+                                  _setMisses(newVal);
                                 },
                               ),
                               Expanded(
@@ -323,6 +353,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _missesController.text = n.toString();
                                     setState(() => widget.vm.misses = n);
                                   },
                                 ),
@@ -332,8 +363,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_missesController.text) ?? 0;
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _missesController.text = newVal.toString();
-                                  setState(() => widget.vm.misses = newVal);
+                                  _setMisses(newVal);
                                 },
                               ),
                             ],
@@ -347,8 +377,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_noShootsController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _noShootsController.text = newVal.toString();
-                                  setState(() => widget.vm.noShoots = newVal);
+                                  _setNoShoots(newVal);
                                 },
                               ),
                               Expanded(
@@ -363,6 +392,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _noShootsController.text = n.toString();
                                     setState(() => widget.vm.noShoots = n);
                                   },
                                 ),
@@ -372,8 +402,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_noShootsController.text) ?? 0;
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _noShootsController.text = newVal.toString();
-                                  setState(() => widget.vm.noShoots = newVal);
+                                  _setNoShoots(newVal);
                                 },
                               ),
                             ],
@@ -387,8 +416,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_procErrorsController.text) ?? 0;
                                   final newVal = (n - 1).clamp(0, 999);
-                                  _procErrorsController.text = newVal.toString();
-                                  setState(() => widget.vm.procErrors = newVal);
+                                  _setProcErrors(newVal);
                                 },
                               ),
                               Expanded(
@@ -403,6 +431,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                   keyboardType: TextInputType.number,
                                   onChanged: (v) {
                                     final n = int.tryParse(v) ?? 0;
+                                    _procErrorsController.text = n.toString();
                                     setState(() => widget.vm.procErrors = n);
                                   },
                                 ),
@@ -412,8 +441,7 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                                 onPressed: () {
                                   final n = int.tryParse(_procErrorsController.text) ?? 0;
                                   final newVal = (n + 1).clamp(0, 999);
-                                  _procErrorsController.text = newVal.toString();
-                                  setState(() => widget.vm.procErrors = newVal);
+                                  _setProcErrors(newVal);
                                 },
                               ),
                             ],
@@ -422,12 +450,11 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                           ElevatedButton(
                             key: const Key('submitButton'),
                             onPressed: isValid
-                                ? () {
-                                    setState(() {
-                                      widget.vm.submit();
-                                      _editingKey = null;
-                                      _refreshFields();
-                                    });
+                                ? () async {
+                                    await widget.vm.submit();
+                                    widget.vm.reload();
+                                    _clearEditing();
+                                    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
                                   }
                                 : null,
                             child: Text(_editingKey == null ? 'Submit' : 'Update'),
@@ -498,11 +525,11 @@ class _StageInputViewBodyState extends State<_StageInputViewBody> {
                             IconButton(
                               key: Key('removeResult-${r.stage}-${r.shooter}'),
                               icon: const Icon(Icons.delete),
-                              onPressed: () {
+                              onPressed: () async {
+                                widget.vm.selectStage(r.stage);
+                                widget.vm.selectShooter(r.shooter);
+                                await widget.vm.remove();
                                 setState(() {
-                                  widget.vm.selectStage(r.stage);
-                                  widget.vm.selectShooter(r.shooter);
-                                  widget.vm.remove();
                                   _editingKey = null;
                                   _refreshFields();
                                 });

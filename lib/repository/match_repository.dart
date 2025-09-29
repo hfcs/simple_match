@@ -14,12 +14,19 @@ class MatchRepository extends ChangeNotifier {
     await saveAll();
     notifyListeners();
   }
-  final List<MatchStage> _stages = [];
-  final List<Shooter> _shooters = [];
-  final List<StageResult> _results = [];
+  final List<MatchStage> _stages;
+  final List<Shooter> _shooters;
+  final List<StageResult> _results;
   final PersistenceService? persistence;
 
-  MatchRepository({this.persistence});
+  MatchRepository({
+    this.persistence,
+    List<MatchStage>? initialStages,
+    List<Shooter>? initialShooters,
+    List<StageResult>? initialResults,
+  })  : _stages = initialStages ?? [],
+        _shooters = initialShooters ?? [],
+        _results = initialResults ?? [];
   // Persistence integration (stub)
   Future<void> saveAll() async {
     if (persistence == null) return;

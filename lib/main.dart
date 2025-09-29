@@ -45,7 +45,8 @@ class MiniIPSCMatchApp extends StatelessWidget {
         ProxyProvider<MatchRepository, ShooterSetupViewModel>(
           update: (_, repo, __) => ShooterSetupViewModel(repo),
         ),
-        ProxyProvider<MatchRepository, StageInputViewModel>(
+        ChangeNotifierProxyProvider<MatchRepository, StageInputViewModel>(
+          create: (_) => StageInputViewModel(repository),
           update: (_, repo, __) => StageInputViewModel(repo),
         ),
         ProxyProvider<MatchRepository, OverallResultViewModel>(

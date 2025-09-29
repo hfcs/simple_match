@@ -101,6 +101,9 @@ class StageInputViewModel extends ChangeNotifier {
     if ((a + c + d + misses) != stage.scoringShoots) {
       return 'A + C + D + Misses must equal ${stage.scoringShoots}';
     }
+    if (time == 0) {
+      return 'Time must be greater than 0';
+    }
     return null;
   }
 

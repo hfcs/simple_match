@@ -60,12 +60,14 @@ void main() {
   vm.c = 3;
   vm.d = 3;
   vm.misses = 2; // 3+3+3+2=11, not equal to 10
+  vm.time = 1.0;
   expect(vm.isValid, false);
   expect(vm.validationError, contains('10'));
   vm.a = 5;
   vm.c = 3;
   vm.d = 2;
   vm.misses = 0; // 5+3+2+0=10
+  vm.time = 1.0; // set to valid time
   expect(vm.isValid, true);
   expect(vm.validationError, isNull);
     });

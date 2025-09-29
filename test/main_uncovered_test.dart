@@ -5,6 +5,7 @@ import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
 import 'package:simple_match/views/stage_result_view.dart';
 import 'package:simple_match/viewmodel/stage_result_viewmodel.dart';
+import 'package:simple_match/main.dart' as app;
 
 void main() {
   testWidgets('StageResultView route builds with injected ViewModel', (tester) async {
@@ -49,5 +50,12 @@ void main() {
     tester.takeException();
     // Should fallback to Home
     expect(find.text('Home'), findsOneWidget);
+  });
+
+  testWidgets('main() runs without error', (tester) async {
+    // This covers the real main() entrypoint for coverage tools.
+    // It does not assert UI, just that the app starts up without exceptions.
+    app.main(); // main() returns void, so just call it.
+    await tester.pumpAndSettle();
   });
 }

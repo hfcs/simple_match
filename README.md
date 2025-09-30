@@ -7,6 +7,10 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 - **Shooter Management:** Add shooters with unique names and scale factors (0.10–2.00)
 - **Stage Input:** Record scores with mobile-friendly numeric input, validation, and error feedback
 - **Results:** Calculate and display hit factors, adjusted hit factors, and rank shooters
+- **Stage Result Table:**
+  - Rotated (vertical) header labels for all columns to maximize mobile readability
+  - Fixed column widths (in characters): Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2
+  - Vertical rules (dividers) between columns for improved alignment and readability on mobile
 - **Export:** Export all stage results to PDF
 - **Persistence:** All data is auto-saved and restored using SharedPreferences
 - **Clear All Data:** One-tap clear with confirmation
@@ -38,6 +42,10 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 
 ## Testing
 - All features are covered by widget and logic tests (test-driven development)
+- Stage Result table tests verify:
+  - All columns and headers are present and rotated
+  - All columns are visible and correct on mobile-sized screens
+  - Vertical rules are present between columns in both header and data rows
 - Migration logic is covered by integration tests in `test/persistence_test.dart`
 
 ## Test Coverage

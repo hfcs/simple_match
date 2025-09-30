@@ -1,6 +1,7 @@
+
 # Requirements for Stage Result Table (Mobile-Friendly)
 
-## Feature: Rotated Table Headers for Mobile
+## Feature: Mobile-Optimized Table with Rotated Headers and Vertical Rules
 - The Stage Result view must display a detailed table with columns:
   - Name
   - Raw Hit Factor
@@ -13,18 +14,23 @@
   - No Shoots
   - Procedure Errors
 - Table header titles must be rotated 90 degrees (vertical) to maximize horizontal space and improve readability on mobile devices.
+- Each column (except the last) must have a visible vertical rule (divider) between columns to help users align data to headers.
 - Table must remain visually clear, modern, and mobile-optimized.
 - All columns must remain visible and readable on small screens.
 - Sorting: Table rows are sorted by scaled hit factor (descending).
 
 ## Test Coverage
-- Widget test must verify that all headers are present and rotated, and that all columns are visible and correct on mobile-sized screens.
+- Widget test must verify:
+  - All headers are present and rotated
+  - All columns are visible and correct on mobile-sized screens
+  - Vertical rules are present between columns in both header and data rows
 
 ## UI/UX
 - Use Flutter's `RotatedBox` or equivalent for header rotation.
+- Use a `Container` or similar for vertical rules between columns.
 - Maintain card-based, modern UI style.
-- Ensure accessibility and legibility of rotated headers.
+- Ensure accessibility and legibility of rotated headers and vertical rules.
 
 ## Documentation
 - This requirement supersedes any previous table header layout for the Stage Result view.
-- All documentation and instructions must reflect this mobile-friendly, rotated-header design.
+- All documentation and instructions must reflect this mobile-friendly, rotated-header, vertical-rule design.

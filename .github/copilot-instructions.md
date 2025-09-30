@@ -56,6 +56,8 @@
 - **Stage Result Table (Mobile-Friendly):**
    - The Stage Result view displays a detailed table with columns: Name, raw hit factor, scaled hit factor, time, A, C, D, misses, no shoots, procedure errors.
    - Table header titles are rotated 90 degrees (vertical) to maximize horizontal space and improve readability on mobile devices.
+   - Each column (except the last) has a visible vertical rule (divider) between columns to help users align data to headers.
+   - Column widths (in characters): Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2. The largest possible font is used while keeping all columns visible on mobile.
    - Table rows are sorted by scaled hit factor (descending).
    - Table remains visually clear, modern, and mobile-optimized.
 - **Overall Result:** Calculate and display hit factor and adjusted hit factor for each shooter, and rank shooters by total adjusted stage point. The PDF export from the Overall Result view must include:
@@ -83,7 +85,9 @@
 - **Error Handling:** Errors returned as strings, displayed via SnackBar. All error cases must be handled with user feedback.
 - **State Updates:** All state changes trigger persistence updates. All state changes must trigger persistence.
 - **Shared Logic:** Common calculations in model classes.
-- **UI Layout:** All input fields must be mobile-friendly and support multi-digit input. Input fields for Time, A, C, D are arranged vertically. Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row.
+- **UI Layout:**
+   - All input fields must be mobile-friendly and support multi-digit input. Input fields for Time, A, C, D are arranged vertically. Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row.
+   - Stage Result table columns must have vertical rules (dividers) between columns for alignment/readability, and column widths as specified above. Widget tests must verify all columns, rules, and layout on mobile.
 
 ## Dependencies
 - **Flutter SDK:** `^3.9.2`

@@ -25,6 +25,21 @@ class StageResultViewBody extends StatefulWidget {
 }
 
 class StageResultViewBodyState extends State<StageResultViewBody> {
+  // Helper for vertical rule between columns
+  Widget _tableCellWithRule(Widget child) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        child,
+        Container(
+          width: 1,
+          height: 32,
+          color: Colors.grey.shade400,
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+        ),
+      ],
+    );
+  }
   int? _selectedStage;
 
   @override
@@ -77,99 +92,189 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                       if (ranks.isEmpty) {
                         return const Center(child: Text('No results for this stage.'));
                       }
+                      // Column widths in characters: Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2
+                      // Approximate width per char: 10px (depends on font, but for mobile, use tightest reasonable)
+                      // Use SizedBox for each column, and a slightly larger font size that fits all columns
+                      final double charWidth = 10.0;
+                      final double fontSize = 15.0; // Largest that fits all columns on mobile
                       return ListView(
+                        scrollDirection: Axis.horizontal,
                         children: [
-                          Card(
-                            margin: const EdgeInsets.all(12),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Stage $selected', style: Theme.of(context).textTheme.titleLarge),
-                                  const SizedBox(height: 8),
-                                  // Table header
-                                  Row(
-                                    children: const [
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Raw HF', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Scaled HF', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Time', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('A', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('C', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('D', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Misses', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('No Shoots', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                      SizedBox(width: 8),
-                                      Expanded(child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Text('Proc Err', style: TextStyle(fontWeight: FontWeight.bold)),
-                                      )),
-                                    ],
-                                  ),
-                                  const Divider(),
-                                  ...ranks.map((e) => Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 4),
-                                        child: Row(
-                                          children: [
-                                            Expanded(child: Text(e.name)),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.hitFactor.toStringAsFixed(2))),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.adjustedHitFactor.toStringAsFixed(2))),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.time.toStringAsFixed(2))),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.a.toString())),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.c.toString())),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.d.toString())),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.misses.toString())),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.noShoots.toString())),
-                                            const SizedBox(width: 8),
-                                            Expanded(child: Text(e.procedureErrors.toString())),
-                                          ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Card(
+                              margin: const EdgeInsets.all(12),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Stage $selected', style: Theme.of(context).textTheme.titleLarge),
+                                    const SizedBox(height: 8),
+                                    // Table header
+                                    Row(
+                                      key: const Key('stageResultTableHeader'),
+                                      children: [
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 10,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('Name', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
                                         ),
-                                      )),
-                                ],
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 5,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('Raw HF', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 5,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('Scaled HF', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 5,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('Time', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 2,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('A', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 2,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('C', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 2,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('D', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 2,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('Misses', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 2,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
+                                              child: Text('No Shoots', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        // Last column, no rule
+                                        SizedBox(
+                                          width: charWidth * 2,
+                                          child: RotatedBox(
+                                            quarterTurns: 3,
+                                            child: Text('Proc Err', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const Divider(),
+                                    ...ranks.map((e) => Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 4),
+                                          child: Row(
+                                            children: [
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 10,
+                                                  child: Text(e.name, style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 5,
+                                                  child: Text(e.hitFactor.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 5,
+                                                  child: Text(e.adjustedHitFactor.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 5,
+                                                  child: Text(e.time.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 2,
+                                                  child: Text(e.a.toString(), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 2,
+                                                  child: Text(e.c.toString(), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 2,
+                                                  child: Text(e.d.toString(), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 2,
+                                                  child: Text(e.misses.toString(), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 2,
+                                                  child: Text(e.noShoots.toString(), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              // Last column, no rule
+                                              SizedBox(
+                                                width: charWidth * 2,
+                                                child: Text(e.procedureErrors.toString(), style: TextStyle(fontSize: fontSize)),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

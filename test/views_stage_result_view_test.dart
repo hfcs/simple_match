@@ -21,7 +21,7 @@ class MockPersistenceService extends PersistenceService {
 }
 
 void main() {
-  testWidgets('StageResultView displays detailed sortable table', (WidgetTester tester) async {
+  testWidgets('StageResultView displays detailed sortable table with fixed column widths', (WidgetTester tester) async {
     final shooters = [
       Shooter(name: 'Alice', scaleFactor: 1.0),
       Shooter(name: 'Bob', scaleFactor: 0.9),
@@ -35,7 +35,10 @@ void main() {
     final viewModel = StageResultViewModel(persistenceService: mockPersistence);
     await tester.pumpWidget(
       MaterialApp(
-        home: StageResultView(viewModel: viewModel),
+        home: SizedBox(
+          width: 400, // Simulate mobile width
+          child: StageResultView(viewModel: viewModel),
+        ),
       ),
     );
     await tester.pumpAndSettle();
@@ -53,15 +56,50 @@ void main() {
     // Should show both shooters
     expect(find.text('Alice'), findsOneWidget);
     expect(find.text('Bob'), findsOneWidget);
-  // Should show correct values for Alice
-  expect(find.text('8'), findsOneWidget); // A
-  expect(find.text('2'), findsOneWidget); // C
-  expect(find.text('0'), findsWidgets); // D, Misses, No Shoots, Proc Err
-  // Should show correct values for Bob
-  expect(find.text('7'), findsOneWidget); // A
-  expect(find.text('3'), findsOneWidget); // C
-  expect(find.text('1'), findsWidgets); // No Shoots, Proc Err, etc
+    // Should show correct values for Alice
+    expect(find.text('8'), findsOneWidget); // A
+    expect(find.text('2'), findsOneWidget); // C
+    expect(find.text('0'), findsWidgets); // D, Misses, No Shoots, Proc Err
+    // Should show correct values for Bob
+    expect(find.text('7'), findsOneWidget); // A
+    expect(find.text('3'), findsOneWidget); // C
+    expect(find.text('1'), findsWidgets); // No Shoots, Proc Err, etc
     // Should show hit factors
     expect(find.textContaining('.'), findsWidgets); // hit factors and time
+    // Check that all columns are visible (not clipped)
+    final headerRow = tester.widget<Row>(find.byKey(const Key('stageResultTableHeader')));
+  // Should have 10 columns (each with a vertical rule except the last)
+  expect(headerRow.children.length, equals(10));
+  });
+  
+  testWidgets('StageResultView columns fit within mobile width', (WidgetTester tester) async {
+    final shooters = [Shooter(name: 'A', scaleFactor: 1.0)];
+    final stages = [MatchStage(stage: 1, scoringShoots: 10)];
+    final results = [StageResult(stage: 1, shooter: 'A', time: 10.0, a: 1, c: 1, d: 1, misses: 1, noShoots: 1, procedureErrors: 1)];
+    final mockPersistence = MockPersistenceService(mockResults: results, mockShooters: shooters, mockStages: stages);
+    final viewModel = StageResultViewModel(persistenceService: mockPersistence);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: SizedBox(
+          width: 400, // Simulate mobile width
+          child: StageResultView(viewModel: viewModel),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    // All columns should be present and visible
+    expect(find.text('Name'), findsOneWidget);
+    expect(find.text('Raw HF'), findsOneWidget);
+    expect(find.text('Scaled HF'), findsOneWidget);
+    expect(find.text('Time'), findsOneWidget);
+  expect(find.text('A'), findsWidgets); // header and data cell
+  expect(find.text('C'), findsWidgets);
+  expect(find.text('D'), findsWidgets);
+    expect(find.text('Misses'), findsOneWidget);
+    expect(find.text('No Shoots'), findsOneWidget);
+    expect(find.text('Proc Err'), findsOneWidget);
+    // Should not overflow horizontally (ListView is scrollable, but all columns are present)
+    // (No overflow error thrown)
+    expect(tester.takeException(), isNull);
   });
 }

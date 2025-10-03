@@ -19,11 +19,13 @@
 - All columns must remain visible and readable on small screens.
 - Sorting: Table rows are sorted by scaled hit factor (descending).
 
+
 ## Test Coverage
 - Widget test must verify:
   - All headers are present and rotated
   - All columns are visible and correct on mobile-sized screens
   - Vertical rules are present between columns in both header and data rows
+- PDF export must be tested for Unicode (Traditional Chinese) support using `pdftotext` for robust extraction
 
 ## UI/UX
 - Use Flutter's `RotatedBox` or equivalent for header rotation.

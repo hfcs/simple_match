@@ -49,6 +49,7 @@
 
 
 
+
 ## Key Features
 - **Match Setup:** Configure stages and scoring shoots (stage number 1-30, scoring shoots 1-32, unique per match)
 - **Shooter Management:** Track participants and scale factor (unique name, scale factor 0.10-2.00)
@@ -66,18 +67,23 @@
 - **Data Persistence:** Auto-saves all changes to local storage using SharedPreferences. All data (stages, shooters, results) must persist to disk and restore on app relaunch.
 - **Clear All Data:** User can clear all match data with confirmation.
 - **Modern UI:** All pages use cards, icons, and spacing for a visually appealing, mobile-optimized experience. Stage Result table headers are rotated for mobile usability.
+- **Unicode PDF Export:** PDF export uses a bundled TTF font (NotoSerifHK) for robust Traditional Chinese and Unicode support across all platforms. Font is downloaded and bundled automatically; no system font dependencies.
+- **PDF Export Test:** PDF export is tested using `pdftotext` for robust Unicode extraction. Test will fail if `pdftotext` is not installed.
+
 
 
 ## Developer Workflows
 - **Run app:** `flutter run`
 - **Add dependency:** `flutter pub add <package>`
 - **Tests:** `flutter test`
+- **Test coverage:** `flutter test --coverage` (requires `pdftotext` for PDF export test)
 - **Hot Reload:** Supported for rapid UI iteration
 - **Schema changes:**
    - Increment schema version in `PersistenceService` if making breaking changes to persisted data.
    - Add migration logic for any schema change.
    - Update `data_schema_history.md` and `docs/data_schema_versioning.md` with details of the change.
    - Add/Update integration tests to cover migration and backward compatibility.
+
 
 ## Project Conventions
 - **Test-Driven Development:** All new features and bug fixes must be implemented using a test-driven approach. Always generate or update tests in `test/` before writing or modifying any production code. No code should be added or changed without a corresponding test.
@@ -88,6 +94,7 @@
 - **UI Layout:**
    - All input fields must be mobile-friendly and support multi-digit input. Input fields for Time, A, C, D are arranged vertically. Misses and No Shoots are on one row, Procedure Errors and Submit button are on the next row.
    - Stage Result table columns must have vertical rules (dividers) between columns for alignment/readability, and column widths as specified above. Widget tests must verify all columns, rules, and layout on mobile.
+   - PDF export must use the bundled Unicode font and be tested for Traditional Chinese/Unicode support.
 
 ## Dependencies
 - **Flutter SDK:** `^3.9.2`

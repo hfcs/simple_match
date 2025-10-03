@@ -6,7 +6,6 @@ import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
-import 'package:simple_match/models/stage_result.dart';
 
 void main() {
   group('StageInputView additional edge cases', () {

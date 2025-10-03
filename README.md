@@ -1,6 +1,7 @@
+
 # IPSC Match Management App
 
-A robust, test-driven Flutter MVVM application for managing IPSC match stages, shooters, and scoring with scale factors. Modern UI, persistent storage, and export features.
+A robust, test-driven Flutter MVVM application for managing IPSC match stages, shooters, and scoring with scale factors. Modern UI, persistent storage, Unicode PDF export, and advanced test coverage.
 
 ## Features
 - **Match Setup:** Configure stages (1-30) and scoring shoots (1-32)
@@ -11,7 +12,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
   - Rotated (vertical) header labels for all columns to maximize mobile readability
   - Fixed column widths (in characters): Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2
   - Vertical rules (dividers) between columns for improved alignment and readability on mobile
-- **Export:** Export all stage results to PDF
+- **Export:** Export all stage results to PDF (Unicode support, including Traditional Chinese; uses bundled font for cross-platform reliability)
 - **Persistence:** All data is auto-saved and restored using SharedPreferences
 - **Clear All Data:** One-tap clear with confirmation
 - **Modern UI:** Card-based, mobile-optimized, visually appealing
@@ -48,12 +49,15 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
   - Vertical rules are present between columns in both header and data rows
 - Migration logic is covered by integration tests in `test/persistence_test.dart`
 
+
 ## Test Coverage
 - All core features are covered by unit, widget, and integration tests in `test/`
 - ViewModel logic is tested (e.g., `test/viewmodel_main_menu_test.dart`, `test/viewmodel_match_setup_test.dart`)
 - Persistence logic is tested (e.g., `test/services_test.dart`)
 - Widget navigation and UI are tested (e.g., `test/widget_test.dart`)
+- PDF export is tested for Unicode (Traditional Chinese) using `pdftotext` for robust extraction
 - All TODOs for tests have been implemented and committed
+
 
 ## How to Run All Tests
 
@@ -61,16 +65,22 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 flutter test --coverage
 ```
 
+### PDF Export Test Requirements
+- The PDF export test requires `pdftotext` (from poppler-utils) to be installed for Unicode extraction verification.
+- On macOS: `brew install poppler`
+
 ## Contributing
 - Follow MVVM and Provider patterns
 - Write or update tests for all new features and bug fixes
 - Keep the codebase warning- and lint-free (`flutter analyze`)
 - Document all schema changes and migrations
 
+
 ## Documentation
 - Data schema history: `data_schema_history.md`
 - Schema versioning and migration: `docs/data_schema_versioning.md`
 - Developer/contributor instructions: `.github/copilot-instructions.md`
+- Unicode PDF export and font bundling: see `.github/copilot-instructions.md`
 
 ## Getting Started (Flutter)
 - [Flutter: Get Started](https://docs.flutter.dev/get-started/codelab)

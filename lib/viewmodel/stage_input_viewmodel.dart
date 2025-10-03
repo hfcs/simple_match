@@ -24,6 +24,7 @@ class StageInputViewModel extends ChangeNotifier {
     repository.addListener(_repoListener);
   }
 
+  @override
   void dispose() {
     repository.removeListener(_repoListener);
     super.dispose();

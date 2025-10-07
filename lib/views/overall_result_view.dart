@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart' show rootBundle;
@@ -7,18 +6,20 @@ import '../repository/match_repository.dart';
 import '../viewmodel/overall_result_viewmodel.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
+import 'dart:html' as html;
+
 class OverallResultView extends StatelessWidget {
   const OverallResultView({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Get repository and viewmodel
-  final repo = Provider.of<MatchRepository>(context, listen: false);
-  final viewModel = OverallResultViewModel(repo);
-  final results = viewModel.getOverallResults();
-  final stages = repo.stages;
-  final shooters = repo.shooters;
-  final allResults = repo.results;
+    final repo = Provider.of<MatchRepository>(context, listen: false);
+    final viewModel = OverallResultViewModel(repo);
+    final results = viewModel.getOverallResults();
+    final stages = repo.stages;
+    final shooters = repo.shooters;
+    final allResults = repo.results;
 
     return Scaffold(
       appBar: AppBar(
@@ -29,13 +30,43 @@ class OverallResultView extends StatelessWidget {
                   icon: const Icon(Icons.picture_as_pdf),
                   tooltip: 'Export overall results to PDF',
                   onPressed: () async {
-                    final pdf = await buildOverallResultPdf(
-                      results: results,
-                      stages: stages,
-                      shooters: shooters,
-                      allResults: allResults,
-                    );
-                    await Printing.layoutPdf(onLayout: (format) async => pdf.save());
+                    print('PDF export button pressed'); // Debugging log
+                    try {
+                      final pdf = await buildOverallResultPdf(
+                        results: results,
+                        stages: stages,
+                        shooters: shooters,
+                        allResults: allResults,
+                      );
+                      print('PDF generated successfully'); // Debugging log
+
+                      // Detect iOS Safari
+                      final userAgent = html.window.navigator.userAgent.toLowerCase();
+                      final isIosSafari = userAgent.contains('safari') && (userAgent.contains('iphone') || userAgent.contains('ipad'));
+
+                      if (isIosSafari) {
+                        print('iOS Safari detected, using refined Blob URL approach'); // Debugging log
+                        // Fallback: Create an <a> element for download
+                        final bytes = await pdf.save();
+                        final blob = html.Blob([bytes], 'application/pdf');
+                        final url = html.Url.createObjectUrlFromBlob(blob);
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          final anchor = html.AnchorElement(href: url)
+                            ..target = '_self' // Ensure it opens in the same tab
+                            ..download = 'overall_results.pdf';
+                          html.document.body?.append(anchor);
+                          anchor.click();
+                          html.document.body?.children.remove(anchor); // Clean up the DOM
+                          html.Url.revokeObjectUrl(url);
+                          print('PDF download triggered via refined approach'); // Debugging log
+                        });
+                      } else {
+                        await Printing.layoutPdf(onLayout: (format) async => pdf.save());
+                        print('PDF sent to printer'); // Debugging log
+                      }
+                    } catch (e) {
+                      print('Error during PDF export: $e'); // Debugging log
+                    }
                   },
                 ),
               ]

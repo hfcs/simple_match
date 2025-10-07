@@ -49,6 +49,18 @@ class StageResultViewModel extends ChangeNotifier {
           procedureErrors: r.procedureErrors,
         );
       }).toList();
+      
+      // Calculate adjusted match points for this stage
+      if (ranks.isNotEmpty) {
+        final maxAdjHitFactor = ranks.map((r) => r.adjustedHitFactor).reduce((a, b) => a > b ? a : b);
+        for (final rank in ranks) {
+          final adjustedMatchPoint = maxAdjHitFactor > 0 
+              ? (rank.adjustedHitFactor / maxAdjHitFactor) * stage.scoringShoots * 5
+              : 0.0;
+          rank.adjustedMatchPoint = adjustedMatchPoint;
+        }
+      }
+      
       // Sort by scaled (adjusted) hit factor descending
       ranks.sort((a, b) => b.adjustedHitFactor.compareTo(a.adjustedHitFactor));
       stageRanks[stage.stage] = ranks;
@@ -69,6 +81,8 @@ class StageResultFullRank {
   final int misses;
   final int noShoots;
   final int procedureErrors;
+  double adjustedMatchPoint;
+  
   StageResultFullRank({
     required this.name,
     required this.hitFactor,
@@ -80,5 +94,6 @@ class StageResultFullRank {
     required this.misses,
     required this.noShoots,
     required this.procedureErrors,
+    this.adjustedMatchPoint = 0.0,
   });
 }

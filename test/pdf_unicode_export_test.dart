@@ -13,7 +13,8 @@ class DummyResult {
 
 class DummyStage {
   final int stage;
-  DummyStage(this.stage);
+  final int scoringShoots;
+  DummyStage(this.stage, {this.scoringShoots = 10});
 }
 
 

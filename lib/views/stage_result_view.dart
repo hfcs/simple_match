@@ -147,6 +147,15 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 5,
                                             child: RotatedBox(
                                               quarterTurns: 3,
+                                              child: Text('Match Pt (After Scaling)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            ),
+                                          ),
+                                        ),
+                                        _tableCellWithRule(
+                                          SizedBox(
+                                            width: charWidth * 5,
+                                            child: RotatedBox(
+                                              quarterTurns: 3,
                                               child: Text('Time', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
                                             ),
                                           ),
@@ -227,6 +236,12 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                                 SizedBox(
                                                   width: charWidth * 5,
                                                   child: Text(e.adjustedHitFactor.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                                ),
+                                              ),
+                                              _tableCellWithRule(
+                                                SizedBox(
+                                                  width: charWidth * 5,
+                                                  child: Text(e.adjustedMatchPoint.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
                                                 ),
                                               ),
                                               _tableCellWithRule(

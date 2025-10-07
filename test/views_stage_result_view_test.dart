@@ -46,6 +46,7 @@ void main() {
     expect(find.text('Name'), findsOneWidget);
     expect(find.text('Raw HF'), findsOneWidget);
     expect(find.text('Scaled HF'), findsOneWidget);
+    expect(find.text('Match Pt (After Scaling)'), findsOneWidget);
     expect(find.text('Time'), findsOneWidget);
     expect(find.text('A'), findsOneWidget);
     expect(find.text('C'), findsOneWidget);
@@ -68,8 +69,8 @@ void main() {
     expect(find.textContaining('.'), findsWidgets); // hit factors and time
     // Check that all columns are visible (not clipped)
     final headerRow = tester.widget<Row>(find.byKey(const Key('stageResultTableHeader')));
-  // Should have 10 columns (each with a vertical rule except the last)
-  expect(headerRow.children.length, equals(10));
+  // Should have 11 columns (each with a vertical rule except the last)
+  expect(headerRow.children.length, equals(11));
   });
   
   testWidgets('StageResultView columns fit within mobile width', (WidgetTester tester) async {
@@ -91,6 +92,7 @@ void main() {
     expect(find.text('Name'), findsOneWidget);
     expect(find.text('Raw HF'), findsOneWidget);
     expect(find.text('Scaled HF'), findsOneWidget);
+    expect(find.text('Match Pt (After Scaling)'), findsOneWidget);
     expect(find.text('Time'), findsOneWidget);
   expect(find.text('A'), findsWidgets); // header and data cell
   expect(find.text('C'), findsWidgets);

@@ -21,54 +21,67 @@ void main() {
     });
 
     Widget buildTestWidget() => MultiProvider(
-          providers: [
-            ChangeNotifierProvider.value(value: repo),
-            ChangeNotifierProvider<StageInputViewModel>.value(value: vm),
-          ],
-          child: const MaterialApp(home: StageInputView()),
-        );
+      providers: [
+        ChangeNotifierProvider.value(value: repo),
+        ChangeNotifierProvider<StageInputViewModel>.value(value: vm),
+      ],
+      child: const MaterialApp(home: StageInputView()),
+    );
 
-    testWidgets('Procedure Errors increment/decrement and validation', (tester) async {
-    await tester.pumpWidget(buildTestWidget());
-    await tester.pumpAndSettle();
+    testWidgets('Procedure Errors increment/decrement and validation', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildTestWidget());
+      await tester.pumpAndSettle();
 
-    // Select stage and shooter
-    await tester.tap(find.byKey(const Key('stageSelector')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Stage 1').last);
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('shooterSelector')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Alice').last);
-    await tester.pumpAndSettle();
+      // Select stage and shooter
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Alice').last);
+      await tester.pumpAndSettle();
 
-    // Find procedure errors field and ensure visible
-    final procErrorsField = find.byKey(const Key('procErrorsField'));
-    expect(procErrorsField, findsOneWidget);
-    await tester.ensureVisible(procErrorsField);
-    await tester.pumpAndSettle();
-    await tester.enterText(procErrorsField, '2');
-    await tester.pump();
-    expect(vm.procErrors, 2);
+      // Find procedure errors field and ensure visible
+      final procErrorsField = find.byKey(const Key('procErrorsField'));
+      expect(procErrorsField, findsOneWidget);
+      await tester.ensureVisible(procErrorsField);
+      await tester.pumpAndSettle();
+      await tester.enterText(procErrorsField, '2');
+      await tester.pump();
+      expect(vm.procErrors, 2);
 
-    // Find the parent Row of the procErrorsField
-    final procErrorsRow = find.ancestor(of: procErrorsField, matching: find.byType(Row));
-    // Decrement using button (first IconButton in the row)
-    final decBtn = find.descendant(of: procErrorsRow, matching: find.widgetWithIcon(IconButton, Icons.remove));
-    await tester.ensureVisible(decBtn);
-    await tester.tap(decBtn);
-    await tester.pump();
-    expect(vm.procErrors, 1);
+      // Find the parent Row of the procErrorsField
+      final procErrorsRow = find.ancestor(
+        of: procErrorsField,
+        matching: find.byType(Row),
+      );
+      // Decrement using button (first IconButton in the row)
+      final decBtn = find.descendant(
+        of: procErrorsRow,
+        matching: find.widgetWithIcon(IconButton, Icons.remove),
+      );
+      await tester.ensureVisible(decBtn);
+      await tester.tap(decBtn);
+      await tester.pump();
+      expect(vm.procErrors, 1);
 
-    // Increment using button (last IconButton in the row)
-    final incBtn = find.descendant(of: procErrorsRow, matching: find.widgetWithIcon(IconButton, Icons.add));
-    await tester.ensureVisible(incBtn);
-    await tester.tap(incBtn);
-    await tester.pump();
-    expect(vm.procErrors, 2);
+      // Increment using button (last IconButton in the row)
+      final incBtn = find.descendant(
+        of: procErrorsRow,
+        matching: find.widgetWithIcon(IconButton, Icons.add),
+      );
+      await tester.ensureVisible(incBtn);
+      await tester.tap(incBtn);
+      await tester.pump();
+      expect(vm.procErrors, 2);
     });
 
-    testWidgets('Shows error if submit with invalid (negative) values', (tester) async {
+    testWidgets('Shows error if submit with invalid (negative) values', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildTestWidget());
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('stageSelector')));

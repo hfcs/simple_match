@@ -10,10 +10,10 @@ void main() {
     late StageInputViewModel vm;
     setUp(() {
       repo = MatchRepository();
-  repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
-  repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
-  repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
-  repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
+      repo.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
+      repo.addShooter(Shooter(name: 'Bob', scaleFactor: 1.0));
+      repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
+      repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
       vm = StageInputViewModel(repo);
     });
 
@@ -54,22 +54,22 @@ void main() {
     });
 
     test('validation disables submit if sum != scoring shoots', () {
-  vm.selectStage(1);
-  vm.selectShooter('Alice');
-  vm.a = 3;
-  vm.c = 3;
-  vm.d = 3;
-  vm.misses = 2; // 3+3+3+2=11, not equal to 10
-  vm.time = 1.0;
-  expect(vm.isValid, false);
-  expect(vm.validationError, contains('10'));
-  vm.a = 5;
-  vm.c = 3;
-  vm.d = 2;
-  vm.misses = 0; // 5+3+2+0=10
-  vm.time = 1.0; // set to valid time
-  expect(vm.isValid, true);
-  expect(vm.validationError, isNull);
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
+      vm.a = 3;
+      vm.c = 3;
+      vm.d = 3;
+      vm.misses = 2; // 3+3+3+2=11, not equal to 10
+      vm.time = 1.0;
+      expect(vm.isValid, false);
+      expect(vm.validationError, contains('10'));
+      vm.a = 5;
+      vm.c = 3;
+      vm.d = 2;
+      vm.misses = 0; // 5+3+2+0=10
+      vm.time = 1.0; // set to valid time
+      expect(vm.isValid, true);
+      expect(vm.validationError, isNull);
     });
 
     test('hit factor and adjusted hit factor calculation', () {
@@ -82,7 +82,7 @@ void main() {
       vm.misses = 0;
       vm.noShoots = 0;
       vm.procErrors = 0;
-      final totalScore = 5*5 + 3*3 + 2*1;
+      final totalScore = 5 * 5 + 3 * 3 + 2 * 1;
       final hitFactor = totalScore / 10.0;
       final adjHitFactor = hitFactor * 0.9;
       expect(vm.totalScore, totalScore);
@@ -100,14 +100,14 @@ void main() {
       vm.misses = 0;
       vm.noShoots = 0;
       vm.procErrors = 0;
-  expect(repo.results.length, 0);
+      expect(repo.results.length, 0);
       vm.submit();
-  expect(repo.results.length, 1);
+      expect(repo.results.length, 1);
       // Update
       vm.a = 4;
       vm.submit();
-  expect(repo.results.length, 1);
-  expect(repo.results.first.a, 4);
+      expect(repo.results.length, 1);
+      expect(repo.results.first.a, 4);
     });
 
     test('remove deletes result', () {
@@ -121,9 +121,9 @@ void main() {
       vm.noShoots = 0;
       vm.procErrors = 0;
       vm.submit();
-  expect(repo.results.length, 1);
+      expect(repo.results.length, 1);
       vm.remove();
-  expect(repo.results.length, 0);
+      expect(repo.results.length, 0);
     });
   });
 }

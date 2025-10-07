@@ -12,23 +12,38 @@ class OverallResultViewModel {
     final stages = repository.stages;
     final results = repository.results;
     // Map: shooter name -> total points
-    final Map<String, double> shooterPoints = {for (var s in shooters) s.name: 0.0};
+    final Map<String, double> shooterPoints = {
+      for (var s in shooters) s.name: 0.0,
+    };
 
     for (final stage in stages) {
       // Get all results for this stage
-      final stageResults = results.where((r) => r.stage == stage.stage).toList();
+      final stageResults = results
+          .where((r) => r.stage == stage.stage)
+          .toList();
       if (stageResults.isEmpty) continue;
       // Compute adjusted hit factor for each shooter
       final Map<String, double> adjHitFactors = {};
       for (final r in stageResults) {
-        final shooter = shooters.firstWhere((s) => s.name == r.shooter, orElse: () => Shooter(name: r.shooter));
-        final totalScore = r.a * 5 + r.c * 3 + r.d * 1 - r.misses * 10 - r.noShoots * 10 - r.procedureErrors * 10;
+        final shooter = shooters.firstWhere(
+          (s) => s.name == r.shooter,
+          orElse: () => Shooter(name: r.shooter),
+        );
+        final totalScore =
+            r.a * 5 +
+            r.c * 3 +
+            r.d * 1 -
+            r.misses * 10 -
+            r.noShoots * 10 -
+            r.procedureErrors * 10;
         final hitFactor = r.time > 0 ? totalScore / r.time : 0.0;
-  final adjHitFactor = hitFactor * shooter.scaleFactor;
+        final adjHitFactor = hitFactor * shooter.scaleFactor;
         adjHitFactors[r.shooter] = adjHitFactor;
       }
       // Find highest adjusted hit factor in this stage
-      final maxAdjHitFactor = adjHitFactors.values.isNotEmpty ? adjHitFactors.values.reduce((a, b) => a > b ? a : b) : 0.0;
+      final maxAdjHitFactor = adjHitFactors.values.isNotEmpty
+          ? adjHitFactors.values.reduce((a, b) => a > b ? a : b)
+          : 0.0;
       if (maxAdjHitFactor == 0.0) continue;
       // Assign stage points
       for (final r in stageResults) {

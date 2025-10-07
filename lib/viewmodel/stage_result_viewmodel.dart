@@ -30,7 +30,9 @@ class StageResultViewModel extends ChangeNotifier {
   Map<int, List<StageResultFullRank>> getStageRanks() {
     final Map<int, List<StageResultFullRank>> stageRanks = {};
     for (final stage in _stages) {
-      final stageResults = _results.where((r) => r.stage == stage.stage).toList();
+      final stageResults = _results
+          .where((r) => r.stage == stage.stage)
+          .toList();
       final List<StageResultFullRank> ranks = stageResults.map((r) {
         final shooter = _shooters.firstWhere(
           (s) => s.name == r.shooter,
@@ -49,26 +51,43 @@ class StageResultViewModel extends ChangeNotifier {
           procedureErrors: r.procedureErrors,
         );
       }).toList();
-      
+
       // Calculate adjusted match points for this stage
       if (ranks.isNotEmpty) {
-        final maxAdjHitFactor = ranks.map((r) => r.adjustedHitFactor).reduce((a, b) => a > b ? a : b);
+        final maxAdjHitFactor = ranks
+            .map((r) => r.adjustedHitFactor)
+            .reduce((a, b) => a > b ? a : b);
         for (final rank in ranks) {
-          final adjustedMatchPoint = maxAdjHitFactor > 0 
-              ? (rank.adjustedHitFactor / maxAdjHitFactor) * stage.scoringShoots * 5
+          final adjustedMatchPoint = maxAdjHitFactor > 0
+              ? (rank.adjustedHitFactor / maxAdjHitFactor) *
+                    stage.scoringShoots *
+                    5
               : 0.0;
           rank.adjustedMatchPoint = adjustedMatchPoint;
         }
       }
-      
+
       // Sort by scaled (adjusted) hit factor descending
       ranks.sort((a, b) => b.adjustedHitFactor.compareTo(a.adjustedHitFactor));
       stageRanks[stage.stage] = ranks;
     }
     return stageRanks;
   }
-}
 
+  Future<void> updateStatus(int stage, String shooter, String newStatus) async {
+    final resultIndex = _results.indexWhere(
+      (r) => r.stage == stage && r.shooter == shooter,
+    );
+    if (resultIndex != -1) {
+      _results[resultIndex] = _results[resultIndex].copyWith(status: newStatus);
+      await persistenceService.saveList(
+        'stageResults',
+        _results.map((r) => r.toJson()).toList(),
+      );
+      notifyListeners();
+    }
+  }
+}
 
 class StageResultFullRank {
   final String name;
@@ -82,7 +101,7 @@ class StageResultFullRank {
   final int noShoots;
   final int procedureErrors;
   double adjustedMatchPoint;
-  
+
   StageResultFullRank({
     required this.name,
     required this.hitFactor,

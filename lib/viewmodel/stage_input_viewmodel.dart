@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/foundation.dart';
 import '../repository/match_repository.dart';
 import '../models/stage_result.dart';
-
 
 /// ViewModel for stage input page.
 class StageInputViewModel extends ChangeNotifier {
@@ -12,6 +9,7 @@ class StageInputViewModel extends ChangeNotifier {
     _loadOrReset();
     notifyListeners();
   }
+
   final MatchRepository repository;
   late final VoidCallback _repoListener;
   int? _selectedStage;
@@ -64,17 +62,17 @@ class StageInputViewModel extends ChangeNotifier {
   }
 
   void _reset() {
-  time = 0.0;
-  a = 0;
-  c = 0;
-  d = 0;
-  misses = 0;
-  noShoots = 0;
-  procErrors = 0;
+    time = 0.0;
+    a = 0;
+    c = 0;
+    d = 0;
+    misses = 0;
+    noShoots = 0;
+    procErrors = 0;
   }
 
   int get totalScore =>
-  5 * a + 3 * c + 1 * d - 10 * misses - 10 * noShoots - 10 * procErrors;
+      5 * a + 3 * c + 1 * d - 10 * misses - 10 * noShoots - 10 * procErrors;
 
   // Removed duplicate hitFactor getter; see below for correct version using 'time'.
   double get hitFactor => time > 0 ? totalScore / time : 0.0;
@@ -85,10 +83,10 @@ class StageInputViewModel extends ChangeNotifier {
   }
 
   bool get isValid {
-  if (_selectedStage == null) return false;
-  final stage = repository.getStage(_selectedStage!);
-  if (stage == null) return false;
-  return (a + c + d + misses) == stage.scoringShoots;
+    if (_selectedStage == null) return false;
+    final stage = repository.getStage(_selectedStage!);
+    if (stage == null) return false;
+    return (a + c + d + misses) == stage.scoringShoots;
   }
 
   String? get validationError {
@@ -96,7 +94,13 @@ class StageInputViewModel extends ChangeNotifier {
     final stage = repository.getStage(_selectedStage!);
     if (stage == null) return null;
     // Negative value check
-    if (a < 0 || c < 0 || d < 0 || misses < 0 || noShoots < 0 || procErrors < 0 || time < 0) {
+    if (a < 0 ||
+        c < 0 ||
+        d < 0 ||
+        misses < 0 ||
+        noShoots < 0 ||
+        procErrors < 0 ||
+        time < 0) {
       return 'Values cannot be negative';
     }
     if ((a + c + d + misses) != stage.scoringShoots) {
@@ -127,9 +131,9 @@ class StageInputViewModel extends ChangeNotifier {
     } else {
       await repository.updateResult(result);
     }
-  // After submit, reload fields from repository to update UI in-place
-  _loadOrReset();
-  notifyListeners();
+    // After submit, reload fields from repository to update UI in-place
+    _loadOrReset();
+    notifyListeners();
   }
 
   Future<void> remove() async {

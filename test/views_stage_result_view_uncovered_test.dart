@@ -10,7 +10,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: StageResultView(
-            viewModel: StageResultViewModel(persistenceService: PersistenceService()),
+            viewModel: StageResultViewModel(
+              persistenceService: PersistenceService(),
+            ),
           ),
         ),
       );

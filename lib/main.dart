@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'repository/match_repository.dart';
@@ -16,7 +14,6 @@ import 'views/stage_input_view.dart';
 import 'views/stage_result_view.dart';
 import 'viewmodel/stage_result_viewmodel.dart';
 import 'views/overall_result_view.dart';
-
 
 import 'services/persistence_service.dart';
 

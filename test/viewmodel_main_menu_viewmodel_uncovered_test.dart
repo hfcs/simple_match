@@ -33,20 +33,20 @@ void main() {
     final repo = MatchRepository();
     final vm = MainMenuViewModel(repo);
     final observer = MockNavigatorObserver();
-    await tester.pumpWidget(MaterialApp(
-      navigatorObservers: [observer],
-      routes: {
-        '/test': (context) => const Text('Test Route'),
-      },
-      home: Builder(
-        builder: (context) {
-          return ElevatedButton(
-            onPressed: () => vm.navigateTo(context, '/test'),
-            child: const Text('Go'),
-          );
-        },
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorObservers: [observer],
+        routes: {'/test': (context) => const Text('Test Route')},
+        home: Builder(
+          builder: (context) {
+            return ElevatedButton(
+              onPressed: () => vm.navigateTo(context, '/test'),
+              child: const Text('Go'),
+            );
+          },
+        ),
       ),
-    ));
+    );
     await tester.tap(find.text('Go'));
     await tester.pumpAndSettle();
     expect(find.text('Test Route'), findsOneWidget);

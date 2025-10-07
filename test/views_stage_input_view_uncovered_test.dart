@@ -11,14 +11,20 @@ import 'package:simple_match/models/stage_result.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
-  Future<List<Shooter>> loadShooters() async => [Shooter(name: 'Test', scaleFactor: 1.0)];
+  Future<List<Shooter>> loadShooters() async => [
+    Shooter(name: 'Test', scaleFactor: 1.0),
+  ];
   @override
-  Future<List<MatchStage>> loadStages() async => [MatchStage(stage: 1, scoringShoots: 10)];
+  Future<List<MatchStage>> loadStages() async => [
+    MatchStage(stage: 1, scoringShoots: 10),
+  ];
 }
 
 void main() {
   group('StageInputView uncovered branches', () {
-    testWidgets('shows validation error for incorrect sum', (WidgetTester tester) async {
+    testWidgets('shows validation error for incorrect sum', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         persistence: MockPersistenceService(),
         initialStages: [MatchStage(stage: 1, scoringShoots: 10)],
@@ -52,13 +58,20 @@ void main() {
       // This sums to 8, not 10
       await tester.pumpAndSettle();
       // The error should be visible
-      expect(find.textContaining('A + C + D + Misses must equal 10'), findsOneWidget);
+      expect(
+        find.textContaining('A + C + D + Misses must equal 10'),
+        findsOneWidget,
+      );
       // The submit button should be disabled
-      final ElevatedButton submitBtn = tester.widget(find.byKey(const Key('submitButton')));
+      final ElevatedButton submitBtn = tester.widget(
+        find.byKey(const Key('submitButton')),
+      );
       expect(submitBtn.onPressed, isNull);
     });
-    
-    testWidgets('all increment/decrement buttons work', (WidgetTester tester) async {
+
+    testWidgets('all increment/decrement buttons work', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 10)],
         initialShooters: [Shooter(name: 'Test', scaleFactor: 1.0)],
@@ -96,7 +109,7 @@ void main() {
       // No exceptions = pass
       expect(true, isTrue);
     });
-    
+
     testWidgets('shows error for negative values', (WidgetTester tester) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 10)],
@@ -125,8 +138,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.textContaining('cannot be negative'), findsOneWidget);
     });
-    
-    testWidgets('shows empty state if no stages or shooters', (WidgetTester tester) async {
+
+    testWidgets('shows empty state if no stages or shooters', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository();
       final vm = StageInputViewModel(repo);
       await tester.pumpWidget(
@@ -139,9 +154,12 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.textContaining('Please add at least one stage and one shooter'), findsOneWidget);
+      expect(
+        find.textContaining('Please add at least one stage and one shooter'),
+        findsOneWidget,
+      );
     });
-    
+
     testWidgets('can edit and remove a result', (WidgetTester tester) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 10)],
@@ -180,8 +198,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('editResult-1-Test')), findsNothing);
     });
-    
-    testWidgets('shows hit factor and adjusted hit factor', (WidgetTester tester) async {
+
+    testWidgets('shows hit factor and adjusted hit factor', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 10)],
         initialShooters: [Shooter(name: 'Test', scaleFactor: 1.5)],

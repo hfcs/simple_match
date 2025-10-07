@@ -50,8 +50,8 @@ void main() {
           'd': 2,
           'misses': 1,
           'noShoots': 0,
-          'procedureErrors': 0
-        }
+          'procedureErrors': 0,
+        },
       ]);
       final results = await service.loadStageResults();
       expect(results.length, 1);

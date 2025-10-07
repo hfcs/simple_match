@@ -70,12 +70,17 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                         prefixIcon: Icon(Icons.percent),
                         border: OutlineInputBorder(),
                       ),
-                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      keyboardType: TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                     ),
                     if (_error != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
-                        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                        child: Text(
+                          _error!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
                       ),
                     const SizedBox(height: 12),
                     Row(
@@ -86,7 +91,9 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                             icon: const Icon(Icons.add),
                             onPressed: () {
                               final name = _nameController.text.trim();
-                              final scale = double.tryParse(_scaleController.text);
+                              final scale = double.tryParse(
+                                _scaleController.text,
+                              );
                               final err = (scale == null)
                                   ? 'Invalid scale.'
                                   : widget.vm.addShooter(name, scale);
@@ -103,7 +110,9 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                             key: const Key('confirmEditButton'),
                             icon: const Icon(Icons.check),
                             onPressed: () {
-                              final scale = double.tryParse(_scaleController.text);
+                              final scale = double.tryParse(
+                                _scaleController.text,
+                              );
                               final err = (scale == null)
                                   ? 'Invalid scale.'
                                   : widget.vm.editShooter(_editingName!, scale);
@@ -134,7 +143,10 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text('Shooters:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              'Shooters:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             Expanded(
               child: ListView.separated(
@@ -150,10 +162,16 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                         children: [
                           Text(s.name),
                           const SizedBox(width: 12),
-                          Text(s.scaleFactor.toStringAsFixed(2), key: Key('scaleValue-${s.name}'), style: const TextStyle(color: Colors.blueGrey)),
+                          Text(
+                            s.scaleFactor.toStringAsFixed(2),
+                            key: Key('scaleValue-${s.name}'),
+                            style: const TextStyle(color: Colors.blueGrey),
+                          ),
                         ],
                       ),
-                      subtitle: Text('Scale: ${s.scaleFactor.toStringAsFixed(2)}'),
+                      subtitle: Text(
+                        'Scale: ${s.scaleFactor.toStringAsFixed(2)}',
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -164,7 +182,8 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                               setState(() {
                                 _editingName = s.name;
                                 _nameController.text = s.name;
-                                _scaleController.text = s.scaleFactor.toString();
+                                _scaleController.text = s.scaleFactor
+                                    .toString();
                                 _error = null;
                               });
                             },

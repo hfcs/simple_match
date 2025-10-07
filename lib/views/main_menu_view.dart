@@ -65,13 +65,18 @@ class MainMenuView extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 leading: const Icon(Icons.delete_forever, color: Colors.red),
-                title: const Text('Clear All Data', style: TextStyle(color: Colors.red)),
+                title: const Text(
+                  'Clear All Data',
+                  style: TextStyle(color: Colors.red),
+                ),
                 onTap: () async {
                   final confirmed = await showDialog<bool>(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Clear All Data'),
-                      content: const Text('Are you sure you want to clear all data? This cannot be undone.'),
+                      content: const Text(
+                        'Are you sure you want to clear all data? This cannot be undone.',
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.of(context).pop(false),

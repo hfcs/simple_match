@@ -8,7 +8,17 @@ import 'package:simple_match/models/match_stage.dart';
 class _MockPersistenceService extends PersistenceService {
   @override
   Future<List<StageResult>> loadStageResults() async => [
-    StageResult(stage: 1, shooter: 'A', time: 10, a: 5, c: 3, d: 2, misses: 0, noShoots: 0, procedureErrors: 0),
+    StageResult(
+      stage: 1,
+      shooter: 'A',
+      time: 10,
+      a: 5,
+      c: 3,
+      d: 2,
+      misses: 0,
+      noShoots: 0,
+      procedureErrors: 0,
+    ),
   ];
   @override
   Future<List<Shooter>> loadShooters() async => [

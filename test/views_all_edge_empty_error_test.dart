@@ -39,13 +39,15 @@ void main() {
           ),
         ),
       );
-  expect(find.text('Match Setup'), findsOneWidget);
-  // Empty state: section label present, no ListTile
-  expect(find.text('Stages:'), findsOneWidget);
-  expect(find.byType(ListTile), findsNothing);
+      expect(find.text('Match Setup'), findsOneWidget);
+      // Empty state: section label present, no ListTile
+      expect(find.text('Stages:'), findsOneWidget);
+      expect(find.byType(ListTile), findsNothing);
     });
 
-    testWidgets('ShooterSetupView shows empty and error states', (tester) async {
+    testWidgets('ShooterSetupView shows empty and error states', (
+      tester,
+    ) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       await tester.pumpWidget(
         ChangeNotifierProvider<MatchRepository>(
@@ -56,10 +58,10 @@ void main() {
           ),
         ),
       );
-  expect(find.text('Shooter Setup'), findsOneWidget);
-  // Empty state: section label present, no ListTile
-  expect(find.text('Shooters:'), findsOneWidget);
-  expect(find.byType(ListTile), findsNothing);
+      expect(find.text('Shooter Setup'), findsOneWidget);
+      // Empty state: section label present, no ListTile
+      expect(find.text('Shooters:'), findsOneWidget);
+      expect(find.byType(ListTile), findsNothing);
     });
 
     testWidgets('StageInputView shows empty state', (tester) async {
@@ -68,23 +70,34 @@ void main() {
         MultiProvider(
           providers: [
             ChangeNotifierProvider<MatchRepository>(create: (_) => repo),
-            ChangeNotifierProvider<StageInputViewModel>(create: (_) => StageInputViewModel(repo)),
+            ChangeNotifierProvider<StageInputViewModel>(
+              create: (_) => StageInputViewModel(repo),
+            ),
           ],
           child: const MaterialApp(home: StageInputView()),
         ),
       );
-  expect(find.text('Stage Input'), findsOneWidget);
-  // No stages/shooters: shows exact message
-  expect(find.text('Please add at least one stage and one shooter first.'), findsOneWidget);
+      expect(find.text('Stage Input'), findsOneWidget);
+      // No stages/shooters: shows exact message
+      expect(
+        find.text('Please add at least one stage and one shooter first.'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('StageResultView shows empty state', (tester) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       await tester.pumpWidget(
         ChangeNotifierProvider<StageResultViewModel>(
-          create: (_) => StageResultViewModel(persistenceService: _MockPersistenceService()),
+          create: (_) => StageResultViewModel(
+            persistenceService: _MockPersistenceService(),
+          ),
           child: MaterialApp(
-            home: StageResultView(viewModel: StageResultViewModel(persistenceService: _MockPersistenceService())),
+            home: StageResultView(
+              viewModel: StageResultViewModel(
+                persistenceService: _MockPersistenceService(),
+              ),
+            ),
           ),
         ),
       );
@@ -92,13 +105,17 @@ void main() {
       expect(find.text('No stages available.'), findsOneWidget);
     });
 
-    testWidgets('OverallResultView shows empty state and PDF button hidden', (tester) async {
+    testWidgets('OverallResultView shows empty state and PDF button hidden', (
+      tester,
+    ) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       await tester.pumpWidget(
         MultiProvider(
           providers: [
             ChangeNotifierProvider<MatchRepository>(create: (_) => repo),
-            Provider<OverallResultViewModel>(create: (context) => OverallResultViewModel(repo)),
+            Provider<OverallResultViewModel>(
+              create: (context) => OverallResultViewModel(repo),
+            ),
           ],
           child: const MaterialApp(home: OverallResultView()),
         ),

@@ -9,7 +9,9 @@ import 'package:simple_match/models/match_stage.dart';
 
 void main() {
   group('StageInputView additional edge cases', () {
-    testWidgets('Rapid field changes and focus loss do not break state', (WidgetTester tester) async {
+    testWidgets('Rapid field changes and focus loss do not break state', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 5)],
         initialShooters: [Shooter(name: 'Edge', scaleFactor: 1.0)],
@@ -25,13 +27,19 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('stageSelector')), warnIfMissed: false);
+      await tester.tap(
+        find.byKey(const Key('stageSelector')),
+        warnIfMissed: false,
+      );
       await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
+      await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
       await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('shooterSelector')), warnIfMissed: false);
+      await tester.tap(
+        find.byKey(const Key('shooterSelector')),
+        warnIfMissed: false,
+      );
       await tester.pumpAndSettle();
-  await tester.tap(find.text('Edge').last, warnIfMissed: false);
+      await tester.tap(find.text('Edge').last, warnIfMissed: false);
       await tester.pumpAndSettle();
       // Rapidly change A, C, D fields
       await tester.enterText(find.byKey(const Key('aField')), '2');
@@ -41,7 +49,7 @@ void main() {
       await tester.enterText(find.byKey(const Key('dField')), '1');
       await tester.pump();
       // Move focus away
-  await tester.tap(find.byKey(const Key('timeField')), warnIfMissed: false);
+      await tester.tap(find.byKey(const Key('timeField')), warnIfMissed: false);
       await tester.pump();
       // Should not throw and state should be correct
       expect(vm.a, 2);
@@ -55,7 +63,9 @@ void main() {
       expect(find.textContaining('cannot be negative'), findsOneWidget);
     });
 
-    testWidgets('All error messages for each field are shown as expected', (WidgetTester tester) async {
+    testWidgets('All error messages for each field are shown as expected', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         initialStages: [MatchStage(stage: 1, scoringShoots: 2)],
         initialShooters: [Shooter(name: 'Err', scaleFactor: 1.0)],
@@ -71,13 +81,19 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('stageSelector')), warnIfMissed: false);
+      await tester.tap(
+        find.byKey(const Key('stageSelector')),
+        warnIfMissed: false,
+      );
       await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
+      await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
       await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('shooterSelector')), warnIfMissed: false);
+      await tester.tap(
+        find.byKey(const Key('shooterSelector')),
+        warnIfMissed: false,
+      );
       await tester.pumpAndSettle();
-  await tester.tap(find.text('Err').last, warnIfMissed: false);
+      await tester.tap(find.text('Err').last, warnIfMissed: false);
       await tester.pumpAndSettle();
       // Enter negative for each field and check error
       final fields = [

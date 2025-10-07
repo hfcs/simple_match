@@ -6,14 +6,14 @@ import 'package:simple_match/viewmodel/match_setup_viewmodel.dart';
 import 'package:simple_match/views/match_setup_view.dart';
 
 Widget _wrap(Widget child) => MultiProvider(
-      providers: [
-        ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
-        ProxyProvider<MatchRepository, MatchSetupViewModel>(
-          update: (_, repo, __) => MatchSetupViewModel(repo),
-        ),
-      ],
-      child: MaterialApp(home: child),
-    );
+  providers: [
+    ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
+    ProxyProvider<MatchRepository, MatchSetupViewModel>(
+      update: (_, repo, __) => MatchSetupViewModel(repo),
+    ),
+  ],
+  child: MaterialApp(home: child),
+);
 
 void main() {
   testWidgets('MatchSetupView can remove a stage', (tester) async {

@@ -65,7 +65,10 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                     if (_error != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
-                        child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                        child: Text(
+                          _error!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
                       ),
                     const SizedBox(height: 12),
                     Row(
@@ -76,7 +79,9 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                             icon: const Icon(Icons.add),
                             onPressed: () {
                               final stage = int.tryParse(_stageController.text);
-                              final shoots = int.tryParse(_shootsController.text);
+                              final shoots = int.tryParse(
+                                _shootsController.text,
+                              );
                               final err = (stage == null || shoots == null)
                                   ? 'Invalid input.'
                                   : vm.addStage(stage, shoots);
@@ -93,7 +98,9 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                             key: const Key('confirmEditButton'),
                             icon: const Icon(Icons.check),
                             onPressed: () {
-                              final shoots = int.tryParse(_shootsController.text);
+                              final shoots = int.tryParse(
+                                _shootsController.text,
+                              );
                               final err = (shoots == null)
                                   ? 'Invalid input.'
                                   : vm.editStage(_editingStage!, shoots);
@@ -125,7 +132,10 @@ class _MatchSetupViewState extends State<MatchSetupView> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text('Stages:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              'Stages:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             Expanded(
               child: ListView.separated(
@@ -137,7 +147,9 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                     elevation: 1,
                     child: ListTile(
                       leading: const Icon(Icons.flag),
-                      title: Text('Stage ${s.stage}: ${s.scoringShoots} shoots'),
+                      title: Text(
+                        'Stage ${s.stage}: ${s.scoringShoots} shoots',
+                      ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -148,7 +160,8 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                               setState(() {
                                 _editingStage = s.stage;
                                 _stageController.text = s.stage.toString();
-                                _shootsController.text = s.scoringShoots.toString();
+                                _shootsController.text = s.scoringShoots
+                                    .toString();
                                 _error = null;
                               });
                             },

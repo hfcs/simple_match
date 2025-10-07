@@ -6,7 +6,9 @@ import 'package:simple_match/services/persistence_service.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
-  Future<List<Shooter>> loadShooters() async => [Shooter(name: 'Test', scaleFactor: 1.0)];
+  Future<List<Shooter>> loadShooters() async => [
+    Shooter(name: 'Test', scaleFactor: 1.0),
+  ];
 }
 
 void main() {

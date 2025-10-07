@@ -7,6 +7,7 @@ import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
+
 Widget _wrapWithProviders(Widget child, MatchRepository repo) {
   return MultiProvider(
     providers: [
@@ -18,6 +19,7 @@ Widget _wrapWithProviders(Widget child, MatchRepository repo) {
     child: MaterialApp(home: child),
   );
 }
+
 void main() {
   group('StageInputView', () {
     late MatchRepository repo;
@@ -30,33 +32,38 @@ void main() {
       repo.addStage(MatchStage(stage: 2, scoringShoots: 8));
     });
 
-    testWidgets('renders all input fields and selectors in vertical layout with +/- buttons', (tester) async {
-      await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      expect(find.byKey(const Key('stageSelector')), findsOneWidget);
-      expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
-      // Each field should have its own Row with - [TextField] +
-      expect(find.byKey(const Key('timeField')), findsOneWidget);
-      expect(find.byKey(const Key('aField')), findsOneWidget);
-      expect(find.byKey(const Key('cField')), findsOneWidget);
-      expect(find.byKey(const Key('dField')), findsOneWidget);
-      expect(find.byKey(const Key('missesField')), findsOneWidget);
-      expect(find.byKey(const Key('noShootsField')), findsOneWidget);
-      expect(find.byKey(const Key('procErrorsField')), findsOneWidget);
-      // There should be at least 7 increment and 7 decrement IconButtons (one for each field)
-      final addButtons = find.widgetWithIcon(IconButton, Icons.add);
-      final removeButtons = find.widgetWithIcon(IconButton, Icons.remove);
-      expect(addButtons, findsNWidgets(7));
-      expect(removeButtons, findsNWidgets(7));
-      // Submit button is below all fields
-      expect(find.byKey(const Key('submitButton')), findsOneWidget);
-    });
+    testWidgets(
+      'renders all input fields and selectors in vertical layout with +/- buttons',
+      (tester) async {
+        await tester.pumpWidget(
+          _wrapWithProviders(const StageInputView(), repo),
+        );
+        expect(find.byKey(const Key('stageSelector')), findsOneWidget);
+        expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
+        // Each field should have its own Row with - [TextField] +
+        expect(find.byKey(const Key('timeField')), findsOneWidget);
+        expect(find.byKey(const Key('aField')), findsOneWidget);
+        expect(find.byKey(const Key('cField')), findsOneWidget);
+        expect(find.byKey(const Key('dField')), findsOneWidget);
+        expect(find.byKey(const Key('missesField')), findsOneWidget);
+        expect(find.byKey(const Key('noShootsField')), findsOneWidget);
+        expect(find.byKey(const Key('procErrorsField')), findsOneWidget);
+        // There should be at least 7 increment and 7 decrement IconButtons (one for each field)
+        final addButtons = find.widgetWithIcon(IconButton, Icons.add);
+        final removeButtons = find.widgetWithIcon(IconButton, Icons.remove);
+        expect(addButtons, findsNWidgets(7));
+        expect(removeButtons, findsNWidgets(7));
+        // Submit button is below all fields
+        expect(find.byKey(const Key('submitButton')), findsOneWidget);
+      },
+    );
 
     testWidgets('disables submit if input is invalid', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -66,19 +73,26 @@ void main() {
       await tester.enterText(find.byKey(const Key('aField')), '3');
       await tester.enterText(find.byKey(const Key('cField')), '3');
       await tester.enterText(find.byKey(const Key('dField')), '3');
-      await tester.enterText(find.byKey(const Key('missesField')), '2'); // 3+3+3+2=11 != 10
+      await tester.enterText(
+        find.byKey(const Key('missesField')),
+        '2',
+      ); // 3+3+3+2=11 != 10
       await tester.pump();
-      final submit = tester.widget<ElevatedButton>(find.byKey(const Key('submitButton')));
+      final submit = tester.widget<ElevatedButton>(
+        find.byKey(const Key('submitButton')),
+      );
       expect(submit.enabled, isFalse);
       expect(find.textContaining('must equal'), findsOneWidget);
     });
 
-    testWidgets('enables submit and displays hit factors when valid', (tester) async {
+    testWidgets('enables submit and displays hit factors when valid', (
+      tester,
+    ) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -93,7 +107,9 @@ void main() {
       await tester.enterText(find.byKey(const Key('noShootsField')), '0');
       await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
       await tester.pump();
-      final submit = tester.widget<ElevatedButton>(find.byKey(const Key('submitButton')));
+      final submit = tester.widget<ElevatedButton>(
+        find.byKey(const Key('submitButton')),
+      );
       expect(submit.enabled, isTrue);
       expect(find.textContaining('Hit Factor'), findsOneWidget);
       expect(find.textContaining('Adjusted'), findsOneWidget);
@@ -102,9 +118,9 @@ void main() {
     testWidgets('submits and displays in result list', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -117,28 +133,34 @@ void main() {
       await tester.enterText(find.byKey(const Key('dField')), '2');
       await tester.enterText(find.byKey(const Key('missesField')), '0');
       await tester.enterText(find.byKey(const Key('noShootsField')), '0');
-  await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
-  await tester.pump();
-  // Ensure submit button is visible before tapping
-  await tester.ensureVisible(find.byKey(const Key('submitButton')));
-  await tester.tap(find.byKey(const Key('submitButton')));
-  await tester.pump();
-  // Ensure results list is visible before checking
-  await tester.ensureVisible(find.byKey(const Key('resultsList')));
-  expect(find.text('Alice'), findsWidgets);
-  expect(find.textContaining('Stage: 1'), findsWidgets); // Stage number in subtitle
-  expect(find.textContaining('Time: 10.0'), findsWidgets); // Time in subtitle
+      await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
+      await tester.pump();
+      // Ensure submit button is visible before tapping
+      await tester.ensureVisible(find.byKey(const Key('submitButton')));
+      await tester.tap(find.byKey(const Key('submitButton')));
+      await tester.pump();
+      // Ensure results list is visible before checking
+      await tester.ensureVisible(find.byKey(const Key('resultsList')));
+      expect(find.text('Alice'), findsWidgets);
+      expect(
+        find.textContaining('Stage: 1'),
+        findsWidgets,
+      ); // Stage number in subtitle
+      expect(
+        find.textContaining('Time: 10.0'),
+        findsWidgets,
+      ); // Time in subtitle
     });
 
     testWidgets('can edit and remove a result', (tester) async {
-    // Increase test environment size to avoid off-screen widget issues
-    tester.view.physicalSize = const Size(1200, 1600);
-    tester.view.devicePixelRatio = 1.0;
+      // Increase test environment size to avoid off-screen widget issues
+      tester.view.physicalSize = const Size(1200, 1600);
+      tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('shooterSelector')));
       await tester.pumpAndSettle();
@@ -154,7 +176,7 @@ void main() {
       await tester.pump();
       await tester.tap(find.byKey(const Key('submitButton')));
       await tester.pump();
-  // Ensure results list is visible
+      // Ensure results list is visible
       await tester.ensureVisible(find.byKey(const Key('resultsList')));
       // Tap edit
       await tester.ensureVisible(find.byKey(const Key('editResult-1-Alice')));
@@ -172,7 +194,10 @@ void main() {
       await tester.pumpAndSettle();
       // Only check that Alice is not present in the results list (no ListTile with her name)
       final resultTiles = tester.widgetList<ListTile>(find.byType(ListTile));
-      expect(resultTiles.where((tile) => (tile.title as Text).data == 'Alice'), isEmpty);
+      expect(
+        resultTiles.where((tile) => (tile.title as Text).data == 'Alice'),
+        isEmpty,
+      );
       // Reset test environment size
       addTearDown(() {
         tester.view.resetPhysicalSize();

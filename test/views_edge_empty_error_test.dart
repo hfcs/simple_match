@@ -24,7 +24,9 @@ class _MockPersistenceService extends PersistenceService {
   @override
   Future<List<Shooter>> loadShooters() async => [];
   @override
-  Future<List<MatchStage>> loadStages() async => [MatchStage(stage: 1, scoringShoots: 5)];
+  Future<List<MatchStage>> loadStages() async => [
+    MatchStage(stage: 1, scoringShoots: 5),
+  ];
 }
 
 void main() {
@@ -66,16 +68,16 @@ void main() {
     testWidgets('StageResultView shows no results for stage', (tester) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       repo.addStage(MatchStage(stage: 1, scoringShoots: 5));
-      final vm = StageResultViewModel(persistenceService: _MockPersistenceService());
+      final vm = StageResultViewModel(
+        persistenceService: _MockPersistenceService(),
+      );
       await tester.pumpWidget(
         MultiProvider(
           providers: [
             ChangeNotifierProvider<MatchRepository>.value(value: repo),
             ChangeNotifierProvider<StageResultViewModel>.value(value: vm),
           ],
-          child: MaterialApp(
-            home: StageResultView(viewModel: vm),
-          ),
+          child: MaterialApp(home: StageResultView(viewModel: vm)),
         ),
       );
       await tester.pumpAndSettle();
@@ -98,7 +100,9 @@ void main() {
       expect(find.text('No results yet.'), findsOneWidget);
     });
 
-    testWidgets('StageInputView shows empty state and validation error', (tester) async {
+    testWidgets('StageInputView shows empty state and validation error', (
+      tester,
+    ) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       // Add stage and shooter BEFORE building the widget
       repo.addStage(MatchStage(stage: 1, scoringShoots: 5));
@@ -113,30 +117,33 @@ void main() {
           child: const MaterialApp(home: StageInputView()),
         ),
       );
-  // Ensure dropdowns are present before tapping
-  expect(find.byKey(const Key('stageSelector')), findsOneWidget);
-  expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
-  // Select stage and shooter in dropdowns
-  await tester.tap(find.byKey(const Key('stageSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('Stage 1').last);
-  await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('shooterSelector')));
-  await tester.pumpAndSettle();
-  await tester.tap(find.text('A').last);
-  await tester.pumpAndSettle();
-  // Enter valid values for A, C, D, Misses so sum is correct
-  await tester.enterText(find.byKey(const Key('aField')), '2');
-  await tester.enterText(find.byKey(const Key('cField')), '2');
-  await tester.enterText(find.byKey(const Key('dField')), '1');
-  await tester.enterText(find.byKey(const Key('missesField')), '0');
-  await tester.pumpAndSettle();
-  // Now set time to 0 to trigger time validation error
-  await tester.enterText(find.byKey(const Key('timeField')), '0');
-  await tester.pumpAndSettle();
-  await tester.tap(find.byKey(const Key('submitButton')));
-  await tester.pumpAndSettle();
-  expect(find.textContaining('Time must be greater than 0'), findsOneWidget);
+      // Ensure dropdowns are present before tapping
+      expect(find.byKey(const Key('stageSelector')), findsOneWidget);
+      expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
+      // Select stage and shooter in dropdowns
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('A').last);
+      await tester.pumpAndSettle();
+      // Enter valid values for A, C, D, Misses so sum is correct
+      await tester.enterText(find.byKey(const Key('aField')), '2');
+      await tester.enterText(find.byKey(const Key('cField')), '2');
+      await tester.enterText(find.byKey(const Key('dField')), '1');
+      await tester.enterText(find.byKey(const Key('missesField')), '0');
+      await tester.pumpAndSettle();
+      // Now set time to 0 to trigger time validation error
+      await tester.enterText(find.byKey(const Key('timeField')), '0');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('submitButton')));
+      await tester.pumpAndSettle();
+      expect(
+        find.textContaining('Time must be greater than 0'),
+        findsOneWidget,
+      );
     });
   });
 }

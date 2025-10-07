@@ -13,32 +13,44 @@ void main() {
   test('Repository can persist and reload all data', () async {
     // Set up mock SharedPreferences
     SharedPreferences.setMockInitialValues({});
-  final persistence = PersistenceService();
-  final repo1 = MatchRepository(persistence: persistence);
-  // Add data and save
-  await repo1.addStage(MatchStage(stage: 1, scoringShoots: 10));
-  await repo1.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
-  await repo1.addResult(StageResult(stage: 1, shooter: 'Alice', time: 12.3, a: 5, c: 3, d: 2, misses: 1, noShoots: 0, procedureErrors: 0));
-  await repo1.saveAll();
-  // Simulate app restart with a new repository instance
-  final repo2 = MatchRepository(persistence: persistence);
-  await repo2.loadAll();
-  expect(repo2.stages.length, 1);
-  expect(repo2.stages.first.stage, 1);
-  expect(repo2.stages.first.scoringShoots, 10);
-  expect(repo2.shooters.length, 1);
-  expect(repo2.shooters.first.name, 'Alice');
-  expect(repo2.shooters.first.scaleFactor, 0.9);
-  expect(repo2.results.length, 1);
-  final r = repo2.results.first;
-  expect(r.stage, 1);
-  expect(r.shooter, 'Alice');
-  expect(r.time, 12.3);
-  expect(r.a, 5);
-  expect(r.c, 3);
-  expect(r.d, 2);
-  expect(r.misses, 1);
-  expect(r.noShoots, 0);
-  expect(r.procedureErrors, 0);
+    final persistence = PersistenceService();
+    final repo1 = MatchRepository(persistence: persistence);
+    // Add data and save
+    await repo1.addStage(MatchStage(stage: 1, scoringShoots: 10));
+    await repo1.addShooter(Shooter(name: 'Alice', scaleFactor: 0.9));
+    await repo1.addResult(
+      StageResult(
+        stage: 1,
+        shooter: 'Alice',
+        time: 12.3,
+        a: 5,
+        c: 3,
+        d: 2,
+        misses: 1,
+        noShoots: 0,
+        procedureErrors: 0,
+      ),
+    );
+    await repo1.saveAll();
+    // Simulate app restart with a new repository instance
+    final repo2 = MatchRepository(persistence: persistence);
+    await repo2.loadAll();
+    expect(repo2.stages.length, 1);
+    expect(repo2.stages.first.stage, 1);
+    expect(repo2.stages.first.scoringShoots, 10);
+    expect(repo2.shooters.length, 1);
+    expect(repo2.shooters.first.name, 'Alice');
+    expect(repo2.shooters.first.scaleFactor, 0.9);
+    expect(repo2.results.length, 1);
+    final r = repo2.results.first;
+    expect(r.stage, 1);
+    expect(r.shooter, 'Alice');
+    expect(r.time, 12.3);
+    expect(r.a, 5);
+    expect(r.c, 3);
+    expect(r.d, 2);
+    expect(r.misses, 1);
+    expect(r.noShoots, 0);
+    expect(r.procedureErrors, 0);
   });
 }

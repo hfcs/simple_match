@@ -16,8 +16,6 @@ class StageResultView extends StatelessWidget {
   }
 }
 
-
-
 class StageResultViewBody extends StatefulWidget {
   const StageResultViewBody({super.key});
   @override
@@ -40,6 +38,7 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
       ],
     );
   }
+
   int? _selectedStage;
 
   @override
@@ -61,9 +60,7 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
     final selected = _selectedStage;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stage Result'),
-      ),
+      appBar: AppBar(title: const Text('Stage Result')),
       body: stages.isEmpty
           ? const Center(child: Text('No stages available.'))
           : Column(
@@ -71,12 +68,14 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: DropdownButtonFormField<int>(
-                        initialValue: selected,
+                    initialValue: selected,
                     items: stages
-                        .map((s) => DropdownMenuItem(
-                              value: s.stage,
-                              child: Text('Stage ${s.stage}'),
-                            ))
+                        .map(
+                          (s) => DropdownMenuItem(
+                            value: s.stage,
+                            child: Text('Stage ${s.stage}'),
+                          ),
+                        )
                         .toList(),
                     onChanged: (v) => setState(() => _selectedStage = v),
                     decoration: const InputDecoration(
@@ -88,15 +87,20 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      final ranks = selected != null ? stageRanks[selected] ?? [] : [];
+                      final ranks = selected != null
+                          ? stageRanks[selected] ?? []
+                          : [];
                       if (ranks.isEmpty) {
-                        return const Center(child: Text('No results for this stage.'));
+                        return const Center(
+                          child: Text('No results for this stage.'),
+                        );
                       }
                       // Column widths in characters: Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2
                       // Approximate width per char: 10px (depends on font, but for mobile, use tightest reasonable)
                       // Use SizedBox for each column, and a slightly larger font size that fits all columns
                       final double charWidth = 10.0;
-                      final double fontSize = 15.0; // Largest that fits all columns on mobile
+                      final double fontSize =
+                          15.0; // Largest that fits all columns on mobile
                       return ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
@@ -109,7 +113,12 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Stage $selected', style: Theme.of(context).textTheme.titleLarge),
+                                    Text(
+                                      'Stage $selected',
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleLarge,
+                                    ),
                                     const SizedBox(height: 8),
                                     // Table header
                                     Row(
@@ -120,7 +129,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 10,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Name', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Name',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -129,7 +144,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 5,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Raw HF', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Raw HF',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -138,7 +159,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 5,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Scaled HF', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Scaled HF',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -147,7 +174,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 5,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Match Pt (After Scaling)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Match Pt (After Scaling)',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -156,7 +189,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 5,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Time', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Time',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -165,7 +204,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 2,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('A', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'A',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -174,7 +219,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 2,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('C', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'C',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -183,7 +234,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 2,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('D', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'D',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -192,7 +249,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 2,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('Misses', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'Misses',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -201,7 +264,13 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                             width: charWidth * 2,
                                             child: RotatedBox(
                                               quarterTurns: 3,
-                                              child: Text('No Shoots', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                              child: Text(
+                                                'No Shoots',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -210,84 +279,153 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                           width: charWidth * 2,
                                           child: RotatedBox(
                                             quarterTurns: 3,
-                                            child: Text('Proc Err', style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)),
+                                            child: Text(
+                                              'Proc Err',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: fontSize,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                     const Divider(),
-                                    ...ranks.map((e) => Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 4),
-                                          child: Row(
-                                            children: [
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 10,
-                                                  child: Text(e.name, style: TextStyle(fontSize: fontSize)),
+                                    ...ranks.map(
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 4,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 10,
+                                                child: Text(
+                                                  e.name,
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
                                                 ),
                                               ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 5,
-                                                  child: Text(e.hitFactor.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 5,
+                                                child: Text(
+                                                  e.hitFactor.toStringAsFixed(
+                                                    2,
+                                                  ),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
                                                 ),
                                               ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 5,
-                                                  child: Text(e.adjustedHitFactor.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 5,
+                                                child: Text(
+                                                  e.adjustedHitFactor
+                                                      .toStringAsFixed(2),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
                                                 ),
                                               ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 5,
-                                                  child: Text(e.adjustedMatchPoint.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 5,
+                                                child: Text(
+                                                  e.adjustedMatchPoint
+                                                      .toStringAsFixed(2),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
                                                 ),
                                               ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 5,
-                                                  child: Text(e.time.toStringAsFixed(2), style: TextStyle(fontSize: fontSize)),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 5,
+                                                child: Text(
+                                                  e.time.toStringAsFixed(2),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
                                                 ),
                                               ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 2,
-                                                  child: Text(e.a.toString(), style: TextStyle(fontSize: fontSize)),
-                                                ),
-                                              ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 2,
-                                                  child: Text(e.c.toString(), style: TextStyle(fontSize: fontSize)),
-                                                ),
-                                              ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 2,
-                                                  child: Text(e.d.toString(), style: TextStyle(fontSize: fontSize)),
-                                                ),
-                                              ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 2,
-                                                  child: Text(e.misses.toString(), style: TextStyle(fontSize: fontSize)),
-                                                ),
-                                              ),
-                                              _tableCellWithRule(
-                                                SizedBox(
-                                                  width: charWidth * 2,
-                                                  child: Text(e.noShoots.toString(), style: TextStyle(fontSize: fontSize)),
-                                                ),
-                                              ),
-                                              // Last column, no rule
+                                            ),
+                                            _tableCellWithRule(
                                               SizedBox(
                                                 width: charWidth * 2,
-                                                child: Text(e.procedureErrors.toString(), style: TextStyle(fontSize: fontSize)),
+                                                child: Text(
+                                                  e.a.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        )),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 2,
+                                                child: Text(
+                                                  e.c.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 2,
+                                                child: Text(
+                                                  e.d.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 2,
+                                                child: Text(
+                                                  e.misses.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            _tableCellWithRule(
+                                              SizedBox(
+                                                width: charWidth * 2,
+                                                child: Text(
+                                                  e.noShoots.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: fontSize,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            // Last column, no rule
+                                            SizedBox(
+                                              width: charWidth * 2,
+                                              child: Text(
+                                                e.procedureErrors.toString(),
+                                                style: TextStyle(
+                                                  fontSize: fontSize,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

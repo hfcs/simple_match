@@ -53,3 +53,8 @@ app.*.map.json
 # leave this out for now, GenAI retro analysis
 retro.md
 
+
+# test/log files created during test runs
+migration_test_log.txt
+migration_test_debug.log
+

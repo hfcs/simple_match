@@ -13,14 +13,14 @@ void main() {
   });
 
   group('Shooter', () {
-  test('constructor assigns name and default scale', () {
+    test('constructor assigns name and default scale', () {
       final shooter = Shooter(name: 'Alice');
       expect(shooter.name, 'Alice');
-  expect(shooter.scaleFactor, 1.0);
+      expect(shooter.scaleFactor, 1.0);
     });
-  test('constructor assigns custom scale', () {
-  final shooter = Shooter(name: 'Bob', scaleFactor: 0.85);
-  expect(shooter.scaleFactor, 0.85);
+    test('constructor assigns custom scale', () {
+      final shooter = Shooter(name: 'Bob', scaleFactor: 0.85);
+      expect(shooter.scaleFactor, 0.85);
     });
   });
 

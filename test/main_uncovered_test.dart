@@ -8,19 +8,21 @@ import 'package:simple_match/viewmodel/stage_result_viewmodel.dart';
 import 'package:simple_match/main.dart' as app;
 
 void main() {
-  testWidgets('StageResultView route builds with injected ViewModel', (tester) async {
+  testWidgets('StageResultView route builds with injected ViewModel', (
+    tester,
+  ) async {
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       MultiProvider(
-        providers: [
-          ChangeNotifierProvider<MatchRepository>.value(value: repo),
-        ],
+        providers: [ChangeNotifierProvider<MatchRepository>.value(value: repo)],
         child: MaterialApp(
           home: Builder(
             builder: (context) {
               final persistence = repo.persistence ?? PersistenceService();
               return StageResultView(
-                viewModel: StageResultViewModel(persistenceService: persistence),
+                viewModel: StageResultViewModel(
+                  persistenceService: persistence,
+                ),
               );
             },
           ),
@@ -34,14 +36,10 @@ void main() {
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       MultiProvider(
-        providers: [
-          ChangeNotifierProvider<MatchRepository>.value(value: repo),
-        ],
+        providers: [ChangeNotifierProvider<MatchRepository>.value(value: repo)],
         child: MaterialApp(
           initialRoute: '/unknown',
-          routes: {
-            '/': (context) => const Text('Home'),
-          },
+          routes: {'/': (context) => const Text('Home')},
         ),
       ),
     );

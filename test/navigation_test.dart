@@ -3,7 +3,9 @@ import 'package:simple_match/main.dart';
 import 'package:simple_match/repository/match_repository.dart';
 
 void main() {
-  testWidgets('Main menu navigation buttons push correct routes', (tester) async {
+  testWidgets('Main menu navigation buttons push correct routes', (
+    tester,
+  ) async {
     final repo = MatchRepository();
     await tester.pumpWidget(MiniIPSCMatchApp(repository: repo));
 

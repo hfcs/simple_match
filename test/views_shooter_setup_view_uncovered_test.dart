@@ -9,12 +9,16 @@ import 'package:simple_match/services/persistence_service.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
-  Future<List<Shooter>> loadShooters() async => [Shooter(name: 'Test', scaleFactor: 1.0)];
+  Future<List<Shooter>> loadShooters() async => [
+    Shooter(name: 'Test', scaleFactor: 1.0),
+  ];
 }
 
 void main() {
   group('ShooterSetupView uncovered branches', () {
-    testWidgets('shows error for duplicate shooter name', (WidgetTester tester) async {
+    testWidgets('shows error for duplicate shooter name', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         persistence: MockPersistenceService(),
         initialStages: [],
@@ -32,14 +36,16 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Try to add duplicate shooter
-  await tester.enterText(find.byKey(const Key('nameField')), 'Test');
-  await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
+      await tester.enterText(find.byKey(const Key('nameField')), 'Test');
+      await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
       await tester.tap(find.byKey(const Key('addShooterButton')));
       await tester.pumpAndSettle();
-  expect(find.text('Shooter already exists.'), findsOneWidget);
+      expect(find.text('Shooter already exists.'), findsOneWidget);
     });
 
-    testWidgets('shows error for invalid scale factor', (WidgetTester tester) async {
+    testWidgets('shows error for invalid scale factor', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         persistence: MockPersistenceService(),
         initialStages: [],
@@ -57,28 +63,28 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Enter invalid scale factor
-  await tester.enterText(find.byKey(const Key('nameField')), 'NewShooter');
-  await tester.enterText(find.byKey(const Key('scaleField')), 'abc');
+      await tester.enterText(find.byKey(const Key('nameField')), 'NewShooter');
+      await tester.enterText(find.byKey(const Key('scaleField')), 'abc');
       await tester.tap(find.byKey(const Key('addShooterButton')));
       await tester.pumpAndSettle();
-  expect(find.text('Invalid scale.'), findsOneWidget);
+      expect(find.text('Invalid scale.'), findsOneWidget);
     });
-      testWidgets('shows error on invalid scale and empty state', (tester) async {
-        final repo = MatchRepository(persistence: PersistenceService());
-        await tester.pumpWidget(
-          Provider<ShooterSetupViewModel>(
-            create: (_) => ShooterSetupViewModel(repo),
-            child: const MaterialApp(home: ShooterSetupView()),
-          ),
-        );
-        // Try to add with missing scale
-        await tester.enterText(find.byKey(const Key('nameField')), 'Test');
-        await tester.enterText(find.byKey(const Key('scaleField')), '');
-        await tester.tap(find.byKey(const Key('addShooterButton')));
-        await tester.pump();
-        expect(find.textContaining('Invalid'), findsOneWidget);
-        // Should show empty state (no shooters)
-        expect(find.text('Shooters:'), findsOneWidget);
-      });
+    testWidgets('shows error on invalid scale and empty state', (tester) async {
+      final repo = MatchRepository(persistence: PersistenceService());
+      await tester.pumpWidget(
+        Provider<ShooterSetupViewModel>(
+          create: (_) => ShooterSetupViewModel(repo),
+          child: const MaterialApp(home: ShooterSetupView()),
+        ),
+      );
+      // Try to add with missing scale
+      await tester.enterText(find.byKey(const Key('nameField')), 'Test');
+      await tester.enterText(find.byKey(const Key('scaleField')), '');
+      await tester.tap(find.byKey(const Key('addShooterButton')));
+      await tester.pump();
+      expect(find.textContaining('Invalid'), findsOneWidget);
+      // Should show empty state (no shooters)
+      expect(find.text('Shooters:'), findsOneWidget);
+    });
   });
 }

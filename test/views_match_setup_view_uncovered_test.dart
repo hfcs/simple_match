@@ -9,7 +9,9 @@ import 'package:simple_match/services/persistence_service.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
-  Future<List<MatchStage>> loadStages() async => [MatchStage(stage: 1, scoringShoots: 10)];
+  Future<List<MatchStage>> loadStages() async => [
+    MatchStage(stage: 1, scoringShoots: 10),
+  ];
 }
 
 void main() {
@@ -32,14 +34,16 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Try to add duplicate stage
-  await tester.enterText(find.byKey(const Key('stageField')), '1');
-  await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
-  await tester.tap(find.byKey(const Key('addStageButton')));
-  await tester.pumpAndSettle();
-  expect(find.textContaining('already exists'), findsOneWidget);
+      await tester.enterText(find.byKey(const Key('stageField')), '1');
+      await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
+      await tester.tap(find.byKey(const Key('addStageButton')));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('already exists'), findsOneWidget);
     });
 
-    testWidgets('shows error for invalid stage number', (WidgetTester tester) async {
+    testWidgets('shows error for invalid stage number', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         persistence: MockPersistenceService(),
         initialStages: [],
@@ -57,13 +61,15 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Enter invalid stage number
-  await tester.enterText(find.byKey(const Key('stageField')), 'abc');
-  await tester.tap(find.byKey(const Key('addStageButton')));
-  await tester.pumpAndSettle();
-  expect(find.text('Invalid input.'), findsOneWidget);
+      await tester.enterText(find.byKey(const Key('stageField')), 'abc');
+      await tester.tap(find.byKey(const Key('addStageButton')));
+      await tester.pumpAndSettle();
+      expect(find.text('Invalid input.'), findsOneWidget);
     });
 
-    testWidgets('shows error for invalid scoring shoots', (WidgetTester tester) async {
+    testWidgets('shows error for invalid scoring shoots', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository(
         persistence: MockPersistenceService(),
         initialStages: [],
@@ -81,28 +87,31 @@ void main() {
       );
       await tester.pumpAndSettle();
       // Enter invalid scoring shoots
-  await tester.enterText(find.byKey(const Key('stageField')), '2');
-  await tester.enterText(find.byKey(const Key('scoringShootsField')), 'abc');
-  await tester.tap(find.byKey(const Key('addStageButton')));
-  await tester.pumpAndSettle();
-  expect(find.text('Invalid input.'), findsOneWidget);
+      await tester.enterText(find.byKey(const Key('stageField')), '2');
+      await tester.enterText(
+        find.byKey(const Key('scoringShootsField')),
+        'abc',
+      );
+      await tester.tap(find.byKey(const Key('addStageButton')));
+      await tester.pumpAndSettle();
+      expect(find.text('Invalid input.'), findsOneWidget);
     });
-      testWidgets('shows error on invalid input and empty state', (tester) async {
-        final repo = MatchRepository(persistence: PersistenceService());
-        await tester.pumpWidget(
-          Provider<MatchSetupViewModel>(
-            create: (_) => MatchSetupViewModel(repo),
-            child: const MaterialApp(home: MatchSetupView()),
-          ),
-        );
-        // Try to add with invalid input
-        await tester.enterText(find.byKey(const Key('stageField')), '');
-        await tester.enterText(find.byKey(const Key('scoringShootsField')), '');
-        await tester.tap(find.byKey(const Key('addStageButton')));
-        await tester.pump();
-        expect(find.textContaining('Invalid'), findsOneWidget);
-        // Should show empty state (no stages)
-        expect(find.text('Stages:'), findsOneWidget);
-      });
+    testWidgets('shows error on invalid input and empty state', (tester) async {
+      final repo = MatchRepository(persistence: PersistenceService());
+      await tester.pumpWidget(
+        Provider<MatchSetupViewModel>(
+          create: (_) => MatchSetupViewModel(repo),
+          child: const MaterialApp(home: MatchSetupView()),
+        ),
+      );
+      // Try to add with invalid input
+      await tester.enterText(find.byKey(const Key('stageField')), '');
+      await tester.enterText(find.byKey(const Key('scoringShootsField')), '');
+      await tester.tap(find.byKey(const Key('addStageButton')));
+      await tester.pump();
+      expect(find.textContaining('Invalid'), findsOneWidget);
+      // Should show empty state (no stages)
+      expect(find.text('Stages:'), findsOneWidget);
+    });
   });
 }

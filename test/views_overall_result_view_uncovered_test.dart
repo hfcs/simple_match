@@ -7,7 +7,8 @@ import 'package:simple_match/viewmodel/overall_result_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
 
 class MockRepo extends MatchRepository {
-  MockRepo() : super(initialStages: [], initialShooters: [], initialResults: []);
+  MockRepo()
+    : super(initialStages: [], initialShooters: [], initialResults: []);
 }
 
 void main() {

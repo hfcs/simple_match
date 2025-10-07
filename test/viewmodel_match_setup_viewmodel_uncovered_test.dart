@@ -6,7 +6,9 @@ import 'package:simple_match/services/persistence_service.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
-  Future<List<MatchStage>> loadStages() async => [MatchStage(stage: 1, scoringShoots: 10)];
+  Future<List<MatchStage>> loadStages() async => [
+    MatchStage(stage: 1, scoringShoots: 10),
+  ];
 }
 
 void main() {

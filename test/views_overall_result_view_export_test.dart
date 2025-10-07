@@ -10,35 +10,52 @@ import 'package:simple_match/models/stage_result.dart';
 
 void main() {
   group('OverallResultView PDF Export', () {
-    testWidgets('shows PDF export button when results exist and triggers on tap', (WidgetTester tester) async {
-      final repo = MatchRepository();
-      repo.addShooter(Shooter(name: 'Alice', scaleFactor: 1.0));
-      repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
-      repo.addResult(StageResult(stage: 1, shooter: 'Alice', time: 10.0, a: 5, c: 3, d: 2, misses: 0, noShoots: 0, procedureErrors: 0));
+    testWidgets(
+      'shows PDF export button when results exist and triggers on tap',
+      (WidgetTester tester) async {
+        final repo = MatchRepository();
+        repo.addShooter(Shooter(name: 'Alice', scaleFactor: 1.0));
+        repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
+        repo.addResult(
+          StageResult(
+            stage: 1,
+            shooter: 'Alice',
+            time: 10.0,
+            a: 5,
+            c: 3,
+            d: 2,
+            misses: 0,
+            noShoots: 0,
+            procedureErrors: 0,
+          ),
+        );
 
-      await tester.pumpWidget(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => repo),
-            ProxyProvider<MatchRepository, OverallResultViewModel>(
-              update: (_, repo, __) => OverallResultViewModel(repo),
-            ),
-          ],
-          child: const MaterialApp(home: OverallResultView()),
-        ),
-      );
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => repo),
+              ProxyProvider<MatchRepository, OverallResultViewModel>(
+                update: (_, repo, __) => OverallResultViewModel(repo),
+              ),
+            ],
+            child: const MaterialApp(home: OverallResultView()),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      // PDF export button should be present
-      final pdfButton = find.byIcon(Icons.picture_as_pdf);
-      expect(pdfButton, findsOneWidget);
+        // PDF export button should be present
+        final pdfButton = find.byIcon(Icons.picture_as_pdf);
+        expect(pdfButton, findsOneWidget);
 
-      // Tap the button (should not throw)
-      await tester.tap(pdfButton);
-      // No need to check actual PDF output, just that the button is tappable
-    });
+        // Tap the button (should not throw)
+        await tester.tap(pdfButton);
+        // No need to check actual PDF output, just that the button is tappable
+      },
+    );
 
-    testWidgets('does not show PDF export button when no results', (WidgetTester tester) async {
+    testWidgets('does not show PDF export button when no results', (
+      WidgetTester tester,
+    ) async {
       final repo = MatchRepository();
       await tester.pumpWidget(
         MultiProvider(

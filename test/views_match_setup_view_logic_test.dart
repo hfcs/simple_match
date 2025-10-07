@@ -6,14 +6,14 @@ import 'package:simple_match/viewmodel/match_setup_viewmodel.dart';
 import 'package:simple_match/views/match_setup_view.dart';
 
 Widget _wrap(Widget child) => MultiProvider(
-      providers: [
-        ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
-        ProxyProvider<MatchRepository, MatchSetupViewModel>(
-          update: (_, repo, __) => MatchSetupViewModel(repo),
-        ),
-      ],
-      child: MaterialApp(home: child),
-    );
+  providers: [
+    ChangeNotifierProvider<MatchRepository>(create: (_) => MatchRepository()),
+    ProxyProvider<MatchRepository, MatchSetupViewModel>(
+      update: (_, repo, __) => MatchSetupViewModel(repo),
+    ),
+  ],
+  child: MaterialApp(home: child),
+);
 
 void main() {
   testWidgets('MatchSetupView adds and displays a stage', (tester) async {
@@ -27,7 +27,9 @@ void main() {
     expect(find.text('Stage 2: 10 shoots'), findsOneWidget);
   });
 
-  testWidgets('MatchSetupView rejects duplicate and invalid input', (tester) async {
+  testWidgets('MatchSetupView rejects duplicate and invalid input', (
+    tester,
+  ) async {
     await tester.pumpWidget(_wrap(const MatchSetupView()));
     // Add valid
     await tester.enterText(find.byKey(const Key('stageField')), '2');

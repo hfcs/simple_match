@@ -6,7 +6,9 @@ import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
 
 void main() {
-  testWidgets('MainMenuView navigation and edge cases', (WidgetTester tester) async {
+  testWidgets('MainMenuView navigation and edge cases', (
+    WidgetTester tester,
+  ) async {
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
@@ -14,11 +16,26 @@ void main() {
         child: MaterialApp(
           home: const MainMenuView(),
           routes: {
-            '/match-setup': (_) => Scaffold(appBar: AppBar(title: const Text('Match Setup')), body: const Center(child: Text('Match Setup Page'))),
-            '/shooter-setup': (_) => Scaffold(appBar: AppBar(title: const Text('Shooter Setup')), body: const Center(child: Text('Shooter Setup Page'))),
-            '/stage-input': (_) => Scaffold(appBar: AppBar(title: const Text('Stage Input')), body: const Center(child: Text('Stage Input Page'))),
-            '/stage-result': (_) => Scaffold(appBar: AppBar(title: const Text('Stage Result')), body: const Center(child: Text('Stage Result Page'))),
-            '/overall-result': (_) => Scaffold(appBar: AppBar(title: const Text('Overall Result')), body: const Center(child: Text('Overall Result Page'))),
+            '/match-setup': (_) => Scaffold(
+              appBar: AppBar(title: const Text('Match Setup')),
+              body: const Center(child: Text('Match Setup Page')),
+            ),
+            '/shooter-setup': (_) => Scaffold(
+              appBar: AppBar(title: const Text('Shooter Setup')),
+              body: const Center(child: Text('Shooter Setup Page')),
+            ),
+            '/stage-input': (_) => Scaffold(
+              appBar: AppBar(title: const Text('Stage Input')),
+              body: const Center(child: Text('Stage Input Page')),
+            ),
+            '/stage-result': (_) => Scaffold(
+              appBar: AppBar(title: const Text('Stage Result')),
+              body: const Center(child: Text('Stage Result Page')),
+            ),
+            '/overall-result': (_) => Scaffold(
+              appBar: AppBar(title: const Text('Overall Result')),
+              body: const Center(child: Text('Overall Result Page')),
+            ),
           },
         ),
       ),

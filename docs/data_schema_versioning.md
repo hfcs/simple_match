@@ -1,6 +1,6 @@
 # Data Schema Versioning
 
-> **Last updated:** 2025-10-03
+> **Last updated:** 2025-10-07
 
 This document describes the versioning and migration policy for all persisted data in the IPSC Match Management App.
 
@@ -16,9 +16,9 @@ This document describes the versioning and migration policy for all persisted da
 - All schema versions and changes must be documented in `data_schema_history.md` and in this file.
 
 ## Current Version
-- **v1 (Initial Release):**
-  - Initial schema for stages, shooters, and stage results.
-  - No migrations have occurred as of this date.
+- **v2 (2025-10-07):**
+  - Added `status` field to `StageResult` model to track completion status (Completed, DNF, DQ).
+  - Migration: Default all existing records to "Completed".
 
 ## How to Update the Schema Version
 1. Increment the schema version in `PersistenceService`.

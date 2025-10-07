@@ -10,7 +10,9 @@ Widget _wrapWithProviders(Widget child) {
   return ChangeNotifierProvider<MatchRepository>(
     create: (_) => MatchRepository(),
     child: Provider<ShooterSetupViewModel>(
-      create: (context) => ShooterSetupViewModel(Provider.of<MatchRepository>(context, listen: false)),
+      create: (context) => ShooterSetupViewModel(
+        Provider.of<MatchRepository>(context, listen: false),
+      ),
       child: MaterialApp(home: child),
     ),
   );
@@ -25,17 +27,17 @@ void main() {
   testWidgets('Can add a shooter', (tester) async {
     await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
     await tester.enterText(find.byKey(const Key('nameField')), 'Alice');
-  await tester.enterText(find.byKey(const Key('scaleField')), '0.95');
+    await tester.enterText(find.byKey(const Key('scaleField')), '0.95');
     await tester.tap(find.byKey(const Key('addShooterButton')));
     await tester.pump();
     expect(find.text('Alice'), findsOneWidget);
-  expect(find.byKey(const Key('scaleValue-Alice')), findsOneWidget);
+    expect(find.byKey(const Key('scaleValue-Alice')), findsOneWidget);
   });
 
   testWidgets('Cannot add duplicate shooter', (tester) async {
     await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
     await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
-  await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
+    await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
     await tester.tap(find.byKey(const Key('addShooterButton')));
     await tester.pump();
     await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
@@ -56,7 +58,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('scaleField')), '0.8');
     await tester.tap(find.byKey(const Key('confirmEditButton')));
     await tester.pump();
-  expect(find.byKey(const Key('scaleValue-Charlie')), findsOneWidget);
+    expect(find.byKey(const Key('scaleValue-Charlie')), findsOneWidget);
   });
 
   testWidgets('Can remove shooter', (tester) async {
@@ -71,15 +73,27 @@ void main() {
   });
 
   testWidgets('Shows validation error for invalid scale', (tester) async {
-  await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
-  await tester.enterText(find.byKey(const Key('nameField')), 'Eve');
-  await tester.enterText(find.byKey(const Key('scaleField')), '0.05'); // too low
-  await tester.tap(find.byKey(const Key('addShooterButton')));
-  await tester.pump();
-  expect(find.textContaining('Invalid scale: must be between 0.10 and 2.00.'), findsOneWidget);
-  await tester.enterText(find.byKey(const Key('scaleField')), '2.5'); // too high
-  await tester.tap(find.byKey(const Key('addShooterButton')));
-  await tester.pump();
-  expect(find.textContaining('Invalid scale: must be between 0.10 and 2.00.'), findsOneWidget);
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.enterText(find.byKey(const Key('nameField')), 'Eve');
+    await tester.enterText(
+      find.byKey(const Key('scaleField')),
+      '0.05',
+    ); // too low
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pump();
+    expect(
+      find.textContaining('Invalid scale: must be between 0.10 and 2.00.'),
+      findsOneWidget,
+    );
+    await tester.enterText(
+      find.byKey(const Key('scaleField')),
+      '2.5',
+    ); // too high
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pump();
+    expect(
+      find.textContaining('Invalid scale: must be between 0.10 and 2.00.'),
+      findsOneWidget,
+    );
   });
 }

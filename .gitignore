@@ -45,5 +45,11 @@ app.*.map.json
 /android/app/release
 
 # Downloaded fonts
-/fonts
+/assets/fonts
+
+# Firebase
+.firebase/
+
+# leave this out for now, GenAI retro analysis
+retro.md
 

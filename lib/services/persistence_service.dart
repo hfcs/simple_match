@@ -96,6 +96,11 @@ class PersistenceService {
         } else {
           _logger.info('Result already has status: $updatedResult');
         }
+        // Ensure roRemark field exists in migrated data (default empty string)
+        if (!updatedResult.containsKey('roRemark') || updatedResult['roRemark'] == null) {
+          updatedResult['roRemark'] = '';
+          _logger.info('Added default roRemark field: $updatedResult');
+        }
         updatedResults.add(updatedResult);
       }
 
@@ -161,6 +166,7 @@ class PersistenceService {
             misses: m['misses'] as int? ?? 0,
             noShoots: m['noShoots'] as int? ?? 0,
             procedureErrors: m['procedureErrors'] as int? ?? 0,
+            roRemark: (m['roRemark'] as String?) ?? '',
           ),
         )
         .toList();

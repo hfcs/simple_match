@@ -18,7 +18,8 @@ This document describes the versioning and migration policy for all persisted da
 ## Current Version
 - **v2 (2025-10-07):**
   - Added `status` field to `StageResult` model to track completion status (Completed, DNF, DQ).
-  - Migration: Default all existing records to "Completed".
+  - Added `roRemark` field to `StageResult` to store referee/RO remarks (string).
+  - Migration: Default all existing `status` values to "Completed" and ensure `roRemark` exists on migrated records (default empty string).
 
 ## How to Update the Schema Version
 1. Increment the schema version in `PersistenceService`.

@@ -74,6 +74,7 @@ void main() {
     expect(json['c'], equals(1));
     expect(json['d'], equals(1));
     expect(json['status'], equals('Custom'));
+  expect(json['roRemark'], equals(''));
 
     // Also verify round-trip via encode/decode
     final encoded = jsonEncode(json);
@@ -85,6 +86,7 @@ void main() {
   test('default status is Completed and custom statuses are preserved', () {
     final def = StageResult(stage: 5, shooter: 'F');
     expect(def.status, equals('Completed'));
+  expect(def.roRemark, equals(''));
 
     final dnf = StageResult(stage: 5, shooter: 'G', status: 'DNF');
     final dq = StageResult(stage: 5, shooter: 'H', status: 'DQ');

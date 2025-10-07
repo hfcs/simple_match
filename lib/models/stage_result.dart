@@ -22,6 +22,9 @@ class StageResult {
 
   // New field to track the completion status of the stage result
   final String status; // Values: "Completed", "DNF", "DQ"
+  
+  // Optional arbitrary-length remark associated with the stage result (e.g. judge notes)
+  final String roRemark;
 
   StageResult({
     required this.stage,
@@ -34,6 +37,7 @@ class StageResult {
     this.noShoots = 0,
     this.procedureErrors = 0,
     this.status = "Completed", // Default value
+  this.roRemark = '',
   });
 
   StageResult copyWith({
@@ -47,6 +51,7 @@ class StageResult {
     int? noShoots,
     int? procedureErrors,
     String? status,
+  String? roRemark,
   }) {
     return StageResult(
       stage: stage ?? this.stage,
@@ -59,6 +64,7 @@ class StageResult {
       noShoots: noShoots ?? this.noShoots,
       procedureErrors: procedureErrors ?? this.procedureErrors,
       status: status ?? this.status,
+  roRemark: roRemark ?? this.roRemark,
     );
   }
 
@@ -74,6 +80,7 @@ class StageResult {
       'noShoots': noShoots,
       'procedureErrors': procedureErrors,
       'status': status,
+  'roRemark': roRemark,
     };
   }
 }

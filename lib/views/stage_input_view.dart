@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/stage_input_viewmodel.dart';
@@ -219,11 +218,17 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.looks_one),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_aController.text = n.toString();
-																		setState(() => vm.a = n);
+																		if (v != n.toString()) {
+																			_aController.value = TextEditingValue(
+																				text: v,
+																				selection: TextSelection.collapsed(offset: v.length),
+																			);
+																		} else {
+																			setState(() => vm.a = n);
+																		}
 																	},
 																),
 															),
@@ -258,7 +263,7 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.looks_two),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
 																		_cController.text = n.toString();
@@ -297,7 +302,7 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.looks_3),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
 																		_dController.text = n.toString();
@@ -336,7 +341,7 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.close),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
 																		_missesController.text = n.toString();
@@ -375,7 +380,7 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.block),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
 																		_noShootsController.text = n.toString();
@@ -414,7 +419,7 @@ class _StageInputViewState extends State<StageInputView> {
 																		prefixIcon: Icon(Icons.error),
 																		border: OutlineInputBorder(),
 																	),
-																	keyboardType: TextInputType.number,
+																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
 																		_procErrorsController.text = n.toString();

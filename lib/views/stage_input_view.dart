@@ -221,14 +221,11 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		if (v != n.toString()) {
-																			_aController.value = TextEditingValue(
-																				text: v,
-																				selection: TextSelection.collapsed(offset: v.length),
-																			);
-																		} else {
-																			setState(() => vm.a = n);
-																		}
+																		_aController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
+																		setState(() => vm.a = n);
 																	},
 																),
 															),
@@ -266,7 +263,10 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_cController.text = n.toString();
+																		_cController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
 																		setState(() => vm.c = n);
 																	},
 																),
@@ -305,7 +305,10 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_dController.text = n.toString();
+																		_dController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
 																		setState(() => vm.d = n);
 																	},
 																),
@@ -344,7 +347,10 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_missesController.text = n.toString();
+																		_missesController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
 																		setState(() => vm.misses = n);
 																	},
 																),
@@ -383,7 +389,10 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_noShootsController.text = n.toString();
+																		_noShootsController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
 																		setState(() => vm.noShoots = n);
 																	},
 																),
@@ -422,7 +431,10 @@ class _StageInputViewState extends State<StageInputView> {
 																	keyboardType: const TextInputType.numberWithOptions(decimal: false, signed: false),
 																	onChanged: (v) {
 																		final n = int.tryParse(v) ?? 0;
-																		_procErrorsController.text = n.toString();
+																		_procErrorsController.value = TextEditingValue(
+																			text: v,
+																			selection: TextSelection.collapsed(offset: v.length),
+																		);
 																		setState(() => vm.procErrors = n);
 																	},
 																),

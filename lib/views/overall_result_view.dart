@@ -6,7 +6,7 @@ import '../repository/match_repository.dart';
 import '../viewmodel/overall_result_viewmodel.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
-import 'dart:html' as html;
+import 'dart:io' as io;
 
 class OverallResultView extends StatelessWidget {
   const OverallResultView({super.key});
@@ -40,27 +40,36 @@ class OverallResultView extends StatelessWidget {
                       );
                       print('PDF generated successfully'); // Debugging log
 
-                      // Detect iOS Safari
-                      final userAgent = html.window.navigator.userAgent.toLowerCase();
-                      final isIosSafari = userAgent.contains('safari') && (userAgent.contains('iphone') || userAgent.contains('ipad'));
+                      if (io.Platform.isWeb) {
+                        // Web-specific logic
+                        import 'dart:html' as html;
 
-                      if (isIosSafari) {
-                        print('iOS Safari detected, using refined Blob URL approach'); // Debugging log
-                        // Fallback: Create an <a> element for download
-                        final bytes = await pdf.save();
-                        final blob = html.Blob([bytes], 'application/pdf');
-                        final url = html.Url.createObjectUrlFromBlob(blob);
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          final anchor = html.AnchorElement(href: url)
-                            ..target = '_self' // Ensure it opens in the same tab
-                            ..download = 'overall_results.pdf';
-                          html.document.body?.append(anchor);
-                          anchor.click();
-                          html.document.body?.children.remove(anchor); // Clean up the DOM
-                          html.Url.revokeObjectUrl(url);
-                          print('PDF download triggered via refined approach'); // Debugging log
-                        });
+                        // Detect iOS Safari
+                        final userAgent = html.window.navigator.userAgent.toLowerCase();
+                        final isIosSafari = userAgent.contains('safari') && (userAgent.contains('iphone') || userAgent.contains('ipad'));
+
+                        if (isIosSafari) {
+                          print('iOS Safari detected, using refined Blob URL approach'); // Debugging log
+                          // Fallback: Create an <a> element for download
+                          final bytes = await pdf.save();
+                          final blob = html.Blob([bytes], 'application/pdf');
+                          final url = html.Url.createObjectUrlFromBlob(blob);
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            final anchor = html.AnchorElement(href: url)
+                              ..target = '_self' // Ensure it opens in the same tab
+                              ..download = 'overall_results.pdf';
+                            html.document.body?.append(anchor);
+                            anchor.click();
+                            html.document.body?.children.remove(anchor); // Clean up the DOM
+                            html.Url.revokeObjectUrl(url);
+                            print('PDF download triggered via refined approach'); // Debugging log
+                          });
+                        } else {
+                          await Printing.layoutPdf(onLayout: (format) async => pdf.save());
+                          print('PDF sent to printer'); // Debugging log
+                        }
                       } else {
+                        // Non-web platform logic
                         await Printing.layoutPdf(onLayout: (format) async => pdf.save());
                         print('PDF sent to printer'); // Debugging log
                       }

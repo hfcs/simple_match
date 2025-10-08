@@ -33,6 +33,11 @@
 - Maintain card-based, modern UI style.
 - Ensure accessibility and legibility of rotated headers and vertical rules.
 
+# Result display rules (added)
+- If a StageResult is marked DNF or DQ, the Stage Result table and Stage Input results list must display the status (DNF/DQ) instead of the numeric breakdown (Time, A/C/D, Misses, No Shoots, Procedure Errors).
+- The RO remark (if present) must always be shown alongside the status or numeric breakdown.
+- These display rules must be covered by widget tests.
+
 ## Documentation
 - This requirement supersedes any previous table header layout for the Stage Result view.
 - All documentation and instructions must reflect this mobile-friendly, rotated-header, vertical-rule design.

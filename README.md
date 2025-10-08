@@ -7,6 +7,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 - **Match Setup:** Configure stages (1-30) and scoring shoots (1-32)
 - **Shooter Management:** Add shooters with unique names and scale factors (0.10–2.00)
 - **Stage Input:** Record scores with mobile-friendly numeric input, validation, and error feedback
+  - New: results can be marked with a Status ("Completed", "DNF", "DQ"). When a result is not "Completed" numeric inputs are disabled and submitted values are zeroed by the ViewModel. An RO remark field is available for match officials to record notes.
 - **Results:** Calculate and display hit factors, adjusted hit factors, and rank shooters
 - **Stage Result Table:**
   - Rotated (vertical) header labels for all columns to maximize mobile readability
@@ -14,6 +15,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
   - Vertical rules (dividers) between columns for improved alignment and readability on mobile
 - **Export:** Export all stage results to PDF (Unicode support, including Traditional Chinese; uses bundled font for cross-platform reliability)
 - **Persistence:** All data is auto-saved and restored using SharedPreferences
+  - Note: The persisted schema was recently extended (schema v2) to include `status` and `roRemark` on `StageResult`. `PersistenceService` implements a migration path that upgrades older data to the new schema on app startup.
 - **Clear All Data:** One-tap clear with confirmation
 - **Modern UI:** Card-based, mobile-optimized, visually appealing
 
@@ -35,6 +37,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 - **Run app:** `flutter run`
 - **Add dependency:** `flutter pub add <package>`
 - **Test:** `flutter test`
+  - New/Updated tests: migration tests (schema v2), widget tests for DNF/DQ + RO remark behavior, and additional stability improvements to StageInput widget tests.
 - **Hot Reload:** Supported
 - **Schema changes:**
   - Increment schema version in `PersistenceService` for breaking changes
@@ -43,6 +46,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 
 ## Testing
 - All features are covered by widget and logic tests (test-driven development)
+  - Migration logic is covered by integration tests simulating older schema data being loaded and verified.
 - Stage Result table tests verify:
   - All columns and headers are present and rotated
   - All columns are visible and correct on mobile-sized screens
@@ -64,6 +68,9 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 ```sh
 flutter test --coverage
 ```
+
+Recent CI notes
+- The GitHub workflows were hardened after CI troubleshooting: the Flutter installer action is invoked with `channel: 'stable'`, the job now prints `flutter --version` to logs for easier debugging, and `actions/cache` is used to cache `~/.pub-cache`. An earlier `npm ci` step that caused failures was removed.
 
 ### PDF Export Test Requirements
 - The PDF export test requires `pdftotext` (from poppler-utils) to be installed for Unicode extraction verification.

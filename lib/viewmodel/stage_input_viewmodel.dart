@@ -16,9 +16,14 @@ class StageInputViewModel extends ChangeNotifier {
   String? _selectedShooter;
   double time = 0.0;
   int a = 0, c = 0, d = 0, misses = 0, noShoots = 0, procErrors = 0;
+  String status = 'Completed';
+  String roRemark = '';
 
   StageInputViewModel(this.repository) {
-    _repoListener = () => notifyListeners();
+    _repoListener = () {
+      _loadOrReset();
+      notifyListeners();
+    };
     repository.addListener(_repoListener);
   }
 
@@ -56,6 +61,8 @@ class StageInputViewModel extends ChangeNotifier {
       misses = result.misses;
       noShoots = result.noShoots;
       procErrors = result.procedureErrors;
+      status = result.status;
+      roRemark = result.roRemark;
     } else {
       _reset();
     }
@@ -69,6 +76,8 @@ class StageInputViewModel extends ChangeNotifier {
     misses = 0;
     noShoots = 0;
     procErrors = 0;
+    status = 'Completed';
+    roRemark = '';
   }
 
   int get totalScore =>
@@ -86,7 +95,9 @@ class StageInputViewModel extends ChangeNotifier {
     if (_selectedStage == null) return false;
     final stage = repository.getStage(_selectedStage!);
     if (stage == null) return false;
-    return (a + c + d + misses) == stage.scoringShoots;
+    // If DNF or DQ, the record is valid (fields should be zeroed)
+    if (status != 'Completed') return true;
+    return (a + c + d + misses) == stage.scoringShoots && time > 0;
   }
 
   String? get validationError {
@@ -103,27 +114,51 @@ class StageInputViewModel extends ChangeNotifier {
         time < 0) {
       return 'Values cannot be negative';
     }
-    if ((a + c + d + misses) != stage.scoringShoots) {
-      return 'A + C + D + Misses must equal ${stage.scoringShoots}';
-    }
-    if (time == 0) {
-      return 'Time must be greater than 0';
+    // If status is DNF or DQ, numeric fields should be zero — accept that.
+    if (status == 'Completed') {
+      if ((a + c + d + misses) != stage.scoringShoots) {
+        return 'A + C + D + Misses must equal ${stage.scoringShoots}';
+      }
+      if (time == 0) {
+        return 'Time must be greater than 0';
+      }
     }
     return null;
   }
 
   Future<void> submit() async {
     if (_selectedStage == null || _selectedShooter == null) return;
+    // Prepare values according to status
+    var submitTime = time;
+    var submitA = a;
+    var submitC = c;
+    var submitD = d;
+    var submitMisses = misses;
+    var submitNoShoots = noShoots;
+    var submitProcErrors = procErrors;
+    if (status != 'Completed') {
+      // For DNF and DQ, zero all numeric scoring fields
+      submitTime = 0.0;
+      submitA = 0;
+      submitC = 0;
+      submitD = 0;
+      submitMisses = 0;
+      submitNoShoots = 0;
+      submitProcErrors = 0;
+    }
+
     final result = StageResult(
       stage: _selectedStage!,
       shooter: _selectedShooter!,
-      time: time,
-      a: a,
-      c: c,
-      d: d,
-      misses: misses,
-      noShoots: noShoots,
-      procedureErrors: procErrors,
+      time: submitTime,
+      a: submitA,
+      c: submitC,
+      d: submitD,
+      misses: submitMisses,
+      noShoots: submitNoShoots,
+      procedureErrors: submitProcErrors,
+      status: status,
+      roRemark: roRemark,
     );
     final existing = repository.getResult(_selectedStage!, _selectedShooter!);
     if (existing == null) {
@@ -133,6 +168,27 @@ class StageInputViewModel extends ChangeNotifier {
     }
     // After submit, reload fields from repository to update UI in-place
     _loadOrReset();
+    notifyListeners();
+  }
+
+  // Allow external updates to status/roRemark from the UI
+  void setStatus(String s) {
+    status = s;
+    if (status != 'Completed') {
+      // zero numeric fields when switching to DNF/DQ
+      time = 0.0;
+      a = 0;
+      c = 0;
+      d = 0;
+      misses = 0;
+      noShoots = 0;
+      procErrors = 0;
+    }
+    notifyListeners();
+  }
+
+  void setRoRemark(String v) {
+    roRemark = v;
     notifyListeners();
   }
 

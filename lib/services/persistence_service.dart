@@ -166,6 +166,7 @@ class PersistenceService {
             misses: m['misses'] as int? ?? 0,
             noShoots: m['noShoots'] as int? ?? 0,
             procedureErrors: m['procedureErrors'] as int? ?? 0,
+            status: (m['status'] as String?) ?? 'Completed',
             roRemark: (m['roRemark'] as String?) ?? '',
           ),
         )

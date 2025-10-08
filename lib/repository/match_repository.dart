@@ -57,6 +57,8 @@ class MatchRepository extends ChangeNotifier {
               'misses': e.misses,
               'noShoots': e.noShoots,
               'procedureErrors': e.procedureErrors,
+              'status': e.status,
+              'roRemark': e.roRemark,
             },
           )
           .toList(),
@@ -103,6 +105,8 @@ class MatchRepository extends ChangeNotifier {
             misses: e['misses'],
             noShoots: e['noShoots'],
             procedureErrors: e['procedureErrors'],
+            status: (e['status'] as String?) ?? 'Completed',
+            roRemark: (e['roRemark'] as String?) ?? '',
           ),
         ),
       );

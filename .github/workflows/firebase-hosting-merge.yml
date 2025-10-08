@@ -17,7 +17,6 @@ jobs:
           channel: 'stable'
       - name: Install dependencies
         run: flutter pub get
-      - run: npm ci
       - run: ./build.sh web --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

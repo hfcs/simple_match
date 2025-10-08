@@ -206,61 +206,7 @@ class _StageInputViewState extends State<StageInputView> {
                                 );
                               }),
                               const SizedBox(height: 12),
-                              // Status selector (Completed / DNF / DQ)
-                              Row(
-                                children: [
-                                  const Text('Status:'),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('Completed'),
-                                            value: 'Completed',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('DNF'),
-                                            value: 'DNF',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('DQ'),
-                                            value: 'DQ',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 12),
-                              // roRemark input
-                              TextField(
-                                key: const Key('roRemarkField'),
-                                decoration: const InputDecoration(
-                                  labelText: 'RO Remark',
-                                  border: OutlineInputBorder(),
-                                ),
-                                controller: _roRemarkController,
-                                onChanged: (v) => vm.setRoRemark(v),
-                              ),
-                              const SizedBox(height: 12),
+                              // ...existing code...
                               // Time
                               Row(
                                 children: [
@@ -602,13 +548,69 @@ class _StageInputViewState extends State<StageInputView> {
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 12),
+                              // Status selector (Completed / DNF / DQ)
+                              Row(
+                                children: [
+                                  const Text('Status:'),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: RadioListTile<String>(
+                                            title: const Text('Completed'),
+                                            value: 'Completed',
+                                            groupValue: vm.status,
+                                            onChanged: (v) {
+                                              if (v != null) vm.setStatus(v);
+                                            },
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: RadioListTile<String>(
+                                            title: const Text('DNF'),
+                                            value: 'DNF',
+                                            groupValue: vm.status,
+                                            onChanged: (v) {
+                                              if (v != null) vm.setStatus(v);
+                                            },
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: RadioListTile<String>(
+                                            title: const Text('DQ'),
+                                            value: 'DQ',
+                                            groupValue: vm.status,
+                                            onChanged: (v) {
+                                              if (v != null) vm.setStatus(v);
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              // roRemark input
+                              TextField(
+                                key: const Key('roRemarkField'),
+                                decoration: const InputDecoration(
+                                  labelText: 'RO Remark',
+                                  border: OutlineInputBorder(),
+                                ),
+                                controller: _roRemarkController,
+                                onChanged: (v) => vm.setRoRemark(v),
+                              ),
+                              const SizedBox(height: 12),
                                   ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                              // end of card content
                         ElevatedButton(
                           key: const Key('submitButton'),
                           onPressed: isValid

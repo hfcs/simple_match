@@ -15,6 +15,16 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      - name: Verify Flutter
+        run: flutter --version
+      - name: Cache Flutter Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
       - name: Install dependencies
         run: flutter pub get
       - run: ./build.sh web --release

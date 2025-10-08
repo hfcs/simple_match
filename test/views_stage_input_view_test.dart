@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:simple_match/views/stage_input_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
+import 'package:simple_match/models/stage_result.dart';
 import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 
 Widget _wrapWithProviders(Widget child, MatchRepository repo) {
@@ -99,7 +99,8 @@ void main() {
       await tester.tap(find.text('Alice').last);
       await tester.pumpAndSettle();
       // Enter valid values
-      await tester.enterText(find.byKey(const Key('timeField')), '10.0');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '10.0');
       await tester.enterText(find.byKey(const Key('aField')), '5');
       await tester.enterText(find.byKey(const Key('cField')), '3');
       await tester.enterText(find.byKey(const Key('dField')), '2');
@@ -127,7 +128,8 @@ void main() {
       await tester.tap(find.text('Alice').last);
       await tester.pumpAndSettle();
       // Enter valid values
-      await tester.enterText(find.byKey(const Key('timeField')), '10.0');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '10.0');
       await tester.enterText(find.byKey(const Key('aField')), '5');
       await tester.enterText(find.byKey(const Key('cField')), '3');
       await tester.enterText(find.byKey(const Key('dField')), '2');
@@ -153,9 +155,9 @@ void main() {
     });
 
     testWidgets('DNF result displays status-only in result list', (tester) async {
-      // Increase test environment size so radio tiles are visible and hittable
-      tester.view.physicalSize = const Size(1200, 1600);
-      tester.view.devicePixelRatio = 1.0;
+  // Increase test environment size so radio tiles are visible and hittable
+  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
+  tester.binding.window.devicePixelRatioTestValue = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
@@ -189,9 +191,9 @@ void main() {
     });
 
     testWidgets('can edit and remove a result', (tester) async {
-      // Increase test environment size to avoid off-screen widget issues
-      tester.view.physicalSize = const Size(1200, 1600);
-      tester.view.devicePixelRatio = 1.0;
+  // Increase test environment size to avoid off-screen widget issues
+  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
+  tester.binding.window.devicePixelRatioTestValue = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
       await tester.tap(find.byKey(const Key('stageSelector')));
@@ -202,7 +204,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Alice').last);
       await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const Key('timeField')), '10.0');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '10.0');
       await tester.enterText(find.byKey(const Key('aField')), '5');
       await tester.enterText(find.byKey(const Key('cField')), '3');
       await tester.enterText(find.byKey(const Key('dField')), '2');
@@ -236,9 +239,30 @@ void main() {
       );
       // Reset test environment size
       addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
+        tester.binding.window.clearPhysicalSizeTestValue();
+        tester.binding.window.clearDevicePixelRatioTestValue();
       });
+    });
+
+    testWidgets('DQ-ed shooters are greyed out and unselectable in shooter selector', (tester) async {
+      await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
+  // Pre-populate a DQ result for Bob
+  repo.addResult(StageResult(stage: 1, shooter: 'Bob', status: 'DQ'));
+      // Rebuild UI
+      await tester.pumpAndSettle();
+      // Open shooter selector
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      // The menu should show Bob annotated and greyed out
+      expect(find.text("Bob (DQ'ed)"), findsOneWidget);
+      final bobText = tester.widget<Text>(find.text("Bob (DQ'ed)").first);
+      expect(bobText.style?.color, equals(Colors.grey));
+      // Try to tap Bob - since the menu item is disabled, tapping it should not select Bob
+      await tester.tap(find.text("Bob (DQ'ed)").first);
+      await tester.pumpAndSettle();
+      // Selected shooter should still be null / not Bob
+      expect(find.textContaining('Bob'), findsWidgets); // appears in menu, but not selected label
+      expect(find.text('Select Shooter'), findsOneWidget);
     });
   });
 }

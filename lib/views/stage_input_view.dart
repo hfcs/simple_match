@@ -186,14 +186,17 @@ class _StageInputViewState extends State<StageInputView> {
                                       vm.selectShooter(v);
                                       _refreshFields(vm);
                                     },
-                                    itemBuilder: (_) => shooters
-                                        .map(
-                                          (s) => PopupMenuItem<String>(
+                                    itemBuilder: (_) => shooters.map((s) {
+                                          final hasDQ = repo.results.any((r) => r.shooter == s.name && r.status == 'DQ');
+                                          return PopupMenuItem<String>(
                                             value: s.name,
-                                            child: Text(s.name),
-                                          ),
-                                        )
-                                        .toList(),
+                                            enabled: !hasDQ,
+                                            child: Text(
+                                              hasDQ ? "${s.name} (DQ'ed)" : s.name,
+                                              style: hasDQ ? const TextStyle(color: Colors.grey) : null,
+                                            ),
+                                          );
+                                        }).toList(),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -643,7 +646,7 @@ class _StageInputViewState extends State<StageInputView> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text('Results:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Results:', style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Expanded(
                     child: ListView.separated(

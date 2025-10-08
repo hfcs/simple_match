@@ -136,7 +136,8 @@ void main() {
       await tester.enterText(find.byKey(const Key('missesField')), '0');
       await tester.pumpAndSettle();
       // Now set time to 0 to trigger time validation error
-      await tester.enterText(find.byKey(const Key('timeField')), '0');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '0');
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('submitButton')));
       await tester.pumpAndSettle();

@@ -48,8 +48,9 @@ void main() {
       await tester.pump();
       await tester.enterText(find.byKey(const Key('dField')), '1');
       await tester.pump();
-      // Move focus away
-      await tester.tap(find.byKey(const Key('timeField')), warnIfMissed: false);
+  // Move focus away (ensure visible first to avoid hit-test warnings)
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.tap(find.byKey(const Key('timeField')), warnIfMissed: false);
       await tester.pump();
       // Should not throw and state should be correct
       expect(vm.a, 2);
@@ -106,6 +107,7 @@ void main() {
         'timeField',
       ];
       for (final key in fields) {
+        await tester.ensureVisible(find.byKey(Key(key)));
         await tester.enterText(find.byKey(Key(key)), '-1');
         await tester.pump();
         expect(find.textContaining('cannot be negative'), findsOneWidget);

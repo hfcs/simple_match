@@ -88,7 +88,8 @@ void main() {
       await tester.enterText(find.byKey(const Key('missesField')), '0');
       await tester.enterText(find.byKey(const Key('noShootsField')), '0');
       await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
-      await tester.enterText(find.byKey(const Key('timeField')), '1.5');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '1.5');
       await tester.pumpAndSettle();
 
       // Submit the result first

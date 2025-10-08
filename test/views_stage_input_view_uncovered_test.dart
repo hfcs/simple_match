@@ -226,7 +226,8 @@ void main() {
       await tester.tap(find.text('Test').last);
       await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('aField')), '10');
-      await tester.enterText(find.byKey(const Key('timeField')), '2');
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  await tester.enterText(find.byKey(const Key('timeField')), '2');
       await tester.pumpAndSettle();
       expect(find.textContaining('Hit Factor: 25.00'), findsOneWidget);
       expect(find.textContaining('Adjusted: 37.50'), findsOneWidget);

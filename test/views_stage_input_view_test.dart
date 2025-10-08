@@ -264,5 +264,52 @@ void main() {
       expect(find.textContaining('Bob'), findsWidgets); // appears in menu, but not selected label
       expect(find.text('Select Shooter'), findsOneWidget);
     });
+
+    testWidgets('DQ requires non-empty RO remark and disables submit when blank', (tester) async {
+      await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
+      // Select stage and shooter
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Alice').last);
+      await tester.pumpAndSettle();
+      // Select DQ status
+      await tester.ensureVisible(find.text('DQ'));
+      await tester.tap(find.text('DQ').first);
+      await tester.pump();
+      // Clear RO remark if any and ensure it's empty/whitespace
+      await tester.enterText(find.byKey(const Key('roRemarkField')), '   ');
+      await tester.pump();
+      // Submit should be disabled and validation should show
+      final submitBtn = tester.widget<ElevatedButton>(find.byKey(const Key('submitButton')));
+      expect(submitBtn.enabled, isFalse);
+      expect(find.textContaining("RO remark is required for DQ"), findsOneWidget);
+    });
+
+    testWidgets('DQ with RO remark allows submit', (tester) async {
+      await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
+      // Select stage and shooter
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Alice').last);
+      await tester.pumpAndSettle();
+      // Select DQ status
+      await tester.ensureVisible(find.text('DQ'));
+      await tester.tap(find.text('DQ').first);
+      await tester.pump();
+      // Provide RO remark
+      await tester.enterText(find.byKey(const Key('roRemarkField')), 'RO observed illegal procedure');
+      await tester.pump();
+      // Submit should be enabled
+      final submitBtn = tester.widget<ElevatedButton>(find.byKey(const Key('submitButton')));
+      expect(submitBtn.enabled, isTrue);
+    });
   });
 }

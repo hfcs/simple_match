@@ -95,8 +95,10 @@ class StageInputViewModel extends ChangeNotifier {
     if (_selectedStage == null) return false;
     final stage = repository.getStage(_selectedStage!);
     if (stage == null) return false;
-    // If DNF or DQ, the record is valid (fields should be zeroed)
-    if (status != 'Completed') return true;
+    // If DNF, the record is valid (fields should be zeroed)
+    if (status == 'DNF') return true;
+    // If DQ, RO remark must be non-empty (non-whitespace)
+    if (status == 'DQ') return roRemark.trim().isNotEmpty;
     return (a + c + d + misses) == stage.scoringShoots && time > 0;
   }
 
@@ -122,6 +124,10 @@ class StageInputViewModel extends ChangeNotifier {
       if (time == 0) {
         return 'Time must be greater than 0';
       }
+    }
+    // If DQ, require RO remark
+    if (status == 'DQ') {
+      if (roRemark.trim().isEmpty) return 'RO remark is required for DQ';
     }
     return null;
   }

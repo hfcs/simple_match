@@ -660,13 +660,26 @@ class _StageInputViewState extends State<StageInputView> {
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Stage: ${r.stage}, Time: ${r.time.toStringAsFixed(2)}'),
-                                Text('A: ${r.a}, C: ${r.c}, D: ${r.d}, Misses: ${r.misses}, No Shoots: ${r.noShoots}, Proc Err: ${r.procedureErrors}'),
-                                Builder(builder: (context) {
-                                  final shooter = repo.getShooter(r.shooter);
-                                  final scale = shooter?.scaleFactor ?? 1.0;
-                                  return Text('Hit Factor: ${r.hitFactor.toStringAsFixed(2)}, Adjusted: ${r.adjustedHitFactor(scale).toStringAsFixed(2)}');
-                                }),
+                                // Show stage and time only for completed results. For
+                                // DNF/DQ we show status-only (and RO remark if present).
+                                if (r.status == 'DNF' || r.status == 'DQ')
+                                  const SizedBox.shrink()
+                                else
+                                  Text('Stage: ${r.stage}, Time: ${r.time.toStringAsFixed(2)}'),
+                                // If the result was a DNF or DQ show only the status
+                                // instead of the numeric breakdown. Always show the
+                                // RO remark if present regardless of status.
+                                if (r.status == 'DNF' || r.status == 'DQ') ...[
+                                  Text('Status: ${r.status}'),
+                                ] else ...[
+                                  Text('A: ${r.a}, C: ${r.c}, D: ${r.d}, Misses: ${r.misses}, No Shoots: ${r.noShoots}, Proc Err: ${r.procedureErrors}'),
+                                  Builder(builder: (context) {
+                                    final shooter = repo.getShooter(r.shooter);
+                                    final scale = shooter?.scaleFactor ?? 1.0;
+                                    return Text('Hit Factor: ${r.hitFactor.toStringAsFixed(2)}, Adjusted: ${r.adjustedHitFactor(scale).toStringAsFixed(2)}');
+                                  }),
+                                ],
+                                if (r.roRemark.isNotEmpty) Text('RO: ${r.roRemark}'),
                               ],
                             ),
                             trailing: Row(

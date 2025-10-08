@@ -152,6 +152,42 @@ void main() {
       ); // Time in subtitle
     });
 
+    testWidgets('DNF result displays status-only in result list', (tester) async {
+      // Increase test environment size so radio tiles are visible and hittable
+      tester.view.physicalSize = const Size(1200, 1600);
+      tester.view.devicePixelRatio = 1.0;
+      await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
+      // Select stage and shooter
+      await tester.tap(find.byKey(const Key('stageSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Stage 1').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('shooterSelector')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Bob').last);
+      await tester.pumpAndSettle();
+  // Mark as DNF and set an RO remark
+  await tester.ensureVisible(find.text('DNF'));
+  await tester.tap(find.text('DNF').first);
+  await tester.pump();
+  await tester.enterText(find.byKey(const Key('roRemarkField')), 'Gun jam');
+  await tester.pump();
+  // Submit (vm.submit() will zero numeric fields for non-completed statuses)
+  await tester.tap(find.byKey(const Key('submitButton')));
+  await tester.pump();
+      await tester.ensureVisible(find.byKey(const Key('resultsList')));
+  // The result subtitle should contain 'Status: DNF' and the RO remark, but not the time or numeric labels
+  expect(find.textContaining('Status: DNF'), findsWidgets);
+  expect(find.textContaining('RO: Gun jam'), findsWidgets);
+  expect(find.textContaining('Time:'), findsNothing);
+  expect(find.textContaining('A:'), findsNothing);
+      // Reset test environment size
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+    });
+
     testWidgets('can edit and remove a result', (tester) async {
       // Increase test environment size to avoid off-screen widget issues
       tester.view.physicalSize = const Size(1200, 1600);

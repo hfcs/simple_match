@@ -22,10 +22,8 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SIMPLE_IPSC_MATCH }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DT_SIMPLE_MATCH }}
           channelId: live
-          projectId: simple-ipsc-match
           projectId: dt-simple-match
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks

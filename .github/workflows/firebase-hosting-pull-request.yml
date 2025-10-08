@@ -19,9 +19,14 @@ jobs:
           channel: 'stable'
       - name: Install dependencies
         run: flutter pub get
+      - run: npm ci
       - run: ./build.sh web --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SIMPLE_IPSC_MATCH }}
           projectId: simple-ipsc-match
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DT_SIMPLE_MATCH }}
+          projectId: dt-simple-match
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks

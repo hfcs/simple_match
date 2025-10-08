@@ -48,6 +48,15 @@ void main() {
     await tester.enterText(find.byKey(const Key('roRemarkField')), 'Safety issue');
     await tester.pumpAndSettle();
 
+  // ordering assertions: status radio and roRemark should be above the submit button
+  final submitFinder = find.byKey(const Key('submitButton'));
+  expect(submitFinder, findsOneWidget);
+  final dnfRect = tester.getRect(dnfFinder);
+  final roRect = tester.getRect(find.byKey(const Key('roRemarkField')));
+  final submitRect = tester.getRect(submitFinder);
+  expect(dnfRect.top < submitRect.top, isTrue, reason: 'DNF radio should appear above Submit');
+  expect(roRect.top < submitRect.top, isTrue, reason: 'RO Remark field should appear above Submit');
+
     // submit
     await tester.ensureVisible(find.byKey(const Key('submitButton')));
     await tester.tap(find.byKey(const Key('submitButton')));

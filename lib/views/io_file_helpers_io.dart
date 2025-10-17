@@ -5,8 +5,12 @@ import 'package:path_provider/path_provider.dart';
 
 Future<Directory> getDocumentsDirectory() => getApplicationDocumentsDirectory();
 
-Future<List<FileSystemEntity>> listBackups() async {
-  final dir = await getDocumentsDirectory();
+/// List JSON backup files in the documents directory.
+///
+/// An optional [directory] may be provided for testing. If omitted the
+/// application documents directory will be used.
+Future<List<FileSystemEntity>> listBackups({Directory? directory}) async {
+  final dir = directory ?? await getDocumentsDirectory();
   final files = dir.listSync().where((f) => f.path.endsWith('.json')).toList();
   files.sort((a, b) => b.statSync().modified.compareTo(a.statSync().modified));
   return files;

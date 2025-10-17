@@ -27,6 +27,15 @@ class MainMenuView extends StatelessWidget {
             Card(
               elevation: 2,
               child: ListTile(
+                leading: const Icon(Icons.build),
+                title: const Text('Settings'),
+                onTap: () => Navigator.pushNamed(context, '/settings'),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Card(
+              elevation: 2,
+              child: ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text('Shooter Setup'),
                 onTap: () => Navigator.pushNamed(context, '/shooter-setup'),

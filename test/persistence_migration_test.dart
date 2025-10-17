@@ -55,7 +55,7 @@ void makeWritable(MockSharedPreferences p) {
 void main() {
   late IOSink logSink;
   late MockSharedPreferences mockPrefs;
-  late PersistenceService persistenceService;
+  
 
   setUpAll(() {
     // Redirect print statements to a log file
@@ -83,8 +83,7 @@ void main() {
   });
 
   setUp(() {
-    mockPrefs = MockSharedPreferences();
-    persistenceService = PersistenceService(prefs: mockPrefs);
+  mockPrefs = MockSharedPreferences();
 
     // Make the mock writable so setInt/setString mutate getInt/getString behavior
     makeWritable(mockPrefs);

@@ -1,4 +1,9 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'dart:convert';
+import 'dart:io';
+import 'platform_info.dart';
+import 'dart:typed_data';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logging/logging.dart';
 import '../models/shooter.dart';
@@ -173,6 +178,148 @@ class PersistenceService {
         .toList();
   }
 
+  /// Build a full backup map containing metadata and all lists.
+  Future<Map<String, dynamic>> buildBackupMap() async {
+    await ensureSchemaUpToDate();
+    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    // For metadata we include schema version and timestamp
+    final meta = <String, dynamic>{
+      'schemaVersion': prefs.getInt(kDataSchemaVersionKey) ?? kDataSchemaVersion,
+      'exportedAt': DateTime.now().toUtc().toIso8601String(),
+      'appVersion': 'unknown', // kept simple for MVP
+      'platform': getPlatformName(),
+    };
+    final stages = await loadList('stages');
+    final shooters = await loadList('shooters');
+    final results = await loadList('stageResults');
+    return {
+      'metadata': meta,
+      'stages': stages,
+      'shooters': shooters,
+      'stageResults': results,
+    };
+  }
+
+  /// Return JSON string of a full backup (plain JSON, MVP no compression).
+  Future<String> exportBackupJson() async {
+    final map = await buildBackupMap();
+    return jsonEncode(map);
+  }
+
+  /// Atomic write to file path (plain JSON). Throws on IO errors.
+  Future<File> exportBackupToFile(String path) async {
+    final jsonStr = await exportBackupJson();
+    final outFile = File(path);
+    final tmp = File('${path}.tmp');
+
+    // Ensure parent dir exists
+    try {
+      await outFile.parent.create(recursive: true);
+    } catch (e) {
+      throw Exception('Failed to create parent directory for export file: $e');
+    }
+
+    try {
+      await tmp.writeAsString(jsonStr);
+    } catch (e) {
+      throw Exception('Failed to write temporary export file: $e');
+    }
+
+    // Try atomic rename; fall back to copy if rename isn't supported on the platform/filesystem
+    try {
+      if (await outFile.exists()) {
+        await outFile.delete();
+      }
+      return await tmp.rename(path);
+    } catch (e) {
+      // Non-atomic fallback: copy and remove temp file
+      try {
+        await tmp.copy(path);
+        await tmp.delete();
+        return File(path);
+      } catch (e2) {
+        throw Exception('Failed to finalize export file (rename and copy failed): $e ; $e2');
+      }
+    }
+  }
+
+  /// Result object returned from import operation.
+  /// Simple MVP: success flag, message, and counts of imported records.
+
+
+  /// Import backup from raw bytes (expects UTF-8 JSON). If [dryRun] is true,
+  /// validate only and do not persist. If [backupBeforeRestore] is true, save
+  /// a snapshot of current persisted data in prefs under key 'backup_before_restore'.
+  Future<ImportResult> importBackupFromBytes(Uint8List bytes, {bool dryRun = false, bool backupBeforeRestore = true}) async {
+    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    String jsonStr;
+    try {
+      jsonStr = utf8.decode(bytes);
+    } catch (e) {
+      return ImportResult(success: false, message: 'Invalid UTF-8 in backup bytes');
+    }
+
+    Map<String, dynamic> parsed;
+    try {
+      final decoded = jsonDecode(jsonStr);
+      if (decoded is! Map<String, dynamic>) return ImportResult(success: false, message: 'Backup JSON must be an object');
+      parsed = decoded;
+    } catch (e) {
+      return ImportResult(success: false, message: 'Failed to parse JSON: $e');
+    }
+
+    // Basic validation
+    if (!parsed.containsKey('stages') || !parsed.containsKey('shooters') || !parsed.containsKey('stageResults')) {
+      return ImportResult(success: false, message: 'Backup missing required keys (stages, shooters, stageResults)');
+    }
+
+    final stages = parsed['stages'];
+    final shooters = parsed['shooters'];
+    final results = parsed['stageResults'];
+    if (stages is! List || shooters is! List || results is! List) {
+      return ImportResult(success: false, message: 'Backup keys must be lists');
+    }
+
+    // If dry run, return counts and success
+    if (dryRun) {
+      return ImportResult(success: true, counts: {
+        'stages': stages.length,
+        'shooters': shooters.length,
+        'stageResults': results.length,
+      });
+    }
+
+    // Backup current data snapshot in prefs (simple MVP)
+    if (backupBeforeRestore) {
+      try {
+        final current = await buildBackupMap();
+        await prefs.setString('backup_before_restore', jsonEncode(current));
+      } catch (e, st) {
+        _logger.warning('Failed to create backup_before_restore snapshot: $e', e, st);
+      }
+    }
+
+    // Persist incoming lists using saveList to ensure schema version updates
+    try {
+      // normalize to List<Map<String,dynamic>>
+      final stagesList = stages.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+      final shootersList = shooters.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+      final resultsList = results.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+      await saveList('stages', stagesList);
+      await saveList('shooters', shootersList);
+      await saveList('stageResults', resultsList);
+    } catch (e, st) {
+      _logger.severe('Failed to persist imported backup: $e', e, st);
+      return ImportResult(success: false, message: 'Failed to save imported data: $e');
+    }
+    
+    return ImportResult(success: true, counts: {
+      'stages': stages.length,
+      'shooters': shooters.length,
+      'stageResults': results.length,
+    });
+  }
+
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
     final prefs = _prefs ?? await SharedPreferences.getInstance();
     _logger.info('Attempting to save list to key $key with data: $list');
@@ -203,4 +350,12 @@ class PersistenceService {
   }
 
   // Migration method is public and can be invoked directly in tests.
+}
+
+/// Result object returned from import operations.
+class ImportResult {
+  final bool success;
+  final String? message;
+  final Map<String, int> counts;
+  ImportResult({required this.success, this.message, Map<String, int>? counts}) : counts = counts ?? {};
 }

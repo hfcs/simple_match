@@ -110,6 +110,8 @@ class MatchRepository extends ChangeNotifier {
           ),
         ),
       );
+  // Notify listeners so UI updates after a programmatic reload (e.g., after import)
+  notifyListeners();
   }
 
   // Stages

@@ -7,9 +7,4 @@ class WebPdfUtils {
   }
 }
 
-// Public marker used by tests for coverage attribution.
-int coverageMarkerNonWebPdfUtils() => 1;
-
-int _nonWebPdfUtils_importInitializer() => 0;
-
-final int nonWebPdfUtilsImported = _nonWebPdfUtils_importInitializer();
+// (No test markers remain)

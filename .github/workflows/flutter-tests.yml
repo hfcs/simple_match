@@ -27,5 +27,21 @@ jobs:
             ${{ runner.os }}-pub-
       - name: Install dependencies
         run: flutter pub get
-      - name: Run tests
-        run: flutter test --no-shard
+      - name: Run tests with coverage
+        run: flutter test --coverage --no-shard
+
+      - name: Install lcov (for genhtml)
+        run: sudo apt-get update && sudo apt-get install -y lcov
+
+      - name: Filter LCOV (remove non-web IO-only entries)
+        run: |
+          bash tools/filter_lcov.sh coverage/lcov.info coverage/lcov.filtered.info
+
+      - name: Generate HTML coverage
+        run: genhtml coverage/lcov.filtered.info -o coverage/html
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: coverage/html

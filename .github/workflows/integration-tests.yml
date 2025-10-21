@@ -1,0 +1,62 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [ main, fix/web-export-import ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  web_integration:
+    name: Web integration (Chrome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.9.2'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Enable web support
+        run: flutter config --enable-web
+
+      - name: Run web integration test (Chrome)
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
+        run: |
+          flutter doctor -v
+          flutter test integration_test/settings_view_web_integration_test.dart -d chrome --verbose
+
+  macos_integration:
+    name: macOS integration
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.9.2'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run macOS integration test
+        run: |
+          flutter doctor -v
+          flutter test integration_test/settings_view_io_integration_test.dart -d macos --verbose

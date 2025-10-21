@@ -11,8 +11,24 @@ import '../repository/match_repository.dart';
 class SettingsView extends StatefulWidget {
   /// Optional override for the platform-specific saveExport function used in tests.
   final Future<void> Function(String path, String content)? saveExportOverride;
+  /// Optional override for the browser file picker (used to simulate web picks in tests).
+  final Future<Map<String, dynamic>?> Function()? pickBackupOverride;
 
-  const SettingsView({super.key, this.saveExportOverride});
+  /// Optional override for listing backup files in the documents directory.
+  /// If provided it should return a List of objects each exposing a `.path` string.
+  final Future<List<dynamic>> Function()? listBackupsOverride;
+
+  /// Optional override for reading file bytes by path. If provided, this will be
+  /// used instead of `readFileBytes` when importing on IO platforms.
+  final Future<Uint8List> Function(String path)? readFileBytesOverride;
+
+  const SettingsView({
+    super.key,
+    this.saveExportOverride,
+    this.pickBackupOverride,
+    this.listBackupsOverride,
+    this.readFileBytesOverride,
+  });
 
   @override
   State<SettingsView> createState() => _SettingsViewState();
@@ -30,6 +46,61 @@ class _SettingsViewState extends State<SettingsView> {
     final repo = Provider.of<MatchRepository>(context, listen: false);
     final svc = repo.persistence ?? PersistenceService();
     try {
+      // If a test override for picking a backup is provided, use it directly
+      // regardless of platform. This lets widget tests inject a chosen file
+      // and exercise the confirm/import flow deterministically.
+      if (widget.pickBackupOverride != null) {
+        final picked = await widget.pickBackupOverride!();
+        if (picked == null) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
+          return;
+        }
+        final bytes = picked['bytes'] as Uint8List;
+        final name = picked['name'] as String;
+
+        // Dry-run
+        final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
+        if (!dry.success) {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+          return;
+        }
+
+        final confirm = await showDialog<bool?>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('Confirm restore'),
+            content: Text('This will overwrite current match data. Import ${dry.counts['stages']} stages, ${dry.counts['shooters']} shooters, ${dry.counts['stageResults']} results from $name. Proceed?'),
+            actions: [
+              TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+              TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Restore')),
+            ],
+          ),
+        );
+
+        if (confirm != true) return;
+
+        final res = await svc.importBackupFromBytes(bytes, dryRun: false, backupBeforeRestore: true);
+        if (res.success) {
+          try {
+            await repo.loadAll();
+          } catch (e) {
+            if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+            if (!mounted) return;
+            setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
+            return;
+          }
+
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+          if (!mounted) return;
+          setState(() => _lastMessage = 'Import successful');
+        } else {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+          if (!mounted) return;
+          setState(() => _lastMessage = 'Import failed: ${res.message}');
+        }
+        return;
+      }
+
       final ts = DateTime.now().toIso8601String().replaceAll(':', '-');
       final exporter = widget.saveExportOverride ?? saveExport;
 
@@ -86,9 +157,11 @@ class _SettingsViewState extends State<SettingsView> {
     final repo = Provider.of<MatchRepository>(context, listen: false);
     final svc = repo.persistence ?? PersistenceService();
     try {
-      // On web, use a file picker because we can't access app documents dir.
-      if (kIsWeb) {
-        final picked = await pickBackupFileViaBrowser();
+      // If a test override for picking a backup is provided, use it regardless
+      // of platform. This allows widget tests to inject bytes directly and
+      // exercise the import/confirm flow deterministically.
+      if (widget.pickBackupOverride != null) {
+        final picked = await widget.pickBackupOverride!();
         if (picked == null) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
           return;
@@ -103,19 +176,76 @@ class _SettingsViewState extends State<SettingsView> {
           return;
         }
 
-        final confirm = await showDialog<bool?>(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Confirm restore'),
-            content: Text('This will overwrite current match data. Import ${dry.counts['stages']} stages, ${dry.counts['shooters']} shooters, ${dry.counts['stageResults']} results from $name. Proceed?'),
-            actions: [
-              TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
-              TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Restore')),
-            ],
-          ),
-        );
+        final autoConfirm = picked.containsKey('autoConfirm') && (picked['autoConfirm'] == true);
+        if (!autoConfirm) {
+          final confirm = await showDialog<bool?>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Confirm restore'),
+              content: Text('This will overwrite current match data. Import ${dry.counts['stages']} stages, ${dry.counts['shooters']} shooters, ${dry.counts['stageResults']} results from $name. Proceed?'),
+              actions: [
+                TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+                TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Restore')),
+              ],
+            ),
+          );
+          if (confirm != true) return;
+        }
 
-        if (confirm != true) return;
+        final res = await svc.importBackupFromBytes(bytes, dryRun: false, backupBeforeRestore: true);
+        if (res.success) {
+          try {
+            await repo.loadAll();
+          } catch (e) {
+            if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+            if (!mounted) return;
+            setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
+            return;
+          }
+
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+          if (!mounted) return;
+          setState(() => _lastMessage = 'Import successful');
+        } else {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+          if (!mounted) return;
+          setState(() => _lastMessage = 'Import failed: ${res.message}');
+        }
+        return;
+      }
+      // On web, use a file picker because we can't access app documents dir.
+      if (kIsWeb) {
+        final picked = widget.pickBackupOverride != null ? await widget.pickBackupOverride!() : await pickBackupFileViaBrowser();
+        if (picked == null) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
+          return;
+        }
+        final bytes = picked['bytes'] as Uint8List;
+        final name = picked['name'] as String;
+
+        // Run a dry-run first
+        final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
+        if (!dry.success) {
+          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+          return;
+        }
+        // If the picked map included an 'autoConfirm' flag, skip the dialog
+        // to allow deterministic test behavior.
+        final autoConfirm = picked.containsKey('autoConfirm') && (picked['autoConfirm'] == true);
+        if (!autoConfirm) {
+          final confirm = await showDialog<bool?>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Confirm restore'),
+              content: Text('This will overwrite current match data. Import ${dry.counts['stages']} stages, ${dry.counts['shooters']} shooters, ${dry.counts['stageResults']} results from $name. Proceed?'),
+              actions: [
+                TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+                TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Restore')),
+              ],
+            ),
+          );
+          if (confirm != true) return;
+        }
 
         final res = await svc.importBackupFromBytes(bytes, dryRun: false, backupBeforeRestore: true);
         if (res.success) {
@@ -139,7 +269,7 @@ class _SettingsViewState extends State<SettingsView> {
         return;
       }
 
-      final files = await _listBackups();
+      final files = widget.listBackupsOverride != null ? await widget.listBackupsOverride!() : await _listBackups();
       if (files.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No backup files found in app documents directory')));
         return;
@@ -162,7 +292,7 @@ class _SettingsViewState extends State<SettingsView> {
 
       if (chosen == null) return;
 
-  final bytes = await readFileBytes(chosen.path);
+  final bytes = widget.readFileBytesOverride != null ? await widget.readFileBytesOverride!(chosen.path) : await readFileBytes(chosen.path);
 
   // Run a dry-run first
   final dry = await svc.importBackupFromBytes(bytes, dryRun: true);

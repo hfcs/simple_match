@@ -10,7 +10,7 @@ import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
 
 class _FailingLoadRepo extends MatchRepository {
-  _FailingLoadRepo({PersistenceService? persistence}) : super(persistence: persistence);
+  _FailingLoadRepo({super.persistence});
 
   @override
   Future<void> loadAll() async {

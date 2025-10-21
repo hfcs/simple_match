@@ -22,18 +22,18 @@ void main() {
     String? exportedContent;
 
     // 1) successful export
-    final saveExportSuccess = (String path, String content) async {
+    Future<void> saveExportSuccess(String path, String content) async {
       exportedPath = path;
       exportedContent = content;
-    };
+    }
 
     // 2) failing export
-    final saveExportFail = (String path, String content) async {
+    Future<Never> saveExportFail(String path, String content) async {
       throw Exception('disk full');
-    };
+    }
 
     // 3) pick backup override returning a valid full backup JSON bytes and autoConfirm
-    final pickBackupOk = () async => <String, dynamic>{
+    Future<Map<String, dynamic>> pickBackupOk() async => <String, dynamic>{
           'bytes': Uint8List.fromList('{"stages": [], "shooters": [], "stageResults": []}'.codeUnits),
           'name': 'demo.json',
           'autoConfirm': true,
@@ -41,8 +41,8 @@ void main() {
 
     // 5) listBackups + readFileBytes flow (simulate a file in documents dir)
     final fakeFilePath = '/tmp/fake.json';
-    final listBackups = () async => [ _FakeFile(fakeFilePath) ];
-    final readFileBytes = (String path) async => Uint8List.fromList('{"fromFile":1}'.codeUnits);
+    Future<List<_FakeFile>> listBackups() async => [ _FakeFile(fakeFilePath) ];
+    Future<Uint8List> readFileBytes(String path) async => Uint8List.fromList('{"fromFile":1}'.codeUnits);
 
   // Ensure SharedPreferences uses an in-memory mock for this test
   SharedPreferences.setMockInitialValues({});

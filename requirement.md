@@ -41,3 +41,12 @@
 ## Documentation
 - This requirement supersedes any previous table header layout for the Stage Result view.
 - All documentation and instructions must reflect this mobile-friendly, rotated-header, vertical-rule design.
+
+## Notes for tests and AI agents
+- The project provides deterministic testing overrides on `SettingsView` to make import/export UI behavior testable without platform plugins:
+  - `pickBackupOverride`: a callback returning a `Map` with keys `bytes` (Uint8List), `name` (String), and optionally `autoConfirm` (bool) to skip the confirmation dialog in tests.
+  - `listBackupsOverride`: a callback returning a `List` of objects that expose a `.path` string (e.g., `File`) to simulate documents directory listings.
+  - `readFileBytesOverride`: a callback accepting a path and returning `Uint8List` to simulate file reads.
+
+- LLM-generated tests should prefer these overrides to make widget tests deterministic and CI-friendly. Avoid relying on platform method-channel mocks or running tests on the web platform unless specifically testing web-only behavior.
+

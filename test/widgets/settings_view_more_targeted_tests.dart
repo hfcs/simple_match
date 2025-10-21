@@ -170,4 +170,81 @@ void main() {
 
     expect(find.textContaining('Import failed'), findsOneWidget);
   });
+
+  testWidgets('Export shows Export failed when exporter throws', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    Future<void> badSave(String path, String content) async {
+      throw Exception('simulated exporter error');
+    }
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(saveExportOverride: badSave)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Export Backup'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Export failed'), findsOneWidget);
+  });
+
+  testWidgets('Import shows no-backups SnackBar when listBackupsOverride returns empty', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    Future<List<dynamic>> emptyList() async => [];
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(listBackupsOverride: emptyList)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('No backup files found'), findsOneWidget);
+  });
+
+  testWidgets('Import error shown when readFileBytesOverride throws', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    final fake = _FakeFile('/tmp/failure.json');
+    Future<List<dynamic>> listBackups() async => [fake];
+    Future<Uint8List> badRead(String path) async => throw Exception('simulated read error');
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(listBackupsOverride: listBackups, readFileBytesOverride: badRead)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    // After selecting the file, read should throw and the catch should show an Import error
+    expect(find.textContaining('Import error'), findsOneWidget);
+  });
 }

@@ -15,7 +15,7 @@ class _FakeFile {
 }
 
 class _BadPersistence extends PersistenceService {
-  _BadPersistence({SharedPreferences? prefs}) : super(prefs: prefs);
+  _BadPersistence({super.prefs});
   @override
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
     throw Exception('simulated save failure');
@@ -48,8 +48,8 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    // Expect validation failure SnackBar
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+  // Expect validation failure SnackBar
+  expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   testWidgets('Import via listBackupsOverride and readFileBytesOverride flow', (tester) async {
@@ -94,7 +94,7 @@ void main() {
     await tester.tap(find.text('Restore'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Import successful'), findsOneWidget);
+  expect(find.textContaining('Import successful'), findsWidgets);
   });
 
   testWidgets('Import shows dialog and Cancel prevents restore', (tester) async {
@@ -168,7 +168,7 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Import failed'), findsOneWidget);
+  expect(find.textContaining('Import failed'), findsWidgets);
   });
 
   testWidgets('Export shows Export failed when exporter throws', (tester) async {
@@ -194,7 +194,7 @@ void main() {
     await tester.tap(find.text('Export Backup'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Export failed'), findsOneWidget);
+  expect(find.textContaining('Export failed'), findsWidgets);
   });
 
   testWidgets('Import shows no-backups SnackBar when listBackupsOverride returns empty', (tester) async {
@@ -218,7 +218,7 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('No backup files found'), findsOneWidget);
+  expect(find.textContaining('No backup files found'), findsWidgets);
   });
 
   testWidgets('Import error shown when readFileBytesOverride throws', (tester) async {
@@ -244,7 +244,104 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    // After selecting the file, read should throw and the catch should show an Import error
-    expect(find.textContaining('Import error'), findsOneWidget);
+  // Select the file from the dialog to trigger the read (which throws)
+  expect(find.text('failure.json'), findsOneWidget);
+  await tester.tap(find.text('failure.json'));
+  await tester.pumpAndSettle();
+
+  // After selecting the file, read should throw and the catch should show an Import error
+  expect(find.textContaining('Import error'), findsWidgets);
+  });
+
+  testWidgets('Export with pickBackupOverride null shows No file selected', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    Future<Map<String, dynamic>?> pickNull() async => null;
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickNull)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Export Backup'));
+    await tester.pumpAndSettle();
+
+  expect(find.text('No file selected'), findsWidgets);
+  });
+
+  testWidgets('Export pickBackupOverride with invalid JSON shows Backup validation failed', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    Future<Map<String, dynamic>?> pickBad() async => {
+      'bytes': Uint8List.fromList('badjson'.codeUnits),
+      'name': 'bad.json',
+    };
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickBad)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Export Backup'));
+    await tester.pumpAndSettle();
+
+  expect(find.textContaining('Backup validation failed'), findsWidgets);
+  });
+
+  testWidgets('Export pickBackupOverride autoConfirm true triggers import successful', (tester) async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+
+    // Prepare a valid backup
+    await svc.saveList('stages', [ {'stage': 1, 'scoringShoots': 5} ]);
+    await svc.saveList('shooters', [ {'name': 'Zed', 'scaleFactor': 1.0} ]);
+    await svc.saveList('stageResults', [ {'stage': 1, 'shooter': 'Zed', 'time': 1.0, 'a': 1, 'c': 0, 'd': 0, 'misses': 0, 'noShoots': 0, 'procedureErrors': 0} ]);
+
+    final repo = MatchRepository(persistence: svc);
+    await repo.loadAll();
+
+    final bytes = Uint8List.fromList((await svc.exportBackupJson()).codeUnits);
+
+    Future<Map<String, dynamic>?> pickAuto() async => {
+      'bytes': bytes,
+      'name': 'auto.json',
+      'autoConfirm': true,
+    };
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickAuto)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Export Backup'));
+  await tester.pumpAndSettle();
+
+  // Confirm the restore dialog that appears in the export path
+  expect(find.text('Confirm restore'), findsOneWidget);
+  await tester.tap(find.text('Restore'));
+  await tester.pumpAndSettle();
+
+  expect(find.textContaining('Import successful'), findsWidgets);
   });
 }

@@ -5,9 +5,6 @@ import 'package:pdf/widgets.dart' as pw;
 
 // Import via package: URIs as well to ensure coverage tooling maps hits
 // to the canonical package source paths.
-import 'package:simple_match/views/export_utils_io.dart' as export_io_pkg;
-import 'package:simple_match/views/io_file_helpers_io.dart' as io_helpers_pkg;
-import 'package:simple_match/views/non_web_pdf_utils.dart' as pdf_utils_pkg;
 
 // Also keep relative imports to be robust across tooling.
 import 'package:simple_match/views/export_utils_io.dart' as export_io;
@@ -35,16 +32,9 @@ void main() {
     // non-web PDF util should throw on non-web platforms
     expect(() => pdf_utils.WebPdfUtils.downloadPdf(pw.Document()), throwsA(isA<UnsupportedError>()));
 
-  // Call coverage markers to make sure these files are recorded by the
-  // coverage tracer.
-  expect(export_io.coverageMarkerExportUtilsIo(), equals(1));
-  expect(io_helpers.coverageMarkerIoFileHelpers(), equals(1));
-  expect(pdf_utils.coverageMarkerNonWebPdfUtils(), equals(1));
-
-  // Call package imports as well.
-  expect(export_io_pkg.coverageMarkerExportUtilsIo(), equals(1));
-  expect(io_helpers_pkg.coverageMarkerIoFileHelpers(), equals(1));
-  expect(pdf_utils_pkg.coverageMarkerNonWebPdfUtils(), equals(1));
+    // The helper files have been executed above (saveExport, listBackups,
+    // readFileBytes and non-web PDF util), which triggers coverage hits for
+    // those source files. No explicit coverage marker functions remain.
 
     await dir.delete(recursive: true);
   });

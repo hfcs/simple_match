@@ -1,10 +1,15 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_match/views/io_file_helpers_io.dart';
 
 void main() {
+  if (kIsWeb) {
+    print('Skipping io_file_helpers_io_test on web');
+    return;
+  }
   test('listBackups returns json files sorted by modified desc and readFileBytes reads', () async {
     final dir = Directory.systemTemp.createTempSync('simple_match_backups');
 

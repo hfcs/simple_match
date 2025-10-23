@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter_test/flutter_test.dart';
 
@@ -44,10 +46,15 @@ class DummyStageResult {
 
 // Removed unused and incomplete _containsUtf8 function
 void main() {
+  if (kIsWeb) {
+    print('Skipping pdf_unicode_export_test on web');
+    return;
+  }
   TestWidgetsFlutterBinding.ensureInitialized();
   test(
     'PDF export renders Traditional Chinese shooter names (pdftotext extraction)',
     () async {
+      if (kIsWeb) return;
       final chineseName = '張偉';
       final results = [DummyResult(chineseName, 123.45)];
       final stages = [DummyStage(1)];

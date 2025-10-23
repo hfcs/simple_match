@@ -3,27 +3,17 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
+
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 class _ThrowingRepo extends MatchRepository {
-  _ThrowingRepo(PersistenceService svc) : super(persistence: svc);
+  _ThrowingRepo(dynamic svc) : super(persistence: svc);
   @override
   Future<void> loadAll() async {
     throw Exception('reload failed');
-  }
-}
-
-class _FailingPersistence extends PersistenceService {
-  _FailingPersistence(SharedPreferences prefs) : super(prefs: prefs);
-
-  @override
-  Future<ImportResult> importBackupFromBytes(Uint8List bytes,
-      {bool dryRun = false, bool backupBeforeRestore = true}) async {
-    return ImportResult(success: false, message: 'import failed', counts: {});
   }
 }
 
@@ -40,15 +30,14 @@ class _SpyRepo extends MatchRepository {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  setUp(() async {
-    SharedPreferences.setMockInitialValues({});
-  });
-
   testWidgets('Import dry-run with invalid JSON shows error message',
       (WidgetTester tester) async {
-  final prefs = await SharedPreferences.getInstance();
-  final svc = PersistenceService(prefs: prefs);
-  final repo = MatchRepository(persistence: svc);
+    // Use FakePersistence that fails the dry-run validation for invalid bytes
+    final repo = MatchRepository(
+        persistence: FakePersistence(importFn: (Uint8List bytes, {bool dryRun = false, bool backupBeforeRestore = true}) async {
+      if (dryRun) return FakeImportResult(success: false, message: 'invalid json', counts: {});
+      return FakeImportResult(success: true, message: 'ok', counts: {});
+    }));
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
@@ -74,9 +63,7 @@ void main() {
 
   testWidgets('pickBackupOverride autoConfirm=false shows confirm dialog',
       (WidgetTester tester) async {
-  final prefs = await SharedPreferences.getInstance();
-  final svc = PersistenceService(prefs: prefs);
-  final repo = MatchRepository(persistence: svc);
+    final repo = MatchRepository(persistence: FakePersistence());
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
@@ -107,9 +94,7 @@ void main() {
 
   testWidgets('saveExportOverride throwing is caught and shows message',
       (WidgetTester tester) async {
-  final prefs = await SharedPreferences.getInstance();
-  final svc = PersistenceService(prefs: prefs);
-  final repo = MatchRepository(persistence: svc);
+    final repo = MatchRepository(persistence: FakePersistence());
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
@@ -131,9 +116,11 @@ void main() {
 
   testWidgets('Import returns failure ImportResult shows error',
       (WidgetTester tester) async {
-  final prefs = await SharedPreferences.getInstance();
-  final svc = _FailingPersistence(prefs);
-  final repo = MatchRepository(persistence: svc);
+    // Use a FakePersistence that simulates failed import
+    final failing = FakePersistence(importFn: (bytes, {dryRun = false, backupBeforeRestore = true}) async {
+      return FakeImportResult(success: false, message: 'import failed', counts: {});
+    });
+    final repo = MatchRepository(persistence: failing);
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
@@ -159,9 +146,8 @@ void main() {
 
   testWidgets('Import succeeds but repo.loadAll throws shows reload failed',
       (WidgetTester tester) async {
-  final prefs = await SharedPreferences.getInstance();
-  final svc = PersistenceService(prefs: prefs);
-  final repo = _ThrowingRepo(svc);
+    // Repo that throws on loadAll
+    final repo = _ThrowingRepo(FakePersistence());
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
@@ -185,9 +171,7 @@ void main() {
 
   testWidgets('Export via saveExportOverride succeeds and shows message',
       (WidgetTester tester) async {
-    final prefs = await SharedPreferences.getInstance();
-    final svc = PersistenceService(prefs: prefs);
-    final repo = MatchRepository(persistence: svc);
+    final repo = MatchRepository(persistence: FakePersistence());
 
     String? calledPath;
     String? calledContent;
@@ -216,12 +200,9 @@ void main() {
 
   testWidgets('Import with autoConfirm true calls repo.loadAll and shows success',
       (WidgetTester tester) async {
-    final prefs = await SharedPreferences.getInstance();
-    final svc = PersistenceService(prefs: prefs);
-
     // Spy repo to detect loadAll calls
     bool loadCalled = false;
-    final repo = _SpyRepo(persistence: svc, onLoad: () => loadCalled = true);
+    final repo = _SpyRepo(persistence: FakePersistence(), onLoad: () => loadCalled = true);
 
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,

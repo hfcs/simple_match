@@ -2,10 +2,15 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_match/services/persistence_service.dart';
 
 void main() {
+  if (kIsWeb) {
+    print('Skipping persistence_backup_integration_test on web');
+    return;
+  }
   group('Persistence backup integration-style', () {
     late PersistenceService svc;
     setUp(() async {

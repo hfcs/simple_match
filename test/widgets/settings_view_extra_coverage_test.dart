@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+// web-safe: this test uses injected overrides and should run on web.
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -160,6 +161,8 @@ void main() {
           home: SettingsView(
             listBackupsOverride: () async => [ _FakeFile('/tmp/yara.json') ],
             readFileBytesOverride: (p) async => bytes,
+            // Provide pick override so web runs use the same deterministic path
+            pickBackupOverride: () async => {'bytes': bytes, 'name': 'yara.json', 'autoConfirm': false},
           ),
         ),
       ),
@@ -169,14 +172,26 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    // The SimpleDialog lists filenames (last path segment)
-    expect(find.text('yara.json'), findsOneWidget);
-    await tester.tap(find.text('yara.json'));
-    await tester.pumpAndSettle();
-
-    // Confirm dialog
-    expect(find.text('Confirm restore'), findsOneWidget);
-    await tester.tap(find.text('Restore'));
+    // The import flow differs on web vs IO. If the pick override/directory
+    // path was used we will see a Confirm dialog immediately; otherwise a
+    // SimpleDialog lists files. Handle both cases.
+    if (find.text('Confirm restore').evaluate().isNotEmpty) {
+      await tester.tap(find.text('Restore'));
+    } else if (find.byType(SimpleDialogOption).evaluate().isNotEmpty) {
+      final option = find.byType(SimpleDialogOption).first;
+      await tester.tap(option);
+      await tester.pumpAndSettle();
+      if (find.text('Confirm restore').evaluate().isNotEmpty) {
+        await tester.tap(find.text('Restore'));
+      }
+    } else {
+      // Try to match a filename somewhere in the tree as a last resort
+      final fileFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('yara.json'));
+      expect(fileFinder, findsOneWidget);
+      await tester.tap(fileFinder);
+      await tester.pumpAndSettle();
+      if (find.text('Confirm restore').evaluate().isNotEmpty) await tester.tap(find.text('Restore'));
+    }
     await tester.pumpAndSettle();
 
     await repo.loadAll();

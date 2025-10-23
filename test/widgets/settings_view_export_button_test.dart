@@ -1,44 +1,18 @@
-import 'dart:io';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
 
-// Lightweight TestPersistence for widget tests that avoids heavy IO.
-class TestPersistence extends PersistenceService {
-  final String tmpBase;
-  TestPersistence(this.tmpBase, {super.prefs});
-  @override
-  Future<File> exportBackupToFile(String path) async {
-    final f = File(path);
-    await f.parent.create(recursive: true);
-    await f.writeAsString('{}');
-    return f;
-  }
-
-  @override
-  Future<String> exportBackupJson() async => '{}';
-}
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   testWidgets('Pressing Export Backup calls saveExportOverride', (tester) async {
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    // Prepare temp dir and mock path_provider to point to it
-    final tmpDir = Directory.systemTemp.createTempSync('sm_test_docs_');
-    const channelName = 'plugins.flutter.io/path_provider';
-    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(MethodChannel(channelName), (methodCall) async {
-      return tmpDir.path;
-    });
-
-    final persistence = TestPersistence(tmpDir.path, prefs: prefs);
+    // Use fake persistence to avoid dart:io and platform plugins
+    final persistence = FakePersistence(exportJsonValue: '{"ok":true}');
     final repo = MatchRepository(persistence: persistence);
     await repo.loadAll();
 
@@ -47,7 +21,6 @@ void main() {
     Future<void> fakeSaveExport(String path, String contents) async {
       called = true;
       if (!completer.isCompleted) completer.complete();
-      // no disk write here; test records invocation
     }
 
     await tester.pumpWidget(
@@ -72,10 +45,6 @@ void main() {
     } catch (_) {}
 
     expect(called, isTrue, reason: 'saveExportOverride should be invoked when Export Backup is tapped');
-    try {
-      tmpDir.deleteSync(recursive: true);
-    } catch (_) {}
-  // Clear any method channel mocks to avoid interfering with other tests
-  tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(MethodChannel('plugins.flutter.io/path_provider'), null);
+    // No disk cleanup needed for the override-based test
   });
 }

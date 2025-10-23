@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -12,6 +13,11 @@ import 'package:simple_match/views/io_file_helpers_io.dart' as io_helpers;
 import 'package:simple_match/views/non_web_pdf_utils.dart' as pdf_utils;
 
 void main() {
+  if (kIsWeb) {
+    print('Skipping coverage_wrapper_test on web');
+    return;
+  }
+
   test('coverage wrapper for lib/views helper files', () async {
     final dir = Directory.systemTemp.createTempSync('simple_match_cov');
 

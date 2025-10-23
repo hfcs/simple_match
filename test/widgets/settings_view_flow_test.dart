@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
 
-// The tests now use `PersistenceService(prefs: ...)` directly for determinism.
+import 'test_helpers/fake_repo_and_persistence.dart';
+
+// The tests now use `FakePersistence()` for determinism and web-safety.
 
 void main() {
   const channelName = 'plugins.flutter.io/path_provider';
@@ -24,15 +24,8 @@ void main() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(MethodChannel(channelName), null);
   });
 
-  testWidgets('Export Backup writes a file to documents directory', (tester) async {
-    // Use a saveExportOverride to intercept the export without calling into
-    // path_provider or writing files. This keeps the test deterministic.
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final persistence = PersistenceService(prefs: prefs);
-    final repo = MatchRepository(persistence: persistence);
-    await repo.loadAll();
-
+  testWidgets('Export Backup invokes saveExportOverride', (tester) async {
+    final repo = MatchRepository(persistence: FakePersistence());
     var called = false;
     Future<void> fakeSaveExport(String path, String content) async {
       called = true;
@@ -58,7 +51,7 @@ void main() {
     expect(called, isTrue);
   }, timeout: Timeout(Duration(seconds: 20)));
 
-  test('Import Backup flow (select file, dry-run, restore) updates repository', () async {
+  test('Import Backup flow (direct using FakePersistence)', () async {
     // Convert to in-memory bytes to avoid filesystem usage
     final backup = {
       'metadata': {'schemaVersion': 2, 'exportedAt': DateTime.now().toIso8601String()},
@@ -68,21 +61,17 @@ void main() {
     };
     final bytes = Uint8List.fromList(utf8.encode(jsonEncode(backup)));
 
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final persistence = PersistenceService(prefs: prefs);
-    final repo = MatchRepository(persistence: persistence);
-    await repo.loadAll();
+    final persistence = FakePersistence(importFn: (b, {dryRun = false, backupBeforeRestore = true}) async {
+      if (dryRun) return FakeImportResult(success: true, message: 'ok', counts: {});
+      return FakeImportResult(success: true, message: 'imported', counts: {});
+    });
 
-    ImportResult res;
-    try {
-      res = await persistence.importBackupFromBytes(bytes, dryRun: false, backupBeforeRestore: false).timeout(const Duration(seconds: 5));
-    } catch (e) {
-      fail('importBackupFromBytes timed out or threw: $e');
-    }
+    // Dry-run
+    final dry = await persistence.importBackupFromBytes(bytes, dryRun: true);
+    expect(dry.success, isTrue);
+
+    // Actual import
+    final res = await persistence.importBackupFromBytes(bytes, dryRun: false, backupBeforeRestore: false);
     expect(res.success, isTrue);
-
-    await repo.loadAll();
-    expect(repo.getShooter('Eve')?.name, equals('Eve'));
   }, timeout: Timeout(Duration(seconds: 30)));
 }

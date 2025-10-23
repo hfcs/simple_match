@@ -1,10 +1,15 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_match/views/io_file_helpers_io.dart';
 
 void main() {
+  if (kIsWeb) {
+    print('Skipping io_file_helpers_list_test on web');
+    return;
+  }
   test('listBackups finds json files in mocked documents directory', () async {
     TestWidgetsFlutterBinding.ensureInitialized();
     final tmpDir = Directory.systemTemp.createTempSync('sm_test_docs_');

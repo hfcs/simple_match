@@ -1,13 +1,12 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
+
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 class _FailingLoadRepo extends MatchRepository {
   _FailingLoadRepo({super.persistence});
@@ -21,20 +20,13 @@ class _FailingLoadRepo extends MatchRepository {
 void main() {
   testWidgets('Import succeeds but repo.loadAll() throws is handled', (tester) async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    SharedPreferences.setMockInitialValues({});
-    final prefs = await SharedPreferences.getInstance();
-    final svc = PersistenceService(prefs: prefs);
 
-    // Prepare an export payload to import
-    // Add some minimal data into prefs via saveList
-    await svc.saveList('stages', [ {'stage': 1, 'scoringShoots': 5} ]);
-    await svc.saveList('shooters', [ {'name': 'Alice', 'scaleFactor': 1.0} ]);
-    await svc.saveList('stageResults', [ {'stage': 1, 'shooter': 'Alice', 'time': 10.0, 'a': 1, 'c': 0, 'd': 0, 'misses': 0, 'noShoots': 0, 'procedureErrors': 0} ]);
-
-    final jsonBytes = Uint8List.fromList((await svc.exportBackupJson()).codeUnits);
+    // Create fake persistence and prepare bytes via exportBackupJson on the fake
+    final fake = FakePersistence(exportJsonValue: '{"stages":[],"shooters":[{"name":"Alice","scaleFactor":1.0}],"stageResults":[]}');
+    final jsonBytes = Uint8List.fromList((await fake.exportBackupJson()).codeUnits);
 
     // Repo that will throw on loadAll
-    final repo = _FailingLoadRepo(persistence: svc);
+    final repo = _FailingLoadRepo(persistence: fake);
 
     // Inject a pickBackupOverride that returns the bytes and autoConfirm true
     Future<Map<String, dynamic>?> pick() async => {

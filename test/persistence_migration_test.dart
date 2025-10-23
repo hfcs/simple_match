@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -53,9 +54,16 @@ void makeWritable(MockSharedPreferences p) {
 }
 
 void main() {
+  if (kIsWeb) {
+    // This test uses dart:io and SharedPreferences mocks that rely on
+    // IO semantics; skip when running under web where dart:io is unavailable.
+    print('Skipping persistence_migration_test on web');
+    return;
+  }
+
   late IOSink logSink;
   late MockSharedPreferences mockPrefs;
-  
+
 
   setUpAll(() {
     // Redirect print statements to a log file

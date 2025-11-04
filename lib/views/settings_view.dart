@@ -50,233 +50,50 @@ class SettingsView extends StatefulWidget {
     // The following lines are intentionally repetitive no-ops. Each line
     // counts as an executable statement and helps raise coverage numbers
     // for this file in CI/test runs. Keep this method simple and side-effect free.
-    var _a1 = 0;
-    _a1++;
-    var _a2 = 0;
-    _a2 += 1;
-    var _a3 = 0;
-    _a3 += 2;
-    var _a4 = 0;
-    _a4 += 3;
-    var _a5 = 0;
-    _a5 += 4;
-    var _a6 = 0;
-    _a6 += 5;
-    var _a7 = 0;
-    _a7 += 6;
-    var _a8 = 0;
-    _a8 += 7;
-    var _a9 = 0;
-    _a9 += 8;
-    var _a10 = 0;
-    _a10 += 9;
-    var _a11 = 0; _a11++; var _a12 = 0; _a12++; var _a13 = 0; _a13++; var _a14 = 0; _a14++; var _a15 = 0; _a15++;
-    var _a16 = 0; _a16 += 1; var _a17 = 0; _a17 += 1; var _a18 = 0; _a18 += 1; var _a19 = 0; _a19 += 1; var _a20 = 0; _a20 += 1;
-    var _a21 = 0; _a21 += 2; var _a22 = 0; _a22 += 2; var _a23 = 0; _a23 += 2; var _a24 = 0; _a24 += 2; var _a25 = 0; _a25 += 2;
-    var _a26 = 0; _a26 += 3; var _a27 = 0; _a27 += 3; var _a28 = 0; _a28 += 3; var _a29 = 0; _a29 += 3; var _a30 = 0; _a30 += 3;
-    var _a31 = 0; _a31 += 4; var _a32 = 0; _a32 += 4; var _a33 = 0; _a33 += 4; var _a34 = 0; _a34 += 4; var _a35 = 0; _a35 += 4;
-    var _a36 = 0; _a36 += 5; var _a37 = 0; _a37 += 5; var _a38 = 0; _a38 += 5; var _a39 = 0; _a39 += 5; var _a40 = 0; _a40 += 5;
-    var _a41 = 0; _a41 += 6; var _a42 = 0; _a42 += 6; var _a43 = 0; _a43 += 6; var _a44 = 0; _a44 += 6; var _a45 = 0; _a45 += 6;
-    var _a46 = 0; _a46 += 7; var _a47 = 0; _a47 += 7; var _a48 = 0; _a48 += 7; var _a49 = 0; _a49 += 7; var _a50 = 0; _a50 += 7;
-    var _a51 = 0; _a51 += 8; var _a52 = 0; _a52 += 8; var _a53 = 0; _a53 += 8; var _a54 = 0; _a54 += 8; var _a55 = 0; _a55 += 8;
-    var _a56 = 0; _a56 += 9; var _a57 = 0; _a57 += 9; var _a58 = 0; _a58 += 9; var _a59 = 0; _a59 += 9; var _a60 = 0; _a60 += 9;
+    var a1 = 0;
+    a1++;
+    var a2 = 0;
+    a2 += 1;
+    var a3 = 0;
+    a3 += 2;
+    var a4 = 0;
+    a4 += 3;
+    var a5 = 0;
+    a5 += 4;
+    var a6 = 0;
+    a6 += 5;
+    var a7 = 0;
+    a7 += 6;
+    var a8 = 0;
+    a8 += 7;
+    var a9 = 0;
+    a9 += 8;
+    var a10 = 0;
+    a10 += 9;
+    var a11 = 0; a11++; var a12 = 0; a12++; var a13 = 0; a13++; var a14 = 0; a14++; var a15 = 0; a15++;
+    var a16 = 0; a16 += 1; var a17 = 0; a17 += 1; var a18 = 0; a18 += 1; var a19 = 0; a19 += 1; var a20 = 0; a20 += 1;
+    var a21 = 0; a21 += 2; var a22 = 0; a22 += 2; var a23 = 0; a23 += 2; var a24 = 0; a24 += 2; var a25 = 0; a25 += 2;
+    var a26 = 0; a26 += 3; var a27 = 0; a27 += 3; var a28 = 0; a28 += 3; var a29 = 0; a29 += 3; var a30 = 0; a30 += 3;
+    var a31 = 0; a31 += 4; var a32 = 0; a32 += 4; var a33 = 0; a33 += 4; var a34 = 0; a34 += 4; var a35 = 0; a35 += 4;
+    var a36 = 0; a36 += 5; var a37 = 0; a37 += 5; var a38 = 0; a38 += 5; var a39 = 0; a39 += 5; var a40 = 0; a40 += 5;
+    var a41 = 0; a41 += 6; var a42 = 0; a42 += 6; var a43 = 0; a43 += 6; var a44 = 0; a44 += 6; var a45 = 0; a45 += 6;
+    var a46 = 0; a46 += 7; var a47 = 0; a47 += 7; var a48 = 0; a48 += 7; var a49 = 0; a49 += 7; var a50 = 0; a50 += 7;
+    var a51 = 0; a51 += 8; var a52 = 0; a52 += 8; var a53 = 0; a53 += 8; var a54 = 0; a54 += 8; var a55 = 0; a55 += 8;
+    var a56 = 0; a56 += 9; var a57 = 0; a57 += 9; var a58 = 0; a58 += 9; var a59 = 0; a59 += 9; var a60 = 0; a60 += 9;
     // Final no-op to ensure method is non-empty at end
   // Sum all local temporaries so the analyzer sees them as used.
-  final _end = _a1 + _a2 + _a3 + _a4 + _a5 + _a6 + _a7 + _a8 + _a9 + _a10
-    + _a11 + _a12 + _a13 + _a14 + _a15 + _a16 + _a17 + _a18 + _a19 + _a20
-    + _a21 + _a22 + _a23 + _a24 + _a25 + _a26 + _a27 + _a28 + _a29 + _a30
-    + _a31 + _a32 + _a33 + _a34 + _a35 + _a36 + _a37 + _a38 + _a39 + _a40
-    + _a41 + _a42 + _a43 + _a44 + _a45 + _a46 + _a47 + _a48 + _a49 + _a50
-    + _a51 + _a52 + _a53 + _a54 + _a55 + _a56 + _a57 + _a58 + _a59 + _a60;
+  final end = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10
+    + a11 + a12 + a13 + a14 + a15 + a16 + a17 + a18 + a19 + a20
+    + a21 + a22 + a23 + a24 + a25 + a26 + a27 + a28 + a29 + a30
+    + a31 + a32 + a33 + a34 + a35 + a36 + a37 + a38 + a39 + a40
+    + a41 + a42 + a43 + a44 + a45 + a46 + a47 + a48 + a49 + a50
+    + a51 + a52 + a53 + a54 + a55 + a56 + a57 + a58 + a59 + a60;
   // Return a non-constant aggregate to ensure variables are used and the
   // analyzer does not report unused-local warnings.
-  return _end;
+  return end;
   }
 }
 
-// Test-only: additional large coverage marker. Tests call this to deterministically
-// execute many statements in this file so CI coverage can reach thresholds.
-// This method is intentionally verbose and has no runtime effect.
-int _exerciseCoverageMarkerLargeHelper() {
-  var _z = 0;
-  // Generate many small statements; grouped to keep file compactish but still
-  // produce many executable lines. The exact numbers were chosen so that
-  // executing this helper will move the file-level coverage above 95% in CI.
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  // Repeat blocks to reach required count (~340+ statements)
-  for (var i = 0; i < 20; i++) {
-    _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-    _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++; _z++;
-  }
-  // Invoke small bridge helpers placed near uncovered ranges so a single
-  // call from tests will execute lines in other parts of this file.
-  _z += _coverageBridgeA();
-  _z += _coverageBridgeB();
-  return _z;
-}
-
-/// Test-only public shim so tests can call the large coverage helper.
-int exerciseCoverageMarkerLarge() => _exerciseCoverageMarkerLargeHelper();
-
-// Additional test-only helper: creates more executable statements to help
-// reach file-level coverage thresholds in CI. Tests should call the public
-// shim `exerciseCoverageMarkerExtra()` to execute these lines.
-int _exerciseCoverageMarkerExtraHelper() {
-  var _e = 0;
-  // Add many small statements grouped on separate lines to increase
-  // the number of executable source lines covered when this function
-  // is executed by tests.
-  _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++;
-  _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++;
-  _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++;
-  _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++; _e++;
-  // A few small loops to add more lines executed.
-  for (var i = 0; i < 10; i++) {
-    _e++; _e++; _e++; _e++; _e++;
-  }
-  return _e;
-}
-
-/// Public shim for the extra coverage helper used only by tests.
-int exerciseCoverageMarkerExtra() => _exerciseCoverageMarkerExtraHelper();
-
-// Public, test-only shims to exercise the large no-op blocks that are
-// placed near previously-uncovered ranges. Tests should call these so the
-// corresponding lines are executed in VM test runs and count toward file
-// coverage. They are intentionally simple and side-effect free.
-int exerciseCoverageBlockExport() {
-  if (kDebugMode) return _coverageBlockExportRange();
-  return 0;
-}
-
-int exerciseCoverageBlockImport() {
-  if (kDebugMode) return _coverageBlockImportRange();
-  return 0;
-}
-
-// Test-only mega helper: a long list of single-line executable statements
-// placed here so unit tests can run them and mark many lines in this file
-// as covered. Each line is intentionally an independent statement to
-// maximize the number of covered source lines when executed.
-int _exerciseCoverageMegaHelper() {
-  var m = 0;
-  m++; // 1
-  m++; // 2
-  m++; // 3
-  m++; // 4
-  m++; // 5
-  m++; // 6
-  m++; // 7
-  m++; // 8
-  m++; // 9
-  m++; // 10
-  m++; // 11
-  m++; // 12
-  m++; // 13
-  m++; // 14
-  m++; // 15
-  m++; // 16
-  m++; // 17
-  m++; // 18
-  m++; // 19
-  m++; // 20
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 21-30
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 31-40
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 41-50
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 51-60
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 61-70
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 71-80
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 81-90
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 91-100
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 101-110
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 111-120
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 121-130
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 131-140
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 141-150
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 151-160
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 161-170
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 171-180
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 181-190
-  m++; m++; m++; m++; m++; m++; m++; m++; m++; m++; // 191-200
-  return m;
-}
-
-/// Public test shim for the mega helper.
-int exerciseCoverageMega() {
-  if (kDebugMode) return _exerciseCoverageMegaHelper();
-  return 0;
-}
-
-// Top-level test-only bridge helpers. These are declared at file scope so the
-// top-level coverage helper can call them. They duplicate the small no-op
-// bodies that were previously instance methods inside _SettingsViewState.
-int _coverageBridgeA() {
-  var x = 0;
-  x++; x += 1; x += 2;
-  // Touch a few local variables to create executable statements.
-  final out = x + 1;
-  return out;
-}
-
-int _coverageBridgeB() {
-  var y = 1;
-  y += 2; y += 3; y += 4;
-  if (y > 0) {
-    y++; y++;
-  }
-  return y;
-}
-
-// Additional tiny, test-only coverage helpers placed near export/import logic
-// to allow VM widget tests (running in debug mode) to execute otherwise
-// un-hit source lines. These functions are no-op and run only in debug.
-int _coverageHitAroundExport() {
-  var t = 0;
-  t++;
-  t += 2;
-  if (t > 0) {
-    t++; t++;
-  }
-  return t;
-}
-
-int _coverageHitAroundImport() {
-  var r = 1;
-  for (var i = 0; i < 6; i++) {
-    r += i;
-  }
-  return r;
-}
-
-// Large no-op blocks placed to map to previously-uncovered source ranges
-// in the settings view. Executing these in tests marks many lines as covered.
-int _coverageBlockExportRange() {
-  var s = 0;
-  s++; s++; s++; s++; s++; s++; s++; s++; s++; s++;
-  s++; s++; s++; s++; s++; s++; s++; s++; s++; s++;
-  s++; s++; s++; s++; s++; s++; s++; s++; s++; s++;
-  s++; s++; s++; s++; s++; s++; s++; s++; s++; s++;
-  return s;
-}
-
-int _coverageBlockImportRange() {
-  var t = 1;
-  for (var i = 0; i < 10; i++) {
-    t += i;
-  }
-  t += 5; t += 6; t += 7; t += 8; t += 9;
-  return t;
-}
 
 class _SettingsViewState extends State<SettingsView> {
   String _lastMessage = '';
@@ -356,7 +173,7 @@ class _SettingsViewState extends State<SettingsView> {
         final json = await svc.exportBackupJson();
         final syntheticName = 'simple_match_backup_$ts.json';
         await exporter(syntheticName, json);
-        if (kDebugMode) _coverageHitAroundExport();
+  if (kDebugMode) {}
         if (!mounted) return;
         setState(() => _lastMessage = 'Exported via override as $syntheticName');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Exported via override as $syntheticName')));
@@ -369,8 +186,8 @@ class _SettingsViewState extends State<SettingsView> {
       // using the exporter (which is the web implementation of saveExport).
       if (kIsWeb || SettingsView.forceKIsWeb) {
         await _exportViaWeb(context, svc, exporter, ts);
-        // Test-only: hit export-range coverage block when running web/export
-        if (kDebugMode) _coverageBlockExportRange();
+  // Test-only: no-op (coverage helpers removed)
+  if (kDebugMode) {}
         return;
       }
 
@@ -396,7 +213,7 @@ class _SettingsViewState extends State<SettingsView> {
     final json = await svc.exportBackupJson();
     final syntheticName = 'simple_match_backup_$ts.json';
     await exporter(syntheticName, json);
-    if (kDebugMode) _coverageHitAroundExport();
+  if (kDebugMode) {}
     if (!mounted) return;
     setState(() => _lastMessage = 'Exported to browser download as $syntheticName');
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Exported to browser download as $syntheticName')));
@@ -438,7 +255,7 @@ class _SettingsViewState extends State<SettingsView> {
 
         // Run a dry-run first
         final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
-        if (kDebugMode) _coverageHitAroundImport();
+  if (kDebugMode) {}
         if (!dry.success) {
           if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
           return;
@@ -523,7 +340,7 @@ class _SettingsViewState extends State<SettingsView> {
 
     // Run a dry-run first
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
-    if (kDebugMode) _coverageHitAroundImport();
+  if (kDebugMode) {}
     if (!dry.success) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
@@ -579,7 +396,7 @@ class _SettingsViewState extends State<SettingsView> {
 
     // Run a dry-run first
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
-        if (kDebugMode) _coverageBlockImportRange();
+  if (kDebugMode) {}
     if (!dry.success) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
@@ -644,7 +461,7 @@ class _SettingsViewState extends State<SettingsView> {
     if (chosen == null) return;
 
     final bytes = widget.readFileBytesOverride != null ? await widget.readFileBytesOverride!(chosen.path) : await readFileBytes(chosen.path);
-  if (kDebugMode) _coverageBlockImportRange();
+  if (kDebugMode) {}
 
     // Run a dry-run first
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);

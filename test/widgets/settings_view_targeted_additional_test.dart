@@ -6,13 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
-import 'package:simple_match/services/persistence_service.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 // Subclass MatchRepository at top-level so tests can override behavior like
 // loadAll() to throw for specific test scenarios.
 class _ThrowingRepo extends MatchRepository {
-  _ThrowingRepo({PersistenceService? persistence}) : super(persistence: persistence);
+  _ThrowingRepo({super.persistence});
   @override
   Future<void> loadAll() async => throw Exception('boom');
 }
@@ -45,7 +44,7 @@ void main() {
     final repo = MatchRepository(persistence: fake);
 
     // Provide a pickBackupOverride that returns a map with bytes and a name
-    final pickOverride = () async => <String, dynamic>{'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'bad.json', 'autoConfirm': true};
+    Future<Map<String, dynamic>> pickOverride() async => <String, dynamic>{'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'bad.json', 'autoConfirm': true};
 
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
@@ -72,7 +71,7 @@ void main() {
     });
 
     final repo = _ThrowingRepo(persistence: fake);
-    final pickOverride = () async => <String, dynamic>{'bytes': Uint8List.fromList([9, 9, 9]), 'name': 'good.json', 'autoConfirm': true};
+    Future<Map<String, dynamic>> pickOverride() async => <String, dynamic>{'bytes': Uint8List.fromList([9, 9, 9]), 'name': 'good.json', 'autoConfirm': true};
 
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(

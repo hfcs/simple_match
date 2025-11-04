@@ -5,7 +5,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 
 ## Features
 - **Match Setup:** Configure stages (1-30) and scoring shoots (1-32)
-- **Shooter Management:** Add shooters with unique names and scale factors (0.10–2.00)
+- **Shooter Management:** Add shooters with unique names and scale factors (0.100–2.000)
 - **Stage Input:** Record scores with mobile-friendly numeric input, validation, and error feedback
   - New: results can be marked with a Status ("Completed", "DNF", "DQ"). When a result is not "Completed" numeric inputs are disabled and submitted values are zeroed by the ViewModel. An RO remark field is available for match officials to record notes.
 - **Results:** Calculate and display hit factors, adjusted hit factors, and rank shooters

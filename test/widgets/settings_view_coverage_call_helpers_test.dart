@@ -1,15 +1,30 @@
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
-  test('call settings_view coverage helpers', () {
-    final a = SettingsView.exerciseCoverageMarker();
-    expect(a, isA<int>());
+  testWidgets('Import flow covers small helpers previously called directly', (tester) async {
+    final fake = FakePersistence(importFn: (bytes, {dryRun = false, backupBeforeRestore = false}) async => FakeImportResult(success: true));
+    final repo = MatchRepository(persistence: fake);
 
-    final b = exerciseCoverageMarkerLarge();
-    expect(b, isA<int>());
+    Future<Map<String, dynamic>> pickOverride() async => <String, dynamic>{'bytes': Uint8List.fromList([1,2,3]), 'name': 'import.json', 'autoConfirm': true};
 
-    final c = exerciseCoverageMarkerExtra();
-    expect(c, isA<int>());
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickOverride)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
   });
 }

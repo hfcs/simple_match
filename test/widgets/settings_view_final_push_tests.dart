@@ -6,11 +6,10 @@ import 'package:provider/provider.dart';
 
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
-import 'package:simple_match/services/persistence_service.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 class _ThrowingRepo extends MatchRepository {
-  _ThrowingRepo({PersistenceService? persistence}) : super(persistence: persistence);
+  _ThrowingRepo({super.persistence});
   @override
   Future<void> loadAll() async {
     throw StateError('loadAll failed');
@@ -26,9 +25,9 @@ void main() {
   testWidgets('export shows Export failed when exporter throws', (tester) async {
     final fake = FakePersistence(exportJsonValue: '{}');
 
-    final exporter = (String path, String content) async {
+    Future<Never> exporter(String path, String content) async {
       throw Exception('boom');
-    };
+    }
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
@@ -52,7 +51,7 @@ void main() {
       return FakeImportResult(success: true);
     });
 
-    final pick = () async => {'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'ok.json', 'autoConfirm': true};
+    Future<Map<String, Object>> pick() async => {'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'ok.json', 'autoConfirm': true};
 
     final throwingRepo = _ThrowingRepo(persistence: fake);
     await tester.pumpWidget(MaterialApp(

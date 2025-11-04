@@ -1,14 +1,30 @@
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
-  test('exercise block coverage helpers', () {
-    // Call the test-only shims which execute large no-op blocks. The
-    // assertions verify they return values without checking types which
-    // keeps the test resilient to analyzer changes.
-    final a = exerciseCoverageBlockExport();
-    final b = exerciseCoverageBlockImport();
-    expect(a, isNonNegative);
-    expect(b, isNonNegative);
+  testWidgets('Import flow replaces block coverage helper usage', (tester) async {
+    final fake = FakePersistence(importFn: (bytes, {dryRun = false, backupBeforeRestore = false}) async => FakeImportResult(success: true));
+    final repo = MatchRepository(persistence: fake);
+
+    Future<Map<String, dynamic>> pickOverride() async => <String, dynamic>{'bytes': Uint8List.fromList([1,2,3]), 'name': 'import.json', 'autoConfirm': true};
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickOverride)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
   });
 }

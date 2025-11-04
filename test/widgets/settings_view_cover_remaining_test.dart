@@ -6,16 +6,15 @@ import 'package:provider/provider.dart';
 
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
-import 'package:simple_match/services/persistence_service.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   testWidgets('exporter exception sets Export failed and shows SnackBar', (tester) async {
     final fake = FakePersistence(exportJsonValue: '{"ok":true}');
 
-    final exporter = (String path, String content) async {
+    Future<Never> exporter(String path, String content) async {
       throw Exception('export boom');
-    };
+    }
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
@@ -35,9 +34,9 @@ void main() {
     final fake = FakePersistence(exportJsonValue: '{"ok":true}');
 
     var called = false;
-    final exporter = (String name, String content) async {
+    Future<void> exporter(String name, String content) async {
       called = true;
-    };
+    }
 
     SettingsView.forceKIsWeb = true;
 
@@ -62,7 +61,7 @@ void main() {
     final fake = FakePersistence(exportJsonValue: '{}');
 
     // pickBackupOverride returns null to simulate cancel/no file
-    final pickNull = () async => null;
+    Future<Null> pickNull() async => null;
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
@@ -84,7 +83,7 @@ void main() {
       return FakeImportResult(success: true);
     });
 
-    final pick = () async => {'bytes': Uint8List.fromList([9, 9]), 'name': 'bad.json', 'autoConfirm': true};
+    Future<Map<String, Object>> pick() async => {'bytes': Uint8List.fromList([9, 9]), 'name': 'bad.json', 'autoConfirm': true};
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(

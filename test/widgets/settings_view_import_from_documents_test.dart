@@ -25,7 +25,7 @@ void main() {
             // the widget won't call platform APIs during the test.
             saveExportOverride: (String path, String content) async {
               print('TEST: saveExportOverride called with path=$path length=${content.length}');
-              final f = io.File('${io.Directory.systemTemp.path}/' + path);
+              final f = io.File('${io.Directory.systemTemp.path}/$path');
               f.writeAsStringSync(content);
               print('TEST: saveExportOverride write complete (sync)');
             },

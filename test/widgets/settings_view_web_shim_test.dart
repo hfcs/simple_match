@@ -15,7 +15,7 @@ void main() {
   final repo = MatchRepository(persistence: fake);
 
     // Provide a pickBackupOverride that simulates a browser pick with autoConfirm=true
-    final pick = () async => {
+    Future<Map<String, Object>> pick() async => {
       'bytes': Uint8List.fromList([1, 2, 3]),
       'name': 'shim.json',
       'autoConfirm': true,

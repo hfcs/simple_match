@@ -1,18 +1,30 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/views/settings_view.dart';
+import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
-  test('exercise settings_view coverage helpers', () {
-    // Call the small marker
-    final v1 = SettingsView.exerciseCoverageMarker();
-    expect(v1, isA<int>());
+  testWidgets('Import path exercised to replace coverage-only helpers', (tester) async {
+    final fake = FakePersistence(importFn: (bytes, {dryRun = false, backupBeforeRestore = false}) async => FakeImportResult(success: true));
+    final repo = MatchRepository(persistence: fake);
 
-    // Call the large helper which executes many statements
-    final v2 = exerciseCoverageMarkerLarge();
-    expect(v2, isA<int>());
+    Future<Map<String, dynamic>> pickOverride() async => <String, dynamic>{'bytes': Uint8List.fromList([1,2,3]), 'name': 'import.json', 'autoConfirm': true};
 
-    // Call the extra helper which executes additional statements
-    final v3 = exerciseCoverageMarkerExtra();
-    expect(v3, isA<int>());
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(pickBackupOverride: pickOverride)),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
   });
 }

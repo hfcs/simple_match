@@ -7,12 +7,11 @@ import 'package:provider/provider.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
 
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 class _ThrowingRepo extends MatchRepository {
-  _ThrowingRepo({PersistenceService? persistence}) : super(persistence: persistence);
+  _ThrowingRepo({super.persistence});
 
   @override
   Future<void> loadAll() async {

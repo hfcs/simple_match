@@ -14,6 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Ensure font asset available
+        run: |
+          if [ -f tool/download_fonts.sh ]; then
+            echo "Running font downloader to ensure assets/fonts exists"
+            bash tool/download_fonts.sh
+          else
+            echo "No font downloader script found at tool/download_fonts.sh; continuing"
+          fi
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -51,6 +59,15 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+
+      - name: Ensure font asset available
+        run: |
+          if [ -f tool/download_fonts.sh ]; then
+            echo "Running font downloader to ensure assets/fonts exists"
+            bash tool/download_fonts.sh
+          else
+            echo "No font downloader script found at tool/download_fonts.sh; continuing"
+          fi
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2

@@ -88,7 +88,7 @@ Future<pw.Document> buildOverallResultPdf({
   required List shooters,
   required List allResults,
 }) async {
-  final fontData = await rootBundle.load('assets/fonts/NotoSerifHK[wght].ttf');
+  final fontData = await rootBundle.load('assets/fonts/NotoSerifHK-wght.ttf');
   final font = pw.Font.ttf(fontData);
   final pdf = pw.Document();
   pdf.addPage(

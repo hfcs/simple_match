@@ -8,8 +8,9 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
 echo "Ensuring bundled fonts are present (download if needed)"
-if [ -x "$(pwd)/tool/download_fonts.sh" ]; then
-  echo "Running tool/download_fonts.sh to fetch required fonts..."
+# If the downloader script exists, run it via bash (don't rely on the executable bit in CI)
+if [ -f "$(pwd)/tool/download_fonts.sh" ]; then
+  echo "Found tool/download_fonts.sh — running to fetch required fonts..."
   bash tool/download_fonts.sh || echo "Warning: download_fonts.sh failed; continuing (may fail later)"
 else
   echo "No download script found at tool/download_fonts.sh; ensure assets/fonts/... exists if required"

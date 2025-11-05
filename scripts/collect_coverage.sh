@@ -7,6 +7,14 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
+echo "Ensuring bundled fonts are present (download if needed)"
+if [ -x "$(pwd)/tool/download_fonts.sh" ]; then
+  echo "Running tool/download_fonts.sh to fetch required fonts..."
+  bash tool/download_fonts.sh || echo "Warning: download_fonts.sh failed; continuing (may fail later)"
+else
+  echo "No download script found at tool/download_fonts.sh; ensure assets/fonts/... exists if required"
+fi
+
 echo "Running VM tests..."
 flutter test --coverage
 mv coverage/lcov.info coverage/lcov.vm.info

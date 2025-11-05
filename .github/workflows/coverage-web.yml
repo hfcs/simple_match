@@ -18,6 +18,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
+      - name: Install pdftotext (poppler-utils)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
       - name: Get packages
         run: flutter pub get
       - name: Run coverage script

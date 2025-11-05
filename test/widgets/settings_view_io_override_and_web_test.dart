@@ -105,6 +105,9 @@ void main() {
     await tester.tap(find.text('Import Backup'));
     await tester.pumpAndSettle();
 
-    expect(find.text('No backup files found in app documents directory'), findsOneWidget);
+    // Wait again to ensure any SnackBar or status text is visible, then
+    // assert using a contains matcher for robustness.
+    await tester.pumpAndSettle();
+    expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 }

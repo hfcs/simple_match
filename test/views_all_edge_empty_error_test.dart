@@ -29,14 +29,16 @@ void main() {
     });
 
     testWidgets('MatchSetupView shows empty and error states', (tester) async {
-      final repo = MatchRepository(persistence: _MockPersistenceService());
       await tester.pumpWidget(
         ChangeNotifierProvider<MatchRepository>(
-          create: (_) => repo,
-          child: Provider<MatchSetupViewModel>(
-            create: (_) => MatchSetupViewModel(repo),
-            child: const MaterialApp(home: MatchSetupView()),
-          ),
+          create: (_) => MatchRepository(persistence: _MockPersistenceService()),
+          child: Builder(builder: (context) {
+            final repo = Provider.of<MatchRepository>(context, listen: false);
+            return Provider<MatchSetupViewModel>(
+              create: (_) => MatchSetupViewModel(repo),
+              child: const MaterialApp(home: MatchSetupView()),
+            );
+          }),
         ),
       );
       expect(find.text('Match Setup'), findsOneWidget);
@@ -86,7 +88,6 @@ void main() {
     });
 
     testWidgets('StageResultView shows empty state', (tester) async {
-      final repo = MatchRepository(persistence: _MockPersistenceService());
       await tester.pumpWidget(
         ChangeNotifierProvider<StageResultViewModel>(
           create: (_) => StageResultViewModel(

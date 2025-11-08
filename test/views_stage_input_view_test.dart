@@ -156,8 +156,8 @@ void main() {
 
     testWidgets('DNF result displays status-only in result list', (tester) async {
   // Increase test environment size so radio tiles are visible and hittable
-  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
-  tester.binding.window.devicePixelRatioTestValue = 1.0;
+  tester.view.physicalSize = const Size(1200, 1600);
+  tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
@@ -192,8 +192,8 @@ void main() {
 
     testWidgets('can edit and remove a result', (tester) async {
   // Increase test environment size to avoid off-screen widget issues
-  tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
-  tester.binding.window.devicePixelRatioTestValue = 1.0;
+  tester.view.physicalSize = const Size(1200, 1600);
+  tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
       await tester.tap(find.byKey(const Key('stageSelector')));
@@ -239,8 +239,8 @@ void main() {
       );
       // Reset test environment size
       addTearDown(() {
-        tester.binding.window.clearPhysicalSizeTestValue();
-        tester.binding.window.clearDevicePixelRatioTestValue();
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
       });
     });
 

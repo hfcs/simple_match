@@ -1,0 +1,51 @@
+name: CI - Flutter tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Verify Flutter
+        run: flutter --version
+      - name: Cache Flutter Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Install pdftotext (poppler-utils)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+      - name: Run tests with coverage
+        run: flutter test --coverage --no-shard
+
+      - name: Install lcov (for genhtml)
+        run: sudo apt-get update && sudo apt-get install -y lcov
+
+      - name: Filter LCOV (remove non-web IO-only entries)
+        run: |
+          bash tools/filter_lcov.sh coverage/lcov.info coverage/lcov.filtered.info
+
+      - name: Generate HTML coverage
+        run: genhtml coverage/lcov.filtered.info -o coverage/html
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: coverage/html

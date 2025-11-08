@@ -10,6 +10,7 @@ import 'views/main_menu_view.dart';
 import 'views/match_setup_view.dart';
 import 'views/shooter_setup_view.dart';
 import 'views/stage_input_view.dart';
+import 'views/settings_view.dart';
 
 import 'views/stage_result_view.dart';
 import 'viewmodel/stage_result_viewmodel.dart';
@@ -55,6 +56,7 @@ class MiniIPSCMatchApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => MainMenuView(),
+          '/settings': (context) => SettingsView(),
           '/match-setup': (context) => const MatchSetupView(),
           '/shooter-setup': (context) => const ShooterSetupView(),
           '/stage-input': (context) => const StageInputView(),

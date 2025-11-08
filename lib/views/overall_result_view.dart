@@ -7,7 +7,12 @@ import '../viewmodel/overall_result_viewmodel.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'web_pdf_utils.dart' if (dart.library.io) 'non_web_pdf_utils.dart';
+// Use the html conditional to ensure the web implementation is selected for web
+// builds. The previous conditional used `dart.library.io` which can cause the
+// non-web implementation (which throws UnsupportedError) to be chosen in some
+// build scenarios. Explicitly prefer the non-web default and swap in the
+// web-specific file when `dart.library.html` is available.
+import 'non_web_pdf_utils.dart' if (dart.library.html) 'web_pdf_utils.dart';
 
 class OverallResultView extends StatelessWidget {
   const OverallResultView({super.key});
@@ -83,7 +88,7 @@ Future<pw.Document> buildOverallResultPdf({
   required List shooters,
   required List allResults,
 }) async {
-  final fontData = await rootBundle.load('assets/fonts/NotoSerifHK[wght].ttf');
+  final fontData = await rootBundle.load('assets/fonts/NotoSerifHK-wght.ttf');
   final font = pw.Font.ttf(fontData);
   final pdf = pw.Document();
   pdf.addPage(

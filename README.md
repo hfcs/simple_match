@@ -5,7 +5,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 
 ## Features
 - **Match Setup:** Configure stages (1-30) and scoring shoots (1-32)
-- **Shooter Management:** Add shooters with unique names and scale factors (0.10–2.00)
+- **Shooter Management:** Add shooters with unique names and scale factors (0.100–2.000)
 - **Stage Input:** Record scores with mobile-friendly numeric input, validation, and error feedback
   - New: results can be marked with a Status ("Completed", "DNF", "DQ"). When a result is not "Completed" numeric inputs are disabled and submitted values are zeroed by the ViewModel. An RO remark field is available for match officials to record notes.
 - **Results:** Calculate and display hit factors, adjusted hit factors, and rank shooters
@@ -68,6 +68,21 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 ```sh
 flutter test --coverage
 ```
+
+## Web + VM Coverage (merged HTML)
+
+To collect merged VM+Chrome coverage and generate an HTML report locally run:
+
+```bash
+chmod +x ./scripts/collect_coverage.sh
+./scripts/collect_coverage.sh
+```
+
+Notes:
+- The script tries `flutter test -d chrome --coverage` first (some Flutter versions write lcov that way).
+- If that fails it falls back to `--platform chrome` and finally attempts a VM-service based collection (requires `dart` and `dart pub global activate coverage`).
+- On CI, ensure Chrome is installed and `CHROME_EXECUTABLE` is set or Chrome is on PATH.
+
 
 Recent CI notes
 - The GitHub workflows were hardened after CI troubleshooting: the Flutter installer action is invoked with `channel: 'stable'`, the job now prints `flutter --version` to logs for easier debugging, and `actions/cache` is used to cache `~/.pub-cache`. An earlier `npm ci` step that caused failures was removed.

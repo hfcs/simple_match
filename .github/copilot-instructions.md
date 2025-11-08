@@ -116,4 +116,8 @@
 - Ensure all data is persisted and restored using SharedPreferences
 - Ensure all UI is mobile-friendly and visually modern
 
+### Testing overrides and CI guidance
+- `SettingsView` exposes deterministic testing overrides: `pickBackupOverride`, `listBackupsOverride`, and `readFileBytesOverride` to simulate file selection and IO in widget tests. Use these in generated tests to avoid flaky dialog/platform interactions.
+- Prefer deterministic direct tests (dry-run -> import -> repo.loadAll) for CI; keep full UI dialog tests locally for debugging but mark them skipped in CI if they are flaky.
+
 For more, see [Flutter Architecture Guide](https://docs.flutter.dev/app-architecture/guide)

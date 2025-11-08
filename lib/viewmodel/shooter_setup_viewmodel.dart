@@ -10,7 +10,7 @@ class ShooterSetupViewModel {
   String? addShooter(String name, double scaleFactor) {
     if (name.trim().isEmpty) return 'Name required.';
     if (scaleFactor < 0.1 || scaleFactor > 2.0) {
-      return 'Invalid scale: must be between 0.10 and 2.00.';
+      return 'Invalid scale: must be between 0.100 and 2.000.';
     }
     if (repository.shooters.any((s) => s.name == name)) {
       return 'Shooter already exists.';
@@ -22,7 +22,7 @@ class ShooterSetupViewModel {
   /// Edits a shooter's scale. Returns null on success, or error string on failure.
   String? editShooter(String name, double scaleFactor) {
     if (scaleFactor < 0.1 || scaleFactor > 2.0) {
-      return 'Invalid scale: must be between 0.10 and 2.00.';
+      return 'Invalid scale: must be between 0.100 and 2.000.';
     }
     final orig = repository.getShooter(name);
     if (orig == null) return 'Shooter not found.';

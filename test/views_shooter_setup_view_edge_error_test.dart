@@ -34,7 +34,7 @@ void main() {
       await tester.enterText(find.byKey(const Key('scaleField')), '1.5');
       await tester.tap(find.byKey(const Key('confirmEditButton')));
       await tester.pumpAndSettle();
-      expect(find.text('1.50', skipOffstage: false), findsWidgets);
+  expect(find.text('1.500', skipOffstage: false), findsWidgets);
       // Enter edit mode and cancel
       await tester.tap(find.byKey(const Key('editShooter-Alice')));
       await tester.pumpAndSettle();

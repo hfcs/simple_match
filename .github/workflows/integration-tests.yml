@@ -1,0 +1,83 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [ main, fix/web-export-import ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  web_integration:
+    name: Web integration (Chrome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure font asset available
+        run: |
+          if [ -f tool/download_fonts.sh ]; then
+            echo "Running font downloader to ensure assets/fonts exists"
+            bash tool/download_fonts.sh
+          else
+            echo "No font downloader script found at tool/download_fonts.sh; continuing"
+          fi
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          # Use the Flutter channel rather than a Dart SDK version.
+          # Provide the channel explicitly so the action resolves a
+          # concrete Flutter SDK (avoids treating 'stable' as a literal
+          # version string).
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Enable web support
+        run: flutter config --enable-web
+
+      - name: Run web integration test (Chrome)
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
+        run: |
+          flutter doctor -v
+          flutter test integration_test/settings_view_web_integration_test.dart -d chrome --verbose
+
+  macos_integration:
+    name: macOS integration
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure font asset available
+        run: |
+          if [ -f tool/download_fonts.sh ]; then
+            echo "Running font downloader to ensure assets/fonts exists"
+            bash tool/download_fonts.sh
+          else
+            echo "No font downloader script found at tool/download_fonts.sh; continuing"
+          fi
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run macOS integration test
+        run: |
+          flutter doctor -v
+          flutter test integration_test/settings_view_io_integration_test.dart -d macos --verbose

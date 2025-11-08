@@ -50,6 +50,9 @@ dev_dependencies:
   # For font download automation
   http: ^1.2.1
 
+  # Test helper dependency used by some tests
+  path: ^1.8.3
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -71,7 +74,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/fonts/NotoSerifHK[wght].ttf
+    - assets/fonts/NotoSerifHK-wght.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

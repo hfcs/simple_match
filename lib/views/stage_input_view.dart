@@ -1,3 +1,5 @@
+// Temporarily ignore deprecated Radio API uses; refactor to RadioGroup in a follow-up
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/stage_input_viewmodel.dart';

@@ -12,12 +12,12 @@ class _MockRepo extends MatchRepository {
   }
 }
 
-class _TestNavigator {
+class TestNavigator {
   String? lastRoute;
 }
 
 extension MainMenuViewModelTestNav on MainMenuViewModel {
-  void navigateToFake(_TestNavigator context, String routeName) {
+  void navigateToFake(TestNavigator context, String routeName) {
     context.lastRoute = routeName;
   }
 }
@@ -40,7 +40,7 @@ void main() {
     test('navigateTo calls Navigator.pushNamed', () {
       final repo = MatchRepository();
       final vm = MainMenuViewModel(repo);
-      final nav = _TestNavigator();
+      final nav = TestNavigator();
       final context = nav;
       vm.navigateToFake(context, '/test-route');
       expect(nav.lastRoute, '/test-route');

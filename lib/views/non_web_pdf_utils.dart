@@ -6,3 +6,5 @@ class WebPdfUtils {
     throw UnsupportedError('PDF download is not supported on this platform.');
   }
 }
+
+// (No test markers remain)

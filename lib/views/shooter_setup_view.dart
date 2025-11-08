@@ -66,7 +66,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                       key: const Key('scaleField'),
                       controller: _scaleController,
                       decoration: const InputDecoration(
-                        labelText: 'Scale (0.10-2.00)',
+                        labelText: 'Scale (0.100-2.000)',
                         prefixIcon: Icon(Icons.percent),
                         border: OutlineInputBorder(),
                       ),
@@ -163,14 +163,14 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                           Text(s.name),
                           const SizedBox(width: 12),
                           Text(
-                            s.scaleFactor.toStringAsFixed(2),
+                            s.scaleFactor.toStringAsFixed(3),
                             key: Key('scaleValue-${s.name}'),
                             style: const TextStyle(color: Colors.blueGrey),
                           ),
                         ],
                       ),
                       subtitle: Text(
-                        'Scale: ${s.scaleFactor.toStringAsFixed(2)}',
+                        'Scale: ${s.scaleFactor.toStringAsFixed(3)}',
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -182,8 +182,8 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                               setState(() {
                                 _editingName = s.name;
                                 _nameController.text = s.name;
-                                _scaleController.text = s.scaleFactor
-                                    .toString();
+                _scaleController.text = s.scaleFactor
+                  .toStringAsFixed(3);
                                 _error = null;
                               });
                             },

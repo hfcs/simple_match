@@ -43,7 +43,8 @@ jobs:
           # If extraction did not produce $HOME/flutter, fall back to a shallow git clone of the tagged release
           if [ ! -d "$HOME/flutter/bin" ]; then
             echo "Falling back to git clone of flutter repo (tag: $FLUTTER_VERSION)"
-            git clone --depth 1 --branch ${FLUTTER_VERSION} https://github.com/flutter/flutter.git $HOME/flutter
+            # Clone the stable branch as a fallback (tag/archived release may not be present)
+            git clone --depth 1 --branch stable https://github.com/flutter/flutter.git $HOME/flutter
           fi
 
           export PATH="$HOME/flutter/bin:$PATH"

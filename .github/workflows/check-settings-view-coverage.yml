@@ -16,7 +16,10 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          # Pin to a concrete Flutter SDK version to avoid action resolving issues
+          # Project pubspec suggests Flutter 3.9.x compatibility; pin to 3.9.2
+          flutter-version: '3.9.2'
+          channel: 'stable'
 
       - name: Install dependencies
         run: flutter pub get

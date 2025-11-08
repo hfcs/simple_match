@@ -22,17 +22,30 @@ jobs:
           FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_ARCHIVE}"
           echo "Downloading Flutter from $FLUTTER_URL"
           # -f: fail on HTTP errors, -S: show errors, -L: follow redirects
+          set +e
           curl -fSL -o /tmp/${FLUTTER_ARCHIVE} "$FLUTTER_URL"
-          echo "Downloaded archive:" && ls -lh /tmp/${FLUTTER_ARCHIVE} || true
-          echo "File type:" && file /tmp/${FLUTTER_ARCHIVE} || true
-          # Verify we actually downloaded an xz-compressed archive and not an HTML error page
-          if ! file /tmp/${FLUTTER_ARCHIVE} | grep -qi 'XZ compressed'; then
-            echo "ERROR: Downloaded Flutter archive does not look like an xz file. Showing head of file for diagnostics:" >&2
-            head -n 50 /tmp/${FLUTTER_ARCHIVE} | sed -n '1,50p' >&2 || true
-            exit 2
+          CURL_EXIT=$?
+          set -e
+          if [ $CURL_EXIT -eq 0 ]; then
+            echo "Downloaded archive:" && ls -lh /tmp/${FLUTTER_ARCHIVE} || true
+            echo "File type:" && file /tmp/${FLUTTER_ARCHIVE} || true
+            # Verify we actually downloaded an xz-compressed archive and not an HTML error page
+            if file /tmp/${FLUTTER_ARCHIVE} | grep -qi 'XZ compressed'; then
+              echo "Extracting downloaded Flutter archive"
+              tar -xJf /tmp/${FLUTTER_ARCHIVE} -C $HOME
+            else
+              echo "Downloaded file is not an xz archive; will fall back to git-clone method" >&2
+            fi
+          else
+            echo "curl failed with exit code $CURL_EXIT; will fall back to git-clone method" >&2
           fi
-          # Extract to $HOME so archive's top-level 'flutter' directory lands at $HOME/flutter
-          tar -xJf /tmp/${FLUTTER_ARCHIVE} -C $HOME
+
+          # If extraction did not produce $HOME/flutter, fall back to a shallow git clone of the tagged release
+          if [ ! -d "$HOME/flutter/bin" ]; then
+            echo "Falling back to git clone of flutter repo (tag: $FLUTTER_VERSION)"
+            git clone --depth 1 --branch ${FLUTTER_VERSION} https://github.com/flutter/flutter.git $HOME/flutter
+          fi
+
           export PATH="$HOME/flutter/bin:$PATH"
           echo "Flutter installed at $HOME/flutter"
           flutter --version

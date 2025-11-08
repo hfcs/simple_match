@@ -66,7 +66,7 @@ void main() {
     });
     final repo = MatchRepository(persistence: fake);
 
-    final pick = () async => {'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'b.json', 'autoConfirm': true};
+    Future<Map<String, Object>> pick() async => {'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'b.json', 'autoConfirm': true};
 
     final prev = SettingsView.forceKIsWeb;
     SettingsView.forceKIsWeb = true;

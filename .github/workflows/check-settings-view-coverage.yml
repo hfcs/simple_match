@@ -1,0 +1,38 @@
+name: Check settings_view.dart coverage
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-check-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests with coverage
+        run: flutter test --coverage
+
+      - name: Check settings_view.dart coverage >= 95%
+        run: |
+          chmod +x tools/check_settings_view_coverage.sh
+          tools/check_settings_view_coverage.sh
+
+      # Optional: upload coverage artifacts for debugging when it fails
+      - name: Upload coverage artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-lcov
+          path: coverage/lcov.info

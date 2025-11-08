@@ -50,7 +50,8 @@ jobs:
           # Persist flutter/bin to following steps by writing to $GITHUB_PATH
           echo "$HOME/flutter/bin" >> $GITHUB_PATH
           echo "Flutter installed at $HOME/flutter"
-          flutter --version
+          # Use the explicit path in this step (GITHUB_PATH only affects later steps)
+          $HOME/flutter/bin/flutter --version
         shell: bash
 
       - name: Install dependencies

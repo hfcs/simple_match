@@ -21,8 +21,17 @@ jobs:
           FLUTTER_ARCHIVE=flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
           FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_ARCHIVE}"
           echo "Downloading Flutter from $FLUTTER_URL"
-          curl -sSLo /tmp/${FLUTTER_ARCHIVE} "$FLUTTER_URL"
-          mkdir -p $HOME/flutter
+          # -f: fail on HTTP errors, -S: show errors, -L: follow redirects
+          curl -fSL -o /tmp/${FLUTTER_ARCHIVE} "$FLUTTER_URL"
+          echo "Downloaded archive:" && ls -lh /tmp/${FLUTTER_ARCHIVE} || true
+          echo "File type:" && file /tmp/${FLUTTER_ARCHIVE} || true
+          # Verify we actually downloaded an xz-compressed archive and not an HTML error page
+          if ! file /tmp/${FLUTTER_ARCHIVE} | grep -qi 'XZ compressed'; then
+            echo "ERROR: Downloaded Flutter archive does not look like an xz file. Showing head of file for diagnostics:" >&2
+            head -n 50 /tmp/${FLUTTER_ARCHIVE} | sed -n '1,50p' >&2 || true
+            exit 2
+          fi
+          # Extract to $HOME so archive's top-level 'flutter' directory lands at $HOME/flutter
           tar -xJf /tmp/${FLUTTER_ARCHIVE} -C $HOME
           export PATH="$HOME/flutter/bin:$PATH"
           echo "Flutter installed at $HOME/flutter"

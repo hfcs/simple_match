@@ -77,6 +77,11 @@ jobs:
           CHROME_BIN: /usr/bin/google-chrome-stable
         run: |
           chmod +x ./scripts/collect_coverage.sh
+          # Defensive: ensure lcov is present before running the collection script
+          if ! command -v lcov >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y lcov
+          fi
           ./scripts/collect_coverage.sh
 
       - name: Upload coverage HTML

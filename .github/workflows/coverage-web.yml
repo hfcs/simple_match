@@ -43,6 +43,15 @@ jobs:
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
       - name: Get packages
         run: flutter pub get
+      - name: Ensure lcov present (defensive)
+        run: |
+          if ! command -v lcov >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y lcov
+          else
+            echo "lcov present: $(lcov --version)"
+          fi
+
       - name: Run coverage script
         run: |
           chmod +x ./scripts/collect_coverage.sh

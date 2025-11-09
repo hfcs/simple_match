@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4
@@ -62,10 +64,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install pdftotext (poppler-utils)
+      - name: Install pdftotext (poppler-utils) and git-lfs
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils
+          sudo apt-get install -y poppler-utils git-lfs
+          # initialize git-lfs so git lfs pull works reliably
+          git lfs install --system || true
 
       - name: Install lcov (for genhtml)
         run: |
@@ -82,6 +86,11 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y lcov
           fi
+          # Ensure fonts/assets fetched from Git LFS (if any)
+          if command -v git-lfs >/dev/null 2>&1; then
+            git lfs pull --include="assets/fonts/*" || true
+          fi
+          echo "lcov: $(which lcov || true)" && lcov --version || true
           ./scripts/collect_coverage.sh
 
       - name: Upload coverage HTML

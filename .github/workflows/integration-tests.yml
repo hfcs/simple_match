@@ -13,6 +13,14 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Ensure Git LFS assets
+        run: |
+          if command -v git-lfs >/dev/null 2>&1; then
+            git lfs install --system || true
+            git lfs pull --include="assets/fonts/*" || true
+          fi
 
       - name: Ensure font asset available
         run: |
@@ -72,11 +80,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install lcov (for genhtml)
+      - name: Install lcov (for genhtml) and git-lfs
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y lcov
+          sudo apt-get install -y lcov git-lfs
+          git lfs install --system || true
 
       - name: Enable web support
         run: flutter config --enable-web

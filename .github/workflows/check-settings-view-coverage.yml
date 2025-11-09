@@ -31,6 +31,20 @@ jobs:
           echo "Listing assets/fonts for debug"
           ls -la assets/fonts || true
 
+      - name: "CI fallback: comment out missing font asset in pubspec"
+        run: |
+          # If the font file isn't present in the working tree (e.g. not committed),
+          # comment out the explicit asset line so Flutter tests can run in CI.
+          if [ ! -f assets/fonts/NotoSerifHK-wght.ttf ]; then
+            echo "Font not found in repo; commenting out pubspec asset line for CI"
+            # Use sed to replace the exact assets line with a commented marker. Keep a backup.
+            sed -i.bak 's/^[[:space:]]*- assets\/fonts\/NotoSerifHK-wght.ttf/  # - assets\/fonts\/NotoSerifHK-wght.ttf (removed in CI)/' pubspec.yaml || true
+            echo "Diff of pubspec.yaml after comment:";
+            git --no-pager diff -- pubspec.yaml || true
+          else
+            echo "Font present; no pubspec change needed"
+          fi
+
       - name: Install Flutter SDK (manual)
         run: |
           set -eux

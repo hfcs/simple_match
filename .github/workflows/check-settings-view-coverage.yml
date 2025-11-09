@@ -16,6 +16,21 @@ jobs:
           lfs: true
           fetch-depth: 0
 
+      - name: Ensure LFS assets are present (diagnostic)
+        run: |
+          # Sometimes LFS pointers are fetched but not checked out into working tree;
+          # explicitly pull LFS objects for assets to ensure files exist for flutter.
+          if command -v git-lfs >/dev/null 2>&1; then
+            echo "git-lfs present; pulling LFS files for assets"
+            git lfs pull --include="assets/fonts/*" || true
+          else
+            echo "git-lfs not present in runner; attempting fallback pull via git lfs fetch && git lfs checkout"
+            git lfs fetch --all || true
+            git lfs checkout || true
+          fi
+          echo "Listing assets/fonts for debug"
+          ls -la assets/fonts || true
+
       - name: Install Flutter SDK (manual)
         run: |
           set -eux

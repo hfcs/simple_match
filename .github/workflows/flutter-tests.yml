@@ -64,7 +64,9 @@ jobs:
         run: flutter test --coverage --no-shard
 
       - name: Install lcov (for genhtml)
-        run: sudo apt-get update && sudo apt-get install -y lcov
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov
 
       - name: Filter LCOV (remove non-web IO-only entries)
         run: |

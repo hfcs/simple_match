@@ -68,9 +68,13 @@ jobs:
           sudo apt-get install -y poppler-utils
 
       - name: Install lcov (for genhtml)
-        run: sudo apt-get install -y lcov
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov
 
       - name: Run coverage script (VM + Chrome)
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
         run: |
           chmod +x ./scripts/collect_coverage.sh
           ./scripts/collect_coverage.sh

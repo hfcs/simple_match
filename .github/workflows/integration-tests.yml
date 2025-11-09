@@ -30,6 +30,22 @@ jobs:
           # concrete Flutter SDK (avoids treating 'stable' as a literal
           # version string).
           channel: stable
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+      - name: Verify installed tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          echo "Flutter:" && flutter --version || true
+          echo "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4
@@ -91,6 +107,23 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+      - name: Cache Pub packages (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+      - name: Verify installed tools (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          echo "Flutter:" && flutter --version || true
+          if command -v pdftotext >/dev/null 2>&1; then pdftotext -v; else brew list --versions poppler || echo "pdftotext/poppler not present"; fi
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4

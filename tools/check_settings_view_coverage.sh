@@ -10,10 +10,6 @@ if [ ! -f "$LCOV_FILE" ]; then
   exit 2
 fi
 
-# Find the LF and LH values for the settings_view.dart record.
-# Match any SF line that ends with lib/views/settings_view.dart (absolute or relative path).
-set -eu
-
 LCOV_FILE="coverage/lcov.info"
 if [ ! -f "$LCOV_FILE" ]; then
   echo "Coverage file not found: $LCOV_FILE"
@@ -21,8 +17,10 @@ if [ ! -f "$LCOV_FILE" ]; then
 fi
 
 # Robustly extract LF and LH for the settings_view.dart SF record.
+# Accept SF:lib/... or SF:/absolute/path/.../lib/... so we match any SF line that
+# ends with lib/views/settings_view.dart
 read -r LF LH <<EOF
-$(awk '/^SF:lib\/views\/settings_view.dart/{f=1;next} f&&/^LF:/{lf=substr($0,4)} f&&/^LH:/{lh=substr($0,4); print lf " " lh; exit}' "$LCOV_FILE")
+$(awk '/^SF:.*lib\/views\/settings_view\.dart$/ { in_record=1; next } in_record && /^LF:/ { lf=substr($0,4) } in_record && /^LH:/ { lh=substr($0,4); print lf " " lh; exit }' "$LCOV_FILE")
 EOF
 
 if [ -z "$LF" ] || [ -z "$LH" ]; then

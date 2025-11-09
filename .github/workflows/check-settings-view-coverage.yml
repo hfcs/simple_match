@@ -16,6 +16,16 @@ jobs:
           lfs: true
           fetch-depth: 0
 
+      - name: Install runner system packages
+        run: |
+          set -eux
+          # Ensure tools required by the tests and LFS are present on the runner
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends git-lfs poppler-utils xz-utils curl ca-certificates
+          # Initialize git-lfs so later git lfs commands work reliably
+          git lfs install --system || true
+        shell: bash
+
       - name: Ensure LFS assets are present (diagnostic)
         run: |
           # Sometimes LFS pointers are fetched but not checked out into working tree;
@@ -58,46 +68,31 @@ jobs:
             echo "Font present; no pubspec change needed"
           fi
 
-      - name: Install Flutter SDK (manual)
-        run: |
-          set -eux
-          # Download and extract a pinned Flutter SDK to avoid action resolution issues
-          FLUTTER_VERSION=3.9.2
-          FLUTTER_ARCHIVE=flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
-          FLUTTER_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_ARCHIVE}"
-          echo "Downloading Flutter from $FLUTTER_URL"
-          # -f: fail on HTTP errors, -S: show errors, -L: follow redirects
-          set +e
-          curl -fSL -o /tmp/${FLUTTER_ARCHIVE} "$FLUTTER_URL"
-          CURL_EXIT=$?
-          set -e
-          if [ $CURL_EXIT -eq 0 ]; then
-            echo "Downloaded archive:" && ls -lh /tmp/${FLUTTER_ARCHIVE} || true
-            echo "File type:" && file /tmp/${FLUTTER_ARCHIVE} || true
-            # Verify we actually downloaded an xz-compressed archive and not an HTML error page
-            if file /tmp/${FLUTTER_ARCHIVE} | grep -qi 'XZ compressed'; then
-              echo "Extracting downloaded Flutter archive"
-              tar -xJf /tmp/${FLUTTER_ARCHIVE} -C $HOME
-            else
-              echo "Downloaded file is not an xz archive; will fall back to git-clone method" >&2
-            fi
-          else
-            echo "curl failed with exit code $CURL_EXIT; will fall back to git-clone method" >&2
-          fi
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-          # If extraction did not produce $HOME/flutter, fall back to a shallow git clone of the tagged release
-          if [ ! -d "$HOME/flutter/bin" ]; then
-            echo "Falling back to git clone of flutter repo (tag: $FLUTTER_VERSION)"
-            # Clone the stable branch as a fallback (tag/archived release may not be present)
-            git clone --depth 1 --branch stable https://github.com/flutter/flutter.git $HOME/flutter
-          fi
+      - name: Setup Flutter (action)
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
 
-          # Persist flutter/bin to following steps by writing to $GITHUB_PATH
-          echo "$HOME/flutter/bin" >> $GITHUB_PATH
-          echo "Flutter installed at $HOME/flutter"
-          # Use the explicit path in this step (GITHUB_PATH only affects later steps)
-          $HOME/flutter/bin/flutter --version
-        shell: bash
+      - name: Verify Flutter
+        run: flutter --version
+
+      - name: Cache Pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            ~/.pub-cache/hosted
+            ~/.pub-cache/git
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install dependencies
         run: flutter pub get

@@ -28,6 +28,19 @@ jobs:
           channel: 'stable'
       - name: Verify Flutter
         run: flutter --version
+      - name: Debug: print environment and tools
+        run: |
+          set -eux
+          echo "===== ENV ====="
+          uname -a || true
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version || true
+          javac -version || true
+          echo "Flutter:" && flutter --version || true
+          echo "Which flutter: $(which flutter || true)"
+          echo "pdftotext:" && pdftotext -v || echo "pdftotext not installed"
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not installed"
+          echo "lcov:" && lcov --version || echo "lcov not installed"
       - name: Cache Flutter Pub packages
         uses: actions/cache@v4
         with:
@@ -42,11 +55,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
+      - name: Verify installed tools
+        run: |
+          echo "Flutter:" && flutter --version || true
+          echo "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
       - name: Run tests with coverage
         run: flutter test --coverage --no-shard
 
       - name: Install lcov (for genhtml)
-        run: sudo apt-get update && sudo apt-get install -y lcov
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov
 
       - name: Filter LCOV (remove non-web IO-only entries)
         run: |

@@ -31,6 +31,19 @@ jobs:
           echo "Listing assets/fonts for debug"
           ls -la assets/fonts || true
 
+      - name: Download NotoSerifHK font (if missing)
+        run: |
+          set -eux
+          mkdir -p assets/fonts
+          FONT_PATH=assets/fonts/NotoSerifHK-wght.ttf
+          if [ -f "$FONT_PATH" ]; then
+            echo "Font already present at $FONT_PATH"
+          else
+            echo "Downloading NotoSerifHK font to $FONT_PATH"
+            curl -fSL -o "$FONT_PATH" "https://github.com/notofonts/noto-cjk/raw/refs/heads/main/google-fonts/NotoSerifHK%5Bwght%5D.ttf"
+            echo "Downloaded font size:" && ls -lh "$FONT_PATH" || true
+          fi
+
       - name: "CI fallback: comment out missing font asset in pubspec"
         run: |
           # If the font file isn't present in the working tree (e.g. not committed),

@@ -34,6 +34,22 @@ jobs:
       - name: Verify Flutter
         run: flutter --version
 
+      - name: Debug: print environment and tools
+        run: |
+          set -eux
+          echo "===== ENV ====="
+          uname -a || true
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version || true
+          javac -version || true
+          echo "Flutter:" && flutter --version || true
+          echo "Which flutter: $(which flutter || true)"
+          echo "pdftotext:" && pdftotext -v || echo "pdftotext not installed"
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not installed"
+          echo "lcov:" && lcov --version || echo "lcov not installed"
+          echo "genhtml:" && genhtml --version || echo "genhtml not installed"
+          echo "which chrome: $(which google-chrome || which google-chrome-stable || true)"
+
       - name: Install dependencies
         run: flutter pub get
 

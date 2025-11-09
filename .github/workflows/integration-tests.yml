@@ -36,6 +36,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+      - name: Debug: show Java/Gradle info
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version || true
+          javac -version || true
+          ./gradlew --version || true
 
       - name: Install dependencies
         run: flutter pub get
@@ -85,6 +91,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+      - name: Debug: show Java/Gradle info
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version || true
+          javac -version || true
+          ./gradlew --version || true
 
       - name: Install dependencies
         run: flutter pub get

@@ -11,6 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Debug: show Java/Gradle info
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME"
+          java -version || true
+          javac -version || true
+          ./gradlew --version || true
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:

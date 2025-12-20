@@ -29,6 +29,12 @@ jobs:
       - name: Verify Flutter
         run: flutter --version
 
+      - name: Install coverage tools (lcov, poppler-utils, git-lfs)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov poppler-utils git-lfs
+          git lfs install --system || true
+
       - name: Write CI diagnostics
         run: |
           set -eux

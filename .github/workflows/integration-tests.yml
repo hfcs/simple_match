@@ -53,6 +53,13 @@ jobs:
           echo "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
+      - name: Install coverage tools (lcov, poppler-utils, git-lfs) (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov poppler-utils git-lfs
+          git lfs install --system || true
+
       - name: Write CI diagnostics (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -150,6 +157,21 @@ jobs:
           echo "Flutter:" && flutter --version || true
           if command -v pdftotext >/dev/null 2>&1; then pdftotext -v; else brew list --versions poppler || echo "pdftotext/poppler not present"; fi
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
+
+      - name: Install coverage tools (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          if ! command -v lcov >/dev/null 2>&1; then
+            brew update || true
+            brew install lcov || true
+          fi
+          if ! command -v pdftotext >/dev/null 2>&1; then
+            brew install poppler || true
+          fi
+          if ! command -v git-lfs >/dev/null 2>&1; then
+            brew install git-lfs || true
+            git lfs install --system || true
+          fi
 
       - name: Write CI diagnostics (macOS)
         if: runner.os == 'macOS'

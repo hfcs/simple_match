@@ -1,0 +1,44 @@
+name: CI Diagnostics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    name: Diagnostics (Ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Write CI diagnostics
+        run: |
+          set -eux
+          out=ci-diagnostics.txt
+          echo "=== CI Diagnostics: $(date -u) ===" > "$out"
+          echo "Runner: $(uname -a)" >> "$out" || true
+          echo "--- Java ---" >> "$out"; java -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "--- Javac ---" >> "$out"; javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "--- Flutter ---" >> "$out"; flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "Which flutter: $(which flutter || true)" >> "$out"
+          echo "--- pdftotext/poppler ---" >> "$out"; pdftotext -v 2>&1 | sed -n '1,3p' >> "$out" || echo "pdftotext not installed" >> "$out"
+          echo "--- git-lfs ---" >> "$out"; git lfs --version 2>&1 | sed -n '1,3p' >> "$out" || echo "git-lfs not installed" >> "$out"
+          echo "--- lcov ---" >> "$out"; lcov --version 2>&1 | sed -n '1,3p' >> "$out" || echo "lcov not installed" >> "$out"
+          echo "--- genhtml ---" >> "$out"; genhtml --version 2>&1 | sed -n '1,3p' >> "$out" || echo "genhtml not installed" >> "$out"
+
+      - name: Upload diagnostics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-diagnostics
+          path: ci-diagnostics.txt

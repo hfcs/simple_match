@@ -53,6 +53,26 @@ jobs:
           echo "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
+      - name: Write CI diagnostics (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          set -eux
+          out=ci-diagnostics.txt
+          echo "=== CI Diagnostics: $(date -u) ===" > "$out"
+          java -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
+          pdftotext -v 2>&1 | sed -n '1,5p' >> "$out" || echo "pdftotext not installed" >> "$out"
+          git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
+          lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"
+
+      - name: Upload CI diagnostics (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-diagnostics
+          path: ci-diagnostics.txt
+
       - name: Debug: show Java/Gradle info
         run: |
           echo "JAVA_HOME=$JAVA_HOME"
@@ -130,6 +150,25 @@ jobs:
           echo "Flutter:" && flutter --version || true
           if command -v pdftotext >/dev/null 2>&1; then pdftotext -v; else brew list --versions poppler || echo "pdftotext/poppler not present"; fi
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
+
+      - name: Write CI diagnostics (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          set -eux
+          out=ci-diagnostics.txt
+          echo "=== CI Diagnostics: $(date -u) ===" > "$out"
+          java -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
+          if command -v pdftotext >/dev/null 2>&1; then pdftotext -v 2>&1 | sed -n '1,5p' >> "$out"; else brew list --versions poppler >> "$out" || echo "pdftotext/poppler not present" >> "$out"; fi
+          git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
+
+      - name: Upload CI diagnostics (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-diagnostics
+          path: ci-diagnostics.txt
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4

@@ -33,6 +33,7 @@ jobs:
         run: flutter --version
 
       - name: Write CI diagnostics
+        if: ${{ always() }}
         run: |
           set -eux
           out=ci-diagnostics.txt
@@ -46,6 +47,7 @@ jobs:
           echo "lcov:" >> "$out"; lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"
 
       - name: Upload CI diagnostics
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: ci-diagnostics

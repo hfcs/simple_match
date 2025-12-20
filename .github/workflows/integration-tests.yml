@@ -63,7 +63,7 @@ jobs:
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
       - name: Write CI diagnostics (Linux)
-        if: runner.os == 'Linux'
+        if: ${{ always() }} && runner.os == 'Linux'
         run: |
           set -eux
           out=ci-diagnostics.txt
@@ -76,7 +76,7 @@ jobs:
           lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"
 
       - name: Upload CI diagnostics (Linux)
-        if: runner.os == 'Linux'
+        if: ${{ always() }} && runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
           name: ci-diagnostics
@@ -168,7 +168,7 @@ jobs:
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
       - name: Write CI diagnostics (macOS)
-        if: runner.os == 'macOS'
+        if: ${{ always() }} && runner.os == 'macOS'
         run: |
           set -eux
           out=ci-diagnostics.txt
@@ -180,7 +180,7 @@ jobs:
           git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
 
       - name: Upload CI diagnostics (macOS)
-        if: runner.os == 'macOS'
+        if: ${{ always() }} && runner.os == 'macOS'
         uses: actions/upload-artifact@v4
         with:
           name: ci-diagnostics

@@ -37,6 +37,27 @@ jobs:
       - name: Verify Flutter
         run: flutter --version
 
+      - name: Write CI diagnostics
+        run: |
+          set -eux
+          out=ci-diagnostics.txt
+          echo "=== CI Diagnostics: $(date -u) ===" > "$out"
+          echo "Java:" >> "$out"; java -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "Javac:" >> "$out"; javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "Flutter:" >> "$out"; flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
+          echo "Which flutter: $(which flutter || true)" >> "$out"
+          echo "pdftotext:" >> "$out"; pdftotext -v 2>&1 | sed -n '1,5p' >> "$out" || echo "pdftotext not installed" >> "$out"
+          echo "git-lfs:" >> "$out"; git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
+          echo "lcov:" >> "$out"; lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"
+          echo "genhtml:" >> "$out"; genhtml --version 2>&1 | sed -n '1,5p' >> "$out" || echo "genhtml not installed" >> "$out"
+          echo "which chrome: $(which google-chrome || which google-chrome-stable || true)" >> "$out"
+
+      - name: Upload CI diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-diagnostics
+          path: ci-diagnostics.txt
+
       - name: Debug: print environment and tools
         run: |
           set -eux

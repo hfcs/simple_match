@@ -87,7 +87,7 @@ jobs:
           echo "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
       - name: Run tests with coverage
-        run: flutter test --coverage --no-shard
+        run: flutter test --coverage
 
       - name: Install lcov (for genhtml)
         run: |

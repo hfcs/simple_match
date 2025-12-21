@@ -17,7 +17,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - name: Debug: show Java/Gradle info
+      - name: "Debug: show Java/Gradle info"
         run: |
           echo "JAVA_HOME=$JAVA_HOME"
           java -version || true
@@ -54,7 +54,7 @@ jobs:
         with:
           name: ci-diagnostics
           path: ci-diagnostics.txt
-      - name: Debug: print environment and tools
+      - name: "Debug: print environment and tools"
         run: |
           set -eux
           echo "===== ENV ====="

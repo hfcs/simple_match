@@ -20,7 +20,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - name: Debug: show Java/Gradle info
+      - name: "Debug: show Java/Gradle info"
         run: |
           echo "JAVA_HOME=$JAVA_HOME"
           java -version || true
@@ -62,7 +62,7 @@ jobs:
           name: ci-diagnostics
           path: ci-diagnostics.txt
 
-      - name: Debug: print environment and tools
+      - name: "Debug: print environment and tools"
         run: |
           set -eux
           echo "===== ENV ====="
@@ -85,10 +85,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget gnupg lsb-release
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
+            sudo apt-get update 
+            sudo apt-get install -y google-chrome-stable 
 
       - name: Install pdftotext (poppler-utils)
         run: |

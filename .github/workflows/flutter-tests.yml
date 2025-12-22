@@ -35,6 +35,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lcov poppler-utils git-lfs
           git lfs install --system || true
+          git lfs pull --include="assets/fonts/*" || true
 
       - name: Write CI diagnostics
         run: |

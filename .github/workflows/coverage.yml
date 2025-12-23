@@ -16,6 +16,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+          fetch-depth: 0
+      - name: Debug LFS and repo state
+        run: |
+          git --version || true
+          git lfs version || echo "git-lfs not available"
+          git lfs ls-files --all || true
+          echo "--- .gitattributes ---"; sed -n '1,120p' .gitattributes || true
+          echo "--- git status (porcelain) ---"; git status --porcelain --untracked-files=all || true
       - name: Ensure LFS assets are present
         run: |
           git lfs install --system || true

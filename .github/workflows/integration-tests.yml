@@ -14,6 +14,8 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Ensure font asset available
         run: |
@@ -123,6 +125,8 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Ensure font asset available
         run: |

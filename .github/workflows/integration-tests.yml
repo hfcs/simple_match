@@ -16,6 +16,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Ensure LFS assets are present (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          git lfs install --system || true
+          git lfs pull --include="assets/fonts/*" || true
+          echo "Listing assets/fonts:"; ls -la assets/fonts || true
 
       - name: Ensure font asset available
         run: |
@@ -127,6 +133,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Ensure LFS assets are present (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          git lfs install --system || true
+          git lfs pull --include="assets/fonts/*" || true
+          echo "Listing assets/fonts:"; ls -la assets/fonts || true
 
       - name: Ensure font asset available
         run: |

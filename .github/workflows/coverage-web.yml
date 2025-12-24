@@ -32,6 +32,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils
+      - name: Install lcov (for genhtml)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov git-lfs
       - name: Verify installed tools
         run: |
           echo "Flutter:" && flutter --version || true

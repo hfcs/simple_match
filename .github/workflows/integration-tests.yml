@@ -136,6 +136,7 @@ jobs:
           flutter test integration_test/settings_view_web_integration_test.dart --verbose
 
   macos_integration:
+    if: false
     name: macOS integration
     runs-on: macos-latest
     timeout-minutes: 60

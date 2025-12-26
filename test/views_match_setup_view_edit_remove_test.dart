@@ -24,9 +24,11 @@ void main() {
     await tester.tap(find.byKey(const Key('addStageButton')));
     await tester.pump();
     expect(find.text('Stage 2: 10 shoots'), findsOneWidget);
-    // Remove it
+    // Remove it (confirm dialog)
     await tester.tap(find.byKey(const Key('removeStage-2')));
-    await tester.pump();
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Remove'));
+    await tester.pumpAndSettle();
     expect(find.text('Stage 2: 10 shoots'), findsNothing);
   });
 

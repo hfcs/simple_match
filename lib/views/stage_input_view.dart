@@ -706,13 +706,32 @@ class _StageInputViewState extends State<StageInputView> {
                                   key: Key('removeResult-${r.stage}-${r.shooter}'),
                                   icon: const Icon(Icons.delete),
                                   onPressed: () async {
-                                    vm.selectStage(r.stage);
-                                    vm.selectShooter(r.shooter);
-                                    await vm.remove();
-                                    setState(() {
-                                      _editingKey = null;
-                                      _refreshFields(vm);
-                                    });
+                                    final confirmed = await showDialog<bool>(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text('Remove Result'),
+                                        content: Text('Remove result for ${r.shooter} on stage ${r.stage}?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.of(context).pop(false),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => Navigator.of(context).pop(true),
+                                            child: const Text('Remove'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                    if (confirmed == true) {
+                                      vm.selectStage(r.stage);
+                                      vm.selectShooter(r.shooter);
+                                      await vm.remove();
+                                      setState(() {
+                                        _editingKey = null;
+                                        _refreshFields(vm);
+                                      });
+                                    }
                                   },
                                 ),
                               ],

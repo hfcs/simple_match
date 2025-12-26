@@ -1,0 +1,896 @@
+test	UNKNOWN STEP	﻿2025-12-22T15:44:14.3506497Z Current runner version: '2.330.0'
+test	UNKNOWN STEP	2025-12-22T15:44:14.3529832Z ##[group]Runner Image Provisioner
+test	UNKNOWN STEP	2025-12-22T15:44:14.3530721Z Hosted Compute Agent
+test	UNKNOWN STEP	2025-12-22T15:44:14.3531223Z Version: 20251211.462
+test	UNKNOWN STEP	2025-12-22T15:44:14.3531806Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+test	UNKNOWN STEP	2025-12-22T15:44:14.3532584Z Build Date: 2025-12-11T16:28:49Z
+test	UNKNOWN STEP	2025-12-22T15:44:14.3533194Z Worker ID: {7bdcc17a-38e6-440f-b804-92778b2c645b}
+test	UNKNOWN STEP	2025-12-22T15:44:14.3533845Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:14.3534427Z ##[group]Operating System
+test	UNKNOWN STEP	2025-12-22T15:44:14.3535426Z Ubuntu
+test	UNKNOWN STEP	2025-12-22T15:44:14.3535854Z 24.04.3
+test	UNKNOWN STEP	2025-12-22T15:44:14.3536378Z LTS
+test	UNKNOWN STEP	2025-12-22T15:44:14.3536806Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:14.3537283Z ##[group]Runner Image
+test	UNKNOWN STEP	2025-12-22T15:44:14.3537846Z Image: ubuntu-24.04
+test	UNKNOWN STEP	2025-12-22T15:44:14.3538326Z Version: 20251215.174.1
+test	UNKNOWN STEP	2025-12-22T15:44:14.3539315Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+test	UNKNOWN STEP	2025-12-22T15:44:14.3540873Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+test	UNKNOWN STEP	2025-12-22T15:44:14.3541813Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:14.3542887Z ##[group]GITHUB_TOKEN Permissions
+test	UNKNOWN STEP	2025-12-22T15:44:14.3544832Z Contents: read
+test	UNKNOWN STEP	2025-12-22T15:44:14.3545419Z Metadata: read
+test	UNKNOWN STEP	2025-12-22T15:44:14.3545975Z Packages: read
+test	UNKNOWN STEP	2025-12-22T15:44:14.3546453Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:14.3548549Z Secret source: Actions
+test	UNKNOWN STEP	2025-12-22T15:44:14.3549729Z Prepare workflow directory
+test	UNKNOWN STEP	2025-12-22T15:44:14.3876923Z Prepare all required actions
+test	UNKNOWN STEP	2025-12-22T15:44:14.3915539Z Getting action download info
+test	UNKNOWN STEP	2025-12-22T15:44:14.7762134Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+test	UNKNOWN STEP	2025-12-22T15:44:14.8874864Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+test	UNKNOWN STEP	2025-12-22T15:44:15.5116533Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+test	UNKNOWN STEP	2025-12-22T15:44:15.8822176Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+test	UNKNOWN STEP	2025-12-22T15:44:15.9969463Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+test	UNKNOWN STEP	2025-12-22T15:44:16.2297338Z Getting action download info
+test	UNKNOWN STEP	2025-12-22T15:44:16.4457252Z Complete job name: test
+test	UNKNOWN STEP	2025-12-22T15:44:16.5443689Z ##[group]Run actions/checkout@v4
+test	UNKNOWN STEP	2025-12-22T15:44:16.5445290Z with:
+test	UNKNOWN STEP	2025-12-22T15:44:16.5446092Z   repository: hfcs/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:16.5447327Z   token: ***
+test	UNKNOWN STEP	2025-12-22T15:44:16.5448100Z   ssh-strict: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5448829Z   ssh-user: git
+test	UNKNOWN STEP	2025-12-22T15:44:16.5449594Z   persist-credentials: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5450442Z   clean: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5451233Z   sparse-checkout-cone-mode: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5452156Z   fetch-depth: 1
+test	UNKNOWN STEP	2025-12-22T15:44:16.5452876Z   fetch-tags: false
+test	UNKNOWN STEP	2025-12-22T15:44:16.5453621Z   show-progress: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5454386Z   lfs: false
+test	UNKNOWN STEP	2025-12-22T15:44:16.5455353Z   submodules: false
+test	UNKNOWN STEP	2025-12-22T15:44:16.5456130Z   set-safe-directory: true
+test	UNKNOWN STEP	2025-12-22T15:44:16.5457247Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:16.6617885Z Syncing repository: hfcs/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:16.6620511Z ##[group]Getting Git version info
+test	UNKNOWN STEP	2025-12-22T15:44:16.6621961Z Working directory is '/home/runner/work/simple_match/simple_match'
+test	UNKNOWN STEP	2025-12-22T15:44:16.6623883Z [command]/usr/bin/git version
+test	UNKNOWN STEP	2025-12-22T15:44:16.6671968Z git version 2.52.0
+test	UNKNOWN STEP	2025-12-22T15:44:16.6700664Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:16.6725882Z Temporarily overriding HOME='/home/runner/work/_temp/dd73d88c-8a40-4684-afff-7681f1385eef' before making global git config changes
+test	UNKNOWN STEP	2025-12-22T15:44:16.6730398Z Adding repository directory to the temporary git global config as a safe directory
+test	UNKNOWN STEP	2025-12-22T15:44:16.6734065Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:16.6775341Z Deleting the contents of '/home/runner/work/simple_match/simple_match'
+test	UNKNOWN STEP	2025-12-22T15:44:16.6779308Z ##[group]Initializing the repository
+test	UNKNOWN STEP	2025-12-22T15:44:16.6784782Z [command]/usr/bin/git init /home/runner/work/simple_match/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:16.6893258Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	UNKNOWN STEP	2025-12-22T15:44:16.6896140Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	UNKNOWN STEP	2025-12-22T15:44:16.6898961Z hint: to use in all of your new repositories, which will suppress this warning,
+test	UNKNOWN STEP	2025-12-22T15:44:16.6901194Z hint: call:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6902348Z hint:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6903808Z hint: 	git config --global init.defaultBranch <name>
+test	UNKNOWN STEP	2025-12-22T15:44:16.6905900Z hint:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6907546Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	UNKNOWN STEP	2025-12-22T15:44:16.6910440Z hint: 'development'. The just-created branch can be renamed via this command:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6912697Z hint:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6913828Z hint: 	git branch -m <name>
+test	UNKNOWN STEP	2025-12-22T15:44:16.6915331Z hint:
+test	UNKNOWN STEP	2025-12-22T15:44:16.6917094Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	UNKNOWN STEP	2025-12-22T15:44:16.6919763Z Initialized empty Git repository in /home/runner/work/simple_match/simple_match/.git/
+test	UNKNOWN STEP	2025-12-22T15:44:16.6922800Z [command]/usr/bin/git remote add origin https://github.com/hfcs/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:16.6950372Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:16.6952651Z ##[group]Disabling automatic garbage collection
+test	UNKNOWN STEP	2025-12-22T15:44:16.6954875Z [command]/usr/bin/git config --local gc.auto 0
+test	UNKNOWN STEP	2025-12-22T15:44:16.6986565Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:16.6988646Z ##[group]Setting up auth
+test	UNKNOWN STEP	2025-12-22T15:44:16.6994910Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	UNKNOWN STEP	2025-12-22T15:44:16.7028686Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	UNKNOWN STEP	2025-12-22T15:44:16.7368711Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	UNKNOWN STEP	2025-12-22T15:44:16.7400857Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	UNKNOWN STEP	2025-12-22T15:44:16.7633063Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	UNKNOWN STEP	2025-12-22T15:44:16.7664202Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	UNKNOWN STEP	2025-12-22T15:44:16.7900475Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	UNKNOWN STEP	2025-12-22T15:44:16.7937402Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:16.7938761Z ##[group]Fetching the repository
+test	UNKNOWN STEP	2025-12-22T15:44:16.7946465Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +badc47e8a3cdd7a0c3cb8d03cc33b173821ac046:refs/remotes/origin/main
+test	UNKNOWN STEP	2025-12-22T15:44:17.1816560Z From https://github.com/hfcs/simple_match
+test	UNKNOWN STEP	2025-12-22T15:44:17.1823836Z  * [new ref]         badc47e8a3cdd7a0c3cb8d03cc33b173821ac046 -> origin/main
+test	UNKNOWN STEP	2025-12-22T15:44:17.1851732Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.1852546Z ##[group]Determining the checkout info
+test	UNKNOWN STEP	2025-12-22T15:44:17.1855780Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.1861772Z [command]/usr/bin/git sparse-checkout disable
+test	UNKNOWN STEP	2025-12-22T15:44:17.1913437Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	UNKNOWN STEP	2025-12-22T15:44:17.1952504Z ##[group]Checking out the ref
+test	UNKNOWN STEP	2025-12-22T15:44:17.1971030Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	UNKNOWN STEP	2025-12-22T15:44:17.2332647Z Switched to a new branch 'main'
+test	UNKNOWN STEP	2025-12-22T15:44:17.2335418Z branch 'main' set up to track 'origin/main'.
+test	UNKNOWN STEP	2025-12-22T15:44:17.2345704Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.2391651Z [command]/usr/bin/git log -1 --format=%H
+test	UNKNOWN STEP	2025-12-22T15:44:17.2418789Z badc47e8a3cdd7a0c3cb8d03cc33b173821ac046
+test	UNKNOWN STEP	2025-12-22T15:44:17.2706595Z ##[group]Run actions/setup-java@v4
+test	UNKNOWN STEP	2025-12-22T15:44:17.2706980Z with:
+test	UNKNOWN STEP	2025-12-22T15:44:17.2707254Z   distribution: temurin
+test	UNKNOWN STEP	2025-12-22T15:44:17.2707730Z   java-version: 21
+test	UNKNOWN STEP	2025-12-22T15:44:17.2708014Z   java-package: jdk
+test	UNKNOWN STEP	2025-12-22T15:44:17.2708307Z   check-latest: false
+test	UNKNOWN STEP	2025-12-22T15:44:17.2708596Z   server-id: github
+test	UNKNOWN STEP	2025-12-22T15:44:17.2708889Z   server-username: GITHUB_ACTOR
+test	UNKNOWN STEP	2025-12-22T15:44:17.2709234Z   server-password: GITHUB_TOKEN
+test	UNKNOWN STEP	2025-12-22T15:44:17.2709571Z   overwrite-settings: true
+test	UNKNOWN STEP	2025-12-22T15:44:17.2709888Z   job-status: success
+test	UNKNOWN STEP	2025-12-22T15:44:17.2710315Z   token: ***
+test	UNKNOWN STEP	2025-12-22T15:44:17.2710587Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.4798482Z ##[group]Installed distributions
+test	UNKNOWN STEP	2025-12-22T15:44:17.5847517Z Resolved Java 21.0.9+10 from tool-cache
+test	UNKNOWN STEP	2025-12-22T15:44:17.5848354Z Setting Java 21.0.9+10 as the default
+test	UNKNOWN STEP	2025-12-22T15:44:17.5862532Z Creating toolchains.xml for JDK version 21 from temurin
+test	UNKNOWN STEP	2025-12-22T15:44:17.5942273Z Writing to /home/runner/.m2/toolchains.xml
+test	UNKNOWN STEP	2025-12-22T15:44:17.5942902Z 
+test	UNKNOWN STEP	2025-12-22T15:44:17.5943119Z Java configuration:
+test	UNKNOWN STEP	2025-12-22T15:44:17.5944138Z   Distribution: temurin
+test	UNKNOWN STEP	2025-12-22T15:44:17.5944952Z   Version: 21.0.9+10
+test	UNKNOWN STEP	2025-12-22T15:44:17.5945857Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:17.5946535Z 
+test	UNKNOWN STEP	2025-12-22T15:44:17.5947234Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.5963502Z Creating settings.xml with server-id: github
+test	UNKNOWN STEP	2025-12-22T15:44:17.5971428Z Writing to /home/runner/.m2/settings.xml
+test	UNKNOWN STEP	2025-12-22T15:44:17.6080699Z ##[group]Run echo "JAVA_HOME=$JAVA_HOME"
+test	UNKNOWN STEP	2025-12-22T15:44:17.6081168Z [36;1mecho "JAVA_HOME=$JAVA_HOME"[0m
+test	UNKNOWN STEP	2025-12-22T15:44:17.6081566Z [36;1mjava -version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:44:17.6081912Z [36;1mjavac -version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:44:17.6082249Z [36;1m./gradlew --version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:44:17.6123550Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:44:17.6123895Z env:
+test	UNKNOWN STEP	2025-12-22T15:44:17.6124292Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:17.6125398Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:17.6125866Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:17.6204800Z JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.3585782Z openjdk version "21.0.9" 2025-10-21 LTS
+test	UNKNOWN STEP	2025-12-22T15:44:18.3586647Z OpenJDK Runtime Environment Temurin-21.0.9+10 (build 21.0.9+10-LTS)
+test	UNKNOWN STEP	2025-12-22T15:44:18.3587600Z OpenJDK 64-Bit Server VM Temurin-21.0.9+10 (build 21.0.9+10-LTS, mixed mode, sharing)
+test	UNKNOWN STEP	2025-12-22T15:44:18.8629497Z javac 21.0.9
+test	UNKNOWN STEP	2025-12-22T15:44:18.9056821Z /home/runner/work/_temp/8610f13e-4e43-4679-96c6-a1f0d127d8fa.sh: line 4: ./gradlew: No such file or directory
+test	UNKNOWN STEP	2025-12-22T15:44:18.9219716Z ##[group]Run subosito/flutter-action@v2
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220012Z with:
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220180Z   channel: stable
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220365Z   architecture: X64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220542Z   cache: false
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220729Z   pub-cache-path: default
+test	UNKNOWN STEP	2025-12-22T15:44:18.9220925Z   dry-run: false
+test	UNKNOWN STEP	2025-12-22T15:44:18.9221170Z   git-source: https://github.com/flutter/flutter.git
+test	UNKNOWN STEP	2025-12-22T15:44:18.9221460Z env:
+test	UNKNOWN STEP	2025-12-22T15:44:18.9221722Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9222157Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9222485Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:18.9300300Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+test	UNKNOWN STEP	2025-12-22T15:44:18.9300672Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9335101Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	UNKNOWN STEP	2025-12-22T15:44:18.9335416Z env:
+test	UNKNOWN STEP	2025-12-22T15:44:18.9335735Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9336184Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9336517Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:18.9443827Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+test	UNKNOWN STEP	2025-12-22T15:44:18.9444167Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9444427Z [36;1m  -n '' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9445073Z [36;1m  -f '' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9445269Z [36;1m  -a 'X64' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9445450Z [36;1m  -k '' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9445626Z [36;1m  -c '' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9445795Z [36;1m  -l '' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9446016Z [36;1m  -d 'default' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9446339Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9446634Z [36;1m  stable[0m
+test	UNKNOWN STEP	2025-12-22T15:44:18.9476087Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	UNKNOWN STEP	2025-12-22T15:44:18.9476405Z env:
+test	UNKNOWN STEP	2025-12-22T15:44:18.9476696Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9477144Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:18.9477493Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:19.2273821Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+test	UNKNOWN STEP	2025-12-22T15:44:19.2274139Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2274385Z [36;1m  -n '3.38.5' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2274871Z [36;1m  -a 'x64' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2275176Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.38.5-x64' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2275520Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2275773Z [36;1m  stable[0m
+test	UNKNOWN STEP	2025-12-22T15:44:19.2308390Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	UNKNOWN STEP	2025-12-22T15:44:19.2308695Z env:
+test	UNKNOWN STEP	2025-12-22T15:44:19.2308985Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:19.2309449Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:44:19.2309786Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:44:19.5512240Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+test	UNKNOWN STEP	2025-12-22T15:44:19.5513589Z                                  Dload  Upload   Total   Spent    Left  Speed
+test	UNKNOWN STEP	2025-12-22T15:44:19.5514221Z 
+test	UNKNOWN STEP	2025-12-22T15:44:20.1810059Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+test	UNKNOWN STEP	2025-12-22T15:44:21.1811052Z   5 1396M    5 73.3M    0     0   116M      0  0:00:11 --:--:--  0:00:11  116M
+test	UNKNOWN STEP	2025-12-22T15:44:22.1812138Z  18 1396M   18  252M    0     0   154M      0  0:00:09  0:00:01  0:00:08  154M
+test	UNKNOWN STEP	2025-12-22T15:44:23.1809850Z  31 1396M   31  439M    0     0   167M      0  0:00:08  0:00:02  0:00:06  167M
+test	UNKNOWN STEP	2025-12-22T15:44:24.1811929Z  45 1396M   45  632M    0     0   174M      0  0:00:08  0:00:03  0:00:05  174M
+test	UNKNOWN STEP	2025-12-22T15:44:25.1809854Z  58 1396M   58  820M    0     0   177M      0  0:00:07  0:00:04  0:00:03  177M
+test	UNKNOWN STEP	2025-12-22T15:44:26.1818618Z  72 1396M   72 1010M    0     0   179M      0  0:00:07  0:00:05  0:00:02  187M
+test	UNKNOWN STEP	2025-12-22T15:44:27.1810147Z  85 1396M   85 1197M    0     0   180M      0  0:00:07  0:00:06  0:00:01  189M
+test	UNKNOWN STEP	2025-12-22T15:44:27.5188420Z  96 1396M   96 1344M    0     0   176M      0  0:00:07  0:00:07 --:--:--  180M
+test	UNKNOWN STEP	2025-12-22T15:44:27.5189434Z 100 1396M  100 1396M    0     0   175M      0  0:00:07  0:00:07 --:--:--  176M
+test	UNKNOWN STEP	2025-12-22T15:45:16.6444898Z ##[group]Run flutter --version
+test	UNKNOWN STEP	2025-12-22T15:45:16.6445196Z [36;1mflutter --version[0m
+test	UNKNOWN STEP	2025-12-22T15:45:16.6477484Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:16.6477702Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:16.6477979Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.6478424Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.6478837Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.6479144Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:16.6479381Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:16.8001588Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	UNKNOWN STEP	2025-12-22T15:45:16.8002267Z Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+test	UNKNOWN STEP	2025-12-22T15:45:16.8003021Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+test	UNKNOWN STEP	2025-12-22T15:45:16.8003834Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	UNKNOWN STEP	2025-12-22T15:45:16.8063550Z ##[group]Run sudo apt-get update
+test	UNKNOWN STEP	2025-12-22T15:45:16.8063845Z [36;1msudo apt-get update[0m
+test	UNKNOWN STEP	2025-12-22T15:45:16.8064310Z [36;1msudo apt-get install -y lcov poppler-utils git-lfs[0m
+test	UNKNOWN STEP	2025-12-22T15:45:16.8065022Z [36;1mgit lfs install --system || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:16.8065317Z [36;1mgit lfs pull --include="assets/fonts/*" || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:16.8097232Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:16.8097457Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:16.8097758Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.8098192Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.8098603Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:16.8098919Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:16.8099141Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:16.8900822Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	UNKNOWN STEP	2025-12-22T15:45:16.9226359Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:16.9230715Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:16.9305719Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:16.9331253Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:16.9344952Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:16.9521757Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0518037Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1684 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0684443Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [311 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0716948Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [175 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0741629Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [15.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0754098Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1506 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0855430Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [306 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0889860Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [378 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0926884Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [31.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.0937045Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2413 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1100201Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [550 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1541385Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1550929Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 c-n-f Metadata [516 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1563638Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [30.3 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1576845Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [6048 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1615274Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1616402Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [488 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1618041Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1634274Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7312 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1646941Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1659816Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [29.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1673408Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [17.9 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1687233Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1704275Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1444 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.1715105Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2133851Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2151003Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [225 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2173711Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2187140Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [9504 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2199160Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2217360Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2233114Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2617235Z Get:39 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [77.2 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2662455Z Get:40 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:17.2690755Z Get:41 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [58.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:25.6412148Z Fetched 8375 kB in 1s (7804 kB/s)
+test	UNKNOWN STEP	2025-12-22T15:45:26.4249985Z Reading package lists...
+test	UNKNOWN STEP	2025-12-22T15:45:26.4574117Z Reading package lists...
+test	UNKNOWN STEP	2025-12-22T15:45:26.6359123Z Building dependency tree...
+test	UNKNOWN STEP	2025-12-22T15:45:26.6366948Z Reading state information...
+test	UNKNOWN STEP	2025-12-22T15:45:26.7978708Z git-lfs is already the newest version (3.7.1).
+test	UNKNOWN STEP	2025-12-22T15:45:26.7979218Z The following additional packages will be installed:
+test	UNKNOWN STEP	2025-12-22T15:45:26.7981783Z   libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7982587Z   libcapture-tiny-perl libclass-c3-perl libclass-c3-xs-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7983241Z   libclass-data-inheritable-perl libclass-inspector-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7983908Z   libclass-method-modifiers-perl libclass-singleton-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7984862Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7985653Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7986439Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7987274Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7988138Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7988927Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7989928Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7990665Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7991406Z   libparams-validationcompiler-perl libperlio-gzip-perl libpoppler134
+test	UNKNOWN STEP	2025-12-22T15:45:26.7992172Z   libreadonly-perl libref-util-perl libref-util-xs-perl librole-tiny-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7992810Z   libspecio-perl libsub-exporter-perl libsub-exporter-progressive-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7993306Z   libsub-identify-perl libsub-install-perl libsub-name-perl libsub-quote-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.7993786Z   libtry-tiny-perl libvariable-magic-perl libxstring-perl poppler-data
+test	UNKNOWN STEP	2025-12-22T15:45:26.7994125Z Suggested packages:
+test	UNKNOWN STEP	2025-12-22T15:45:26.7994465Z   libscalar-number-perl libtest-fatal-perl ghostscript fonts-japanese-mincho
+test	UNKNOWN STEP	2025-12-22T15:45:26.7995177Z   | fonts-ipafont-mincho fonts-japanese-gothic | fonts-ipafont-gothic
+test	UNKNOWN STEP	2025-12-22T15:45:26.7996113Z   fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+test	UNKNOWN STEP	2025-12-22T15:45:26.8292293Z The following NEW packages will be installed:
+test	UNKNOWN STEP	2025-12-22T15:45:26.8293505Z   lcov libalgorithm-c3-perl libb-hooks-endofscope-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8294249Z   libb-hooks-op-check-perl libcapture-tiny-perl libclass-c3-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8295370Z   libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8296177Z   libclass-method-modifiers-perl libclass-singleton-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8296954Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8297877Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8298723Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8299600Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8300429Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8302666Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8303484Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8303999Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8304685Z   libparams-validationcompiler-perl libperlio-gzip-perl libpoppler134
+test	UNKNOWN STEP	2025-12-22T15:45:26.8305458Z   libreadonly-perl libref-util-perl libref-util-xs-perl librole-tiny-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8305956Z   libspecio-perl libsub-exporter-perl libsub-exporter-progressive-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8306472Z   libsub-identify-perl libsub-install-perl libsub-name-perl libsub-quote-perl
+test	UNKNOWN STEP	2025-12-22T15:45:26.8306962Z   libtry-tiny-perl libvariable-magic-perl libxstring-perl poppler-data
+test	UNKNOWN STEP	2025-12-22T15:45:26.8307312Z   poppler-utils
+test	UNKNOWN STEP	2025-12-22T15:45:26.8492104Z 0 upgraded, 54 newly installed, 0 to remove and 69 not upgraded.
+test	UNKNOWN STEP	2025-12-22T15:45:26.8492661Z Need to get 7808 kB of archives.
+test	UNKNOWN STEP	2025-12-22T15:45:26.8493017Z After this operation, 49.5 MB of additional disk space will be used.
+test	UNKNOWN STEP	2025-12-22T15:45:26.8493404Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	UNKNOWN STEP	2025-12-22T15:45:26.8993984Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:26.9643788Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libcapture-tiny-perl all 0.48-2 [20.2 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:26.9939223Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-inspector-perl all 1.36-3 [15.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.0232335Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libfile-sharedir-perl all 1.118-3 [14.0 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.0528390Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-op-check-perl amd64 0.22-3build1 [9518 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.0826539Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdynaloader-functions-perl all 0.003-3 [12.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.1125446Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-callchecker-perl amd64 0.008-2build3 [13.2 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.1425967Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-classify-perl amd64 0.015-2build5 [20.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.1726507Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-runtime-perl all 0.016-2 [16.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.2026068Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtry-tiny-perl all 0.31-2 [20.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.2324754Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-implementation-perl all 0.09-2 [12.0 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.2620071Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-progressive-perl all 0.001013-3 [6718 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.2920601Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libvariable-magic-perl amd64 0.63-1build3 [35.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.3219604Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-endofscope-perl all 0.28-1 [15.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.3526290Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-perl all 0.40-1 [19.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.3824805Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-identify-perl amd64 0.14-3build3 [9786 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.4119806Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-name-perl amd64 0.27-1build3 [10.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.4865369Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libnamespace-clean-perl all 0.27-2 [14.0 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.5162437Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libnamespace-autoclean-perl all 0.29-2 [11.7 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.5460350Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-util-perl amd64 1.102-2build3 [21.2 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.5757784Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-install-perl all 0.929-1 [9764 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.6115358Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdata-optlist-perl all 0.114-1 [9708 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.6469296Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-perl all 0.990-1 [49.0 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.6826105Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libeval-closure-perl all 0.14-3 [10.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.7177508Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-data-inheritable-perl all 0.08-3 [8084 B]
+test	UNKNOWN STEP	2025-12-22T15:45:27.7551410Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-stacktrace-perl all 2.0500-1 [22.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.7904927Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libexception-class-perl all 1.45-1 [28.6 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.8257283Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libparams-validationcompiler-perl all 0.31-1 [28.3 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.8556924Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libalgorithm-c3-perl all 0.11-2 [10.2 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.8854155Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-perl all 0.35-2 [18.4 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.9169121Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmro-compat-perl all 0.15-2 [10.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.9466758Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-method-modifiers-perl all 2.15-1 [16.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:27.9763184Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 librole-tiny-perl all 2.002004-1 [16.3 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.0061955Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-quote-perl all 2.006008-1ubuntu1 [20.7 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.0790883Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libxstring-perl amd64 0.005-2build3 [7852 B]
+test	UNKNOWN STEP	2025-12-22T15:45:28.1088632Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libspecio-perl all 0.48-1 [137 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.1395388Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-locale-perl all 1:1.37-1 [2833 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.1997782Z Get:39 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-singleton-perl all 1.6-2 [11.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.2295722Z Get:40 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-timezone-perl all 1:2.62-1+2024a [262 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.2672534Z Get:41 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-perl amd64 2:1.65-1build2 [95.8 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.2975855Z Get:42 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libperlio-gzip-perl amd64 0.20-1build4 [14.6 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.3274994Z Get:43 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 lcov all 2.0-4ubuntu2 [223 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.3588122Z Get:44 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-xs-perl amd64 0.15-1build6 [16.3 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.3886322Z Get:45 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-xsaccessor-perl amd64 1.19-4build4 [33.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.4358837Z Get:46 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libpadwalker-perl amd64 2.5-1build6 [15.5 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.4655170Z Get:47 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-caller-perl amd64 2.07-1build3 [9766 B]
+test	UNKNOWN STEP	2025-12-22T15:45:28.4961529Z Get:48 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-lexalias-perl amd64 0.05-3build4 [8014 B]
+test	UNKNOWN STEP	2025-12-22T15:45:28.5257444Z Get:49 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-xs-perl amd64 0.30-1build4 [18.7 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.5556423Z Get:50 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.8 [1118 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.5969556Z Get:51 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libreadonly-perl all 2.050-3 [19.9 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.6264769Z Get:52 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-perl all 0.204-2 [15.1 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.6561761Z Get:53 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-xs-perl amd64 0.117-2build4 [12.6 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.7308307Z Get:54 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.8 [212 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:28.7734116Z Get:55 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libgd-perl amd64 2.78-1build3 [129 kB]
+test	UNKNOWN STEP	2025-12-22T15:45:29.0949432Z Fetched 7808 kB in 2s (4034 kB/s)
+test	UNKNOWN STEP	2025-12-22T15:45:29.1238675Z Selecting previously unselected package poppler-data.
+test	UNKNOWN STEP	2025-12-22T15:45:29.1564020Z (Reading database ... 
+test	UNKNOWN STEP	2025-12-22T15:45:29.1564815Z (Reading database ... 5%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1565179Z (Reading database ... 10%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1565527Z (Reading database ... 15%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1565839Z (Reading database ... 20%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1566154Z (Reading database ... 25%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1566488Z (Reading database ... 30%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1566795Z (Reading database ... 35%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1567109Z (Reading database ... 40%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1567414Z (Reading database ... 45%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1567714Z (Reading database ... 50%
+test	UNKNOWN STEP	2025-12-22T15:45:29.1667472Z (Reading database ... 55%
+test	UNKNOWN STEP	2025-12-22T15:45:29.2509373Z (Reading database ... 60%
+test	UNKNOWN STEP	2025-12-22T15:45:29.3227669Z (Reading database ... 65%
+test	UNKNOWN STEP	2025-12-22T15:45:29.3819275Z (Reading database ... 70%
+test	UNKNOWN STEP	2025-12-22T15:45:29.6262199Z (Reading database ... 75%
+test	UNKNOWN STEP	2025-12-22T15:45:30.1275936Z (Reading database ... 80%
+test	UNKNOWN STEP	2025-12-22T15:45:30.4307513Z (Reading database ... 85%
+test	UNKNOWN STEP	2025-12-22T15:45:30.6032622Z (Reading database ... 90%
+test	UNKNOWN STEP	2025-12-22T15:45:30.7904696Z (Reading database ... 95%
+test	UNKNOWN STEP	2025-12-22T15:45:30.7905188Z (Reading database ... 100%
+test	UNKNOWN STEP	2025-12-22T15:45:30.7905804Z (Reading database ... 217374 files and directories currently installed.)
+test	UNKNOWN STEP	2025-12-22T15:45:30.7949861Z Preparing to unpack .../00-poppler-data_0.4.12-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:30.8013260Z Unpacking poppler-data (0.4.12-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:30.9317082Z Selecting previously unselected package libcapture-tiny-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:30.9453644Z Preparing to unpack .../01-libcapture-tiny-perl_0.48-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:30.9463034Z Unpacking libcapture-tiny-perl (0.48-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:30.9724289Z Selecting previously unselected package libclass-inspector-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:30.9859897Z Preparing to unpack .../02-libclass-inspector-perl_1.36-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:30.9870208Z Unpacking libclass-inspector-perl (1.36-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.0113642Z Selecting previously unselected package libfile-sharedir-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.0250966Z Preparing to unpack .../03-libfile-sharedir-perl_1.118-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.0261314Z Unpacking libfile-sharedir-perl (1.118-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.0502642Z Selecting previously unselected package libb-hooks-op-check-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:31.0642038Z Preparing to unpack .../04-libb-hooks-op-check-perl_0.22-3build1_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.0650445Z Unpacking libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.0880234Z Selecting previously unselected package libdynaloader-functions-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.1017854Z Preparing to unpack .../05-libdynaloader-functions-perl_0.003-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1030134Z Unpacking libdynaloader-functions-perl (0.003-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1246490Z Selecting previously unselected package libdevel-callchecker-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:31.1382512Z Preparing to unpack .../06-libdevel-callchecker-perl_0.008-2build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1391551Z Unpacking libdevel-callchecker-perl:amd64 (0.008-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1618202Z Selecting previously unselected package libparams-classify-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:31.1755504Z Preparing to unpack .../07-libparams-classify-perl_0.015-2build5_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1763970Z Unpacking libparams-classify-perl:amd64 (0.015-2build5) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.1985170Z Selecting previously unselected package libmodule-runtime-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.2123604Z Preparing to unpack .../08-libmodule-runtime-perl_0.016-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.2133576Z Unpacking libmodule-runtime-perl (0.016-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.2353719Z Selecting previously unselected package libtry-tiny-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.2489130Z Preparing to unpack .../09-libtry-tiny-perl_0.31-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.2497639Z Unpacking libtry-tiny-perl (0.31-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.2717885Z Selecting previously unselected package libmodule-implementation-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.2851535Z Preparing to unpack .../10-libmodule-implementation-perl_0.09-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.2859587Z Unpacking libmodule-implementation-perl (0.09-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3071071Z Selecting previously unselected package libsub-exporter-progressive-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.3206409Z Preparing to unpack .../11-libsub-exporter-progressive-perl_0.001013-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3215676Z Unpacking libsub-exporter-progressive-perl (0.001013-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3427343Z Selecting previously unselected package libvariable-magic-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.3565986Z Preparing to unpack .../12-libvariable-magic-perl_0.63-1build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3574942Z Unpacking libvariable-magic-perl (0.63-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3807995Z Selecting previously unselected package libb-hooks-endofscope-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.3940883Z Preparing to unpack .../13-libb-hooks-endofscope-perl_0.28-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.3950915Z Unpacking libb-hooks-endofscope-perl (0.28-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.4181839Z Selecting previously unselected package libpackage-stash-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.4316318Z Preparing to unpack .../14-libpackage-stash-perl_0.40-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.4324883Z Unpacking libpackage-stash-perl (0.40-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.4542059Z Selecting previously unselected package libsub-identify-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.4678568Z Preparing to unpack .../15-libsub-identify-perl_0.14-3build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.4688292Z Unpacking libsub-identify-perl (0.14-3build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.4908844Z Selecting previously unselected package libsub-name-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:31.5045593Z Preparing to unpack .../16-libsub-name-perl_0.27-1build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5055585Z Unpacking libsub-name-perl:amd64 (0.27-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5270479Z Selecting previously unselected package libnamespace-clean-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.5404417Z Preparing to unpack .../17-libnamespace-clean-perl_0.27-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5414064Z Unpacking libnamespace-clean-perl (0.27-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5619126Z Selecting previously unselected package libnamespace-autoclean-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.5752515Z Preparing to unpack .../18-libnamespace-autoclean-perl_0.29-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5762050Z Unpacking libnamespace-autoclean-perl (0.29-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.5965734Z Selecting previously unselected package libparams-util-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.6097305Z Preparing to unpack .../19-libparams-util-perl_1.102-2build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.6105917Z Unpacking libparams-util-perl (1.102-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.6335983Z Selecting previously unselected package libsub-install-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.6469861Z Preparing to unpack .../20-libsub-install-perl_0.929-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.6479584Z Unpacking libsub-install-perl (0.929-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.6684315Z Selecting previously unselected package libdata-optlist-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.6817200Z Preparing to unpack .../21-libdata-optlist-perl_0.114-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.6827021Z Unpacking libdata-optlist-perl (0.114-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7030083Z Selecting previously unselected package libsub-exporter-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.7161292Z Preparing to unpack .../22-libsub-exporter-perl_0.990-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7170192Z Unpacking libsub-exporter-perl (0.990-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7417777Z Selecting previously unselected package libeval-closure-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.7549624Z Preparing to unpack .../23-libeval-closure-perl_0.14-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7560783Z Unpacking libeval-closure-perl (0.14-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7769210Z Selecting previously unselected package libclass-data-inheritable-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.7902232Z Preparing to unpack .../24-libclass-data-inheritable-perl_0.08-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.7914454Z Unpacking libclass-data-inheritable-perl (0.08-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.8122646Z Selecting previously unselected package libdevel-stacktrace-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.8253925Z Preparing to unpack .../25-libdevel-stacktrace-perl_2.0500-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.8262839Z Unpacking libdevel-stacktrace-perl (2.0500-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.8471374Z Selecting previously unselected package libexception-class-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.8603624Z Preparing to unpack .../26-libexception-class-perl_1.45-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.8611922Z Unpacking libexception-class-perl (1.45-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.8859650Z Selecting previously unselected package libparams-validationcompiler-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.9004328Z Preparing to unpack .../27-libparams-validationcompiler-perl_0.31-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9017864Z Unpacking libparams-validationcompiler-perl (0.31-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9245759Z Selecting previously unselected package libalgorithm-c3-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.9380338Z Preparing to unpack .../28-libalgorithm-c3-perl_0.11-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9390036Z Unpacking libalgorithm-c3-perl (0.11-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9603870Z Selecting previously unselected package libclass-c3-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:31.9737034Z Preparing to unpack .../29-libclass-c3-perl_0.35-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9746845Z Unpacking libclass-c3-perl (0.35-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:31.9958963Z Selecting previously unselected package libmro-compat-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.0091911Z Preparing to unpack .../30-libmro-compat-perl_0.15-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.0104054Z Unpacking libmro-compat-perl (0.15-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.0310912Z Selecting previously unselected package libclass-method-modifiers-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.0445559Z Preparing to unpack .../31-libclass-method-modifiers-perl_2.15-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.0456317Z Unpacking libclass-method-modifiers-perl (2.15-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.0671256Z Selecting previously unselected package librole-tiny-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.0805892Z Preparing to unpack .../32-librole-tiny-perl_2.002004-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.0818914Z Unpacking librole-tiny-perl (2.002004-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1040253Z Selecting previously unselected package libsub-quote-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.1174477Z Preparing to unpack .../33-libsub-quote-perl_2.006008-1ubuntu1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1182465Z Unpacking libsub-quote-perl (2.006008-1ubuntu1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1397368Z Selecting previously unselected package libxstring-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:32.1532371Z Preparing to unpack .../34-libxstring-perl_0.005-2build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1543606Z Unpacking libxstring-perl:amd64 (0.005-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1763521Z Selecting previously unselected package libspecio-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.1897110Z Preparing to unpack .../35-libspecio-perl_0.48-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.1905215Z Unpacking libspecio-perl (0.48-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.2285718Z Selecting previously unselected package libdatetime-locale-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.2419557Z Preparing to unpack .../36-libdatetime-locale-perl_1%3a1.37-1_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.2427391Z Unpacking libdatetime-locale-perl (1:1.37-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.7302782Z Selecting previously unselected package libclass-singleton-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.7444438Z Preparing to unpack .../37-libclass-singleton-perl_1.6-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.7456070Z Unpacking libclass-singleton-perl (1.6-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.7663048Z Selecting previously unselected package libdatetime-timezone-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.7797760Z Preparing to unpack .../38-libdatetime-timezone-perl_1%3a2.62-1+2024a_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.7808931Z Unpacking libdatetime-timezone-perl (1:2.62-1+2024a) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.8770054Z Selecting previously unselected package libdatetime-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.8908132Z Preparing to unpack .../39-libdatetime-perl_2%3a1.65-1build2_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.8916684Z Unpacking libdatetime-perl (2:1.65-1build2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.9169932Z Selecting previously unselected package libperlio-gzip-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:32.9305473Z Preparing to unpack .../40-libperlio-gzip-perl_0.20-1build4_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.9314217Z Unpacking libperlio-gzip-perl (0.20-1build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.9528881Z Selecting previously unselected package lcov.
+test	UNKNOWN STEP	2025-12-22T15:45:32.9666287Z Preparing to unpack .../41-lcov_2.0-4ubuntu2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:32.9676752Z Unpacking lcov (2.0-4ubuntu2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0078953Z Selecting previously unselected package libclass-c3-xs-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.0213282Z Preparing to unpack .../42-libclass-c3-xs-perl_0.15-1build6_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0222994Z Unpacking libclass-c3-xs-perl (0.15-1build6) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0449971Z Selecting previously unselected package libclass-xsaccessor-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.0583674Z Preparing to unpack .../43-libclass-xsaccessor-perl_1.19-4build4_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0599372Z Unpacking libclass-xsaccessor-perl (1.19-4build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0816459Z Selecting previously unselected package libpadwalker-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.0950695Z Preparing to unpack .../44-libpadwalker-perl_2.5-1build6_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.0961234Z Unpacking libpadwalker-perl (2.5-1build6) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.1182240Z Selecting previously unselected package libdevel-caller-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:33.1318585Z Preparing to unpack .../45-libdevel-caller-perl_2.07-1build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.1328380Z Unpacking libdevel-caller-perl:amd64 (2.07-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.1538413Z Selecting previously unselected package libdevel-lexalias-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.1674288Z Preparing to unpack .../46-libdevel-lexalias-perl_0.05-3build4_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.1682700Z Unpacking libdevel-lexalias-perl (0.05-3build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.1890252Z Selecting previously unselected package libpackage-stash-xs-perl:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:33.2024363Z Preparing to unpack .../47-libpackage-stash-xs-perl_0.30-1build4_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.2036723Z Unpacking libpackage-stash-xs-perl:amd64 (0.30-1build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.2259512Z Selecting previously unselected package libpoppler134:amd64.
+test	UNKNOWN STEP	2025-12-22T15:45:33.2393597Z Preparing to unpack .../48-libpoppler134_24.02.0-1ubuntu9.8_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.2419572Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.2805950Z Selecting previously unselected package libreadonly-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.2940532Z Preparing to unpack .../49-libreadonly-perl_2.050-3_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.2950134Z Unpacking libreadonly-perl (2.050-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.3163067Z Selecting previously unselected package libref-util-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.3299383Z Preparing to unpack .../50-libref-util-perl_0.204-2_all.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.3309316Z Unpacking libref-util-perl (0.204-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.3522294Z Selecting previously unselected package libref-util-xs-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.3662495Z Preparing to unpack .../51-libref-util-xs-perl_0.117-2build4_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.3675726Z Unpacking libref-util-xs-perl (0.117-2build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.3911880Z Selecting previously unselected package poppler-utils.
+test	UNKNOWN STEP	2025-12-22T15:45:33.4047131Z Preparing to unpack .../52-poppler-utils_24.02.0-1ubuntu9.8_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.4056284Z Unpacking poppler-utils (24.02.0-1ubuntu9.8) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.4470950Z Selecting previously unselected package libgd-perl.
+test	UNKNOWN STEP	2025-12-22T15:45:33.4611547Z Preparing to unpack .../53-libgd-perl_2.78-1build3_amd64.deb ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.4620114Z Unpacking libgd-perl (2.78-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5102904Z Setting up libclass-inspector-perl (1.36-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5135392Z Setting up libdynaloader-functions-perl (0.003-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5171913Z Setting up libclass-method-modifiers-perl (2.15-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5197270Z Setting up libref-util-xs-perl (0.117-2build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5227756Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5251200Z Setting up libsub-identify-perl (0.14-3build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5270802Z Setting up libtry-tiny-perl (0.31-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5297033Z Setting up libclass-singleton-perl (1.6-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5322037Z Setting up libpadwalker-perl (2.5-1build6) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5348166Z Setting up libxstring-perl:amd64 (0.005-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5372530Z Setting up libclass-c3-xs-perl (0.15-1build6) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5396953Z Setting up libdevel-caller-perl:amd64 (2.07-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5423208Z Setting up libsub-install-perl (0.929-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5444254Z Setting up poppler-data (0.4.12-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5533659Z Setting up libgd-perl (2.78-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5561751Z Setting up libreadonly-perl (2.050-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5583638Z Setting up libdevel-lexalias-perl (0.05-3build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5611724Z Setting up libpackage-stash-xs-perl:amd64 (0.30-1build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5650694Z Setting up libclass-data-inheritable-perl (0.08-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5676644Z Setting up libalgorithm-c3-perl (0.11-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5698918Z Setting up libref-util-perl (0.204-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5722484Z Setting up libvariable-magic-perl (0.63-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5823271Z Setting up libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5856757Z Setting up libparams-util-perl (1.102-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5880639Z Setting up libsub-exporter-progressive-perl (0.001013-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5903615Z Setting up libcapture-tiny-perl (0.48-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5930264Z Setting up libsub-name-perl:amd64 (0.27-1build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5957076Z Setting up librole-tiny-perl (2.002004-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.5982057Z Setting up libfile-sharedir-perl (1.118-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6006499Z Setting up libsub-quote-perl (2.006008-1ubuntu1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6034026Z Setting up libdevel-stacktrace-perl (2.0500-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6061925Z Setting up libclass-xsaccessor-perl (1.19-4build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6086285Z Setting up poppler-utils (24.02.0-1ubuntu9.8) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6115331Z Setting up libperlio-gzip-perl (0.20-1build4) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6141579Z Setting up libexception-class-perl (1.45-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6166921Z Setting up libclass-c3-perl (0.35-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6212572Z Setting up libdevel-callchecker-perl:amd64 (0.008-2build3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6240338Z Setting up libdata-optlist-perl (0.114-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6267238Z Setting up libmro-compat-perl (0.15-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6299586Z Setting up libsub-exporter-perl (0.990-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6325360Z Setting up libeval-closure-perl (0.14-3) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6360901Z Setting up libparams-validationcompiler-perl (0.31-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6389853Z Setting up libparams-classify-perl:amd64 (0.015-2build5) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6413902Z Setting up libmodule-runtime-perl (0.016-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6437413Z Setting up libmodule-implementation-perl (0.09-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6460476Z Setting up libpackage-stash-perl (0.40-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6485739Z Setting up libspecio-perl (0.48-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6586455Z Setting up libb-hooks-endofscope-perl (0.28-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6616549Z Setting up libnamespace-clean-perl (0.27-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6643205Z Setting up libnamespace-autoclean-perl (0.29-2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6667397Z Setting up libdatetime-locale-perl (1:1.37-1) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6694807Z Setting up libdatetime-timezone-perl (1:2.62-1+2024a) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6722894Z Setting up libdatetime-perl (2:1.65-1build2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6749374Z Setting up lcov (2.0-4ubuntu2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.6795753Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.7290530Z Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.7659042Z Processing triggers for man-db (2.12.0-4build2) ...
+test	UNKNOWN STEP	2025-12-22T15:45:33.7687445Z Not building database; man-db/auto-update is not 'true'.
+test	UNKNOWN STEP	2025-12-22T15:45:34.4565409Z 
+test	UNKNOWN STEP	2025-12-22T15:45:34.4565891Z Running kernel seems to be up-to-date.
+test	UNKNOWN STEP	2025-12-22T15:45:34.4566257Z 
+test	UNKNOWN STEP	2025-12-22T15:45:34.4566428Z No services need to be restarted.
+test	UNKNOWN STEP	2025-12-22T15:45:34.4566717Z 
+test	UNKNOWN STEP	2025-12-22T15:45:34.4566868Z No containers need to be restarted.
+test	UNKNOWN STEP	2025-12-22T15:45:34.4567153Z 
+test	UNKNOWN STEP	2025-12-22T15:45:34.4567341Z No user sessions are running outdated binaries.
+test	UNKNOWN STEP	2025-12-22T15:45:34.4567729Z 
+test	UNKNOWN STEP	2025-12-22T15:45:34.4568055Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+test	UNKNOWN STEP	2025-12-22T15:45:35.4129274Z warning: current user is not root/admin, system install is likely to fail.
+test	UNKNOWN STEP	2025-12-22T15:45:35.4291836Z Updated Git hooks.
+test	UNKNOWN STEP	2025-12-22T15:45:35.4292181Z Git LFS initialized.
+test	UNKNOWN STEP	2025-12-22T15:45:35.4605206Z ##[group]Run set -eux
+test	UNKNOWN STEP	2025-12-22T15:45:35.4605524Z [36;1mset -eux[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4605717Z [36;1mout=ci-diagnostics.txt[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4605998Z [36;1mecho "=== CI Diagnostics: $(date -u) ===" > "$out"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4606375Z [36;1mecho "Java:" >> "$out"; java -version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4606807Z [36;1mecho "Javac:" >> "$out"; javac -version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4607243Z [36;1mecho "Flutter:" >> "$out"; flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4607645Z [36;1mecho "Which flutter: $(which flutter || true)" >> "$out"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4608112Z [36;1mecho "pdftotext:" >> "$out"; pdftotext -v 2>&1 | sed -n '1,5p' >> "$out" || echo "pdftotext not installed" >> "$out"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4609347Z [36;1mecho "git-lfs:" >> "$out"; git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4609906Z [36;1mecho "lcov:" >> "$out"; lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:35.4642664Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:35.4642886Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:35.4643159Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:35.4643600Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:35.4644003Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:35.4644323Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:35.4644747Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:35.4697081Z + out=ci-diagnostics.txt
+test	UNKNOWN STEP	2025-12-22T15:45:35.4699681Z ++ date -u
+test	UNKNOWN STEP	2025-12-22T15:45:35.4710622Z + echo '=== CI Diagnostics: Mon Dec 22 15:45:35 UTC 2025 ==='
+test	UNKNOWN STEP	2025-12-22T15:45:35.4711399Z + echo Java:
+test	UNKNOWN STEP	2025-12-22T15:45:35.4714005Z + java -version
+test	UNKNOWN STEP	2025-12-22T15:45:35.4715742Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:35.4996148Z + echo Javac:
+test	UNKNOWN STEP	2025-12-22T15:45:35.4998391Z + javac -version
+test	UNKNOWN STEP	2025-12-22T15:45:35.4999346Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:35.6354848Z + echo Flutter:
+test	UNKNOWN STEP	2025-12-22T15:45:35.6357237Z + flutter --version
+test	UNKNOWN STEP	2025-12-22T15:45:35.6358189Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:35.7428166Z ++ which flutter
+test	UNKNOWN STEP	2025-12-22T15:45:35.7444118Z + echo 'Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter'
+test	UNKNOWN STEP	2025-12-22T15:45:35.7444890Z + echo pdftotext:
+test	UNKNOWN STEP	2025-12-22T15:45:35.7446892Z + pdftotext -v
+test	UNKNOWN STEP	2025-12-22T15:45:35.7449028Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:35.7645217Z + echo git-lfs:
+test	UNKNOWN STEP	2025-12-22T15:45:35.7650814Z + git lfs --version
+test	UNKNOWN STEP	2025-12-22T15:45:35.7653881Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:35.7745613Z + echo lcov:
+test	UNKNOWN STEP	2025-12-22T15:45:35.7755583Z + lcov --version
+test	UNKNOWN STEP	2025-12-22T15:45:35.7756312Z + sed -n 1,5p
+test	UNKNOWN STEP	2025-12-22T15:45:36.0627840Z ##[group]Run actions/upload-artifact@v4
+test	UNKNOWN STEP	2025-12-22T15:45:36.0628112Z with:
+test	UNKNOWN STEP	2025-12-22T15:45:36.0628280Z   name: ci-diagnostics
+test	UNKNOWN STEP	2025-12-22T15:45:36.0628474Z   path: ci-diagnostics.txt
+test	UNKNOWN STEP	2025-12-22T15:45:36.0628685Z   if-no-files-found: warn
+test	UNKNOWN STEP	2025-12-22T15:45:36.0628884Z   compression-level: 6
+test	UNKNOWN STEP	2025-12-22T15:45:36.0629064Z   overwrite: false
+test	UNKNOWN STEP	2025-12-22T15:45:36.0629249Z   include-hidden-files: false
+test	UNKNOWN STEP	2025-12-22T15:45:36.0629442Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:36.0629708Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.0630149Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.0630556Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.0630860Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:36.0631085Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:36.2733846Z With the provided path, there will be 1 file uploaded
+test	UNKNOWN STEP	2025-12-22T15:45:36.2739007Z Artifact name is valid!
+test	UNKNOWN STEP	2025-12-22T15:45:36.2740344Z Root directory input is valid!
+test	UNKNOWN STEP	2025-12-22T15:45:36.4476823Z Beginning upload of artifact content to blob storage
+test	UNKNOWN STEP	2025-12-22T15:45:36.6115451Z Uploaded bytes 716
+test	UNKNOWN STEP	2025-12-22T15:45:36.6571951Z Finished uploading artifact content to blob storage!
+test	UNKNOWN STEP	2025-12-22T15:45:36.6575693Z SHA256 digest of uploaded artifact zip is 32ae2f46cc1735b737ff3f6f0483a81e81d93f38acfd8234bfd5e0eda232ac8e
+test	UNKNOWN STEP	2025-12-22T15:45:36.6578028Z Finalizing artifact upload
+test	UNKNOWN STEP	2025-12-22T15:45:36.7776987Z Artifact ci-diagnostics.zip successfully finalized. Artifact ID 4944827002
+test	UNKNOWN STEP	2025-12-22T15:45:36.7778361Z Artifact ci-diagnostics has been successfully uploaded! Final size is 716 bytes. Artifact ID is 4944827002
+test	UNKNOWN STEP	2025-12-22T15:45:36.7787322Z Artifact download URL: https://github.com/hfcs/simple_match/actions/runs/20436717767/artifacts/4944827002
+test	UNKNOWN STEP	2025-12-22T15:45:36.7877869Z ##[group]Run set -eux
+test	UNKNOWN STEP	2025-12-22T15:45:36.7878137Z [36;1mset -eux[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7878327Z [36;1mecho "===== ENV ====="[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7878555Z [36;1muname -a || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7878791Z [36;1mecho "JAVA_HOME=$JAVA_HOME"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7879031Z [36;1mjava -version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7879256Z [36;1mjavac -version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7879514Z [36;1mecho "Flutter:" && flutter --version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7879833Z [36;1mecho "Which flutter: $(which flutter || true)"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7880206Z [36;1mecho "pdftotext:" && pdftotext -v || echo "pdftotext not installed"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7880625Z [36;1mecho "git-lfs:" && git lfs --version || echo "git-lfs not installed"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7881011Z [36;1mecho "lcov:" && lcov --version || echo "lcov not installed"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:36.7913878Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:36.7914101Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:36.7914402Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.7915155Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.7915571Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.7916064Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:36.7916290Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:36.7968441Z + echo '===== ENV ====='
+test	UNKNOWN STEP	2025-12-22T15:45:36.7968842Z ===== ENV =====
+test	UNKNOWN STEP	2025-12-22T15:45:36.7969158Z + uname -a
+test	UNKNOWN STEP	2025-12-22T15:45:36.7978391Z Linux runnervmh13bl 6.11.0-1018-azure #18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+test	UNKNOWN STEP	2025-12-22T15:45:36.7979709Z + echo JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.7980338Z + java -version
+test	UNKNOWN STEP	2025-12-22T15:45:36.7981100Z JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:36.8227886Z openjdk version "21.0.9" 2025-10-21 LTS
+test	UNKNOWN STEP	2025-12-22T15:45:36.8229881Z OpenJDK Runtime Environment Temurin-21.0.9+10 (build 21.0.9+10-LTS)
+test	UNKNOWN STEP	2025-12-22T15:45:36.8230686Z OpenJDK 64-Bit Server VM Temurin-21.0.9+10 (build 21.0.9+10-LTS, mixed mode, sharing)
+test	UNKNOWN STEP	2025-12-22T15:45:36.8273241Z + javac -version
+test	UNKNOWN STEP	2025-12-22T15:45:36.9456000Z javac 21.0.9
+test	UNKNOWN STEP	2025-12-22T15:45:36.9704036Z + echo Flutter:
+test	UNKNOWN STEP	2025-12-22T15:45:36.9704411Z Flutter:
+test	UNKNOWN STEP	2025-12-22T15:45:36.9704879Z + flutter --version
+test	UNKNOWN STEP	2025-12-22T15:45:37.0684381Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	UNKNOWN STEP	2025-12-22T15:45:37.0685560Z Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+test	UNKNOWN STEP	2025-12-22T15:45:37.0686722Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+test	UNKNOWN STEP	2025-12-22T15:45:37.0687597Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	UNKNOWN STEP	2025-12-22T15:45:37.0723658Z ++ which flutter
+test	UNKNOWN STEP	2025-12-22T15:45:37.0736570Z + echo 'Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter'
+test	UNKNOWN STEP	2025-12-22T15:45:37.0737487Z Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter
+test	UNKNOWN STEP	2025-12-22T15:45:37.0738067Z + echo pdftotext:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0738276Z + pdftotext -v
+test	UNKNOWN STEP	2025-12-22T15:45:37.0738468Z pdftotext:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0806262Z pdftotext version 24.02.0
+test	UNKNOWN STEP	2025-12-22T15:45:37.0806848Z Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+test	UNKNOWN STEP	2025-12-22T15:45:37.0807370Z Copyright 1996-2011, 2022 Glyph & Cog, LLC
+test	UNKNOWN STEP	2025-12-22T15:45:37.0816221Z + echo git-lfs:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0816586Z git-lfs:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0816942Z + git lfs --version
+test	UNKNOWN STEP	2025-12-22T15:45:37.0898393Z git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+test	UNKNOWN STEP	2025-12-22T15:45:37.0906394Z + echo lcov:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0906694Z lcov:
+test	UNKNOWN STEP	2025-12-22T15:45:37.0906899Z + lcov --version
+test	UNKNOWN STEP	2025-12-22T15:45:37.2555501Z lcov: LCOV version 2.0-1
+test	UNKNOWN STEP	2025-12-22T15:45:37.3605686Z ##[group]Run actions/cache@v4
+test	UNKNOWN STEP	2025-12-22T15:45:37.3605948Z with:
+test	UNKNOWN STEP	2025-12-22T15:45:37.3606134Z   path: ~/.pub-cache
+test	UNKNOWN STEP	
+test	UNKNOWN STEP	2025-12-22T15:45:37.3606490Z   key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	UNKNOWN STEP	2025-12-22T15:45:37.3606903Z   restore-keys: Linux-pub-
+test	UNKNOWN STEP	
+test	UNKNOWN STEP	2025-12-22T15:45:37.3607135Z   enableCrossOsArchive: false
+test	UNKNOWN STEP	2025-12-22T15:45:37.3607364Z   fail-on-cache-miss: false
+test	UNKNOWN STEP	2025-12-22T15:45:37.3607574Z   lookup-only: false
+test	UNKNOWN STEP	2025-12-22T15:45:37.3607781Z   save-always: false
+test	UNKNOWN STEP	2025-12-22T15:45:37.3607954Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:37.3608232Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:37.3608670Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:37.3609083Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:37.3609396Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:37.3609618Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:37.6335208Z Cache hit for: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	UNKNOWN STEP	2025-12-22T15:45:38.3286136Z Received 40113154 of 40113154 (100.0%), 66.8 MBs/sec
+test	UNKNOWN STEP	2025-12-22T15:45:38.3287209Z Cache Size: ~38 MB (40113154 B)
+test	UNKNOWN STEP	2025-12-22T15:45:38.3321243Z [command]/usr/bin/tar -xf /home/runner/work/_temp/423a7ae6-2d20-4b86-ae9f-0f399078631d/cache.tzst -P -C /home/runner/work/simple_match/simple_match --use-compress-program unzstd
+test	UNKNOWN STEP	2025-12-22T15:45:38.9852155Z Cache restored successfully
+test	UNKNOWN STEP	2025-12-22T15:45:39.0015477Z Cache restored from key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	UNKNOWN STEP	2025-12-22T15:45:39.0120285Z ##[group]Run flutter pub get
+test	UNKNOWN STEP	2025-12-22T15:45:39.0120566Z [36;1mflutter pub get[0m
+test	UNKNOWN STEP	2025-12-22T15:45:39.0152516Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:39.0152753Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:39.0153037Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:39.0153515Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:39.0153938Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:39.0154266Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:39.0154664Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:39.4771290Z Resolving dependencies...
+test	UNKNOWN STEP	2025-12-22T15:45:39.6522047Z Downloading packages...
+test	UNKNOWN STEP	2025-12-22T15:45:39.7211539Z   _fe_analyzer_shared 89.0.0 (92.0.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7212056Z   analyzer 8.2.0 (9.0.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7212354Z   build 4.0.0 (4.0.3 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7212589Z   build_daemon 4.0.4 (4.1.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7212890Z   build_runner 2.8.0 (2.10.4 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7213135Z   built_value 8.12.0 (8.12.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7213387Z   characters 1.4.0 (1.4.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7213630Z   crypto 3.0.6 (3.0.7 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7213860Z   dart_style 3.1.2 (3.1.3 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7214097Z   flutter_lints 5.0.0 (6.0.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7214343Z   http 1.5.0 (1.6.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7214716Z   image 4.5.4 (4.7.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7214936Z   lints 5.1.1 (6.0.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7215157Z   matcher 0.12.17 (0.12.18 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7215436Z   material_color_utilities 0.11.1 (0.13.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7215749Z > meta 1.17.0 (was 1.16.0)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7216087Z   mockito 5.5.1 (5.6.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7216469Z   path_provider_android 2.2.18 (2.2.22 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7216796Z   path_provider_foundation 2.4.2 (2.5.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7217089Z   shared_preferences 2.5.3 (2.5.4 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7217381Z   shared_preferences_android 2.4.13 (2.4.18 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7217701Z   shared_preferences_foundation 2.5.4 (2.5.6 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7217983Z   source_gen 4.0.1 (4.1.1 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7218232Z > test_api 0.7.7 (was 0.7.6) (0.7.8 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7218481Z   watcher 1.1.3 (1.2.0 available)
+test	UNKNOWN STEP	2025-12-22T15:45:39.7218719Z Changed 2 dependencies!
+test	UNKNOWN STEP	2025-12-22T15:45:39.7219045Z 24 packages have newer versions incompatible with dependency constraints.
+test	UNKNOWN STEP	2025-12-22T15:45:39.7219443Z Try `flutter pub outdated` for more information.
+test	UNKNOWN STEP	2025-12-22T15:45:40.1350287Z ##[group]Run sudo apt-get update
+test	UNKNOWN STEP	2025-12-22T15:45:40.1350592Z [36;1msudo apt-get update[0m
+test	UNKNOWN STEP	2025-12-22T15:45:40.1350860Z [36;1msudo apt-get install -y poppler-utils[0m
+test	UNKNOWN STEP	2025-12-22T15:45:40.1383749Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:40.1383999Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:40.1384289Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:40.1384942Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:40.1385381Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:40.1385712Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:40.1385947Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:40.2038989Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	UNKNOWN STEP	2025-12-22T15:45:40.2332850Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:40.2343351Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:40.2348033Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:40.2368643Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:40.2377664Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:40.2402311Z Hit:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+test	UNKNOWN STEP	2025-12-22T15:45:41.4329754Z Reading package lists...
+test	UNKNOWN STEP	2025-12-22T15:45:41.4649627Z Reading package lists...
+test	UNKNOWN STEP	2025-12-22T15:45:41.6493379Z Building dependency tree...
+test	UNKNOWN STEP	2025-12-22T15:45:41.6501265Z Reading state information...
+test	UNKNOWN STEP	2025-12-22T15:45:41.8384452Z poppler-utils is already the newest version (24.02.0-1ubuntu9.8).
+test	UNKNOWN STEP	2025-12-22T15:45:41.8385213Z 0 upgraded, 0 newly installed, 0 to remove and 69 not upgraded.
+test	UNKNOWN STEP	2025-12-22T15:45:41.8426072Z ##[group]Run echo "Flutter:" && flutter --version || true
+test	UNKNOWN STEP	2025-12-22T15:45:41.8426469Z [36;1mecho "Flutter:" && flutter --version || true[0m
+test	UNKNOWN STEP	2025-12-22T15:45:41.8426878Z [36;1mecho "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:41.8427335Z [36;1mecho "git-lfs:" && git lfs --version || echo "git-lfs not present"[0m
+test	UNKNOWN STEP	2025-12-22T15:45:41.8459831Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:41.8460067Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:41.8460369Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.8460831Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.8461261Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.8461586Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:41.8461825Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:41.8512743Z Flutter:
+test	UNKNOWN STEP	2025-12-22T15:45:41.9491741Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	UNKNOWN STEP	2025-12-22T15:45:41.9492693Z Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+test	UNKNOWN STEP	2025-12-22T15:45:41.9493926Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+test	UNKNOWN STEP	2025-12-22T15:45:41.9495221Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	UNKNOWN STEP	2025-12-22T15:45:41.9529332Z pdftotext (poppler):
+test	UNKNOWN STEP	2025-12-22T15:45:41.9601230Z pdftotext version 24.02.0
+test	UNKNOWN STEP	2025-12-22T15:45:41.9601905Z Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+test	UNKNOWN STEP	2025-12-22T15:45:41.9602503Z Copyright 1996-2011, 2022 Glyph & Cog, LLC
+test	UNKNOWN STEP	2025-12-22T15:45:41.9610665Z git-lfs:
+test	UNKNOWN STEP	2025-12-22T15:45:41.9693337Z git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+test	UNKNOWN STEP	2025-12-22T15:45:41.9725991Z ##[group]Run flutter test --coverage
+test	UNKNOWN STEP	2025-12-22T15:45:41.9726319Z [36;1mflutter test --coverage[0m
+test	UNKNOWN STEP	2025-12-22T15:45:41.9759160Z shell: /usr/bin/bash -e {0}
+test	UNKNOWN STEP	2025-12-22T15:45:41.9759390Z env:
+test	UNKNOWN STEP	2025-12-22T15:45:41.9759679Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.9760147Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.9760582Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	UNKNOWN STEP	2025-12-22T15:45:41.9760918Z   PUB_CACHE: /home/runner/.pub-cache
+test	UNKNOWN STEP	2025-12-22T15:45:41.9761158Z ##[endgroup]
+test	UNKNOWN STEP	2025-12-22T15:45:42.5497239Z Error detected in pubspec.yaml:
+test	UNKNOWN STEP	2025-12-22T15:45:42.5508483Z No file or variants found for asset: assets/fonts/NotoSerifHK-wght.ttf.
+test	UNKNOWN STEP	2025-12-22T15:45:42.5509056Z 
+test	UNKNOWN STEP	2025-12-22T15:45:42.5624247Z Error: Failed to build asset bundle
+test	UNKNOWN STEP	2025-12-22T15:45:42.5695137Z ##[error]Process completed with exit code 1.
+test	UNKNOWN STEP	2025-12-22T15:45:42.5817270Z Post job cleanup.
+test	UNKNOWN STEP	2025-12-22T15:45:42.5864449Z Post job cleanup.
+test	UNKNOWN STEP	2025-12-22T15:45:42.7613644Z Post job cleanup.
+test	UNKNOWN STEP	2025-12-22T15:45:42.8572388Z [command]/usr/bin/git version
+test	UNKNOWN STEP	2025-12-22T15:45:42.8608601Z git version 2.52.0
+test	UNKNOWN STEP	2025-12-22T15:45:42.8653212Z Temporarily overriding HOME='/home/runner/work/_temp/f153bb0f-c742-4dbd-8fa9-571ce8d9cdd1' before making global git config changes
+test	UNKNOWN STEP	2025-12-22T15:45:42.8654408Z Adding repository directory to the temporary git global config as a safe directory
+test	UNKNOWN STEP	2025-12-22T15:45:42.8666252Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+test	UNKNOWN STEP	2025-12-22T15:45:42.8700803Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	UNKNOWN STEP	2025-12-22T15:45:42.8735081Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	UNKNOWN STEP	2025-12-22T15:45:42.8960387Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	UNKNOWN STEP	2025-12-22T15:45:42.8980834Z http.https://github.com/.extraheader
+test	UNKNOWN STEP	2025-12-22T15:45:42.8993654Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+test	UNKNOWN STEP	2025-12-22T15:45:42.9023865Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	UNKNOWN STEP	2025-12-22T15:45:42.9243667Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	UNKNOWN STEP	2025-12-22T15:45:42.9275218Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	UNKNOWN STEP	2025-12-22T15:45:42.9603604Z Cleaning up orphan processes

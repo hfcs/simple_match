@@ -1,0 +1,1026 @@
+{"protocolVersion":"0.1.1","runnerVersion":null,"pid":30991,"type":"start","time":0}
+{"suite":{"id":0,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"suite","time":0}
+{"test":{"id":1,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart","suiteID":0,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":0}
+{"suite":{"id":2,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_integration_like_test.dart"},"type":"suite","time":2}
+{"test":{"id":3,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_integration_like_test.dart","suiteID":2,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2}
+{"suite":{"id":4,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_targets_test.dart"},"type":"suite","time":2}
+{"test":{"id":5,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_targets_test.dart","suiteID":4,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2}
+{"suite":{"id":6,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"suite","time":2}
+{"test":{"id":7,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart","suiteID":6,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2}
+{"suite":{"id":8,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shim_test.dart"},"type":"suite","time":2}
+{"test":{"id":9,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shim_test.dart","suiteID":8,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2}
+{"count":66,"time":3,"type":"allSuites"}
+{"testID":1,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":1212}
+{"group":{"id":10,"suiteID":0,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":7,"line":null,"column":null,"url":null},"type":"group","time":1213}
+{"test":{"id":11,"name":"Export uses documentsDirOverride and shows exported status","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1213}
+{"testID":3,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":1264}
+{"group":{"id":12,"suiteID":2,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":1264}
+{"test":{"id":13,"name":"Import Backup (integration-like) using pickBackupOverride","suiteID":2,"groupIDs":[12],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":14,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_integration_like_test.dart"},"type":"testStart","time":1265}
+{"testID":5,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":1314}
+{"group":{"id":14,"suiteID":4,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":1314}
+{"test":{"id":15,"name":"exportBackupForTest triggers web-export branch when forced web","suiteID":4,"groupIDs":[14],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":18,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_targets_test.dart"},"type":"testStart","time":1314}
+{"testID":7,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":1420}
+{"group":{"id":16,"suiteID":6,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":6,"line":null,"column":null,"url":null},"type":"group","time":1420}
+{"test":{"id":17,"name":"Import flow: dismissing Select backup dialog returns early (cancel)","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":25,"root_column":5,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":1420}
+{"testID":9,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":1510}
+{"group":{"id":18,"suiteID":8,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":1510}
+{"test":{"id":19,"name":"shim: invoke _importViaWeb through state to exercise web branch","suiteID":8,"groupIDs":[18],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shim_test.dart"},"type":"testStart","time":1510}
+{"testID":11,"messageType":"print","message":"FakePersistence.exportBackupToFile called with path: /tmp/simple_match_backup_2025-12-26T19-32-59.225899.json","type":"print","time":1605}
+{"testID":11,"messageType":"print","message":"FakePersistence: creating file","type":"print","time":1605}
+{"testID":13,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150","type":"print","time":1648}
+{"testID":13,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":1648}
+{"testID":13,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150","type":"print","time":1648}
+{"testID":13,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":1648}
+{"testID":11,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1667}
+{"test":{"id":20,"name":"Import with pickBackupOverride returning null shows no file selected","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":43,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1668}
+{"testID":15,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":1670}
+{"testID":15,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":1670}
+{"testID":13,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1723}
+{"suite":{"id":21,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_instance_wrappers_test.dart"},"type":"suite","time":1734}
+{"test":{"id":22,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_instance_wrappers_test.dart","suiteID":21,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":1734}
+{"testID":20,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1740}
+{"test":{"id":23,"name":"Import dry-run failure via pickBackupOverride shows validation failed","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":68,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1740}
+{"testID":15,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1749}
+{"test":{"id":24,"name":"importViaWebForTest shows confirm dialog and Cancel returns without import","suiteID":4,"groupIDs":[14],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":50,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_targets_test.dart"},"type":"testStart","time":1750}
+{"testID":23,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":1763}
+{"testID":23,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1764}
+{"testID":24,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":1776}
+{"testID":24,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1776}
+{"testID":23,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1781}
+{"test":{"id":25,"name":"Import actual import failure shows Import failed status","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":98,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1781}
+{"testID":25,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":1798}
+{"testID":25,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1798}
+{"testID":25,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":1798}
+{"testID":25,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1798}
+{"testID":25,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1820}
+{"test":{"id":26,"name":"Import succeeds but repo.loadAll throws shows reload failed state","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":129,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1820}
+{"testID":26,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":1841}
+{"testID":26,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1841}
+{"testID":26,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":1841}
+{"testID":26,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1841}
+{"testID":19,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":1864}
+{"testID":19,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":1864}
+{"testID":19,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":1864}
+{"testID":19,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":1864}
+{"testID":26,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1865}
+{"test":{"id":27,"name":"Import from documents list and readFileBytesOverride succeeds","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":157,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1866}
+{"testID":24,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1876}
+{"suite":{"id":28,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart"},"type":"suite","time":1884}
+{"test":{"id":29,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart","suiteID":28,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":1884}
+{"testID":17,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1931}
+{"test":{"id":30,"name":"Export flow: exporter throws shows Export failed SnackBar","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":63,"root_column":5,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":1932}
+{"testID":27,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":1937}
+{"testID":27,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":1937}
+{"testID":19,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1939}
+{"suite":{"id":31,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"suite","time":1945}
+{"test":{"id":32,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart","suiteID":31,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":1945}
+{"testID":30,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":1955}
+{"testID":30,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":1955}
+{"testID":27,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1969}
+{"test":{"id":33,"name":"Import readFileBytesOverride throws shows Import error","suiteID":0,"groupIDs":[10],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":194,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_uncovered_test.dart"},"type":"testStart","time":1969}
+{"testID":30,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":1993}
+{"test":{"id":34,"name":"Export flow: pickBackupOverride returns null shows No file selected","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":89,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":1994}
+{"testID":33,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2019}
+{"suite":{"id":35,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_test.dart"},"type":"suite","time":2026}
+{"test":{"id":36,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_test.dart","suiteID":35,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2026}
+{"testID":34,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2030}
+{"test":{"id":37,"name":"Export flow: dry-run fails shows validation failed SnackBar","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":111,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":2030}
+{"testID":37,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118","type":"print","time":2048}
+{"testID":37,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2048}
+{"testID":37,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2059}
+{"test":{"id":38,"name":"Import flow: repo.loadAll throws after successful import shows reload failed status","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":143,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":2059}
+{"testID":38,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=148","type":"print","time":2079}
+{"testID":38,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2079}
+{"testID":38,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=148","type":"print","time":2080}
+{"testID":38,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2080}
+{"testID":38,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2097}
+{"test":{"id":39,"name":"Force web export/import paths are reachable via state wrappers","suiteID":6,"groupIDs":[16],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":179,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branches_test.dart"},"type":"testStart","time":2098}
+{"testID":39,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":2118}
+{"testID":39,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":2118}
+{"testID":39,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118","type":"print","time":2128}
+{"testID":39,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2128}
+{"testID":39,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=118","type":"print","time":2128}
+{"testID":39,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2129}
+{"testID":39,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2141}
+{"suite":{"id":40,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_direct_invocations_test.dart"},"type":"suite","time":2148}
+{"test":{"id":41,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_direct_invocations_test.dart","suiteID":40,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2148}
+{"testID":22,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2295}
+{"group":{"id":42,"suiteID":21,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":2295}
+{"test":{"id":43,"name":"instance wrappers: exportViaWebForTest and importViaWebForTest","suiteID":21,"groupIDs":[42],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_instance_wrappers_test.dart"},"type":"testStart","time":2296}
+{"testID":29,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2428}
+{"group":{"id":44,"suiteID":28,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":2428}
+{"test":{"id":45,"name":"exportViaWebForTest uses exporter and updates status","suiteID":28,"groupIDs":[44],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":16,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart"},"type":"testStart","time":2428}
+{"testID":32,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2517}
+{"group":{"id":46,"suiteID":31,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":7,"line":null,"column":null,"url":null},"type":"group","time":2517}
+{"test":{"id":47,"name":"exportViaWebForTest: web export wrapper updates status using a dummy exporter","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":26,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":2517}
+{"testID":36,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2594}
+{"group":{"id":48,"suiteID":35,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":2594}
+{"test":{"id":49,"name":"Export Backup writes a file to documents directory via UI","suiteID":35,"groupIDs":[48],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_test.dart"},"type":"testStart","time":2594}
+{"testID":43,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":2645}
+{"testID":43,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":2645}
+{"testID":43,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=76","type":"print","time":2652}
+{"testID":43,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":2652}
+{"testID":43,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=76","type":"print","time":2652}
+{"testID":43,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":2652}
+{"testID":41,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2670}
+{"group":{"id":50,"suiteID":40,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":2671}
+{"test":{"id":51,"name":"Directly invoke SettingsView test wrappers to exercise branches","suiteID":40,"groupIDs":[50],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":26,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_direct_invocations_test.dart"},"type":"testStart","time":2671}
+{"testID":43,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2732}
+{"test":{"id":52,"name":"instance wrapper: importFromDocumentsConfirmedForTest","suiteID":21,"groupIDs":[42],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":68,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_instance_wrappers_test.dart"},"type":"testStart","time":2733}
+{"testID":52,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":2756}
+{"testID":52,"messageType":"print","message":"TESTDBG: read bytes length=76","type":"print","time":2757}
+{"testID":52,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=76","type":"print","time":2757}
+{"testID":52,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":2757}
+{"testID":52,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":2758}
+{"testID":52,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=76","type":"print","time":2758}
+{"testID":52,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":2758}
+{"testID":52,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":2758}
+{"testID":52,"messageType":"print","message":"TESTDBG: repo.loadAll completed","type":"print","time":2758}
+{"testID":52,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2779}
+{"testID":45,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":2783}
+{"testID":45,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":2783}
+{"suite":{"id":53,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_widget_test.dart"},"type":"suite","time":2787}
+{"test":{"id":54,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_widget_test.dart","suiteID":53,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2787}
+{"testID":45,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2855}
+{"test":{"id":55,"name":"importViaWebForTest dry-run failure shows validation","suiteID":28,"groupIDs":[44],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":48,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart"},"type":"testStart","time":2856}
+{"testID":47,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":2858}
+{"testID":47,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":2858}
+{"testID":55,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":2886}
+{"testID":55,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2891}
+{"testID":55,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2900}
+{"test":{"id":56,"name":"importFromDocumentsConfirmedForTest handles repo.loadAll throwing","suiteID":28,"groupIDs":[44],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":84,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart"},"type":"testStart","time":2900}
+{"testID":56,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":2933}
+{"testID":56,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":2933}
+{"testID":47,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2936}
+{"test":{"id":57,"name":"importViaWebForTest: pickBackupOverride returning null shows no-file SnackBar","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":62,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":2937}
+{"testID":56,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2947}
+{"suite":{"id":58,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_from_documents_test.dart"},"type":"suite","time":2956}
+{"test":{"id":59,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_from_documents_test.dart","suiteID":58,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2956}
+{"testID":57,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":2970}
+{"test":{"id":60,"name":"importFromDocumentsChosenForTest: dry-run failure shows validation message","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":82,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":2970}
+{"testID":49,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":2980}
+{"testID":49,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":2980}
+{"testID":60,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":2991}
+{"testID":60,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":2992}
+{"testID":60,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":2992}
+{"testID":60,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":2992}
+{"testID":60,"messageType":"print","message":"TESTDBG: dry-run result success=false counts={} message=validation failed","type":"print","time":2993}
+{"testID":60,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3011}
+{"test":{"id":61,"name":"importFromDocumentsChosenForTest: import succeeds but repo.reload throws shows reload failed","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":108,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":3011}
+{"testID":51,"messageType":"print","message":"TEST: calling exportViaWebForTest","type":"print","time":3012}
+{"testID":51,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":3012}
+{"testID":51,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=7","type":"print","time":3012}
+{"testID":51,"messageType":"print","message":"TEST: exportViaWebForTest returned","type":"print","time":3015}
+{"testID":51,"messageType":"print","message":"TEST: calling exportBackupForTest","type":"print","time":3016}
+{"testID":51,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":3018}
+{"testID":51,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=7","type":"print","time":3018}
+{"testID":51,"messageType":"print","message":"TEST: exportBackupForTest returned","type":"print","time":3018}
+{"testID":61,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":3030}
+{"testID":61,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":3030}
+{"testID":61,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":3030}
+{"testID":61,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3030}
+{"testID":61,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null","type":"print","time":3031}
+{"testID":61,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":3031}
+{"testID":61,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3031}
+{"testID":61,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":3031}
+{"testID":61,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3053}
+{"test":{"id":62,"name":"exportBackupForTest: documentsDirOverride throwing triggers Export failed","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":132,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":3053}
+{"testID":49,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3061}
+{"suite":{"id":63,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_gaps_test.dart"},"type":"suite","time":3069}
+{"test":{"id":64,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_gaps_test.dart","suiteID":63,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":3069}
+{"testID":51,"messageType":"print","message":"TEST: calling importViaWebForTest","type":"print","time":3074}
+{"testID":51,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":3078}
+{"testID":51,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3078}
+{"testID":51,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":3081}
+{"testID":51,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3081}
+{"testID":51,"messageType":"print","message":"TEST: importViaWebForTest returned","type":"print","time":3081}
+{"testID":51,"messageType":"print","message":"TEST: calling importFromDocumentsConfirmedForTest on throwingRepo","type":"print","time":3090}
+{"testID":51,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":3091}
+{"testID":51,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":3092}
+{"testID":51,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":3092}
+{"testID":51,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3092}
+{"testID":51,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null","type":"print","time":3092}
+{"testID":51,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":3092}
+{"testID":51,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3093}
+{"testID":51,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":3093}
+{"testID":51,"messageType":"print","message":"TEST: importFromDocumentsConfirmedForTest returned","type":"print","time":3094}
+{"testID":62,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3097}
+{"test":{"id":65,"name":"importFromDocumentsForTest: empty documents list shows no-backups SnackBar","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":153,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":3098}
+{"testID":51,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3111}
+{"suite":{"id":66,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_block_coverage_test.dart"},"type":"suite","time":3117}
+{"test":{"id":67,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_block_coverage_test.dart","suiteID":66,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":3117}
+{"testID":65,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3122}
+{"test":{"id":68,"name":"importFromDocumentsChosenForTest: final import failure sets Import failed status","suiteID":31,"groupIDs":[46],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":173,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart"},"type":"testStart","time":3122}
+{"testID":68,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":3135}
+{"testID":68,"messageType":"print","message":"TESTDBG: import res success=false message=final fail","type":"print","time":3135}
+{"testID":68,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3148}
+{"suite":{"id":69,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart"},"type":"suite","time":3155}
+{"test":{"id":70,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart","suiteID":69,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":3155}
+{"testID":54,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3336}
+{"group":{"id":71,"suiteID":53,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":3337}
+{"test":{"id":72,"name":"Tapping Settings opens SettingsView","suiteID":53,"groupIDs":[71],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":14,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_widget_test.dart"},"type":"testStart","time":3337}
+{"testID":59,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3480}
+{"group":{"id":73,"suiteID":58,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":3481}
+{"test":{"id":74,"name":"export and importFromDocuments test exercises document import/export paths","suiteID":58,"groupIDs":[73],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_from_documents_test.dart"},"type":"testStart","time":3481}
+{"testID":64,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3560}
+{"group":{"id":75,"suiteID":63,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":3560}
+{"test":{"id":76,"name":"fill gaps: deterministic exercise of IO/web branches","suiteID":63,"groupIDs":[75],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":19,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_gaps_test.dart"},"type":"testStart","time":3560}
+{"testID":67,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3635}
+{"group":{"id":77,"suiteID":66,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":3635}
+{"test":{"id":78,"name":"Import flow replaces block coverage helper usage","suiteID":66,"groupIDs":[77],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_block_coverage_test.dart"},"type":"testStart","time":3635}
+{"testID":70,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3735}
+{"group":{"id":79,"suiteID":69,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":3735}
+{"test":{"id":80,"name":"import-from-documents with empty list shows expected message","suiteID":69,"groupIDs":[79],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":15,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart"},"type":"testStart","time":3735}
+{"testID":74,"messageType":"print","message":"TEST: calling exportBackupForTest","type":"print","time":3861}
+{"testID":74,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":3864}
+{"testID":74,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":3865}
+{"testID":74,"messageType":"print","message":"TEST: saveExportOverride called with path=simple_match_backup_2025-12-26T19-33-01.486896.json length=11","type":"print","time":3865}
+{"testID":74,"messageType":"print","message":"TEST: saveExportOverride write complete (sync)","type":"print","time":3869}
+{"testID":74,"messageType":"print","message":"TEST: exportBackupForTest returned","type":"print","time":3873}
+{"testID":74,"messageType":"print","message":"TEST: calling importFromDocumentsConfirmedForTest with /var/folders/m9/ys79x0qx7hj3glk4k0r7p_gc0000gq/T/simple_match_test_backup.json","type":"print","time":3873}
+{"testID":74,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":3875}
+{"testID":74,"messageType":"print","message":"TEST: readFileBytesOverride called with path=/var/folders/m9/ys79x0qx7hj3glk4k0r7p_gc0000gq/T/simple_match_test_backup.json","type":"print","time":3875}
+{"testID":74,"messageType":"print","message":"TEST: readFileBytesOverride exists=true","type":"print","time":3875}
+{"testID":74,"messageType":"print","message":"TEST: readFileBytesOverride read 11 bytes (sync)","type":"print","time":3877}
+{"testID":74,"messageType":"print","message":"TESTDBG: read bytes length=11","type":"print","time":3877}
+{"testID":74,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=11","type":"print","time":3877}
+{"testID":74,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":3878}
+{"testID":74,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":3878}
+{"testID":74,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=11","type":"print","time":3879}
+{"testID":74,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":3879}
+{"testID":74,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":3879}
+{"testID":74,"messageType":"print","message":"TESTDBG: repo.loadAll completed","type":"print","time":3880}
+{"testID":74,"messageType":"print","message":"TEST: importFromDocumentsConfirmedForTest returned","type":"print","time":3880}
+{"testID":74,"messageType":"print","message":"TEST: verifying status text","type":"print","time":3915}
+{"testID":74,"messageType":"print","message":"TEST: done","type":"print","time":3922}
+{"testID":76,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":3935}
+{"testID":76,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":3935}
+{"testID":74,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3957}
+{"suite":{"id":81,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_mega_coverage_test.dart"},"type":"suite","time":3963}
+{"test":{"id":82,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_mega_coverage_test.dart","suiteID":81,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":3963}
+{"testID":76,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":4002}
+{"testID":76,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":4002}
+{"testID":72,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4010}
+{"test":{"id":83,"name":"Importing backup updates UI via repository reload","suiteID":53,"groupIDs":[71],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":36,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_widget_test.dart"},"type":"testStart","time":4010}
+{"testID":83,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4032}
+{"testID":76,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":4034}
+{"testID":76,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":4035}
+{"testID":76,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":4035}
+{"testID":76,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":4036}
+{"testID":76,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={} message=null","type":"print","time":4036}
+{"testID":76,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":4036}
+{"testID":76,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":4036}
+{"testID":76,"messageType":"print","message":"TESTDBG: import res success=false message=final fail","type":"print","time":4036}
+{"suite":{"id":84,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_integration_test.dart"},"type":"suite","time":4039}
+{"test":{"id":85,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_integration_test.dart","suiteID":84,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4039}
+{"testID":78,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":4043}
+{"testID":78,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":4043}
+{"testID":78,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":4043}
+{"testID":78,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":4043}
+{"testID":76,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4062}
+{"suite":{"id":86,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_failure_test.dart"},"type":"suite","time":4069}
+{"test":{"id":87,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_failure_test.dart","suiteID":86,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4069}
+{"testID":78,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4120}
+{"suite":{"id":88,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_variants_test.dart"},"type":"suite","time":4125}
+{"test":{"id":89,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_variants_test.dart","suiteID":88,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4125}
+{"testID":80,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4148}
+{"test":{"id":90,"name":"pickBackupOverride null -> Import Backup shows No file selected","suiteID":69,"groupIDs":[79],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":45,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart"},"type":"testStart","time":4148}
+{"testID":90,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4217}
+{"test":{"id":91,"name":"saveExportOverride throws -> Export failed shown","suiteID":69,"groupIDs":[79],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":70,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart"},"type":"testStart","time":4218}
+{"testID":91,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":4239}
+{"testID":91,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":4239}
+{"testID":91,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4261}
+{"suite":{"id":92,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_targets_test.dart"},"type":"suite","time":4267}
+{"test":{"id":93,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_targets_test.dart","suiteID":92,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4267}
+{"testID":85,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":4552}
+{"group":{"id":94,"suiteID":84,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":4598}
+{"test":{"id":95,"name":"Export Backup JSON generation (non-override IO path)","suiteID":84,"groupIDs":[94],"metadata":{"skip":false,"skipReason":null},"line":8,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_integration_test.dart"},"type":"testStart","time":4598}
+{"testID":82,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":4599}
+{"group":{"id":96,"suiteID":81,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":4599}
+{"test":{"id":97,"name":"Import flow covers mega helper branches","suiteID":81,"groupIDs":[96],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_mega_coverage_test.dart"},"type":"testStart","time":4599}
+{"testID":95,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":4627}
+{"suite":{"id":98,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart"},"type":"suite","time":4632}
+{"test":{"id":99,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart","suiteID":98,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4632}
+{"testID":87,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":4715}
+{"group":{"id":100,"suiteID":86,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":4716}
+{"test":{"id":101,"name":"Import flow when persistence throws shows Import error SnackBar","suiteID":86,"groupIDs":[100],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":18,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_failure_test.dart"},"type":"testStart","time":4716}
+{"testID":89,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":4764}
+{"group":{"id":102,"suiteID":88,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":4764}
+{"test":{"id":103,"name":"pickBackupOverride returns null shows No file selected","suiteID":88,"groupIDs":[102],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_variants_test.dart"},"type":"testStart","time":4764}
+{"testID":97,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":5033}
+{"testID":97,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5033}
+{"testID":97,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":5033}
+{"testID":97,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5034}
+{"testID":93,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":5092}
+{"group":{"id":104,"suiteID":92,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":5093}
+{"test":{"id":105,"name":"pickBackupOverride returns null -> No file selected","suiteID":92,"groupIDs":[104],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_targets_test.dart"},"type":"testStart","time":5093}
+{"testID":101,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=154","type":"print","time":5149}
+{"testID":101,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5149}
+{"testID":99,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":5160}
+{"group":{"id":106,"suiteID":98,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":5160}
+{"test":{"id":107,"name":"Import via web without autoConfirm: final import failure sets Import failed status","suiteID":98,"groupIDs":[106],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart"},"type":"testStart","time":5160}
+{"testID":97,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5161}
+{"suite":{"id":108,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_pick_cancel_test.dart"},"type":"suite","time":5169}
+{"test":{"id":109,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_pick_cancel_test.dart","suiteID":108,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":5169}
+{"testID":101,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5234}
+{"test":{"id":110,"name":"Export Backup with pickBackupOverride exercises import branch and shows success","suiteID":86,"groupIDs":[100],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":51,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_failure_test.dart"},"type":"testStart","time":5235}
+{"testID":110,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=157","type":"print","time":5284}
+{"testID":110,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5285}
+{"testID":103,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5299}
+{"test":{"id":111,"name":"pickBackupOverride dry-run fails shows validation failed","suiteID":88,"groupIDs":[102],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":28,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_variants_test.dart"},"type":"testStart","time":5299}
+{"testID":111,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=1","type":"print","time":5346}
+{"testID":111,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5347}
+{"testID":110,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=157","type":"print","time":5410}
+{"testID":110,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5423}
+{"testID":111,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5424}
+{"test":{"id":112,"name":"saveExportOverride used for export shows exported message","suiteID":88,"groupIDs":[102],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":48,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_variants_test.dart"},"type":"testStart","time":5425}
+{"testID":110,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5437}
+{"suite":{"id":113,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"suite","time":5445}
+{"test":{"id":114,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart","suiteID":113,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":5445}
+{"testID":112,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":5452}
+{"testID":112,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":5453}
+{"testID":112,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5472}
+{"suite":{"id":115,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_direct_test.dart"},"type":"suite","time":5478}
+{"test":{"id":116,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_direct_test.dart","suiteID":115,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":5478}
+{"testID":107,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":5630}
+{"testID":107,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5630}
+{"testID":105,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5650}
+{"test":{"id":117,"name":"listBackupsOverride empty -> No backup files found","suiteID":92,"groupIDs":[104],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":29,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_targets_test.dart"},"type":"testStart","time":5650}
+{"testID":117,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5707}
+{"test":{"id":118,"name":"pickBackupOverride autoConfirm false -> user cancels confirm dialog","suiteID":92,"groupIDs":[104],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":46,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_tiny_targets_test.dart"},"type":"testStart","time":5707}
+{"testID":107,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":5726}
+{"testID":107,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5726}
+{"testID":118,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":5733}
+{"testID":118,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5733}
+{"testID":109,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":5788}
+{"group":{"id":119,"suiteID":108,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":5788}
+{"test":{"id":120,"name":"Import flow: pickBackupOverride returns null (user cancelled)","suiteID":108,"groupIDs":[119],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_pick_cancel_test.dart"},"type":"testStart","time":5789}
+{"testID":107,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5796}
+{"test":{"id":121,"name":"Import from documents: confirm dialog and repo.loadAll throws -> reload failed status","suiteID":98,"groupIDs":[106],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":59,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart"},"type":"testStart","time":5797}
+{"testID":118,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5809}
+{"suite":{"id":122,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"suite","time":5818}
+{"test":{"id":123,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart","suiteID":122,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":5818}
+{"testID":121,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":5872}
+{"testID":121,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5872}
+{"testID":121,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":5898}
+{"testID":121,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5898}
+{"testID":121,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":5928}
+{"test":{"id":124,"name":"importFromDocumentsChosenForTest: final import failure via chosen file sets Import failed status","suiteID":98,"groupIDs":[106],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":97,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart"},"type":"testStart","time":5929}
+{"testID":124,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":5956}
+{"testID":124,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5956}
+{"testID":116,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":5982}
+{"group":{"id":125,"suiteID":115,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":5982}
+{"test":{"id":126,"name":"Direct import flow (dry-run -> import) with FakePersistence","suiteID":115,"groupIDs":[125],"metadata":{"skip":false,"skipReason":null},"line":8,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_direct_test.dart"},"type":"testStart","time":5983}
+{"testID":124,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":5983}
+{"testID":124,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5983}
+{"testID":114,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":5989}
+{"group":{"id":127,"suiteID":113,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":null,"column":null,"url":null},"type":"group","time":5989}
+{"test":{"id":128,"name":"Export override throwing shows Export failed SnackBar","suiteID":113,"groupIDs":[127],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":26,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"testStart","time":5990}
+{"testID":126,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150","type":"print","time":5996}
+{"testID":126,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":5996}
+{"testID":126,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150","type":"print","time":6004}
+{"testID":126,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":6004}
+{"testID":126,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6005}
+{"testID":124,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6006}
+{"suite":{"id":129,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart"},"type":"suite","time":6011}
+{"test":{"id":130,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart","suiteID":129,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":6011}
+{"suite":{"id":131,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"suite","time":6013}
+{"test":{"id":132,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart","suiteID":131,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":6013}
+{"testID":120,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6264}
+{"suite":{"id":133,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shims_direct_test.dart"},"type":"suite","time":6273}
+{"test":{"id":134,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shims_direct_test.dart","suiteID":133,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":6274}
+{"testID":123,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":6402}
+{"group":{"id":135,"suiteID":122,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":6,"line":null,"column":null,"url":null},"type":"group","time":6402}
+{"test":{"id":136,"name":"importViaWebForTest final import failure sets Import failed status","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":6402}
+{"testID":128,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6467}
+{"test":{"id":137,"name":"pickBackupOverride null shows No file selected SnackBar","suiteID":113,"groupIDs":[127],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":54,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"testStart","time":6467}
+{"testID":137,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6516}
+{"test":{"id":138,"name":"pickBackupOverride with invalid JSON shows validation failure","suiteID":113,"groupIDs":[127],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":78,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"testStart","time":6516}
+{"testID":130,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":6528}
+{"group":{"id":139,"suiteID":129,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":4,"line":null,"column":null,"url":null},"type":"group","time":6528}
+{"test":{"id":140,"name":"Import via web: pickBackupOverride returns null shows No file selected","suiteID":129,"groupIDs":[139],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":23,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart"},"type":"testStart","time":6529}
+{"testID":138,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6560}
+{"test":{"id":141,"name":"pickBackupOverride shows dialog and restore when not autoConfirm","suiteID":113,"groupIDs":[127],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":104,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"testStart","time":6560}
+{"testID":132,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":6597}
+{"group":{"id":142,"suiteID":131,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":null,"column":null,"url":null},"type":"group","time":6597}
+{"test":{"id":143,"name":"pickBackupOverride confirm dialog then import success","suiteID":131,"groupIDs":[142],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":18,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"testStart","time":6598}
+{"testID":141,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6650}
+{"test":{"id":144,"name":"listBackupsOverride + readFileBytesOverride import flow","suiteID":113,"groupIDs":[127],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":140,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_extra_coverage_test.dart"},"type":"testStart","time":6651}
+{"testID":144,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6713}
+{"suite":{"id":145,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_flow_test.dart"},"type":"suite","time":6722}
+{"test":{"id":146,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_flow_test.dart","suiteID":145,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":6722}
+{"testID":134,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":6768}
+{"group":{"id":147,"suiteID":133,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":6768}
+{"test":{"id":148,"name":"direct exportViaWebForTest updates status and calls exporter","suiteID":133,"groupIDs":[147],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":20,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shims_direct_test.dart"},"type":"testStart","time":6769}
+{"testID":136,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":6773}
+{"testID":136,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":6776}
+{"testID":136,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":6776}
+{"testID":136,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":6776}
+{"testID":136,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6865}
+{"test":{"id":149,"name":"importViaWebForTest dialog Cancel returns without import","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":52,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":6865}
+{"testID":149,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":6895}
+{"testID":149,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":6895}
+{"testID":143,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":6975}
+{"testID":143,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":6975}
+{"testID":149,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":6995}
+{"test":{"id":150,"name":"importFromDocumentsChosenForTest final import failure shows Import failed","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":87,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":6995}
+{"testID":140,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7020}
+{"test":{"id":151,"name":"Import from documents: empty listBackupsOverride shows no files SnackBar","suiteID":129,"groupIDs":[139],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":46,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart"},"type":"testStart","time":7020}
+{"testID":150,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":7023}
+{"testID":150,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7024}
+{"testID":150,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":7045}
+{"testID":150,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7045}
+{"testID":150,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7072}
+{"test":{"id":152,"name":"importFromDocumentsConfirmedForTest handles repo.loadAll throwing and shows reload-failed","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":120,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":7072}
+{"testID":151,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7076}
+{"test":{"id":153,"name":"Import flow: dry-run succeeds but actual import fails shows Import failed SnackBar","suiteID":129,"groupIDs":[139],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":68,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart"},"type":"testStart","time":7076}
+{"testID":143,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":7080}
+{"testID":143,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7080}
+{"testID":152,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":7100}
+{"testID":152,"messageType":"print","message":"TESTDBG: read bytes length=2","type":"print","time":7100}
+{"testID":152,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":7101}
+{"testID":152,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7101}
+{"testID":152,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null","type":"print","time":7101}
+{"testID":152,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":7101}
+{"testID":152,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7101}
+{"testID":152,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":7102}
+{"testID":153,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118","type":"print","time":7114}
+{"testID":153,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7114}
+{"testID":153,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=118","type":"print","time":7114}
+{"testID":153,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7114}
+{"testID":152,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7126}
+{"test":{"id":154,"name":"exportBackupForTest with pickBackupOverride and repo.loadAll throwing shows reload-failed","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":146,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":7126}
+{"testID":153,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7143}
+{"test":{"id":155,"name":"call coverage marker static helper","suiteID":129,"groupIDs":[139],"metadata":{"skip":false,"skipReason":null},"line":102,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_additional_behavior_test.dart"},"type":"testStart","time":7143}
+{"testID":155,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7147}
+{"testID":154,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":7150}
+{"testID":154,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7150}
+{"testID":148,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":7152}
+{"testID":148,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":7152}
+{"suite":{"id":156,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart"},"type":"suite","time":7156}
+{"test":{"id":157,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart","suiteID":156,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7156}
+{"testID":143,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7164}
+{"test":{"id":158,"name":"pickBackupOverride with dry-run failure shows validation message","suiteID":131,"groupIDs":[142],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":51,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"testStart","time":7165}
+{"testID":154,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":7173}
+{"testID":154,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7173}
+{"testID":158,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=1","type":"print","time":7190}
+{"testID":158,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7190}
+{"testID":154,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7193}
+{"test":{"id":159,"name":"exportBackupForTest with pickBackupOverride final import failure shows Import failed","suiteID":122,"groupIDs":[135],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":178,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_missing_branch_more_test.dart"},"type":"testStart","time":7193}
+{"testID":159,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":7207}
+{"testID":159,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7207}
+{"testID":158,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7209}
+{"test":{"id":160,"name":"saveExportOverride throwing still shows export message","suiteID":131,"groupIDs":[142],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":75,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"testStart","time":7209}
+{"testID":159,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":7224}
+{"testID":159,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7225}
+{"testID":148,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7232}
+{"test":{"id":161,"name":"direct importViaWebForTest handles repo.loadAll throwing","suiteID":133,"groupIDs":[147],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":48,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_shims_direct_test.dart"},"type":"testStart","time":7232}
+{"testID":160,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":7233}
+{"testID":160,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":7233}
+{"testID":159,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7246}
+{"suite":{"id":162,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_uncovered_test.dart"},"type":"suite","time":7255}
+{"test":{"id":163,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_uncovered_test.dart","suiteID":162,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7255}
+{"testID":160,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7258}
+{"test":{"id":164,"name":"listBackupsOverride with multiple files and choose second then cancel confirm","suiteID":131,"groupIDs":[142],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":98,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"testStart","time":7259}
+{"testID":161,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":7266}
+{"testID":161,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":7266}
+{"testID":161,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=11","type":"print","time":7266}
+{"testID":161,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7267}
+{"testID":161,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=11","type":"print","time":7267}
+{"testID":161,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7268}
+{"testID":146,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":7279}
+{"group":{"id":165,"suiteID":145,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":7280}
+{"test":{"id":166,"name":"Export Backup invokes saveExportOverride","suiteID":145,"groupIDs":[165],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":27,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_flow_test.dart"},"type":"testStart","time":7280}
+{"testID":161,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7290}
+{"suite":{"id":167,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart"},"type":"suite","time":7301}
+{"test":{"id":168,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart","suiteID":167,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7301}
+{"testID":164,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":7322}
+{"testID":164,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":7322}
+{"testID":164,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7349}
+{"test":{"id":169,"name":"readFileBytesOverride throws while choosing file shows Import error","suiteID":131,"groupIDs":[142],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":136,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart"},"type":"testStart","time":7349}
+{"testID":169,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7403}
+{"suite":{"id":170,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_coverage_test.dart"},"type":"suite","time":7410}
+{"test":{"id":171,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_coverage_test.dart","suiteID":170,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7410}
+{"testID":166,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":7645}
+{"testID":166,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":7645}
+{"testID":166,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7726}
+{"test":{"id":172,"name":"Import Backup flow (direct using FakePersistence)","suiteID":145,"groupIDs":[165],"metadata":{"skip":false,"skipReason":null},"line":54,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_flow_test.dart"},"type":"testStart","time":7726}
+{"testID":172,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150","type":"print","time":7729}
+{"testID":172,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7729}
+{"testID":172,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=false bytesLen=150","type":"print","time":7729}
+{"testID":172,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":7729}
+{"testID":172,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7729}
+{"testID":163,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":7731}
+{"group":{"id":173,"suiteID":162,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":7731}
+{"test":{"id":174,"name":"placeholder to avoid unstable tests","suiteID":162,"groupIDs":[173],"metadata":{"skip":false,"skipReason":null},"line":4,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_fill_uncovered_test.dart"},"type":"testStart","time":7731}
+{"suite":{"id":175,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_zero_lines_test.dart"},"type":"suite","time":7737}
+{"test":{"id":176,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_zero_lines_test.dart","suiteID":175,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7737}
+{"testID":174,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":7748}
+{"suite":{"id":177,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_add_missing_branches_test.dart"},"type":"suite","time":7752}
+{"test":{"id":178,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_add_missing_branches_test.dart","suiteID":177,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":7752}
+{"testID":157,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":7756}
+{"group":{"id":179,"suiteID":156,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":4,"line":null,"column":null,"url":null},"type":"group","time":7756}
+{"test":{"id":180,"name":"exporter exception sets Export failed and shows SnackBar","suiteID":156,"groupIDs":[179],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart"},"type":"testStart","time":7756}
+{"testID":168,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":7878}
+{"group":{"id":181,"suiteID":167,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":4,"line":null,"column":null,"url":null},"type":"group","time":7879}
+{"test":{"id":182,"name":"Import: pickBackupOverride null shows No file selected","suiteID":167,"groupIDs":[181],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":20,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart"},"type":"testStart","time":7879}
+{"testID":171,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":7920}
+{"group":{"id":183,"suiteID":170,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":7920}
+{"test":{"id":184,"name":"exercise import/export branches in SettingsView","suiteID":170,"groupIDs":[183],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_coverage_test.dart"},"type":"testStart","time":7920}
+{"testID":180,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":8135}
+{"testID":180,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":8135}
+{"testID":180,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8225}
+{"test":{"id":185,"name":"force web export path via forceKIsWeb executes exportViaWebForTest","suiteID":156,"groupIDs":[179],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":33,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart"},"type":"testStart","time":8225}
+{"testID":185,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":8252}
+{"testID":185,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":8252}
+{"testID":185,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8271}
+{"test":{"id":186,"name":"import via web returns no file selected shows SnackBar","suiteID":156,"groupIDs":[179],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":60,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart"},"type":"testStart","time":8271}
+{"testID":184,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":8274}
+{"testID":184,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":8274}
+{"testID":184,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":8275}
+{"testID":184,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":8276}
+{"testID":184,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":8277}
+{"testID":184,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":8277}
+{"testID":184,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":8277}
+{"testID":184,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":8278}
+{"testID":184,"messageType":"print","message":"TESTDBG: repo.loadAll completed","type":"print","time":8280}
+{"testID":176,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":8288}
+{"group":{"id":187,"suiteID":175,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":8288}
+{"test":{"id":188,"name":"export IO path invokes exporter try-block and updates status","suiteID":175,"groupIDs":[187],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_zero_lines_test.dart"},"type":"testStart","time":8289}
+{"testID":186,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8323}
+{"test":{"id":189,"name":"import dry-run failure shows validation failed message","suiteID":156,"groupIDs":[179],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":80,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_remaining_test.dart"},"type":"testStart","time":8323}
+{"testID":189,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":8354}
+{"testID":189,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8354}
+{"testID":184,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8372}
+{"testID":178,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":8378}
+{"group":{"id":190,"suiteID":177,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":8378}
+{"test":{"id":191,"name":"importViaWebForTest: final import failure shows Import failed","suiteID":177,"groupIDs":[190],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_add_missing_branches_test.dart"},"type":"testStart","time":8378}
+{"testID":182,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8379}
+{"suite":{"id":192,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_no_backups_test.dart"},"type":"suite","time":8381}
+{"test":{"id":193,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_no_backups_test.dart","suiteID":192,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8381}
+{"testID":189,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8381}
+{"test":{"id":194,"name":"Import: pickBackupOverride dry-run failure shows validation failed","suiteID":167,"groupIDs":[181],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":39,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart"},"type":"testStart","time":8381}
+{"suite":{"id":195,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_call_helpers_test.dart"},"type":"suite","time":8394}
+{"test":{"id":196,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_call_helpers_test.dart","suiteID":195,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8395}
+{"testID":194,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":8407}
+{"testID":194,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8407}
+{"testID":194,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8422}
+{"test":{"id":197,"name":"Import: repo.loadAll throws shows reload-failed message","suiteID":167,"groupIDs":[181],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":67,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart"},"type":"testStart","time":8422}
+{"testID":188,"messageType":"print","message":"TESTDBG: creating tmp dir","type":"print","time":8425}
+{"testID":188,"messageType":"print","message":"TESTDBG: tmp dir created at /var/folders/m9/ys79x0qx7hj3glk4k0r7p_gc0000gq/T/simple_match_test_docsNwyUUW","type":"print","time":8428}
+{"testID":188,"messageType":"print","message":"TESTDBG: about to pump widget","type":"print","time":8428}
+{"testID":197,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":8441}
+{"testID":197,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8441}
+{"testID":197,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":8441}
+{"testID":197,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8441}
+{"testID":197,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8462}
+{"test":{"id":198,"name":"Export: saveExportOverride path exercised","suiteID":167,"groupIDs":[181],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":93,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_additional_test.dart"},"type":"testStart","time":8462}
+{"testID":198,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":8494}
+{"testID":198,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":8494}
+{"testID":198,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8503}
+{"suite":{"id":199,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_fallback_test.dart"},"type":"suite","time":8511}
+{"test":{"id":200,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_fallback_test.dart","suiteID":199,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8511}
+{"testID":188,"messageType":"print","message":"TESTDBG: initial pump requested","type":"print","time":8653}
+{"testID":188,"messageType":"print","message":"TESTDBG: pump completed","type":"print","time":8657}
+{"testID":188,"messageType":"print","message":"TESTDBG: calling exportBackupForTest","type":"print","time":8663}
+{"testID":188,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":8667}
+{"testID":188,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":8668}
+{"testID":191,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":8741}
+{"testID":191,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8741}
+{"testID":191,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":8741}
+{"testID":191,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8741}
+{"testID":188,"messageType":"print","message":"TESTDBG: exportBackupForTest returned","type":"print","time":8756}
+{"testID":191,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8816}
+{"test":{"id":201,"name":"importFromDocumentsConfirmedForTest: final import failure sets message","suiteID":177,"groupIDs":[190],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":62,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_add_missing_branches_test.dart"},"type":"testStart","time":8865}
+{"testID":188,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8886}
+{"suite":{"id":202,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_helpers_test.dart"},"type":"suite","time":8894}
+{"test":{"id":203,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_helpers_test.dart","suiteID":202,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8894}
+{"testID":201,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"TESTDBG: read bytes length=2","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":8894}
+{"testID":201,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8895}
+{"testID":201,"messageType":"print","message":"TESTDBG: import res success=false message=final fail","type":"print","time":8895}
+{"testID":201,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8908}
+{"test":{"id":204,"name":"importFromDocumentsChosenForTest: repo.loadAll throws shows reload failed","suiteID":177,"groupIDs":[190],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":91,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_add_missing_branches_test.dart"},"type":"testStart","time":8908}
+{"testID":204,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":8927}
+{"testID":204,"messageType":"print","message":"TESTDBG: read bytes length=2","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":8928}
+{"testID":204,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":8928}
+{"testID":204,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":8945}
+{"testID":193,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":8947}
+{"group":{"id":205,"suiteID":192,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":8947}
+{"test":{"id":206,"name":"Import Backup shows no-files SnackBar when documents dir empty","suiteID":192,"groupIDs":[205],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":25,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_no_backups_test.dart"},"type":"testStart","time":8947}
+{"suite":{"id":207,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_default_test.dart"},"type":"suite","time":8953}
+{"test":{"id":208,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_default_test.dart","suiteID":207,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":8953}
+{"testID":196,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":9005}
+{"group":{"id":209,"suiteID":195,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":9005}
+{"test":{"id":210,"name":"Import flow covers small helpers previously called directly","suiteID":195,"groupIDs":[209],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_call_helpers_test.dart"},"type":"testStart","time":9005}
+{"testID":200,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":9271}
+{"suite":{"id":211,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_extras_test.dart"},"type":"suite","time":9278}
+{"test":{"id":212,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_extras_test.dart","suiteID":211,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":9278}
+{"testID":210,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":9439}
+{"testID":210,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":9439}
+{"testID":210,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":9439}
+{"testID":210,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":9439}
+{"testID":203,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":9451}
+{"group":{"id":213,"suiteID":202,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":9451}
+{"test":{"id":214,"name":"Import path exercised to replace coverage-only helpers","suiteID":202,"groupIDs":[213],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_helpers_test.dart"},"type":"testStart","time":9451}
+{"testID":206,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":9452}
+{"suite":{"id":215,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_exhaustive_test.dart"},"type":"suite","time":9463}
+{"test":{"id":216,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_exhaustive_test.dart","suiteID":215,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":9464}
+{"testID":208,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":9514}
+{"group":{"id":217,"suiteID":207,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":9514}
+{"test":{"id":218,"name":"export uses saveExportOverride and shows exported message","suiteID":207,"groupIDs":[217],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":14,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_default_test.dart"},"type":"testStart","time":9514}
+{"testID":210,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":9538}
+{"suite":{"id":219,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_marker_test.dart"},"type":"suite","time":9546}
+{"test":{"id":220,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_marker_test.dart","suiteID":219,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":9546}
+{"testID":212,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":9804}
+{"group":{"id":221,"suiteID":211,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":9804}
+{"test":{"id":222,"name":"Import flow covers extras previously exercised by helpers","suiteID":211,"groupIDs":[221],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_extras_test.dart"},"type":"testStart","time":9804}
+{"testID":214,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":9861}
+{"testID":214,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":9861}
+{"testID":214,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":9861}
+{"testID":214,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":9861}
+{"testID":218,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":9906}
+{"testID":218,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":9906}
+{"testID":214,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":9960}
+{"suite":{"id":223,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart"},"type":"suite","time":9968}
+{"test":{"id":224,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart","suiteID":223,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":9969}
+{"testID":218,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":10006}
+{"suite":{"id":225,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_coverage_test.dart"},"type":"suite","time":10013}
+{"test":{"id":226,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_coverage_test.dart","suiteID":225,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":10014}
+{"testID":216,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":10032}
+{"group":{"id":227,"suiteID":215,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":10032}
+{"test":{"id":228,"name":"Exhaustive import scenarios","suiteID":215,"groupIDs":[227],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":19,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_exhaustive_test.dart"},"type":"testStart","time":10032}
+{"testID":220,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":10108}
+{"group":{"id":229,"suiteID":219,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":10109}
+{"test":{"id":230,"name":"Import triggers code paths covered previously by markerLarge","suiteID":219,"groupIDs":[229],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_marker_test.dart"},"type":"testStart","time":10109}
+{"testID":222,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":10225}
+{"testID":222,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10225}
+{"testID":222,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":10225}
+{"testID":222,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10225}
+{"testID":222,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":10334}
+{"suite":{"id":231,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart"},"type":"suite","time":10344}
+{"test":{"id":232,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart","suiteID":231,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":10345}
+{"testID":224,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":10567}
+{"group":{"id":233,"suiteID":223,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":10567}
+{"test":{"id":234,"name":"exportBackup _exportViaWeb call site executed when forced web","suiteID":223,"groupIDs":[233],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart"},"type":"testStart","time":10567}
+{"testID":230,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":10575}
+{"testID":230,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10575}
+{"testID":230,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":10575}
+{"testID":230,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10575}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":10643}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10644}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":10644}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10644}
+{"testID":230,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":10674}
+{"test":{"id":235,"name":"exercise coverage marker returns int","suiteID":219,"groupIDs":[229],"metadata":{"skip":false,"skipReason":null},"line":31,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_marker_test.dart"},"type":"testStart","time":10674}
+{"testID":226,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":10677}
+{"group":{"id":236,"suiteID":225,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":10677}
+{"test":{"id":237,"name":"SettingsView export/import branches (overrides)","suiteID":225,"groupIDs":[236],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":20,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_coverage_test.dart"},"type":"testStart","time":10677}
+{"testID":235,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":10681}
+{"suite":{"id":238,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_smoke_test.dart"},"type":"suite","time":10690}
+{"test":{"id":239,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_smoke_test.dart","suiteID":238,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":10690}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":10714}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10715}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":10815}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10815}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":10834}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10834}
+{"testID":232,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":10861}
+{"group":{"id":240,"suiteID":231,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":10861}
+{"test":{"id":241,"name":"exportBackupForTest hits web-export branch and coverage block","suiteID":231,"groupIDs":[240],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":30,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart"},"type":"testStart","time":10861}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":10892}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10892}
+{"testID":228,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":10893}
+{"testID":228,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":10893}
+{"testID":228,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":10923}
+{"suite":{"id":242,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart"},"type":"suite","time":10931}
+{"test":{"id":243,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart","suiteID":242,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":10931}
+{"testID":234,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":10969}
+{"testID":234,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":10969}
+{"testID":234,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11061}
+{"test":{"id":244,"name":"exportBackup IO path executes exporter and mounted-check","suiteID":223,"groupIDs":[233],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":44,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart"},"type":"testStart","time":11062}
+{"testID":244,"messageType":"print","message":"FakePersistence.exportBackupToFile called with path: /var/folders/m9/ys79x0qx7hj3glk4k0r7p_gc0000gq/T/simple_match_test_docsqIK0G1/simple_match_backup_2025-12-26T19-33-08.718065.json","type":"print","time":11096}
+{"testID":244,"messageType":"print","message":"FakePersistence: creating file","type":"print","time":11096}
+{"testID":244,"messageType":"print","message":"FakePersistence: writing file","type":"print","time":11097}
+{"testID":244,"messageType":"print","message":"FakePersistence: write complete","type":"print","time":11099}
+{"testID":244,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":11099}
+{"testID":244,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":11099}
+{"testID":237,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":11105}
+{"testID":237,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":11105}
+{"testID":244,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11118}
+{"suite":{"id":245,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_extra_test.dart"},"type":"suite","time":11126}
+{"test":{"id":246,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_extra_test.dart","suiteID":245,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":11126}
+{"testID":237,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":11194}
+{"testID":237,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":11194}
+{"testID":237,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=50","type":"print","time":11229}
+{"testID":237,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":11229}
+{"testID":237,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=50","type":"print","time":11230}
+{"testID":237,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":11230}
+{"testID":239,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":11247}
+{"group":{"id":247,"suiteID":238,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":11247}
+{"test":{"id":248,"name":"SettingsView pumps without error","suiteID":238,"groupIDs":[247],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_smoke_test.dart"},"type":"testStart","time":11249}
+{"testID":241,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":11287}
+{"testID":241,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":11287}
+{"testID":241,"messageType":"print","message":"TEST: dummy exporter called with name=simple_match_backup_test-ts.json contentLen=11","type":"print","time":11287}
+{"testID":237,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11378}
+{"suite":{"id":249,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"suite","time":11386}
+{"test":{"id":250,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart","suiteID":249,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":11386}
+{"testID":241,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11390}
+{"test":{"id":251,"name":"importFromDocumentsConfirmedForTest dry-run failure shows validation failed","suiteID":231,"groupIDs":[240],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":66,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart"},"type":"testStart","time":11391}
+{"testID":251,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":11417}
+{"testID":251,"messageType":"print","message":"TESTDBG: read bytes length=32","type":"print","time":11417}
+{"testID":251,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":11417}
+{"testID":251,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":11417}
+{"testID":251,"messageType":"print","message":"TESTDBG: dry-run result success=false counts={} message=validation failed","type":"print","time":11418}
+{"testID":251,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11433}
+{"test":{"id":252,"name":"importFromDocumentsConfirmedForTest handles repo.loadAll throwing (reload failed)","suiteID":231,"groupIDs":[240],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":102,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart"},"type":"testStart","time":11433}
+{"testID":252,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":11460}
+{"testID":252,"messageType":"print","message":"TESTDBG: read bytes length=32","type":"print","time":11460}
+{"testID":252,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":11460}
+{"testID":252,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":11460}
+{"testID":252,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":11460}
+{"testID":252,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":11461}
+{"testID":252,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":11461}
+{"testID":252,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":11461}
+{"testID":252,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11484}
+{"suite":{"id":253,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_pick_override_test.dart"},"type":"suite","time":11491}
+{"test":{"id":254,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_pick_override_test.dart","suiteID":253,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":11491}
+{"testID":243,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":11515}
+{"group":{"id":255,"suiteID":242,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":4,"line":null,"column":null,"url":null},"type":"group","time":11516}
+{"test":{"id":256,"name":"Web pick override: autoConfirm true -> import successful","suiteID":242,"groupIDs":[255],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart"},"type":"testStart","time":11516}
+{"testID":248,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":11679}
+{"suite":{"id":257,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_import_test.dart"},"type":"suite","time":11687}
+{"test":{"id":258,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_import_test.dart","suiteID":257,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":11687}
+{"testID":246,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":11694}
+{"group":{"id":259,"suiteID":245,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":11694}
+{"test":{"id":260,"name":"SettingsView web import/export override flow","suiteID":245,"groupIDs":[259],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":19,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_extra_test.dart"},"type":"testStart","time":11694}
+{"testID":256,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":11942}
+{"testID":256,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":11943}
+{"testID":256,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":11943}
+{"testID":256,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":11944}
+{"testID":250,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":11996}
+{"group":{"id":261,"suiteID":249,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":6,"line":null,"column":null,"url":null},"type":"group","time":11997}
+{"test":{"id":262,"name":"exerciseCoverageMarker returns a non-zero sum","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":15,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":11997}
+{"testID":262,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12020}
+{"test":{"id":263,"name":"exerciseCoverageMarker2 returns a non-zero sum","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":20,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":12020}
+{"testID":263,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12022}
+{"test":{"id":264,"name":"exerciseCoverageMarker3 returns a non-zero sum","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":25,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":12022}
+{"testID":264,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12023}
+{"test":{"id":265,"name":"coverage boost: call common test-only wrappers","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":30,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":12024}
+{"testID":256,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12040}
+{"test":{"id":266,"name":"Web pick override: dry-run validation fails (autoConfirm true with bad bytes)","suiteID":242,"groupIDs":[255],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":36,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart"},"type":"testStart","time":12040}
+{"testID":266,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":12069}
+{"testID":266,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12070}
+{"testID":254,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":12083}
+{"group":{"id":267,"suiteID":253,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":12083}
+{"test":{"id":268,"name":"Web pickBackupOverride autoConfirm import succeeds","suiteID":253,"groupIDs":[267],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_pick_override_test.dart"},"type":"testStart","time":12083}
+{"testID":266,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12098}
+{"test":{"id":269,"name":"pickBackupOverride returns null -> import cancelled path","suiteID":242,"groupIDs":[255],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":57,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart"},"type":"testStart","time":12099}
+{"testID":269,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12162}
+{"test":{"id":270,"name":"Export saveOverride throws -> shows export failed","suiteID":242,"groupIDs":[255],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":75,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_range_batch2_test.dart"},"type":"testStart","time":12163}
+{"testID":270,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":12190}
+{"testID":270,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":12190}
+{"testID":258,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":12215}
+{"group":{"id":271,"suiteID":257,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":12215}
+{"test":{"id":272,"name":"Web import flow: autoConfirm true and false","suiteID":257,"groupIDs":[271],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_web_import_test.dart"},"type":"testStart","time":12215}
+{"testID":270,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12220}
+{"suite":{"id":273,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_list_import_test.dart"},"type":"suite","time":12230}
+{"test":{"id":274,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_list_import_test.dart","suiteID":273,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":12230}
+{"testID":260,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12266}
+{"suite":{"id":275,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_ui_test.dart"},"type":"suite","time":12272}
+{"test":{"id":276,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_ui_test.dart","suiteID":275,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":12272}
+{"testID":265,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":12416}
+{"testID":265,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":12416}
+{"testID":265,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12540}
+{"test":{"id":277,"name":"importViaWebForTest: shows confirm dialog and Restore proceeds","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":88,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":12540}
+{"testID":268,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":12541}
+{"testID":268,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12541}
+{"testID":268,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":12542}
+{"testID":268,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12542}
+{"testID":277,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":12565}
+{"testID":277,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12565}
+{"testID":268,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12641}
+{"suite":{"id":278,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_remaining_branches_test.dart"},"type":"suite","time":12648}
+{"test":{"id":279,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_remaining_branches_test.dart","suiteID":278,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":12648}
+{"testID":277,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":12653}
+{"testID":277,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12653}
+{"testID":277,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12685}
+{"test":{"id":280,"name":"forceKIsWeb: _exportBackup and _importBackup branches execute","suiteID":249,"groupIDs":[261],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":127,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_coverage_boost_test.dart"},"type":"testStart","time":12685}
+{"testID":272,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":12698}
+{"testID":272,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12698}
+{"testID":272,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":12699}
+{"testID":272,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12699}
+{"testID":280,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":12711}
+{"testID":280,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":12711}
+{"testID":280,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":12725}
+{"testID":280,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12726}
+{"testID":280,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":12726}
+{"testID":280,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12726}
+{"testID":280,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12737}
+{"suite":{"id":281,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"suite","time":12753}
+{"test":{"id":282,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart","suiteID":281,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":12753}
+{"testID":272,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":12766}
+{"testID":272,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12766}
+{"testID":274,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":12811}
+{"group":{"id":283,"suiteID":273,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":12811}
+{"test":{"id":284,"name":"IO list import handles reload failure and shows message","suiteID":273,"groupIDs":[283],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":28,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_list_import_test.dart"},"type":"testStart","time":12811}
+{"testID":272,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":12828}
+{"testID":272,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":12828}
+{"testID":272,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":12872}
+{"suite":{"id":285,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_web_shim_test.dart"},"type":"suite","time":12880}
+{"test":{"id":286,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_web_shim_test.dart","suiteID":285,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":12880}
+{"testID":276,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":12902}
+{"group":{"id":287,"suiteID":275,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":12902}
+{"test":{"id":288,"name":"Import Backup UI flow (select file, dry-run, restore) updates repository","suiteID":275,"groupIDs":[287],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":18,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_ui_test.dart"},"type":"testStart","time":12902}
+{"testID":279,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":13273}
+{"group":{"id":289,"suiteID":278,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":13273}
+{"test":{"id":290,"name":"Dry-run validation failure path (web pick)","suiteID":278,"groupIDs":[289],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":24,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_remaining_branches_test.dart"},"type":"testStart","time":13273}
+{"testID":288,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150","type":"print","time":13349}
+{"testID":288,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":13349}
+{"testID":288,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150","type":"print","time":13349}
+{"testID":288,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":13350}
+{"testID":284,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13386}
+{"testID":284,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13386}
+{"testID":282,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":13396}
+{"group":{"id":291,"suiteID":281,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":7,"line":null,"column":null,"url":null},"type":"group","time":13396}
+{"test":{"id":292,"name":"Import handles final import failure and shows Import failed","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":18,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":13396}
+{"testID":286,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":13420}
+{"group":{"id":293,"suiteID":285,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":13420}
+{"test":{"id":294,"name":"shim: invoke _exportViaWeb through state to exercise web export branch","suiteID":285,"groupIDs":[293],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":10,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_web_shim_test.dart"},"type":"testStart","time":13420}
+{"testID":284,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":13438}
+{"testID":284,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13438}
+{"testID":288,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13438}
+{"suite":{"id":295,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_force_all_branches_test.dart"},"type":"suite","time":13447}
+{"test":{"id":296,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_force_all_branches_test.dart","suiteID":295,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":13447}
+{"testID":284,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13494}
+{"test":{"id":297,"name":"IO documents listing import flow with SimpleDialog selection","suiteID":273,"groupIDs":[283],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":73,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_list_import_test.dart"},"type":"testStart","time":13494}
+{"testID":297,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13546}
+{"testID":297,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13546}
+{"testID":297,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":13561}
+{"testID":297,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13561}
+{"testID":297,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13585}
+{"suite":{"id":298,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart"},"type":"suite","time":13593}
+{"test":{"id":299,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart","suiteID":298,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":13593}
+{"testID":290,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13669}
+{"testID":290,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13669}
+{"testID":290,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13752}
+{"test":{"id":300,"name":"Import succeeds but repo.loadAll throws (web pick)","suiteID":278,"groupIDs":[289],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":47,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_remaining_branches_test.dart"},"type":"testStart","time":13752}
+{"testID":294,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":13776}
+{"testID":294,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":13776}
+{"testID":300,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13779}
+{"testID":300,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13779}
+{"testID":300,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":13779}
+{"testID":300,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13779}
+{"testID":292,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2","type":"print","time":13785}
+{"testID":292,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13785}
+{"testID":292,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2","type":"print","time":13786}
+{"testID":292,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13786}
+{"testID":300,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13809}
+{"test":{"id":301,"name":"IO documents-list path: import failed and catch(e) path","suiteID":278,"groupIDs":[289],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":70,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_remaining_branches_test.dart"},"type":"testStart","time":13809}
+{"testID":294,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13863}
+{"suite":{"id":302,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart"},"type":"suite","time":13870}
+{"test":{"id":303,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart","suiteID":302,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":13870}
+{"testID":292,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13883}
+{"test":{"id":304,"name":"Export saveExportOverride throwing shows Export failed","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":39,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":13883}
+{"testID":301,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13902}
+{"testID":301,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13902}
+{"testID":304,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":13911}
+{"testID":304,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=2","type":"print","time":13911}
+{"testID":296,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":13916}
+{"group":{"id":305,"suiteID":295,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":2,"line":null,"column":null,"url":null},"type":"group","time":13916}
+{"test":{"id":306,"name":"exercise many SettingsView branches via state wrappers (smoke)","suiteID":295,"groupIDs":[305],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":6,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_force_all_branches_test.dart"},"type":"testStart","time":13916}
+{"testID":304,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":13943}
+{"test":{"id":307,"name":"pickBackupOverride without autoConfirm and Cancel returns early","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":60,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":13944}
+{"testID":301,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":13947}
+{"testID":301,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13947}
+{"testID":307,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":13971}
+{"testID":307,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":13972}
+{"testID":301,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14025}
+{"suite":{"id":308,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"suite","time":14033}
+{"test":{"id":309,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart","suiteID":308,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":14033}
+{"testID":307,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14051}
+{"test":{"id":310,"name":"pickBackupOverride returning null shows No file selected","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":86,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":14051}
+{"testID":306,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14069}
+{"test":{"id":311,"name":"exercise error and edge branches (smoke)","suiteID":295,"groupIDs":[305],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":11,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_force_all_branches_test.dart"},"type":"testStart","time":14070}
+{"testID":311,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14077}
+{"suite":{"id":312,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_button_test.dart"},"type":"suite","time":14082}
+{"test":{"id":313,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_button_test.dart","suiteID":312,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":14082}
+{"testID":310,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14088}
+{"test":{"id":314,"name":"pickBackupOverride dry-run failure shows validation SnackBar","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":106,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":14088}
+{"testID":299,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":14101}
+{"group":{"id":315,"suiteID":298,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":3,"line":null,"column":null,"url":null},"type":"group","time":14102}
+{"test":{"id":316,"name":"exercise coverage marker returns non-zero","suiteID":298,"groupIDs":[315],"metadata":{"skip":false,"skipReason":null},"line":21,"column":3,"url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart"},"type":"testStart","time":14102}
+{"testID":314,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":14109}
+{"testID":314,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":14109}
+{"testID":316,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14123}
+{"test":{"id":317,"name":"exportViaWebForTest updates status and calls exporter","suiteID":298,"groupIDs":[315],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":28,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart"},"type":"testStart","time":14123}
+{"testID":314,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14131}
+{"test":{"id":318,"name":"import non-dry-run failure shows Import failed message","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":133,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":14131}
+{"testID":318,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32","type":"print","time":14154}
+{"testID":318,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":14154}
+{"testID":318,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32","type":"print","time":14154}
+{"testID":318,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":14154}
+{"testID":318,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14166}
+{"test":{"id":319,"name":"listBackupsOverride empty shows No backup files found message","suiteID":281,"groupIDs":[291],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":160,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_more_branches_test.dart"},"type":"testStart","time":14166}
+{"testID":319,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14197}
+{"suite":{"id":320,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_branches_test.dart"},"type":"suite","time":14204}
+{"test":{"id":321,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_branches_test.dart","suiteID":320,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":14204}
+{"testID":303,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":14438}
+{"group":{"id":322,"suiteID":302,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":4,"line":null,"column":null,"url":null},"type":"group","time":14439}
+{"test":{"id":323,"name":"Export backup uses saveExportOverride and shows status","suiteID":302,"groupIDs":[322],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart"},"type":"testStart","time":14439}
+{"testID":317,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":14454}
+{"testID":317,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":14454}
+{"testID":317,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14529}
+{"test":{"id":324,"name":"importFromDocumentsConfirmedForTest with dummy chosen file triggers import path","suiteID":298,"groupIDs":[315],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":72,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart"},"type":"testStart","time":14529}
+{"testID":324,"messageType":"print","message":"TESTDBG: importFromDocumentsConfirmedForTest start","type":"print","time":14560}
+{"testID":324,"messageType":"print","message":"TESTDBG: read bytes length=3","type":"print","time":14560}
+{"testID":324,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":14561}
+{"testID":324,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":14561}
+{"testID":324,"messageType":"print","message":"TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null","type":"print","time":14561}
+{"testID":324,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":14562}
+{"testID":324,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":14562}
+{"testID":324,"messageType":"print","message":"TESTDBG: import res success=true message=null","type":"print","time":14562}
+{"testID":324,"messageType":"print","message":"TESTDBG: repo.loadAll completed","type":"print","time":14562}
+{"testID":324,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14585}
+{"suite":{"id":325,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_reload_failure_test.dart"},"type":"suite","time":14593}
+{"test":{"id":326,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_reload_failure_test.dart","suiteID":325,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":14593}
+{"testID":309,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":14599}
+{"group":{"id":327,"suiteID":308,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":null,"column":null,"url":null},"type":"group","time":14600}
+{"test":{"id":328,"name":"pickBackupOverride null shows No file selected SnackBar","suiteID":308,"groupIDs":[327],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":23,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"testStart","time":14600}
+{"testID":313,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":14648}
+{"group":{"id":329,"suiteID":312,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":14648}
+{"test":{"id":330,"name":"Pressing Export Backup calls saveExportOverride","suiteID":312,"groupIDs":[329],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":13,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_button_test.dart"},"type":"testStart","time":14648}
+{"testID":321,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":14670}
+{"suite":{"id":331,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_docsdir_test.dart"},"type":"suite","time":14694}
+{"test":{"id":332,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_docsdir_test.dart","suiteID":331,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":14694}
+{"testID":323,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":14836}
+{"testID":323,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":14836}
+{"testID":323,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14925}
+{"test":{"id":333,"name":"Import with pickBackupOverride returning null shows No file selected","suiteID":302,"groupIDs":[322],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":43,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart"},"type":"testStart","time":14925}
+{"testID":333,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":14966}
+{"test":{"id":334,"name":"Import via web with autoConfirm true performs import and shows success","suiteID":302,"groupIDs":[322],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":62,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart"},"type":"testStart","time":14967}
+{"testID":334,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3","type":"print","time":14991}
+{"testID":334,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":14991}
+{"testID":334,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3","type":"print","time":14991}
+{"testID":334,"messageType":"print","message":"FakePersistence: delegating to importFn","type":"print","time":14991}
+{"testID":334,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15014}
+{"test":{"id":335,"name":"ImportFromDocuments shows No backup files found when list is empty","suiteID":302,"groupIDs":[322],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":92,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_io_override_and_web_test.dart"},"type":"testStart","time":15015}
+{"testID":330,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":15050}
+{"testID":330,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=11","type":"print","time":15050}
+{"testID":335,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15056}
+{"suite":{"id":336,"platform":"vm","path":"/Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_override_test.dart"},"type":"suite","time":15066}
+{"test":{"id":337,"name":"loading /Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_override_test.dart","suiteID":336,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":15066}
+{"testID":328,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15077}
+{"test":{"id":338,"name":"pickBackupOverride with confirm -> user cancels","suiteID":308,"groupIDs":[327],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":41,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"testStart","time":15077}
+{"testID":330,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15121}
+{"testID":326,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":15158}
+{"group":{"id":339,"suiteID":325,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":15158}
+{"test":{"id":340,"name":"Import succeeds but repo.loadAll() throws is handled","suiteID":325,"groupIDs":[339],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":21,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_import_reload_failure_test.dart"},"type":"testStart","time":15158}
+{"testID":338,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15173}
+{"test":{"id":341,"name":"pickBackupOverride with confirm -> user restores","suiteID":308,"groupIDs":[327],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":70,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"testStart","time":15173}
+{"testID":332,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":15211}
+{"group":{"id":342,"suiteID":331,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":15211}
+{"test":{"id":343,"name":"calling export without documentsDirOverride touches getDocumentsDirectory line","suiteID":331,"groupIDs":[342],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":10,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_uncovered_docsdir_test.dart"},"type":"testStart","time":15211}
+{"testID":341,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15239}
+{"test":{"id":344,"name":"listBackupsOverride empty shows no-files SnackBar","suiteID":308,"groupIDs":[327],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":95,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"testStart","time":15239}
+{"testID":344,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15269}
+{"test":{"id":345,"name":"listBackupsOverride shows list and restore","suiteID":308,"groupIDs":[327],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":115,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_dialog_confirm_test.dart"},"type":"testStart","time":15269}
+{"testID":340,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":15274}
+{"testID":340,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=79","type":"print","time":15274}
+{"testID":345,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15313}
+{"testID":340,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=79","type":"print","time":15491}
+{"testID":340,"messageType":"print","message":"FakePersistence: returning dryRun success","type":"print","time":15491}
+{"testID":340,"messageType":"print","message":"FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=79","type":"print","time":15491}
+{"testID":340,"messageType":"print","message":"FakePersistence: returning full import success","type":"print","time":15491}
+{"testID":337,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":15529}
+{"group":{"id":346,"suiteID":336,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":15529}
+{"test":{"id":347,"name":"Export Backup via saveExportOverride writes to temp file","suiteID":336,"groupIDs":[346],"metadata":{"skip":false,"skipReason":null},"line":174,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":12,"root_column":3,"root_url":"file:///Users/lawstanley/git/airsoft_target/simple_match/test/widgets/settings_view_export_io_override_test.dart"},"type":"testStart","time":15529}
+{"testID":340,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15562}
+{"testID":343,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15580}
+{"testID":347,"messageType":"print","message":"FakePersistence.exportBackupJson called","type":"print","time":15805}
+{"testID":347,"messageType":"print","message":"FakePersistence.exportBackupJson returning length=17","type":"print","time":15805}
+{"testID":347,"messageType":"print","message":"saveOverride called with path: simple_match_backup_2025-12-26T19-33-13.427884.json, content length: 17","type":"print","time":15806}
+{"testID":347,"messageType":"print","message":"saveOverride recorded content for /var/folders/m9/ys79x0qx7hj3glk4k0r7p_gc0000gq/T/simple_match_export_overrideCQM5Sw/simple_match_backup_2025-12-26T19-33-13.427884.json","type":"print","time":15808}
+{"testID":347,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":15860}
+{"success":true,"type":"done","time":15866}

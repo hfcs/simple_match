@@ -20,7 +20,13 @@ class _MockPersistenceService extends PersistenceService {}
 void main() {
   group('Widget edge/empty/error coverage for all views', () {
     testWidgets('MainMenuView navigation buttons present', (tester) async {
-      await tester.pumpWidget(const MaterialApp(home: MainMenuView()));
+      final repo = MatchRepository(persistence: _MockPersistenceService());
+      await tester.pumpWidget(
+        ChangeNotifierProvider<MatchRepository>(
+          create: (_) => repo,
+          child: const MaterialApp(home: MainMenuView()),
+        ),
+      );
       expect(find.text('Match Setup'), findsOneWidget);
       expect(find.text('Shooter Setup'), findsOneWidget);
       expect(find.text('Stage Input'), findsOneWidget);

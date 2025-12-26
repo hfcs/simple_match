@@ -1,0 +1,1423 @@
+collect-coverage	UNKNOWN STEP	﻿2025-12-22T15:44:14.0994116Z Current runner version: '2.330.0'
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1014907Z ##[group]Runner Image Provisioner
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1015680Z Hosted Compute Agent
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1016214Z Version: 20251211.462
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1016768Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1017668Z Build Date: 2025-12-11T16:28:49Z
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1018288Z Worker ID: {b1db412e-27e3-4f02-afd0-09561e69322a}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1018929Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1019377Z ##[group]Operating System
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1019920Z Ubuntu
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1020327Z 24.04.3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1020742Z LTS
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1021137Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1021645Z ##[group]Runner Image
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1022250Z Image: ubuntu-24.04
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1022732Z Version: 20251215.174.1
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1023639Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1024972Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1025870Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1026800Z ##[group]GITHUB_TOKEN Permissions
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1028709Z Contents: read
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1029196Z Metadata: read
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1029651Z Packages: read
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1030215Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1032063Z Secret source: Actions
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1032644Z Prepare workflow directory
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1375112Z Prepare all required actions
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.1412023Z Getting action download info
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.5293859Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:14.5961975Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.1162005Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.1959616Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.3753550Z Getting action download info
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.5624928Z Complete job name: collect-coverage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6338259Z ##[group]Run actions/checkout@v4
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6339097Z with:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6339532Z   repository: hfcs/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6340243Z   token: ***
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6340651Z   ssh-strict: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6341067Z   ssh-user: git
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6341506Z   persist-credentials: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6341980Z   clean: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6342406Z   sparse-checkout-cone-mode: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6342923Z   fetch-depth: 1
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6343333Z   fetch-tags: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6343762Z   show-progress: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6344201Z   lfs: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6344617Z   submodules: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6345055Z   set-safe-directory: true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.6345714Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7326421Z Syncing repository: hfcs/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7328832Z ##[group]Getting Git version info
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7329616Z Working directory is '/home/runner/work/simple_match/simple_match'
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7330877Z [command]/usr/bin/git version
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7375560Z git version 2.52.0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7397780Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7417401Z Temporarily overriding HOME='/home/runner/work/_temp/74b7f605-48ce-48ca-92ef-72141eb3ef82' before making global git config changes
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7419005Z Adding repository directory to the temporary git global config as a safe directory
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7421492Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7451684Z Deleting the contents of '/home/runner/work/simple_match/simple_match'
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7454633Z ##[group]Initializing the repository
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7459523Z [command]/usr/bin/git init /home/runner/work/simple_match/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7536212Z hint: Using 'master' as the name for the initial branch. This default branch name
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7537855Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7538802Z hint: to use in all of your new repositories, which will suppress this warning,
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7539631Z hint: call:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7540310Z hint:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7540956Z hint: 	git config --global init.defaultBranch <name>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7541550Z hint:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7542118Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7543052Z hint: 'development'. The just-created branch can be renamed via this command:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7544141Z hint:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7544544Z hint: 	git branch -m <name>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7545004Z hint:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7545604Z hint: Disable this message with "git config set advice.defaultBranchName false"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7546681Z Initialized empty Git repository in /home/runner/work/simple_match/simple_match/.git/
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7549232Z [command]/usr/bin/git remote add origin https://github.com/hfcs/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7574940Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7575924Z ##[group]Disabling automatic garbage collection
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7577848Z [command]/usr/bin/git config --local gc.auto 0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7599890Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7600686Z ##[group]Setting up auth
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7604873Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7628360Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7877912Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.7900204Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8061842Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8094603Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8262478Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8288501Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8289270Z ##[group]Fetching the repository
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:15.8295989Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +badc47e8a3cdd7a0c3cb8d03cc33b173821ac046:refs/remotes/origin/main
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3558153Z From https://github.com/hfcs/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3560185Z  * [new ref]         badc47e8a3cdd7a0c3cb8d03cc33b173821ac046 -> origin/main
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3585237Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3587454Z ##[group]Determining the checkout info
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3589892Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3593316Z [command]/usr/bin/git sparse-checkout disable
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3626990Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3652177Z ##[group]Checking out the ref
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3655377Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3820903Z Switched to a new branch 'main'
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3822605Z branch 'main' set up to track 'origin/main'.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3827899Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3853019Z [command]/usr/bin/git log -1 --format=%H
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.3870383Z badc47e8a3cdd7a0c3cb8d03cc33b173821ac046
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4334472Z ##[group]Run subosito/flutter-action@v2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4336205Z with:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4337676Z   channel: stable
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4339057Z   architecture: X64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4340449Z   cache: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4342105Z   pub-cache-path: default
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4343587Z   dry-run: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4345206Z   git-source: https://github.com/flutter/flutter.git
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4347098Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4503147Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4504520Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4532620Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4533799Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4677314Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4678549Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4679547Z [36;1m  -n '' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4680322Z [36;1m  -f '' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4681148Z [36;1m  -a 'X64' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4681929Z [36;1m  -k '' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4682683Z [36;1m  -c '' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4683445Z [36;1m  -l '' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4684219Z [36;1m  -d 'default' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4685277Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4686373Z [36;1m  stable[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4708880Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.4710049Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6979054Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6980161Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6981124Z [36;1m  -n '3.38.5' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6981934Z [36;1m  -a 'x64' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6982961Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.38.5-x64' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6984190Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.6985158Z [36;1m  stable[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.7008911Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.7010061Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.9162937Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.9165514Z                                  Dload  Upload   Total   Spent    Left  Speed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:16.9166895Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:17.0288938Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:18.0289126Z   0 1396M    0 76583    0     0   661k      0  0:36:01 --:--:--  0:36:01  661k
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:19.0288359Z  23 1396M   23  325M    0     0   292M      0  0:00:04  0:00:01  0:00:03  292M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:20.0289155Z  48 1396M   48  679M    0     0   321M      0  0:00:04  0:00:02  0:00:02  321M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:21.0287611Z  72 1396M   72 1016M    0     0   326M      0  0:00:04  0:00:03  0:00:01  326M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:21.1026134Z  98 1396M   98 1370M    0     0   333M      0  0:00:04  0:00:04 --:--:--  333M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:44:21.1027332Z 100 1396M  100 1396M    0     0   333M      0  0:00:04  0:00:04 --:--:--  342M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8533945Z ##[group]Run actions/cache@v4
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8534183Z with:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8534440Z   path: ~/.pub-cache
+collect-coverage	UNKNOWN STEP	~/.pub-cache/hosted
+collect-coverage	UNKNOWN STEP	~/.pub-cache/git
+collect-coverage	UNKNOWN STEP	
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8534898Z   key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8535288Z   restore-keys: Linux-pub-
+collect-coverage	UNKNOWN STEP	
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8535520Z   enableCrossOsArchive: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8535747Z   fail-on-cache-miss: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8535963Z   lookup-only: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8536175Z   save-always: false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8536370Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8536601Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8536912Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:11.8537135Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:12.2217867Z Cache hit for: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.4281714Z Received 40777876 of 40777876 (100.0%), 39.9 MBs/sec
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.4282870Z Cache Size: ~39 MB (40777876 B)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.4338527Z [command]/usr/bin/tar -xf /home/runner/work/_temp/213106f2-adaf-49ff-944d-8ab3929794cd/cache.tzst -P -C /home/runner/work/simple_match/simple_match --use-compress-program unzstd
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8725290Z Cache restored successfully
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8843202Z Cache restored from key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8921969Z ##[group]Run sudo apt update
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8922262Z [36;1msudo apt update[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8922538Z [36;1msudo apt install -y google-chrome-stable[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8943102Z shell: /usr/bin/bash -e {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8943358Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8943656Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8943981Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.8944222Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9070488Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9070988Z WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9071489Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9626740Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9901329Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9916981Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9965256Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:13.9985860Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.0022074Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.0026698Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.0977755Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1684 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1110670Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [311 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1132823Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [175 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1149815Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [15.8 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1159470Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1506 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1228604Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [306 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1253324Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [378 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1277696Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [31.4 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1289542Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2413 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1403072Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [550 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1855119Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1856153Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 c-n-f Metadata [516 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1864595Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [30.3 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1871810Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [6048 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1879850Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1888046Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [488 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1901739Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.4 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1911260Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7312 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1922368Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1930007Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [29.5 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1945478Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [17.9 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1950348Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1962997Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1444 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.1974254Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2406308Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2425990Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [225 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2435675Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2441673Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [9504 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2455640Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.5 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2464747Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2472227Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2591657Z Get:39 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.4 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2619613Z Get:40 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [58.8 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:14.2668315Z Get:41 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [77.2 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:21.5382404Z Fetched 8375 kB in 1s (8129 kB/s)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.2626255Z Reading package lists...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4057408Z Building dependency tree...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4063164Z Reading state information...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4201066Z 69 packages can be upgraded. Run 'apt list --upgradable' to see them.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4285727Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4286906Z WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4291570Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.4416728Z Reading package lists...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.5951629Z Building dependency tree...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.5957681Z Reading state information...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.7571290Z google-chrome-stable is already the newest version (143.0.7499.109-1).
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8000971Z 0 upgraded, 0 newly installed, 0 to remove and 69 not upgraded.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8335695Z ##[group]Run sudo apt-get update
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8335992Z [36;1msudo apt-get update[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8336247Z [36;1msudo apt-get install -y poppler-utils[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8354924Z shell: /usr/bin/bash -e {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8355149Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8355407Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8355739Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8355986Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.8881452Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9157911Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9173447Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9183142Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9193374Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9210844Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:22.9284624Z Hit:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.0246307Z Reading package lists...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.0541852Z Reading package lists...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.2119592Z Building dependency tree...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.2125346Z Reading state information...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3728237Z The following additional packages will be installed:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3734028Z   libpoppler134 poppler-data
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3741421Z Suggested packages:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3742008Z   ghostscript fonts-japanese-mincho | fonts-ipafont-mincho
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3742610Z   fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3743106Z   fonts-arphic-uming fonts-nanum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3950426Z The following NEW packages will be installed:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.3950984Z   libpoppler134 poppler-data poppler-utils
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.4037768Z 0 upgraded, 3 newly installed, 0 to remove and 69 not upgraded.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.4038114Z Need to get 3390 kB of archives.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.4038436Z After this operation, 17.8 MB of additional disk space will be used.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.4038798Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.5124865Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.8981905Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.8 [1118 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:24.9638210Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.8 [212 kB]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2034785Z Fetched 3390 kB in 1s (5938 kB/s)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2240068Z Selecting previously unselected package poppler-data.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2408041Z (Reading database ... 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2408400Z (Reading database ... 5%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2408617Z (Reading database ... 10%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2408856Z (Reading database ... 15%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2409068Z (Reading database ... 20%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2409271Z (Reading database ... 25%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2409464Z (Reading database ... 30%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2409664Z (Reading database ... 35%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2409892Z (Reading database ... 40%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2410214Z (Reading database ... 45%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2410539Z (Reading database ... 50%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.2474400Z (Reading database ... 55%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.3066782Z (Reading database ... 60%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.3881758Z (Reading database ... 65%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.4186660Z (Reading database ... 70%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.4468895Z (Reading database ... 75%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.5623313Z (Reading database ... 80%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.7453053Z (Reading database ... 85%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:25.9265619Z (Reading database ... 90%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.0477335Z (Reading database ... 95%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.0477781Z (Reading database ... 100%
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.0478639Z (Reading database ... 217374 files and directories currently installed.)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.0522533Z Preparing to unpack .../poppler-data_0.4.12-1_all.deb ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.0539509Z Unpacking poppler-data (0.4.12-1) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1379700Z Selecting previously unselected package libpoppler134:amd64.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1496835Z Preparing to unpack .../libpoppler134_24.02.0-1ubuntu9.8_amd64.deb ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1510674Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1788980Z Selecting previously unselected package poppler-utils.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1903157Z Preparing to unpack .../poppler-utils_24.02.0-1ubuntu9.8_amd64.deb ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.1911185Z Unpacking poppler-utils (24.02.0-1ubuntu9.8) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.2312782Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.2332193Z Setting up poppler-data (0.4.12-1) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.2385659Z Setting up poppler-utils (24.02.0-1ubuntu9.8) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:26.2402769Z Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:28.7573275Z Processing triggers for man-db (2.12.0-4build2) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:28.7595142Z Not building database; man-db/auto-update is not 'true'.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:28.7607441Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3230002Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3231140Z Running kernel seems to be up-to-date.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3231355Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3231455Z No services need to be restarted.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3231864Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3231954Z No containers need to be restarted.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3232128Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3232243Z No user sessions are running outdated binaries.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3232432Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:29.3232603Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1059010Z ##[group]Run echo "Flutter:" && flutter --version || true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1059398Z [36;1mecho "Flutter:" && flutter --version || true[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1059782Z [36;1mecho "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1060218Z [36;1mecho "git-lfs:" && git lfs --version || echo "git-lfs not present"[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1079370Z shell: /usr/bin/bash -e {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1079613Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1079875Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1080186Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1080419Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.1115191Z Flutter:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2614261Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2615125Z Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2616358Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2617107Z Tools • Dart 3.10.4 • DevTools 2.51.1
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2638380Z pdftotext (poppler):
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2694057Z pdftotext version 24.02.0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2694686Z Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2695083Z Copyright 1996-2011, 2022 Glyph & Cog, LLC
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.2704469Z git-lfs:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.9955768Z git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.9985509Z ##[group]Run flutter pub get
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:30.9985783Z [36;1mflutter pub get[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.0004647Z shell: /usr/bin/bash -e {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.0004911Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.0005167Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.0005484Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.0005715Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.4128211Z Resolving dependencies...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.5859613Z Downloading packages...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6466713Z   _fe_analyzer_shared 89.0.0 (92.0.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6467312Z   analyzer 8.2.0 (9.0.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6467725Z   build 4.0.0 (4.0.3 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6468107Z   build_daemon 4.0.4 (4.1.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6468524Z   build_runner 2.8.0 (2.10.4 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6468926Z   built_value 8.12.0 (8.12.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6469326Z   characters 1.4.0 (1.4.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6469834Z   crypto 3.0.6 (3.0.7 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6470193Z   dart_style 3.1.2 (3.1.3 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6470592Z   flutter_lints 5.0.0 (6.0.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6470986Z   http 1.5.0 (1.6.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6471371Z   image 4.5.4 (4.7.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6471738Z   lints 5.1.1 (6.0.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6472131Z   matcher 0.12.17 (0.12.18 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6472580Z   material_color_utilities 0.11.1 (0.13.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6472975Z > meta 1.17.0 (was 1.16.0)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6473316Z   mockito 5.5.1 (5.6.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6473777Z   path_provider_android 2.2.18 (2.2.22 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6474283Z   path_provider_foundation 2.4.2 (2.5.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6474795Z   shared_preferences 2.5.3 (2.5.4 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6475312Z   shared_preferences_android 2.4.13 (2.4.18 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6475773Z   shared_preferences_foundation 2.5.4 (2.5.6 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6476259Z   source_gen 4.0.1 (4.1.1 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6476716Z > test_api 0.7.7 (was 0.7.6) (0.7.8 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6477378Z   watcher 1.1.3 (1.2.0 available)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6478070Z Changed 2 dependencies!
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6478651Z 24 packages have newer versions incompatible with dependency constraints.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:31.6479347Z Try `flutter pub outdated` for more information.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0106507Z ##[group]Run chmod +x ./scripts/collect_coverage.sh
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0106872Z [36;1mchmod +x ./scripts/collect_coverage.sh[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0107449Z [36;1m./scripts/collect_coverage.sh[0m
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0125992Z shell: /usr/bin/bash -e {0}
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0126219Z env:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0126475Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0126796Z   PUB_CACHE: /home/runner/.pub-cache
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0127021Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0198476Z Ensuring bundled fonts are present (download if needed)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0202171Z Found tool/download_fonts.sh — running to fetch required fonts...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0223654Z Downloading NotoSerifHK from https://github.com/notofonts/noto-cjk/raw/refs/heads/main/google-fonts/NotoSerifHK%5Bwght%5D.ttf and saving as NotoSerifHK-wght.ttf...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0263983Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0264673Z                                  Dload  Upload   Total   Spent    Left  Speed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0264866Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.0289245Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.2564340Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.2564800Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.8325630Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.8326278Z 100 16.0M  100 16.0M    0     0  19.9M      0 --:--:-- --:--:-- --:--:-- 19.9M
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.8521664Z Font downloaded to assets/fonts/NotoSerifHK-wght.ttf.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.8603619Z Also created compatibility copy assets/fonts/NotoSerifHK[wght].ttf if permissions allow.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:32.8605277Z Running VM tests...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:33.8858894Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:42.4543287Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: ShooterSetupView renders title
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:42.7620669Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: Can add a shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:42.9308188Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: Cannot add duplicate shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:43.1041217Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: Can edit shooter scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:43.2139539Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: Can remove shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:43.3119638Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_test.dart: Shows validation error for invalid scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:44.3992030Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_edge_test.dart: MatchSetupViewModel edge cases addStage with min and max valid values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:44.4014985Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_edge_test.dart: MatchSetupViewModel edge cases addStage with negative and over max values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:44.4044960Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_edge_test.dart: MatchSetupViewModel edge cases editStage for non-existent stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:44.4066316Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_edge_test.dart: MatchSetupViewModel edge cases removeStage for non-existent stage does not throw
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:44.4087669Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_edge_test.dart: MatchSetupViewModel edge cases addStage after removal allows reuse of stage number
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:45.1093543Z ✅ /home/runner/work/simple_match/simple_match/test/views_overall_result_view_export_test.dart: OverallResultView PDF Export shows PDF export button when results exist and triggers on tap
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:45.1514037Z ✅ /home/runner/work/simple_match/simple_match/test/views_overall_result_view_export_test.dart: OverallResultView PDF Export does not show PDF export button when no results
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:45.4090688Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_viewmodel_uncovered_test.dart: ShooterSetupViewModel edge cases
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:46.5442893Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_overall_result_test.dart: OverallResultViewModel can instantiate
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:46.5523113Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_overall_result_test.dart: OverallResultViewModel calculates and ranks overall results correctly
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6091936Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: totalScore computes sum with penalties
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6111621Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: hitFactor returns 0.0 when time is zero or negative
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6140835Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: hitFactor and adjustedHitFactor compute correctly
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6161476Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: copyWith preserves unspecified fields and updates specified ones
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6186679Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: toJson contains all expected keys and values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6204119Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: default status is Completed and custom statuses are preserved
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6221067Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: copyWith without arguments returns equivalent values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:47.6240764Z ✅ /home/runner/work/simple_match/simple_match/test/models_stage_result_test.dart: adjustedHitFactor with zero scale returns zero
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:48.0702553Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_status_test.dart: DNF/DQ and roRemark persistence
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:48.5789843Z ✅ /home/runner/work/simple_match/simple_match/test/repository_test.dart: MatchRepository initial lists are empty
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:48.5849777Z ✅ /home/runner/work/simple_match/simple_match/test/repository_test.dart: MatchRepository can add and retrieve stages
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:48.5880556Z ✅ /home/runner/work/simple_match/simple_match/test/repository_test.dart: MatchRepository can add and retrieve shooters
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:48.5911799Z ✅ /home/runner/work/simple_match/simple_match/test/repository_test.dart: MatchRepository can add and retrieve results
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:50.1309740Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_edit_remove_test.dart: MatchSetupView can remove a stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:50.3123149Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_result_view_test.dart: StageResultView displays detailed sortable table with fixed column widths
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:50.3148129Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_edit_remove_test.dart: MatchSetupView can edit a stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:50.3692127Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_result_view_test.dart: StageResultView columns fit within mobile width
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:51.2096314Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_test.dart: MainMenuViewModel can instantiate
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:51.2140906Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_test.dart: MainMenuViewModel clearAllData calls repository.clearAllData
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:51.2201239Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_test.dart: MainMenuViewModel navigateTo calls Navigator.pushNamed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:51.4336273Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_restart_test.dart: status and roRemark persist across simulated restart
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:52.3140233Z ✅ /home/runner/work/simple_match/simple_match/test/services_test.dart: PersistenceService can instantiate
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:52.3256248Z ✅ /home/runner/work/simple_match/simple_match/test/services_test.dart: PersistenceService can save and load shooters
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:52.3285384Z ✅ /home/runner/work/simple_match/simple_match/test/services_test.dart: PersistenceService can save and load stages
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:52.3317965Z ✅ /home/runner/work/simple_match/simple_match/test/services_test.dart: PersistenceService can save and load stage results
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:53.0029944Z ✅ /home/runner/work/simple_match/simple_match/test/views_overall_result_view_test.dart: OverallResultView renders title
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:53.8173321Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_result_view_uncovered_test.dart: StageResultView uncovered UI/logic shows empty state when no stages
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7833018Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches save and load shooters
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7858314Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches save and load stages
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7881200Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches schema migration logic (noop)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7960086Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches future-proof: clears data if schema version is downgraded (mocked, injectable)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7978907Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches ensureSchemaUpToDate sets version if missing (mocked, injectable)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.7999081Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches calls _migrateSchema when upgrading schema
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.8017420Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches clears data if schema version is downgraded
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.8038031Z ✅ /home/runner/work/simple_match/simple_match/test/services_persistence_service_uncovered_test.dart: PersistenceService uncovered branches returns empty list if key missing in loadList
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:54.8926214Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views MainMenuView navigation buttons present
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.0821051Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views MatchSetupView shows empty and error states
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.1467861Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views ShooterSetupView shows empty and error states
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.1841211Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views StageInputView shows empty state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.2090314Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views StageResultView shows empty state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.2342378Z ✅ /home/runner/work/simple_match/simple_match/test/views_all_edge_empty_error_test.dart: Widget edge/empty/error coverage for all views OverallResultView shows empty state and PDF button hidden
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:55.9909963Z ✅ /home/runner/work/simple_match/simple_match/test/non_web_pdf_utils_test.dart: WebPdfUtils.downloadPdf throws on non-web
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3658613Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel initializes with default values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3711342Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel selectStage and selectShooter loads or resets values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3740671Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel validation disables submit if sum != scoring shoots
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3766630Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel hit factor and adjusted hit factor calculation
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3789466Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel submit adds or updates result
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:56.3812875Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_input_test.dart: StageInputViewModel remove deletes result
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:57.5589427Z ✅ /home/runner/work/simple_match/simple_match/test/io_file_helpers_io_test.dart: listBackups returns json files sorted by modified desc and readFileBytes reads
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:57.7974247Z ✅ /home/runner/work/simple_match/simple_match/test/main_uncovered_test.dart: StageResultView route builds with injected ViewModel
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:57.8215468Z ✅ /home/runner/work/simple_match/simple_match/test/main_uncovered_test.dart: main.dart routes fallback to / if unknown
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:57.8331773Z ✅ /home/runner/work/simple_match/simple_match/test/main_uncovered_test.dart: main() runs without error
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6476952Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: Migration logic upgrades old schema version and preserves data (using mockito)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6510946Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: Migration logic adds default status to stage results
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6534195Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: Simplified migration test for status field
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6558190Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: Mock data retrieval test with generated mock
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6602411Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: Directly call migrateSchema to verify behavior
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6624700Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: ensureSchemaUpToDate clears prefs when stored version is higher than current
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6684239Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: ensureSchemaUpToDate clears prefs when stored version is higher (SharedPreferences mock)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6704388Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: ensureSchemaUpToDate calls clear and resets version (mocked prefs verify calls)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6739602Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: migrateSchema handles malformed JSON by saving empty list
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6776069Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: migrateSchema skips non-map items and migrates valid maps
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:58.6810250Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_migration_test.dart: migrateSchema preserves existing status value
+collect-coverage	UNKNOWN STEP	2025-12-22T15:45:59.7454937Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_result_viewmodel_notify_test.dart: StageResultViewModel notifies listeners on load
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.7505259Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_test.dart: Persistence backup/import MVP export produces JSON with expected keys
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.7601885Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_test.dart: Persistence backup/import MVP import dry run validates and returns counts without persisting
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.7692657Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_test.dart: Persistence backup/import MVP import persists data and can be loaded after import
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.7726537Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_test.dart: Persistence backup/import MVP import rejects invalid JSON
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.7750229Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_test.dart: Persistence backup/import MVP import rejects missing keys
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8590484Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_additional_edge_test.dart: StageInputView additional edge cases Rapid field changes and focus loss do not break state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8592174Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8600122Z Warning: A call to tap() with finder "Found 1 widget with key [<'timeField'>]: [
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8605210Z   TextField-[<'timeField'>](controller: TextEditingController#01e81(TextEditingValue(text: ┤0.0├, selection: TextSelection.collapsed(offset: 3, affinity: TextAffinity.upstream, isDirectional: false), composing: TextRange(start: -1, end: -1))), enabled: true, decoration: InputDecoration(labelText: "Time", prefixIcon: Icon(IconData(U+0E662)), border: OutlineInputBorder()), keyboardType: TextInputType(name: TextInputType.number, signed: false, decimal: true), dependencies: [DefaultSelectionStyle, InheritedCupertinoTheme, MediaQuery, UnmanagedRestorationScope, _InheritedTheme, _LocalizationsScope-[GlobalKey#36cc6], _ScrollableScope], state: _TextFieldState#99bef),
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8609401Z ]" derived an Offset (Offset(400.0, 100.0)) that would not hit test on the specified widget.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8610286Z Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8611133Z The finder corresponds to this RenderBox: RenderMouseRegion#37e66 relayoutBoundary=up24
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8620477Z The hit test result at that offset is: HitTestResult(RenderPointerListener#dbae0@Offset(384.0, 28.0), RenderSemanticsGestureHandler#7c26c@Offset(384.0, 28.0), RenderPointerListener#23dbe@Offset(384.0, 28.0), _RenderScrollSemantics#4a1fe@Offset(384.0, 28.0), RenderClipRect#6d26e@Offset(384.0, 28.0), RenderFlex#ba0a1@Offset(384.0, 28.0), RenderFlex#6c371@Offset(384.0, 28.0), RenderPadding#8e5fc@Offset(400.0, 44.0), RenderConstrainedBox#26786@Offset(400.0, 44.0), _RenderLayoutBuilder#c9e96@Offset(400.0, 44.0), RenderCustomMultiChildLayoutBox#41745@Offset(400.0, 100.0), _RenderInkFeatures#ad8a6@Offset(400.0, 100.0), RenderPhysicalModel#77da1@Offset(400.0, 100.0), RenderSemanticsAnnotations#b704d@Offset(400.0, 100.0), RenderRepaintBoundary#18754@Offset(400.0, 100.0), RenderIgnorePointer#934f4@Offset(400.0, 100.0), RenderAnimatedOpacity#c4204@Offset(400.0, 100.0), RenderAnimatedOpacity#5dd3b@Offset(400.0, 100.0), _RenderColoredBox#23ae5@Offset(400.0, 100.0), RenderAnimatedOpacity#93b7f@Offset(400.0, 100.0), RenderIgnorePointer#38209@Offset(400.0, 100.0), RenderAnimatedOpacity#d22b4@Offset(400.0, 100.0), RenderRepaintBoundary#9243b@Offset(400.0, 100.0), RenderSemanticsAnnotations#963bd@Offset(400.0, 100.0), RenderOffstage#9d5c1@Offset(400.0, 100.0), RenderSemanticsAnnotations#8b3b0@Offset(400.0, 100.0), _RenderTheater#9c25a@Offset(400.0, 100.0), RenderAbsorbPointer#1efd1@Offset(400.0, 100.0), RenderPointerListener#c9335@Offset(400.0, 100.0), RenderSemanticsAnnotations#bc4e2@Offset(400.0, 100.0), RenderCustomPaint#50ed0@Offset(400.0, 100.0), RenderSemanticsAnnotations#89242@Offset(400.0, 100.0), RenderSemanticsAnnotations#55e8e@Offset(400.0, 100.0), RenderTapRegionSurface#83073@Offset(400.0, 100.0), RenderSemanticsAnnotations#e98c5@Offset(400.0, 100.0), RenderSemanticsAnnotations#2bac1@Offset(400.0, 100.0), RenderSemanticsAnnotations#e9137@Offset(400.0, 100.0), HitTestEntry<HitTestTarget>#e9c3f(_ReusableRenderView#61cfb), HitTestEntry<HitTestTarget>#15c28(<AutomatedTestWidgetsFlutterBinding>))
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8629563Z #0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2081:25)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8630875Z #1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1865:12)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8631828Z #2      WidgetController.tap (package:flutter_test/src/controller.dart:1045:7)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8633045Z #3      main.<anonymous closure>.<anonymous closure> (file:///home/runner/work/simple_match/simple_match/test/views_stage_input_view_additional_edge_test.dart:62:20)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8634060Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8634757Z #4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8635511Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8636129Z #5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8636794Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8637784Z #6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8638722Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8639186Z To silence this warning, pass "warnIfMissed: false" to "tap()".
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8639955Z To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8640491Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:00.8640965Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:02.0846461Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_additional_edge_test.dart: StageInputView additional edge cases All error messages for each field are shown as expected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:03.2200968Z ✅ /home/runner/work/simple_match/simple_match/test/io_file_helpers_list_test.dart: listBackups finds json files in mocked documents directory
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:03.3110523Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_edge_test.dart: MatchSetupView handles min/max and invalid input
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:04.1700297Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_test.dart: Repository can persist and reload all data
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:05.6736981Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_edge_error_test.dart: MatchSetupView edge/error coverage Add, edit, cancel, remove, and error flows
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:05.8915870Z ✅ /home/runner/work/simple_match/simple_match/test/widget_test.dart: App starts and shows main menu
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:06.2853549Z ✅ /home/runner/work/simple_match/simple_match/test/widget_test.dart: Navigation to Match Setup works
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:06.4036852Z ✅ /home/runner/work/simple_match/simple_match/test/widget_test.dart: Navigation to Shooter Setup works
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:07.3545122Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_import_real_export_test.dart: import of a real exported JSON succeeds (dry-run and apply)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:07.6399264Z ✅ /home/runner/work/simple_match/simple_match/test/views_main_menu_view_uncovered_test.dart: MainMenuView navigation and edge cases
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6359204Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel addStage adds valid stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6380531Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel addStage rejects duplicate stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6408424Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel addStage rejects out-of-range stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6424273Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel addStage rejects out-of-range scoringShoots
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6444515Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel removeStage removes stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6466232Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel editStage updates stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:08.6484044Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_logic_test.dart: MatchSetupViewModel editStage rejects invalid scoringShoots
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:09.4713922Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_uncovered_test.dart: ShooterSetupView uncovered branches shows error for duplicate shooter name
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:09.5908405Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_uncovered_test.dart: ShooterSetupView uncovered branches shows error for invalid scale factor
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:09.6944017Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_uncovered_test.dart: ShooterSetupView uncovered branches shows error on invalid scale and empty state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:10.2757107Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_test.dart: MatchSetupView renders title
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:10.4590879Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_result_viewmodel_test.dart: getStageRanks computes ordering and adjustedMatchPoint
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:10.4631802Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_result_viewmodel_test.dart: updateStatus updates result and saves via persistence
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4688842Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel can instantiate
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4749655Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel addShooter adds a shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4775025Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel addShooter fails for duplicate name
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4792438Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel addShooter fails for invalid scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4812462Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel editShooter updates scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4828280Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel editShooter fails for missing shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:11.4854099Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_shooter_setup_test.dart: ShooterSetupViewModel removeShooter removes shooter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:12.1019245Z ✅ /home/runner/work/simple_match/simple_match/test/views_main_menu_clear_all_test.dart: Clear All Data button clears repository after confirmation
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:13.4058420Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView renders all input fields and selectors in vertical layout with +/- buttons
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:14.3299126Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView disables submit if input is invalid
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:14.7723923Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches shows validation error for incorrect sum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:14.9379039Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView enables submit and displays hit factors when valid
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:15.6254950Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView submits and displays in result list
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:15.8653866Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches all increment/decrement buttons work
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:16.1305354Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView DNF result displays status-only in result list
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:16.2667899Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches shows error for negative values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:16.2901339Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches shows empty state if no stages or shooters
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:16.6357051Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches can edit and remove a result
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:16.8835588Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView can edit and remove a result
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:17.0382061Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_test.dart: StageInputView uncovered branches shows hit factor and adjusted hit factor
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:17.1139243Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView DQ-ed shooters are greyed out and unselectable in shooter selector
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:17.4972243Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView DQ requires non-empty RO remark and disables submit when blank
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:17.9754839Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_test.dart: StageInputView DQ with RO remark allows submit
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:18.6183414Z ✅ /home/runner/work/simple_match/simple_match/test/views_overall_result_view_uncovered_test.dart: OverallResultView edge case
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:18.7762661Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_stage_result_viewmodel_uncovered_test.dart: StageResultViewModel edge cases
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:19.9086648Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_test.dart: MatchSetupViewModel can instantiate
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:19.9153326Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_test.dart: MatchSetupViewModel addStage adds a stage and validates input
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:19.9190291Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_test.dart: MatchSetupViewModel editStage updates scoring shoots and validates input
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:19.9213366Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_test.dart: MatchSetupViewModel removeStage removes a stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:20.7014913Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_uncovered_test.dart: MatchSetupView uncovered branches shows error for duplicate stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:20.7989224Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_uncovered_test.dart: MatchSetupView uncovered branches shows error for invalid stage number
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:20.8695300Z ✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_bump_coverage_test.dart: call settings view coverage helpers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:20.9069342Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_uncovered_test.dart: MatchSetupView uncovered branches shows error for invalid scoring shoots
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:21.0058477Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_uncovered_test.dart: MatchSetupView uncovered branches shows error on invalid input and empty state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.2196186Z ✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_run_all_helpers_test.dart: runAllSettingsViewCoverageHelpersForTest executes remaining helper blocks
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6832215Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_extra_helpers_test.dart: Import flow replaces extra helper calls
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6833592Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6834413Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6835202Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6835967Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:22.6836675Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:23.2737676Z ✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_marker4_test.dart: exerciseCoverageMarker4 returns a positive sum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:23.8792304Z ✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_coverage_helpers_test.dart: exercise settings_view coverage helpers (minimal shim)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5877808Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_coverage_helpers_test.dart: Import path exercises coverage branches (unit -> widget)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5887380Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5888485Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5889307Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5890079Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:24.5890909Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1984282Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/unit/settings_view_force_helpers_test.dart: Import path exercises guarded blocks previously hit by force helpers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1989026Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1990913Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1992625Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1993443Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.1994245Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:25.5871071Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_viewmodel_uncovered_test.dart: MainMenuViewModel edge case
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:26.0878157Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_viewmodel_uncovered_test.dart: navigateTo pushes named route
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:26.0954549Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_main_menu_viewmodel_uncovered_test.dart: clearAllData calls repository.clearAllData
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:26.1619540Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_restart_full_integration_test.dart: stages and shooters persist across simulated restart
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:27.8663315Z ✅ /home/runner/work/simple_match/simple_match/test/views_edge_empty_error_test.dart: Widget edge/empty/error coverage MatchSetupView renders with no stages
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:27.9271762Z ✅ /home/runner/work/simple_match/simple_match/test/views_edge_empty_error_test.dart: Widget edge/empty/error coverage ShooterSetupView renders with no shooters
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:27.9954590Z ✅ /home/runner/work/simple_match/simple_match/test/views_edge_empty_error_test.dart: Widget edge/empty/error coverage StageResultView shows no results for stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:28.0218264Z ✅ /home/runner/work/simple_match/simple_match/test/views_edge_empty_error_test.dart: Widget edge/empty/error coverage OverallResultView shows no results yet
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:29.1555639Z ✅ /home/runner/work/simple_match/simple_match/test/views_edge_empty_error_test.dart: Widget edge/empty/error coverage StageInputView shows empty state and validation error
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:29.2109892Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_ui_test.dart: StageInputView uncovered UI/logic Procedure Errors increment/decrement and validation
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:29.6519968Z ✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_uncovered_ui_test.dart: StageInputView uncovered UI/logic Shows error if submit with invalid (negative) values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:30.8546076Z ✅ /home/runner/work/simple_match/simple_match/test/provider_setup_test.dart: Provider tree is set up and provides all viewmodels
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:31.7803427Z ✅ /home/runner/work/simple_match/simple_match/test/navigation_test.dart: Main menu navigation buttons push correct routes
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:32.8701049Z ✅ /home/runner/work/simple_match/simple_match/test/export_utils_io_test.dart: saveExport writes content to file (platform-aware)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:33.1772498Z ✅ /home/runner/work/simple_match/simple_match/test/views_shooter_setup_view_edge_error_test.dart: ShooterSetupView edge/error coverage Add, edit, cancel, remove, and error flows
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:34.1527705Z ✅ /home/runner/work/simple_match/simple_match/test/coverage_wrapper_test.dart: coverage wrapper for lib/views helper files
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:34.2911735Z ✅ /home/runner/work/simple_match/simple_match/test/migration_v2_default_fields_test.dart: migrateSchema adds default status and roRemark and updates schema version
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:35.2090061Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_io_integration_test.dart: Export Backup JSON generation (non-override IO path)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.1315553Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: exportViaWebForTest: web export wrapper updates status using a dummy exporter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.1316739Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.1328799Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.1329744Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2052853Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: importViaWebForTest: pickBackupOverride returning null shows no-file SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2486695Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_direct_test.dart: Direct import flow (dry-run -> import) with FakePersistence
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2495660Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2498411Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2499140Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2499822Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2500528Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2629659Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: importFromDocumentsChosenForTest: dry-run failure shows validation message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2633141Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2633639Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2634290Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2634966Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2635515Z TESTDBG: dry-run result success=false counts={} message=validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.2636275Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3190506Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: importFromDocumentsChosenForTest: import succeeds but repo.reload throws shows reload failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3194082Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3194758Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3195741Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3196732Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3197762Z TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3198917Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3199819Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3200467Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3201291Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.3651688Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: exportBackupForTest: documentsDirOverride throwing triggers Export failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4045637Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: importFromDocumentsForTest: empty documents list shows no-backups SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4508337Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_final_coverage_test.dart: importFromDocumentsChosenForTest: final import failure sets Import failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4510200Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4510629Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4511199Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4511877Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4512441Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4513319Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4513942Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4514362Z TESTDBG: import res success=false message=final fail
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:36.4515060Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:37.8839001Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_targets_test.dart: pickBackupOverride returns null -> No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:37.9501201Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_targets_test.dart: listBackupsOverride empty -> No backup files found
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.0866850Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_targets_test.dart: pickBackupOverride autoConfirm false -> user cancels confirm dialog
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.0869024Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.0871021Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.0871812Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.2686197Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Import flow: dismissing Select backup dialog returns early (cancel)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.3624394Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Export flow: exporter throws shows Export failed SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.3628927Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.3629702Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.3630453Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.4193137Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Export flow: pickBackupOverride returns null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.4684546Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Export flow: dry-run fails shows validation failed SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.4686139Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.4687095Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.4691356Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5165482Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Import flow: repo.loadAll throws after successful import shows reload failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5167048Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=148
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5167885Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5168562Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=148
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5169253Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5169907Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5864644Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branches_test.dart: Force web export/import paths are reachable via state wrappers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5865694Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5866136Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5866884Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5868070Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5868758Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=118
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5869675Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:38.5870368Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9869245Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_ui_test.dart: Import Backup UI flow (select file, dry-run, restore) updates repository
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9871115Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9871867Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9872625Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9873137Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:39.9873891Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4049477Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_add_missing_branches_test.dart: importViaWebForTest: final import failure shows Import failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4051517Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4052526Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4053457Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4054346Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4055662Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4697082Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_add_missing_branches_test.dart: importFromDocumentsConfirmedForTest: final import failure sets message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4700883Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4701688Z TESTDBG: read bytes length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4702501Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4703361Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4704076Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4705113Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4705876Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4706389Z TESTDBG: import res success=false message=final fail
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.4707349Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5499968Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_add_missing_branches_test.dart: importFromDocumentsChosenForTest: repo.loadAll throws shows reload failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5501558Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5502248Z TESTDBG: read bytes length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5503099Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5503903Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5504728Z TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5505931Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5506819Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5507448Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:40.5508315Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7548465Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_integration_like_test.dart: Import Backup (integration-like) using pickBackupOverride
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7550731Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7552039Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7553333Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7555087Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:41.7556345Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:42.4165511Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_io_test.dart: Export Backup writes a file to documents directory via UI
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:42.4166890Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:42.4167575Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:42.4168325Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.3609738Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart: exportBackupForTest hits web-export branch and coverage block
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.3611047Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.3611590Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.3612327Z TEST: dummy exporter called with name=simple_match_backup_test-ts.json contentLen=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.3613208Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4088258Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart: importFromDocumentsConfirmedForTest dry-run failure shows validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4097088Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4100278Z TESTDBG: read bytes length=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4102659Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4105340Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4105875Z TESTDBG: dry-run result success=false counts={} message=validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4107097Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4804715Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_test.dart: importFromDocumentsConfirmedForTest handles repo.loadAll throwing (reload failed)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4807431Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4808051Z TESTDBG: read bytes length=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4808922Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4809836Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4810652Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4811852Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4812785Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4813331Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:43.4814116Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.1385334Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_remaining_test.dart: exporter exception sets Export failed and shows SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.1392534Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.1393185Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.1398206Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.2269943Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_remaining_test.dart: force web export path via forceKIsWeb executes exportViaWebForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.2274038Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.2274879Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.2276634Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.3233483Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_remaining_test.dart: import via web returns no file selected shows SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.4031168Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_remaining_test.dart: import dry-run failure shows validation failed message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.4034658Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.4037564Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:44.4039959Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.0734227Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_behavior_test.dart: Import via web: pickBackupOverride returns null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.1478152Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_behavior_test.dart: Import from documents: empty listBackupsOverride shows no files SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2140775Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_behavior_test.dart: Import flow: dry-run succeeds but actual import fails shows Import failed SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2143086Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=118
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2144777Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2146401Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=118
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2147571Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2148488Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.2181011Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_behavior_test.dart: call coverage marker static helper
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4216819Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_marker_test.dart: Import triggers code paths covered previously by markerLarge
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4218829Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4219705Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4221583Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4223721Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4224321Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:46.4263367Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_marker_test.dart: exercise coverage marker returns int
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9794986Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_shim_test.dart: shim: invoke _importViaWeb through state to exercise web branch
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9796781Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9798282Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9799185Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9799956Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:47.9800640Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:48.3472375Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_widget_test.dart: Tapping Settings opens SettingsView
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:48.3852101Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_widget_test.dart: Importing backup updates UI via repository reload
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:49.8093006Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_io_default_test.dart: export uses saveExportOverride and shows exported message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:49.8101742Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:49.8102825Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:49.8104547Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2211635Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: importViaWebForTest final import failure sets Import failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2213620Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2216207Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2217139Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2218110Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.2221246Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4088497Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: importViaWebForTest dialog Cancel returns without import
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4090037Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4090940Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4091616Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4984476Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: importFromDocumentsChosenForTest final import failure shows Import failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4989401Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4990237Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4991040Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4991853Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.4992563Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5634758Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: importFromDocumentsConfirmedForTest handles repo.loadAll throwing and shows reload-failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5648096Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5648594Z TESTDBG: read bytes length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5649279Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5649980Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5650600Z TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5651501Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5652223Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5652625Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.5653275Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6649014Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: exportBackupForTest with pickBackupOverride and repo.loadAll throwing shows reload-failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6650760Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6653001Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6656480Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6663639Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.6665143Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7452400Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_missing_branch_more_test.dart: exportBackupForTest with pickBackupOverride final import failure shows Import failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7464533Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7465460Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7466362Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7467376Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:50.7468136Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.4994913Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_dialog_confirm_test.dart: pickBackupOverride null shows No file selected SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.6722855Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_dialog_confirm_test.dart: pickBackupOverride with confirm -> user cancels
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.8023638Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_dialog_confirm_test.dart: pickBackupOverride with confirm -> user restores
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.8432178Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_dialog_confirm_test.dart: listBackupsOverride empty shows no-files SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.8905870Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: exerciseCoverageMarker returns a non-zero sum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.8929980Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: exerciseCoverageMarker2 returns a non-zero sum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.8944706Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: exerciseCoverageMarker3 returns a non-zero sum
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:51.9234772Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_dialog_confirm_test.dart: listBackupsOverride shows list and restore
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.5065984Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: coverage boost: call common test-only wrappers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.5099646Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.5100403Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.5101197Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7505697Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: importViaWebForTest: shows confirm dialog and Restore proceeds
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7518844Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7520240Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7521392Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7527903Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.7528898Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8402117Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_boost_test.dart: forceKIsWeb: _exportBackup and _importBackup branches execute
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8404320Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8405542Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8406976Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8408562Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8418724Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8419964Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:52.8421158Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8108607Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: Import handles final import failure and shows Import failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8109890Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8110576Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8111232Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8122585Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8124884Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8902366Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: Export saveExportOverride throwing shows Export failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8903561Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8904141Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:53.8904937Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.0098649Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: pickBackupOverride without autoConfirm and Cancel returns early
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.0100523Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.0102163Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.0102893Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.0593786Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: pickBackupOverride returning null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1094705Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: pickBackupOverride dry-run failure shows validation SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1097636Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1099242Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1101744Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1586235Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: import non-dry-run failure shows Import failed message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1592070Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1598806Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1599995Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1601403Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.1602375Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.2041487Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_branches_test.dart: listBackupsOverride empty shows No backup files found message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7060394Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_flow_test.dart: Export Backup invokes saveExportOverride
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7061492Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7062015Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7062662Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7094333Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_flow_test.dart: Import Backup flow (direct using FakePersistence)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7095540Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7096185Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7096826Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=false bytesLen=150
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7097643Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:54.7098272Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2253616Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_coverage_test.dart: SettingsView export/import branches (overrides)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2255298Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2256183Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2256877Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2257790Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2259124Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=50
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2260323Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2262116Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=50
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2262996Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.2263726Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6464061Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_range_batch2_test.dart: Web pick override: autoConfirm true -> import successful
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6465483Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6466178Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6466871Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6467742Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.6468365Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.7152816Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_range_batch2_test.dart: Web pick override: dry-run validation fails (autoConfirm true with bad bytes)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.7154415Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.7156520Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.7157338Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.7816637Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_range_batch2_test.dart: pickBackupOverride returns null -> import cancelled path
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.8613626Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_range_batch2_test.dart: Export saveOverride throws -> shows export failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.8614887Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.8617319Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:56.8618198Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9736709Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_mega_coverage_test.dart: Import flow covers mega helper branches
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9738781Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9739881Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9743844Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9745876Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:57.9746508Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6156651Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_call_helpers_test.dart: Import flow covers small helpers previously called directly
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6158190Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6158978Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6159732Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6160476Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:46:58.6161078Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.3667554Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart: exportBackup _exportViaWeb call site executed when forced web
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.3669743Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.3670325Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.3671038Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4512720Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_missing_lines_test.dart: exportBackup IO path executes exporter and mounted-check
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4514981Z FakePersistence.exportBackupToFile called with path: /tmp/simple_match_test_docsAIKAUI/simple_match_backup_2025-12-22T15-47-00.417771.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4517359Z FakePersistence: creating file
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4517744Z FakePersistence: writing file
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4518204Z FakePersistence: write complete
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4518598Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4519070Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.4519771Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8073429Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_shims_direct_test.dart: direct exportViaWebForTest updates status and calls exporter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8075289Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8076279Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8077049Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8685319Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_shims_direct_test.dart: direct importViaWebForTest handles repo.loadAll throwing
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8686730Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8687627Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8688550Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8689380Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8690241Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8691028Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:00.8691695Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4021396Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_fill_gaps_test.dart: fill gaps: deterministic exercise of IO/web branches
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4022745Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4023232Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4023704Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4025840Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4026352Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4026772Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4027500Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4028153Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4028591Z TESTDBG: dry-run result success=true counts={} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4029294Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4030057Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4030474Z TESTDBG: import res success=false message=final fail
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.4031098Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.6386536Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_web_shim_test.dart: shim: invoke _exportViaWeb through state to exercise web export branch
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.6388857Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.6389959Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:02.6390847Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.1659682Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_docsdir_test.dart: calling export without documentsDirOverride touches getDocumentsDirectory line
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.3612788Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_targets_test.dart: exportBackupForTest triggers web-export branch when forced web
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.3618895Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.3619427Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.3622257Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.5629321Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_targets_test.dart: importViaWebForTest shows confirm dialog and Cancel returns without import
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.5631144Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.5632056Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:04.5632732Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8807515Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_coverage_test.dart: exercise import/export branches in SettingsView
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8809112Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8809915Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8811181Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8812036Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8812765Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8813973Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8814769Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8815271Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8841731Z TESTDBG: repo.loadAll completed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:05.8842468Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.2998381Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_reload_failure_test.dart: Import succeeds but repo.loadAll() throws is handled
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3001283Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3002056Z FakePersistence.exportBackupJson returning length=79
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3003001Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=79
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3004659Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3006197Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=79
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3007517Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:06.3008423Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7370342Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_pick_override_test.dart: Web pickBackupOverride autoConfirm import succeeds
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7373350Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7374088Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7380121Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7380828Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:07.7381464Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:08.1382530Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_extra_test.dart: SettingsView web import/export override flow
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.5210797Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_failure_test.dart: Import flow when persistence throws shows Import error SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.5212916Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=154
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.5213660Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.5214234Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6595491Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_additional_failure_test.dart: Export Backup with pickBackupOverride exercises import branch and shows success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6598061Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=157
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6598741Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6599422Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=157
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6600051Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:09.6600619Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.0357559Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_coverage_test.dart: Export override throwing shows Export failed SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.1067686Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_coverage_test.dart: pickBackupOverride null shows No file selected SnackBar
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.1731713Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_coverage_test.dart: pickBackupOverride with invalid JSON shows validation failure
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.3214809Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_coverage_test.dart: pickBackupOverride shows dialog and restore when not autoConfirm
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.4073762Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_coverage_test.dart: listBackupsOverride + readFileBytesOverride import flow
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:10.7295143Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart: exercise coverage marker returns non-zero
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.3327892Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart: exportViaWebForTest updates status and calls exporter
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.3329087Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.3329593Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.3330291Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4003904Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_with_marker_and_wrappers_test.dart: importFromDocumentsConfirmedForTest with dummy chosen file triggers import path
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4008073Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4009305Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4010277Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4011464Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4012634Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4013806Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4023335Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4023878Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4024346Z TESTDBG: repo.loadAll completed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4024981Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:11.4388356Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_fill_uncovered_test.dart: placeholder to avoid unstable tests
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2652503Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_from_documents_test.dart: export and importFromDocuments test exercises document import/export paths
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2654655Z TEST: calling exportBackupForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2655090Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2655554Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2656286Z TEST: saveExportOverride called with path=simple_match_backup_2025-12-22T15-47-13.147973.json length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2656955Z TEST: saveExportOverride write complete (sync)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2657469Z TEST: exportBackupForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2657902Z TEST: creating tmpFile at /tmp/simple_match_test_backup.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2658586Z TEST: calling importFromDocumentsConfirmedForTest with /tmp/simple_match_test_backup.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2659277Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2659848Z TEST: readFileBytesOverride called with path=/tmp/simple_match_test_backup.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2660426Z TEST: readFileBytesOverride exists=true
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2660817Z TEST: readFileBytesOverride read 11 bytes (sync)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2661197Z TESTDBG: read bytes length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2661803Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2662445Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2663057Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2663902Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2664580Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2665046Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2665440Z TESTDBG: repo.loadAll completed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2665863Z TEST: importFromDocumentsConfirmedForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2666259Z TEST: verifying status text
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2666524Z TEST: done
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2667003Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2970094Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart: Import via web without autoConfirm: final import failure sets Import failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2971736Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2978677Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2979582Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2980310Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.2980948Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4404908Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart: Import from documents: confirm dialog and repo.loadAll throws -> reload failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4407773Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4409261Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4410382Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4411570Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.4412441Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5073509Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_extra_confirm_dialogs_test.dart: importFromDocumentsChosenForTest: final import failure via chosen file sets Import failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5075319Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5076174Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5076822Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5077660Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:13.5078296Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:14.9609580Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_import_no_backups_test.dart: Import Backup shows no-files SnackBar when documents dir empty
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2221799Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_direct_invocations_test.dart: Directly invoke SettingsView test wrappers to exercise branches
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2223577Z TEST: calling exportViaWebForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2224457Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2225112Z FakePersistence.exportBackupJson returning length=7
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2225679Z TEST: exportViaWebForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2226271Z TEST: calling exportBackupForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2227300Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2227819Z FakePersistence.exportBackupJson returning length=7
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2228315Z TEST: exportBackupForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2228731Z TEST: calling importViaWebForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2229507Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2230138Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2230816Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2231526Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2231941Z TEST: importViaWebForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2232490Z TEST: calling importFromDocumentsConfirmedForTest on throwingRepo
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2233135Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2233620Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2234290Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2235045Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2235742Z TESTDBG: dry-run result success=true counts={stages: 1, shooters: 1, stageResults: 1} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2236710Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2237734Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2238203Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2238751Z TEST: importFromDocumentsConfirmedForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:15.2239504Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.5132656Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_force_all_branches_test.dart: exercise many SettingsView branches via state wrappers (smoke)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.5199711Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_force_all_branches_test.dart: exercise error and edge branches (smoke)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7713674Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_block_coverage_test.dart: Import flow replaces block coverage helper usage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7715524Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7716942Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7719749Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7720715Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:16.7721350Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1503763Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_cover_zero_lines_test.dart: export IO path invokes exporter try-block and updates status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1505578Z TESTDBG: creating tmp dir
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1506336Z TESTDBG: tmp dir created at /tmp/simple_match_test_docsXWGKIM
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1507739Z TESTDBG: about to pump widget
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1508400Z TESTDBG: initial pump requested
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1508903Z TESTDBG: pump completed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1509391Z TESTDBG: calling exportBackupForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1510055Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1510638Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1511336Z TESTDBG: exportBackupForTest returned
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.1512085Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6469376Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart: pickBackupOverride confirm dialog then import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6470840Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6471628Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6472397Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6473164Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.6473789Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7050912Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart: pickBackupOverride with dry-run failure shows validation message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7053765Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=1
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7054511Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7055151Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7866259Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart: saveExportOverride throwing still shows export message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7868963Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7869567Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.7870537Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.9283616Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart: listBackupsOverride with multiple files and choose second then cancel confirm
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.9294323Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.9295255Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:18.9296020Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.0015989Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_uncovered_batch2_test.dart: readFileBytesOverride throws while choosing file shows Import error
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9332751Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_extras_test.dart: Import flow covers extras previously exercised by helpers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9334233Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9335215Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9335989Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9336777Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:19.9337548Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.6620147Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart: import-from-documents with empty list shows expected message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.8827100Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart: pickBackupOverride null -> Import Backup shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.9580149Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_missing_branches_2_test.dart: saveExportOverride throws -> Export failed shown
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.9581429Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.9581936Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:20.9582667Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.7559639Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_additional_test.dart: Import: pickBackupOverride null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.8372392Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_additional_test.dart: Import: pickBackupOverride dry-run failure shows validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.8373955Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.8374770Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.8375447Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9140175Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_additional_test.dart: Import: repo.loadAll throws shows reload-failed message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9142076Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9142854Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9143605Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9144035Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9144441Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9691830Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_targeted_additional_test.dart: Export: saveExportOverride path exercised
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9693000Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9693598Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:21.9694356Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.6544261Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_variants_test.dart: pickBackupOverride returns null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.7285162Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_variants_test.dart: pickBackupOverride dry-run fails shows validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.7290038Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=1
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.7291348Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.7292293Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.8026646Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_tiny_variants_test.dart: saveExportOverride used for export shows exported message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.8027883Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.8028402Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:22.8029067Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:23.7064351Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_pick_cancel_test.dart: Import flow: pickBackupOverride returns null (user cancelled)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5326754Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart: exportViaWebForTest uses exporter and updates status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5328442Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5329404Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5330196Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5884122Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart: importViaWebForTest dry-run failure shows validation
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5886494Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5887966Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.5888655Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6565037Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_and_error_paths_test.dart: importFromDocumentsConfirmedForTest handles repo.loadAll throwing
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6589016Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6590124Z TESTDBG: read bytes length=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6591003Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6591915Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6592686Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6593634Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6594293Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6594714Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:24.6595418Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5418631Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_web_import_test.dart: Web import flow: autoConfirm true and false
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5419912Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5420372Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5420865Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5421544Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5422188Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5422896Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5423608Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5424352Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:25.5425052Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6286724Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_list_import_test.dart: IO list import handles reload failure and shows message
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6288486Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6289328Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6290106Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6290825Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.6291418Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7334205Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_list_import_test.dart: IO documents listing import flow with SimpleDialog selection
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7345274Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7346065Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7347002Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7347819Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:26.7348468Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8040315Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_exhaustive_test.dart: Exhaustive import scenarios
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8041422Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8042082Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8042722Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8043356Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8044012Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8044665Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8045293Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8046301Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8047068Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8047876Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8048502Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8049235Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8049920Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=32
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8050584Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:27.8051223Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.3881833Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_override_and_web_test.dart: Export backup uses saveExportOverride and shows status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.3883664Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.3884411Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.3885325Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.4520837Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_override_and_web_test.dart: Import with pickBackupOverride returning null shows No file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5208792Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_override_and_web_test.dart: Import via web with autoConfirm true performs import and shows success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5210653Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5211478Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5212458Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5213972Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5214600Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:28.5725993Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_io_override_and_web_test.dart: ImportFromDocuments shows No backup files found when list is empty
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:29.5902202Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_button_test.dart: Pressing Export Backup calls saveExportOverride
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:29.5905435Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:29.5908070Z FakePersistence.exportBackupJson returning length=11
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:29.5910668Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4354028Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_coverage_helpers_test.dart: Import path exercised to replace coverage-only helpers
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4355510Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4356240Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4356843Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4357686Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:30.4358255Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2521643Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_instance_wrappers_test.dart: instance wrappers: exportViaWebForTest and importViaWebForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2522716Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2523373Z FakePersistence.exportBackupJson returning length=2
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2524186Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=76
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2524935Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2525586Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=76
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2526260Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.2526885Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3073866Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_instance_wrappers_test.dart: instance wrapper: importFromDocumentsConfirmedForTest
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3076597Z TESTDBG: importFromDocumentsConfirmedForTest start
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3079434Z TESTDBG: read bytes length=76
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3080906Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=76
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3090137Z FakePersistence: returning dryRun success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3092659Z TESTDBG: dry-run result success=true counts={stages: 0, shooters: 0, stageResults: 0} message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3093562Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=76
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3094571Z FakePersistence: returning full import success
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3095113Z TESTDBG: import res success=true message=null
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3095553Z TESTDBG: repo.loadAll completed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.3096199Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:31.9124369Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_smoke_test.dart: SettingsView pumps without error
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.0682035Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Export uses documentsDirOverride and shows exported status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.0684022Z FakePersistence.exportBackupToFile called with path: /tmp/simple_match_backup_2025-12-22T15-47-33.004944.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.0684976Z FakePersistence: creating file
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.0686722Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.1702071Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import with pickBackupOverride returning null shows no file selected
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2318342Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import dry-run failure via pickBackupOverride shows validation failed
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2325813Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2326670Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2327467Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2969609Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import actual import failure shows Import failed status
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2972044Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2972993Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2973434Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2973863Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.2974271Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3491220Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import succeeds but repo.loadAll throws shows reload failed state
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3493169Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3494116Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3495727Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3496558Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.3497414Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.4848476Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import from documents list and readFileBytesOverride succeeds
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.4849916Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.4850723Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.4851397Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.5521513Z ✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_more_uncovered_test.dart: Import readFileBytesOverride throws shows Import error
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6977858Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_export_io_override_test.dart: Export Backup via saveExportOverride writes to temp file
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6987359Z FakePersistence.exportBackupJson called
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6989039Z FakePersistence.exportBackupJson returning length=17
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6989864Z saveOverride called with path: simple_match_backup_2025-12-22T15-47-33.600954.json, content length: 17
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6991029Z saveOverride recorded content for /tmp/simple_match_export_overrideNHWCFF/simple_match_backup_2025-12-22T15-47-33.600954.json
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:33.6992088Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.3397745Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_remaining_branches_test.dart: Dry-run validation failure path (web pick)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.3399077Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.3403236Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.3403953Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4209549Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_remaining_branches_test.dart: Import succeeds but repo.loadAll throws (web pick)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4211400Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4212401Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4214044Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4215494Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.4216127Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6493728Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/widgets/settings_view_remaining_branches_test.dart: IO documents-list path: import failed and catch(e) path
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6495232Z FakePersistence.importBackupFromBytes called dryRun=true backupBeforeRestore=false bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6496062Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6496886Z FakePersistence.importBackupFromBytes called dryRun=false backupBeforeRestore=true bytesLen=3
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6497868Z FakePersistence: delegating to importFn
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.6500688Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.7813265Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_logic_test.dart: MatchSetupView adds and displays a stage
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:35.9912112Z ✅ /home/runner/work/simple_match/simple_match/test/views_match_setup_view_logic_test.dart: MatchSetupView rejects duplicate and invalid input
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:37.1025517Z ✅ /home/runner/work/simple_match/simple_match/test/pdf_unicode_export_test.dart: PDF export renders Traditional Chinese shooter names (pdftotext extraction)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:38.2496045Z ✅ /home/runner/work/simple_match/simple_match/test/models_test.dart: MatchStage constructor assigns values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:38.2515482Z ✅ /home/runner/work/simple_match/simple_match/test/models_test.dart: Shooter constructor assigns name and default scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:38.2543314Z ✅ /home/runner/work/simple_match/simple_match/test/models_test.dart: Shooter constructor assigns custom scale
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:38.2564522Z ✅ /home/runner/work/simple_match/simple_match/test/models_test.dart: StageResult constructor assigns all values
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:38.2580687Z ✅ /home/runner/work/simple_match/simple_match/test/models_test.dart: StageResult constructor uses defaults
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3603144Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/coverage_diagnostic_test.dart: coverage diagnostic: capture stack frames for helper files (clean)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3604188Z readFileBytes stack:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3604752Z #0      _checkForErrorResponse (dart:io/common.dart:58:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3605301Z #1      _File.open.<anonymous closure> (dart:io/file_impl.dart:442:7)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3606305Z #2      StackZoneSpecification._registerUnaryCallback.<anonymous closure>.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:127:36)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3608399Z #3      StackZoneSpecification._run (package:stack_trace/src/stack_zone_specification.dart:207:15)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3609732Z #4      StackZoneSpecification._registerUnaryCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:127:24)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3610623Z #5      _rootRunUnary (dart:async/zone.dart:1538:47)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3611080Z #6      _CustomZone.runUnary (dart:async/zone.dart:1429:19)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3611516Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3611992Z #7      _File.readAsBytes.<anonymous closure> (dart:io/file_impl.dart:649:24)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3612482Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3612943Z #8      readFileBytes (package:simple_match/views/io_file_helpers_io.dart:21:10)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3613484Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3614141Z #9      main.<anonymous closure> (file:///home/runner/work/simple_match/simple_match/test/coverage_diagnostic_test.dart:12:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3614933Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3615592Z #10     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3616238Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3616752Z #11     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3617601Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3618529Z #12     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3619220Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3619426Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3619532Z saveExport stack:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3619891Z #0      _checkForErrorResponse (dart:io/common.dart:58:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3620467Z #1      _Directory.create.<anonymous closure> (dart:io/directory_impl.dart:130:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3621497Z #2      StackZoneSpecification._registerUnaryCallback.<anonymous closure>.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:127:36)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3622638Z #3      StackZoneSpecification._run (package:stack_trace/src/stack_zone_specification.dart:207:15)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3623708Z #4      StackZoneSpecification._registerUnaryCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:127:24)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3624561Z #5      _rootRunUnary (dart:async/zone.dart:1538:47)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3624996Z #6      _CustomZone.runUnary (dart:async/zone.dart:1429:19)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3625416Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3625984Z #7      _Directory.create.<anonymous closure>.<anonymous closure> (dart:io/directory_impl.dart:118:54)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3626600Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3627135Z #8      _Directory.create.<anonymous closure>.<anonymous closure> (dart:io/directory_impl.dart:118:54)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3627906Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3628358Z #9      saveExport (package:simple_match/views/export_utils_io.dart:5:3)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3629182Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3629876Z #10     main.<anonymous closure> (file:///home/runner/work/simple_match/simple_match/test/coverage_diagnostic_test.dart:18:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3630608Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3631184Z #11     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3631848Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3632354Z #12     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3632902Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3633550Z #13     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3634249Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3634447Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3634563Z downloadPdf stack:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3635223Z #0      main.<anonymous closure> (file:///home/runner/work/simple_match/simple_match/test/coverage_diagnostic_test.dart:27:52)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3636199Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3636921Z #1      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3637791Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3638290Z #2      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3638853Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3639511Z #3      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3640535Z <asynchronous suspension>
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3640757Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.3641133Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.4270826Z ##[group]✅ /home/runner/work/simple_match/simple_match/test/views_stage_input_view_full_test.dart: StageInputView full flow: increment, decrement, submit, result display, edit, remove, and validation
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.4275508Z DEBUG: Results after edit:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.4276081Z Stage: 1, Shooter: Test, A: 4, C: 3, D: 2, Misses: 0, NoShoots: 0, ProcErr: 0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:39.4276881Z ##[endgroup]
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:40.2172865Z ✅ /home/runner/work/simple_match/simple_match/test/viewmodel_match_setup_viewmodel_uncovered_test.dart: MatchSetupViewModel edge cases
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:41.2065105Z ✅ /home/runner/work/simple_match/simple_match/test/persistence_backup_integration_test.dart: Persistence backup integration-style export to file and import back restores data
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:41.3228768Z ✅ /home/runner/work/simple_match/simple_match/test/export_import_widget_test.dart: Widget-hosted Export->Import flow
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:42.5796143Z ✅ /home/runner/work/simple_match/simple_match/test/views_main_menu_view_test.dart: MainMenuView renders all buttons
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:42.8707595Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:42.8714705Z 🎉 332 tests passed.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:42.9302179Z Enabling web and running tests on Chrome...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.0161657Z Setting "enable-web" value to "true".
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.0162651Z 
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.0162887Z You may need to restart any open editors for them to read new settings.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.0196992Z Running web tests on Chrome (logs -> coverage/web_test.log)
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.0197762Z CHROME_EXECUTABLE not set and default macOS path not found; relying on PATH to find Chrome
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.1034780Z Flutter: Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.1051065Z Which chrome: /usr/bin/google-chrome
+collect-coverage	UNKNOWN STEP	2025-12-22T15:47:43.1051524Z Attempt: flutter test -d chrome --coverage -v
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3493758Z Chrome coverage captured -> coverage/lcov.chrome.info
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3494290Z Merging LCOV files...
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3496372Z ./scripts/collect_coverage.sh: line 72: lcov: command not found
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3512961Z ##[error]Process completed with exit code 127.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3628445Z Post job cleanup.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.3675312Z Post job cleanup.
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4517839Z [command]/usr/bin/git version
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4548390Z git version 2.52.0
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4584397Z Temporarily overriding HOME='/home/runner/work/_temp/70baf929-5834-443c-8c7c-1c0a80136493' before making global git config changes
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4585369Z Adding repository directory to the temporary git global config as a safe directory
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4596965Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4624924Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4650744Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4829839Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4846638Z http.https://github.com/.extraheader
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4856618Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.4880570Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.5050323Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.5077918Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+collect-coverage	UNKNOWN STEP	2025-12-22T15:49:38.5330314Z Cleaning up orphan processes

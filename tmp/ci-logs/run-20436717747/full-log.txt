@@ -1,0 +1,332 @@
+build_and_deploy	UNKNOWN STEP	﻿2025-12-22T15:44:13.2744857Z Current runner version: '2.330.0'
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2769960Z ##[group]Runner Image Provisioner
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2771042Z Hosted Compute Agent
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2771766Z Version: 20251211.462
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2772636Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2773830Z Build Date: 2025-12-11T16:28:49Z
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2774841Z Worker ID: ***dc07522e-62fb-45e9-a084-57b3ec1aa7ed***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2775723Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2776559Z ##[group]Operating System
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2777318Z Ubuntu
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2778026Z 24.04.3
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2778645Z LTS
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2779330Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2780020Z ##[group]Runner Image
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2780805Z Image: ubuntu-24.04
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2781483Z Version: 20251215.174.1
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2782842Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2785011Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2786229Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2787768Z ##[group]GITHUB_TOKEN Permissions
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2790074Z Contents: read
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2790811Z Metadata: read
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2791571Z Packages: read
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2792304Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2794847Z Secret source: Actions
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.2796262Z Prepare workflow directory
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.3131576Z Prepare all required actions
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.3173664Z Getting action download info
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.6895117Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:13.7930116Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:14.2687083Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:14.3757706Z Download action repository 'FirebaseExtended/action-hosting-deploy@v0' (SHA:e2eda2e106cfa35cdbcf4ac9ddaf6c4756df2c8c)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:14.9096809Z Getting action download info
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.0905885Z Complete job name: build_and_deploy
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1774131Z ##[group]Run actions/checkout@v4
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1775647Z with:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1776656Z   repository: hfcs/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1778041Z   token: ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1779037Z   ssh-strict: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1780047Z   ssh-user: git
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1781076Z   persist-credentials: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1782189Z   clean: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1783381Z   sparse-checkout-cone-mode: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1784555Z   fetch-depth: 1
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1785578Z   fetch-tags: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1786628Z   show-progress: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1787660Z   lfs: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1788644Z   submodules: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1789693Z   set-safe-directory: true
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.1791019Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.2966713Z Syncing repository: hfcs/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.2969584Z ##[group]Getting Git version info
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.2971225Z Working directory is '/home/runner/work/simple_match/simple_match'
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.2973698Z [command]/usr/bin/git version
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3037109Z git version 2.52.0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3067683Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3083670Z Temporarily overriding HOME='/home/runner/work/_temp/92d71e4a-ab64-47f6-bdcc-8542fc2a6102' before making global git config changes
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3088265Z Adding repository directory to the temporary git global config as a safe directory
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3098955Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3145109Z Deleting the contents of '/home/runner/work/simple_match/simple_match'
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3150789Z ##[group]Initializing the repository
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3153802Z [command]/usr/bin/git init /home/runner/work/simple_match/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3261617Z hint: Using 'master' as the name for the initial branch. This default branch name
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3265269Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3268484Z hint: to use in all of your new repositories, which will suppress this warning,
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3271206Z hint: call:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3272908Z hint:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3275162Z hint: 	git config --global init.defaultBranch <name>
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3277382Z hint:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3279598Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3282752Z hint: 'development'. The just-created branch can be renamed via this command:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3285659Z hint:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3287411Z hint: 	git branch -m <name>
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3289343Z hint:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3292048Z hint: Disable this message with "git config set advice.defaultBranchName false"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3295780Z Initialized empty Git repository in /home/runner/work/simple_match/simple_match/.git/
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3301763Z [command]/usr/bin/git remote add origin https://github.com/hfcs/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3315768Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3318876Z ##[group]Disabling automatic garbage collection
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3321342Z [command]/usr/bin/git config --local gc.auto 0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3350615Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3353717Z ##[group]Setting up auth
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3356655Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3388766Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3738508Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3767602Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.3987160Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.4015783Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.4248595Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.4288785Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.4291885Z ##[group]Fetching the repository
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.4300019Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +badc47e8a3cdd7a0c3cb8d03cc33b173821ac046:refs/remotes/origin/main
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8102504Z From https://github.com/hfcs/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8105470Z  * [new ref]         badc47e8a3cdd7a0c3cb8d03cc33b173821ac046 -> origin/main
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8136364Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8137211Z ##[group]Determining the checkout info
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8138724Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8143572Z [command]/usr/bin/git sparse-checkout disable
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8183202Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8207818Z ##[group]Checking out the ref
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8211012Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8443419Z Switched to a new branch 'main'
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8446797Z branch 'main' set up to track 'origin/main'.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8453957Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8487233Z [command]/usr/bin/git log -1 --format=%H
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8508140Z badc47e8a3cdd7a0c3cb8d03cc33b173821ac046
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8804836Z ##[group]Run subosito/flutter-action@v2
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8805329Z with:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8805676Z   channel: stable
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8806041Z   architecture: X64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8806613Z   cache: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8806977Z   pub-cache-path: default
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8807364Z   dry-run: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8807797Z   git-source: https://github.com/flutter/flutter.git
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8808274Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8914339Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8914921Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8953269Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.8953828Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9094596Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9095394Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9096088Z [36;1m  -n '' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9096470Z [36;1m  -f '' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9096890Z [36;1m  -a 'X64' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9097260Z [36;1m  -k '' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9097613Z [36;1m  -c '' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9097963Z [36;1m  -l '' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9098338Z [36;1m  -d 'default' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9098854Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9099350Z [36;1m  stable[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9131323Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:15.9131901Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2166236Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2166752Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2167201Z [36;1m  -n '3.38.5' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2167597Z [36;1m  -a 'x64' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2168081Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.38.5-x64' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2168612Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2169042Z [36;1m  stable[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2203996Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.2204532Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.5311936Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.5314019Z                                  Dload  Upload   Total   Spent    Left  Speed
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.5314665Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:16.8752898Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:17.8752818Z   1 1396M    1 20.4M    0     0  59.3M      0  0:00:23 --:--:--  0:00:23 59.2M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:18.8753632Z  14 1396M   14  209M    0     0   155M      0  0:00:08  0:00:01  0:00:07  155M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:19.8753279Z  28 1396M   28  396M    0     0   169M      0  0:00:08  0:00:02  0:00:06  169M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:20.8753699Z  42 1396M   42  586M    0     0   175M      0  0:00:07  0:00:03  0:00:04  175M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:21.8752520Z  55 1396M   55  777M    0     0   178M      0  0:00:07  0:00:04  0:00:03  178M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:22.8751962Z  69 1396M   69  966M    0     0   180M      0  0:00:07  0:00:05  0:00:02  189M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:23.8754368Z  82 1396M   82 1156M    0     0   182M      0  0:00:07  0:00:06  0:00:01  189M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:24.2384013Z  96 1396M   96 1348M    0     0   183M      0  0:00:07  0:00:07 --:--:--  190M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:44:24.2385365Z 100 1396M  100 1396M    0     0   181M      0  0:00:07  0:00:07 --:--:--  185M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1017452Z ##[group]Run flutter --version
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1017825Z [36;1mflutter --version[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1052790Z shell: /usr/bin/bash -e ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1053394Z env:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1053754Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1054208Z   PUB_CACHE: /home/runner/.pub-cache
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.1054561Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.3137688Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.3139238Z Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.3141264Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.3143238Z Tools • Dart 3.10.4 • DevTools 2.51.1
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4192591Z ##[group]Run actions/cache@v4
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4192966Z with:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4193503Z   path: ~/.pub-cache
+build_and_deploy	UNKNOWN STEP	
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4193983Z   key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4194502Z   restore-keys: Linux-pub-
+build_and_deploy	UNKNOWN STEP	
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4194823Z   enableCrossOsArchive: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4195138Z   fail-on-cache-miss: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4195431Z   lookup-only: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4195706Z   save-always: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4196001Z env:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4196377Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4196843Z   PUB_CACHE: /home/runner/.pub-cache
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.4197168Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:13.7164769Z Cache hit for: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:14.4928697Z Received 40113154 of 40113154 (100.0%), 58.5 MBs/sec
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:14.4929706Z Cache Size: ~38 MB (40113154 B)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:14.4961578Z [command]/usr/bin/tar -xf /home/runner/work/_temp/ce04ef95-38ee-4f6d-a1e7-0aa0333bdf0b/cache.tzst -P -C /home/runner/work/simple_match/simple_match --use-compress-program unzstd
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1318380Z Cache restored successfully
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1475726Z Cache restored from key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1587029Z ##[group]Run flutter pub get
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1587400Z [36;1mflutter pub get[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1620476Z shell: /usr/bin/bash -e ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1620846Z env:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1621223Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1621703Z   PUB_CACHE: /home/runner/.pub-cache
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.1622074Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.6455731Z Resolving dependencies...
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.8249530Z Downloading packages...
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9015082Z   _fe_analyzer_shared 89.0.0 (92.0.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9015708Z   analyzer 8.2.0 (9.0.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9016254Z   build 4.0.0 (4.0.3 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9016785Z   build_daemon 4.0.4 (4.1.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9017329Z   build_runner 2.8.0 (2.10.4 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9017890Z   built_value 8.12.0 (8.12.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9018463Z   characters 1.4.0 (1.4.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9019024Z   crypto 3.0.6 (3.0.7 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9019539Z   dart_style 3.1.2 (3.1.3 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9020086Z   flutter_lints 5.0.0 (6.0.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9020633Z   http 1.5.0 (1.6.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9021141Z   image 4.5.4 (4.7.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9021645Z   lints 5.1.1 (6.0.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9022157Z   matcher 0.12.17 (0.12.18 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9022771Z   material_color_utilities 0.11.1 (0.13.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9023608Z > meta 1.17.0 (was 1.16.0)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9024098Z   mockito 5.5.1 (5.6.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9024676Z   path_provider_android 2.2.18 (2.2.22 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9025357Z   path_provider_foundation 2.4.2 (2.5.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9025843Z   shared_preferences 2.5.3 (2.5.4 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9026267Z   shared_preferences_android 2.4.13 (2.4.18 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9026723Z   shared_preferences_foundation 2.5.4 (2.5.6 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9027216Z   source_gen 4.0.1 (4.1.1 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9027608Z > test_api 0.7.7 (was 0.7.6) (0.7.8 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9027999Z   watcher 1.1.3 (1.2.0 available)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9028351Z Changed 2 dependencies!
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9028816Z 24 packages have newer versions incompatible with dependency constraints.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:15.9029384Z Try `flutter pub outdated` for more information.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3073331Z ##[group]Run ./build.sh web --release
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3073987Z [36;1m./build.sh web --release[0m
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3121789Z shell: /usr/bin/bash -e ***0***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3122583Z env:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3123377Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3124115Z   PUB_CACHE: /home/runner/.pub-cache
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3124669Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3235062Z Downloading NotoSerifHK from https://github.com/notofonts/noto-cjk/raw/refs/heads/main/google-fonts/NotoSerifHK%5Bwght%5D.ttf and saving as NotoSerifHK-wght.ttf...
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3286819Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3288082Z                                  Dload  Upload   Total   Spent    Left  Speed
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.3289811Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.4866629Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.4868450Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.8754499Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.8829443Z  83 16.0M   83 13.3M    0     0  24.4M      0 --:--:-- --:--:-- --:--:-- 24.4M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.8830379Z 100 16.0M  100 16.0M    0     0  28.9M      0 --:--:-- --:--:-- --:--:--  382M
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.9050623Z Font downloaded to assets/fonts/NotoSerifHK-wght.ttf.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:45:16.9176819Z Also created compatibility copy assets/fonts/NotoSerifHK[wght].ttf if permissions allow.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9068916Z Compiling lib/main.dart for the Web...                          
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9077344Z Wasm dry run findings:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9078521Z Found incompatibilities with WebAssembly.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9078882Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9079539Z package:simple_match/views/export_utils_web.dart 4:1 - dart:html unsupported (0)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9080822Z package:simple_match/views/io_file_helpers_web.dart 6:1 - dart:html unsupported (0)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9083335Z package:simple_match/views/io_file_helpers_web.dart 7:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9084993Z file:///home/runner/.pub-cache/hosted/pub.dev/image-4.5.4/lib/src/exif/ifd_directory.dart 174:26 - avoid_double_and_int_checks lint violation: Explicit check for double or int. (13)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9086712Z file:///home/runner/.pub-cache/hosted/pub.dev/image-4.5.4/lib/src/exif/ifd_directory.dart 183:26 - avoid_double_and_int_checks lint violation: Explicit check for double or int. (13)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9087960Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9088529Z Consider addressing these issues to enable wasm builds. See docs for more info: https://docs.flutter.dev/platform-integration/web/wasm
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9089188Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:03.9089382Z Use --no-wasm-dry-run to disable these warnings.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:05.7720600Z Font asset "CupertinoIcons.ttf" was tree-shaken, reducing it from 257628 to 1472 bytes (99.4% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:05.7734181Z Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 10348 bytes (99.4% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6685983Z Compiling lib/main.dart for the Web...                             49.2s
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6693838Z ✓ Built build/web
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6916693Z ##[group]Run FirebaseExtended/action-hosting-deploy@v0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6917085Z with:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6917457Z   repoToken: ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6926690Z   firebaseServiceAccount: ***
+build_and_deploy	UNKNOWN STEP	
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6927001Z   channelId: live
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6927271Z   projectId: dt-simple-match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6927570Z   expires: 7d
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6927813Z   entryPoint: .
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6928069Z   firebaseToolsVersion: latest
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6928360Z   disableComment: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6928615Z   force: false
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6928845Z env:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6929147Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6929542Z   PUB_CACHE: /home/runner/.pub-cache
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6929879Z   FIREBASE_CLI_EXPERIMENTS: webframeworks
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.6930394Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7571547Z ##[group]Verifying firebase.json exists
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7576585Z firebase.json file found. Continuing deploy.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7580010Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7580882Z ##[group]Setting up CLI credentials
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7594449Z Created a temporary file with Application Default Credentials.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7595612Z ##[endgroup]
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7596450Z ##[group]Deploying to production site
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:06.7634284Z [command]/usr/local/bin/npx firebase-tools@latest deploy --only hosting --project dt-simple-match --json
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:11.2380574Z npm warn exec The following package was not found and will be installed: firebase-tools@15.1.0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:46:28.5262973Z npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2157134Z Compiling lib/main.dart for the Web...                          
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2165195Z Wasm dry run findings:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2166771Z Found incompatibilities with WebAssembly.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2167787Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2168533Z package:simple_match/views/export_utils_web.dart 4:1 - dart:html unsupported (0)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2170059Z package:simple_match/views/io_file_helpers_web.dart 6:1 - dart:html unsupported (0)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2171871Z package:simple_match/views/io_file_helpers_web.dart 7:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2174532Z file:///home/runner/.pub-cache/hosted/pub.dev/image-4.5.4/lib/src/exif/ifd_directory.dart 174:26 - avoid_double_and_int_checks lint violation: Explicit check for double or int. (13)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2177314Z file:///home/runner/.pub-cache/hosted/pub.dev/image-4.5.4/lib/src/exif/ifd_directory.dart 183:26 - avoid_double_and_int_checks lint violation: Explicit check for double or int. (13)
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2178849Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2179822Z Consider addressing these issues to enable wasm builds. See docs for more info: https://docs.flutter.dev/platform-integration/web/wasm
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2181011Z 
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.2181190Z Use --no-wasm-dry-run to disable these warnings.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.9776984Z Compiling lib/main.dart for the Web...                             42.4s
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:19.9789462Z ✓ Built build/web
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6545825Z ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6546352Z   "status": "success",
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6546785Z   "result": ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6547303Z     "hosting": "projects/564627646033/sites/dt-simple-match/versions/1aad4562c04c3c6b"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6547889Z   ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6985586Z ***::endgroup::
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6994718Z ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6995453Z   details_url: 'https://dt-simple-match.web.app/',
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6996387Z   conclusion: 'success',
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6997122Z   output: ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6997787Z     title: 'Production deploy succeeded',
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6998839Z     summary: '[dt-simple-match.web.app](https://dt-simple-match.web.app/)'
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6999535Z   ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.6999873Z ***
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.8190420Z Post job cleanup.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.9470984Z Cache hit occurred on the primary key Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc, not saving cache.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.9632852Z Post job cleanup.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:22.9702985Z Post job cleanup.
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0648742Z [command]/usr/bin/git version
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0684832Z git version 2.52.0
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0728082Z Temporarily overriding HOME='/home/runner/work/_temp/d3108782-aa5b-42d2-9c29-8d502bf9c2ec' before making global git config changes
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0729609Z Adding repository directory to the temporary git global config as a safe directory
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0743853Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0779321Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.0811915Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1042962Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1065789Z http.https://github.com/.extraheader
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1078791Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1112093Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1349021Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1381244Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+build_and_deploy	UNKNOWN STEP	2025-12-22T15:47:23.1750709Z Cleaning up orphan processes

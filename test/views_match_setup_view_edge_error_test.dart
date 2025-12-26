@@ -41,8 +41,10 @@ void main() {
       await tester.tap(find.text('Cancel'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('addStageButton')), findsOneWidget);
-      // Remove the stage
+      // Remove the stage (confirm dialog)
       await tester.tap(find.byKey(const Key('removeStage-1')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Remove'));
       await tester.pumpAndSettle();
       expect(find.text('Stage 1: 12 shoots'), findsNothing);
       // Add invalid input to trigger error

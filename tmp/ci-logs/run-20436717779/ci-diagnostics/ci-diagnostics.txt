@@ -1,0 +1,24 @@
+=== CI Diagnostics: Mon Dec 22 15:45:31 UTC 2025 ===
+Java:
+openjdk version "21.0.9" 2025-10-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.9+10 (build 21.0.9+10-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.9+10 (build 21.0.9+10-LTS, mixed mode, sharing)
+Javac:
+javac 21.0.9
+Flutter:
+Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision f6ff1529fd (11 days ago) • 2025-12-11 11:50:07 -0500
+Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (11 days ago) • 2025-12-11 15:04:31.000Z
+Tools • Dart 3.10.4 • DevTools 2.51.1
+Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter
+pdftotext:
+pdftotext version 24.02.0
+Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+Copyright 1996-2011, 2022 Glyph & Cog, LLC
+git-lfs:
+git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+lcov:
+lcov: LCOV version 2.0-1
+genhtml:
+genhtml: LCOV version 2.0-1
+which chrome: /usr/bin/google-chrome

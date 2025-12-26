@@ -1,0 +1,20 @@
+20412651636 CI - Flutter tests queued  2025-12-21T16:28:15Z
+20412648623 CI - Flutter tests in_progress  2025-12-21T16:27:58Z
+20412648335 Coverage (VM + Chrome) in_progress  2025-12-21T16:27:56Z
+20412647686 Check settings_view.dart coverage in_progress  2025-12-21T16:27:52Z
+20412647685 CI - Flutter tests in_progress  2025-12-21T16:27:52Z
+20412647684 Deploy to Firebase Hosting on merge in_progress  2025-12-21T16:27:52Z
+20412647682 Coverage (VM + Chrome) in_progress  2025-12-21T16:27:52Z
+20412647680 coverage-web in_progress  2025-12-21T16:27:52Z
+20412647582 .github/workflows/integration-tests.yml completed failure 2025-12-21T16:27:51Z
+20396959695 coverage-web completed failure 2025-12-20T16:22:21Z
+20396959693 Check settings_view.dart coverage completed success 2025-12-20T16:22:21Z
+20396959692 Deploy to Firebase Hosting on merge completed success 2025-12-20T16:22:21Z
+20396959604 .github/workflows/integration-tests.yml completed failure 2025-12-20T16:22:20Z
+20396959554 CI - Flutter tests completed failure 2025-12-20T16:22:20Z
+20396959521 Coverage (VM + Chrome) completed failure 2025-12-20T16:22:20Z
+20396124763 Deploy to Firebase Hosting on PR completed success 2025-12-20T15:06:21Z
+20396124759 Check settings_view.dart coverage completed success 2025-12-20T15:06:21Z
+20396124290 .github/workflows/integration-tests.yml completed failure 2025-12-20T15:06:18Z
+20396124226 Coverage (VM + Chrome) completed failure 2025-12-20T15:06:18Z
+20396124174 CI - Flutter tests completed failure 2025-12-20T15:06:18Z

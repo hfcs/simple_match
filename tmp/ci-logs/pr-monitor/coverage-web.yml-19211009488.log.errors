@@ -1,0 +1,200 @@
+88:collect-coverage	Run actions/checkout@v4	2025-11-09T16:06:09.1816380Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5d5c22b0a01031453bdd94c0459c04840dd0bb3c:refs/remotes/origin/ci/install-lcov
+90:collect-coverage	Run actions/checkout@v4	2025-11-09T16:06:09.7452250Z  * [new ref]         5d5c22b0a01031453bdd94c0459c04840dd0bb3c -> origin/ci/install-lcov
+97:collect-coverage	Run actions/checkout@v4	2025-11-09T16:06:09.7649846Z [command]/usr/bin/git checkout --progress --force -B ci/install-lcov refs/remotes/origin/ci/install-lcov
+98:collect-coverage	Run actions/checkout@v4	2025-11-09T16:06:09.7915150Z Switched to a new branch 'ci/install-lcov'
+99:collect-coverage	Run actions/checkout@v4	2025-11-09T16:06:09.7917658Z branch 'ci/install-lcov' set up to track 'origin/ci/install-lcov'.
+267:collect-coverage	Install pdftotext (poppler-utils)	﻿2025-11-09T16:07:53.9816108Z ##[group]Run sudo apt-get update
+268:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9816463Z [36;1msudo apt-get update[0m
+269:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9816740Z [36;1msudo apt-get install -y poppler-utils[0m
+270:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9849254Z shell: /usr/bin/bash -e {0}
+271:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9849487Z env:
+272:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9849740Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.7-x64
+273:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9850086Z   PUB_CACHE: /home/runner/.pub-cache
+274:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:53.9850335Z ##[endgroup]
+275:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0614974Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+276:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0926120Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+277:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0936855Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+278:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0941962Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+279:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0943031Z Hit:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+280:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0949519Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+281:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:54.0959694Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+282:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.3476361Z Reading package lists...
+283:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.3793915Z Reading package lists...
+284:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.5933899Z Building dependency tree...
+285:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.5941772Z Reading state information...
+286:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7781974Z The following additional packages will be installed:
+287:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7786569Z   libpoppler134 poppler-data
+288:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7792556Z Suggested packages:
+289:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7793028Z   ghostscript fonts-japanese-mincho | fonts-ipafont-mincho
+290:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7793516Z   fonts-japanese-gothic | fonts-ipafont-gothic fonts-arphic-ukai
+291:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.7793890Z   fonts-arphic-uming fonts-nanum
+292:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8036870Z The following NEW packages will be installed:
+293:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8042138Z   libpoppler134 poppler-data poppler-utils
+294:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8218066Z 0 upgraded, 3 newly installed, 0 to remove and 22 not upgraded.
+295:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8238508Z Need to get 3390 kB of archives.
+296:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8239128Z After this operation, 17.8 MB of additional disk space will be used.
+297:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.8239716Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+298:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.9125031Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+299:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:55.9988821Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.8 [1118 kB]
+300:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.0791105Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.8 [212 kB]
+301:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.3583239Z Fetched 3390 kB in 0s (12.5 MB/s)
+302:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4186147Z Selecting previously unselected package poppler-data.
+303:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4995327Z (Reading database ... 
+304:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4996083Z (Reading database ... 5%
+305:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4996407Z (Reading database ... 10%
+306:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4996719Z (Reading database ... 15%
+307:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4997031Z (Reading database ... 20%
+308:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4997314Z (Reading database ... 25%
+309:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4997595Z (Reading database ... 30%
+310:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4997867Z (Reading database ... 35%
+311:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4998130Z (Reading database ... 40%
+312:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4998449Z (Reading database ... 45%
+313:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.4998881Z (Reading database ... 50%
+314:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.5788593Z (Reading database ... 55%
+315:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:56.9325796Z (Reading database ... 60%
+316:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:57.1144308Z (Reading database ... 65%
+317:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:57.2010376Z (Reading database ... 70%
+318:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:57.3429117Z (Reading database ... 75%
+319:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:57.7842369Z (Reading database ... 80%
+320:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:58.4041794Z (Reading database ... 85%
+321:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.0079214Z (Reading database ... 90%
+322:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.5737801Z (Reading database ... 95%
+323:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.5738387Z (Reading database ... 100%
+324:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.5739042Z (Reading database ... 215802 files and directories currently installed.)
+325:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.5784139Z Preparing to unpack .../poppler-data_0.4.12-1_all.deb ...
+326:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.5810180Z Unpacking poppler-data (0.4.12-1) ...
+327:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.7470057Z Selecting previously unselected package libpoppler134:amd64.
+328:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.7607495Z Preparing to unpack .../libpoppler134_24.02.0-1ubuntu9.8_amd64.deb ...
+329:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.7632873Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+330:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.8036368Z Selecting previously unselected package poppler-utils.
+331:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.8167937Z Preparing to unpack .../poppler-utils_24.02.0-1ubuntu9.8_amd64.deb ...
+332:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.8177739Z Unpacking poppler-utils (24.02.0-1ubuntu9.8) ...
+333:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.9123723Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+334:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.9148214Z Setting up poppler-data (0.4.12-1) ...
+335:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.9236269Z Setting up poppler-utils (24.02.0-1ubuntu9.8) ...
+336:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:07:59.9268071Z Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+337:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:00.0922869Z Processing triggers for man-db (2.12.0-4build2) ...
+338:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:17.1880094Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+339:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3762342Z 
+340:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3762899Z Running kernel seems to be up-to-date.
+341:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3763356Z 
+342:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3763543Z No services need to be restarted.
+343:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3763863Z 
+344:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3763984Z No containers need to be restarted.
+345:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3764225Z 
+346:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3764379Z No user sessions are running outdated binaries.
+347:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3764654Z 
+348:collect-coverage	Install pdftotext (poppler-utils)	2025-11-09T16:08:18.3764939Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+349:collect-coverage	Install lcov (for genhtml)	﻿2025-11-09T16:08:19.2951292Z ##[group]Run sudo apt-get update
+350:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2951629Z [36;1msudo apt-get update[0m
+351:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2951875Z [36;1msudo apt-get install -y lcov[0m
+352:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2983972Z shell: /usr/bin/bash -e {0}
+353:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2984208Z env:
+354:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2984463Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.35.7-x64
+355:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2984783Z   PUB_CACHE: /home/runner/.pub-cache
+356:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.2985014Z ##[endgroup]
+357:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.3698509Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+358:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4009735Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+359:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4014107Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+360:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4015270Z Hit:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+361:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4047635Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+362:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4064321Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+363:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:19.4069649Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+364:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:20.6371010Z Reading package lists...
+365:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:20.6684973Z Reading package lists...
+366:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:20.8526389Z Building dependency tree...
+367:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:20.8533708Z Reading state information...
+368:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0131969Z The following additional packages will be installed:
+369:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0132950Z   libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl
+370:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0133950Z   libcapture-tiny-perl libclass-c3-perl libclass-c3-xs-perl
+371:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0134741Z   libclass-data-inheritable-perl libclass-inspector-perl
+372:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0135915Z   libclass-method-modifiers-perl libclass-singleton-perl
+373:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0136841Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+374:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0137857Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+375:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0138795Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+376:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0139604Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+377:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0140142Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+378:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0140652Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+379:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0141181Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+380:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0141683Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+381:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0142206Z   libparams-validationcompiler-perl libperlio-gzip-perl libreadonly-perl
+382:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0142754Z   libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl
+383:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0143287Z   libsub-exporter-perl libsub-exporter-progressive-perl libsub-identify-perl
+384:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0143833Z   libsub-install-perl libsub-name-perl libsub-quote-perl libtry-tiny-perl
+385:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0144395Z   libvariable-magic-perl libxstring-perl
+386:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0144823Z Suggested packages:
+387:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0145177Z   libscalar-number-perl libtest-fatal-perl
+388:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0454489Z The following NEW packages will be installed:
+389:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0455291Z   lcov libalgorithm-c3-perl libb-hooks-endofscope-perl
+390:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0456285Z   libb-hooks-op-check-perl libcapture-tiny-perl libclass-c3-perl
+391:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0457240Z   libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl
+392:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0458138Z   libclass-method-modifiers-perl libclass-singleton-perl
+393:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0458757Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+394:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0459488Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+395:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0460382Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+396:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0460929Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+397:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0461483Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+398:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0462388Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+399:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0462918Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+400:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0463637Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+401:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0464181Z   libparams-validationcompiler-perl libperlio-gzip-perl libreadonly-perl
+402:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0464704Z   libref-util-perl libref-util-xs-perl librole-tiny-perl libspecio-perl
+403:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0465234Z   libsub-exporter-perl libsub-exporter-progressive-perl libsub-identify-perl
+404:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0465941Z   libsub-install-perl libsub-name-perl libsub-quote-perl libtry-tiny-perl
+405:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0466380Z   libvariable-magic-perl libxstring-perl
+406:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0656673Z 0 upgraded, 51 newly installed, 0 to remove and 22 not upgraded.
+407:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0657375Z Need to get 4418 kB of archives.
+408:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0657762Z After this operation, 31.7 MB of additional disk space will be used.
+409:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.0658434Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+410:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.1499643Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libcapture-tiny-perl all 0.48-2 [20.2 kB]
+411:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.2273935Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-inspector-perl all 1.36-3 [15.4 kB]
+412:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.2966194Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libfile-sharedir-perl all 1.118-3 [14.0 kB]
+413:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.3661541Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-op-check-perl amd64 0.22-3build1 [9518 B]
+414:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.4356708Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdynaloader-functions-perl all 0.003-3 [12.1 kB]
+415:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.5069870Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-callchecker-perl amd64 0.008-2build3 [13.2 kB]
+416:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.5800630Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-classify-perl amd64 0.015-2build5 [20.1 kB]
+417:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.6495993Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-runtime-perl all 0.016-2 [16.4 kB]
+418:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.7188725Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtry-tiny-perl all 0.31-2 [20.8 kB]
+419:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.7882345Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-implementation-perl all 0.09-2 [12.0 kB]
+420:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.8574755Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-progressive-perl all 0.001013-3 [6718 B]
+421:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:21.9267231Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libvariable-magic-perl amd64 0.63-1build3 [35.1 kB]
+422:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.0014266Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-endofscope-perl all 0.28-1 [15.8 kB]
+423:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.0708517Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-perl all 0.40-1 [19.5 kB]
+424:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.1401570Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-identify-perl amd64 0.14-3build3 [9786 B]
+425:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.2096895Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-name-perl amd64 0.27-1build3 [10.8 kB]
+426:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.2787676Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libnamespace-clean-perl all 0.27-2 [14.0 kB]
+427:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.3484501Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libnamespace-autoclean-perl all 0.29-2 [11.7 kB]
+428:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.4176933Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-util-perl amd64 1.102-2build3 [21.2 kB]
+429:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.4870862Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-install-perl all 0.929-1 [9764 B]
+430:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.5565199Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdata-optlist-perl all 0.114-1 [9708 B]
+431:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.6252614Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-perl all 0.990-1 [49.0 kB]
+432:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.6972653Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libeval-closure-perl all 0.14-3 [10.1 kB]
+433:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.7668523Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-data-inheritable-perl all 0.08-3 [8084 B]
+434:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.8367355Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-stacktrace-perl all 2.0500-1 [22.1 kB]
+435:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.9058279Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libexception-class-perl all 1.45-1 [28.6 kB]
+436:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:22.9756402Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libparams-validationcompiler-perl all 0.31-1 [28.3 kB]
+437:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.0455385Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libalgorithm-c3-perl all 0.11-2 [10.2 kB]
+438:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.1153236Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-perl all 0.35-2 [18.4 kB]
+439:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.1887838Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmro-compat-perl all 0.15-2 [10.1 kB]
+440:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.2578816Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-method-modifiers-perl all 2.15-1 [16.1 kB]
+441:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.3273771Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 librole-tiny-perl all 2.002004-1 [16.3 kB]
+442:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.3967122Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-quote-perl all 2.006008-1ubuntu1 [20.7 kB]
+443:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.4663273Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libxstring-perl amd64 0.005-2build3 [7852 B]
+444:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.5471906Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libspecio-perl all 0.48-1 [137 kB]
+445:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.6193227Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-locale-perl all 1:1.37-1 [2833 kB]
+446:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.7168962Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-singleton-perl all 1.6-2 [11.5 kB]
+447:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.7859826Z Get:39 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-timezone-perl all 1:2.62-1+2024a [262 kB]
+448:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.8590694Z Get:40 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-perl amd64 2:1.65-1build2 [95.8 kB]
+449:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.9295161Z Get:41 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libperlio-gzip-perl amd64 0.20-1build4 [14.6 kB]
+450:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:23.9990749Z Get:42 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 lcov all 2.0-4ubuntu2 [223 kB]
+451:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.0703542Z Get:43 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-xs-perl amd64 0.15-1build6 [16.3 kB]
+452:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.1396135Z Get:44 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-xsaccessor-perl amd64 1.19-4build4 [33.1 kB]
+453:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.2090460Z Get:45 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libpadwalker-perl amd64 2.5-1build6 [15.5 kB]
+454:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.2800196Z Get:46 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-caller-perl amd64 2.07-1build3 [9766 B]
+455:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.3490880Z Get:47 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-lexalias-perl amd64 0.05-3build4 [8014 B]
+456:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.4182261Z Get:48 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-xs-perl amd64 0.30-1build4 [18.7 kB]
+457:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.4873741Z Get:49 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libreadonly-perl all 2.050-3 [19.9 kB]
+458:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.5569615Z Get:50 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-perl all 0.204-2 [15.1 kB]
+459:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.6308474Z Get:51 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-xs-perl amd64 0.117-2build4 [12.6 kB]
+460:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.7010861Z Get:52 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libgd-perl amd64 2.78-1build3 [129 kB]
+461:collect-coverage	Install lcov (for genhtml)	2025-11-09T16:08:24.9797613Z Fetched 4418 kB in 4s (1211 kB/s)

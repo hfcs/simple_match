@@ -26,11 +26,13 @@ void main() {
       captured = contents;
     }
 
-    // Pump SettingsView with provider and override
+    // Pump SettingsView with provider and override (provider inside MaterialApp.home)
     await tester.pumpWidget(
-      ChangeNotifierProvider<MatchRepository>.value(
-        value: repo,
-        child: MaterialApp(home: SettingsView(saveExportOverride: fakeExport)),
+      MaterialApp(
+        home: ChangeNotifierProvider<MatchRepository>.value(
+          value: repo,
+          child: SettingsView(saveExportOverride: fakeExport),
+        ),
       ),
     );
     await tester.pumpAndSettle();

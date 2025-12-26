@@ -161,8 +161,9 @@ void main() {
       expect(removeBtn, findsOneWidget);
       await tester.tap(removeBtn, warnIfMissed: false);
       await tester.pumpAndSettle();
-      // Confirm removal
-      await tester.tap(find.text('Remove'));
+      // Confirm removal (tap the dialog's TextButton explicitly)
+      await tester.tap(find.widgetWithText(TextButton, 'Remove'));
+      await tester.pumpAndSettle();
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('editResult-1-Test')), findsNothing);
 

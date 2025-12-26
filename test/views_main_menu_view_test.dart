@@ -8,9 +8,11 @@ void main() {
   testWidgets('MainMenuView renders all buttons', (WidgetTester tester) async {
     final repo = MatchRepository();
     await tester.pumpWidget(
-      ChangeNotifierProvider<MatchRepository>.value(
-        value: repo,
-        child: const MaterialApp(home: MainMenuView()),
+      MaterialApp(
+        home: ChangeNotifierProvider<MatchRepository>.value(
+          value: repo,
+          child: const MainMenuView(),
+        ),
       ),
     );
     await tester.pumpAndSettle();

@@ -193,8 +193,11 @@ void main() {
       // Edit
       await tester.tap(find.byKey(const Key('editResult-1-Test')));
       await tester.pumpAndSettle();
-      // Remove
+      // Remove (confirm dialog)
       await tester.tap(find.byKey(const Key('removeResult-1-Test')));
+      await tester.pumpAndSettle();
+      // Confirm removal in dialog
+      await tester.tap(find.text('Remove'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('editResult-1-Test')), findsNothing);
     });

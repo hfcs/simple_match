@@ -231,6 +231,9 @@ void main() {
       await tester.ensureVisible(find.byKey(const Key('removeResult-1-Alice')));
       await tester.tap(find.byKey(const Key('removeResult-1-Alice')));
       await tester.pumpAndSettle();
+      // Confirm removal from dialog
+      await tester.tap(find.text('Remove'));
+      await tester.pumpAndSettle();
       // Only check that Alice is not present in the results list (no ListTile with her name)
       final resultTiles = tester.widgetList<ListTile>(find.byType(ListTile));
       expect(

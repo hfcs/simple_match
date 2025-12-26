@@ -41,8 +41,10 @@ void main() {
       await tester.tap(find.text('Cancel'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('addShooterButton')), findsOneWidget);
-      // Remove the shooter
+      // Remove the shooter (confirm dialog)
       await tester.tap(find.byKey(const Key('removeShooter-Alice')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Remove'));
       await tester.pumpAndSettle();
       expect(find.text('Alice'), findsNothing);
       // Add invalid input to trigger error
@@ -50,7 +52,7 @@ void main() {
       await tester.enterText(find.byKey(const Key('scaleField')), '');
       await tester.tap(find.byKey(const Key('addShooterButton')));
       await tester.pumpAndSettle();
-      expect(find.textContaining('Invalid'), findsOneWidget);
+      expect(find.text('Invalid scale.'), findsOneWidget);
     });
   });
 }

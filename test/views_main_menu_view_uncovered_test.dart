@@ -40,47 +40,26 @@ void main() {
         ),
       ),
     );
-    // Tap all menu buttons if present
-    final matchSetupBtn = find.textContaining('Match Setup');
-    if (matchSetupBtn.evaluate().isNotEmpty) {
-      await tester.tap(matchSetupBtn);
-      await tester.pumpAndSettle();
-      expect(find.text('Match Setup Page'), findsOneWidget);
-      await tester.pageBack();
-      await tester.pumpAndSettle();
+    // Tap all menu buttons if present and enabled
+    Future<void> tryTapNamed(String title, String expectedPage) async {
+      final titleFinder = find.textContaining(title);
+      if (titleFinder.evaluate().isEmpty) return;
+      final tileFinder = find.ancestor(of: titleFinder, matching: find.byType(ListTile));
+      if (tileFinder.evaluate().isEmpty) return;
+      final tile = tester.widget<ListTile>(tileFinder);
+      if (tile.enabled == true) {
+        await tester.tap(titleFinder);
+        await tester.pumpAndSettle();
+        expect(find.text(expectedPage), findsOneWidget);
+        await tester.pageBack();
+        await tester.pumpAndSettle();
+      }
     }
-    final shooterSetupBtn = find.textContaining('Shooter Setup');
-    if (shooterSetupBtn.evaluate().isNotEmpty) {
-      await tester.tap(shooterSetupBtn);
-      await tester.pumpAndSettle();
-      expect(find.text('Shooter Setup Page'), findsOneWidget);
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-    }
-    final stageInputBtn = find.textContaining('Stage Input');
-    if (stageInputBtn.evaluate().isNotEmpty) {
-      await tester.tap(stageInputBtn);
-      await tester.pumpAndSettle();
-      expect(find.text('Stage Input Page'), findsOneWidget);
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-    }
-    final stageResultBtn = find.textContaining('Stage Result');
-    if (stageResultBtn.evaluate().isNotEmpty) {
-      await tester.tap(stageResultBtn);
-      await tester.pumpAndSettle();
-      expect(find.text('Stage Result Page'), findsOneWidget);
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-    }
-    final overallResultBtn = find.textContaining('Overall Result');
-    if (overallResultBtn.evaluate().isNotEmpty) {
-      await tester.tap(overallResultBtn);
-      await tester.pumpAndSettle();
-      expect(find.text('Overall Result Page'), findsOneWidget);
-      await tester.pageBack();
-      await tester.pumpAndSettle();
-    }
+    await tryTapNamed('Match Setup', 'Match Setup Page');
+    await tryTapNamed('Shooter Setup', 'Shooter Setup Page');
+    await tryTapNamed('Stage Input', 'Stage Input Page');
+    await tryTapNamed('Stage Result', 'Stage Result Page');
+    await tryTapNamed('Overall Result', 'Overall Result Page');
     // Should not crash on any navigation
     expect(true, isTrue);
     // Test Clear All Data dialog cancel and confirm

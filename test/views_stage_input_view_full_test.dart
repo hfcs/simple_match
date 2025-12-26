@@ -156,10 +156,13 @@ void main() {
       expect(repo.results.length, 1);
       expect(repo.results.first.a, 4);
 
-      // Remove the result
+      // Remove the result (confirm dialog)
       final removeBtn = find.byKey(const Key('removeResult-1-Test'));
       expect(removeBtn, findsOneWidget);
       await tester.tap(removeBtn, warnIfMissed: false);
+      await tester.pumpAndSettle();
+      // Confirm removal
+      await tester.tap(find.text('Remove'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('editResult-1-Test')), findsNothing);
 

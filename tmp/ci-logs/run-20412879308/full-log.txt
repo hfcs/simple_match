@@ -1,0 +1,893 @@
+test	Set up job	﻿2025-12-21T16:48:54.8124400Z Current runner version: '2.330.0'
+test	Set up job	2025-12-21T16:48:54.8158591Z ##[group]Runner Image Provisioner
+test	Set up job	2025-12-21T16:48:54.8159992Z Hosted Compute Agent
+test	Set up job	2025-12-21T16:48:54.8160879Z Version: 20251211.462
+test	Set up job	2025-12-21T16:48:54.8161799Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+test	Set up job	2025-12-21T16:48:54.8163013Z Build Date: 2025-12-11T16:28:49Z
+test	Set up job	2025-12-21T16:48:54.8164091Z Worker ID: {69e1a08e-3107-4eaf-bc0a-c701ef339554}
+test	Set up job	2025-12-21T16:48:54.8165326Z ##[endgroup]
+test	Set up job	2025-12-21T16:48:54.8166243Z ##[group]Operating System
+test	Set up job	2025-12-21T16:48:54.8167136Z Ubuntu
+test	Set up job	2025-12-21T16:48:54.8167848Z 24.04.3
+test	Set up job	2025-12-21T16:48:54.8168599Z LTS
+test	Set up job	2025-12-21T16:48:54.8169575Z ##[endgroup]
+test	Set up job	2025-12-21T16:48:54.8170790Z ##[group]Runner Image
+test	Set up job	2025-12-21T16:48:54.8171834Z Image: ubuntu-24.04
+test	Set up job	2025-12-21T16:48:54.8172615Z Version: 20251215.174.1
+test	Set up job	2025-12-21T16:48:54.8174340Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2025-12-21T16:48:54.8177105Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+test	Set up job	2025-12-21T16:48:54.8178960Z ##[endgroup]
+test	Set up job	2025-12-21T16:48:54.8181413Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2025-12-21T16:48:54.8184113Z Contents: read
+test	Set up job	2025-12-21T16:48:54.8185025Z Metadata: read
+test	Set up job	2025-12-21T16:48:54.8185854Z Packages: read
+test	Set up job	2025-12-21T16:48:54.8186640Z ##[endgroup]
+test	Set up job	2025-12-21T16:48:54.8190095Z Secret source: Actions
+test	Set up job	2025-12-21T16:48:54.8191095Z Prepare workflow directory
+test	Set up job	2025-12-21T16:48:54.8636682Z Prepare all required actions
+test	Set up job	2025-12-21T16:48:54.8692455Z Getting action download info
+test	Set up job	2025-12-21T16:48:55.1793090Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+test	Set up job	2025-12-21T16:48:55.2739807Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+test	Set up job	2025-12-21T16:48:55.5812304Z Download action repository 'subosito/flutter-action@v2' (SHA:fd55f4c5af5b953cc57a2be44cb082c8f6635e8e)
+test	Set up job	2025-12-21T16:48:55.7555460Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+test	Set up job	2025-12-21T16:48:55.8663616Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+test	Set up job	2025-12-21T16:48:56.1092623Z Getting action download info
+test	Set up job	2025-12-21T16:48:56.2643118Z Complete job name: test
+test	Run actions/checkout@v4	﻿2025-12-21T16:48:56.3399159Z ##[group]Run actions/checkout@v4
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3400263Z with:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3400713Z   repository: hfcs/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3401427Z   token: ***
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3401829Z   ssh-strict: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3402256Z   ssh-user: git
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3402689Z   persist-credentials: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3403178Z   clean: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3403609Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3404151Z   fetch-depth: 1
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3404568Z   fetch-tags: false
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3469148Z   show-progress: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3470404Z   lfs: false
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3471167Z   submodules: false
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3472013Z   set-safe-directory: true
+test	Run actions/checkout@v4	2025-12-21T16:48:56.3473338Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4548037Z Syncing repository: hfcs/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4550073Z ##[group]Getting Git version info
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4550923Z Working directory is '/home/runner/work/simple_match/simple_match'
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4552038Z [command]/usr/bin/git version
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4616493Z git version 2.52.0
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4642050Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4655267Z Temporarily overriding HOME='/home/runner/work/_temp/427b9cbd-10f9-40c0-8c8e-46c07d33aa2e' before making global git config changes
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4666615Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4668010Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4704896Z Deleting the contents of '/home/runner/work/simple_match/simple_match'
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4708157Z ##[group]Initializing the repository
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4712166Z [command]/usr/bin/git init /home/runner/work/simple_match/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4810040Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4811343Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4812496Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4813496Z hint: call:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4814160Z hint:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4815025Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4815733Z hint:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4816389Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4817538Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4818418Z hint:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4819039Z hint: 	git branch -m <name>
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4819790Z hint:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4820516Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4821897Z Initialized empty Git repository in /home/runner/work/simple_match/simple_match/.git/
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4824800Z [command]/usr/bin/git remote add origin https://github.com/hfcs/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4858807Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4860345Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4863666Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4892353Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4893767Z ##[group]Setting up auth
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4900351Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@v4	2025-12-21T16:48:56.4930709Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5269659Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5301064Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5518522Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5547755Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5775714Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5808302Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5809168Z ##[group]Fetching the repository
+test	Run actions/checkout@v4	2025-12-21T16:48:56.5816584Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +e2d1f8bcf41b89f3a028b27be0e9b51712a0a197:refs/remotes/origin/main
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7937275Z From https://github.com/hfcs/simple_match
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7940621Z  * [new ref]         e2d1f8bcf41b89f3a028b27be0e9b51712a0a197 -> origin/main
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7971609Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7973447Z ##[group]Determining the checkout info
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7975499Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.7979725Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8021076Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8047829Z ##[group]Checking out the ref
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8051423Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8287464Z Switched to a new branch 'main'
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8291292Z branch 'main' set up to track 'origin/main'.
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8300091Z ##[endgroup]
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8343140Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@v4	2025-12-21T16:48:56.8369100Z e2d1f8bcf41b89f3a028b27be0e9b51712a0a197
+test	Setup JDK 21	﻿2025-12-21T16:48:56.8833944Z ##[group]Run actions/setup-java@v4
+test	Setup JDK 21	2025-12-21T16:48:56.8835291Z with:
+test	Setup JDK 21	2025-12-21T16:48:56.8836061Z   distribution: temurin
+test	Setup JDK 21	2025-12-21T16:48:56.8837183Z   java-version: 21
+test	Setup JDK 21	2025-12-21T16:48:56.8838014Z   java-package: jdk
+test	Setup JDK 21	2025-12-21T16:48:56.8839230Z   check-latest: false
+test	Setup JDK 21	2025-12-21T16:48:56.8840465Z   server-id: github
+test	Setup JDK 21	2025-12-21T16:48:56.8841331Z   server-username: GITHUB_ACTOR
+test	Setup JDK 21	2025-12-21T16:48:56.8842357Z   server-password: GITHUB_TOKEN
+test	Setup JDK 21	2025-12-21T16:48:56.8843485Z   overwrite-settings: true
+test	Setup JDK 21	2025-12-21T16:48:56.8844422Z   job-status: success
+test	Setup JDK 21	2025-12-21T16:48:56.8845573Z   token: ***
+test	Setup JDK 21	2025-12-21T16:48:56.8846553Z ##[endgroup]
+test	Setup JDK 21	2025-12-21T16:48:57.0797218Z ##[group]Installed distributions
+test	Setup JDK 21	2025-12-21T16:48:57.1017886Z Resolved Java 21.0.9+10 from tool-cache
+test	Setup JDK 21	2025-12-21T16:48:57.1019830Z Setting Java 21.0.9+10 as the default
+test	Setup JDK 21	2025-12-21T16:48:57.1031195Z Creating toolchains.xml for JDK version 21 from temurin
+test	Setup JDK 21	2025-12-21T16:48:57.1105324Z Writing to /home/runner/.m2/toolchains.xml
+test	Setup JDK 21	2025-12-21T16:48:57.1106747Z 
+test	Setup JDK 21	2025-12-21T16:48:57.1107596Z Java configuration:
+test	Setup JDK 21	2025-12-21T16:48:57.1109190Z   Distribution: temurin
+test	Setup JDK 21	2025-12-21T16:48:57.1110881Z   Version: 21.0.9+10
+test	Setup JDK 21	2025-12-21T16:48:57.1112068Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup JDK 21	2025-12-21T16:48:57.1113524Z 
+test	Setup JDK 21	2025-12-21T16:48:57.1114888Z ##[endgroup]
+test	Setup JDK 21	2025-12-21T16:48:57.1131355Z Creating settings.xml with server-id: github
+test	Setup JDK 21	2025-12-21T16:48:57.1132622Z Writing to /home/runner/.m2/settings.xml
+test	Debug: show Java/Gradle info	﻿2025-12-21T16:48:57.1269588Z ##[group]Run echo "JAVA_HOME=$JAVA_HOME"
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1270832Z [36;1mecho "JAVA_HOME=$JAVA_HOME"[0m
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1271929Z [36;1mjava -version || true[0m
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1272918Z [36;1mjavac -version || true[0m
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1273949Z [36;1m./gradlew --version || true[0m
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1315231Z shell: /usr/bin/bash -e {0}
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1316170Z env:
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1317304Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1319241Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1321025Z ##[endgroup]
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.1405917Z JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.9468795Z openjdk version "21.0.9" 2025-10-21 LTS
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.9475175Z OpenJDK Runtime Environment Temurin-21.0.9+10 (build 21.0.9+10-LTS)
+test	Debug: show Java/Gradle info	2025-12-21T16:48:57.9477894Z OpenJDK 64-Bit Server VM Temurin-21.0.9+10 (build 21.0.9+10-LTS, mixed mode, sharing)
+test	Debug: show Java/Gradle info	2025-12-21T16:48:58.4261091Z javac 21.0.9
+test	Debug: show Java/Gradle info	2025-12-21T16:48:58.4686340Z /home/runner/work/_temp/93f1985b-1b44-4493-a7ed-01b10cb80c49.sh: line 4: ./gradlew: No such file or directory
+test	Setup Flutter	﻿2025-12-21T16:48:58.4849846Z ##[group]Run subosito/flutter-action@v2
+test	Setup Flutter	2025-12-21T16:48:58.4850164Z with:
+test	Setup Flutter	2025-12-21T16:48:58.4850341Z   channel: stable
+test	Setup Flutter	2025-12-21T16:48:58.4850530Z   architecture: X64
+test	Setup Flutter	2025-12-21T16:48:58.4850710Z   cache: false
+test	Setup Flutter	2025-12-21T16:48:58.4850892Z   pub-cache-path: default
+test	Setup Flutter	2025-12-21T16:48:58.4851099Z   dry-run: false
+test	Setup Flutter	2025-12-21T16:48:58.4851346Z   git-source: https://github.com/flutter/flutter.git
+test	Setup Flutter	2025-12-21T16:48:58.4851647Z env:
+test	Setup Flutter	2025-12-21T16:48:58.4851915Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.4852345Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.4852672Z ##[endgroup]
+test	Setup Flutter	2025-12-21T16:48:58.4930109Z ##[group]Run chmod +x "$GITHUB_ACTION_PATH/setup.sh"
+test	Setup Flutter	2025-12-21T16:48:58.4930504Z [36;1mchmod +x "$GITHUB_ACTION_PATH/setup.sh"[0m
+test	Setup Flutter	2025-12-21T16:48:58.4964078Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Setup Flutter	2025-12-21T16:48:58.4964393Z env:
+test	Setup Flutter	2025-12-21T16:48:58.4964678Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.4965174Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.4965532Z ##[endgroup]
+test	Setup Flutter	2025-12-21T16:48:58.5072865Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh -p \
+test	Setup Flutter	2025-12-21T16:48:58.5073226Z [36;1m$GITHUB_ACTION_PATH/setup.sh -p \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5073486Z [36;1m  -n '' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5073870Z [36;1m  -f '' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5074055Z [36;1m  -a 'X64' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5074238Z [36;1m  -k '' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5074414Z [36;1m  -c '' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5074578Z [36;1m  -l '' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5074787Z [36;1m  -d 'default' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5075110Z [36;1m  -g 'https://github.com/flutter/flutter.git' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.5075395Z [36;1m  stable[0m
+test	Setup Flutter	2025-12-21T16:48:58.5105427Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Setup Flutter	2025-12-21T16:48:58.5105744Z env:
+test	Setup Flutter	2025-12-21T16:48:58.5106023Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.5106497Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.5106825Z ##[endgroup]
+test	Setup Flutter	2025-12-21T16:48:58.7172409Z ##[group]Run $GITHUB_ACTION_PATH/setup.sh \
+test	Setup Flutter	2025-12-21T16:48:58.7172736Z [36;1m$GITHUB_ACTION_PATH/setup.sh \[0m
+test	Setup Flutter	2025-12-21T16:48:58.7172979Z [36;1m  -n '3.38.5' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.7173186Z [36;1m  -a 'x64' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.7173468Z [36;1m  -c '/opt/hostedtoolcache/flutter/stable-3.38.5-x64' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.7173793Z [36;1m  -d '/home/runner/.pub-cache' \[0m
+test	Setup Flutter	2025-12-21T16:48:58.7174037Z [36;1m  stable[0m
+test	Setup Flutter	2025-12-21T16:48:58.7206471Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+test	Setup Flutter	2025-12-21T16:48:58.7206780Z env:
+test	Setup Flutter	2025-12-21T16:48:58.7207063Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.7207497Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Setup Flutter	2025-12-21T16:48:58.7207843Z ##[endgroup]
+test	Setup Flutter	2025-12-21T16:48:58.8899872Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+test	Setup Flutter	2025-12-21T16:48:58.8900587Z                                  Dload  Upload   Total   Spent    Left  Speed
+test	Setup Flutter	2025-12-21T16:48:58.8900825Z 
+test	Setup Flutter	2025-12-21T16:48:59.0822020Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+test	Setup Flutter	2025-12-21T16:49:00.0825673Z   1 1396M    1 15.4M    0     0  80.2M      0  0:00:17 --:--:--  0:00:17 80.0M
+test	Setup Flutter	2025-12-21T16:49:01.0831023Z  21 1396M   21  305M    0     0   256M      0  0:00:05  0:00:01  0:00:04  256M
+test	Setup Flutter	2025-12-21T16:49:02.0833052Z  38 1396M   38  540M    0     0   246M      0  0:00:05  0:00:02  0:00:03  246M
+test	Setup Flutter	2025-12-21T16:49:03.0830580Z  58 1396M   58  810M    0     0   253M      0  0:00:05  0:00:03  0:00:02  253M
+test	Setup Flutter	2025-12-21T16:49:04.0820230Z  77 1396M   77 1081M    0     0   257M      0  0:00:05  0:00:04  0:00:01  257M
+test	Setup Flutter	2025-12-21T16:49:04.3272117Z  94 1396M   94 1316M    0     0   253M      0  0:00:05  0:00:05 --:--:--  260M
+test	Setup Flutter	2025-12-21T16:49:04.3273171Z 100 1396M  100 1396M    0     0   256M      0  0:00:05  0:00:05 --:--:--  257M
+test	Verify Flutter	﻿2025-12-21T16:49:53.2798290Z ##[group]Run flutter --version
+test	Verify Flutter	2025-12-21T16:49:53.2798627Z [36;1mflutter --version[0m
+test	Verify Flutter	2025-12-21T16:49:53.2831034Z shell: /usr/bin/bash -e {0}
+test	Verify Flutter	2025-12-21T16:49:53.2831248Z env:
+test	Verify Flutter	2025-12-21T16:49:53.2831523Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Verify Flutter	2025-12-21T16:49:53.2831988Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Verify Flutter	2025-12-21T16:49:53.2832397Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Verify Flutter	2025-12-21T16:49:53.2832710Z   PUB_CACHE: /home/runner/.pub-cache
+test	Verify Flutter	2025-12-21T16:49:53.2832941Z ##[endgroup]
+test	Verify Flutter	2025-12-21T16:49:53.5193111Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	Verify Flutter	2025-12-21T16:49:53.5194108Z Framework • revision f6ff1529fd (10 days ago) • 2025-12-11 11:50:07 -0500
+test	Verify Flutter	2025-12-21T16:49:53.5195251Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (10 days ago) • 2025-12-11 15:04:31.000Z
+test	Verify Flutter	2025-12-21T16:49:53.5196181Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	﻿2025-12-21T16:49:53.5255448Z ##[group]Run sudo apt-get update
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5255737Z [36;1msudo apt-get update[0m
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5256021Z [36;1msudo apt-get install -y lcov poppler-utils git-lfs[0m
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5256343Z [36;1mgit lfs install --system || true[0m
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5288381Z shell: /usr/bin/bash -e {0}
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5288596Z env:
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5288871Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5289481Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5289960Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5290279Z   PUB_CACHE: /home/runner/.pub-cache
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.5290502Z ##[endgroup]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6025191Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6339899Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6341603Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6343189Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6367944Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6417479Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.6432530Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8014172Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [77.3 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8124327Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8154587Z Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [58.7 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8486372Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1684 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8606371Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [311 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8632408Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [175 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8656826Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [15.8 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8673663Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1506 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8754937Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [306 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8788561Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [378 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8829296Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [31.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8835191Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2413 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.8983873Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [550 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9474388Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9487748Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 c-n-f Metadata [516 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9502431Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [30.3 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9526250Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [6048 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9535671Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9559665Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [488 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9587079Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9596924Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7304 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9614396Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9627185Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [29.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9680597Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [17.9 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9682345Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9688218Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1444 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:53.9700300Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0151976Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0171692Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [225 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0201052Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0210252Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [9504 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0224105Z Get:39 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [71.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0234239Z Get:40 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:49:54.0243463Z Get:41 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:02.3247818Z Fetched 8375 kB in 1s (7441 kB/s)
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.0686330Z Reading package lists...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.1005611Z Reading package lists...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.2664481Z Building dependency tree...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.2671512Z Reading state information...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4266122Z git-lfs is already the newest version (3.7.1).
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4266637Z The following additional packages will be installed:
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4267284Z   libalgorithm-c3-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4267986Z   libcapture-tiny-perl libclass-c3-perl libclass-c3-xs-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4268614Z   libclass-data-inheritable-perl libclass-inspector-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4269220Z   libclass-method-modifiers-perl libclass-singleton-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4270154Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4270905Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4271632Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4272453Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4273221Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4273947Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4274723Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4275231Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4275683Z   libparams-validationcompiler-perl libperlio-gzip-perl libpoppler134
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4276141Z   libreadonly-perl libref-util-perl libref-util-xs-perl librole-tiny-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4276618Z   libspecio-perl libsub-exporter-perl libsub-exporter-progressive-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4277081Z   libsub-identify-perl libsub-install-perl libsub-name-perl libsub-quote-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4277544Z   libtry-tiny-perl libvariable-magic-perl libxstring-perl poppler-data
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4277889Z Suggested packages:
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4278223Z   libscalar-number-perl libtest-fatal-perl ghostscript fonts-japanese-mincho
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4278681Z   | fonts-ipafont-mincho fonts-japanese-gothic | fonts-ipafont-gothic
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4279038Z   fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4659979Z The following NEW packages will be installed:
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4661229Z   lcov libalgorithm-c3-perl libb-hooks-endofscope-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4661797Z   libb-hooks-op-check-perl libcapture-tiny-perl libclass-c3-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4662375Z   libclass-c3-xs-perl libclass-data-inheritable-perl libclass-inspector-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4663138Z   libclass-method-modifiers-perl libclass-singleton-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4663924Z   libclass-xsaccessor-perl libdata-optlist-perl libdatetime-locale-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4664472Z   libdatetime-perl libdatetime-timezone-perl libdevel-callchecker-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4664960Z   libdevel-caller-perl libdevel-lexalias-perl libdevel-stacktrace-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4665448Z   libdynaloader-functions-perl libeval-closure-perl libexception-class-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4665921Z   libfile-sharedir-perl libgd-perl libmodule-implementation-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4666386Z   libmodule-runtime-perl libmro-compat-perl libnamespace-autoclean-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4667005Z   libnamespace-clean-perl libpackage-stash-perl libpackage-stash-xs-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4667738Z   libpadwalker-perl libparams-classify-perl libparams-util-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4668453Z   libparams-validationcompiler-perl libperlio-gzip-perl libpoppler134
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4669210Z   libreadonly-perl libref-util-perl libref-util-xs-perl librole-tiny-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4670132Z   libspecio-perl libsub-exporter-perl libsub-exporter-progressive-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4670898Z   libsub-identify-perl libsub-install-perl libsub-name-perl libsub-quote-perl
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4671657Z   libtry-tiny-perl libvariable-magic-perl libxstring-perl poppler-data
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4672134Z   poppler-utils
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4853846Z 0 upgraded, 54 newly installed, 0 to remove and 69 not upgraded.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4854400Z Need to get 7808 kB of archives.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4854818Z After this operation, 49.5 MB of additional disk space will be used.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.4855222Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5079681Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5356963Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libcapture-tiny-perl all 0.48-2 [20.2 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5380067Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-inspector-perl all 1.36-3 [15.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5403066Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libfile-sharedir-perl all 1.118-3 [14.0 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5426277Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-op-check-perl amd64 0.22-3build1 [9518 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5452099Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdynaloader-functions-perl all 0.003-3 [12.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5476844Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-callchecker-perl amd64 0.008-2build3 [13.2 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5508169Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-classify-perl amd64 0.015-2build5 [20.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5530627Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-runtime-perl all 0.016-2 [16.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5560502Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtry-tiny-perl all 0.31-2 [20.8 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5584663Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libmodule-implementation-perl all 0.09-2 [12.0 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5606640Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-progressive-perl all 0.001013-3 [6718 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5631715Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libvariable-magic-perl amd64 0.63-1build3 [35.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5655938Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libb-hooks-endofscope-perl all 0.28-1 [15.8 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5679715Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-perl all 0.40-1 [19.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5705987Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-identify-perl amd64 0.14-3build3 [9786 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.5727841Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-name-perl amd64 0.27-1build3 [10.8 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6157332Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libnamespace-clean-perl all 0.27-2 [14.0 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6180672Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libnamespace-autoclean-perl all 0.29-2 [11.7 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6202544Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libparams-util-perl amd64 1.102-2build3 [21.2 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6223994Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-install-perl all 0.929-1 [9764 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6244637Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdata-optlist-perl all 0.114-1 [9708 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6272433Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-exporter-perl all 0.990-1 [49.0 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6303706Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libeval-closure-perl all 0.14-3 [10.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6326156Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-data-inheritable-perl all 0.08-3 [8084 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6352425Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libdevel-stacktrace-perl all 2.0500-1 [22.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6377754Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libexception-class-perl all 1.45-1 [28.6 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6404399Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libparams-validationcompiler-perl all 0.31-1 [28.3 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6485105Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libalgorithm-c3-perl all 0.11-2 [10.2 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6511877Z Get:31 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-perl all 0.35-2 [18.4 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6535489Z Get:32 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmro-compat-perl all 0.15-2 [10.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6558881Z Get:33 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-method-modifiers-perl all 2.15-1 [16.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6580793Z Get:34 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 librole-tiny-perl all 2.002004-1 [16.3 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.6607637Z Get:35 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libsub-quote-perl all 2.006008-1ubuntu1 [20.7 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.7489945Z Get:36 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libxstring-perl amd64 0.005-2build3 [7852 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.7513179Z Get:37 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libspecio-perl all 0.48-1 [137 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.7701560Z Get:38 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-locale-perl all 1:1.37-1 [2833 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8054609Z Get:39 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-singleton-perl all 1.6-2 [11.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8080740Z Get:40 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-timezone-perl all 1:2.62-1+2024a [262 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8135215Z Get:41 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdatetime-perl amd64 2:1.65-1build2 [95.8 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8173969Z Get:42 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libperlio-gzip-perl amd64 0.20-1build4 [14.6 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8202274Z Get:43 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 lcov all 2.0-4ubuntu2 [223 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8249953Z Get:44 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libclass-c3-xs-perl amd64 0.15-1build6 [16.3 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8271725Z Get:45 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libclass-xsaccessor-perl amd64 1.19-4build4 [33.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8294671Z Get:46 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libpadwalker-perl amd64 2.5-1build6 [15.5 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8318325Z Get:47 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-caller-perl amd64 2.07-1build3 [9766 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8339505Z Get:48 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libdevel-lexalias-perl amd64 0.05-3build4 [8014 B]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8362967Z Get:49 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libpackage-stash-xs-perl amd64 0.30-1build4 [18.7 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:03.8393753Z Get:50 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libpoppler134 amd64 24.02.0-1ubuntu9.8 [1118 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.1783313Z Get:51 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libreadonly-perl all 2.050-3 [19.9 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.1811612Z Get:52 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-perl all 0.204-2 [15.1 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.1837755Z Get:53 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libref-util-xs-perl amd64 0.117-2build4 [12.6 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.2285946Z Get:54 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 poppler-utils amd64 24.02.0-1ubuntu9.8 [212 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.2361305Z Get:55 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libgd-perl amd64 2.78-1build3 [129 kB]
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5309911Z Fetched 7808 kB in 1s (10.2 MB/s)
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5552064Z Selecting previously unselected package poppler-data.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5821280Z (Reading database ... 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5821869Z (Reading database ... 5%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5822309Z (Reading database ... 10%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5822747Z (Reading database ... 15%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5823148Z (Reading database ... 20%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5823573Z (Reading database ... 25%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5824009Z (Reading database ... 30%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5824426Z (Reading database ... 35%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5824835Z (Reading database ... 40%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5825173Z (Reading database ... 45%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5825461Z (Reading database ... 50%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.5895288Z (Reading database ... 55%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.7072225Z (Reading database ... 60%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.8246712Z (Reading database ... 65%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.8738238Z (Reading database ... 70%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:04.9630881Z (Reading database ... 75%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.1581423Z (Reading database ... 80%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.3670036Z (Reading database ... 85%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.5826791Z (Reading database ... 90%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.7657974Z (Reading database ... 95%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.7658293Z (Reading database ... 100%
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.7658635Z (Reading database ... 217374 files and directories currently installed.)
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.7701724Z Preparing to unpack .../00-poppler-data_0.4.12-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.7726683Z Unpacking poppler-data (0.4.12-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9298219Z Selecting previously unselected package libcapture-tiny-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9432125Z Preparing to unpack .../01-libcapture-tiny-perl_0.48-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9439624Z Unpacking libcapture-tiny-perl (0.48-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9721645Z Selecting previously unselected package libclass-inspector-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9853160Z Preparing to unpack .../02-libclass-inspector-perl_1.36-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:05.9861245Z Unpacking libclass-inspector-perl (1.36-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0068610Z Selecting previously unselected package libfile-sharedir-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0198691Z Preparing to unpack .../03-libfile-sharedir-perl_1.118-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0205375Z Unpacking libfile-sharedir-perl (1.118-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0414126Z Selecting previously unselected package libb-hooks-op-check-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0542072Z Preparing to unpack .../04-libb-hooks-op-check-perl_0.22-3build1_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0570005Z Unpacking libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0779891Z Selecting previously unselected package libdynaloader-functions-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0908736Z Preparing to unpack .../05-libdynaloader-functions-perl_0.003-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.0916369Z Unpacking libdynaloader-functions-perl (0.003-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1119832Z Selecting previously unselected package libdevel-callchecker-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1248317Z Preparing to unpack .../06-libdevel-callchecker-perl_0.008-2build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1256100Z Unpacking libdevel-callchecker-perl:amd64 (0.008-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1459132Z Selecting previously unselected package libparams-classify-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1589031Z Preparing to unpack .../07-libparams-classify-perl_0.015-2build5_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1596139Z Unpacking libparams-classify-perl:amd64 (0.015-2build5) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1792402Z Selecting previously unselected package libmodule-runtime-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1922432Z Preparing to unpack .../08-libmodule-runtime-perl_0.016-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.1931235Z Unpacking libmodule-runtime-perl (0.016-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2127330Z Selecting previously unselected package libtry-tiny-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2257113Z Preparing to unpack .../09-libtry-tiny-perl_0.31-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2264652Z Unpacking libtry-tiny-perl (0.31-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2460006Z Selecting previously unselected package libmodule-implementation-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2590075Z Preparing to unpack .../10-libmodule-implementation-perl_0.09-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2596498Z Unpacking libmodule-implementation-perl (0.09-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2790638Z Selecting previously unselected package libsub-exporter-progressive-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2921738Z Preparing to unpack .../11-libsub-exporter-progressive-perl_0.001013-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.2928637Z Unpacking libsub-exporter-progressive-perl (0.001013-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3119144Z Selecting previously unselected package libvariable-magic-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3249290Z Preparing to unpack .../12-libvariable-magic-perl_0.63-1build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3257282Z Unpacking libvariable-magic-perl (0.63-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3462363Z Selecting previously unselected package libb-hooks-endofscope-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3591939Z Preparing to unpack .../13-libb-hooks-endofscope-perl_0.28-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3599171Z Unpacking libb-hooks-endofscope-perl (0.28-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3805299Z Selecting previously unselected package libpackage-stash-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3936601Z Preparing to unpack .../14-libpackage-stash-perl_0.40-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.3944835Z Unpacking libpackage-stash-perl (0.40-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4144420Z Selecting previously unselected package libsub-identify-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4275111Z Preparing to unpack .../15-libsub-identify-perl_0.14-3build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4282184Z Unpacking libsub-identify-perl (0.14-3build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4491199Z Selecting previously unselected package libsub-name-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4621202Z Preparing to unpack .../16-libsub-name-perl_0.27-1build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4630867Z Unpacking libsub-name-perl:amd64 (0.27-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4822653Z Selecting previously unselected package libnamespace-clean-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4953880Z Preparing to unpack .../17-libnamespace-clean-perl_0.27-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.4961647Z Unpacking libnamespace-clean-perl (0.27-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5151996Z Selecting previously unselected package libnamespace-autoclean-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5282812Z Preparing to unpack .../18-libnamespace-autoclean-perl_0.29-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5291974Z Unpacking libnamespace-autoclean-perl (0.29-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5482028Z Selecting previously unselected package libparams-util-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5613328Z Preparing to unpack .../19-libparams-util-perl_1.102-2build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5620831Z Unpacking libparams-util-perl (1.102-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5812968Z Selecting previously unselected package libsub-install-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5942781Z Preparing to unpack .../20-libsub-install-perl_0.929-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.5950646Z Unpacking libsub-install-perl (0.929-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6139271Z Selecting previously unselected package libdata-optlist-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6270013Z Preparing to unpack .../21-libdata-optlist-perl_0.114-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6277151Z Unpacking libdata-optlist-perl (0.114-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6470784Z Selecting previously unselected package libsub-exporter-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6601477Z Preparing to unpack .../22-libsub-exporter-perl_0.990-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6609504Z Unpacking libsub-exporter-perl (0.990-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6814628Z Selecting previously unselected package libeval-closure-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6946314Z Preparing to unpack .../23-libeval-closure-perl_0.14-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.6954026Z Unpacking libeval-closure-perl (0.14-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7145391Z Selecting previously unselected package libclass-data-inheritable-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7275793Z Preparing to unpack .../24-libclass-data-inheritable-perl_0.08-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7283911Z Unpacking libclass-data-inheritable-perl (0.08-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7480849Z Selecting previously unselected package libdevel-stacktrace-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7612819Z Preparing to unpack .../25-libdevel-stacktrace-perl_2.0500-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7622426Z Unpacking libdevel-stacktrace-perl (2.0500-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7830713Z Selecting previously unselected package libexception-class-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7964957Z Preparing to unpack .../26-libexception-class-perl_1.45-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.7974241Z Unpacking libexception-class-perl (1.45-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8180557Z Selecting previously unselected package libparams-validationcompiler-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8311239Z Preparing to unpack .../27-libparams-validationcompiler-perl_0.31-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8318177Z Unpacking libparams-validationcompiler-perl (0.31-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8528216Z Selecting previously unselected package libalgorithm-c3-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8658769Z Preparing to unpack .../28-libalgorithm-c3-perl_0.11-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8666598Z Unpacking libalgorithm-c3-perl (0.11-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8858647Z Selecting previously unselected package libclass-c3-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8989087Z Preparing to unpack .../29-libclass-c3-perl_0.35-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.8997217Z Unpacking libclass-c3-perl (0.35-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9191207Z Selecting previously unselected package libmro-compat-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9320940Z Preparing to unpack .../30-libmro-compat-perl_0.15-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9328594Z Unpacking libmro-compat-perl (0.15-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9517282Z Selecting previously unselected package libclass-method-modifiers-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9646012Z Preparing to unpack .../31-libclass-method-modifiers-perl_2.15-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9655009Z Unpacking libclass-method-modifiers-perl (2.15-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9844707Z Selecting previously unselected package librole-tiny-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9973988Z Preparing to unpack .../32-librole-tiny-perl_2.002004-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:06.9983664Z Unpacking librole-tiny-perl (2.002004-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0191807Z Selecting previously unselected package libsub-quote-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0320300Z Preparing to unpack .../33-libsub-quote-perl_2.006008-1ubuntu1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0328124Z Unpacking libsub-quote-perl (2.006008-1ubuntu1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0520212Z Selecting previously unselected package libxstring-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0647546Z Preparing to unpack .../34-libxstring-perl_0.005-2build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0655518Z Unpacking libxstring-perl:amd64 (0.005-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0851053Z Selecting previously unselected package libspecio-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0978520Z Preparing to unpack .../35-libspecio-perl_0.48-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.0986656Z Unpacking libspecio-perl (0.48-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.1331081Z Selecting previously unselected package libdatetime-locale-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.1460831Z Preparing to unpack .../36-libdatetime-locale-perl_1%3a1.37-1_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:07.1468326Z Unpacking libdatetime-locale-perl (1:1.37-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1068140Z Selecting previously unselected package libclass-singleton-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1210006Z Preparing to unpack .../37-libclass-singleton-perl_1.6-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1217201Z Unpacking libclass-singleton-perl (1.6-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1413031Z Selecting previously unselected package libdatetime-timezone-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1544833Z Preparing to unpack .../38-libdatetime-timezone-perl_1%3a2.62-1+2024a_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.1552404Z Unpacking libdatetime-timezone-perl (1:2.62-1+2024a) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.2550442Z Selecting previously unselected package libdatetime-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.2683697Z Preparing to unpack .../39-libdatetime-perl_2%3a1.65-1build2_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.2692165Z Unpacking libdatetime-perl (2:1.65-1build2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.2928874Z Selecting previously unselected package libperlio-gzip-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.3062255Z Preparing to unpack .../40-libperlio-gzip-perl_0.20-1build4_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.3069821Z Unpacking libperlio-gzip-perl (0.20-1build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.3275533Z Selecting previously unselected package lcov.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.3407988Z Preparing to unpack .../41-lcov_2.0-4ubuntu2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.3415744Z Unpacking lcov (2.0-4ubuntu2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4015927Z Selecting previously unselected package libclass-c3-xs-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4148800Z Preparing to unpack .../42-libclass-c3-xs-perl_0.15-1build6_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4156525Z Unpacking libclass-c3-xs-perl (0.15-1build6) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4363611Z Selecting previously unselected package libclass-xsaccessor-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4496985Z Preparing to unpack .../43-libclass-xsaccessor-perl_1.19-4build4_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4505813Z Unpacking libclass-xsaccessor-perl (1.19-4build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4711390Z Selecting previously unselected package libpadwalker-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4846169Z Preparing to unpack .../44-libpadwalker-perl_2.5-1build6_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.4855324Z Unpacking libpadwalker-perl (2.5-1build6) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5059084Z Selecting previously unselected package libdevel-caller-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5195724Z Preparing to unpack .../45-libdevel-caller-perl_2.07-1build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5206576Z Unpacking libdevel-caller-perl:amd64 (2.07-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5408088Z Selecting previously unselected package libdevel-lexalias-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5542854Z Preparing to unpack .../46-libdevel-lexalias-perl_0.05-3build4_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5551446Z Unpacking libdevel-lexalias-perl (0.05-3build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5750267Z Selecting previously unselected package libpackage-stash-xs-perl:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5883399Z Preparing to unpack .../47-libpackage-stash-xs-perl_0.30-1build4_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.5891014Z Unpacking libpackage-stash-xs-perl:amd64 (0.30-1build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6098896Z Selecting previously unselected package libpoppler134:amd64.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6230580Z Preparing to unpack .../48-libpoppler134_24.02.0-1ubuntu9.8_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6248518Z Unpacking libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6619168Z Selecting previously unselected package libreadonly-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6753301Z Preparing to unpack .../49-libreadonly-perl_2.050-3_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6761769Z Unpacking libreadonly-perl (2.050-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.6971563Z Selecting previously unselected package libref-util-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7104046Z Preparing to unpack .../50-libref-util-perl_0.204-2_all.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7113395Z Unpacking libref-util-perl (0.204-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7311774Z Selecting previously unselected package libref-util-xs-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7443501Z Preparing to unpack .../51-libref-util-xs-perl_0.117-2build4_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7451363Z Unpacking libref-util-xs-perl (0.117-2build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7652979Z Selecting previously unselected package poppler-utils.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7785886Z Preparing to unpack .../52-poppler-utils_24.02.0-1ubuntu9.8_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.7795344Z Unpacking poppler-utils (24.02.0-1ubuntu9.8) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.8398100Z Selecting previously unselected package libgd-perl.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.8531550Z Preparing to unpack .../53-libgd-perl_2.78-1build3_amd64.deb ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.8538967Z Unpacking libgd-perl (2.78-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9071885Z Setting up libclass-inspector-perl (1.36-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9094898Z Setting up libdynaloader-functions-perl (0.003-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9112919Z Setting up libclass-method-modifiers-perl (2.15-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9131446Z Setting up libref-util-xs-perl (0.117-2build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9149083Z Setting up libpoppler134:amd64 (24.02.0-1ubuntu9.8) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9171254Z Setting up libsub-identify-perl (0.14-3build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9190066Z Setting up libtry-tiny-perl (0.31-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9209267Z Setting up libclass-singleton-perl (1.6-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9227957Z Setting up libpadwalker-perl (2.5-1build6) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9247924Z Setting up libxstring-perl:amd64 (0.005-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9269612Z Setting up libclass-c3-xs-perl (0.15-1build6) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9289970Z Setting up libdevel-caller-perl:amd64 (2.07-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9309522Z Setting up libsub-install-perl (0.929-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9331039Z Setting up poppler-data (0.4.12-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9396468Z Setting up libgd-perl (2.78-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9417384Z Setting up libreadonly-perl (2.050-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9436358Z Setting up libdevel-lexalias-perl (0.05-3build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9455573Z Setting up libpackage-stash-xs-perl:amd64 (0.30-1build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9475974Z Setting up libclass-data-inheritable-perl (0.08-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9515612Z Setting up libalgorithm-c3-perl (0.11-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9535341Z Setting up libref-util-perl (0.204-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9555233Z Setting up libvariable-magic-perl (0.63-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9573883Z Setting up libb-hooks-op-check-perl:amd64 (0.22-3build1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9593383Z Setting up libparams-util-perl (1.102-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9612875Z Setting up libsub-exporter-progressive-perl (0.001013-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9664420Z Setting up libcapture-tiny-perl (0.48-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9683918Z Setting up libsub-name-perl:amd64 (0.27-1build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9703284Z Setting up librole-tiny-perl (2.002004-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9722312Z Setting up libfile-sharedir-perl (1.118-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9742365Z Setting up libsub-quote-perl (2.006008-1ubuntu1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9762272Z Setting up libdevel-stacktrace-perl (2.0500-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9782235Z Setting up libclass-xsaccessor-perl (1.19-4build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9803070Z Setting up poppler-utils (24.02.0-1ubuntu9.8) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9824102Z Setting up libperlio-gzip-perl (0.20-1build4) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9850105Z Setting up libexception-class-perl (1.45-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9877744Z Setting up libclass-c3-perl (0.35-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9904349Z Setting up libdevel-callchecker-perl:amd64 (0.008-2build3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9925767Z Setting up libdata-optlist-perl (0.114-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9947744Z Setting up libmro-compat-perl (0.15-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:08.9979515Z Setting up libsub-exporter-perl (0.990-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0006194Z Setting up libeval-closure-perl (0.14-3) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0028056Z Setting up libparams-validationcompiler-perl (0.31-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0052457Z Setting up libparams-classify-perl:amd64 (0.015-2build5) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0078250Z Setting up libmodule-runtime-perl (0.016-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0104832Z Setting up libmodule-implementation-perl (0.09-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0133496Z Setting up libpackage-stash-perl (0.40-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0162121Z Setting up libspecio-perl (0.48-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0182328Z Setting up libb-hooks-endofscope-perl (0.28-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0213991Z Setting up libnamespace-clean-perl (0.27-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0245310Z Setting up libnamespace-autoclean-perl (0.29-2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0266509Z Setting up libdatetime-locale-perl (1:1.37-1) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0296634Z Setting up libdatetime-timezone-perl (1:2.62-1+2024a) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0316122Z Setting up libdatetime-perl (2:1.65-1build2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0339620Z Setting up lcov (2.0-4ubuntu2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.0370931Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:09.1225393Z Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:10.4037866Z Processing triggers for man-db (2.12.0-4build2) ...
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:10.4127401Z Not building database; man-db/auto-update is not 'true'.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0592018Z 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0592472Z Running kernel seems to be up-to-date.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0592825Z 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0592974Z No services need to be restarted.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0593235Z 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0593376Z No containers need to be restarted.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0593652Z 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0593835Z No user sessions are running outdated binaries.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0594138Z 
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:11.0594435Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:12.3663367Z warning: current user is not root/admin, system install is likely to fail.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:12.3827413Z Updated Git hooks.
+test	Install coverage tools (lcov, poppler-utils, git-lfs)	2025-12-21T16:50:12.3827702Z Git LFS initialized.
+test	Write CI diagnostics	﻿2025-12-21T16:50:12.3865439Z ##[group]Run set -eux
+test	Write CI diagnostics	2025-12-21T16:50:12.3865724Z [36;1mset -eux[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3865938Z [36;1mout=ci-diagnostics.txt[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3866217Z [36;1mecho "=== CI Diagnostics: $(date -u) ===" > "$out"[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3866580Z [36;1mecho "Java:" >> "$out"; java -version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3867010Z [36;1mecho "Javac:" >> "$out"; javac -version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3867436Z [36;1mecho "Flutter:" >> "$out"; flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3867848Z [36;1mecho "Which flutter: $(which flutter || true)" >> "$out"[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3868306Z [36;1mecho "pdftotext:" >> "$out"; pdftotext -v 2>&1 | sed -n '1,5p' >> "$out" || echo "pdftotext not installed" >> "$out"[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3868847Z [36;1mecho "git-lfs:" >> "$out"; git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3869784Z [36;1mecho "lcov:" >> "$out"; lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"[0m
+test	Write CI diagnostics	2025-12-21T16:50:12.3902429Z shell: /usr/bin/bash -e {0}
+test	Write CI diagnostics	2025-12-21T16:50:12.3902720Z env:
+test	Write CI diagnostics	2025-12-21T16:50:12.3903035Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Write CI diagnostics	2025-12-21T16:50:12.3903471Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Write CI diagnostics	2025-12-21T16:50:12.3903877Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Write CI diagnostics	2025-12-21T16:50:12.3904180Z   PUB_CACHE: /home/runner/.pub-cache
+test	Write CI diagnostics	2025-12-21T16:50:12.3904406Z ##[endgroup]
+test	Write CI diagnostics	2025-12-21T16:50:12.3953085Z + out=ci-diagnostics.txt
+test	Write CI diagnostics	2025-12-21T16:50:12.3955781Z ++ date -u
+test	Write CI diagnostics	2025-12-21T16:50:12.3965921Z + echo '=== CI Diagnostics: Sun Dec 21 16:50:12 UTC 2025 ==='
+test	Write CI diagnostics	2025-12-21T16:50:12.3966416Z + echo Java:
+test	Write CI diagnostics	2025-12-21T16:50:12.3969031Z + java -version
+test	Write CI diagnostics	2025-12-21T16:50:12.3970225Z + sed -n 1,5p
+test	Write CI diagnostics	2025-12-21T16:50:12.4247860Z + echo Javac:
+test	Write CI diagnostics	2025-12-21T16:50:12.4249824Z + javac -version
+test	Write CI diagnostics	2025-12-21T16:50:12.4251139Z + sed -n 1,5p
+test	Write CI diagnostics	2025-12-21T16:50:12.5541353Z + echo Flutter:
+test	Write CI diagnostics	2025-12-21T16:50:12.5543439Z + flutter --version
+test	Write CI diagnostics	2025-12-21T16:50:12.5544415Z + sed -n 1,5p
+test	Write CI diagnostics	2025-12-21T16:50:12.6703806Z ++ which flutter
+test	Write CI diagnostics	2025-12-21T16:50:12.6720522Z + echo 'Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter'
+test	Write CI diagnostics	2025-12-21T16:50:12.6720959Z + echo pdftotext:
+test	Write CI diagnostics	2025-12-21T16:50:12.6723049Z + pdftotext -v
+test	Write CI diagnostics	2025-12-21T16:50:12.6724728Z + sed -n 1,5p
+test	Write CI diagnostics	2025-12-21T16:50:12.6808890Z + echo git-lfs:
+test	Write CI diagnostics	2025-12-21T16:50:12.6811408Z + git lfs --version
+test	Write CI diagnostics	2025-12-21T16:50:12.6814400Z + sed -n 1,5p
+test	Write CI diagnostics	2025-12-21T16:50:12.6900036Z + echo lcov:
+test	Write CI diagnostics	2025-12-21T16:50:12.6902158Z + lcov --version
+test	Write CI diagnostics	2025-12-21T16:50:12.6903260Z + sed -n 1,5p
+test	Upload CI diagnostics	﻿2025-12-21T16:50:13.0012492Z ##[group]Run actions/upload-artifact@v4
+test	Upload CI diagnostics	2025-12-21T16:50:13.0012760Z with:
+test	Upload CI diagnostics	2025-12-21T16:50:13.0012925Z   name: ci-diagnostics
+test	Upload CI diagnostics	2025-12-21T16:50:13.0013113Z   path: ci-diagnostics.txt
+test	Upload CI diagnostics	2025-12-21T16:50:13.0013317Z   if-no-files-found: warn
+test	Upload CI diagnostics	2025-12-21T16:50:13.0013512Z   compression-level: 6
+test	Upload CI diagnostics	2025-12-21T16:50:13.0013704Z   overwrite: false
+test	Upload CI diagnostics	2025-12-21T16:50:13.0013884Z   include-hidden-files: false
+test	Upload CI diagnostics	2025-12-21T16:50:13.0014075Z env:
+test	Upload CI diagnostics	2025-12-21T16:50:13.0014327Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Upload CI diagnostics	2025-12-21T16:50:13.0014752Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Upload CI diagnostics	2025-12-21T16:50:13.0015176Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Upload CI diagnostics	2025-12-21T16:50:13.0015483Z   PUB_CACHE: /home/runner/.pub-cache
+test	Upload CI diagnostics	2025-12-21T16:50:13.0015705Z ##[endgroup]
+test	Upload CI diagnostics	2025-12-21T16:50:13.2125134Z With the provided path, there will be 1 file uploaded
+test	Upload CI diagnostics	2025-12-21T16:50:13.2130463Z Artifact name is valid!
+test	Upload CI diagnostics	2025-12-21T16:50:13.2132012Z Root directory input is valid!
+test	Upload CI diagnostics	2025-12-21T16:50:13.3089066Z Beginning upload of artifact content to blob storage
+test	Upload CI diagnostics	2025-12-21T16:50:13.3514049Z Uploaded bytes 715
+test	Upload CI diagnostics	2025-12-21T16:50:13.3637488Z Finished uploading artifact content to blob storage!
+test	Upload CI diagnostics	2025-12-21T16:50:13.3640918Z SHA256 digest of uploaded artifact zip is 01f6b32f11266895615233864c09071cbdfb8834ecfb8817097037cc3a261d54
+test	Upload CI diagnostics	2025-12-21T16:50:13.3642975Z Finalizing artifact upload
+test	Upload CI diagnostics	2025-12-21T16:50:13.4390571Z Artifact ci-diagnostics.zip successfully finalized. Artifact ID 4937379842
+test	Upload CI diagnostics	2025-12-21T16:50:13.4391734Z Artifact ci-diagnostics has been successfully uploaded! Final size is 715 bytes. Artifact ID is 4937379842
+test	Upload CI diagnostics	2025-12-21T16:50:13.4399001Z Artifact download URL: https://github.com/hfcs/simple_match/actions/runs/20412879308/artifacts/4937379842
+test	Debug: print environment and tools	﻿2025-12-21T16:50:13.4497079Z ##[group]Run set -eux
+test	Debug: print environment and tools	2025-12-21T16:50:13.4497508Z [36;1mset -eux[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4497830Z [36;1mecho "===== ENV ====="[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4498229Z [36;1muname -a || true[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4498619Z [36;1mecho "JAVA_HOME=$JAVA_HOME"[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4498881Z [36;1mjava -version || true[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4499101Z [36;1mjavac -version || true[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4499596Z [36;1mecho "Flutter:" && flutter --version || true[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4499920Z [36;1mecho "Which flutter: $(which flutter || true)"[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4500309Z [36;1mecho "pdftotext:" && pdftotext -v || echo "pdftotext not installed"[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4500737Z [36;1mecho "git-lfs:" && git lfs --version || echo "git-lfs not installed"[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4501121Z [36;1mecho "lcov:" && lcov --version || echo "lcov not installed"[0m
+test	Debug: print environment and tools	2025-12-21T16:50:13.4533955Z shell: /usr/bin/bash -e {0}
+test	Debug: print environment and tools	2025-12-21T16:50:13.4534186Z env:
+test	Debug: print environment and tools	2025-12-21T16:50:13.4534467Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: print environment and tools	2025-12-21T16:50:13.4534938Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: print environment and tools	2025-12-21T16:50:13.4535351Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Debug: print environment and tools	2025-12-21T16:50:13.4535663Z   PUB_CACHE: /home/runner/.pub-cache
+test	Debug: print environment and tools	2025-12-21T16:50:13.4535894Z ##[endgroup]
+test	Debug: print environment and tools	2025-12-21T16:50:13.4591414Z + echo '===== ENV ====='
+test	Debug: print environment and tools	2025-12-21T16:50:13.4591793Z ===== ENV =====
+test	Debug: print environment and tools	2025-12-21T16:50:13.4592117Z + uname -a
+test	Debug: print environment and tools	2025-12-21T16:50:13.4601557Z Linux runnervmh13bl 6.11.0-1018-azure #18~24.04.1-Ubuntu SMP Sat Jun 28 04:46:03 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+test	Debug: print environment and tools	2025-12-21T16:50:13.4603031Z + echo JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: print environment and tools	2025-12-21T16:50:13.4603647Z + java -version
+test	Debug: print environment and tools	2025-12-21T16:50:13.4604708Z JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Debug: print environment and tools	2025-12-21T16:50:13.4843853Z openjdk version "21.0.9" 2025-10-21 LTS
+test	Debug: print environment and tools	2025-12-21T16:50:13.4844876Z OpenJDK Runtime Environment Temurin-21.0.9+10 (build 21.0.9+10-LTS)
+test	Debug: print environment and tools	2025-12-21T16:50:13.4845735Z OpenJDK 64-Bit Server VM Temurin-21.0.9+10 (build 21.0.9+10-LTS, mixed mode, sharing)
+test	Debug: print environment and tools	2025-12-21T16:50:13.4886037Z + javac -version
+test	Debug: print environment and tools	2025-12-21T16:50:13.6110662Z javac 21.0.9
+test	Debug: print environment and tools	2025-12-21T16:50:13.6282771Z + echo Flutter:
+test	Debug: print environment and tools	2025-12-21T16:50:13.6283155Z Flutter:
+test	Debug: print environment and tools	2025-12-21T16:50:13.6283463Z + flutter --version
+test	Debug: print environment and tools	2025-12-21T16:50:13.7299299Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	Debug: print environment and tools	2025-12-21T16:50:13.7300454Z Framework • revision f6ff1529fd (10 days ago) • 2025-12-11 11:50:07 -0500
+test	Debug: print environment and tools	2025-12-21T16:50:13.7301536Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (10 days ago) • 2025-12-11 15:04:31.000Z
+test	Debug: print environment and tools	2025-12-21T16:50:13.7302378Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	Debug: print environment and tools	2025-12-21T16:50:13.7337920Z ++ which flutter
+test	Debug: print environment and tools	2025-12-21T16:50:13.7350091Z + echo 'Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter'
+test	Debug: print environment and tools	2025-12-21T16:50:13.7350920Z Which flutter: /opt/hostedtoolcache/flutter/stable-3.38.5-x64/bin/flutter
+test	Debug: print environment and tools	2025-12-21T16:50:13.7351550Z + echo pdftotext:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7351868Z + pdftotext -v
+test	Debug: print environment and tools	2025-12-21T16:50:13.7352077Z pdftotext:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7417970Z pdftotext version 24.02.0
+test	Debug: print environment and tools	2025-12-21T16:50:13.7418561Z Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+test	Debug: print environment and tools	2025-12-21T16:50:13.7419031Z Copyright 1996-2011, 2022 Glyph & Cog, LLC
+test	Debug: print environment and tools	2025-12-21T16:50:13.7427758Z + echo git-lfs:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7428079Z git-lfs:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7428356Z + git lfs --version
+test	Debug: print environment and tools	2025-12-21T16:50:13.7511310Z git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+test	Debug: print environment and tools	2025-12-21T16:50:13.7519249Z + echo lcov:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7519816Z lcov:
+test	Debug: print environment and tools	2025-12-21T16:50:13.7520091Z + lcov --version
+test	Debug: print environment and tools	2025-12-21T16:50:13.9172292Z lcov: LCOV version 2.0-1
+test	Cache Flutter Pub packages	﻿2025-12-21T16:50:14.0265607Z ##[group]Run actions/cache@v4
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0265859Z with:
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0266027Z   path: ~/.pub-cache
+test	Cache Flutter Pub packages	
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0266370Z   key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0266761Z   restore-keys: Linux-pub-
+test	Cache Flutter Pub packages	
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0266982Z   enableCrossOsArchive: false
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0267206Z   fail-on-cache-miss: false
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0267409Z   lookup-only: false
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0267589Z   save-always: false
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0267761Z env:
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0268031Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0268470Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0268888Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0269206Z   PUB_CACHE: /home/runner/.pub-cache
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.0269644Z ##[endgroup]
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.2799686Z Cache hit for: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.6205649Z Received 40113154 of 40113154 (100.0%), 132.8 MBs/sec
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.6206420Z Cache Size: ~38 MB (40113154 B)
+test	Cache Flutter Pub packages	2025-12-21T16:50:14.6239094Z [command]/usr/bin/tar -xf /home/runner/work/_temp/a2661505-d329-4192-bbff-b344682637c4/cache.tzst -P -C /home/runner/work/simple_match/simple_match --use-compress-program unzstd
+test	Cache Flutter Pub packages	2025-12-21T16:50:15.2531808Z Cache restored successfully
+test	Cache Flutter Pub packages	2025-12-21T16:50:15.2691953Z Cache restored from key: Linux-pub-11c962e0daf3758977c45a8dc3e808d1118c607c88c7d4d6cf9e1482829858fc
+test	Install dependencies	﻿2025-12-21T16:50:15.2801232Z ##[group]Run flutter pub get
+test	Install dependencies	2025-12-21T16:50:15.2801724Z [36;1mflutter pub get[0m
+test	Install dependencies	2025-12-21T16:50:15.2840076Z shell: /usr/bin/bash -e {0}
+test	Install dependencies	2025-12-21T16:50:15.2840510Z env:
+test	Install dependencies	2025-12-21T16:50:15.2840789Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install dependencies	2025-12-21T16:50:15.2841253Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install dependencies	2025-12-21T16:50:15.2841674Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Install dependencies	2025-12-21T16:50:15.2842003Z   PUB_CACHE: /home/runner/.pub-cache
+test	Install dependencies	2025-12-21T16:50:15.2842249Z ##[endgroup]
+test	Install dependencies	2025-12-21T16:50:15.6560315Z Resolving dependencies...
+test	Install dependencies	2025-12-21T16:50:15.8193931Z Downloading packages...
+test	Install dependencies	2025-12-21T16:50:15.8640181Z   _fe_analyzer_shared 89.0.0 (92.0.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8640752Z   analyzer 8.2.0 (9.0.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8641148Z   build 4.0.0 (4.0.3 available)
+test	Install dependencies	2025-12-21T16:50:15.8641528Z   build_daemon 4.0.4 (4.1.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8641938Z   build_runner 2.8.0 (2.10.4 available)
+test	Install dependencies	2025-12-21T16:50:15.8642409Z   built_value 8.12.0 (8.12.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8642793Z   characters 1.4.0 (1.4.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8643204Z   crypto 3.0.6 (3.0.7 available)
+test	Install dependencies	2025-12-21T16:50:15.8643581Z   dart_style 3.1.2 (3.1.3 available)
+test	Install dependencies	2025-12-21T16:50:15.8643976Z   flutter_lints 5.0.0 (6.0.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8644373Z   http 1.5.0 (1.6.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8644723Z   image 4.5.4 (4.7.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8645064Z   lints 5.1.1 (6.0.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8645417Z   matcher 0.12.17 (0.12.18 available)
+test	Install dependencies	2025-12-21T16:50:15.8645858Z   material_color_utilities 0.11.1 (0.13.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8646309Z > meta 1.17.0 (was 1.16.0)
+test	Install dependencies	2025-12-21T16:50:15.8646660Z   mockito 5.5.1 (5.6.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8647089Z   path_provider_android 2.2.18 (2.2.22 available)
+test	Install dependencies	2025-12-21T16:50:15.8647576Z   path_provider_foundation 2.4.2 (2.5.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8648055Z   shared_preferences 2.5.3 (2.5.4 available)
+test	Install dependencies	2025-12-21T16:50:15.8648550Z   shared_preferences_android 2.4.13 (2.4.18 available)
+test	Install dependencies	2025-12-21T16:50:15.8649067Z   shared_preferences_foundation 2.5.4 (2.5.6 available)
+test	Install dependencies	2025-12-21T16:50:15.8649729Z   source_gen 4.0.1 (4.1.1 available)
+test	Install dependencies	2025-12-21T16:50:15.8650154Z > test_api 0.7.7 (was 0.7.6) (0.7.8 available)
+test	Install dependencies	2025-12-21T16:50:15.8650586Z   watcher 1.1.3 (1.2.0 available)
+test	Install dependencies	2025-12-21T16:50:15.8650992Z Changed 2 dependencies!
+test	Install dependencies	2025-12-21T16:50:15.8651524Z 24 packages have newer versions incompatible with dependency constraints.
+test	Install dependencies	2025-12-21T16:50:15.8652175Z Try `flutter pub outdated` for more information.
+test	Install pdftotext (poppler-utils)	﻿2025-12-21T16:50:16.2832964Z ##[group]Run sudo apt-get update
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2833274Z [36;1msudo apt-get update[0m
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2833536Z [36;1msudo apt-get install -y poppler-utils[0m
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2865536Z shell: /usr/bin/bash -e {0}
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2865762Z env:
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2866046Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2866494Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2866921Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2867285Z   PUB_CACHE: /home/runner/.pub-cache
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.2867512Z ##[endgroup]
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3510188Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3803589Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3806395Z Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3822371Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3826599Z Hit:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3834253Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:16.3842988Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.5591879Z Reading package lists...
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.5906538Z Reading package lists...
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.7576403Z Building dependency tree...
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.7583899Z Reading state information...
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.9316717Z poppler-utils is already the newest version (24.02.0-1ubuntu9.8).
+test	Install pdftotext (poppler-utils)	2025-12-21T16:50:17.9317255Z 0 upgraded, 0 newly installed, 0 to remove and 69 not upgraded.
+test	Verify installed tools	﻿2025-12-21T16:50:17.9359038Z ##[group]Run echo "Flutter:" && flutter --version || true
+test	Verify installed tools	2025-12-21T16:50:17.9359916Z [36;1mecho "Flutter:" && flutter --version || true[0m
+test	Verify installed tools	2025-12-21T16:50:17.9360319Z [36;1mecho "pdftotext (poppler):" && pdftotext -v || echo "pdftotext not present"[0m
+test	Verify installed tools	2025-12-21T16:50:17.9360762Z [36;1mecho "git-lfs:" && git lfs --version || echo "git-lfs not present"[0m
+test	Verify installed tools	2025-12-21T16:50:17.9392992Z shell: /usr/bin/bash -e {0}
+test	Verify installed tools	2025-12-21T16:50:17.9393218Z env:
+test	Verify installed tools	2025-12-21T16:50:17.9393500Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Verify installed tools	2025-12-21T16:50:17.9393944Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Verify installed tools	2025-12-21T16:50:17.9394360Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Verify installed tools	2025-12-21T16:50:17.9394692Z   PUB_CACHE: /home/runner/.pub-cache
+test	Verify installed tools	2025-12-21T16:50:17.9394921Z ##[endgroup]
+test	Verify installed tools	2025-12-21T16:50:17.9445497Z Flutter:
+test	Verify installed tools	2025-12-21T16:50:18.0439818Z Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+test	Verify installed tools	2025-12-21T16:50:18.0440639Z Framework • revision f6ff1529fd (10 days ago) • 2025-12-11 11:50:07 -0500
+test	Verify installed tools	2025-12-21T16:50:18.0441342Z Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (10 days ago) • 2025-12-11 15:04:31.000Z
+test	Verify installed tools	2025-12-21T16:50:18.0442227Z Tools • Dart 3.10.4 • DevTools 2.51.1
+test	Verify installed tools	2025-12-21T16:50:18.0477378Z pdftotext (poppler):
+test	Verify installed tools	2025-12-21T16:50:18.0545422Z pdftotext version 24.02.0
+test	Verify installed tools	2025-12-21T16:50:18.0545929Z Copyright 2005-2024 The Poppler Developers - http://poppler.freedesktop.org
+test	Verify installed tools	2025-12-21T16:50:18.0546354Z Copyright 1996-2011, 2022 Glyph & Cog, LLC
+test	Verify installed tools	2025-12-21T16:50:18.0554453Z git-lfs:
+test	Verify installed tools	2025-12-21T16:50:18.0634799Z git-lfs/3.7.1 (GitHub; linux amd64; go 1.24.4)
+test	Run tests with coverage	﻿2025-12-21T16:50:18.0667343Z ##[group]Run flutter test --coverage
+test	Run tests with coverage	2025-12-21T16:50:18.0667769Z [36;1mflutter test --coverage[0m
+test	Run tests with coverage	2025-12-21T16:50:18.0700311Z shell: /usr/bin/bash -e {0}
+test	Run tests with coverage	2025-12-21T16:50:18.0700548Z env:
+test	Run tests with coverage	2025-12-21T16:50:18.0700833Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Run tests with coverage	2025-12-21T16:50:18.0701298Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.9-10/x64
+test	Run tests with coverage	2025-12-21T16:50:18.0701738Z   FLUTTER_ROOT: /opt/hostedtoolcache/flutter/stable-3.38.5-x64
+test	Run tests with coverage	2025-12-21T16:50:18.0702070Z   PUB_CACHE: /home/runner/.pub-cache
+test	Run tests with coverage	2025-12-21T16:50:18.0702332Z ##[endgroup]
+test	Run tests with coverage	2025-12-21T16:50:18.6654872Z Error detected in pubspec.yaml:
+test	Run tests with coverage	2025-12-21T16:50:18.6668812Z No file or variants found for asset: assets/fonts/NotoSerifHK-wght.ttf.
+test	Run tests with coverage	2025-12-21T16:50:18.6669515Z 
+test	Run tests with coverage	2025-12-21T16:50:18.6771901Z Error: Failed to build asset bundle
+test	Run tests with coverage	2025-12-21T16:50:18.6840378Z ##[error]Process completed with exit code 1.
+test	Post Setup Flutter	﻿2025-12-21T16:50:18.6960827Z Post job cleanup.
+test	Post Setup JDK 21	﻿2025-12-21T16:50:18.7020494Z Post job cleanup.
+test	Post Run actions/checkout@v4	﻿2025-12-21T16:50:18.8738516Z Post job cleanup.
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9675533Z [command]/usr/bin/git version
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9711500Z git version 2.52.0
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9756997Z Temporarily overriding HOME='/home/runner/work/_temp/a6f4c6f9-2268-4b37-b39f-9675c2a983f7' before making global git config changes
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9758265Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9762511Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/simple_match/simple_match
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9805047Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Run actions/checkout@v4	2025-12-21T16:50:18.9838495Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0062569Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0082919Z http.https://github.com/.extraheader
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0095638Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0125764Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0343913Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Run actions/checkout@v4	2025-12-21T16:50:19.0376130Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Complete job	﻿2025-12-21T16:50:19.0693696Z Cleaning up orphan processes

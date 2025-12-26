@@ -11,7 +11,12 @@ void main() {
     await tester.pumpWidget(MiniIPSCMatchApp(repository: repo));
 
     // Match Setup
-    await tester.tap(find.text('Match Setup'));
+    final matchTile = find.ancestor(of: find.text('Match Setup'), matching: find.byType(ListTile));
+    if (matchTile.evaluate().isNotEmpty) {
+      await tester.tap(matchTile);
+    } else {
+      await tester.tap(find.text('Match Setup'));
+    }
     await tester.pumpAndSettle();
     expect(find.text('Match Setup'), findsOneWidget); // AppBar only
     // Navigate back using the visible back button instead of tester.pageBack()
@@ -28,7 +33,12 @@ void main() {
     }
 
     // Shooter Setup
-    await tester.tap(find.text('Shooter Setup'));
+    final shooterTile = find.ancestor(of: find.text('Shooter Setup'), matching: find.byType(ListTile));
+    if (shooterTile.evaluate().isNotEmpty) {
+      await tester.tap(shooterTile);
+    } else {
+      await tester.tap(find.text('Shooter Setup'));
+    }
     await tester.pumpAndSettle();
     expect(find.text('Shooter Setup'), findsOneWidget);
     final backBtn2 = find.byType(BackButton);
@@ -44,7 +54,12 @@ void main() {
     }
 
     // Stage Input
-    await tester.tap(find.text('Stage Input'));
+    final stageTile = find.ancestor(of: find.text('Stage Input'), matching: find.byType(ListTile));
+    if (stageTile.evaluate().isNotEmpty) {
+      await tester.tap(stageTile);
+    } else {
+      await tester.tap(find.text('Stage Input'));
+    }
     await tester.pumpAndSettle();
     expect(find.text('Stage Input'), findsOneWidget);
     final backBtn3 = find.byType(BackButton);

@@ -48,7 +48,8 @@ void main() {
       if (tileFinder.evaluate().isEmpty) return;
       final tile = tester.widget<ListTile>(tileFinder);
       if (tile.enabled == true) {
-        await tester.tap(titleFinder);
+        // Tap the ListTile itself to ensure the onTap is invoked in all environments
+        await tester.tap(tileFinder);
         await tester.pumpAndSettle();
         expect(find.text(expectedPage), findsOneWidget);
         await tester.pageBack();

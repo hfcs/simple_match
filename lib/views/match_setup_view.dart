@@ -169,15 +169,34 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                           IconButton(
                             key: Key('removeStage-${s.stage}'),
                             icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              vm.removeStage(s.stage);
-                              setState(() {
-                                if (_editingStage == s.stage) {
-                                  _editingStage = null;
-                                  _stageController.clear();
-                                  _shootsController.clear();
-                                }
-                              });
+                            onPressed: () async {
+                              final confirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Remove Stage'),
+                                  content: Text('Remove stage ${s.stage}? This will delete any associated results.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(false),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(true),
+                                      child: const Text('Remove'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              if (confirmed == true) {
+                                vm.removeStage(s.stage);
+                                setState(() {
+                                  if (_editingStage == s.stage) {
+                                    _editingStage = null;
+                                    _stageController.clear();
+                                    _shootsController.clear();
+                                  }
+                                });
+                              }
                             },
                           ),
                         ],

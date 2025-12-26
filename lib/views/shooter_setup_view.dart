@@ -191,15 +191,34 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                           IconButton(
                             key: Key('removeShooter-${s.name}'),
                             icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              widget.vm.removeShooter(s.name);
-                              setState(() {
-                                if (_editingName == s.name) {
-                                  _editingName = null;
-                                  _nameController.clear();
-                                  _scaleController.clear();
-                                }
-                              });
+                            onPressed: () async {
+                              final confirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Remove Shooter'),
+                                  content: Text('Remove shooter "${s.name}"? This will delete any associated results.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(false),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.of(context).pop(true),
+                                      child: const Text('Remove'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              if (confirmed == true) {
+                                widget.vm.removeShooter(s.name);
+                                setState(() {
+                                  if (_editingName == s.name) {
+                                    _editingName = null;
+                                    _nameController.clear();
+                                    _scaleController.clear();
+                                  }
+                                });
+                              }
                             },
                           ),
                         ],

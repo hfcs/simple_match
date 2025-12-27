@@ -1,6 +1,6 @@
 name: Integration Tests
- # manual: ensure this workflow is refreshed so `workflow_dispatch` registers
- 
+# manual: ensure this workflow is refreshed so `workflow_dispatch` registers
+
 on:
   push:
     branches: [ main, fix/web-export-import ]

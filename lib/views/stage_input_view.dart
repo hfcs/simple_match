@@ -2,6 +2,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../viewmodel/stage_input_viewmodel.dart';
 
 class StageInputView extends StatefulWidget {
@@ -19,6 +20,41 @@ class _StageInputViewState extends State<StageInputView> {
   final _noShootsController = TextEditingController();
   final _procErrorsController = TextEditingController();
   final _roRemarkController = TextEditingController();
+
+  // Fraction of vertical space allocated to the input area (0.0 - 1.0).
+  // Default sets the lower (results) pane to 1/3 of the screen: inputFraction = 2/3.
+  double _inputFraction = 2.0 / 3.0;
+
+  static const _kInputFractionKey = 'stage_input_fraction_v1';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInputFraction();
+  }
+
+  Future<void> _loadInputFraction() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final v = prefs.getDouble(_kInputFractionKey);
+      if (v != null) {
+        setState(() {
+          _inputFraction = v.clamp(0.30, 0.85);
+        });
+      }
+    } catch (_) {
+      // ignore errors and keep default
+    }
+  }
+
+  Future<void> _saveInputFraction() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble(_kInputFractionKey, _inputFraction);
+    } catch (_) {
+      // ignore save errors
+    }
+  }
 
   String? _editingKey;
 
@@ -92,6 +128,8 @@ class _StageInputViewState extends State<StageInputView> {
     final shooters = repo.shooters;
     final isValid = vm.isValid;
     final validationError = vm.validationError;
+    final inputFlex = ((_inputFraction * 100).round()).clamp(30, 85).toInt();
+    final resultsFlex = (100 - inputFlex).clamp(15, 70).toInt();
 
     // Use a LayoutBuilder to apply a responsive minimum height for the
     // input area. We cap the minHeight to the available max height so tests
@@ -129,6 +167,7 @@ class _StageInputViewState extends State<StageInputView> {
                   )
                 else ...[
                   Expanded(
+                    flex: inputFlex,
                     child: Column(
                       children: [
                         Expanded(
@@ -646,11 +685,41 @@ class _StageInputViewState extends State<StageInputView> {
                         ),
                       ],
                     ),
+                    ),
+                  // Small draggable handle to adjust input/results split (non-invasive for now)
+                  Semantics(
+                    label: 'Resize input area',
+                    hint: 'Drag up or down to adjust input and results panes',
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onVerticalDragUpdate: (details) {
+                        final total = MediaQuery.of(context).size.height;
+                        setState(() {
+                          _inputFraction += details.delta.dy / total;
+                          _inputFraction = _inputFraction.clamp(0.30, 0.85);
+                        });
+                      },
+                      onVerticalDragEnd: (_) => _saveInputFraction(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 6),
+                        child: Center(
+                          child: Container(
+                            width: 56,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[400],
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Text('Results:', style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Expanded(
+                    flex: resultsFlex,
                     child: ListView.separated(
                       key: const Key('resultsList'),
                       itemCount: results.length,

@@ -194,7 +194,7 @@ jobs:
         run: |
           echo "Flutter:" && flutter --version || true
           if command -v pdftotext >/dev/null 2>&1; then pdftotext -v; else brew list --versions poppler || echo "pdftotext/poppler not present"; fi
-echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
+          echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
 
       - name: Install coverage tools (macOS)
         if: runner.os == 'macOS'
@@ -220,9 +220,12 @@ echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
           java -version 2>&1 | sed -n '1,5p' >> "$out" || true
           javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
           flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
-          if command -v pdftotext >/dev/null 2>&1; then pdftotext -v 2>&1 | sed -n '1,5p' >> "$out"; else brew list --versions poppler >> "$out" || echo "pdftotext/poppler not present" >> "$out"; fi
+          if command -v pdftotext >/dev/null 2>&1; then
+            pdftotext -v 2>&1 | sed -n '1,5p' >> "$out"
+          else
+            brew list --versions poppler >> "$out" || echo "pdftotext/poppler not present" >> "$out"
+          fi
           git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
-
       - name: Upload CI diagnostics (macOS)
         if: runner.os == 'macOS'
         uses: actions/upload-artifact@v4
@@ -235,7 +238,7 @@ echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
         with:
           distribution: temurin
           java-version: 21
-      - name: Debug: show Java/Gradle info
+      - name: "Debug: show Java/Gradle info"
         run: |
           echo "JAVA_HOME=$JAVA_HOME"
           java -version || true

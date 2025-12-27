@@ -221,7 +221,7 @@ echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
           javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
           flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
           if command -v pdftotext >/dev/null 2>&1; then pdftotext -v 2>&1 | sed -n '1,5p' >> "$out"; else brew list --versions poppler >> "$out" || echo "pdftotext/poppler not present" >> "$out"; fi
-git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
+          git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
 
       - name: Upload CI diagnostics (macOS)
         if: runner.os == 'macOS'

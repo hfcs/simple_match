@@ -12,7 +12,7 @@ import '../models/stage_result.dart';
 
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 2; // Incremented schema version
+const int kDataSchemaVersion = 3; // Incremented for splitter persistence
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -108,7 +108,6 @@ class PersistenceService {
         }
         updatedResults.add(updatedResult);
       }
-
       _logger.info('Final updatedResults: $updatedResults');
       // Save directly using prefs to avoid triggering ensureSchemaUpToDate again
       try {
@@ -123,6 +122,36 @@ class PersistenceService {
         rethrow;
       }
     }
+
+    // Migration for splitter persistence key introduced in v3
+    if (from < 3 && to >= 3) {
+      _logger.info('Migrating splitter preference to v3');
+      const key = 'stage_input_fraction_v1';
+      double? existing;
+      try {
+        existing = prefs.getDouble(key);
+      } catch (e, st) {
+        _logger.fine('prefs.getDouble not available or threw: $e');
+        existing = null;
+      }
+      if (existing == null) {
+        // set default to 2/3 (input fraction)
+        try {
+          await prefs.setDouble(key, 2.0 / 3.0);
+        } catch (e, st) {
+          _logger.warning('Failed to set default splitter value: $e', e, st);
+        }
+      } else {
+        // clamp to safe bounds
+        final clamped = (existing as num).toDouble().clamp(0.30, 0.85);
+        try {
+          await prefs.setDouble(key, clamped);
+        } catch (e, st) {
+          _logger.warning('Failed to clamp splitter value: $e', e, st);
+        }
+      }
+    }
+
     _logger.info('Migrating schema: Current data before migration:');
     _logger.info(
       'Adding default status field with value "Completed" to each record.',
@@ -176,6 +205,23 @@ class PersistenceService {
           ),
         )
         .toList();
+  }
+
+  // Splitter persistence API
+  static const String kInputFractionKey = 'stage_input_fraction_v1';
+
+  Future<double?> getInputFraction() async {
+    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    final v = prefs.getDouble(kInputFractionKey);
+    if (v == null) return null;
+    return (v as num).toDouble();
+  }
+
+  Future<void> setInputFraction(double value) async {
+    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    final clamped = value.clamp(0.30, 0.85);
+    await prefs.setDouble(kInputFractionKey, clamped);
+    await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
   }
 
   /// Build a full backup map containing metadata and all lists.

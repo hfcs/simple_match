@@ -45,10 +45,17 @@ void makeWritable(MockSharedPreferences p) {
     when(p.getString(key)).thenReturn(value);
     return true;
   });
+  when(p.setDouble(any, any)).thenAnswer((inv) async {
+    final key = inv.positionalArguments[0] as String;
+    final value = inv.positionalArguments[1] as double;
+    when(p.getDouble(key)).thenReturn(value);
+    return true;
+  });
   when(p.clear()).thenAnswer((inv) async {
     // clear common keys used in tests
     when(p.getInt(any)).thenReturn(null);
     when(p.getString(any)).thenReturn(null);
+    when(p.getDouble(any)).thenReturn(null);
     return true;
   });
 }
@@ -189,7 +196,7 @@ void main() {
 
     // Verify schema version
     final schemaVersion = mockPrefs.getInt('dataSchemaVersion');
-    expect(schemaVersion, equals(2));
+    expect(schemaVersion, equals(kDataSchemaVersion));
   });
 
   test('Simplified migration test for status field', () async {
@@ -208,7 +215,7 @@ void main() {
     expect(updatedResults, contains('"status":"Completed"'));
 
     final schemaVersion = mockPrefs.getInt('dataSchemaVersion');
-    expect(schemaVersion, equals(2));
+    expect(schemaVersion, equals(kDataSchemaVersion));
   });
 
   // Updated to use Mockito's @GenerateMocks annotation
@@ -229,7 +236,7 @@ void main() {
     final persistenceService = PersistenceService(prefs: mockPrefs);
     await persistenceService.migrateSchema(1, 2, mockPrefs);
     // Migration should update schema version to 2
-    verify(mockPrefs.setInt('dataSchemaVersion', 2)).called(1);
+    verify(mockPrefs.setInt('dataSchemaVersion', kDataSchemaVersion)).called(1);
   });
 
   test('ensureSchemaUpToDate clears prefs when stored version is higher than current', () async {

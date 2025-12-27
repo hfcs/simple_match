@@ -21,6 +21,10 @@ This document describes the versioning and migration policy for all persisted da
   - Added `roRemark` field to `StageResult` to store referee/RO remarks (string).
   - Migration: Default all existing `status` values to "Completed" and ensure `roRemark` exists on migrated records (default empty string).
 
+- **v3 (2025-12-28):**
+  - Persist UI splitter for `StageInput` view under key `stage_input_fraction_v1`.
+  - Migration: If upgrading from earlier versions, the migration will add the key with default `2/3` (input fraction) if missing and clamp any existing persisted value into the valid range (0.30–0.85).
+
 ## How to Update the Schema Version
 1. Increment the schema version in `PersistenceService`.
 2. Add migration logic to `PersistenceService._migrateSchema()`.

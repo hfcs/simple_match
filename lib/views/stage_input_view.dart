@@ -2,7 +2,6 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../viewmodel/stage_input_viewmodel.dart';
 
 class StageInputView extends StatefulWidget {
@@ -25,35 +24,25 @@ class _StageInputViewState extends State<StageInputView> {
   // Default sets the lower (results) pane to 1/3 of the screen: inputFraction = 2/3.
   double _inputFraction = 2.0 / 3.0;
 
-  static const _kInputFractionKey = 'stage_input_fraction_v1';
-
   @override
   void initState() {
     super.initState();
-    _loadInputFraction();
-  }
-
-  Future<void> _loadInputFraction() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final v = prefs.getDouble(_kInputFractionKey);
-      if (v != null) {
-        setState(() {
-          _inputFraction = v.clamp(0.30, 0.85);
-        });
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final vm = Provider.of<StageInputViewModel>(context, listen: false);
+        final p = vm.repository.persistence;
+        if (p != null) {
+          final v = await p.getInputFraction();
+          if (v != null) {
+            setState(() {
+              _inputFraction = v.clamp(0.30, 0.85);
+            });
+          }
+        }
+      } catch (_) {
+        // ignore errors and keep default
       }
-    } catch (_) {
-      // ignore errors and keep default
-    }
-  }
-
-  Future<void> _saveInputFraction() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(_kInputFractionKey, _inputFraction);
-    } catch (_) {
-      // ignore save errors
-    }
+    });
   }
 
   String? _editingKey;
@@ -699,7 +688,15 @@ class _StageInputViewState extends State<StageInputView> {
                           _inputFraction = _inputFraction.clamp(0.30, 0.85);
                         });
                       },
-                      onVerticalDragEnd: (_) => _saveInputFraction(),
+                      onVerticalDragEnd: (_) async {
+                        try {
+                          final vm = Provider.of<StageInputViewModel>(context, listen: false);
+                          final p = vm.repository.persistence;
+                          if (p != null) await p.setInputFraction(_inputFraction);
+                        } catch (_) {
+                          // ignore
+                        }
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         child: Center(

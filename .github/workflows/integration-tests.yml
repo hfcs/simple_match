@@ -133,7 +133,7 @@ jobs:
           # regular widget/integration test on the VM. The test uses mocked
           # SharedPreferences and verifies UI behavior, so this is a safe
           # compromise for CI.
-          flutter test integration_test/settings_view_web_integration_test.dart --verbose
+          flutter test -d linux integration_test/settings_view_web_integration_test.dart --verbose
 
   macos_integration:
     if: false

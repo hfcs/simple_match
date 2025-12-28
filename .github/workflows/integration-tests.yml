@@ -123,7 +123,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libglib2.0-dev libgdk-pixbuf2.0-dev libglu1-mesa-dev mesa-utils
+          sudo apt-get install -y libgtk-3-dev libglib2.0-dev libgdk-pixbuf2.0-dev libglu1-mesa-dev mesa-utils xvfb
 
       - name: Enable web support
         run: flutter config --enable-web
@@ -133,13 +133,14 @@ jobs:
           CHROME_BIN: /usr/bin/google-chrome-stable
         run: |
           flutter doctor -v
+          # Running the integration_test on hosted Linux runners requires an X
+          # server. Use Xvfb (headless X) so the Linux desktop app can launch
+          # and the integration test can attach a debug connection.
           # Running the integration_test on hosted Linux runners with -d chrome
-          # currently fails: "Web devices are not supported for integration
-          # tests yet." Run the test without a device flag so it executes as a
-          # regular widget/integration test on the VM. The test uses mocked
-          # SharedPreferences and verifies UI behavior, so this is a safe
-          # compromise for CI.
-          flutter test -d linux integration_test/settings_view_web_integration_test.dart --verbose
+          # currently fails for UI device support; instead run the Linux
+          # desktop integration test under Xvfb.
+          if ! command -v Xvfb >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y xvfb; fi
+          xvfb-run -s "-screen 0 1280x720x24" flutter test -d linux integration_test/settings_view_web_integration_test.dart --verbose
 
   macos_integration:
     if: false

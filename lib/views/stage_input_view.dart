@@ -27,22 +27,6 @@ class _StageInputViewState extends State<StageInputView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        final vm = Provider.of<StageInputViewModel>(context, listen: false);
-        final p = vm.repository.persistence;
-        if (p != null) {
-          final v = await p.getInputFraction();
-          if (v != null) {
-            setState(() {
-              _inputFraction = v.clamp(0.30, 0.85);
-            });
-          }
-        }
-      } catch (_) {
-        // ignore errors and keep default
-      }
-    });
   }
 
   String? _editingKey;
@@ -689,13 +673,8 @@ class _StageInputViewState extends State<StageInputView> {
                         });
                       },
                       onVerticalDragEnd: (_) async {
-                        try {
-                          final vm = Provider.of<StageInputViewModel>(context, listen: false);
-                          final p = vm.repository.persistence;
-                          if (p != null) await p.setInputFraction(_inputFraction);
-                        } catch (_) {
-                          // ignore
-                        }
+                        // Persisting this UI setting was removed: it's a client UI
+                        // preference and not part of the shared data model.
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 6),

@@ -12,7 +12,7 @@ import '../models/stage_result.dart';
 
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 3; // Incremented for splitter persistence
+const int kDataSchemaVersion = 2; // Reverted: UI-only settings removed from schema
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -123,34 +123,10 @@ class PersistenceService {
       }
     }
 
-    // Migration for splitter persistence key introduced in v3
-    if (from < 3 && to >= 3) {
-      _logger.info('Migrating splitter preference to v3');
-      const key = 'stage_input_fraction_v1';
-      double? existing;
-      try {
-        existing = prefs.getDouble(key);
-      } catch (e, st) {
-        _logger.fine('prefs.getDouble not available or threw: $e');
-        existing = null;
-      }
-      if (existing == null) {
-        // set default to 2/3 (input fraction)
-        try {
-          await prefs.setDouble(key, 2.0 / 3.0);
-        } catch (e, st) {
-          _logger.warning('Failed to set default splitter value: $e', e, st);
-        }
-      } else {
-        // clamp to safe bounds
-        final clamped = (existing as num).toDouble().clamp(0.30, 0.85);
-        try {
-          await prefs.setDouble(key, clamped);
-        } catch (e, st) {
-          _logger.warning('Failed to clamp splitter value: $e', e, st);
-        }
-      }
-    }
+    // Note: UI client-only preferences (such as splitter position) should not
+    // be part of the persisted data schema. Those keys are intentionally not
+    // migrated here and are excluded from backups/imports to keep the data
+    // model focused on match data only.
 
     _logger.info('Migrating schema: Current data before migration:');
     _logger.info(
@@ -207,22 +183,11 @@ class PersistenceService {
         .toList();
   }
 
-  // Splitter persistence API
-  static const String kInputFractionKey = 'stage_input_fraction_v1';
-
-  Future<double?> getInputFraction() async {
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
-    final v = prefs.getDouble(kInputFractionKey);
-    if (v == null) return null;
-    return (v as num).toDouble();
-  }
-
-  Future<void> setInputFraction(double value) async {
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
-    final clamped = value.clamp(0.30, 0.85);
-    await prefs.setDouble(kInputFractionKey, clamped);
-    await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
-  }
+  // NOTE: UI-only client preferences (splitter, window layout, etc.) are not
+  // part of the persisted data model used for backups/imports or schema
+  // migrations. UI settings should be stored/read by the client UI layer and
+  // are intentionally excluded from this service to keep the data model
+  // portable between different app instances and platforms.
 
   /// Build a full backup map containing metadata and all lists.
   Future<Map<String, dynamic>> buildBackupMap() async {

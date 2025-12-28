@@ -119,6 +119,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libglib2.0-dev libgdk-pixbuf2.0-dev libglu1-mesa-dev mesa-utils
+
       - name: Enable web support
         run: flutter config --enable-web
 

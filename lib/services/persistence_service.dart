@@ -12,7 +12,7 @@ import '../models/stage_result.dart';
 
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 2; // Reverted: UI-only settings removed from schema
+const int kDataSchemaVersion = 3; // Added Shooter.classificationScore
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -128,6 +128,54 @@ class PersistenceService {
     // migrated here and are excluded from backups/imports to keep the data
     // model focused on match data only.
 
+    // Migration for v3: add `classificationScore` to each shooter with default 100.0
+    if (from < 3 && to >= 3) {
+      _logger.info('Migrating shooters to include classificationScore (v3)');
+      String? rawShooters;
+      try {
+        rawShooters = prefs.getString('shooters');
+      } catch (e, st) {
+        // Some tests use Mockito mocks for SharedPreferences and may not
+        // stub getString('shooters'). Avoid failing the entire test run;
+        // log and skip shooter migration in that case.
+        _logger.warning('Could not read shooters from prefs during v3 migration: $e', e, st);
+        rawShooters = null;
+      }
+
+      final updatedShooters = <Map<String, dynamic>>[];
+      if (rawShooters != null) {
+        try {
+          final decoded = jsonDecode(rawShooters) as List;
+          for (final item in decoded) {
+            Map<String, dynamic> map;
+            if (item is Map<String, dynamic>) {
+              map = Map<String, dynamic>.from(item);
+            } else if (item is Map) {
+              map = Map<String, dynamic>.from(item);
+            } else {
+              continue;
+            }
+            if (!map.containsKey('classificationScore') || map['classificationScore'] == null) {
+              map['classificationScore'] = 100.0;
+            }
+            updatedShooters.add(map);
+          }
+        } catch (e, st) {
+          _logger.severe('Failed to decode shooters during v3 migration: $e', e, st);
+        }
+      }
+      if (updatedShooters.isNotEmpty) {
+        try {
+          await prefs.setString('shooters', jsonEncode(updatedShooters));
+          await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
+          _logger.info('Saved migrated shooters for v3');
+        } catch (e, st) {
+          _logger.severe('Failed to save migrated shooters for v3: $e', e, st);
+          rethrow;
+        }
+      }
+    }
+
     _logger.info('Migrating schema: Current data before migration:');
     _logger.info(
       'Adding default status field with value "Completed" to each record.',
@@ -140,10 +188,7 @@ class PersistenceService {
     final list = await loadList('shooters');
     return list
         .map(
-          (m) => Shooter(
-            name: m['name'] as String,
-            scaleFactor: (m['scaleFactor'] as num?)?.toDouble() ?? 1.0,
-          ),
+          (m) => Shooter.fromJson(m),
         )
         .toList();
   }

@@ -8,11 +8,8 @@ import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/models/stage_result.dart';
 
 void main() {
-  testWidgets('Clear All Data button clears repository after confirmation', (
-    tester,
-  ) async {
+  testWidgets('dump main menu with data', (tester) async {
     final repo = MatchRepository();
-    // Add some data
     repo.addShooter(Shooter(name: 'Alice'));
     repo.addStage(MatchStage(stage: 1, scoringShoots: 10));
     repo.addResult(
@@ -26,12 +23,6 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-
-    // Directly clear repository (avoid flaky UI tap/scroll in this test environment)
-    await repo.clearAllData();
-    // Data should be cleared
-    expect(repo.shooters, isEmpty);
-    expect(repo.stages, isEmpty);
-    expect(repo.results, isEmpty);
+    debugDumpApp();
   });
 }

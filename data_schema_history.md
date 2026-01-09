@@ -9,9 +9,10 @@
   - All persisted data is versioned and migration-ready.
   - No breaking changes or migrations have occurred as of this date.
 
-- **v3 (2025-12-28):**
-  - (Removed) Previous experimental v3 entry that persisted a UI-only splitter preference has been reverted.
-  - UI client preferences (window/splitter positions) are not part of the persisted match data model and are excluded from backups/imports.
+- **v3 (2026-01-09):**
+  - Added `classificationScore` (percentage 0-100) to `Shooter` model. Default value for existing shooters is `100.0`.
+  - Migration implemented to populate `classificationScore` with `100.0` for persisted shooters missing the field.
+  - Updated persistence and export/import to include `classificationScore` on shooter objects.
 
 ## Notes
 - All schema changes must be documented here with version, date, and migration details.

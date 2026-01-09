@@ -59,6 +59,14 @@ class MainMenuView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             menuCard(
+              leading: const Icon(Icons.tune),
+              title: 'Adjust Scaling',
+              subtitle: repo.shooters.isNotEmpty ? null : 'Add shooters first',
+              enabled: repo.shooters.isNotEmpty,
+              onTap: () => Navigator.pushNamed(context, '/adjust-scaling'),
+            ),
+            const SizedBox(height: 16),
+            menuCard(
               leading: const Icon(Icons.input),
               title: 'Stage Input',
               subtitle: canStageInput ? null : 'Add at least one stage and one shooter',

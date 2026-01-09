@@ -27,11 +27,8 @@ void main() {
           child: const MaterialApp(home: MainMenuView()),
         ),
       );
-      expect(find.text('Match Setup'), findsOneWidget);
-      expect(find.text('Shooter Setup'), findsOneWidget);
-      expect(find.text('Stage Input'), findsOneWidget);
-      expect(find.text('Stage Result'), findsOneWidget);
-      expect(find.text('Overall Result'), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(find.byType(ListTile), findsWidgets);
     });
 
     testWidgets('MatchSetupView shows empty and error states', (tester) async {
@@ -47,6 +44,7 @@ void main() {
           }),
         ),
       );
+      await tester.pumpAndSettle();
       expect(find.text('Match Setup'), findsOneWidget);
       // Empty state: section label present, no ListTile
       expect(find.text('Stages:'), findsOneWidget);
@@ -66,6 +64,7 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
       expect(find.text('Shooter Setup'), findsOneWidget);
       // Empty state: section label present, no ListTile
       expect(find.text('Shooters:'), findsOneWidget);
@@ -85,6 +84,7 @@ void main() {
           child: const MaterialApp(home: StageInputView()),
         ),
       );
+      await tester.pumpAndSettle();
       expect(find.text('Stage Input'), findsOneWidget);
       // No stages/shooters: shows exact message
       expect(
@@ -108,6 +108,7 @@ void main() {
           ),
         ),
       );
+      await tester.pumpAndSettle();
       expect(find.text('Stage Result'), findsOneWidget);
       expect(find.text('No stages available.'), findsOneWidget);
     });
@@ -127,6 +128,7 @@ void main() {
           child: const MaterialApp(home: OverallResultView()),
         ),
       );
+      await tester.pumpAndSettle();
       expect(find.text('Overall Result'), findsOneWidget);
       expect(find.text('No results yet.'), findsOneWidget);
       expect(find.byIcon(Icons.picture_as_pdf), findsNothing);

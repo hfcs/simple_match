@@ -26,7 +26,12 @@ class ShooterSetupViewModel {
     }
     final orig = repository.getShooter(name);
     if (orig == null) return 'Shooter not found.';
-    repository.updateShooter(Shooter(name: name, scaleFactor: scaleFactor));
+    // Preserve classificationScore when editing scale
+    repository.updateShooter(Shooter(
+      name: name,
+      scaleFactor: scaleFactor,
+      classificationScore: orig.classificationScore,
+    ));
     return null;
   }
 

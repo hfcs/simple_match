@@ -40,7 +40,11 @@ class MatchRepository extends ChangeNotifier {
     await persistence!.saveList(
       'shooters',
       _shooters
-          .map((e) => {'name': e.name, 'scaleFactor': e.scaleFactor})
+          .map((e) => {
+            'name': e.name,
+            'scaleFactor': e.scaleFactor,
+            'classificationScore': e.classificationScore,
+          })
           .toList(),
     );
     await persistence!.saveList(
@@ -83,10 +87,7 @@ class MatchRepository extends ChangeNotifier {
       ..clear()
       ..addAll(
         shooterList.map(
-          (e) => Shooter(
-            name: e['name'],
-            scaleFactor: (e['scaleFactor'] as num).toDouble(),
-          ),
+          (e) => Shooter.fromJson(Map<String, dynamic>.from(e)),
         ),
       );
 

@@ -38,10 +38,19 @@ class TeamGameViewModel extends ChangeNotifier {
   }
 
   Future<void> renameTeam(String id, String newName) async {
-    final t = _teamGame.teams.firstWhere((t) => t.id == id);
-    t.name = newName;
+    final idx = _teamGame.teams.indexWhere((t) => t.id == id);
+    if (idx == -1) return;
+    final old = _teamGame.teams[idx];
+    // Replace the team object so listeners relying on identity changes refresh.
+    final replaced = Team(id: old.id, name: newName, members: List<String>.from(old.members));
+    _teamGame.teams[idx] = replaced;
     notifyListeners();
     await save();
+    // Also notify repository listeners in case other parts of the UI read from the
+    // repository directly (ensure assigned shooters UI refreshes everywhere).
+    try {
+      repo.notifyListeners();
+    } catch (_) {}
   }
 
   Future<void> assignShooter(String teamId, String shooterName) async {

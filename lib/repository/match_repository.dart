@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import '../models/match_stage.dart';
 import '../models/shooter.dart';
 import '../models/stage_result.dart';
 import '../services/persistence_service.dart';
+import '../models/team_game.dart';
 
 /// Repository for managing match data (stages, shooters, results).
 class MatchRepository extends ChangeNotifier {
@@ -18,7 +20,11 @@ class MatchRepository extends ChangeNotifier {
   final List<MatchStage> _stages;
   final List<Shooter> _shooters;
   final List<StageResult> _results;
+  TeamGame? _teamGame;
   final PersistenceService? persistence;
+  /// When true, `loadAll` will use short timeouts around persistence calls
+  /// to avoid blocking callers (used by import flows/tests).
+  bool importMode = false;
 
   MatchRepository({
     this.persistence,
@@ -67,53 +73,152 @@ class MatchRepository extends ChangeNotifier {
           )
           .toList(),
     );
+    // Save team game configuration if present
+    try {
+      if (_teamGame != null) {
+        await persistence!.saveTeamGame(_teamGame!.toJson());
+      }
+    } catch (_) {}
   }
 
   Future<void> loadAll() async {
-    if (persistence == null) return;
-    await persistence!.ensureSchemaUpToDate();
-    final stageList = await persistence!.loadList('stages');
-    _stages
-      ..clear()
-      ..addAll(
-        stageList.map(
-          (e) =>
-              MatchStage(stage: e['stage'], scoringShoots: e['scoringShoots']),
-        ),
-      );
+    if (persistence == null) {
+      if (kDebugMode) print('TESTDBG: repo.loadAll - persistence is null, returning');
+      return;
+    }
+    if (kDebugMode) print('TESTDBG: repo.loadAll - start ${DateTime.now().toIso8601String()} importMode=$importMode');
+    try {
+      if (kDebugMode) print('TESTDBG: repo.loadAll - ensureSchemaUpToDate start');
+      try {
+        if (importMode) {
+          await persistence!.ensureSchemaUpToDate().timeout(const Duration(seconds: 1));
+        } else {
+          await persistence!.ensureSchemaUpToDate();
+        }
+      } on TimeoutException catch (te) {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - ensureSchemaUpToDate timed out: $te');
+      }
+      if (kDebugMode) print('TESTDBG: repo.loadAll - ensureSchemaUpToDate done');
 
-    final shooterList = await persistence!.loadList('shooters');
-    _shooters
-      ..clear()
-      ..addAll(
-        shooterList.map(
-          (e) => Shooter.fromJson(Map<String, dynamic>.from(e)),
-        ),
-      );
-
-    final resultList = await persistence!.loadList('stageResults');
-    _results
-      ..clear()
-      ..addAll(
-        resultList.map(
-          (e) => StageResult(
-            stage: e['stage'],
-            shooter: e['shooter'],
-            time: (e['time'] as num).toDouble(),
-            a: e['a'],
-            c: e['c'],
-            d: e['d'],
-            misses: e['misses'],
-            noShoots: e['noShoots'],
-            procedureErrors: e['procedureErrors'],
-            status: (e['status'] as String?) ?? 'Completed',
-            roRemark: (e['roRemark'] as String?) ?? '',
+      if (kDebugMode) print('TESTDBG: repo.loadAll - loading stages');
+      List<Map<String, dynamic>> stageList = <Map<String, dynamic>>[];
+      try {
+        if (importMode) {
+          stageList = await persistence!.loadList('stages').timeout(const Duration(seconds: 1));
+        } else {
+          stageList = await persistence!.loadList('stages');
+        }
+      } on TimeoutException catch (te) {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(stages) timed out: $te');
+        stageList = [];
+      }
+      if (kDebugMode) print('TESTDBG: repo.loadAll - stages loaded len=${stageList.length}');
+      _stages
+        ..clear()
+        ..addAll(
+          stageList.map(
+            (e) => MatchStage(stage: e['stage'], scoringShoots: e['scoringShoots']),
           ),
-        ),
-      );
-  // Notify listeners so UI updates after a programmatic reload (e.g., after import)
-  notifyListeners();
+        );
+
+      if (kDebugMode) print('TESTDBG: repo.loadAll - loading shooters');
+      List<Map<String, dynamic>> shooterList = <Map<String, dynamic>>[];
+      try {
+        if (importMode) {
+          shooterList = await persistence!.loadList('shooters').timeout(const Duration(seconds: 1));
+        } else {
+          shooterList = await persistence!.loadList('shooters');
+        }
+      } on TimeoutException catch (te) {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(shooters) timed out: $te');
+        shooterList = [];
+      }
+      if (kDebugMode) print('TESTDBG: repo.loadAll - shooters loaded len=${shooterList.length}');
+      _shooters
+        ..clear()
+        ..addAll(
+          shooterList.map(
+            (e) => Shooter.fromJson(Map<String, dynamic>.from(e)),
+          ),
+        );
+
+      if (kDebugMode) print('TESTDBG: repo.loadAll - loading results');
+      List<Map<String, dynamic>> resultList = <Map<String, dynamic>>[];
+      try {
+        if (importMode) {
+          resultList = await persistence!.loadList('stageResults').timeout(const Duration(seconds: 1));
+        } else {
+          resultList = await persistence!.loadList('stageResults');
+        }
+      } on TimeoutException catch (te) {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(stageResults) timed out: $te');
+        resultList = [];
+      }
+      if (kDebugMode) print('TESTDBG: repo.loadAll - results loaded len=${resultList.length}');
+      _results
+        ..clear()
+        ..addAll(
+          resultList.map(
+            (e) => StageResult(
+              stage: e['stage'],
+              shooter: e['shooter'],
+              time: (e['time'] as num).toDouble(),
+              a: e['a'],
+              c: e['c'],
+              d: e['d'],
+              misses: e['misses'],
+              noShoots: e['noShoots'],
+              procedureErrors: e['procedureErrors'],
+              status: (e['status'] as String?) ?? 'Completed',
+              roRemark: (e['roRemark'] as String?) ?? '',
+            ),
+          ),
+        );
+      // Load team game config if present
+      try {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loading team game');
+        Map<String, dynamic>? tgRaw;
+        try {
+          if (importMode) {
+            tgRaw = await persistence!.loadTeamGame().timeout(const Duration(seconds: 1));
+          } else {
+            tgRaw = await persistence!.loadTeamGame();
+          }
+        } on TimeoutException catch (te) {
+          if (kDebugMode) print('TESTDBG: repo.loadAll - loadTeamGame timed out: $te');
+          tgRaw = null;
+        }
+        if (tgRaw != null) {
+          _teamGame = TeamGame.fromJson(tgRaw);
+          if (kDebugMode) print('TESTDBG: repo.loadAll - team game loaded');
+        } else {
+          _teamGame = TeamGame();
+          if (kDebugMode) print('TESTDBG: repo.loadAll - team game absent, created default');
+        }
+      } catch (e, st) {
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadTeamGame threw: $e\n$st');
+        _teamGame = TeamGame();
+      }
+    } catch (e, st) {
+      if (kDebugMode) print('TESTDBG: repo.loadAll - outer exception: $e\n$st');
+    } finally {
+      // Notify listeners so UI updates after a programmatic reload (e.g., after import)
+      notifyListeners();
+      if (kDebugMode) print('TESTDBG: repo.loadAll - completed ${DateTime.now().toIso8601String()}');
+    }
   }
+
+    TeamGame? get teamGame => _teamGame;
+
+    Future<void> updateTeamGame(TeamGame tg) async {
+      _teamGame = tg;
+      if (persistence != null) {
+        try {
+          await persistence!.saveTeamGame(tg.toJson());
+        } catch (_) {}
+      }
+      notifyListeners();
+    }
 
   // Stages
   List<MatchStage> get stages => List.unmodifiable(_stages);

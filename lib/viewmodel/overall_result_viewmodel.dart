@@ -59,6 +59,12 @@ class OverallResultViewModel {
     resultsList.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
     return resultsList;
   }
+
+  /// Returns a map of shooter name -> total points for use by team scoring.
+  Map<String, double> getOverallTotalsMap() {
+    final list = getOverallResults();
+    return {for (final r in list) r.name: r.totalPoints};
+  }
 }
 
 class OverallShooterResult {

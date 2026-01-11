@@ -66,4 +66,10 @@ class FakePersistence extends PersistenceService {
 
   @override
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async => Future.value();
+
+  @override
+  Future<void> saveTeamGame(Map<String, dynamic> map) async => Future.value();
+
+  @override
+  Future<Map<String, dynamic>?> loadTeamGame() async => null;
 }

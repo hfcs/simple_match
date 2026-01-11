@@ -16,6 +16,8 @@ import 'views/adjust_scaling_view.dart';
 import 'views/stage_result_view.dart';
 import 'viewmodel/stage_result_viewmodel.dart';
 import 'views/overall_result_view.dart';
+import 'viewmodel/team_game_viewmodel.dart';
+import 'views/team_game_setup_view.dart';
 
 import 'services/persistence_service.dart';
 
@@ -51,6 +53,10 @@ class MiniIPSCMatchApp extends StatelessWidget {
         ProxyProvider<MatchRepository, OverallResultViewModel>(
           update: (_, repo, __) => OverallResultViewModel(repo),
         ),
+        ChangeNotifierProxyProvider<MatchRepository, TeamGameViewModel>(
+          create: (_) => TeamGameViewModel(repository),
+          update: (_, repo, __) => TeamGameViewModel(repo),
+        ),
       ],
       child: MaterialApp(
         title: 'Mini IPSC Match',
@@ -63,6 +69,7 @@ class MiniIPSCMatchApp extends StatelessWidget {
           '/stage-input': (context) => const StageInputView(),
           '/overall-result': (context) => const OverallResultView(),
           '/adjust-scaling': (context) => const AdjustScalingView(),
+          '/team-game-setup': (context) => const TeamGameSetupView(),
           '/stage-result': (context) {
             final repo = Provider.of<MatchRepository>(context, listen: false);
             final persistence = repo.persistence ?? PersistenceService();

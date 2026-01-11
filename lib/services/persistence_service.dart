@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'platform_info.dart';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:logging/logging.dart';
 import '../models/shooter.dart';
@@ -27,9 +28,21 @@ class PersistenceService {
   /// Otherwise, SharedPreferences.getInstance() is used (for production).
   PersistenceService({SharedPreferences? prefs}) : _prefs = prefs;
 
+  // Helper to get SharedPreferences with micro-tracing for test diagnostics.
+  Future<SharedPreferences> _prefsInstance() async {
+    if (_prefs != null) return _prefs!;
+    final start = DateTime.now();
+    if (kDebugMode) print('TESTDBG: SharedPreferences.getInstance start ${start.toIso8601String()}');
+    final p = await SharedPreferences.getInstance();
+    final end = DateTime.now();
+    if (kDebugMode) print('TESTDBG: SharedPreferences.getInstance end ${end.toIso8601String()} duration=${end.difference(start).inMilliseconds}ms');
+    return p;
+  }
+
   /// Loads and migrates data if needed. Call this on app startup before loading any lists.
   Future<void> ensureSchemaUpToDate() async {
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    if (kDebugMode) print('TESTDBG: ensureSchemaUpToDate start');
+    final prefs = await _prefsInstance();
     final int? storedVersionRaw = prefs.getInt(kDataSchemaVersionKey);
     final int storedVersion = storedVersionRaw ?? 0;
     _logger.info(
@@ -48,6 +61,7 @@ class PersistenceService {
       await prefs.clear();
       await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
     }
+    if (kDebugMode) print('TESTDBG: ensureSchemaUpToDate completed');
   }
 
   /// Migration logic for future schema changes. Add cases as schema evolves.
@@ -237,7 +251,7 @@ class PersistenceService {
   /// Build a full backup map containing metadata and all lists.
   Future<Map<String, dynamic>> buildBackupMap() async {
     await ensureSchemaUpToDate();
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    final prefs = await _prefsInstance();
     // For metadata we include schema version and timestamp
     final meta = <String, dynamic>{
       'schemaVersion': prefs.getInt(kDataSchemaVersionKey) ?? kDataSchemaVersion,
@@ -307,7 +321,7 @@ class PersistenceService {
   /// validate only and do not persist. If [backupBeforeRestore] is true, save
   /// a snapshot of current persisted data in prefs under key 'backup_before_restore'.
   Future<ImportResult> importBackupFromBytes(Uint8List bytes, {bool dryRun = false, bool backupBeforeRestore = true}) async {
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    final prefs = await _prefsInstance();
     String jsonStr;
     try {
       jsonStr = utf8.decode(bytes);
@@ -377,7 +391,8 @@ class PersistenceService {
   }
 
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    if (kDebugMode) print('TESTDBG: saveList start key=$key len=${list.length}');
+    final prefs = await _prefsInstance();
     _logger.info('Attempting to save list to key $key with data: $list');
     final jsonStr = jsonEncode(list);
     _logger.info('Encoded JSON string: $jsonStr');
@@ -388,21 +403,56 @@ class PersistenceService {
       kDataSchemaVersionKey,
       kDataSchemaVersion,
     ); // Always update version on save
+    if (kDebugMode) print('TESTDBG: saveList completed key=$key');
   }
 
   Future<List<Map<String, dynamic>>> loadList(String key) async {
+    if (kDebugMode) print('TESTDBG: loadList start key=$key');
     await ensureSchemaUpToDate();
-    final prefs = _prefs ?? await SharedPreferences.getInstance();
+    if (kDebugMode) print('TESTDBG: ensureSchemaUpToDate returned for loadList key=$key');
+    final prefs = await _prefsInstance();
     _logger.info('Attempting to load list from key $key');
     final jsonStr = prefs.getString(key);
     _logger.info('Raw JSON string retrieved for key $key: $jsonStr');
     if (jsonStr == null) {
       _logger.warning('No data found for key $key. Returning empty list.');
+      if (kDebugMode) print('TESTDBG: loadList end key=$key returned empty');
       return [];
     }
     final decoded = jsonDecode(jsonStr) as List;
     _logger.info('Decoded JSON for key $key: $decoded');
+    if (kDebugMode) print('TESTDBG: loadList completed key=$key len=${decoded.length}');
     return decoded.cast<Map<String, dynamic>>();
+  }
+
+  /// Save team game configuration as a single JSON object under key 'teamGame'
+  Future<void> saveTeamGame(Map<String, dynamic> map) async {
+    final prefs = await _prefsInstance();
+    _logger.info('Saving teamGame: $map');
+    await prefs.setString('teamGame', jsonEncode(map));
+    await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
+  }
+
+  /// Load team game configuration, or null if not present.
+  Future<Map<String, dynamic>?> loadTeamGame() async {
+    if (kDebugMode) print('TESTDBG: loadTeamGame start');
+    await ensureSchemaUpToDate();
+    if (kDebugMode) print('TESTDBG: ensureSchemaUpToDate returned for loadTeamGame');
+    final prefs = await _prefsInstance();
+    final raw = prefs.getString('teamGame');
+    if (raw == null) {
+      if (kDebugMode) print('TESTDBG: loadTeamGame no teamGame present');
+      return null;
+    }
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      if (kDebugMode) print('TESTDBG: loadTeamGame decoded');
+      return decoded;
+    } catch (e, st) {
+      _logger.warning('Failed to decode teamGame JSON: $e', e, st);
+      if (kDebugMode) print('TESTDBG: loadTeamGame decode failed: $e');
+      return null;
+    }
   }
 
   // Migration method is public and can be invoked directly in tests.

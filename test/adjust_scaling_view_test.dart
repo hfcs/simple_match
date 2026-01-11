@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
-import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/views/adjust_scaling_view.dart';
 
 void main() {

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:provider/provider.dart';
 import '../repository/match_repository.dart';
 import '../viewmodel/overall_result_viewmodel.dart';
+import '../models/team_game.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -26,6 +27,7 @@ class OverallResultView extends StatelessWidget {
     final stages = repo.stages;
     final shooters = repo.shooters;
     final allResults = repo.results;
+    final teamGame = repo.teamGame;
 
     return Scaffold(
       appBar: AppBar(
@@ -43,6 +45,7 @@ class OverallResultView extends StatelessWidget {
                         stages: stages,
                         shooters: shooters,
                         allResults: allResults,
+                        teamGame: teamGame,
                       );
                       // PDF generated successfully
 
@@ -66,17 +69,63 @@ class OverallResultView extends StatelessWidget {
       ),
       body: results.isEmpty
           ? const Center(child: Text('No results yet.'))
-          : ListView.separated(
-              itemCount: results.length,
-              separatorBuilder: (_, __) => const Divider(),
-              itemBuilder: (context, i) {
-                final r = results[i];
-                return ListTile(
-                  leading: CircleAvatar(child: Text('${i + 1}')),
-                  title: Text(r.name),
-                  trailing: Text(r.totalPoints.toStringAsFixed(2)),
-                );
-              },
+          : ListView(
+              padding: const EdgeInsets.all(8),
+              children: [
+                ...List.generate(results.length, (i) {
+                  final r = results[i];
+                  return Column(children: [
+                    ListTile(
+                      leading: CircleAvatar(child: Text('${i + 1}')),
+                      title: Text(r.name),
+                      trailing: Text(r.totalPoints.toStringAsFixed(2)),
+                    ),
+                    const Divider(),
+                  ]);
+                }),
+                if (teamGame != null && teamGame.mode != 'off' && teamGame.teams.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        const Text('Team Results', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Builder(builder: (context) {
+                          // compute team scores from shooter totals
+                          final shooterTotals = {for (final r in results) r.name: r.totalPoints};
+                          final teamRows = teamGame.teams.map((t) {
+                            final members = (t.members as List).cast<String>();
+                            final memberTotals = members.map((m) => shooterTotals[m] ?? 0.0).toList();
+                            double score = 0.0;
+                            if (teamGame.mode == 'average') {
+                              score = memberTotals.isNotEmpty ? memberTotals.reduce((a, b) => a + b) / memberTotals.length : 0.0;
+                            } else {
+                              final n = teamGame.topCount <= 0 ? memberTotals.length : teamGame.topCount;
+                              memberTotals.sort((a, b) => b.compareTo(a));
+                              score = memberTotals.take(n).fold<double>(0.0, (p, e) => p + e);
+                            }
+                            return {'team': t, 'score': score, 'members': members};
+                          }).toList();
+                          teamRows.sort((a, b) => (b['score'] as double).compareTo(a['score'] as double));
+                          return Column(children: [
+                            ...List.generate(teamRows.length, (i) {
+                              final row = teamRows[i];
+                              final t = row['team'];
+                              return ListTile(
+                                leading: CircleAvatar(child: Text('${i + 1}')),
+                                title: Text((t as dynamic).name as String),
+                                subtitle: Text((row['members'] as List).join(', ')),
+                                trailing: Text((row['score'] as double).toStringAsFixed(2)),
+                              );
+                            }),
+                          ]);
+                        })
+                      ]),
+                    ),
+                  ),
+                ],
+              ],
             ),
     );
   }
@@ -87,6 +136,7 @@ Future<pw.Document> buildOverallResultPdf({
   required List stages,
   required List shooters,
   required List allResults,
+  TeamGame? teamGame,
 }) async {
   final fontData = await rootBundle.load('assets/fonts/NotoSerifHK-wght.ttf');
   final font = pw.Font.ttf(fontData);
@@ -180,6 +230,63 @@ Future<pw.Document> buildOverallResultPdf({
           ),
         );
         widgets.add(pw.SizedBox(height: 24));
+
+        // Team ranking table (only if enabled)
+        if (teamGame != null && teamGame.mode != 'off' && teamGame.teams.isNotEmpty) {
+          // Build shooter totals map from results
+          final Map<String, double> shooterTotals = {};
+          for (final r in results) {
+            try {
+              shooterTotals[r.name] = (r.totalPoints as double);
+            } catch (_) {
+              shooterTotals[r.name] = (r.totalPoints as double? ?? 0.0);
+            }
+          }
+
+          List<Map<String, dynamic>> teamRows = [];
+          for (final t in teamGame.teams) {
+            final members = (t.members as List).cast<String>();
+            final memberTotals = members.map((m) => shooterTotals[m] ?? 0.0).toList();
+            double score = 0.0;
+            if (teamGame.mode == 'average') {
+              score = memberTotals.isNotEmpty ? memberTotals.reduce((a, b) => a + b) / memberTotals.length : 0.0;
+            } else if (teamGame.mode == 'top') {
+              final n = teamGame.topCount <= 0 ? memberTotals.length : teamGame.topCount;
+              memberTotals.sort((a, b) => b.compareTo(a));
+              final take = memberTotals.take(n);
+              score = take.fold<double>(0.0, (p, e) => p + e);
+            }
+            teamRows.add({'team': t, 'score': score, 'members': members});
+          }
+          teamRows.sort((a, b) => (b['score'] as double).compareTo(a['score'] as double));
+
+          widgets.add(pw.Text('Team Results', style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold, font: font)));
+          widgets.add(pw.SizedBox(height: 8));
+          widgets.add(pw.Table(
+            border: pw.TableBorder.all(),
+            children: [
+              pw.TableRow(children: [
+                pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Rank', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Team', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Score', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Members', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+              ]),
+              ...List.generate(teamRows.length, (i) {
+                final row = teamRows[i];
+                final t = row['team'];
+                return pw.TableRow(children: [
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('${i + 1}', style: pw.TextStyle(font: font))),
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text((t as dynamic).name as String, style: pw.TextStyle(font: font))),
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text((row['score'] as double).toStringAsFixed(2), style: pw.TextStyle(font: font))),
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text((row['members'] as List).join(', '), style: pw.TextStyle(font: font))),
+                ]);
+              }),
+            ],
+          ));
+          
+
+          widgets.add(pw.SizedBox(height: 16));
+        }
 
         // Per-stage results
         for (final stage in stages) {
@@ -450,6 +557,63 @@ Future<pw.Document> buildOverallResultPdf({
               ],
             ),
           );
+          // Per-stage team breakdown (only if team scoring enabled)
+          if (teamGame != null && teamGame.mode != 'off' && teamGame.teams.isNotEmpty) {
+            final stageResults = allResults.where((r) => r.stage == stage.stage).toList();
+            final Map<String, double> adjHitFactors = {};
+            for (final r in stageResults) {
+              final shooter = shooters.firstWhere((s) => s.name == r.shooter, orElse: () => Shooter(name: r.shooter, scaleFactor: 1.0));
+              adjHitFactors[r.shooter] = r.adjustedHitFactor(shooter.scaleFactor);
+            }
+            final maxAdjHitFactor = adjHitFactors.values.isNotEmpty ? adjHitFactors.values.reduce((a, b) => a > b ? a : b) : 0.0;
+            final Map<String, double> shooterStagePoints = {};
+            for (final r in stageResults) {
+              final shooter = shooters.firstWhere((s) => s.name == r.shooter, orElse: () => Shooter(name: r.shooter, scaleFactor: 1.0));
+              final scaledHF = r.adjustedHitFactor(shooter.scaleFactor);
+              final adjustedMatchPoint = maxAdjHitFactor > 0 ? (scaledHF / maxAdjHitFactor) * stage.scoringShoots * 5 : 0.0;
+              shooterStagePoints[r.shooter] = adjustedMatchPoint;
+            }
+
+            List<Map<String, dynamic>> perStageTeamRows = [];
+            for (final t in teamGame.teams) {
+              final members = (t.members as List).cast<String>();
+              final memberPoints = members.map((m) => shooterStagePoints[m] ?? 0.0).toList();
+              double score = 0.0;
+              if (teamGame.mode == 'average') {
+                score = memberPoints.isNotEmpty ? memberPoints.reduce((a, b) => a + b) / memberPoints.length : 0.0;
+              } else if (teamGame.mode == 'top') {
+                final n = teamGame.topCount <= 0 ? memberPoints.length : teamGame.topCount;
+                memberPoints.sort((a, b) => b.compareTo(a));
+                score = memberPoints.take(n).fold<double>(0.0, (p, e) => p + e);
+              }
+              perStageTeamRows.add({'team': t, 'score': score, 'members': members});
+            }
+            perStageTeamRows.sort((a, b) => (b['score'] as double).compareTo(a['score'] as double));
+
+            widgets.add(pw.SizedBox(height: 8));
+            widgets.add(pw.Text('Team Results (Stage ${stage.stage})', style: pw.TextStyle(font: font, fontWeight: pw.FontWeight.bold)));
+            widgets.add(pw.SizedBox(height: 4));
+            widgets.add(pw.Table(
+              border: pw.TableBorder.all(),
+              children: [
+                pw.TableRow(children: [
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Rank', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Team', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                  pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('Stage Points', style: pw.TextStyle(fontWeight: pw.FontWeight.bold, font: font))),
+                ]),
+                ...List.generate(perStageTeamRows.length, (i) {
+                  final row = perStageTeamRows[i];
+                  final t = row['team'];
+                  return pw.TableRow(children: [
+                    pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text('${i + 1}', style: pw.TextStyle(font: font))),
+                    pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text((t as dynamic).name as String, style: pw.TextStyle(font: font))),
+                    pw.Padding(padding: const pw.EdgeInsets.all(4), child: pw.Text((row['score'] as double).toStringAsFixed(2), style: pw.TextStyle(font: font))),
+                  ]);
+                }),
+              ],
+            ));
+            widgets.add(pw.SizedBox(height: 8));
+          }
           widgets.add(pw.SizedBox(height: 16));
         }
         return widgets;

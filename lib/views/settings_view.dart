@@ -14,6 +14,18 @@ class SettingsView extends StatefulWidget {
   /// on the VM test runtime. Default false.
   static bool forceKIsWeb = false;
 
+  /// Test-only: suppress SnackBars during widget tests to avoid timers
+  /// interfering with VM test runs. Tests may set and reset this flag.
+  static bool suppressSnackBarsInTests = false;
+
+  /// Test-only: when true tests may pause after import to allow attaching
+  /// a debugger to flutter_tester. Default false in automated runs.
+  static bool pauseAfterImportForDebugger = false;
+
+  /// Test-only: when true the import flow will force an exit after import
+  /// (used by interactive diagnostics). Default false for tests.
+  static bool forceExitAfterImportForDebugger = false;
+
   /// Optional override for the platform-specific saveExport function used in tests.
   final Future<void> Function(String path, String content)? saveExportOverride;
   /// Optional override for the browser file picker (used to simulate web picks in tests).

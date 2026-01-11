@@ -33,6 +33,12 @@ class TestablePersistenceService extends PersistenceService {
 
 // Helper to make a MockSharedPreferences behave like it persists setString/setInt/clear
 void makeWritable(MockSharedPreferences p) {
+  // Provide sensible defaults so unstubbed getters return null instead of
+  // causing Mockito's MissingStubError when tests call getString/getInt.
+  when(p.getInt(any)).thenReturn(null);
+  when(p.getString(any)).thenReturn(null);
+  when(p.getDouble(any)).thenReturn(null);
+
   when(p.setInt(any, any)).thenAnswer((inv) async {
     final key = inv.positionalArguments[0] as String;
     final value = inv.positionalArguments[1] as int;

@@ -327,10 +327,10 @@ Future<pw.Document> buildOverallResultPdf({
                 2: pw.FlexColumnWidth(2.4), // Scaled HF (~6 chars)
                 3: pw.FlexColumnWidth(2.0), // Match Pt (~5 chars)
                 4: pw.FlexColumnWidth(1.6), // Time (~4 chars)
-                // Keep A/C/D slightly larger for readability
-                5: pw.FlexColumnWidth(0.6), // A
-                6: pw.FlexColumnWidth(0.6), // C
-                7: pw.FlexColumnWidth(0.6), // D
+                // A/C/D narrowed to approximate 2-character width
+                5: pw.FlexColumnWidth(0.35), // A (~2 chars)
+                6: pw.FlexColumnWidth(0.35), // C (~2 chars)
+                7: pw.FlexColumnWidth(0.35), // D (~2 chars)
                 // Allocate widths matching requested character counts
                 8: pw.FlexColumnWidth(2.4), // Misses (~6 chars)
                 9: pw.FlexColumnWidth(0.9), // NS (~3 chars)

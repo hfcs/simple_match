@@ -322,16 +322,18 @@ Future<pw.Document> buildOverallResultPdf({
               columnWidths: {
                 0: pw.FlexColumnWidth(3), // Name (wide)
                 1: pw.FlexColumnWidth(1), // Raw HF
-                2: pw.FlexColumnWidth(2), // Scaled HF (wider)
-                3: pw.FlexColumnWidth(2.5), // Match Pt (wider)
+                // Reduce scaled HF and match pt to free space for small numeric titles
+                2: pw.FlexColumnWidth(1.5), // Scaled HF
+                3: pw.FlexColumnWidth(1.2), // Match Pt (trimmed)
                 4: pw.FlexColumnWidth(1), // Time
-                // Narrow numeric columns: reserve just enough for 2-digit values
-                5: pw.FlexColumnWidth(0.5), // A
-                6: pw.FlexColumnWidth(0.5), // C
-                7: pw.FlexColumnWidth(0.5), // D
-                8: pw.FlexColumnWidth(0.5), // Misses
-                9: pw.FlexColumnWidth(0.5), // No Shoots
-                10: pw.FlexColumnWidth(0.5), // Proc Err
+                // Keep A/C/D slightly larger for readability
+                5: pw.FlexColumnWidth(0.6), // A
+                6: pw.FlexColumnWidth(0.6), // C
+                7: pw.FlexColumnWidth(0.6), // D
+                // Allocate minimal width (title width) for Misses/No Shoots/Proc Err
+                8: pw.FlexColumnWidth(0.25), // Misses
+                9: pw.FlexColumnWidth(0.25), // No Shoots
+                10: pw.FlexColumnWidth(0.25), // Proc Err
               },
               children: [
                 pw.TableRow(

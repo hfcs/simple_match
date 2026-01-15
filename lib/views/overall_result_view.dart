@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:io' show File;
+import 'dart:typed_data' show ByteData, Uint8List;
 import 'package:provider/provider.dart';
 import '../repository/match_repository.dart';
 import '../viewmodel/overall_result_viewmodel.dart';
@@ -138,8 +140,17 @@ Future<pw.Document> buildOverallResultPdf({
   required List allResults,
   TeamGame? teamGame,
 }) async {
-  final fontData = await rootBundle.load('assets/fonts/NotoSerifHK-wght.ttf');
-  final font = pw.Font.ttf(fontData);
+  pw.Font font;
+  try {
+    final fontData = await rootBundle.load('assets/fonts/NotoSerifHK-wght.ttf');
+    font = pw.Font.ttf(fontData);
+  } catch (_) {
+    // Fallback for test environments where `rootBundle` asset loading
+    // may not be configured; read the font file directly from disk.
+    final bytes = await File('assets/fonts/NotoSerifHK-wght.ttf').readAsBytes();
+    final bd = ByteData.view(Uint8List.fromList(bytes).buffer);
+    font = pw.Font.ttf(bd);
+  }
   final pdf = pw.Document();
   pdf.addPage(
     pw.MultiPage(

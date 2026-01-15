@@ -304,6 +304,24 @@ Future<pw.Document> buildOverallResultPdf({
           widgets.add(
             pw.Table(
               border: pw.TableBorder.all(),
+              // Use explicit column width weights so the Match Pt column
+              // does not consume excessive width. Name gets extra space
+              // (weight 3) while other numeric columns get smaller equal
+              // weights. This makes A/C/D columns wide enough for 3 digits.
+              columnWidths: {
+                0: pw.FlexColumnWidth(3), // Name (wide)
+                1: pw.FlexColumnWidth(1), // Raw HF
+                2: pw.FlexColumnWidth(2), // Scaled HF (wider)
+                3: pw.FlexColumnWidth(2.5), // Match Pt (wider)
+                4: pw.FlexColumnWidth(1), // Time
+                // Narrow numeric columns: reserve just enough for 2-digit values
+                5: pw.FlexColumnWidth(0.5), // A
+                6: pw.FlexColumnWidth(0.5), // C
+                7: pw.FlexColumnWidth(0.5), // D
+                8: pw.FlexColumnWidth(0.5), // Misses
+                9: pw.FlexColumnWidth(0.5), // No Shoots
+                10: pw.FlexColumnWidth(0.5), // Proc Err
+              },
               children: [
                 pw.TableRow(
                   children: [
@@ -340,7 +358,7 @@ Future<pw.Document> buildOverallResultPdf({
                     pw.Padding(
                       padding: const pw.EdgeInsets.all(4),
                       child: pw.Text(
-                        'Match Pt (After Scaling)',
+                        'Match Pt',
                         style: pw.TextStyle(
                           fontWeight: pw.FontWeight.bold,
                           font: font,

@@ -322,18 +322,18 @@ Future<pw.Document> buildOverallResultPdf({
               columnWidths: {
                 0: pw.FlexColumnWidth(3), // Name (wide)
                 1: pw.FlexColumnWidth(1), // Raw HF
-                // Reduce scaled HF and match pt to free space for small numeric titles
-                2: pw.FlexColumnWidth(1.5), // Scaled HF
-                3: pw.FlexColumnWidth(1.2), // Match Pt (trimmed)
+                // Scaled HF and Match Pt set to approx 6-character width
+                2: pw.FlexColumnWidth(1.8), // Scaled HF (~6 chars)
+                3: pw.FlexColumnWidth(1.8), // Match Pt (~6 chars)
                 4: pw.FlexColumnWidth(1), // Time
                 // Keep A/C/D slightly larger for readability
                 5: pw.FlexColumnWidth(0.6), // A
                 6: pw.FlexColumnWidth(0.6), // C
                 7: pw.FlexColumnWidth(0.6), // D
-                // Allocate minimal width (title width) for Misses/No Shoots/Proc Err
-                8: pw.FlexColumnWidth(0.25), // Misses
-                9: pw.FlexColumnWidth(0.25), // No Shoots
-                10: pw.FlexColumnWidth(0.25), // Proc Err
+                // Allocate widths matching requested character counts
+                8: pw.FlexColumnWidth(1.5), // Misses (~5 chars)
+                9: pw.FlexColumnWidth(0.9), // NS (~3 chars)
+                10: pw.FlexColumnWidth(0.9), // Proc Err (~3 chars)
               },
               children: [
                 pw.TableRow(
@@ -431,7 +431,7 @@ Future<pw.Document> buildOverallResultPdf({
                     pw.Padding(
                       padding: const pw.EdgeInsets.all(4),
                       child: pw.Text(
-                        'No Shoots',
+                        'NS',
                         style: pw.TextStyle(
                           fontWeight: pw.FontWeight.bold,
                           font: font,

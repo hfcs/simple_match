@@ -320,21 +320,18 @@ Future<pw.Document> buildOverallResultPdf({
               // (weight 3) while other numeric columns get smaller equal
               // weights. This makes A/C/D columns wide enough for 3 digits.
               columnWidths: {
-                0: pw.FlexColumnWidth(3), // Name (wide)
-                1: pw.FlexColumnWidth(1), // Raw HF
-                // Scaled HF and Match Pt set to approx 6-character width
-                // Scaled HF and Match Pt set to requested character-widths
-                2: pw.FlexColumnWidth(2.4), // Scaled HF (~6 chars)
-                3: pw.FlexColumnWidth(2.0), // Match Pt (~5 chars)
-                4: pw.FlexColumnWidth(1.6), // Time (~4 chars)
-                // A/C/D narrowed to approximate 2-character width
-                5: pw.FlexColumnWidth(0.35), // A (~2 chars)
-                6: pw.FlexColumnWidth(0.35), // C (~2 chars)
-                7: pw.FlexColumnWidth(0.35), // D (~2 chars)
-                // Allocate widths matching requested character counts
-                8: pw.FlexColumnWidth(2.4), // Misses (~6 chars)
-                9: pw.FlexColumnWidth(0.9), // NS (~3 chars)
-                10: pw.FlexColumnWidth(0.9), // Proc Err (~3 chars)
+                // Name receives the remaining large portion of space
+                0: pw.FlexColumnWidth(12), // Name (rest)
+                1: pw.FlexColumnWidth(4), // Raw HF ~4 chars
+                2: pw.FlexColumnWidth(6), // Scaled HF ~6 chars
+                3: pw.FlexColumnWidth(5), // Match Pt ~5 chars
+                4: pw.FlexColumnWidth(5), // Time ~5 chars
+                5: pw.FlexColumnWidth(2), // A ~2 chars
+                6: pw.FlexColumnWidth(2), // C ~2 chars
+                7: pw.FlexColumnWidth(2), // D ~2 chars
+                8: pw.FlexColumnWidth(6), // Misses ~6 chars
+                9: pw.FlexColumnWidth(2), // NS ~2 chars
+                10: pw.FlexColumnWidth(4), // Proc Err ~4 chars
               },
               children: [
                 pw.TableRow(

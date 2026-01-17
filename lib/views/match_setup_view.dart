@@ -77,33 +77,76 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                           ElevatedButton.icon(
                             key: const Key('addStageButton'),
                             icon: const Icon(Icons.add),
-                            onPressed: () {
-                              final stage = int.tryParse(_stageController.text);
-                              final shoots = int.tryParse(
-                                _shootsController.text,
-                              );
-                              final err = (stage == null || shoots == null)
-                                  ? 'Invalid input.'
-                                  : vm.addStage(stage, shoots);
-                              setState(() => _error = err);
-                              if (err == null) {
-                                _stageController.clear();
-                                _shootsController.clear();
-                              }
-                            },
+                              onPressed: () async {
+                                final stage = int.tryParse(_stageController.text);
+                                final shoots = int.tryParse(
+                                  _shootsController.text,
+                                );
+                                if (stage == null || shoots == null) {
+                                  setState(() => _error = 'Invalid input.');
+                                  return;
+                                }
+
+                                // If user entered more than 32 scoring shoots, ask for confirmation
+                                if (shoots > 32) {
+                                  final confirmed = await showDialog<bool?>(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: const Text('Large shoot count'),
+                                      content: Text('Scoring shoots > 32 is outside standard IPSC scoring. Proceed with $shoots shoots?'),
+                                      actions: [
+                                        TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+                                        TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Proceed')),
+                                      ],
+                                    ),
+                                  );
+                                  if (confirmed != true) {
+                                    setState(() => _error = null);
+                                    return;
+                                  }
+                                }
+
+                                final err = vm.addStage(stage, shoots, allowMoreThan32: true);
+                                setState(() => _error = err);
+                                if (err == null) {
+                                  _stageController.clear();
+                                  _shootsController.clear();
+                                }
+                              },
                             label: const Text('Add Stage'),
                           )
                         else ...[
                           ElevatedButton.icon(
                             key: const Key('confirmEditButton'),
                             icon: const Icon(Icons.check),
-                            onPressed: () {
+                            onPressed: () async {
                               final shoots = int.tryParse(
                                 _shootsController.text,
                               );
-                              final err = (shoots == null)
-                                  ? 'Invalid input.'
-                                  : vm.editStage(_editingStage!, shoots);
+                              if (shoots == null) {
+                                setState(() => _error = 'Invalid input.');
+                                return;
+                              }
+
+                              if (shoots > 32) {
+                                final confirmed = await showDialog<bool?>(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: const Text('Large shoot count'),
+                                    content: Text('Scoring shoots > 32 is outside standard IPSC scoring. Proceed with $shoots shoots?'),
+                                    actions: [
+                                      TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+                                      TextButton(onPressed: () => Navigator.of(ctx).pop(true), child: const Text('Proceed')),
+                                    ],
+                                  ),
+                                );
+                                if (confirmed != true) {
+                                  setState(() => _error = null);
+                                  return;
+                                }
+                              }
+
+                              final err = vm.editStage(_editingStage!, shoots, allowMoreThan32: true);
                               setState(() => _error = err);
                               if (err == null) {
                                 setState(() => _editingStage = null);

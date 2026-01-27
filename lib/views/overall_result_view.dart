@@ -17,8 +17,15 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 // web-specific file when `dart.library.html` is available.
 import 'non_web_pdf_utils.dart' if (dart.library.html) 'web_pdf_utils.dart';
 
-class OverallResultView extends StatelessWidget {
+class OverallResultView extends StatefulWidget {
   const OverallResultView({super.key});
+
+  @override
+  State<OverallResultView> createState() => _OverallResultViewState();
+}
+
+class _OverallResultViewState extends State<OverallResultView> {
+  bool _exporting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,35 +43,42 @@ class OverallResultView extends StatelessWidget {
         title: const Text('Overall Result'),
         actions: results.isNotEmpty
             ? [
+                // Disable button while exporting to avoid concurrent exports
                 IconButton(
-                  icon: const Icon(Icons.picture_as_pdf),
-                  tooltip: 'Export overall results to PDF',
-                  onPressed: () async {
-                    // PDF export button pressed
-                    try {
-                      final pdf = await buildOverallResultPdf(
-                        results: results,
-                        stages: stages,
-                        shooters: shooters,
-                        allResults: allResults,
-                        teamGame: teamGame,
-                      );
-                      // PDF generated successfully
+                  icon: _exporting
+                      ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2))
+                      : const Icon(Icons.picture_as_pdf),
+                  tooltip: _exporting ? 'Exporting PDF…' : 'Export overall results to PDF',
+                  onPressed: _exporting
+                      ? null
+                      : () async {
+                          // Prevent concurrent taps
+                          if (!mounted) return;
+                          setState(() => _exporting = true);
+                          try {
+                            final pdf = await buildOverallResultPdf(
+                              results: results,
+                              stages: stages,
+                              shooters: shooters,
+                              allResults: allResults,
+                              teamGame: teamGame,
+                            );
 
-                      if (kIsWeb) {
-                        // Web-specific logic
-                        await WebPdfUtils.downloadPdf(pdf);
-                      } else {
-                        // Non-web platform logic
-                        await Printing.layoutPdf(
-                          onLayout: (format) async => pdf.save(),
-                        );
-                        // PDF sent to printer
-                      }
-                    } catch (e) {
-                      // Error during PDF export: $e
-                    }
-                  },
+                            if (kIsWeb) {
+                              await WebPdfUtils.downloadPdf(pdf);
+                            } else {
+                              // Use layoutPdf which may show a platform share/print UI.
+                              await Printing.layoutPdf(
+                                onLayout: (format) async => pdf.save(),
+                              );
+                            }
+                          } catch (e) {
+                            // Swallow or log errors; keep UI responsive
+                          } finally {
+                            if (!mounted) return;
+                            setState(() => _exporting = false);
+                          }
+                        },
                 ),
               ]
             : [],

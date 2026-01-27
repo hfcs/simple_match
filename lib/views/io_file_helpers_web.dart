@@ -4,6 +4,10 @@ import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:html' as html;
+// `dart:js_util` is only available on web. When analyzing for non-web targets
+// the analyzer may report a missing URI. Suppress that specific error here
+// because this file is a web-only shim.
+// ignore: uri_does_not_exist
 import 'dart:js_util' as js_util;
 
 Future<dynamic> getDocumentsDirectory() async {

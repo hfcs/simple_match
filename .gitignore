@@ -58,3 +58,7 @@ retro.md
 migration_test_log.txt
 migration_test_debug.log
 
+
+# Generated files
+tmp/*.pdf
+simple_match_backup_*.json

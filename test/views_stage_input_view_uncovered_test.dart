@@ -98,7 +98,10 @@ void main() {
       // Time
       final addBtns = find.widgetWithIcon(IconButton, Icons.add);
       final removeBtns = find.widgetWithIcon(IconButton, Icons.remove);
-      for (int i = 0; i < 7; i++) {
+      final addCount = addBtns.evaluate().length;
+      final removeCount = removeBtns.evaluate().length;
+      final count = addCount < removeCount ? addCount : removeCount;
+      for (int i = 0; i < count; i++) {
         await tester.ensureVisible(addBtns.at(i));
         await tester.tap(addBtns.at(i));
         await tester.pump();

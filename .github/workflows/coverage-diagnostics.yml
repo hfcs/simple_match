@@ -6,7 +6,7 @@ on:
 jobs:
   web-test-watchdog:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -53,18 +53,30 @@ jobs:
           WEB_LOG=coverage/web_test_diag.log
           rm -f "$WEB_LOG"
 
-          echo "Starting heartbeat logger (prints a timestamp every 60s)"
-          (while true; do echo "HEARTBEAT: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$WEB_LOG"; sleep 60; done) &
+          echo "Starting heartbeat logger (prints a timestamp and process snapshot every 30s)"
+          (while true; do
+             echo "HEARTBEAT: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$WEB_LOG"
+             echo "--- process snapshot ---" >> "$WEB_LOG"
+             ps aux | egrep "flutter|dart|chrome|chromium|test" | sed -n '1,120p' >> "$WEB_LOG" || true
+             echo "--- end snapshot ---" >> "$WEB_LOG"
+             sleep 30
+           done) &
           HB_PID=$!
 
-          # Run flutter test under a 20 minute timeout; capture full verbose output
-          echo "Running: timeout 20m flutter test -d chrome --coverage -v"
-          timeout 20m flutter test -d chrome --coverage -v >"$WEB_LOG" 2>&1 || true
+          # Run flutter test under a 10 minute timeout; capture full verbose output
+          echo "Running: timeout 10m flutter test -d chrome --coverage -v"
+          timeout 10m flutter test -d chrome --coverage -v >"$WEB_LOG" 2>&1 || true
           EXIT_CODE=$?
 
-          # stop heartbeat and dump log tail
+          # stop heartbeat and capture additional diagnostics, then dump log tail
           kill $HB_PID || true
           sleep 1
+          echo "--- ps aux snapshot after run ---" >> "$WEB_LOG" || true
+          ps aux | egrep "flutter|dart|chrome|chromium|test" | sed -n '1,200p' >> "$WEB_LOG" || true
+          echo "--- ss listening ports ---" >> "$WEB_LOG" || true
+          ss -ltnp 2>/dev/null | sed -n '1,200p' >> "$WEB_LOG" || true
+          echo "--- last 400 lines of full system dmesg (truncated) ---" >> "$WEB_LOG" || true
+          dmesg | tail -n 400 >> "$WEB_LOG" || true
           echo "--- web test log (last 200 lines) ---"
           tail -n 200 "$WEB_LOG" || true
 

@@ -99,12 +99,24 @@ jobs:
 
       - name: Install Chrome
         run: |
+          set -eux
+          # If Chrome already available, skip install
+          if command -v google-chrome-stable >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1; then
+            echo "Chrome already present; skipping install"
+            command -v google-chrome-stable || command -v google-chrome || true
+            exit 0
+          fi
           sudo apt-get update
-          sudo apt-get install -y wget gnupg lsb-release
-            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
-            sudo apt-get update 
-            sudo apt-get install -y google-chrome-stable 
+          sudo apt-get install -y wget ca-certificates gnupg
+          # Download the .deb directly and install; avoids apt-key interaction
+          TMP_DEB="/tmp/google-chrome-stable_current_amd64.deb"
+          wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+          sudo apt-get install -y --no-install-recommends "$TMP_DEB" || {
+            echo "apt install failed; trying dpkg + apt-get -f install"
+            sudo dpkg -i "$TMP_DEB" || true
+            sudo apt-get install -f -y
+          }
+          rm -f "$TMP_DEB"
 
       - name: Install pdftotext (poppler-utils)
         run: |

@@ -62,3 +62,4 @@ migration_test_debug.log
 # Generated files
 tmp/*.pdf
 simple_match_backup_*.json
+simple_match*.json

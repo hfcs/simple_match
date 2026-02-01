@@ -1,0 +1,122 @@
+name: Coverage Single-Test Diagnostics (Chrome)
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_path:
+        description: 'Path to the single test file to run'
+        required: true
+        default: 'test/views_stage_input_view_uncovered_test.dart'
+      timeout_secs:
+        description: 'Timeout in seconds for the test run'
+        required: false
+        default: '1800'
+
+jobs:
+  single-test-watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Chrome (if missing)
+        run: |
+          set -eux
+          if command -v google-chrome-stable >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1; then
+            echo "Chrome present; skipping install"
+            command -v google-chrome-stable || command -v google-chrome || true
+            exit 0
+          fi
+          sudo apt-get update
+          sudo apt-get install -y wget ca-certificates gnupg
+          TMP_DEB="/tmp/google-chrome-stable_current_amd64.deb"
+          wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+          sudo apt-get install -y --no-install-recommends "$TMP_DEB" || {
+            sudo dpkg -i "$TMP_DEB" || true
+            sudo apt-get install -f -y
+          }
+          rm -f "$TMP_DEB"
+
+      - name: Install coverage tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lcov poppler-utils psmisc lsof gdb
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run single test with enhanced diagnostics
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
+          FLUTTER_TEST_ARGS: --disable-dds
+        run: |
+          set -euxo pipefail
+          TEST_PATH="${{ github.event.inputs.test_path }}"
+          TIMEOUT_SECS="${{ github.event.inputs.timeout_secs }}"
+          OUTDIR="$(pwd)/test_artifacts/single_test"
+          mkdir -p "$OUTDIR"
+
+          ulimit -c unlimited || true
+
+          MON_LOG="$OUTDIR/monitor.log"
+          touch "$MON_LOG"
+
+          # Monitor loop: detect flutter_tester pids and capture per-pid /proc and pmap/lsof
+          (seen=""; while true; do
+             for pid in $(ps -eo pid,comm | awk '$2=="flutter_tester" {print $1}' || true); do
+               case " $seen " in *" $pid "*) ;; *)
+                 echo "NEW PID: $pid" >>"$MON_LOG"
+                 ddir="$OUTDIR/pid_$pid"
+                 mkdir -p "$ddir"
+                 if [ -d "/proc/$pid" ]; then
+                   cat "/proc/$pid/status" >"$ddir/status" 2>/dev/null || true
+                   if command -v pmap >/dev/null 2>&1; then pmap "$pid" >"$ddir/pmap" 2>/dev/null || true; fi
+                   if [ -r "/proc/$pid/maps" ]; then cat "/proc/$pid/maps" >"$ddir/maps" 2>/dev/null || true; fi
+                   if command -v lsof >/dev/null 2>&1; then lsof -p "$pid" >"$ddir/lsof" 2>/dev/null || true; fi
+                 fi
+                 seen="$seen $pid"
+               esac
+             done
+             sleep 1
+           done) &
+          MON_PID=$!
+
+          TEST_LOG="$OUTDIR/test.log"
+          echo "Running single test: $TEST_PATH (timeout ${TIMEOUT_SECS}s)" >"$TEST_LOG"
+          if command -v timeout >/dev/null 2>&1; then
+            timeout ${TIMEOUT_SECS}s flutter test ${FLUTTER_TEST_ARGS} -d chrome --coverage -v "$TEST_PATH" >>"$TEST_LOG" 2>&1 || true
+          else
+            flutter test ${FLUTTER_TEST_ARGS} -d chrome --coverage -v "$TEST_PATH" >>"$TEST_LOG" 2>&1 || true
+          fi
+
+          # Stop monitor
+          kill $MON_PID || true
+          sleep 1
+
+          # Collect system state
+          cat /proc/meminfo >"$OUTDIR/meminfo" 2>/dev/null || true
+          ps aux --sort=-rss | head -n 60 >"$OUTDIR/ps_rss" || true
+          dmesg --ctime | tail -n 400 >"$OUTDIR/dmesg" || true
+          tail -n 200 "$TEST_LOG" >"$OUTDIR/test_tail.log" || true
+
+          # Copy any coverage produced
+          cov=$(find . -type f -path '*/coverage/coverage.lcov' -print 2>/dev/null | head -n 1 || true)
+          if [ -n "$cov" ]; then mkdir -p coverage; cp "$cov" coverage/lcov.single_test.info || true; fi
+
+        continue-on-error: true
+
+      - name: Upload single-test diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-single-test-diagnostics
+          path: |
+            test_artifacts/single_test
+            coverage/lcov.single_test.info

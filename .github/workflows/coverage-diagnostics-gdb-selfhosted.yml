@@ -1,0 +1,101 @@
+name: gdb-capture-self-hosted
+
+on:
+  workflow_dispatch:
+    inputs:
+      TEST_PATH:
+        description: 'Path to single test file (relative to repo root)'
+        required: true
+        default: 'test/debug_main_menu_with_data_test.dart'
+      TIMEOUT_SECS:
+        description: 'Timeout seconds for the test run'
+        required: true
+        default: '1800'
+
+jobs:
+  gdb-capture:
+    # Requires a prepared self-hosted Linux runner with Flutter installed
+    runs-on: [self-hosted, linux, x64]
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify runner prerequisites
+        run: |
+          echo "Verifying Flutter and core-dump settings on runner"
+          which flutter || { echo "flutter not found in PATH on runner; install Flutter and ensure it's available to the runner user."; exit 2; }
+          echo "ulimit -c:"; ulimit -c || true
+          echo "sysctl kernel.core_pattern:"; sysctl kernel.core_pattern || true
+          echo "If ulimit or core_pattern are not configured as required, follow docs/self_hosted_runner_setup.md"
+
+      - name: Enable diagnostic environment (info only)
+        run: |
+          echo "Ensure runner user has core dump limit configured (ulimit -c unlimited) and system core_pattern set."
+
+      - name: Run single test with coverage (self-hosted)
+        shell: bash
+        env:
+          TEST_PATH: ${{ github.event.inputs.TEST_PATH }}
+          TIMEOUT_SECS: ${{ github.event.inputs.TIMEOUT_SECS }}
+        run: |
+          set -o pipefail
+          echo "Running test: $TEST_PATH"
+          timeout ${TIMEOUT_SECS}s flutter test -d chrome "$TEST_PATH" --coverage 2>&1 | tee test-run.log || true
+
+      - name: Search for core files and produce gdb backtraces
+        shell: bash
+        run: |
+          set -e
+          echo "Searching for core files in common locations..."
+          find /tmp /home /var -type f -name 'core.*' -print > core_list.txt || true
+          find . -type f -name 'core.*' -print >> core_list.txt || true
+          sort -u core_list.txt -o core_list.txt || true
+          if [ ! -s core_list.txt ]; then
+            echo "No core files found in standard locations. Listing / for debugging (may be limited)." 
+            sudo find / -xdev -type f -name 'core.*' -print 2>/dev/null | head -n 200 > core_list.txt || true
+          fi
+          if [ -s core_list.txt ]; then
+            echo "Found cores:"; cat core_list.txt
+            FLUTTER_TESTER_BIN=$(find /opt -type f -name flutter_tester -print -quit || true)
+            if [ -z "$FLUTTER_TESTER_BIN" ]; then
+              FLUTTER_TESTER_BIN=$(which flutter_tester 2>/dev/null || true)
+            fi
+            echo "flutter_tester binary: ${FLUTTER_TESTER_BIN:-<not found>}"
+            i=0
+            while read -r corefile; do
+              i=$((i+1))
+              out=core-backtrace-$i.txt
+              echo "Processing $corefile -> $out"
+              if [ -n "$FLUTTER_TESTER_BIN" ] && [ -x "$FLUTTER_TESTER_BIN" ]; then
+                gdb --batch --quiet -ex "thread apply all bt full" -ex "quit" "$FLUTTER_TESTER_BIN" "$corefile" > "$out" 2>&1 || true
+              else
+                if command -v flutter >/dev/null 2>&1; then
+                  guess=$(find /opt -type f -name flutter_tester -print -quit || true)
+                  if [ -n "$guess" ]; then
+                    gdb --batch --quiet -ex "thread apply all bt full" -ex "quit" "$guess" "$corefile" > "$out" 2>&1 || true
+                  else
+                    echo "No flutter_tester binary available; dumping file metadata" > "$out"
+                    ls -la "$corefile" >> "$out" 2>&1 || true
+                  fi
+                else
+                  echo "No flutter/flutter_tester binary available; dumping file metadata" > "$out"
+                  ls -la "$corefile" >> "$out" 2>&1 || true
+                fi
+              fi
+              echo "--- corefile: $corefile ---" >> "$out"
+              file "$corefile" >> "$out" 2>&1 || true
+            done < core_list.txt
+          else
+            echo "No core files found."
+          fi
+
+      - name: Upload diagnostics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdb-core-diagnostics-selfhosted
+          path: |
+            test-run.log
+            core_list.txt
+            core-backtrace-*.txt
+          if-no-files-found: warn

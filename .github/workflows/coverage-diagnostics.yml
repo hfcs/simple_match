@@ -47,7 +47,8 @@ jobs:
       - name: Run web tests in chunks with timeout and heartbeat
         env:
           CHROME_BIN: /usr/bin/google-chrome-stable
-          CHUNKS: 2
+          CHUNKS: 1
+          TIMEOUT_SECS: 1800
           FLUTTER_TEST_ARGS: --disable-dds
         run: |
           set -euxo pipefail
@@ -66,10 +67,11 @@ jobs:
           HB_PID=$!
 
           # Run chunked web tests sequentially to limit concurrent memory pressure; collect diagnostics per chunk
-          for i in $(seq 0 $((CHUNKS-1))); do
+            for i in $(seq 0 $((CHUNKS-1))); do
             echo "=== Running web chunk $i of $CHUNKS ===" | tee -a "$WEB_LOG"
             mkdir -p "test_artifacts/web_chunk_$i"
-            timeout 10m ./scripts/run_web_tests_chunk.sh "$i" "$CHUNKS" "$(pwd)/test_artifacts/web_chunk_$i" >>"$WEB_LOG" 2>&1 || echo "chunk $i exit $?" >>"$WEB_LOG" || true
+            # Use TIMEOUT_SECS (in seconds) to avoid premature kills; keep some kill-after slack
+            timeout ${TIMEOUT_SECS}s ./scripts/run_web_tests_chunk.sh "$i" "$CHUNKS" "$(pwd)/test_artifacts/web_chunk_$i" >>"$WEB_LOG" 2>&1 || echo "chunk $i exit $?" >>"$WEB_LOG" || true
 
             # capture immediate system state after chunk
             echo "--- /proc/meminfo after chunk $i ---" >> "$WEB_LOG" || true

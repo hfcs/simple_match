@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:simple_match/main.dart';
 import 'package:simple_match/repository/match_repository.dart';

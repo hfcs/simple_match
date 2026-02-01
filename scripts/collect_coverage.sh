@@ -20,51 +20,42 @@ echo "Running VM tests..."
 flutter test --coverage
 mv coverage/lcov.info coverage/lcov.vm.info
 
-echo "Enabling web and running tests on Chrome..."
+echo "Enabling web and running tests on Chrome in chunks..."
 flutter config --enable-web
-# Ensure Chrome is available in PATH (CI should install it)
-WEB_LOG=coverage/web_test.log
-rm -f "$WEB_LOG"
-echo "Running web tests on Chrome (logs -> $WEB_LOG)"
-# If CHROME_EXECUTABLE not set, try a reasonable macOS default
-if [ -z "${CHROME_EXECUTABLE-}" ]; then
-  if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
-    export CHROME_EXECUTABLE="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    echo "Using CHROME_EXECUTABLE=$CHROME_EXECUTABLE"
-  else
-    echo "CHROME_EXECUTABLE not set and default macOS path not found; relying on PATH to find Chrome"
+
+# Default number of chunks (parallel groups). Can be overridden by env CHUNKS.
+CHUNKS=${CHUNKS:-2}
+echo "Using CHUNKS=$CHUNKS"
+
+# Ensure helper script is present
+if [ ! -x "$(pwd)/scripts/run_web_tests_chunk.sh" ]; then
+  chmod +x "$(pwd)/scripts/run_web_tests_chunk.sh" || true
+fi
+
+rm -rf test_artifacts || true
+mkdir -p test_artifacts
+
+PIDS=()
+for i in $(seq 0 $((CHUNKS-1))); do
+  echo "Starting web chunk $i"
+  ./scripts/run_web_tests_chunk.sh "$i" "$CHUNKS" "$(pwd)/test_artifacts/web_chunk_$i" &
+  PIDS+=("$!")
+done
+
+for pid in "${PIDS[@]}"; do
+  wait "$pid" || true
+done
+
+# Extract any produced coverage.lcov files from chunk artifacts
+for a in test_artifacts/web_chunk_*/coverage.lcov; do
+  if [ -f "$a" ]; then
+    echo "Found chunk coverage: $a"
   fi
-fi
+done
 
-echo "Flutter: $(flutter --version | head -n 1)"
-echo "Which chrome: $(which google-chrome || which google-chrome-stable || which google-chrome-beta || echo 'not-found')"
-
-# Try the device-id form first; some Flutter versions produce lcov with -d chrome
-echo "Attempt: flutter test -d chrome --coverage -v"
-flutter test -d chrome --coverage -v >"$WEB_LOG" 2>&1 || true
-
-# If no lcov was produced, try --platform chrome with verbose logs (existing fallback)
-if [ ! -f coverage/lcov.info ]; then
-  echo "No lcov.info after -d chrome run, trying --platform chrome..." | tee -a "$WEB_LOG"
-  flutter test --platform chrome --coverage -v >>"$WEB_LOG" 2>&1 || true
-fi
-
-# Move coverage if produced
+# Move any single coverage.lcov produced by flutter into coverage/lcov.chrome.info if present
 if [ -f coverage/lcov.info ]; then
-  mv coverage/lcov.info coverage/lcov.chrome.info
-  echo "Chrome coverage captured -> coverage/lcov.chrome.info"
-else
-  echo "No coverage file produced by flutter test runs. Attempting VM-service fallback..." | tee -a "$WEB_LOG"
-  # Attempt to collect coverage via VM service using our helper; it will read $WEB_LOG for the VM URI
-  if [ -x "$(pwd)/tools/collect_web_coverage_with_vm_service.sh" ]; then
-    if bash tools/collect_web_coverage_with_vm_service.sh "$WEB_LOG" coverage/lcov.chrome.info; then
-      echo "VM-service fallback produced coverage/lcov.chrome.info"
-    else
-      echo "VM-service fallback failed. See $WEB_LOG and tools/collect_web_coverage_with_vm_service.sh for debug." | tee -a "$WEB_LOG"
-    fi
-  else
-    echo "Fallback script not found or not executable: tools/collect_web_coverage_with_vm_service.sh" | tee -a "$WEB_LOG"
-  fi
+  mv coverage/lcov.info coverage/lcov.chrome.info || true
 fi
 
 echo "Merging LCOV files..."

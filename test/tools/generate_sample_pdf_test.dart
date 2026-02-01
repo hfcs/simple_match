@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart' show rootBundle;
 
-import '../../lib/views/overall_result_view.dart';
-import '../../lib/models/stage_result.dart';
-import '../../lib/models/shooter.dart';
-import '../../lib/models/match_stage.dart';
+import 'package:simple_match/views/overall_result_view.dart';
+import 'package:simple_match/models/stage_result.dart';
+import 'package:simple_match/models/shooter.dart';
+import 'package:simple_match/models/match_stage.dart';
 
 class SimpleResult {
   final String name;

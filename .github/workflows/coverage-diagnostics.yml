@@ -44,29 +44,40 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run web tests with timeout and heartbeat
+      - name: Run web tests in chunks with timeout and heartbeat
         env:
           CHROME_BIN: /usr/bin/google-chrome-stable
+          CHUNKS: 2
         run: |
           set -euxo pipefail
           mkdir -p coverage
           WEB_LOG=coverage/web_test_diag.log
           rm -f "$WEB_LOG"
 
-          echo "Starting heartbeat logger (prints a timestamp and process snapshot every 30s)"
+          echo "Starting heartbeat logger (prints a timestamp and process snapshot every 20s)"
           (while true; do
              echo "HEARTBEAT: $(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> "$WEB_LOG"
              echo "--- process snapshot ---" >> "$WEB_LOG"
              ps aux | egrep "flutter|dart|chrome|chromium|test" | sed -n '1,120p' >> "$WEB_LOG" || true
              echo "--- end snapshot ---" >> "$WEB_LOG"
-             sleep 30
+             sleep 20
            done) &
           HB_PID=$!
 
-          # Run flutter test under a 10 minute timeout; capture full verbose output
-          echo "Running: timeout 10m flutter test -d chrome --coverage -v"
-          timeout 10m flutter test -d chrome --coverage -v >"$WEB_LOG" 2>&1 || true
-          EXIT_CODE=$?
+          # Run chunked web tests sequentially to limit concurrent memory pressure; collect diagnostics per chunk
+          for i in $(seq 0 $((CHUNKS-1))); do
+            echo "=== Running web chunk $i of $CHUNKS ===" | tee -a "$WEB_LOG"
+            mkdir -p "test_artifacts/web_chunk_$i"
+            timeout 10m ./scripts/run_web_tests_chunk.sh "$i" "$CHUNKS" "$(pwd)/test_artifacts/web_chunk_$i" >>"$WEB_LOG" 2>&1 || echo "chunk $i exit $?" >>"$WEB_LOG" || true
+
+            # capture immediate system state after chunk
+            echo "--- /proc/meminfo after chunk $i ---" >> "$WEB_LOG" || true
+            if [ -r /proc/meminfo ]; then cat /proc/meminfo >>"$WEB_LOG"; else echo "no /proc/meminfo" >>"$WEB_LOG"; fi
+            echo "--- ps top RSS after chunk $i ---" >> "$WEB_LOG" || true
+            ps aux --sort=-rss | head -n 40 >>"$WEB_LOG" || true
+            echo "--- last dmesg after chunk $i ---" >> "$WEB_LOG" || true
+            dmesg --ctime | tail -n 200 >>"$WEB_LOG" || true
+          done
 
           # stop heartbeat and capture additional diagnostics, then dump log tail
           kill $HB_PID || true
@@ -80,18 +91,14 @@ jobs:
           echo "--- web test log (last 200 lines) ---"
           tail -n 200 "$WEB_LOG" || true
 
+          # Collect any discovered coverage artifacts
           if [ -f coverage/lcov.info ]; then
             mv coverage/lcov.info coverage/lcov.chrome.info
             echo "Chrome coverage captured -> coverage/lcov.chrome.info"
-          else
-            echo "No coverage produced by flutter web test; check $WEB_LOG"
           fi
 
-          # Fail the step if the command timed out (124) to make it visible
-          if [ "$EXIT_CODE" -eq 124 ]; then
-            echo "Web test timed out (exit code 124)" >&2
-            exit 124
-          fi
+          # If chunk-level coverage files exist, copy them into coverage/ for upload
+          find test_artifacts -type f -name "coverage.lcov" -exec cp --parents {} coverage/ \; || true
 
       - name: Upload diagnostics
         uses: actions/upload-artifact@v4

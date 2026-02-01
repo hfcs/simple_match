@@ -128,12 +128,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y lcov
 
-      - name: Run coverage script (VM + Chrome)
+      - name: Run coverage script (VM + Chrome, chunked web)
         env:
           CHROME_BIN: /usr/bin/google-chrome-stable
+          CHUNKS: 2
         run: |
           chmod +x ./scripts/collect_coverage.sh
+          chmod +x ./scripts/run_web_tests_chunk.sh || true
           ./scripts/collect_coverage.sh
+
+      - name: Upload web test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-test-artifacts
+          path: test_artifacts
 
       - name: Upload coverage HTML
         uses: actions/upload-artifact@v4

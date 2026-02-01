@@ -30,7 +30,7 @@ class PersistenceService {
 
   // Helper to get SharedPreferences with micro-tracing for test diagnostics.
   Future<SharedPreferences> _prefsInstance() async {
-    if (_prefs != null) return _prefs!;
+    if (_prefs != null) return _prefs;
     final start = DateTime.now();
     if (kDebugMode) print('TESTDBG: SharedPreferences.getInstance start ${start.toIso8601String()}');
     final p = await SharedPreferences.getInstance();

@@ -43,10 +43,10 @@ for tf in "${SELECTED[@]}"; do
   TEST_EXIT=0
   if command -v timeout >/dev/null 2>&1; then
     # Use GNU timeout with a kill-after to ensure children are reaped
-    timeout --kill-after=30s 10m flutter test -d chrome --coverage -v "$tf" >"${LOG_PREFIX}.log" 2>&1 || TEST_EXIT=$?;
+    timeout --kill-after=30s 10m flutter test ${FLUTTER_TEST_ARGS:-} -d chrome --coverage -v "$tf" >"${LOG_PREFIX}.log" 2>&1 || TEST_EXIT=$?;
   else
     echo "warning: 'timeout' not found; running flutter without enforced timeout" >"${LOG_PREFIX}.log"
-    flutter test -d chrome --coverage -v "$tf" >>"${LOG_PREFIX}.log" 2>&1 || TEST_EXIT=$?;
+    flutter test ${FLUTTER_TEST_ARGS:-} -d chrome --coverage -v "$tf" >>"${LOG_PREFIX}.log" 2>&1 || TEST_EXIT=$?;
   fi
   echo "exit=$TEST_EXIT" >"${LOG_PREFIX}.exit"
 

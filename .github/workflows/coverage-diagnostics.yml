@@ -48,6 +48,7 @@ jobs:
         env:
           CHROME_BIN: /usr/bin/google-chrome-stable
           CHUNKS: 2
+          FLUTTER_TEST_ARGS: --disable-dds
         run: |
           set -euxo pipefail
           mkdir -p coverage

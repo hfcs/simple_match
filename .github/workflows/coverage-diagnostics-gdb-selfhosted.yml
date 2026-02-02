@@ -99,3 +99,53 @@ jobs:
             core_list.txt
             core-backtrace-*.txt
           if-no-files-found: warn
+
+  # Fallback hosted-runner job: installs Flutter and runs the same diagnostic steps.
+  gdb-capture-hosted:
+    runs-on: ubuntu-latest
+    needs: gdb-capture
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install additional packages (Chrome dependencies)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends ca-certificates libnss3 libxss1 libasound2 libgtk-3-0 libgbm1
+
+      - name: Verify Flutter
+        run: |
+          flutter --version
+          flutter precache --web
+
+      - name: Run single test with coverage (hosted)
+        shell: bash
+        env:
+          TEST_PATH: ${{ github.event.inputs.TEST_PATH }}
+          TIMEOUT_SECS: ${{ github.event.inputs.TIMEOUT_SECS }}
+        run: |
+          set -o pipefail
+          echo "Running test (hosted): $TEST_PATH"
+          timeout ${TIMEOUT_SECS}s flutter test -d chrome "$TEST_PATH" --coverage 2>&1 | tee test-run.log || true
+
+      - name: Search for core files (hosted)
+        shell: bash
+        run: |
+          echo "Searching for core files (hosted runner)..."
+          find /tmp /home /var -type f -name 'core.*' -print > core_list.txt || true
+          find . -type f -name 'core.*' -print >> core_list.txt || true
+          sort -u core_list.txt -o core_list.txt || true
+
+      - name: Upload hosted diagnostics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdb-core-diagnostics-hosted
+          path: |
+            test-run.log
+            core_list.txt
+          if-no-files-found: warn

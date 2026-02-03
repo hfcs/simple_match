@@ -1,0 +1,62 @@
+name: gdb-capture-hosted-only
+
+on:
+  workflow_dispatch:
+    inputs:
+      TEST_PATH:
+        description: 'Path to single test file (relative to repo root)'
+        required: true
+        default: 'test/debug_main_menu_with_data_test.dart'
+      TIMEOUT_SECS:
+        description: 'Timeout seconds for the test run'
+        required: true
+        default: '1800'
+
+jobs:
+  hosted-diagnostics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Chromium/Chrome deps
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends ca-certificates libnss3 libxss1 libasound2 libgtk-3-0 libgbm1
+
+      - name: Verify Flutter
+        run: |
+          flutter --version
+          flutter precache --web
+
+      - name: Run single test with coverage (hosted only)
+        shell: bash
+        env:
+          TEST_PATH: ${{ github.event.inputs.TEST_PATH }}
+          TIMEOUT_SECS: ${{ github.event.inputs.TIMEOUT_SECS }}
+        run: |
+          set -o pipefail
+          echo "Running test (hosted-only): $TEST_PATH"
+          timeout ${TIMEOUT_SECS}s flutter test -d chrome "$TEST_PATH" --coverage 2>&1 | tee test-run.log || true
+
+      - name: Search for core files (hosted-only)
+        shell: bash
+        run: |
+          echo "Searching for core files (hosted-only)..."
+          find /tmp /home /var -type f -name 'core.*' -print > core_list.txt || true
+          find . -type f -name 'core.*' -print >> core_list.txt || true
+          sort -u core_list.txt -o core_list.txt || true
+
+      - name: Upload hosted-only diagnostics artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdb-core-diagnostics-hosted-only
+          path: |
+            test-run.log
+            core_list.txt
+          if-no-files-found: warn

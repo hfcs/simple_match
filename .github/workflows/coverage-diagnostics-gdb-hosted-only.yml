@@ -27,7 +27,8 @@ jobs:
       - name: Install Chromium/Chrome deps
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends ca-certificates libnss3 libxss1 libasound2 libgtk-3-0 libgbm1
+          # Install a minimal set of libraries required for Chrome/Chromium; some packages may be preinstalled on hosted images.
+          sudo apt-get install -y --no-install-recommends ca-certificates libnss3 libxss1 libgtk-3-0 libgbm1 || true
 
       - name: Verify Flutter
         run: |

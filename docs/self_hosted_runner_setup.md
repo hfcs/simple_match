@@ -80,3 +80,32 @@ By default, core files might be written to the working directory, /var/crash, or
 Once the runner is registered and verified, trigger the `gdb-capture-self-hosted` workflow from the Actions UI (or via `gh workflow run`) and choose the test path. The workflow will verify `flutter` and core settings, run the test, then search for core files and upload diagnostics.
 
 If you want, I can dispatch the workflow for `test/debug_main_menu_with_data_test.dart` once you confirm the runner is online and ready.
+
+Runner setup helper scripts
+---------------------------
+
+This repository includes three helper scripts to speed up preparing a Linux self-hosted runner. They are not fully-automatic — you must run them on the target host (with root/sudo) and supply the registration token when registering the runner.
+
+- `scripts/setup_selfhosted_runner.sh`: installs common package prerequisites and clones the Flutter SDK into `/opt/flutter`. Run on Ubuntu 22.04/24.04 as root:
+
+```bash
+sudo bash scripts/setup_selfhosted_runner.sh
+```
+
+- `scripts/configure_core_dumps.sh`: configures `/var/crash`, persistent `kernel.core_pattern`, and writes a limits file `/etc/security/limits.d/99-runner-limits.conf` and a systemd drop-in to permit `LimitCORE=infinity`. Run as root:
+
+```bash
+sudo bash scripts/configure_core_dumps.sh
+```
+
+- `scripts/register_github_runner.sh`: template helper to download the GitHub Actions runner binary, configure it for your repository, and install/start the runner service. Usage (replace args):
+
+```bash
+sudo bash scripts/register_github_runner.sh <owner> <repo> <registration_token> <runner_name> "self-hosted,linux,x64"
+```
+
+Notes and next steps
+- After running `configure_core_dumps.sh`, verify `sysctl kernel.core_pattern` and `ulimit -c` as the runner user.
+- Make sure the user the actions runner service uses (usually `runner`) matches the entries in `/etc/security/limits.d/99-runner-limits.conf` or adjust accordingly.
+- Once the runner reports as online in GitHub, trigger the `gdb-capture-self-hosted` workflow. I can dispatch it and help analyze artifacts.
+

@@ -1,11 +1,18 @@
 /// Model for a stage result.
+import 'dart:math' as math;
+
 class StageResult {
   // Returns the total score for this result (A=5, C=3, D=1, Miss=-10, NoShoots=-10, ProcErr=-10 each)
-  int get totalScore =>
-      a * 5 + c * 3 + d * 1 - (misses + noShoots + procedureErrors) * 10;
+  int get totalScore {
+    final score = a * 5 + c * 3 + d * 1 - (misses + noShoots + procedureErrors) * 10;
+    return math.max(0, score);
+  }
 
   // Returns the hit factor (score/time)
-  double get hitFactor => time > 0 ? totalScore / time : 0.0;
+  double get hitFactor {
+    if (time <= 0) return 0.0;
+    return math.max(0.0, totalScore / time);
+  }
 
   // Returns the adjusted hit factor (hit factor * shooter's scale factor)
   double adjustedHitFactor(double scaleFactor) => hitFactor * scaleFactor;

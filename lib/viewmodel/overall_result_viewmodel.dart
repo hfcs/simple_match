@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import '../repository/match_repository.dart';
 import '../models/shooter.dart';
 
@@ -29,14 +30,15 @@ class OverallResultViewModel {
           (s) => s.name == r.shooter,
           orElse: () => Shooter(name: r.shooter),
         );
-        final totalScore =
-            r.a * 5 +
+        final totalScore = math.max(
+          0,
+          r.a * 5 +
             r.c * 3 +
             r.d * 1 -
             r.misses * 10 -
             r.noShoots * 10 -
-            r.procedureErrors * 10;
-        final hitFactor = r.time > 0 ? totalScore / r.time : 0.0;
+            r.procedureErrors * 10);
+        final hitFactor = r.time > 0 ? math.max(0.0, totalScore / r.time) : 0.0;
         final adjHitFactor = hitFactor * shooter.scaleFactor;
         adjHitFactors[r.shooter] = adjHitFactor;
       }

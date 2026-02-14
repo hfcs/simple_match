@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'dart:math' as math;
 import '../repository/match_repository.dart';
 import '../models/stage_result.dart';
 
@@ -81,10 +82,12 @@ class StageInputViewModel extends ChangeNotifier {
   }
 
   int get totalScore =>
-      5 * a + 3 * c + 1 * d - 10 * misses - 10 * noShoots - 10 * procErrors;
+      math.max(
+        0, 5 * a + 3 * c + 1 * d - 10 * misses - 10 * noShoots - 10 * procErrors);
 
   // Removed duplicate hitFactor getter; see below for correct version using 'time'.
-  double get hitFactor => time > 0 ? totalScore / time : 0.0;
+    double get hitFactor =>
+      time > 0 ? math.max(0.0, totalScore / time) : 0.0;
 
   double get adjustedHitFactor {
     final shooter = repository.getShooter(_selectedShooter ?? '');

@@ -63,7 +63,9 @@ class _AdjustScalingViewState extends State<AdjustScalingView> {
     // Update each shooter: newScale = minCS / shooterCS
     for (final s in repo.shooters) {
       final cs = parsed[s.name] ?? s.classificationScore;
-      final newScale = cs <= 0 ? s.scaleFactor : (minCS / cs);
+      final rawNewScale = cs <= 0 ? s.scaleFactor : (minCS / cs);
+      // Clamp to allowed range [0.1, 20.0]
+      final newScale = (rawNewScale as double).clamp(0.1, 20.0);
       final updated = Shooter(name: s.name, scaleFactor: newScale, classificationScore: cs);
       await repo.updateShooter(updated);
     }

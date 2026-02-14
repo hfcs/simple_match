@@ -84,7 +84,7 @@ void main() {
     await tester.tap(find.byKey(const Key('addShooterButton')));
     await tester.pump();
     expect(
-      find.textContaining('Invalid scale: must be between 0.100 and 2.000.'),
+      find.textContaining('Invalid scale: must be between 0.100 and 20.000.'),
       findsOneWidget,
     );
     await tester.enterText(
@@ -94,7 +94,7 @@ void main() {
     await tester.tap(find.byKey(const Key('addShooterButton')));
     await tester.pump();
     expect(
-      find.textContaining('Invalid scale: must be between 0.100 and 2.000.'),
+      find.textContaining('Invalid scale: must be between 0.100 and 20.000.'),
       findsOneWidget,
     );
   });

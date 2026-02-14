@@ -66,7 +66,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                       key: const Key('scaleField'),
                       controller: _scaleController,
                       decoration: const InputDecoration(
-                        labelText: 'Scale (0.100-2.000)',
+                        labelText: 'Scale (0.100-20.000)',
                         prefixIcon: Icon(Icons.percent),
                         border: OutlineInputBorder(),
                       ),

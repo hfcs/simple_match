@@ -1,0 +1,89 @@
+3786:   /opt/hostedtoolcache/flutter/stable-3.38.9-x64/bin/cache/artifacts/engine/linux-x64/flutter_tester --vm-service-port=0 --enable-checked-mode --verify-entry-points --enable-software-rendering --skia-deterministic-rendering --enable-dart-profiling --non-interactive --use-test-fonts --disable-asset-fonts --packages=/home/runner/work/simple_match/simple_match/.dart_tool/package_config.json --flutter-assets-dir=/home/runner/work/simple_match/simple_match/build/unit_test_assets /tmp/flutter_tools.JDROMZ/flutter_test_listener.VQPFYR/listener.dart.dill
+0000562d4b67c000  16040K r---- flutter_tester
+0000562d4c626000  18316K r-x-- flutter_tester
+0000562d4d809000    824K r---- flutter_tester
+0000562d4d8d7000     20K rw--- flutter_tester
+0000562d4d8dc000    160K rw---   [ anon ]
+0000562d80196000    532K rw---   [ anon ]
+00007fc158000000    240K rw---   [ anon ]
+00007fc15803c000  65296K -----   [ anon ]
+00007fc160000000    132K rw---   [ anon ]
+00007fc160021000  65404K -----   [ anon ]
+00007fc164000000    132K rw---   [ anon ]
+00007fc164021000  65404K -----   [ anon ]
+00007fc168000000    724K rw---   [ anon ]
+00007fc1680b5000  64812K -----   [ anon ]
+00007fc16c000000    132K rw---   [ anon ]
+00007fc16c021000  65404K -----   [ anon ]
+00007fc170000000    132K rw---   [ anon ]
+00007fc170021000  65404K -----   [ anon ]
+00007fc174000000    132K rw---   [ anon ]
+00007fc174021000  65404K -----   [ anon ]
+00007fc178000000    132K rw---   [ anon ]
+00007fc178021000  65404K -----   [ anon ]
+00007fc17c800000    260K rw---   [ anon ]
+00007fc17c880000   2116K rw---   [ anon ]
+00007fc17cb00000   1024K rw---   [ anon ]
+00007fc17d000000   1024K rw---   [ anon ]
+00007fc17d17e000      4K -----   [ anon ]
+00007fc17d17f000   1024K rw---   [ anon ]
+00007fc17d27f000      4K -----   [ anon ]
+00007fc17d280000   1024K rw---   [ anon ]
+00007fc17d380000   1668K rw---   [ anon ]
+00007fc17d580000    512K rwx--   [ anon ]
+00007fc17d600000    580K rw---   [ anon ]
+00007fc17d69c000    400K r---- LiberationSans-BoldItalic.ttf
+00007fc17d700000    328K rw---   [ anon ]
+00007fc17d780000    512K rw---   [ anon ]
+00007fc17d863000      4K -----   [ anon ]
+00007fc17d864000   1024K rw---   [ anon ]
+00007fc17d964000      4K -----   [ anon ]
+00007fc17d965000   1024K rw---   [ anon ]
+00007fc17da65000      4K -----   [ anon ]
+00007fc17da66000   1024K rw---   [ anon ]
+00007fc17db66000  19688K rw---   [ anon ]
+00007fc17eea0000    384K rw---   [ anon ]
+00007fc17ef00000    512K r-x--   [ anon ]
+00007fc17ef80000    512K r----   [ anon ]
+00007fc17f009000    448K rw---   [ anon ]
+00007fc17f079000   3860K rw---   [ anon ]
+00007fc17f43e000      4K -----   [ anon ]
+00007fc17f43f000   1024K rw---   [ anon ]
+00007fc17f53f000      4K -----   [ anon ]
+00007fc17f540000  16384K rw---   [ anon ]
+00007fc180540000      4K -----   [ anon ]
+00007fc180541000  16384K rw---   [ anon ]
+00007fc181541000    764K r---- icudtl.dat
+00007fc181600000    160K r---- libc.so.6
+00007fc181628000   1568K r-x-- libc.so.6
+00007fc1817b0000    316K r---- libc.so.6
+00007fc1817ff000     16K r---- libc.so.6
+00007fc181803000      8K rw--- libc.so.6
+00007fc181805000     52K rw---   [ anon ]
+00007fc181821000      8K rw---   [ anon ]
+00007fc181823000     64K r---- libm.so.6
+00007fc181833000    508K r-x-- libm.so.6
+00007fc1818b2000    352K r---- libm.so.6
+00007fc18190a000      4K r---- libm.so.6
+00007fc18190b000      4K rw--- libm.so.6
+00007fc18190c000      4K r---- libpthread.so.0
+00007fc18190d000      4K r-x-- libpthread.so.0
+00007fc18190e000      4K r---- libpthread.so.0
+00007fc18190f000      4K r---- libpthread.so.0
+00007fc181910000      4K rw--- libpthread.so.0
+00007fc181911000      4K r---- libdl.so.2
+00007fc181912000      4K r-x-- libdl.so.2
+00007fc181913000      4K r---- libdl.so.2
+00007fc181914000      4K r---- libdl.so.2
+00007fc181915000      4K rw--- libdl.so.2
+00007fc181920000      8K rw---   [ anon ]
+00007fc181922000     16K r----   [ anon ]
+00007fc181926000      8K r-x--   [ anon ]
+00007fc181928000      4K r---- ld-linux-x86-64.so.2
+00007fc181929000    172K r-x-- ld-linux-x86-64.so.2
+00007fc181954000     40K r---- ld-linux-x86-64.so.2
+00007fc18195e000      8K r---- ld-linux-x86-64.so.2
+00007fc181960000      8K rw--- ld-linux-x86-64.so.2
+00007ffddee0e000    136K rw---   [ stack ]
+ffffffffff600000      4K --x--   [ anon ]
+ total           637220K

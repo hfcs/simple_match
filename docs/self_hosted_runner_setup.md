@@ -80,4 +80,7 @@ By default, core files might be written to the working directory, /var/crash, or
 Once the runner is registered and verified, trigger the `gdb-capture-self-hosted` workflow from the Actions UI (or via `gh workflow run`) and choose the test path. The workflow will verify `flutter` and core settings, run the test, then search for core files and upload diagnostics.
 
 If you want, I can dispatch the workflow for `test/debug_main_menu_with_data_test.dart` once you confirm the runner is online and ready.
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 8f43644 (Add self-hosted runner setup scripts and update docs)

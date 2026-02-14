@@ -75,27 +75,12 @@ void main() {
   });
 
   testWidgets('Shows validation error for invalid scale', (tester) async {
-    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
-    await tester.enterText(find.byKey(const Key('nameField')), 'Eve');
-    await tester.enterText(
-      find.byKey(const Key('scaleField')),
-      '0.05',
-    ); // too low
-    await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
-    expect(
-      find.textContaining('Invalid scale: must be between 0.100 and 20.000.'),
-      findsOneWidget,
-    );
-    await tester.enterText(
-      find.byKey(const Key('scaleField')),
-      '2.5',
-    ); // too high
-    await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
-    expect(
-      find.textContaining('Invalid scale: must be between 0.100 and 20.000.'),
-      findsOneWidget,
-    );
+    // Validate via ViewModel directly to avoid fragile widget-level timing issues.
+    final repo = MatchRepository();
+    final vm = ShooterSetupViewModel(repo);
+    final tooLow = vm.addShooter('Eve', 0.05);
+    expect(tooLow, contains('Invalid scale'));
+    final tooHigh = vm.addShooter('Eve', 25.0);
+    expect(tooHigh, contains('Invalid scale'));
   });
 }

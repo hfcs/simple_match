@@ -1,0 +1,4 @@
+No flutter/flutter_tester binary available; dumping file metadata
+-rw-r--r-- 1 runner docker 1874 Dec 16 23:56 /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/3.4.8/include/ruby-3.4.0/ruby/internal/core.h
+--- corefile: /home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/3.4.8/include/ruby-3.4.0/ruby/internal/core.h ---
+/home/linuxbrew/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/3.4.8/include/ruby-3.4.0/ruby/internal/core.h: C source, ASCII text

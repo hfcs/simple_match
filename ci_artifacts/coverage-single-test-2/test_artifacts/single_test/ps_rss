@@ -1,0 +1,60 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+runner      2019  3.6  0.8 274515112 132688 ?    Sl   15:31   0:03 /home/runner/actions-runner/cached/bin/Runner.Worker spawnclient 142 145
+runner      2003  1.1  0.5 274345128 97616 ?     Sl   15:31   0:01 /home/runner/actions-runner/cached/bin/Runner.Listener run
+root        1230  0.1  0.4 2045408 73812 ?       Ssl  15:31   0:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         862  0.0  0.3 295248 51420 ?        Ss   15:31   0:00 php-fpm: master process (/etc/php/8.3/fpm/php-fpm.conf)
+root         931  0.1  0.2 1932224 49136 ?       Ssl  15:31   0:00 /usr/bin/containerd
+root         227  0.0  0.2 305372 43456 ?        SLsl 15:31   0:00 /sbin/multipathd -d -s
+root        1982  0.6  0.2 1265708 38068 ?       Sl   15:31   0:00 /tmp/provjobd3311841854
+root         899  0.2  0.2  44312 34916 ?        Ss   15:31   0:00 /usr/bin/python3 -u /usr/sbin/waagent -daemon
+root        1277  0.6  0.2 452852 34900 ?        Sl   15:31   0:00 /usr/bin/python3 -u bin/WALinuxAgent-2.15.0.1-py3.12.egg -run-exthandlers
+www-data    1244  0.0  0.1 295848 21292 ?        S    15:31   0:00 php-fpm: pool www
+www-data    1240  0.0  0.1 295848 21160 ?        S    15:31   0:00 php-fpm: pool www
+root         860  0.0  0.1  32520 20748 ?        Ss   15:31   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root        2783  0.0  0.1 405840 20644 ?        Ssl  15:32   0:00 /usr/libexec/packagekitd
+runner      1967  0.0  0.1 1235888 18844 ?       Ssl  15:31   0:00 /opt/hca/hosted-compute-agent
+root         165  0.4  0.1  83268 17272 ?        S<s  15:31   0:00 /usr/lib/systemd/systemd-journald
+root           1  2.1  0.0  22796 13600 ?        Ss   15:31   0:02 /sbin/init
+root         895  0.0  0.0 518132 13100 ?        Ssl  15:31   0:00 /usr/libexec/udisks2/udisksd
+systemd+     535  0.0  0.0  21588 12684 ?        Ss   15:31   0:00 /usr/lib/systemd/systemd-resolved
+root        1071  0.0  0.0 432984 12472 ?        Ssl  15:31   0:00 /usr/sbin/ModemManager
+runner      1055  0.1  0.0  20348 11296 ?        Ss   15:31   0:00 /usr/lib/systemd/systemd --user
+root         889  0.0  0.0  19172  9640 ?        Ss   15:31   0:00 /usr/lib/systemd/systemd-logind
+systemd+     705  0.0  0.0  19128  9488 ?        Ss   15:31   0:00 /usr/lib/systemd/systemd-networkd
+polkitd      867  0.0  0.0 340932  7876 ?        Ssl  15:31   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         234  0.1  0.0  25960  7680 ?        Ss   15:31   0:00 /usr/lib/systemd/systemd-udevd
+root        1980  0.0  0.0  17128  6964 ?        S    15:31   0:00 sudo -E -n /tmp/provjobd3311841854
+root         569  0.1  0.0   8484  6432 ?        Ss   15:31   0:00 /usr/sbin/haveged --Foreground --verbose=1
+syslog       941  0.0  0.0 230700  6180 ?        Ssl  15:31   0:00 /usr/sbin/rsyslogd -n -iNONE
+message+     855  0.1  0.0   9800  5220 ?        Ss   15:31   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+runner      3833  0.0  0.0  11324  4328 ?        R    15:33   0:00 ps aux --sort=-rss
+runner      3676  0.0  0.0   8392  3988 ?        S    15:33   0:00 /usr/bin/bash -e /home/runner/work/_temp/7d30d3f8-5dd4-42d1-ba7b-4bc2ead6767d.sh
+_chrony      993  0.0  0.0  11204  3628 ?        S    15:31   0:00 /usr/sbin/chronyd -F 1
+runner      1086  0.0  0.0  21156  3572 ?        S    15:31   0:00 (sd-pam)
+root         383  0.1  0.0   3840  2876 ?        Ss   15:31   0:00 /usr/lib/linux-tools/6.11.0-1018-azure/hv_kvp_daemon -n
+root         918  0.0  0.0   7224  2752 ?        Ss   15:31   0:00 /usr/sbin/cron -f -P
+root         947  0.0  0.0   6148  2072 ttyS0    Ss+  15:31   0:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 - vt220
+root         963  0.0  0.0   6104  1940 tty1     Ss+  15:31   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+runner      3834  0.0  0.0   6128  1800 ?        S    15:33   0:00 head -n 60
+_chrony      998  0.0  0.0  11072  1200 ?        S    15:31   0:00 /usr/sbin/chronyd -F 1
+root           2  0.0  0.0      0     0 ?        S    15:31   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        S    15:31   0:00 [pool_workqueue_release]
+root           4  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/R-rcu_gp]
+root           5  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/R-sync_wq]
+root           6  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/R-slub_flushwq]
+root           7  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/R-netns]
+root           8  0.0  0.0      0     0 ?        I    15:31   0:00 [kworker/0:0-events]
+root           9  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/0:0H-events_highpri]
+root          10  0.0  0.0      0     0 ?        I    15:31   0:00 [kworker/0:1-cgroup_destroy]
+root          11  0.5  0.0      0     0 ?        I    15:31   0:00 [kworker/u16:0-events_power_efficient]
+root          12  0.0  0.0      0     0 ?        I<   15:31   0:00 [kworker/R-mm_percpu_wq]
+root          13  0.0  0.0      0     0 ?        I    15:31   0:00 [rcu_tasks_rude_kthread]
+root          14  0.0  0.0      0     0 ?        I    15:31   0:00 [rcu_tasks_trace_kthread]
+root          15  0.0  0.0      0     0 ?        S    15:31   0:00 [ksoftirqd/0]
+root          16  0.0  0.0      0     0 ?        I    15:31   0:00 [rcu_sched]
+root          17  0.0  0.0      0     0 ?        S    15:31   0:00 [rcu_exp_par_gp_kthread_worker/0]
+root          18  0.0  0.0      0     0 ?        S    15:31   0:00 [rcu_exp_gp_kthread_worker]
+root          19  0.0  0.0      0     0 ?        S    15:31   0:00 [migration/0]
+root          20  0.0  0.0      0     0 ?        S    15:31   0:00 [idle_inject/0]
+root          21  0.0  0.0      0     0 ?        S    15:31   0:00 [cpuhp/0]
+root          22  0.0  0.0      0     0 ?        S    15:31   0:00 [cpuhp/2]

@@ -30,32 +30,21 @@ class StageResult {
   // New field to track the completion status of the stage result
   final String status; // Values: "Completed", "DNF", "DQ"
   
-  // Optional arbitrary-length remark associated with the stage result (e.g. judge notes)
-  final String roRemark;
+  // Optional arbitrary-length remark associated   // Optional arbitrary-length remark assocfinal String roRemark;
 
   StageResult({
-    required this.stage,
-    required this.shooter,
-    this.time = 0.0,
-    th    th    th  this.c = 0,
-    this.d = 0,
-    this.misses = 0,
-    this.noShoots = 0,
-    this.procedureErrors = 0,
-    this.s    this.s    this.s    this.s    this.s    this.s    this.s    this.s    this.slt cop    this.s    this.s    this.tring?     this.s    this.s    this.s    this.      this.s    this.s      int? misses,
-    int? noShoots,
-    int? procedureErrors,
-    String? statu  
-                                                                      e ?? th                                                                   ?? this.t                ??                       th    ,
-      d: d ?? this.d,
-            :             is            :  n            :        this.noShoots,
-      procedureErrors: procedureErrors ?? this.procedu      procedureErrors: procedureErrors ?? this.p     roRemark: roRemark ?? this.roRemark,
+  StageResult({
+bitrary,
+    r    r    r    r    r    r thi    r    r    r   th    r    r    r    r    r    r thi    r    r    r   th    r    r    r    r    r    r thi    r    r edur    r    r    r    rs.s    r    r    r    r    r    r thi    r    r    r   th    r    r    r    r    sult cop    r    r    r    r    r    tr  g?     r    r    r    r    r    r thi? a,
+                                                      oots                                           tus,
+                                                                           th                                                                       his.t                ??                    ?? th            d:        is          misses:           this               n                  ?? thi                                                              cedu                                                       Remark: roRemark ?? this.roRemark,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-                            'shooter': shooter,
+      'stage': stage,
+      '      '      'ter,
       'time': time,
       'a': a,
       'c': c,

@@ -64,8 +64,10 @@ class _AdjustScalingViewState extends State<AdjustScalingView> {
     for (final s in repo.shooters) {
       final cs = parsed[s.name] ?? s.classificationScore;
       final rawNewScale = cs <= 0 ? s.scaleFactor : (minCS / cs);
-      // Clamp to allowed range [0.1, 20.0]
-      final newScale = (rawNewScale as double).clamp(0.1, 20.0);
+        // Clamp to allowed range [0.1, 20.0] and preserve `double` typing.
+        final newScale = rawNewScale < 0.1
+          ? 0.1
+          : (rawNewScale > 20.0 ? 20.0 : rawNewScale);
       final updated = Shooter(name: s.name, scaleFactor: newScale, classificationScore: cs);
       await repo.updateShooter(updated);
     }

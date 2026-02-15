@@ -1,5 +1,5 @@
 // Web shim: no documents directory or file system access. Expose minimal stubs
-// ignore_for_file: avoid_web_libraries_in_flutter, deprecated_member_use
+// ignore_for_file: avoid_web_libraries_in_flutter, deprecated_member_use, dead_code
 import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:async';

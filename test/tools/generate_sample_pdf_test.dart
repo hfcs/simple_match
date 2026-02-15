@@ -1,7 +1,6 @@
+// This file does not contain a leading code fence.
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:simple_match/views/overall_result_view.dart';
 import 'package:simple_match/models/stage_result.dart';

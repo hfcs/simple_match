@@ -1,4 +1,3 @@
-/// Model for a stage result.
 import 'dart:math' as math;
 
 class StageResult {
@@ -90,4 +89,3 @@ class StageResult {
   'roRemark': roRemark,
     };
   }
-}

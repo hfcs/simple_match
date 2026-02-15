@@ -1,4 +1,4 @@
-/// Model for a stage result.
+// Model for a stage result.
 import 'dart:math' as math;
 
 class StageResult {

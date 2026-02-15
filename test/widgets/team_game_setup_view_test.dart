@@ -59,7 +59,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(vm.teamGame.teams.length, 1);
-    final _teamId = vm.teamGame.teams.first.id;
     expect(vm.teamGame.teams.first.name, 'TeamA');
 
     // Assign Alice to TeamA using the popup menu

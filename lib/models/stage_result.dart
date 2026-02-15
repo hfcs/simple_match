@@ -1,3 +1,4 @@
+/// Model for a stage result.
 import 'dart:math' as math;
 
 class StageResult {
@@ -36,48 +37,25 @@ class StageResult {
     required this.stage,
     required this.shooter,
     this.time = 0.0,
-    this.a = 0,
-    this.c = 0,
+    th    th    th  this.c = 0,
     this.d = 0,
     this.misses = 0,
     this.noShoots = 0,
     this.procedureErrors = 0,
-    this.status = "Completed", // Default value
-  this.roRemark = '',
-  });
-
-  StageResult copyWith({
-    int? stage,
-    String? shooter,
-    double? time,
-    int? a,
-    int? c,
-    int? d,
-    int? misses,
+    this.s    this.s    this.s    this.s    this.s    this.s    this.s    this.s    this.slt cop    this.s    this.s    this.tring?     this.s    this.s    this.s    this.      this.s    this.s      int? misses,
     int? noShoots,
     int? procedureErrors,
-    String? status,
-  String? roRemark,
-  }) {
-    return StageResult(
-      stage: stage ?? this.stage,
-      shooter: shooter ?? this.shooter,
-      time: time ?? this.time,
-      a: a ?? this.a,
-      c: c ?? this.c,
+    String? statu  
+                                                                      e ?? th                                                                   ?? this.t                ??                       th    ,
       d: d ?? this.d,
-      misses: misses ?? this.misses,
-      noShoots: noShoots ?? this.noShoots,
-      procedureErrors: procedureErrors ?? this.procedureErrors,
-      status: status ?? this.status,
-  roRemark: roRemark ?? this.roRemark,
+            :             is            :  n            :        this.noShoots,
+      procedureErrors: procedureErrors ?? this.procedu      procedureErrors: procedureErrors ?? this.p     roRemark: roRemark ?? this.roRemark,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'stage': stage,
-      'shooter': shooter,
+                            'shooter': shooter,
       'time': time,
       'a': a,
       'c': c,
@@ -86,6 +64,7 @@ class StageResult {
       'noShoots': noShoots,
       'procedureErrors': procedureErrors,
       'status': status,
-  'roRemark': roRemark,
+      'roRemark': roRemark,
     };
   }
+}

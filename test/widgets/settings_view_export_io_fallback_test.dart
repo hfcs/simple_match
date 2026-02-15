@@ -8,9 +8,12 @@ import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
+final bool _isCI = Platform.environment.containsKey('CI');
+
 void main() {
   // Skip this IO-focused test in CI; left here for local debugging.
-  return;
+  // Use runtime CI detection to skip the test via the `skip` parameter so
+  // the test runner records a skipped test instead of exiting with 79.
   testWidgets('IO export fallback writes file and updates state', (tester) async {
     final tmp = Directory.systemTemp.createTempSync('simple_match_test');
     final fake = FakePersistence(exportJsonValue: '{"export":true}');
@@ -59,5 +62,5 @@ void main() {
 
     // cleanup
     tmp.deleteSync(recursive: true);
-  });
+  }, skip: _isCI);
 }

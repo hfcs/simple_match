@@ -32,7 +32,7 @@ void main() {
       final repo = MatchRepository();
       final vm = ShooterSetupViewModel(repo);
       final errorLow = vm.addShooter('Charlie', 0.05); // too low
-      final errorHigh = vm.addShooter('Charlie', 2.5); // too high
+      final errorHigh = vm.addShooter('Charlie', 21.0); // too high (over 20.0)
       expect(errorLow, isNotNull);
       expect(errorHigh, isNotNull);
       expect(repo.shooters, isEmpty);

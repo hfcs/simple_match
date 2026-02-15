@@ -44,13 +44,13 @@ class SettingsView extends StatefulWidget {
   /// so widget tests can inject a temporary directory.
   final Future<dynamic> Function()? documentsDirOverride;
   const SettingsView({
-    Key? key,
+    super.key,
     this.saveExportOverride,
     this.pickBackupOverride,
     this.listBackupsOverride,
     this.readFileBytesOverride,
     this.documentsDirOverride,
-  }) : super(key: key);
+  });
 
   @override
   _SettingsViewState createState() => _SettingsViewState();

@@ -9,7 +9,7 @@ import 'package:simple_match/services/persistence_service.dart';
 class _MockPersistenceService extends PersistenceService {}
 
 void main() {
-  group('ShooterSetupView edge/error coverage', () {
+  group('ShooterSetupView edge/error coverage (fixed file)', () {
     testWidgets('Add, edit, cancel, remove, and error flows', (tester) async {
       final repo = MatchRepository(persistence: _MockPersistenceService());
       final vm = ShooterSetupViewModel(repo);
@@ -34,7 +34,7 @@ void main() {
       await tester.enterText(find.byKey(const Key('scaleField')), '1.5');
       await tester.tap(find.byKey(const Key('confirmEditButton')));
       await tester.pumpAndSettle();
-  expect(find.text('1.500', skipOffstage: false), findsWidgets);
+      expect(find.text('1.500', skipOffstage: false), findsWidgets);
       // Enter edit mode and cancel
       await tester.tap(find.byKey(const Key('editShooter-Alice')));
       await tester.pumpAndSettle();

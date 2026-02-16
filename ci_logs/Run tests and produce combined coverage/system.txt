@@ -1,0 +1,8 @@
+2026-02-15T03:37:02.7470000Z Job is about to start running on the hosted runner: GitHub Actions 1000000678
+2026-02-15T03:37:02.7350000Z Evaluating coverage.if
+2026-02-15T03:37:02.7350000Z Evaluating: success()
+2026-02-15T03:37:02.7350000Z Result: true
+2026-02-15T03:37:02.7360000Z Requested labels: ubuntu-latest
+2026-02-15T03:37:02.7360000Z Job defined at: hfcs/simple_match/.github/workflows/coverage.yml@refs/heads/main
+2026-02-15T03:37:02.7360000Z Waiting for a runner to pick up this job...
+2026-02-15T03:37:02.7470000Z Job is waiting for a hosted runner to come online.

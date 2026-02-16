@@ -16,9 +16,16 @@ class _StageInputViewState extends State<StageInputView> {
   final _cController = TextEditingController();
   final _dController = TextEditingController();
   final _missesController = TextEditingController();
+  // Raw-digit buffer for interactive plain-digit input (digits only,
+  // without explicit decimal). We also track whether the value is
+  // negative to preserve a leading '-' during editing.
+  String _timeRawDigits = '';
+  bool _timeNegative = false;
+  bool _timeExplicitDecimal = false;
   final _noShootsController = TextEditingController();
   final _procErrorsController = TextEditingController();
   final _roRemarkController = TextEditingController();
+  
 
   // Fraction of vertical space allocated to the input area (0.0 - 1.0).
   // Default sets the lower (results) pane to 1/3 of the screen: inputFraction = 2/3.
@@ -27,6 +34,23 @@ class _StageInputViewState extends State<StageInputView> {
   @override
   void initState() {
     super.initState();
+    _timeFocusNode.addListener(() {
+      if (!_timeFocusNode.hasFocus) {
+        // On blur, if user didn't type an explicit decimal, show a two-decimal
+        // formatted value so the '.' becomes visible.
+        final text = _timeController.text.trim();
+        if (text.isNotEmpty && !text.contains('.')) {
+          final t = _parseTimeInputValue(text);
+          final display = t.toStringAsFixed(2);
+          _timeController.value = TextEditingValue(
+            text: display,
+            selection: TextSelection.collapsed(offset: display.length),
+          );
+          // Update viewmodel
+          WidgetsBinding.instance.addPostFrameCallback((_) => setState(() => Provider.of<StageInputViewModel>(context, listen: false).time = t));
+        }
+      }
+    });
   }
 
   String? _editingKey;
@@ -34,6 +58,7 @@ class _StageInputViewState extends State<StageInputView> {
   @override
   void dispose() {
     _timeController.dispose();
+    _timeFocusNode.dispose();
     _aController.dispose();
     _cController.dispose();
     _dController.dispose();
@@ -64,6 +89,8 @@ class _StageInputViewState extends State<StageInputView> {
     final value = (digits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
     return hasSign ? -value : value;
   }
+
+  late final FocusNode _timeFocusNode = FocusNode();
 
   void _refreshFields(StageInputViewModel vm) {
     _timeController.text = vm.time.toString();
@@ -273,28 +300,46 @@ class _StageInputViewState extends State<StageInputView> {
                                       ),
                                       onChanged: (v) {
                                         final s = v.trim();
-                                        // If user is just typing a leading '-' or cleared the
-                                        // field, don't auto-format yet.
+                                        // Empty or just '-' -> reset buffer
                                         if (s.isEmpty || s == '-') {
+                                          _timeRawDigits = '';
+                                          _timeNegative = s.startsWith('-');
+                                          _timeExplicitDecimal = false;
                                           final t = _parseTimeInputValue(v);
                                           setState(() => vm.time = t);
                                           return;
                                         }
-                                        final hasDecimal = s.contains('.');
-                                        final t = _parseTimeInputValue(v);
-                                        // If user did NOT type an explicit decimal point,
-                                        // replace the visible text with the formatted
-                                        // two-decimal value so the '.' appears interactively.
-                                        if (!hasDecimal) {
-                                          final display = t.toStringAsFixed(2);
-                                          _timeController.value = TextEditingValue(
-                                            text: display,
-                                            selection: TextSelection.collapsed(offset: display.length),
-                                          );
+
+                                        // If user typed an explicit decimal, switch to
+                                        // decimal editing mode and parse normally.
+                                        if (s.contains('.')) {
+                                          _timeRawDigits = '';
+                                          _timeExplicitDecimal = true;
+                                          _timeNegative = s.startsWith('-');
+                                          final t = double.tryParse(s) ?? 0.0;
                                           setState(() => vm.time = t);
                                           return;
                                         }
-                                        setState(() => vm.time = t);
+
+                                        // Plain-digit mode: gather digits and update raw
+                                        // buffer. Treat 1-2 digits as whole seconds, 3+
+                                        // digits as having two implied decimals.
+                                        final digits = RegExp(r"\d").allMatches(s).map((m) => m.group(0)).join();
+                                        _timeRawDigits = digits;
+                                        _timeNegative = s.startsWith('-');
+                                        _timeExplicitDecimal = false;
+
+                                        final intVal = _timeRawDigits.isEmpty ? 0 : int.tryParse(_timeRawDigits) ?? 0;
+                                        final value = (_timeRawDigits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
+
+                                        // Display formatted two-decimal value but preserve
+                                        // sign for negative inputs. Place caret at end.
+                                        final display = ( _timeNegative ? '-' : '') + value.toStringAsFixed(2);
+                                        _timeController.value = TextEditingValue(
+                                          text: display,
+                                          selection: TextSelection.collapsed(offset: display.length),
+                                        );
+                                        setState(() => vm.time = _timeNegative ? -value : value);
                                       },
                                     ),
                                   ),

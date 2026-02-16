@@ -23,7 +23,19 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
-        child: SettingsView(documentsDirOverride: () async => tmp),
+        child: SettingsView(
+          documentsDirOverride: () async => tmp,
+          // Provide a synchronous save override to avoid async hangs in
+          // the VM test runtime when writing the final export file.
+          saveExportOverride: (path, content) async {
+            // If `path` is a bare filename (web/test synthetic name), write
+            // it into the provided temp directory so the test can find it.
+            final effectivePath = path.contains('/') ? path : '${tmp.path}/$path';
+            final f = File(effectivePath);
+            f.parent.createSync(recursive: true);
+            f.writeAsStringSync(content);
+          },
+        ),
       ),
     ));
 

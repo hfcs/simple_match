@@ -52,10 +52,17 @@ class _StageInputViewState extends State<StageInputView> {
       return double.tryParse(s) ?? 0.0;
     }
     // Otherwise interpret plain digits as two-decimal fixed input: e.g. "1234" -> 12.34
+    // Preserve an explicit leading minus sign so negative values are honored
+    final hasSign = s.startsWith('-');
     final digits = RegExp(r"\d+").allMatches(s).map((m) => m.group(0)).join();
     if (digits.isEmpty) return 0.0;
     final intVal = int.tryParse(digits) ?? 0;
-    return intVal / 100.0;
+    // If the user entered 1-2 digits (e.g. '2' or '12'), treat them as whole seconds
+    // (2 -> 2.00, 12 -> 12.00). For 3+ digits interpret the last two as decimals
+    // (e.g. '1234' -> 12.34). This keeps short inputs intuitive while supporting
+    // fixed two-decimal entry for longer raw digit sequences.
+    final value = (digits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
+    return hasSign ? -value : value;
   }
 
   void _refreshFields(StageInputViewModel vm) {

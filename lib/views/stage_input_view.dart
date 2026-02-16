@@ -44,6 +44,20 @@ class _StageInputViewState extends State<StageInputView> {
     super.dispose();
   }
 
+  double _parseTimeInputValue(String v) {
+    final s = v.trim();
+    if (s.isEmpty) return 0.0;
+    // If user explicitly types a decimal point, parse normally and honor their format
+    if (s.contains('.')) {
+      return double.tryParse(s) ?? 0.0;
+    }
+    // Otherwise interpret plain digits as two-decimal fixed input: e.g. "1234" -> 12.34
+    final digits = RegExp(r"\d+").allMatches(s).map((m) => m.group(0)).join();
+    if (digits.isEmpty) return 0.0;
+    final intVal = int.tryParse(digits) ?? 0;
+    return intVal / 100.0;
+  }
+
   void _refreshFields(StageInputViewModel vm) {
     _timeController.text = vm.time.toString();
     _aController.text = vm.a.toString();
@@ -230,9 +244,7 @@ class _StageInputViewState extends State<StageInputView> {
                                   IconButton(
                                     icon: const Icon(Icons.remove),
                                     onPressed: () {
-                                      final t =
-                                          double.tryParse(_timeController.text) ??
-                                          0.0;
+                                      final t = _parseTimeInputValue(_timeController.text);
                                       final newVal = (t - 0.01).clamp(0.0, 999.99);
                                       _timeController.text = newVal.toStringAsFixed(2);
                                       setState(() => vm.time = newVal);
@@ -253,7 +265,7 @@ class _StageInputViewState extends State<StageInputView> {
                                         decimal: true,
                                       ),
                                       onChanged: (v) {
-                                        final t = double.tryParse(v) ?? 0.0;
+                                        final t = _parseTimeInputValue(v);
                                         setState(() => vm.time = t);
                                       },
                                     ),
@@ -261,9 +273,7 @@ class _StageInputViewState extends State<StageInputView> {
                                   IconButton(
                                     icon: const Icon(Icons.add),
                                     onPressed: () {
-                                      final t =
-                                          double.tryParse(_timeController.text) ??
-                                          0.0;
+                                      final t = _parseTimeInputValue(_timeController.text);
                                       final newVal = (t + 0.01).clamp(0.0, 999.99);
                                       _timeController.text = newVal.toStringAsFixed(2);
                                       setState(() => vm.time = newVal);

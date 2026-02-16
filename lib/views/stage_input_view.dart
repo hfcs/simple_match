@@ -272,7 +272,28 @@ class _StageInputViewState extends State<StageInputView> {
                                         decimal: true,
                                       ),
                                       onChanged: (v) {
+                                        final s = v.trim();
+                                        // If user is just typing a leading '-' or cleared the
+                                        // field, don't auto-format yet.
+                                        if (s.isEmpty || s == '-') {
+                                          final t = _parseTimeInputValue(v);
+                                          setState(() => vm.time = t);
+                                          return;
+                                        }
+                                        final hasDecimal = s.contains('.');
                                         final t = _parseTimeInputValue(v);
+                                        // If user did NOT type an explicit decimal point,
+                                        // replace the visible text with the formatted
+                                        // two-decimal value so the '.' appears interactively.
+                                        if (!hasDecimal) {
+                                          final display = t.toStringAsFixed(2);
+                                          _timeController.value = TextEditingValue(
+                                            text: display,
+                                            selection: TextSelection.collapsed(offset: display.length),
+                                          );
+                                          setState(() => vm.time = t);
+                                          return;
+                                        }
                                         setState(() => vm.time = t);
                                       },
                                     ),

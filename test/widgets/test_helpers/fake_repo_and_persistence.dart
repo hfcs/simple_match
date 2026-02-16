@@ -34,11 +34,11 @@ class FakePersistence extends PersistenceService {
       throw UnsupportedError('exportBackupToFile is not supported on web in tests');
     }
     final file = File(path);
-    print('FakePersistence: creating file');
-    await file.create(recursive: true);
-    print('FakePersistence: writing file');
-    await file.writeAsString(exportJsonValue ?? '{}');
-    print('FakePersistence: write complete');
+    print('FakePersistence: creating file (sync)');
+    file.parent.createSync(recursive: true);
+    print('FakePersistence: writing file (sync)');
+    file.writeAsStringSync(exportJsonValue ?? '{}');
+    print('FakePersistence: write complete (sync)');
     return file;
   }
 

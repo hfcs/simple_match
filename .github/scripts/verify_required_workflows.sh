@@ -30,17 +30,17 @@ missing=0
 
 for wf in "$@"; do
   echo "Checking workflow: '$wf' for commit $SHA"
-  # Query recent runs and look for matching head_sha and workflow_name
+  # Query recent runs and look for matching head_sha and workflow name (API uses 'name')
   resp=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${API_URL}?per_page=200")
-  # Find runs matching both workflow name and head_sha; take the first match's conclusion
+  # Find runs matching either .name or legacy .workflow_name and the head_sha; take the first match's conclusion
   conclusion=$(echo "$resp" | jq -r --arg wf "$wf" --arg sha "$SHA" '
-    ([.workflow_runs[] | select(.workflow_name==$wf and .head_sha==$sha) | .conclusion] | .[0])'
+    ([.workflow_runs[] | select((.name==$wf or .workflow_name==$wf) and .head_sha==$sha) | .conclusion] | .[0])'
   ) || true
 
   # debug: show what conclusions were found (for troubleshooting)
   if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then
     echo "Debug: no conclusion found for workflow '$wf' at $SHA; sample runs:"
-    echo "$resp" | jq -r '.workflow_runs[0:5] | map({name:.workflow_name,sha:.head_sha,conclusion:.conclusion})'
+    echo "$resp" | jq -r '.workflow_runs[0:5] | map({name:.name,workflow_name:.workflow_name,sha:.head_sha,conclusion:.conclusion})'
   fi
 
   if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then

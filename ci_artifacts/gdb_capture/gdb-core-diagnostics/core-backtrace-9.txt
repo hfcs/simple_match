@@ -1,4 +1,0 @@
-No flutter/flutter_tester binary available; dumping file metadata
--rw-r--r-- 1 runner runner 1230 Mar 19  2025 /home/runner/work/_actions/actions/upload-artifact/v4/.licenses/npm/@actions/core.dep.yml
---- corefile: /home/runner/work/_actions/actions/upload-artifact/v4/.licenses/npm/@actions/core.dep.yml ---
-/home/runner/work/_actions/actions/upload-artifact/v4/.licenses/npm/@actions/core.dep.yml: ASCII text, with very long lines (464)

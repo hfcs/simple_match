@@ -1,4 +1,0 @@
-No flutter/flutter_tester binary available; dumping file metadata
--rw-r--r-- 1 runner runner 1381 Nov 13 23:20 /home/runner/work/_actions/actions/checkout/v4/.licenses/npm/@octokit/core.dep.yml
---- corefile: /home/runner/work/_actions/actions/checkout/v4/.licenses/npm/@octokit/core.dep.yml ---
-/home/runner/work/_actions/actions/checkout/v4/.licenses/npm/@octokit/core.dep.yml: ASCII text

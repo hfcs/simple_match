@@ -22,9 +22,13 @@ class _StageInputViewState extends State<StageInputView> {
   String _timeRawDigits = '';
   bool _timeNegative = false;
   bool _timeExplicitDecimal = false;
+  bool _suppressTimeOnChange = false;
+  String _lastFormattedDigits = '';
+  String _lastControllerText = '';
   final _noShootsController = TextEditingController();
   final _procErrorsController = TextEditingController();
   final _roRemarkController = TextEditingController();
+  final _timeFocusNode = FocusNode();
   
 
   // Fraction of vertical space allocated to the input area (0.0 - 1.0).
@@ -46,6 +50,7 @@ class _StageInputViewState extends State<StageInputView> {
             text: display,
             selection: TextSelection.collapsed(offset: display.length),
           );
+          _lastControllerText = display;
           // Update viewmodel
           WidgetsBinding.instance.addPostFrameCallback((_) => setState(() => Provider.of<StageInputViewModel>(context, listen: false).time = t));
         }
@@ -58,56 +63,15 @@ class _StageInputViewState extends State<StageInputView> {
   @override
   void dispose() {
     _timeController.dispose();
-    _timeFocusNode.dispose();
     _aController.dispose();
     _cController.dispose();
     _dController.dispose();
     _missesController.dispose();
     _noShootsController.dispose();
     _procErrorsController.dispose();
-  _roRemarkController.dispose();
+    _roRemarkController.dispose();
+    _timeFocusNode.dispose();
     super.dispose();
-  }
-
-  double _parseTimeInputValue(String v) {
-    final s = v.trim();
-    if (s.isEmpty) return 0.0;
-    // If user explicitly types a decimal point, parse normally and honor their format
-    if (s.contains('.')) {
-      return double.tryParse(s) ?? 0.0;
-    }
-    // Otherwise interpret plain digits as two-decimal fixed input: e.g. "1234" -> 12.34
-    // Preserve an explicit leading minus sign so negative values are honored
-    final hasSign = s.startsWith('-');
-    final digits = RegExp(r"\d+").allMatches(s).map((m) => m.group(0)).join();
-    if (digits.isEmpty) return 0.0;
-    final intVal = int.tryParse(digits) ?? 0;
-    // If the user entered 1-2 digits (e.g. '2' or '12'), treat them as whole seconds
-    // (2 -> 2.00, 12 -> 12.00). For 3+ digits interpret the last two as decimals
-    // (e.g. '1234' -> 12.34). This keeps short inputs intuitive while supporting
-    // fixed two-decimal entry for longer raw digit sequences.
-    final value = (digits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
-    return hasSign ? -value : value;
-  }
-
-  late final FocusNode _timeFocusNode = FocusNode();
-
-  void _refreshFields(StageInputViewModel vm) {
-    _timeController.text = vm.time.toString();
-    _aController.text = vm.a.toString();
-    _cController.text = vm.c.toString();
-    _dController.text = vm.d.toString();
-    _missesController.text = vm.misses.toString();
-    _noShootsController.text = vm.noShoots.toString();
-    _procErrorsController.text = vm.procErrors.toString();
-    _roRemarkController.text = vm.roRemark;
-  }
-
-  void _clearEditing(StageInputViewModel vm) {
-    setState(() {
-      _editingKey = null;
-      _refreshFields(vm);
-    });
   }
 
   void _setA(StageInputViewModel vm, int value) {
@@ -120,6 +84,43 @@ class _StageInputViewState extends State<StageInputView> {
     setState(() => vm.c = value);
   }
 
+  double _parseTimeInputValue(String text) {
+    final s = text.trim();
+    if (s.isEmpty || s == '-') return 0.0;
+    if (s.contains('.')) {
+      return double.tryParse(s) ?? 0.0;
+    }
+    final digits = RegExp(r"\d").allMatches(s).map((m) => m.group(0)).join();
+    if (digits.isEmpty) return 0.0;
+    final intVal = int.tryParse(digits) ?? 0;
+    return (digits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
+  }
+
+  void _refreshFields(StageInputViewModel vm) {
+    // Populate controllers from viewmodel
+    _aController.text = vm.a.toString();
+    _cController.text = vm.c.toString();
+    _dController.text = vm.d.toString();
+    _missesController.text = vm.misses.toString();
+    _noShootsController.text = vm.noShoots.toString();
+    _procErrorsController.text = vm.procErrors.toString();
+    _roRemarkController.text = vm.roRemark;
+    if (vm.time == 0.0) {
+      _timeController.text = '';
+      _lastControllerText = '';
+      _lastFormattedDigits = '';
+    } else {
+      final display = vm.time.toStringAsFixed(2);
+      _timeController.text = display;
+      _lastControllerText = display;
+      _lastFormattedDigits = display.replaceAll('.', '');
+    }
+  }
+
+  void _clearEditing(StageInputViewModel vm) {
+    _editingKey = null;
+    _refreshFields(vm);
+  }
   void _setD(StageInputViewModel vm, int value) {
     _dController.text = value.toString();
     setState(() => vm.d = value);
@@ -275,12 +276,17 @@ class _StageInputViewState extends State<StageInputView> {
                               // Time
                               Row(
                                 children: [
-                                  IconButton(
+                                      IconButton(
                                     icon: const Icon(Icons.remove),
                                     onPressed: () {
                                       final t = _parseTimeInputValue(_timeController.text);
                                       final newVal = (t - 0.01).clamp(0.0, 999.99);
-                                      _timeController.text = newVal.toStringAsFixed(2);
+                                      _suppressTimeOnChange = true;
+                                      final display = newVal.toStringAsFixed(2);
+                                      _timeController.text = display;
+                                      _lastControllerText = display;
+                                      _lastFormattedDigits = display.replaceAll('.', '');
+                                      Future.microtask(() => _suppressTimeOnChange = false);
                                       setState(() => vm.time = newVal);
                                     },
                                   ),
@@ -298,7 +304,9 @@ class _StageInputViewState extends State<StageInputView> {
                                           const TextInputType.numberWithOptions(
                                         decimal: true,
                                       ),
+                                      focusNode: _timeFocusNode,
                                       onChanged: (v) {
+                                        if (_suppressTimeOnChange) return;
                                         final s = v.trim();
                                         // Empty or just '-' -> reset buffer
                                         if (s.isEmpty || s == '-') {
@@ -310,12 +318,59 @@ class _StageInputViewState extends State<StageInputView> {
                                           return;
                                         }
 
-                                        // If user typed an explicit decimal, switch to
-                                        // decimal editing mode and parse normally.
+                                        // Compute digits-only snapshot of the new input.
+                                        final digitsInS = RegExp(r"\d").allMatches(s).map((m) => m.group(0)).join();
+
+                                        // If the user removed the decimal point itself (previous
+                                        // controller text had a '.' but the new input does not),
+                                        // allow explicit decimal editing so backspace can continue
+                                        // removing characters. Without this we immediately
+                                        // re-format into a two-decimal display which prevents
+                                        // the user from deleting the non-decimal part.
+                                        if (!s.contains('.') && _lastControllerText.contains('.') && digitsInS.length <= _lastFormattedDigits.length) {
+                                          _timeRawDigits = digitsInS;
+                                          _timeExplicitDecimal = true;
+                                          _timeNegative = s.startsWith('-');
+                                          _suppressTimeOnChange = true;
+                                          _timeController.value = TextEditingValue(text: s, selection: TextSelection.collapsed(offset: s.length));
+                                          _lastControllerText = s;
+                                          Future.microtask(() => _suppressTimeOnChange = false);
+                                          final parsed = double.tryParse(s) ?? (_timeRawDigits.isEmpty ? 0.0 : ((_timeRawDigits.length <= 2) ? (int.tryParse(_timeRawDigits) ?? 0).toDouble() : (int.tryParse(_timeRawDigits) ?? 0) / 100.0));
+                                          setState(() => vm.time = parsed);
+                                          return;
+                                        }
+
+                                        // If input contains a decimal, either treat as explicit
+                                        // decimal editing or detect an append to our formatted
+                                        // display (user typed while caret at end).
                                         if (s.contains('.')) {
+                                          // If the user typed a single digit appended to our
+                                          // last formatted display, interpret that as an
+                                          // append to the raw-digit buffer. Example:
+                                          // last display "9.00" -> lastFormattedDigits="900";
+                                          // user types '3' -> digitsInS="9003" -> appended '3'.
+                                          if (_lastFormattedDigits.isNotEmpty && digitsInS.startsWith(_lastFormattedDigits) && digitsInS.length == _lastFormattedDigits.length + 1 && !_timeExplicitDecimal) {
+                                            final appended = digitsInS.substring(_lastFormattedDigits.length);
+                                            _timeRawDigits = _timeRawDigits + appended;
+                                            final intVal = _timeRawDigits.isEmpty ? 0 : int.tryParse(_timeRawDigits) ?? 0;
+                                            final value = (_timeRawDigits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
+                                            final display = (_timeNegative ? '-' : '') + value.toStringAsFixed(2);
+                                            _suppressTimeOnChange = true;
+                                            _timeController.value = TextEditingValue(
+                                              text: display,
+                                              selection: TextSelection.collapsed(offset: display.length),
+                                            );
+                                            _lastControllerText = display;
+                                            _lastFormattedDigits = display.replaceAll('.', '');
+                                            Future.microtask(() => _suppressTimeOnChange = false);
+                                            setState(() => vm.time = _timeNegative ? -value : value);
+                                            return;
+                                          }
+                                          // Otherwise treat as explicit decimal entry
                                           _timeRawDigits = '';
                                           _timeExplicitDecimal = true;
                                           _timeNegative = s.startsWith('-');
+                                          _lastFormattedDigits = digitsInS;
                                           final t = double.tryParse(s) ?? 0.0;
                                           setState(() => vm.time = t);
                                           return;
@@ -334,11 +389,18 @@ class _StageInputViewState extends State<StageInputView> {
 
                                         // Display formatted two-decimal value but preserve
                                         // sign for negative inputs. Place caret at end.
-                                        final display = ( _timeNegative ? '-' : '') + value.toStringAsFixed(2);
+                                        final display = (_timeNegative ? '-' : '') + value.toStringAsFixed(2);
+                                        _suppressTimeOnChange = true;
                                         _timeController.value = TextEditingValue(
                                           text: display,
                                           selection: TextSelection.collapsed(offset: display.length),
                                         );
+                                        // Keep a digits-only snapshot of the last formatted
+                                        // text so we can detect single-digit appends.
+                                        _lastFormattedDigits = display.replaceAll('.', '');
+                                        // Release suppression asynchronously so the next
+                                        // user keystroke is handled normally.
+                                        Future.microtask(() => _suppressTimeOnChange = false);
                                         setState(() => vm.time = _timeNegative ? -value : value);
                                       },
                                     ),
@@ -348,7 +410,12 @@ class _StageInputViewState extends State<StageInputView> {
                                     onPressed: () {
                                       final t = _parseTimeInputValue(_timeController.text);
                                       final newVal = (t + 0.01).clamp(0.0, 999.99);
-                                      _timeController.text = newVal.toStringAsFixed(2);
+                                      _suppressTimeOnChange = true;
+                                      final display = newVal.toStringAsFixed(2);
+                                      _timeController.text = display;
+                                      _lastControllerText = display;
+                                      _lastFormattedDigits = display.replaceAll('.', '');
+                                      Future.microtask(() => _suppressTimeOnChange = false);
                                       setState(() => vm.time = newVal);
                                     },
                                   ),

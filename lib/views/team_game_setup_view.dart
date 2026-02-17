@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../viewmodel/team_game_viewmodel.dart';
 import '../repository/match_repository.dart';
 import '../models/team_game.dart';
+import '../widgets/radio_group.dart';
 
 class TeamGameSetupView extends StatefulWidget {
   const TeamGameSetupView({super.key});
@@ -37,40 +38,32 @@ class _TeamGameSetupViewState extends State<TeamGameSetupView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text('Team scoring mode', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                RadioListTile<String>(
-                  value: 'off',
+                AppRadioGroup<String>(
                   groupValue: tg.mode,
-                  title: const Text('Team score deactivated'),
                   onChanged: (v) => vm.setMode(v ?? 'off'),
+                  options: [
+                    AppRadioOption(value: 'off', title: const Text('Team score deactivated')),
+                    AppRadioOption(value: 'average', title: const Text('Overall average — Team score is average of all members')),
+                    AppRadioOption(
+                      value: 'top',
+                      title: Row(children: [
+                        const Expanded(child: Text('Top shooters — only top N shooters count')),
+                        if (tg.mode == 'top')
+                          SizedBox(
+                            width: 80,
+                            child: TextFormField(
+                              initialValue: tg.topCount.toString(),
+                              keyboardType: TextInputType.number,
+                              onChanged: (s) {
+                                final n = int.tryParse(s) ?? 0;
+                                vm.setTopCount(n);
+                              },
+                            ),
+                          ),
+                      ]),
+                    ),
+                  ],
                 ),
-                RadioListTile<String>(
-                  value: 'average',
-                  groupValue: tg.mode,
-                  title: const Text('Overall average — Team score is average of all members'),
-                  onChanged: (v) => vm.setMode(v ?? 'average'),
-                ),
-                RadioListTile<String>(
-                  value: 'top',
-                  groupValue: tg.mode,
-                  title: Row(children: [
-                    const Expanded(child: Text('Top shooters — only top N shooters count')),
-                    if (tg.mode == 'top')
-                      SizedBox(
-                        width: 80,
-                        child: TextFormField(
-                          initialValue: tg.topCount.toString(),
-                          keyboardType: TextInputType.number,
-                          onChanged: (s) {
-                            final n = int.tryParse(s) ?? 0;
-                            vm.setTopCount(n);
-                          },
-                        ),
-                      ),
-                  ]),
-                  onChanged: (v) => vm.setMode(v ?? 'top'),
-                ),
-
-                const SizedBox(height: 12),
                 Row(
                   children: [
                     ElevatedButton.icon(

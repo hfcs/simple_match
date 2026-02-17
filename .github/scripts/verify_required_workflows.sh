@@ -34,8 +34,14 @@ for wf in "$@"; do
   resp=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${API_URL}?per_page=200")
   # Find runs matching both workflow name and head_sha; take the first match's conclusion
   conclusion=$(echo "$resp" | jq -r --arg wf "$wf" --arg sha "$SHA" '
-    (.workflow_runs[] | select(.workflow_name==$wf and .head_sha==$sha) | .conclusion) | .[0]'
+    ([.workflow_runs[] | select(.workflow_name==$wf and .head_sha==$sha) | .conclusion] | .[0])'
   ) || true
+
+  # debug: show what conclusions were found (for troubleshooting)
+  if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then
+    echo "Debug: no conclusion found for workflow '$wf' at $SHA; sample runs:"
+    echo "$resp" | jq -r '.workflow_runs[0:5] | map({name:.workflow_name,sha:.head_sha,conclusion:.conclusion})'
+  fi
 
   if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then
     echo "No run found for workflow '$wf' at commit $SHA"

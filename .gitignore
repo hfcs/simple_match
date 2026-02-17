@@ -58,6 +58,9 @@ retro.md
 migration_test_log.txt
 migration_test_debug.log
 
+# Per-chunk web test artifacts (do not commit large logs)
+test_artifacts/
+
 
 # Generated files
 tmp/

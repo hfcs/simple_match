@@ -344,6 +344,27 @@ class _StageInputViewState extends State<StageInputView> {
                                         // decimal editing or detect an append to our formatted
                                         // display (user typed while caret at end).
                                         if (s.contains('.')) {
+                                          // Deletion case: user removed one or more digits
+                                          // while the decimal remains present (e.g. 12.34 -> 12.3)
+                                          if (_lastFormattedDigits.isNotEmpty && digitsInS.length < _lastFormattedDigits.length) {
+                                            // User deleted one or more digits from the formatted
+                                            // display while the decimal remains. Respect the
+                                            // user's explicit decimal editing (do not immediately
+                                            // re-format to two decimals) so they can continue
+                                            // deleting digits naturally.
+                                            _timeRawDigits = digitsInS;
+                                            _timeExplicitDecimal = true;
+                                            _timeNegative = s.startsWith('-');
+                                            _suppressTimeOnChange = true;
+                                            _timeController.value = TextEditingValue(text: s, selection: TextSelection.collapsed(offset: s.length));
+                                            _lastControllerText = s;
+                                            _lastFormattedDigits = digitsInS;
+                                            Future.microtask(() => _suppressTimeOnChange = false);
+                                            final parsed = double.tryParse(s) ?? 0.0;
+                                            setState(() => vm.time = parsed);
+                                            return;
+                                          }
+
                                           // If the user typed a single digit appended to our
                                           // last formatted display, interpret that as an
                                           // append to the raw-digit buffer. Example:
@@ -382,8 +403,26 @@ class _StageInputViewState extends State<StageInputView> {
                                         final digits = RegExp(r"\d").allMatches(s).map((m) => m.group(0)).join();
                                         _timeRawDigits = digits;
                                         _timeNegative = s.startsWith('-');
-                                        _timeExplicitDecimal = false;
 
+                                        final bool isDeletion = _lastControllerText.length > s.length;
+
+                                        // If we previously entered explicit-decimal-editing mode
+                                        // (user was backspacing through a formatted value) and the
+                                        // current keystroke is a deletion, respect the user's
+                                        // explicit edit and do not re-format into the two-decimal
+                                        // display. This avoids the "10 -> 1.00" issue when
+                                        // stepping back through multi-digit integer parts.
+                                        if (_timeExplicitDecimal && isDeletion) {
+                                          _lastControllerText = s;
+                                          _lastFormattedDigits = digits;
+                                          final parsed = digits.isEmpty ? 0.0 : ((digits.length <= 2) ? (int.tryParse(digits) ?? 0).toDouble() : (int.tryParse(digits) ?? 0) / 100.0);
+                                          setState(() => vm.time = _timeNegative ? -parsed : parsed);
+                                          return;
+                                        }
+
+                                        // Normal plain-digit entry (append or fresh input): format
+                                        // into the interactive two-decimal display.
+                                        _timeExplicitDecimal = false;
                                         final intVal = _timeRawDigits.isEmpty ? 0 : int.tryParse(_timeRawDigits) ?? 0;
                                         final value = (_timeRawDigits.length <= 2) ? intVal.toDouble() : intVal / 100.0;
 
@@ -397,6 +436,7 @@ class _StageInputViewState extends State<StageInputView> {
                                         );
                                         // Keep a digits-only snapshot of the last formatted
                                         // text so we can detect single-digit appends.
+                                        _lastControllerText = display;
                                         _lastFormattedDigits = display.replaceAll('.', '');
                                         // Release suppression asynchronously so the next
                                         // user keystroke is handled normally.

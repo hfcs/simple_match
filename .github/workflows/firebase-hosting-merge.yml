@@ -18,18 +18,19 @@ jobs:
           channel: 'stable'
       - name: Verify Flutter
         run: flutter --version
-        - name: Ensure verify script is executable
-          run: |
-            ls -la .github/scripts || true
-            chmod +x .github/scripts/verify_required_workflows.sh || true
 
-        - name: Verify required workflows succeeded for this commit
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            REPO: ${{ github.repository }}
-            SHA: ${{ github.event.workflow_run.head_sha }}
-          run: |
-            .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"
+      - name: Ensure verify script is executable
+        run: |
+          ls -la .github/scripts || true
+          chmod +x .github/scripts/verify_required_workflows.sh || true
+
+      - name: Verify required workflows succeeded for this commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"
       - name: Cache Flutter Pub packages
         uses: actions/cache@v4
         with:

@@ -67,3 +67,4 @@ tmp/
 tmp/*.pdf
 simple_match_backup_*.json
 simple_match*.json
+run-*-logs.zip

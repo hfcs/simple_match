@@ -29,7 +29,7 @@ jobs:
             REPO: ${{ github.repository }}
             SHA: ${{ github.event.workflow_run.head_sha }}
           run: |
-            .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "coverage-web" "Integration Tests"
+            .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"
       - name: Cache Flutter Pub packages
         uses: actions/cache@v4
         with:

@@ -41,11 +41,13 @@ class StageInputViewModel extends ChangeNotifier {
   void selectStage(int stage) {
     _selectedStage = stage;
     _loadOrReset();
+    notifyListeners();
   }
 
   void selectShooter(String shooter) {
     _selectedShooter = shooter;
     _loadOrReset();
+    notifyListeners();
   }
 
   void _loadOrReset() {

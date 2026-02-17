@@ -120,4 +120,10 @@
 - `SettingsView` exposes deterministic testing overrides: `pickBackupOverride`, `listBackupsOverride`, and `readFileBytesOverride` to simulate file selection and IO in widget tests. Use these in generated tests to avoid flaky dialog/platform interactions.
 - Prefer deterministic direct tests (dry-run -> import -> repo.loadAll) for CI; keep full UI dialog tests locally for debugging but mark them skipped in CI if they are flaky.
 
+### Repository artifact policy
+
+- **Do not check generated files or CI run artifacts into source control.** Generated outputs (coverage HTML, per-test logs, core dumps, tarballs, and zip archives produced by CI runs) must not be committed to the repository unless they are explicitly used as immutable control artifacts in the CI/CD pipeline and documented in the repo.
+- Store diagnostic artifacts externally (CI artifact storage, S3/GCS, or a release attachment) and reference them in issues or PRs instead of committing them.
+- If a generated artifact must be preserved in-repo for automation, add a short `README.md` in the containing folder documenting why it's required and who owns the artifact lifecycle.
+
 For more, see [Flutter Architecture Guide](https://docs.flutter.dev/app-architecture/guide)

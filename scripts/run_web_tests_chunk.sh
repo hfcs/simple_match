@@ -55,10 +55,20 @@ for tf in "${SELECTED[@]}"; do
   if [ -r /proc/meminfo ]; then cat /proc/meminfo >>"${LOG_PREFIX}.meminfo"; else echo "no /proc/meminfo" >>"${LOG_PREFIX}.meminfo"; fi
 
   echo "-- ps top RSS --" >"${LOG_PREFIX}.ps"
-  ps aux --sort=-rss | head -n 40 >>"${LOG_PREFIX}.ps" || true
+  # Prefer GNU ps sorting on Linux, fall back to portable invocation on macOS/BSD
+  if [ "$(uname -s)" = "Linux" ]; then
+    ps aux --sort=-rss | head -n 40 >>"${LOG_PREFIX}.ps" || true
+  else
+    ps aux | head -n 40 >>"${LOG_PREFIX}.ps" || true
+  fi
 
   echo "-- last dmesg --" >"${LOG_PREFIX}.dmesg"
-  if command -v dmesg >/dev/null 2>&1; then dmesg --ctime | tail -n 200 >>"${LOG_PREFIX}.dmesg" || true; else echo "no dmesg" >>"${LOG_PREFIX}.dmesg"; fi
+  # dmesg --ctime is Linux-specific and may require privileges on macOS; only run on Linux
+  if [ "$(uname -s)" = "Linux" ] && command -v dmesg >/dev/null 2>&1; then
+    dmesg --ctime | tail -n 200 >>"${LOG_PREFIX}.dmesg" || true
+  else
+    echo "no dmesg (non-linux or restricted)" >>"${LOG_PREFIX}.dmesg"
+  fi
 
   # If the test was killed by signal 9, dump recent system state for debugging and continue
   if [ "$TEST_EXIT" -ne 0 ]; then

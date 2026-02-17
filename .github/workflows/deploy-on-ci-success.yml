@@ -2,7 +2,7 @@ name: Deploy on CI success
 
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ["CI - Flutter tests"]
     types: [completed]
 
 permissions:

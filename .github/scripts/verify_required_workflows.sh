@@ -39,8 +39,24 @@ for wf in "$@"; do
 
   # debug: show what conclusions were found (for troubleshooting)
   if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then
-    echo "Debug: no conclusion found for workflow '$wf' at $SHA; sample runs:"
+    # If no run matched the exact merge commit SHA, try to find any pull requests
+    # associated with that commit and check their head SHAs (CI often runs on PR heads).
+    echo "Debug: no conclusion found for workflow '$wf' at $SHA; checking associated PR head SHAs and recent runs..."
     echo "$resp" | jq -r '.workflow_runs[0:5] | map({name:.name,workflow_name:.workflow_name,sha:.head_sha,conclusion:.conclusion})'
+
+    prs=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${REPO}/commits/${SHA}/pulls") || true
+    pr_shas=$(echo "$prs" | jq -r '.[].head.sha' || true)
+    for pr_sha in $pr_shas; do
+      if [ -z "$pr_sha" ]; then
+        continue
+      fi
+      echo "Debug: checking PR head sha $pr_sha for workflow '$wf'"
+      concl2=$(echo "$resp" | jq -r --arg wf "$wf" --arg sha "$pr_sha" '([.workflow_runs[] | select((.name==$wf or .workflow_name==$wf) and .head_sha==$sha) | .conclusion] | .[0])') || true
+      if [ -n "$concl2" ] && [ "$concl2" != "null" ]; then
+        conclusion="$concl2"
+        break
+      fi
+    done
   fi
 
   if [ -z "$conclusion" ] || [ "$conclusion" == "null" ]; then

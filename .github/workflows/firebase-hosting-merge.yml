@@ -6,6 +6,9 @@ on:
   workflow_run:
     workflows: ["CI - Flutter tests"]
     types: [completed]
+permissions:
+  actions: read
+  contents: read
 jobs:
   build_and_deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
@@ -19,11 +22,14 @@ jobs:
       - name: Verify Flutter
         run: flutter --version
 
+      - name: Install jq
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq || true
+
       - name: Ensure verify script is executable
         run: |
           ls -la .github/scripts || true
           chmod +x .github/scripts/verify_required_workflows.sh || true
-
       - name: Verify required workflows succeeded for this commit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

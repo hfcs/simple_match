@@ -75,8 +75,12 @@ class _OverallResultViewState extends State<OverallResultView> {
                           } catch (e) {
                             // Swallow or log errors; keep UI responsive
                           } finally {
-                            if (!mounted) return;
-                            setState(() => _exporting = false);
+                            // Avoid returning inside a finally block which can suppress
+                            // exceptions. Only call setState when the widget is still
+                            // mounted.
+                            if (mounted) {
+                              setState(() => _exporting = false);
+                            }
                           }
                         },
                 ),

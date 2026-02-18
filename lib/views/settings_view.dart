@@ -53,7 +53,7 @@ class SettingsView extends StatefulWidget {
   });
 
   @override
-  _SettingsViewState createState() => _SettingsViewState();
+  State<SettingsView> createState() => _SettingsViewState();
 
   /// Additional coverage helper to provide a few more executable statements
   /// in this file for CI coverage boosts. Tests may call this to mark extra

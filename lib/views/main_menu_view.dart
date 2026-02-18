@@ -150,6 +150,13 @@ class MainMenuView extends StatelessWidget {
                       enabled: false,
                     ),
                   ),
+            const SizedBox(height: 8),
+            Center(
+              child: SelectableText(
+                'https://github.com/hfcs/simple_match',
+                style: TextStyle(color: Colors.blue, decoration: TextDecoration.underline),
+              ),
+            ),
           ],
         ),
       ),

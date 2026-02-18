@@ -25,18 +25,10 @@ jobs:
       - name: Install jq
         run: |
           sudo apt-get update && sudo apt-get install -y jq || true
-
-      - name: Ensure verify script is executable
-        run: |
-          ls -la .github/scripts || true
-          chmod +x .github/scripts/verify_required_workflows.sh || true
-      - name: Verify required workflows succeeded for this commit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          SHA: ${{ github.event.workflow_run.head_sha }}
-        run: |
-          .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"
+      # NOTE: verification of required workflows is performed by the Merge Gate.
+      # Removed redundant runtime verification here to avoid duplicate checks
+      # and potential delays. Keep `verify_required_workflows.sh` as a
+      # diagnostic utility for manual runs if needed.
       - name: Cache Flutter Pub packages
         uses: actions/cache@v4
         with:

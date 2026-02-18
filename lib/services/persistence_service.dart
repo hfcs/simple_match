@@ -56,8 +56,23 @@ class PersistenceService {
       await migrateSchema(storedVersion, kDataSchemaVersion, prefs);
       await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
     } else if (storedVersion > kDataSchemaVersion) {
-      // Future-proof: if app is downgraded, clear data to avoid incompatibility
-      await prefs.clear();
+      // Future-proof: if app is downgraded, clear data to avoid incompatibility.
+      // Use an explicit remove loop rather than prefs.clear() to ensure behavior
+      // is consistent across real and mocked SharedPreferences (Mockito stubs).
+      try {
+        final keys = prefs.getKeys();
+        for (final k in keys) {
+          if (k == kDataSchemaVersionKey) continue;
+          try {
+            await prefs.remove(k);
+          } catch (_) {}
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to enumerate prefs keys during downgrade clear: $e', e, st);
+        try {
+          await prefs.clear();
+        } catch (_) {}
+      }
       await prefs.setInt(kDataSchemaVersionKey, kDataSchemaVersion);
     }
     if (kDebugMode) print('TESTDBG: ensureSchemaUpToDate completed');

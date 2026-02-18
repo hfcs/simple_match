@@ -1,8 +1,7 @@
-// Temporarily ignore deprecated Radio API uses; refactor to RadioGroup in a follow-up
-// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodel/stage_input_viewmodel.dart';
+import '../widgets/radio_group.dart';
 
 class StageInputView extends StatefulWidget {
   const StageInputView({super.key});
@@ -762,38 +761,16 @@ class _StageInputViewState extends State<StageInputView> {
                                   const Text('Status:'),
                                   const SizedBox(width: 12),
                                   Expanded(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('Completed'),
-                                            value: 'Completed',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('DNF'),
-                                            value: 'DNF',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RadioListTile<String>(
-                                            title: const Text('DQ'),
-                                            value: 'DQ',
-                                            groupValue: vm.status,
-                                            onChanged: (v) {
-                                              if (v != null) vm.setStatus(v);
-                                            },
-                                          ),
-                                        ),
+                                    child: AppRadioGroup<String>(
+                                      axis: Axis.horizontal,
+                                      groupValue: vm.status,
+                                      onChanged: (v) {
+                                        if (v != null) vm.setStatus(v);
+                                      },
+                                      options: [
+                                        AppRadioOption(value: 'Completed', title: const Text('Completed')),
+                                        AppRadioOption(value: 'DNF', title: const Text('DNF')),
+                                        AppRadioOption(value: 'DQ', title: const Text('DQ')),
                                       ],
                                     ),
                                   ),

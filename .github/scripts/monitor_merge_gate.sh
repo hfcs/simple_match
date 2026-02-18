@@ -23,6 +23,15 @@ if [ -z "$REPO" ]; then
   fi
 fi
 
+# Normalize REPO if someone supplied a full git URL into REPO env
+if echo "$REPO" | grep -q "github.com"; then
+  # extract owner/repo from possible URL forms
+  maybe=$(echo "$REPO" | sed -E 's#.*/github.com/([^/]+/[^/]+)(\.git)?#\1#')
+  if [ -n "$maybe" ]; then
+    REPO="$maybe"
+  fi
+fi
+
 SHA=${1:-}
 if [ -z "$SHA" ]; then
   SHA=$(git rev-parse --verify HEAD 2>/dev/null || true)

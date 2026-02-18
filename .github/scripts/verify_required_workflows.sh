@@ -25,11 +25,24 @@ if [ "$#" -lt 1 ]; then
 fi
 
 API_URL="https://api.github.com/repos/${REPO}/actions/runs"
+WORKFLOWS_API="https://api.github.com/repos/${REPO}/actions/workflows"
 
 missing=0
 
 for wf in "$@"; do
   echo "Checking workflow: '$wf' for commit $SHA"
+  # If wf looks like a workflow filename (ends with .yml or .yaml), resolve to workflow_id
+  workflow_id=""
+  if echo "$wf" | grep -E "\.ya?ml$" >/dev/null 2>&1; then
+    # Try to fetch workflow metadata by filename
+    wresp=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${WORKFLOWS_API}/$wf" || true)
+    workflow_id=$(echo "$wresp" | jq -r '.id // empty' || true)
+    if [ -n "$workflow_id" ]; then
+      echo "Resolved workflow file '$wf' -> id=$workflow_id"
+    else
+      echo "Warning: could not resolve workflow file '$wf' to an id; falling back to name matching"
+    fi
+  fi
   # Query recent runs and look for matching head_sha and workflow name (API uses 'name').
   # If a run is in-progress the API may report a null conclusion; poll briefly to allow it to finish.
   # Allow overrides via environment, but increase defaults to tolerate CI timing
@@ -38,10 +51,13 @@ for wf in "$@"; do
   conclusion=""
   for attempt in $(seq 0 "$POLL_RETRIES"); do
     resp=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${API_URL}?per_page=200") || resp=""
-    # Find runs matching either .name or legacy .workflow_name and the head_sha; take the first match's conclusion
-    conclusion=$(echo "$resp" | jq -r --arg wf "$wf" --arg sha "$SHA" '
-      ([.workflow_runs[] | select((.name==$wf or .workflow_name==$wf) and .head_sha==$sha) | .conclusion] | .[0])'
-    ) || conclusion=""
+    # If we resolved a workflow_id from a filename, prefer matching by workflow_id and head_sha
+    if [ -n "$workflow_id" ]; then
+      conclusion=$(echo "$resp" | jq -r --arg id "$workflow_id" --arg sha "$SHA" '([.workflow_runs[] | select((.workflow_id|tostring)==$id and .head_sha==$sha) | .conclusion] | .[0])') || conclusion=""
+    else
+      # Find runs matching either .name or legacy .workflow_name and the head_sha; take the first match's conclusion
+      conclusion=$(echo "$resp" | jq -r --arg wf "$wf" --arg sha "$SHA" '([.workflow_runs[] | select((.name==$wf or .workflow_name==$wf) and .head_sha==$sha) | .conclusion] | .[0])') || conclusion=""
+    fi
 
     if [ -n "$conclusion" ] && [ "$conclusion" != "null" ]; then
       break

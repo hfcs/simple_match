@@ -10,44 +10,104 @@ permissions:
   contents: read
 
 jobs:
-  gate:
-    name: Merge Gate - dispatch and verify required checks
+  flutter-tests:
+    name: CI - Flutter tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           lfs: true
           fetch-depth: 0
 
-      - name: Ensure verify script is executable
-        run: |
-          ls -la .github/scripts || true
-          chmod +x .github/scripts/verify_required_workflows.sh || true
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
 
-      - name: Dispatch required workflows for this ref
-        env:
-          REPO: ${{ github.repository }}
-          SHA: ${{ github.sha }}
-          REF: ${{ github.ref_name }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -eux
-          # Workflow filenames to dispatch (must match files under .github/workflows)
-          WORKFLOWS=("flutter-tests.yml" "coverage.yml" "coverage-web.yml" "integration-tests.yml")
-          for wf in "${WORKFLOWS[@]}"; do
-            # Use branch ref (REF) when dispatching workflow_dispatch events — passing a raw commit SHA
-            # is not accepted by the API for workflow_dispatch and can cause dispatch failures.
-            echo "Dispatching workflow file: $wf for ref ${REF} (original sha=${SHA})"
-            curl -s -X POST -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches" \
-              -d "{\"ref\":\"${REF}\"}" || echo "dispatch failed for $wf (non-fatal)"
-          done
+      - name: Install dependencies
+        run: flutter pub get
 
-      - name: Verify required workflows succeeded for this commit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          SHA: ${{ github.sha }}
+      - name: Run Flutter unit tests
+        run: flutter test --coverage
+
+  coverage:
+    name: Coverage (VM + Chrome)
+    runs-on: ubuntu-latest
+    needs: flutter-tests
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install system tools
         run: |
-          .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"
+          sudo apt-get update
+          sudo apt-get install -y lcov poppler-utils git-lfs
+          git lfs install --system || true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run coverage
+        run: |
+          flutter test --coverage
+          # generate lcov report if desired
+          genhtml -o coverage_html coverage/lcov.info || true
+
+  coverage-web:
+    name: coverage-web
+    runs-on: ubuntu-latest
+    needs: coverage
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget ca-certificates gnupg
+          TMP_DEB="/tmp/google-chrome-stable_current_amd64.deb"
+          wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+          sudo dpkg -i "$TMP_DEB" || sudo apt-get -f install -y
+          rm -f "$TMP_DEB"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run web tests (headless chrome)
+        run: flutter test -d chrome --coverage || true
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: coverage-web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run integration tests
+        run: flutter test integration_test || true

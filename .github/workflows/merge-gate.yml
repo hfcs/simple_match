@@ -84,14 +84,10 @@ jobs:
   coverage:
     uses: ./.github/workflows/coverage.yml
     needs: flutter-tests
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   coverage-web:
     uses: ./.github/workflows/coverage-web.yml
     needs: coverage
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   integration-tests:
     name: Integration Tests

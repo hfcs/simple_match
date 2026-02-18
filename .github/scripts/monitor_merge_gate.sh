@@ -27,9 +27,11 @@ fi
 if echo "$REPO" | grep -q "github.com"; then
   # if REPO looks like a full URL (contains :// or @), extract owner/repo
   if echo "$REPO" | grep -Eq '://|@'; then
-    maybe=$(echo "$REPO" | sed -E 's#.*/github.com/([^/]+/[^/]+)(\.git)?#\1#') || maybe=""
-    if [ -n "$maybe" ]; then
-      REPO="$maybe"
+    # strip everything up to github.com/ and remove .git suffix
+    tmp="${REPO##*github.com/}"
+    tmp="${tmp%%.git}"
+    if [ -n "$tmp" ]; then
+      REPO="$tmp"
     fi
   else
     # if REPO already looks like owner/repo, keep it

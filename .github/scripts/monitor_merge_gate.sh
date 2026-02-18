@@ -42,10 +42,24 @@ echo "Monitor start: repo=$REPO sha=$SHA" | tee "$LOGFILE"
 curl_opts=( -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" )
 
 echo "Fetching recent workflow runs..." | tee -a "$LOGFILE"
-resp=$(curl "${curl_opts[@]}" "${API_BASE}/runs?per_page=200") || resp=""
-echo "fetched $(echo "$resp" | jq -r '.workflow_runs|length // 0') runs" | tee -a "$LOGFILE"
+# capture HTTP status and raw body for debugging
+resp_body="$LOGDIR/resp_body_$$.json"
+http_status=$(curl -s -w "%{http_code}" -o "$resp_body" "${curl_opts[@]}" "${API_BASE}/runs?per_page=200" || true)
+body_text="$(cat "$resp_body" 2>/dev/null || true)"
+echo "HTTP status=$http_status" | tee -a "$LOGFILE"
+if [ -z "$body_text" ] || [ "$body_text" = "null" ]; then
+  echo "Empty or null response body from API; raw response saved to $resp_body" | tee -a "$LOGFILE"
+  echo "Response preview:" | tee -a "$LOGFILE"
+  head -n 200 "$resp_body" | sed -n '1,200p' | tee -a "$LOGFILE" || true
+  echo "fetched 0 runs" | tee -a "$LOGFILE"
+  resp='{}'
+else
+  resp=$(cat "$resp_body")
+  echo "fetched $(echo "$resp" | jq -r '.workflow_runs|length // 0') runs" | tee -a "$LOGFILE"
+fi
 
-run_id=$(echo "$resp" | jq -r --arg sha "$SHA" '.workflow_runs[] | select(.name=="Merge Gate" and .head_sha==$sha) | .id' | head -n1 || true)
+# safely iterate over workflow_runs (use empty array if missing)
+run_id=$(echo "$resp" | jq -r --arg sha "$SHA" '(.workflow_runs // []) | map(select(.name=="Merge Gate" and .head_sha==$sha)) | .[0].id' 2>/dev/null || true)
 
 if [ -z "$run_id" ] || [ "$run_id" = "null" ]; then
   echo "No Merge Gate run found for $SHA" | tee -a "$LOGFILE"

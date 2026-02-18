@@ -3,7 +3,6 @@ name: Merge Gate
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: {}
 
 permissions:
   actions: write
@@ -36,36 +35,16 @@ jobs:
         run: flutter test --coverage
 
   coverage:
-    name: Coverage (placeholder)
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/coverage.yml
     needs: flutter-tests
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - name: Placeholder - quick verify
-        run: |
-          echo "Coverage placeholder job: quick sanity checks"
-          flutter --version || true
-          flutter pub get || true
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   coverage-web:
-    name: Coverage Web (placeholder)
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/coverage-web.yml
     needs: coverage
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - name: Placeholder - quick web verify
-        run: |
-          echo "Coverage-web placeholder job: quick web checks"
-          flutter --version || true
-          flutter pub get || true
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   integration-tests:
     name: Integration Tests

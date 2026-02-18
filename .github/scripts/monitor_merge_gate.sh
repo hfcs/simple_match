@@ -80,7 +80,7 @@ run_id=$(echo "$resp" | jq -r --arg sha "$SHA" '(.workflow_runs // []) | map(sel
 if [ -z "$run_id" ] || [ "$run_id" = "null" ]; then
   echo "No Merge Gate run found for $SHA" | tee -a "$LOGFILE"
   echo "Recent Merge Gate runs:" | tee -a "$LOGFILE"
-  echo "$resp" | jq -r '.workflow_runs[] | select(.name=="Merge Gate") | "id=\(.id) head_sha=\(.head_sha) status=\(.status) conclusion=\(.conclusion) url=\(.html_url)"' | tee -a "$LOGFILE"
+  echo "$resp" | jq -r '(.workflow_runs // [])[] | select(.name=="Merge Gate") | "id=\(.id) head_sha=\(.head_sha) status=\(.status) conclusion=\(.conclusion) url=\(.html_url)"' | tee -a "$LOGFILE"
   echo "Log file: $LOGFILE" >&2
   exit 5
 fi

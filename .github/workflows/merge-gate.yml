@@ -36,13 +36,13 @@ jobs:
         run: flutter test --coverage
 
   coverage:
-    uses: ./.github/workflows/coverage.yml@main
+    uses: hfcs/simple_match/.github/workflows/coverage.yml@main
     needs: flutter-tests
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   coverage-web:
-    uses: ./.github/workflows/coverage-web.yml@main
+    uses: hfcs/simple_match/.github/workflows/coverage-web.yml@main
     needs: coverage
     secrets:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,6 +9,52 @@ permissions:
   contents: read
 
 jobs:
+  preflight:
+    name: Preflight - validate reusable workflows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Check workflow files exist and declare workflow_call
+        run: |
+          set -euo pipefail
+          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml)
+          for f in "${files[@]}"; do
+            echo "Checking $f"
+            if [ ! -f "$f" ]; then
+              echo "ERROR: missing $f" >&2
+              exit 2
+            fi
+            if ! grep -q "workflow_call" "$f"; then
+              echo "ERROR: $f does not declare workflow_call" >&2
+              grep -n "^on:" -n "$f" || true
+              exit 3
+            fi
+            echo "OK: $f contains workflow_call"
+          done
+      - name: Check via GitHub API (optional extra diagnostic)
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          for f in .github/workflows/coverage.yml .github/workflows/coverage-web.yml; do
+            echo "API lookup: $f"
+            status=$(curl -s -o /tmp/api_resp.txt -w "%{http_code}" -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${REPO}/contents/${f}?ref=${{ github.ref_name }}")
+            if [ "$status" -ne 200 ]; then
+              echo "API lookup failed for $f: HTTP $status" >&2
+              cat /tmp/api_resp.txt || true
+              exit 4
+            fi
+            echo "API OK: $f"
+          done
+      - name: Upload preflight diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: preflight-diagnostics
+          path: |
+            /tmp/api_resp.txt
+
   flutter-tests:
     name: CI - Flutter tests
     runs-on: ubuntu-latest

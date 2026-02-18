@@ -70,13 +70,15 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Run common CI setup
+        uses: ./.github/actions/ci-setup
+        with:
+          install_poppler: 'true'
+          install_lcov: 'false'
+          install_git_lfs: 'true'
+
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Install pdftotext (poppler-utils)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y poppler-utils
 
       - name: Run Flutter unit tests
         run: flutter test --coverage

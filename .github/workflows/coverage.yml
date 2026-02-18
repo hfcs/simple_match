@@ -47,12 +47,12 @@ jobs:
       - name: Verify Flutter
         run: flutter --version
 
-      - name: Install coverage tools (lcov, poppler-utils, git-lfs)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lcov poppler-utils git-lfs
-          git lfs install --system || true
-          git lfs pull --include="assets/fonts/*" || true
+      - name: Run common CI setup
+        uses: ./.github/actions/ci-setup
+        with:
+          install_poppler: 'true'
+          install_lcov: 'true'
+          install_git_lfs: 'true'
 
       - name: Write CI diagnostics
         run: |
@@ -115,15 +115,13 @@ jobs:
           }
           rm -f "$TMP_DEB"
 
-      - name: Install pdftotext (poppler-utils)
+      - name: (covered by ci-setup) pdftotext present
         run: |
-          sudo apt-get update
-          sudo apt-get install -y poppler-utils
+          if command -v pdftotext >/dev/null 2>&1; then pdftotext -v; else echo "pdftotext not present"; fi
 
-      - name: Install lcov (for genhtml)
+      - name: (covered by ci-setup) lcov present
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lcov
+          if command -v lcov >/dev/null 2>&1; then lcov --version; else echo "lcov not present"; fi
 
       - name: Run coverage script (VM + Chrome, chunked web)
         env:

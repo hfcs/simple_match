@@ -77,6 +77,14 @@ jobs:
           git lfs install --system || true
           git lfs pull --include="assets/fonts/*" || true
 
+      - name: Run common CI setup (Linux)
+        if: runner.os == 'Linux'
+        uses: ./.github/actions/ci-setup
+        with:
+          install_poppler: 'true'
+          install_lcov: 'true'
+          install_git_lfs: 'true'
+
       - name: Write CI diagnostics (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -86,9 +94,9 @@ jobs:
           java -version 2>&1 | sed -n '1,5p' >> "$out" || true
           javac -version 2>&1 | sed -n '1,5p' >> "$out" || true
           flutter --version 2>&1 | sed -n '1,5p' >> "$out" || true
-          pdftotext -v 2>&1 | sed -n '1,5p' >> "$out" || echo "pdftotext not installed" >> "$out"
-          git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || echo "git-lfs not installed" >> "$out"
-          lcov --version 2>&1 | sed -n '1,5p' >> "$out" || echo "lcov not installed" >> "$out"
+          if command -v pdftotext >/dev/null 2>&1; then pdftotext -v 2>&1 | sed -n '1,5p' >> "$out"; else echo "pdftotext not installed" >> "$out"; fi
+          if command -v git >/dev/null 2>&1; then git lfs --version 2>&1 | sed -n '1,5p' >> "$out" || true; else echo "git-lfs not installed" >> "$out"; fi
+          if command -v lcov >/dev/null 2>&1; then lcov --version 2>&1 | sed -n '1,5p' >> "$out" || true; else echo "lcov not installed" >> "$out"; fi
 
       - name: Upload CI diagnostics (Linux)
         if: runner.os == 'Linux'

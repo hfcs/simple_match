@@ -23,18 +23,16 @@ jobs:
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pub-
+      - name: Run common CI setup
+        uses: ./.github/actions/ci-setup
+        with:
+          install_poppler: 'true'
+          install_lcov: 'true'
+          install_git_lfs: 'true'
       - name: Install chrome
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
-      - name: Install pdftotext (poppler-utils)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y poppler-utils
-      - name: Install lcov (for genhtml)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lcov git-lfs
       - name: Verify installed tools
         run: |
           echo "Flutter:" && flutter --version || true

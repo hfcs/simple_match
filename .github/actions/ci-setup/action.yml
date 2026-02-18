@@ -1,0 +1,45 @@
+name: CI Setup
+description: "Composite action to install common CI packages (poppler, lcov, git-lfs) and run git-lfs pulls"
+inputs:
+  install_poppler:
+    description: 'Install poppler-utils (pdftotext)'
+    required: false
+    default: 'true'
+  install_lcov:
+    description: 'Install lcov/genhtml'
+    required: false
+    default: 'true'
+  install_git_lfs:
+    description: 'Install and pull git-lfs assets'
+    required: false
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+    - name: Ensure apt packages (poppler/lcov/git-lfs)
+      shell: bash
+      run: |
+        set -eux
+        sudo apt-get update
+        if [ "${{ inputs.install_poppler }}" = 'true' ]; then
+          sudo apt-get install -y poppler-utils || true
+        fi
+        if [ "${{ inputs.install_lcov }}" = 'true' ]; then
+          sudo apt-get install -y lcov || true
+        fi
+        if [ "${{ inputs.install_git_lfs }}" = 'true' ]; then
+          sudo apt-get install -y git-lfs || true
+          git lfs install --system || true
+          # Attempt to pull LFS assets if checkout already present
+          if [ -d "${GITHUB_WORKSPACE:-.}" ]; then
+            git -C "${GITHUB_WORKSPACE}" lfs pull --include="assets/fonts/*" || true
+          fi
+        fi
+
+    - name: Verify installed tools
+      shell: bash
+      run: |
+        set -eux
+        if command -v pdftotext >/dev/null 2>&1; then pdftotext -v || true; else echo "pdftotext not present"; fi
+        if command -v lcov >/dev/null 2>&1; then lcov --version || true; else echo "lcov not present"; fi
+        if command -v git-lfs >/dev/null 2>&1; then git lfs --version || true; else echo "git-lfs not present"; fi

@@ -36,6 +36,7 @@ jobs:
       - name: Check via GitHub API (optional extra diagnostic)
         env:
           REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           for f in .github/workflows/coverage.yml .github/workflows/coverage-web.yml; do

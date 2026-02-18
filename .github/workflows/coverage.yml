@@ -1,11 +1,7 @@
 name: Coverage (VM + Chrome)
 
 on:
-  push:
-    branches: [ main, fix/web-export-import ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch: {}
   workflow_call: {}
 
 jobs:

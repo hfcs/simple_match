@@ -1,9 +1,7 @@
 name: coverage-web
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ main, fix/web-export-import ]
+  workflow_dispatch: {}
   workflow_call: {}
 
 jobs:

@@ -25,10 +25,15 @@ fi
 
 # Normalize REPO if someone supplied a full git URL into REPO env
 if echo "$REPO" | grep -q "github.com"; then
-  # extract owner/repo from possible URL forms
-  maybe=$(echo "$REPO" | sed -E 's#.*/github.com/([^/]+/[^/]+)(\.git)?#\1#')
-  if [ -n "$maybe" ]; then
-    REPO="$maybe"
+  # if REPO looks like a full URL (contains :// or @), extract owner/repo
+  if echo "$REPO" | grep -Eq '://|@'; then
+    maybe=$(echo "$REPO" | sed -E 's#.*/github.com/([^/]+/[^/]+)(\.git)?#\1#') || maybe=""
+    if [ -n "$maybe" ]; then
+      REPO="$maybe"
+    fi
+  else
+    # if REPO already looks like owner/repo, keep it
+    :
   fi
 fi
 

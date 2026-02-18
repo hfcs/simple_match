@@ -49,5 +49,5 @@ jobs:
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-html
+          name: coverage-html-web
           path: coverage/html

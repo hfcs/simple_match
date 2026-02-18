@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ main, fix/web-export-import ]
+  workflow_call: {}
 
 jobs:
   collect-coverage:

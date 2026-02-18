@@ -84,7 +84,7 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget ca-certificates gnupg
+          sudo apt-get install -y wget ca-certificates gnupg poppler-utils
           TMP_DEB="/tmp/google-chrome-stable_current_amd64.deb"
           wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
           sudo dpkg -i "$TMP_DEB" || sudo apt-get -f install -y
@@ -92,6 +92,11 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Install pdftotext (poppler-utils)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
 
       - name: Run web tests (headless chrome)
         run: flutter test -d chrome --coverage || true
@@ -113,6 +118,11 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Install pdftotext (poppler-utils)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
 
       - name: Run integration tests
         run: flutter test integration_test || true

@@ -29,16 +29,19 @@ jobs:
         env:
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
+          REF: ${{ github.ref_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -eux
           # Workflow filenames to dispatch (must match files under .github/workflows)
           WORKFLOWS=("flutter-tests.yml" "coverage.yml" "coverage-web.yml" "integration-tests.yml")
           for wf in "${WORKFLOWS[@]}"; do
-            echo "Dispatching workflow file: $wf for ref ${SHA}"
+            # Use branch ref (REF) when dispatching workflow_dispatch events — passing a raw commit SHA
+            # is not accepted by the API for workflow_dispatch and can cause dispatch failures.
+            echo "Dispatching workflow file: $wf for ref ${REF} (original sha=${SHA})"
             curl -s -X POST -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches" \
-              -d "{\"ref\":\"${SHA}\"}" || echo "dispatch failed for $wf (non-fatal)"
+              -d "{\"ref\":\"${REF}\"}" || echo "dispatch failed for $wf (non-fatal)"
           done
 
       - name: Verify required workflows succeeded for this commit

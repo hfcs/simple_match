@@ -18,7 +18,7 @@ class _FakeFile {
 
 class _RecordingPersistence extends FakePersistence {
   bool exported = false;
-  _RecordingPersistence({String? exportJsonValue}) : super(exportJsonValue: exportJsonValue);
+  _RecordingPersistence({super.exportJsonValue});
 
   @override
   Future<String> exportBackupJson() async {

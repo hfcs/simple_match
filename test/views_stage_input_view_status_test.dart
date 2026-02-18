@@ -37,8 +37,8 @@ void main() {
     await tester.tap(find.text('Zoe').last);
     await tester.pumpAndSettle();
 
-  // choose DNF (tap the RadioListTile itself to avoid hitting text-only render issues)
-  final dnfFinder = find.widgetWithText(RadioListTile<String>, 'DNF');
+  // choose DNF (tap the option text)
+  final dnfFinder = find.text('DNF');
   expect(dnfFinder, findsOneWidget);
   await tester.ensureVisible(dnfFinder);
   await tester.tap(dnfFinder);

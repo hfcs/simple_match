@@ -17,7 +17,7 @@ class _FakeFile {
 
 // Test-only repo that throws when loadAll() is called to exercise reload-failure paths
 class RepoThrow extends MatchRepository {
-  RepoThrow({persistence}) : super(persistence: persistence);
+  RepoThrow({super.persistence});
   @override
   Future<void> loadAll() async => throw Exception('boom');
 }

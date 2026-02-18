@@ -32,8 +32,9 @@ for wf in "$@"; do
   echo "Checking workflow: '$wf' for commit $SHA"
   # Query recent runs and look for matching head_sha and workflow name (API uses 'name').
   # If a run is in-progress the API may report a null conclusion; poll briefly to allow it to finish.
-  POLL_RETRIES=${POLL_RETRIES:-6}
-  POLL_INTERVAL=${POLL_INTERVAL:-5}
+  # Allow overrides via environment, but increase defaults to tolerate CI timing
+  POLL_RETRIES=${POLL_RETRIES:-30}
+  POLL_INTERVAL=${POLL_INTERVAL:-10}
   conclusion=""
   for attempt in $(seq 0 "$POLL_RETRIES"); do
     resp=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" "${API_URL}?per_page=200") || resp=""
@@ -57,7 +58,8 @@ for wf in "$@"; do
     # If no run matched the exact merge commit SHA (or it's still in-progress), try to find any pull
     # requests associated with that commit and check their head SHAs (CI often runs on PR heads).
     echo "Debug: no conclusion found for workflow '$wf' at $SHA; checking associated PR head SHAs and recent runs..."
-    echo "$resp" | jq -r '.workflow_runs[0:5] | map({name:.name,workflow_name:.workflow_name,sha:.head_sha,conclusion:.conclusion})'
+    # Show recent runs for this workflow name to aid debugging (first 20)
+    echo "$resp" | jq -r --arg wf "$wf" '[.workflow_runs[] | select(.name==$wf or .workflow_name==$wf) | {name:.name,workflow_name:.workflow_name,sha:.head_sha,conclusion:.conclusion,created_at:.created_at}][0:20]'
 
     prs=$(curl -s -H "Accept: application/vnd.github.groot-preview+json" -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${REPO}/commits/${SHA}/pulls") || true
     pr_shas=$(echo "$prs" | jq -r '.[].head.sha' || true)

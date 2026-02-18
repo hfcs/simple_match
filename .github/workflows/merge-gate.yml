@@ -1,0 +1,50 @@
+name: Merge Gate
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  gate:
+    name: Merge Gate - dispatch and verify required checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Ensure verify script is executable
+        run: |
+          ls -la .github/scripts || true
+          chmod +x .github/scripts/verify_required_workflows.sh || true
+
+      - name: Dispatch required workflows for this ref
+        env:
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eux
+          # Workflow filenames to dispatch (must match files under .github/workflows)
+          WORKFLOWS=("flutter-tests.yml" "coverage.yml" "coverage-web.yml" "integration-tests.yml")
+          for wf in "${WORKFLOWS[@]}"; do
+            echo "Dispatching workflow file: $wf for ref ${SHA}"
+            curl -s -X POST -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches" \
+              -d "{\"ref\":\"${SHA}\"}" || echo "dispatch failed for $wf (non-fatal)"
+          done
+
+      - name: Verify required workflows succeeded for this commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          .github/scripts/verify_required_workflows.sh "CI - Flutter tests" "Coverage (VM + Chrome)" "coverage-web" "Integration Tests"

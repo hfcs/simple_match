@@ -116,7 +116,7 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                                 }
 
                                 try {
-                                  final err = await vm.addStage(stage, shoots, allowMoreThan32: true);
+                                  final err = vm.addStage(stage, shoots, allowMoreThan32: true);
                                   if (kDebugMode) {
                                     // ignore: avoid_print
                                     print('DBG: MatchSetupView.addStage returned err=$err');
@@ -164,8 +164,8 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                                 }
                               }
 
-                              try {
-                                final err = await vm.editStage(_editingStage!, shoots, allowMoreThan32: true);
+                                try {
+                                final err = vm.editStage(_editingStage!, shoots, allowMoreThan32: true);
                                 if (kDebugMode) {
                                   // ignore: avoid_print
                                   print('DBG: MatchSetupView.editStage returned err=$err');

@@ -65,6 +65,8 @@ class StageResult {
     int? procedureErrors,
     String? status,
   String? roRemark,
+  String? createdAt,
+  String? updatedAt,
   }) {
     return StageResult(
       stage: stage ?? this.stage,

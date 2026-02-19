@@ -24,7 +24,7 @@ class StageResultViewModel extends ChangeNotifier {
       _load();
       notifyListeners();
     };
-    this.repository.addListener(_repoListener);
+    repository.addListener(_repoListener);
     // If a PersistenceService was provided (tests), load directly from it
     // to avoid triggering production migration behavior (which calls
     // SharedPreferences.getInstance). Otherwise, let the repository load.

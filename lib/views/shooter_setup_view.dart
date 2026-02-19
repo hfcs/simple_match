@@ -99,7 +99,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                                 return;
                               }
                               try {
-                                final err = await widget.vm.addShooter(name, scale);
+                                final err = widget.vm.addShooter(name, scale);
                                 setState(() => _error = err);
                                 if (err == null) {
                                   _nameController.clear();
@@ -124,7 +124,7 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                                 return;
                               }
                               try {
-                                final err = await widget.vm.editShooter(_editingName!, scale);
+                                final err = widget.vm.editShooter(_editingName!, scale);
                                 setState(() => _error = err);
                                 if (err == null) {
                                   setState(() => _editingName = null);

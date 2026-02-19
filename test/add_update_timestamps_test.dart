@@ -77,6 +77,7 @@ void main() {
     final tgMap = jsonDecode(tgRaw!) as Map<String, dynamic>;
     final tgCreated = tgMap['createdAt'] as String;
     final tgUpdated = tgMap['updatedAt'] as String;
+    expect(tgCreated, isNotNull);
     await Future.delayed(const Duration(milliseconds: 10));
     tg.mode = 'average';
     await repo.updateTeamGame(tg);

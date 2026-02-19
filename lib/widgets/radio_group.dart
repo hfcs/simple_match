@@ -34,6 +34,7 @@ class AppRadioGroup<T> extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
                 child: Row(
                   children: [
+                    // ignore: deprecated_member_use
                     Radio<T>(value: opt.value, groupValue: groupValue, onChanged: onChanged),
                     const SizedBox(width: 6),
                     Expanded(child: opt.title),
@@ -52,6 +53,7 @@ class AppRadioGroup<T> extends StatelessWidget {
       children: options.map((opt) {
         return ListTile(
           onTap: () => onChanged?.call(opt.value),
+          // ignore: deprecated_member_use
           leading: Radio<T>(value: opt.value, groupValue: groupValue, onChanged: onChanged),
           title: opt.title,
           trailing: opt.trailing,

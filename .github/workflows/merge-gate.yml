@@ -19,7 +19,7 @@ jobs:
       - name: Check workflow files exist and declare workflow_call
         run: |
           set -euo pipefail
-          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml)
+          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml .github/workflows/integration-tests.yml .github/workflows/flutter-tests.yml)
           for f in "${files[@]}"; do
             echo "Checking $f"
             if [ ! -f "$f" ]; then
@@ -56,32 +56,31 @@ jobs:
           path: |
             /tmp/api_resp.txt
 
-  flutter-tests:
-    name: CI - Flutter tests
+  coverage-controller:
+    name: Parallel Test Controller (dispatch & poll)
     runs-on: ubuntu-latest
+    needs: preflight
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           lfs: true
           fetch-depth: 0
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq curl
 
-      - name: Run common CI setup
-        uses: ./.github/actions/ci-setup
-        with:
-          install_poppler: 'true'
-          install_lcov: 'false'
-          install_git_lfs: 'true'
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Run Flutter unit tests
-        run: flutter test --coverage
+      - name: Dispatch test workflows and poll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          REF: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          OWNER=${REPO%/*}
+          REPO_NAME=${REPO#*/}
+          chmod +x ./.github/scripts/dispatch_and_poll.sh
+          ./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO_NAME" "$REF" flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml
 
   coverage-controller:
     name: Coverage Controller (dispatch & poll)
@@ -110,28 +109,4 @@ jobs:
           chmod +x ./.github/scripts/dispatch_and_poll.sh
           ./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO_NAME" "$REF" coverage.yml coverage-web.yml
 
-  integration-tests:
-    name: Integration Tests
-    runs-on: ubuntu-latest
-    needs: coverage-controller
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-          fetch-depth: 0
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Install pdftotext (poppler-utils)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y poppler-utils
-
-      - name: Run integration tests
-        run: flutter test integration_test || true
+  # integration-tests and flutter-tests are now dispatched by the controller

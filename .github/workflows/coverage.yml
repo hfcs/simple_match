@@ -8,7 +8,7 @@ jobs:
   coverage:
     name: Run tests and produce combined coverage
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -94,25 +94,40 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Install Chrome
+      - name: Install Chrome (robust, retry)
         run: |
-          set -eux
+          set -euxo pipefail
           # If Chrome already available, skip install
           if command -v google-chrome-stable >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1; then
             echo "Chrome already present; skipping install"
             command -v google-chrome-stable || command -v google-chrome || true
             exit 0
           fi
+
+          retry() {
+            local n=0
+            local max=3
+            local delay=5
+            until [ "$n" -ge "$max" ]; do
+              "$@" && return 0
+              n=$((n+1))
+              echo "Command failed. Retry $n/$max after $delay seconds..."
+              sleep $delay
+              delay=$((delay*2))
+            done
+            return 1
+          }
+
           sudo apt-get update
-          sudo apt-get install -y wget ca-certificates gnupg
-          # Download the .deb directly and install; avoids apt-key interaction
           TMP_DEB="/tmp/google-chrome-stable_current_amd64.deb"
-          wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-          sudo apt-get install -y --no-install-recommends "$TMP_DEB" || {
+          retry wget -O "$TMP_DEB" "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+
+          # Try apt install with retries; fallback to dpkg + fix
+          if ! retry sudo apt-get install -y --no-install-recommends "$TMP_DEB"; then
             echo "apt install failed; trying dpkg + apt-get -f install"
             sudo dpkg -i "$TMP_DEB" || true
             sudo apt-get install -f -y
-          }
+          fi
           rm -f "$TMP_DEB"
 
       - name: (covered by ci-setup) pdftotext present

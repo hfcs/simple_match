@@ -19,7 +19,7 @@ jobs:
       - name: Check workflow files exist and declare workflow_call
         run: |
           set -euo pipefail
-          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml .github/workflows/integration-tests.yml .github/workflows/flutter-tests.yml)
+          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml .github/workflows/integration-tests.yml .github/workflows/flutter-tests.yml .github/workflows/check-settings-view-coverage.yml)
           for f in "${files[@]}"; do
             echo "Checking $f"
             if [ ! -f "$f" ]; then
@@ -39,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          for f in .github/workflows/coverage.yml .github/workflows/coverage-web.yml; do
+          for f in .github/workflows/coverage.yml .github/workflows/coverage-web.yml .github/workflows/check-settings-view-coverage.yml; do
             echo "API lookup: $f"
             status=$(curl -s -o /tmp/api_resp.txt -w "%{http_code}" -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${REPO}/contents/${f}?ref=${{ github.ref_name }}")
             if [ "$status" -ne 200 ]; then
@@ -80,6 +80,6 @@ jobs:
           OWNER=${REPO%/*}
           REPO_NAME=${REPO#*/}
           chmod +x ./.github/scripts/dispatch_and_poll.sh
-          ./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO_NAME" "$REF" flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml
+          ./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO_NAME" "$REF" flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
 
   # integration-tests and flutter-tests are now dispatched by the controller

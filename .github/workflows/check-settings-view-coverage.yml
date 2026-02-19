@@ -1,10 +1,12 @@
 name: Check settings_view.dart coverage
 
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      merge_run:
+        description: 'Optional identifier from merge gate'
+        required: false
+  workflow_call: {}
 
 jobs:
   test-and-check-coverage:

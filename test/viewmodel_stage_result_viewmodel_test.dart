@@ -4,6 +4,7 @@ import 'package:simple_match/models/stage_result.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/services/persistence_service.dart';
+import 'package:simple_match/repository/match_repository.dart';
 
 class TestPersistenceService extends PersistenceService {
   List<StageResult> stageResults = [];
@@ -54,8 +55,10 @@ void main() {
     svc.stageResults = [r1, r2];
 
     final vm = StageResultViewModel(persistenceService: svc);
-    // wait for initial load to complete
-    await Future<void>.delayed(Duration.zero);
+    // wait for initial async loads to complete (small loop with timeout)
+    for (var i = 0; i < 50 && (vm.stages.isEmpty || vm.results.isEmpty); i++) {
+      await Future<void>.delayed(Duration(milliseconds: 10));
+    }
 
     final ranks = vm.getStageRanks();
     expect(ranks.containsKey(1), isTrue);
@@ -78,8 +81,12 @@ void main() {
       StageResult(stage: 10, shooter: 'T', time: 1.0, a: 1, status: 'Completed')
     ];
 
-    final vm = StageResultViewModel(persistenceService: svc);
-    await Future<void>.delayed(Duration.zero);
+    final repo = MatchRepository(persistence: svc, initialResults: svc.stageResults, initialShooters: svc.shooters, initialStages: svc.stages);
+    final vm = StageResultViewModel(repo: repo);
+    // repository already populated with initialResults, ensure ViewModel loaded
+    for (var i = 0; i < 50 && vm.results.isEmpty; i++) {
+      await Future<void>.delayed(Duration(milliseconds: 10));
+    }
 
     var notified = 0;
     vm.addListener(() {

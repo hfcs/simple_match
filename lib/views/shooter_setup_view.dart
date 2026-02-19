@@ -89,18 +89,24 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                           ElevatedButton.icon(
                             key: const Key('addShooterButton'),
                             icon: const Icon(Icons.add),
-                            onPressed: () {
+                            onPressed: () async {
                               final name = _nameController.text.trim();
                               final scale = double.tryParse(
                                 _scaleController.text,
                               );
-                              final err = (scale == null)
-                                  ? 'Invalid scale.'
-                                  : widget.vm.addShooter(name, scale);
-                              setState(() => _error = err);
-                              if (err == null) {
-                                _nameController.clear();
-                                _scaleController.clear();
+                              if (scale == null) {
+                                setState(() => _error = 'Invalid scale.');
+                                return;
+                              }
+                              try {
+                                final err = await widget.vm.addShooter(name, scale);
+                                setState(() => _error = err);
+                                if (err == null) {
+                                  _nameController.clear();
+                                  _scaleController.clear();
+                                }
+                              } catch (e) {
+                                setState(() => _error = e.toString());
                               }
                             },
                             label: const Text('Add Shooter'),
@@ -109,18 +115,24 @@ class _ShooterSetupViewBodyState extends State<_ShooterSetupViewBody> {
                           ElevatedButton.icon(
                             key: const Key('confirmEditButton'),
                             icon: const Icon(Icons.check),
-                            onPressed: () {
+                            onPressed: () async {
                               final scale = double.tryParse(
                                 _scaleController.text,
                               );
-                              final err = (scale == null)
-                                  ? 'Invalid scale.'
-                                  : widget.vm.editShooter(_editingName!, scale);
-                              setState(() => _error = err);
-                              if (err == null) {
-                                setState(() => _editingName = null);
-                                _nameController.clear();
-                                _scaleController.clear();
+                              if (scale == null) {
+                                setState(() => _error = 'Invalid scale.');
+                                return;
+                              }
+                              try {
+                                final err = await widget.vm.editShooter(_editingName!, scale);
+                                setState(() => _error = err);
+                                if (err == null) {
+                                  setState(() => _editingName = null);
+                                  _nameController.clear();
+                                  _scaleController.clear();
+                                }
+                              } catch (e) {
+                                setState(() => _error = e.toString());
                               }
                             },
                             label: const Text('Confirm Edit'),

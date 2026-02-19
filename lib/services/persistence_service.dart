@@ -12,7 +12,7 @@ import '../models/stage_result.dart';
 
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 3; // Added Shooter.classificationScore
+const int kDataSchemaVersion = 4; // Added per-record audit timestamps
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -201,6 +201,78 @@ class PersistenceService {
           _logger.severe('Failed to save migrated shooters for v3: $e', e, st);
           rethrow;
         }
+      }
+    }
+
+    // Migration for v4: add per-record audit timestamps (`createdAt`, `updatedAt`) in ISO8601 UTC
+    if (from < 4 && to >= 4) {
+      _logger.info('Migrating data to include per-record timestamps (v4)');
+      // stages
+      try {
+        final rawStages = prefs.getString('stages');
+        if (rawStages != null) {
+          final decoded = jsonDecode(rawStages) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            map['createdAt'] = (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['updatedAt'] = (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            updated.add(map);
+          }
+          await prefs.setString('stages', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate stages timestamps: $e', e, st);
+      }
+
+      // shooters
+      try {
+        final rawShooters = prefs.getString('shooters');
+        if (rawShooters != null) {
+          final decoded = jsonDecode(rawShooters) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            map['createdAt'] = (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['updatedAt'] = (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            updated.add(map);
+          }
+          await prefs.setString('shooters', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate shooters timestamps: $e', e, st);
+      }
+
+      // stageResults
+      try {
+        final rawResults = prefs.getString('stageResults');
+        if (rawResults != null) {
+          final decoded = jsonDecode(rawResults) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            map['createdAt'] = (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['updatedAt'] = (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            updated.add(map);
+          }
+          await prefs.setString('stageResults', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate stageResults timestamps: $e', e, st);
+      }
+
+      // teamGame object
+      try {
+        final rawTG = prefs.getString('teamGame');
+        if (rawTG != null) {
+          final decoded = jsonDecode(rawTG) as Map<String, dynamic>;
+          final map = Map<String, dynamic>.from(decoded);
+          map['createdAt'] = (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+          map['updatedAt'] = (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+          await prefs.setString('teamGame', jsonEncode(map));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate teamGame timestamps: $e', e, st);
       }
     }
 

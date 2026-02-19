@@ -30,7 +30,8 @@
       - Any change to persisted data structure, keys, or logic must increment the schema version.
       - On app startup, the stored schema version is checked. If it is less than the current version, migration logic is run to convert old data to the new format before loading.
       - No key or structure should be changed or removed without migration logic for backward compatibility.
-      - Migration logic is implemented in `PersistenceService._migrateSchema()`.
+      - Migration logic is implemented in `PersistenceService.migrateSchema()`.
+      - NOTE: As of schema version 4 the data model includes per-record audit timestamps: `createdAt` and `updatedAt` (ISO8601 UTC). Increment `kDataSchemaVersion` in `PersistenceService` and add migration logic when changing persisted keys.
       - All migration logic must be covered by integration tests simulating loading old data and verifying correctness.
       - All schema versions and changes are documented in `data_schema_history.md` and `docs/data_schema_versioning.md`.
 - **Data Flow:** ViewModels update state, Views observe changes via `Consumer`

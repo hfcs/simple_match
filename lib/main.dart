@@ -72,9 +72,8 @@ class MiniIPSCMatchApp extends StatelessWidget {
           '/team-game-setup': (context) => const TeamGameSetupView(),
           '/stage-result': (context) {
             final repo = Provider.of<MatchRepository>(context, listen: false);
-            final persistence = repo.persistence ?? PersistenceService();
             return StageResultView(
-              viewModel: StageResultViewModel(persistenceService: persistence),
+              viewModel: StageResultViewModel(repo: repo),
             );
           },
         },

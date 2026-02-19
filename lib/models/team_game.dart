@@ -23,10 +23,12 @@ class TeamGame {
   String mode;
   int topCount;
   List<Team> teams;
+  String createdAt;
   String updatedAt;
 
-  TeamGame({this.mode = 'off', this.topCount = 0, List<Team>? teams, String? updatedAt})
+  TeamGame({this.mode = 'off', this.topCount = 0, List<Team>? teams, String? createdAt, String? updatedAt})
       : teams = teams ?? [],
+        createdAt = createdAt ?? DateTime.now().toUtc().toIso8601String(),
         updatedAt = updatedAt ?? DateTime.now().toUtc().toIso8601String();
 
   factory TeamGame.fromJson(Map<String, dynamic> m) => TeamGame(
@@ -36,6 +38,7 @@ class TeamGame {
                 ?.map((e) => Team.fromJson(Map<String, dynamic>.from(e as Map)))
                 .toList() ??
             [],
+        createdAt: (m['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
         updatedAt: (m['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
       );
 
@@ -43,6 +46,7 @@ class TeamGame {
         'mode': mode,
         'topCount': topCount,
         'teams': teams.map((t) => t.toJson()).toList(),
+        'createdAt': createdAt,
         'updatedAt': updatedAt,
       };
 

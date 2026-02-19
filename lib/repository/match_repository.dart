@@ -37,42 +37,10 @@ class MatchRepository extends ChangeNotifier {
   // Persistence integration (stub)
   Future<void> saveAll() async {
     if (persistence == null) return;
-    await persistence!.saveList(
-      'stages',
-      _stages
-          .map((e) => {'stage': e.stage, 'scoringShoots': e.scoringShoots})
-          .toList(),
-    );
-    await persistence!.saveList(
-      'shooters',
-      _shooters
-          .map((e) => {
-            'name': e.name,
-            'scaleFactor': e.scaleFactor,
-            'classificationScore': e.classificationScore,
-          })
-          .toList(),
-    );
-    await persistence!.saveList(
-      'stageResults',
-      _results
-          .map(
-            (e) => {
-              'stage': e.stage,
-              'shooter': e.shooter,
-              'time': e.time,
-              'a': e.a,
-              'c': e.c,
-              'd': e.d,
-              'misses': e.misses,
-              'noShoots': e.noShoots,
-              'procedureErrors': e.procedureErrors,
-              'status': e.status,
-              'roRemark': e.roRemark,
-            },
-          )
-          .toList(),
-    );
+    // Use model `toJson()` so audit fields (`createdAt`, `updatedAt`) are persisted
+    await persistence!.saveList('stages', _stages.map((e) => e.toJson()).toList());
+    await persistence!.saveList('shooters', _shooters.map((e) => e.toJson()).toList());
+    await persistence!.saveList('stageResults', _results.map((e) => e.toJson()).toList());
     // Save team game configuration if present
     try {
       if (_teamGame != null) {
@@ -101,79 +69,55 @@ class MatchRepository extends ChangeNotifier {
       if (kDebugMode) print('TESTDBG: repo.loadAll - ensureSchemaUpToDate done');
 
       if (kDebugMode) print('TESTDBG: repo.loadAll - loading stages');
-      List<Map<String, dynamic>> stageList = <Map<String, dynamic>>[];
+      List<MatchStage> loadedStages = [];
       try {
         if (importMode) {
-          stageList = await persistence!.loadList('stages').timeout(const Duration(seconds: 1));
+          loadedStages = await persistence!.loadStages().timeout(const Duration(seconds: 1));
         } else {
-          stageList = await persistence!.loadList('stages');
+          loadedStages = await persistence!.loadStages();
         }
       } on TimeoutException catch (te) {
-        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(stages) timed out: $te');
-        stageList = [];
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadStages timed out: $te');
+        loadedStages = [];
       }
-      if (kDebugMode) print('TESTDBG: repo.loadAll - stages loaded len=${stageList.length}');
+      if (kDebugMode) print('TESTDBG: repo.loadAll - stages loaded len=${loadedStages.length}');
       _stages
         ..clear()
-        ..addAll(
-          stageList.map(
-            (e) => MatchStage(stage: e['stage'], scoringShoots: e['scoringShoots']),
-          ),
-        );
+        ..addAll(loadedStages);
 
       if (kDebugMode) print('TESTDBG: repo.loadAll - loading shooters');
-      List<Map<String, dynamic>> shooterList = <Map<String, dynamic>>[];
+      List<Shooter> loadedShooters = [];
       try {
         if (importMode) {
-          shooterList = await persistence!.loadList('shooters').timeout(const Duration(seconds: 1));
+          loadedShooters = await persistence!.loadShooters().timeout(const Duration(seconds: 1));
         } else {
-          shooterList = await persistence!.loadList('shooters');
+          loadedShooters = await persistence!.loadShooters();
         }
       } on TimeoutException catch (te) {
-        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(shooters) timed out: $te');
-        shooterList = [];
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadShooters timed out: $te');
+        loadedShooters = [];
       }
-      if (kDebugMode) print('TESTDBG: repo.loadAll - shooters loaded len=${shooterList.length}');
+      if (kDebugMode) print('TESTDBG: repo.loadAll - shooters loaded len=${loadedShooters.length}');
       _shooters
         ..clear()
-        ..addAll(
-          shooterList.map(
-            (e) => Shooter.fromJson(Map<String, dynamic>.from(e)),
-          ),
-        );
+        ..addAll(loadedShooters);
 
       if (kDebugMode) print('TESTDBG: repo.loadAll - loading results');
-      List<Map<String, dynamic>> resultList = <Map<String, dynamic>>[];
+      List<StageResult> loadedResults = [];
       try {
         if (importMode) {
-          resultList = await persistence!.loadList('stageResults').timeout(const Duration(seconds: 1));
+          loadedResults = await persistence!.loadStageResults().timeout(const Duration(seconds: 1));
         } else {
-          resultList = await persistence!.loadList('stageResults');
+          loadedResults = await persistence!.loadStageResults();
         }
       } on TimeoutException catch (te) {
-        if (kDebugMode) print('TESTDBG: repo.loadAll - loadList(stageResults) timed out: $te');
-        resultList = [];
+        if (kDebugMode) print('TESTDBG: repo.loadAll - loadStageResults timed out: $te');
+        loadedResults = [];
       }
-      if (kDebugMode) print('TESTDBG: repo.loadAll - results loaded len=${resultList.length}');
+      if (kDebugMode) print('TESTDBG: repo.loadAll - results loaded len=${loadedResults.length}');
       _results
         ..clear()
-        ..addAll(
-          resultList.map(
-            (e) => StageResult(
-              stage: e['stage'],
-              shooter: e['shooter'],
-              time: (e['time'] as num).toDouble(),
-              a: e['a'],
-              c: e['c'],
-              d: e['d'],
-              misses: e['misses'],
-              noShoots: e['noShoots'],
-              procedureErrors: e['procedureErrors'],
-              status: (e['status'] as String?) ?? 'Completed',
-              roRemark: (e['roRemark'] as String?) ?? '',
-            ),
-          ),
-        );
+        ..addAll(loadedResults);
       // Load team game config if present
       try {
         if (kDebugMode) print('TESTDBG: repo.loadAll - loading team game');
@@ -208,10 +152,43 @@ class MatchRepository extends ChangeNotifier {
     }
   }
 
+  /// Load lists directly from the injected PersistenceService without
+  /// invoking schema migration. This is used by tests which provide a
+  /// mock PersistenceService that overrides the direct loaders.
+  Future<void> loadFromPersistenceNoMigrate() async {
+    if (persistence == null) {
+      if (kDebugMode) print('TESTDBG: loadFromPersistenceNoMigrate - no persistence');
+      return;
+    }
+    try {
+      final loadedStages = await persistence!.loadStages();
+      _stages
+        ..clear()
+        ..addAll(loadedStages);
+
+      final loadedShooters = await persistence!.loadShooters();
+      _shooters
+        ..clear()
+        ..addAll(loadedShooters);
+
+      final loadedResults = await persistence!.loadStageResults();
+      _results
+        ..clear()
+        ..addAll(loadedResults);
+    } catch (e, st) {
+      if (kDebugMode) print('TESTDBG: loadFromPersistenceNoMigrate threw: $e\n$st');
+    } finally {
+      notifyListeners();
+      if (kDebugMode) print('TESTDBG: loadFromPersistenceNoMigrate - completed');
+    }
+  }
+
     TeamGame? get teamGame => _teamGame;
 
     Future<void> updateTeamGame(TeamGame tg) async {
-      _teamGame = tg;
+        // update `updatedAt` before persisting
+        tg.updatedAt = DateTime.now().toUtc().toIso8601String();
+        _teamGame = tg;
       if (persistence != null) {
         try {
           await persistence!.saveTeamGame(tg.toJson());
@@ -224,8 +201,17 @@ class MatchRepository extends ChangeNotifier {
   List<MatchStage> get stages => List.unmodifiable(_stages);
   Future<void> addStage(MatchStage stage) async {
     _stages.add(stage);
+    if (kDebugMode) {
+      // quick debug trace for widget tests
+      // ignore: avoid_print
+      print('DBG: repo.addStage called, _stages.len=${_stages.length}');
+    }
     await saveAll();
     notifyListeners();
+    if (kDebugMode) {
+      // ignore: avoid_print
+      print('DBG: repo.addStage completed notifyListeners');
+    }
   }
 
   Future<void> removeStage(int stageNumber) async {
@@ -236,7 +222,10 @@ class MatchRepository extends ChangeNotifier {
 
   Future<void> updateStage(MatchStage updated) async {
     final idx = _stages.indexWhere((s) => s.stage == updated.stage);
-    if (idx != -1) _stages[idx] = updated;
+    if (idx != -1) {
+      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      _stages[idx] = updated;
+    }
     await saveAll();
     notifyListeners();
   }
@@ -257,7 +246,10 @@ class MatchRepository extends ChangeNotifier {
 
   Future<void> updateShooter(Shooter updated) async {
     final idx = _shooters.indexWhere((s) => s.name == updated.name);
-    if (idx != -1) _shooters[idx] = updated;
+    if (idx != -1) {
+      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      _shooters[idx] = updated;
+    }
     await saveAll();
     notifyListeners();
   }
@@ -280,7 +272,10 @@ class MatchRepository extends ChangeNotifier {
     final idx = _results.indexWhere(
       (r) => r.stage == updated.stage && r.shooter == updated.shooter,
     );
-    if (idx != -1) _results[idx] = updated;
+    if (idx != -1) {
+      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      _results[idx] = updated;
+    }
     await saveAll();
     notifyListeners();
   }

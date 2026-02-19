@@ -99,8 +99,11 @@ void main() {
     testWidgets('shows error on invalid input and empty state', (tester) async {
       final repo = MatchRepository(persistence: PersistenceService());
       await tester.pumpWidget(
-        Provider<MatchSetupViewModel>(
-          create: (_) => MatchSetupViewModel(repo),
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(value: repo),
+            Provider<MatchSetupViewModel>.value(value: MatchSetupViewModel(repo)),
+          ],
           child: const MaterialApp(home: MatchSetupView()),
         ),
       );

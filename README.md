@@ -3,6 +3,14 @@
 
 A robust, test-driven Flutter MVVM application for managing IPSC match stages, shooters, and scoring with scale factors. Modern UI, persistent storage, Unicode PDF export, and advanced test coverage.
 
+## Purpose
+
+- **What:** A cross-platform (mobile & desktop) Flutter app to run IPSC-style matches — configure stages, manage shooters, record stage input, and produce ranked results.
+- **Who:** Range officers, match directors, and competitors who need a compact, mobile-first scoring tool that preserves data locally and exports official-looking PDFs.
+- **Why:** Provides a fast, validated, and auditable workflow for score capture and result calculation with backward-compatible persistence and reproducible tests.
+- **Core guarantees:** mobile-optimized input, versioned persistence with migrations, Unicode PDF export using a bundled font, and test-driven development supported by CI.
+
+
 ## Features
 - **Match Setup:** Configure stages (1-30) and scoring shoots (1-32)
 - **Shooter Management:** Add shooters with unique names and scale factors (0.100–20.000)

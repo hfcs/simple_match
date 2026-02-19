@@ -28,7 +28,7 @@ jobs:
             fi
             if ! grep -q "workflow_call" "$f"; then
               echo "ERROR: $f does not declare workflow_call" >&2
-              grep -n "^on:" -n "$f" || true
+              grep -n "^on:" "$f" || true
               exit 3
             fi
             echo "OK: $f contains workflow_call"

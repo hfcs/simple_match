@@ -2,6 +2,12 @@
 
 This file collects the major features, bug fixes, and notable changes across the project's history. Entries are grouped by timeframe and highlight the most significant user-visible or architectural changes.
 
+Released 2026-02-19
+- CI refactor: introduced a parallel test controller to dispatch and poll per-test workflows in parallel, reducing overall gate time. Controller script: `.github/scripts/dispatch_and_poll.sh`.
+- New/updated workflows: added `flutter-tests.yml`, made `integration-tests.yml` and `check-settings-view-coverage.yml` callable, and updated `coverage.yml` / `coverage-web.yml` to be dispatchable by the controller.
+- Top-level `merge-gate.yml` now runs a preflight that validates `workflow_call` on per-test workflows and uses the controller to run tests in parallel.
+- Documentation: added CI notes to `README.md`, added `.github/README.md` and `docs/ci.md`, and updated `.github/copilot-instructions.md` to describe the controller and local usage.
+
 Unreleased / 2026-02-17
 - Interactive time-entry: plain-digit input interprets digits as fixed two-decimal values (e.g. `1234` → `12.34`) and displays an inserted decimal interactively while typing. Backspace fully clears field; explicit `.` edits are preserved. (`stage_input` time-field work)
 - Several refinements and bugfixes to time-field deletion, caret behavior, and analyzer warnings.

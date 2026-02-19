@@ -12,8 +12,11 @@ void main() {
     final vm = MatchSetupViewModel(MatchRepository());
     await tester.pumpWidget(
       MaterialApp(
-        home: Provider<MatchSetupViewModel>.value(
-          value: vm,
+        home: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<MatchRepository>.value(value: MatchRepository()),
+            Provider<MatchSetupViewModel>.value(value: vm),
+          ],
           child: const MatchSetupView(),
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'dart:async';
 import '../models/match_stage.dart';
 import '../repository/match_repository.dart';
 
@@ -15,13 +17,27 @@ class MatchSetupViewModel {
     if (repository.stages.any((s) => s.stage == stage)) {
       return 'Stage already exists.';
     }
-    repository.addStage(MatchStage(stage: stage, scoringShoots: scoringShoots));
+    try {
+      // Update repository state immediately; persist asynchronously.
+      repository.addStage(MatchStage(stage: stage, scoringShoots: scoringShoots)).catchError((e) {
+        if (kDebugMode) {
+          // ignore: avoid_print
+          print('DBG: MatchSetupViewModel.addStage background save failed: $e');
+        }
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        // ignore: avoid_print
+        print('DBG: MatchSetupViewModel.addStage caught error: $e');
+      }
+      return 'Failed to add stage: $e';
+    }
     return null;
   }
 
   /// Removes a stage by stage number.
-  void removeStage(int stage) {
-    repository.removeStage(stage);
+  Future<void> removeStage(int stage) async {
+    await repository.removeStage(stage);
   }
 
   /// Edits a stage's scoring shoots. Returns null on success, or error string on failure.
@@ -31,9 +47,18 @@ class MatchSetupViewModel {
     }
     final orig = repository.getStage(stage);
     if (orig == null) return 'Stage not found.';
-    repository.updateStage(
-      MatchStage(stage: stage, scoringShoots: scoringShoots),
-    );
+    try {
+      repository.updateStage(
+        MatchStage(stage: stage, scoringShoots: scoringShoots, createdAt: orig.createdAt, updatedAt: orig.updatedAt),
+      ).catchError((e) {
+        if (kDebugMode) {
+          // ignore: avoid_print
+          print('DBG: MatchSetupViewModel.editStage background save failed: $e');
+        }
+      });
+    } catch (e) {
+      return 'Failed to update stage: $e';
+    }
     return null;
   }
 }

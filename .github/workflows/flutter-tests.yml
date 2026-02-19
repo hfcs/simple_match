@@ -30,8 +30,21 @@ jobs:
           install_lcov: 'false'
           install_git_lfs: 'true'
 
+      - name: Cache pub packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            ~/.pub-cache/bin
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Static analysis
+        run: flutter analyze
 
       - name: Run Flutter unit tests
         run: flutter test --coverage

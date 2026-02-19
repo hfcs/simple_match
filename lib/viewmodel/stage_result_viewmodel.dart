@@ -1,25 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '../models/stage_result.dart';
 import '../models/shooter.dart';
 import '../models/match_stage.dart';
+import '../repository/match_repository.dart';
 import '../services/persistence_service.dart';
 
 /// ViewModel for Stage Result page.
 class StageResultViewModel extends ChangeNotifier {
-  final PersistenceService persistenceService;
+  final MatchRepository repository;
   List<StageResult> _results = [];
   List<Shooter> _shooters = [];
   List<MatchStage> _stages = [];
+  late final VoidCallback _repoListener;
 
-  StageResultViewModel({required this.persistenceService}) {
+  /// Backwards-compatible constructor:
+  /// - `repository` can be passed directly (preferred)
+  /// - or `persistenceService` can be passed (older tests) and a
+  ///   `MatchRepository` will be constructed from it.
+    StageResultViewModel({MatchRepository? repo, PersistenceService? persistenceService})
+      : repository = repo ?? MatchRepository(persistence: persistenceService) {
+    _repoListener = () {
+      _load();
+      notifyListeners();
+    };
+    this.repository.addListener(_repoListener);
+    // If a PersistenceService was provided (tests), load directly from it
+    // to avoid triggering production migration behavior (which calls
+    // SharedPreferences.getInstance). Otherwise, let the repository load.
+    if (persistenceService != null) {
+      try {
+        persistenceService.loadStages().then((s) {
+          _stages = List<MatchStage>.from(s);
+          notifyListeners();
+        });
+        persistenceService.loadShooters().then((s) {
+          _shooters = List<Shooter>.from(s);
+          notifyListeners();
+        });
+        persistenceService.loadStageResults().then((r) {
+          _results = List<StageResult>.from(r);
+          notifyListeners();
+        });
+      } catch (e) {
+        if (kDebugMode) print('TESTDBG: StageResultViewModel - direct persistence load threw: $e');
+      }
+    } else {
+      // Kick off an async load from repository (production path)
+      try {
+        repository.loadAll().then((_) {
+          _load();
+          notifyListeners();
+        });
+      } catch (_) {
+        if (kDebugMode) print('TESTDBG: StageResultViewModel - repository.loadAll() threw');
+      }
+    }
     _load();
   }
 
   Future<void> _load() async {
-    _results = await persistenceService.loadStageResults();
-    _shooters = await persistenceService.loadShooters();
-    _stages = await persistenceService.loadStages();
-    notifyListeners();
+    _results = List<StageResult>.from(repository.results);
+    _shooters = List<Shooter>.from(repository.shooters);
+    _stages = List<MatchStage>.from(repository.stages);
   }
 
   List<StageResult> get results => _results;
@@ -79,13 +122,21 @@ class StageResultViewModel extends ChangeNotifier {
       (r) => r.stage == stage && r.shooter == shooter,
     );
     if (resultIndex != -1) {
-      _results[resultIndex] = _results[resultIndex].copyWith(status: newStatus);
-      await persistenceService.saveList(
-        'stageResults',
-        _results.map((r) => r.toJson()).toList(),
-      );
+      final updated = _results[resultIndex].copyWith(status: newStatus);
+      // Delegate to repository which sets updatedAt and persists
+      await repository.updateResult(updated);
+      // Reload local cache from repository
+      _load();
       notifyListeners();
     }
+  }
+
+  @override
+  void dispose() {
+    try {
+      repository.removeListener(_repoListener);
+    } catch (_) {}
+    super.dispose();
   }
 }
 

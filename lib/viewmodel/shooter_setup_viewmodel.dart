@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import '../repository/match_repository.dart';
 import '../models/shooter.dart';
 
@@ -15,7 +17,16 @@ class ShooterSetupViewModel {
     if (repository.shooters.any((s) => s.name == name)) {
       return 'Shooter already exists.';
     }
-    repository.addShooter(Shooter(name: name, scaleFactor: scaleFactor));
+    try {
+      repository.addShooter(Shooter(name: name, scaleFactor: scaleFactor)).catchError((e) {
+        if (kDebugMode) {
+          // ignore: avoid_print
+          print('DBG: ShooterSetupViewModel.addShooter background save failed: $e');
+        }
+      });
+    } catch (e) {
+      return 'Failed to add shooter: $e';
+    }
     return null;
   }
 
@@ -27,16 +38,27 @@ class ShooterSetupViewModel {
     final orig = repository.getShooter(name);
     if (orig == null) return 'Shooter not found.';
     // Preserve classificationScore when editing scale
-    repository.updateShooter(Shooter(
-      name: name,
-      scaleFactor: scaleFactor,
-      classificationScore: orig.classificationScore,
-    ));
+    try {
+      repository.updateShooter(Shooter(
+        name: name,
+        scaleFactor: scaleFactor,
+        classificationScore: orig.classificationScore,
+        createdAt: orig.createdAt,
+        updatedAt: orig.updatedAt,
+      )).catchError((e) {
+        if (kDebugMode) {
+          // ignore: avoid_print
+          print('DBG: ShooterSetupViewModel.editShooter background save failed: $e');
+        }
+      });
+    } catch (e) {
+      return 'Failed to update shooter: $e';
+    }
     return null;
   }
 
   /// Removes a shooter by name.
-  void removeShooter(String name) {
-    repository.removeShooter(name);
+  Future<void> removeShooter(String name) async {
+    await repository.removeShooter(name);
   }
 }

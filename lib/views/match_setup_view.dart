@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:provider/provider.dart';
 import '../viewmodel/match_setup_viewmodel.dart';
+import '../repository/match_repository.dart';
 
 class MatchSetupView extends StatefulWidget {
   const MatchSetupView({super.key});
@@ -26,7 +28,14 @@ class _MatchSetupViewState extends State<MatchSetupView> {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<MatchSetupViewModel>(context);
-    final stages = vm.repository.stages;
+    final repo = Provider.of<MatchRepository>(context);
+    final stages = repo.stages;
+    if (kDebugMode) {
+      // Helpful debug trace for widget tests when UI does not update as expected
+      // (keeps output short and localized)
+      // ignore: avoid_print
+      print('DBG: MatchSetupView.build stages.len=${stages.length}');
+    }
     return Scaffold(
       appBar: AppBar(title: const Text('Match Setup')),
       body: Padding(
@@ -106,11 +115,20 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                                   }
                                 }
 
-                                final err = vm.addStage(stage, shoots, allowMoreThan32: true);
-                                setState(() => _error = err);
-                                if (err == null) {
-                                  _stageController.clear();
-                                  _shootsController.clear();
+                                try {
+                                  final err = await vm.addStage(stage, shoots, allowMoreThan32: true);
+                                  if (kDebugMode) {
+                                    // ignore: avoid_print
+                                    print('DBG: MatchSetupView.addStage returned err=$err');
+                                  }
+                                  setState(() => _error = err);
+                                  if (err == null) {
+                                    _stageController.clear();
+                                    _shootsController.clear();
+                                  }
+                                } catch (e) {
+                                  if (kDebugMode) print('DBG: MatchSetupView.addStage threw $e');
+                                  setState(() => _error = e.toString());
                                 }
                               },
                             label: const Text('Add Stage'),
@@ -146,12 +164,21 @@ class _MatchSetupViewState extends State<MatchSetupView> {
                                 }
                               }
 
-                              final err = vm.editStage(_editingStage!, shoots, allowMoreThan32: true);
-                              setState(() => _error = err);
-                              if (err == null) {
-                                setState(() => _editingStage = null);
-                                _stageController.clear();
-                                _shootsController.clear();
+                              try {
+                                final err = await vm.editStage(_editingStage!, shoots, allowMoreThan32: true);
+                                if (kDebugMode) {
+                                  // ignore: avoid_print
+                                  print('DBG: MatchSetupView.editStage returned err=$err');
+                                }
+                                setState(() => _error = err);
+                                if (err == null) {
+                                  setState(() => _editingStage = null);
+                                  _stageController.clear();
+                                  _shootsController.clear();
+                                }
+                              } catch (e) {
+                                if (kDebugMode) print('DBG: MatchSetupView.editStage threw $e');
+                                setState(() => _error = e.toString());
                               }
                             },
                             label: const Text('Confirm Edit'),

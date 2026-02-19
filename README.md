@@ -130,6 +130,32 @@ Recent CI notes
 - Developer/contributor instructions: `.github/copilot-instructions.md`
 - Unicode PDF export and font bundling: see `.github/copilot-instructions.md`
 
+## Recent Schema Update (v4)
+
+- The persisted data schema was bumped to **v4** (2026-02-19): per-record audit timestamps `createdAt` and `updatedAt` (ISO8601 UTC) were added to `MatchStage`, `Shooter`, `StageResult`, and `TeamGame`.
+- Migration/backfill is performed on app startup by `PersistenceService`; missing timestamps are backfilled using the system UTC now. See `data_schema_history.md` for the changelog and `docs/data_schema_versioning.md` for migration guidance.
+
+## Release tooling
+
+- A helper script to recreate the GitHub release/tag `v2026-02-19` is available at `.github/scripts/recreate_release.py`. It deletes any existing release with that tag and recreates it to point at `main` (requires `GITHUB_TOKEN` with repo access). Use with caution — this modifies releases and git refs.
+
+## CI & Merge-Gate notes
+
+- The repository uses a merge-gate controller `merge-gate.yml` that runs on pushes to `main`. It validates reusable workflows and dispatches parallel test workflows using `.github/scripts/dispatch_and_poll.sh`.
+- Reusable workflows must declare `workflow_call` and (when dispatched by the merge-gate) accept an optional `workflow_dispatch` input named `merge_run` so the controller can dispatch them via the API. See `.github/workflows/*.yml` for examples.
+
+## Analyzer Regression Test
+
+- To prevent analyzer regressions from reaching CI we added `test/analyzer_regression_test.dart`. This test runs `flutter analyze` and fails if the analyzer reports issues — run `flutter test` locally to run it.
+- Before pushing, run:
+
+```sh
+flutter analyze
+flutter test
+```
+
+The CI runs `flutter analyze` as part of the `flutter-tests.yml` workflow; the merge-gate will fail dispatch if the workflows are not callable or mismatch expected inputs.
+
 ## Getting Started (Flutter)
 - [Flutter: Get Started](https://docs.flutter.dev/get-started/codelab)
 - [Flutter Cookbook](https://docs.flutter.dev/cookbook)

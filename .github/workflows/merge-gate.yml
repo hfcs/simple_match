@@ -19,7 +19,13 @@ jobs:
       - name: Check workflow files exist and declare workflow_call
         run: |
           set -euo pipefail
-          files=(.github/workflows/coverage.yml .github/workflows/coverage-web.yml .github/workflows/integration-tests.yml .github/workflows/flutter-tests.yml .github/workflows/check-settings-view-coverage.yml)
+          files=(
+            .github/workflows/coverage.yml
+            .github/workflows/coverage-web.yml
+            .github/workflows/integration-tests.yml
+            .github/workflows/flutter-tests.yml
+            .github/workflows/check-settings-view-coverage.yml
+          )
           for f in "${files[@]}"; do
             echo "Checking $f"
             if [ ! -f "$f" ]; then

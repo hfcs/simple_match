@@ -1,3 +1,4 @@
+"$schema": "https://json.schemastore.org/github-action"
 name: CI Setup
 description: "Composite action to install common CI packages (poppler, lcov, git-lfs) and run git-lfs pulls"
 inputs:
@@ -13,33 +14,128 @@ inputs:
     description: 'Install and pull git-lfs assets'
     required: false
     default: 'true'
+outputs:
+  poppler_ok:
+    description: 'pdftotext available on runner'
+  lcov_ok:
+    description: 'lcov available on runner'
+  git_lfs_ok:
+    description: 'git-lfs available on runner'
 runs:
   using: 'composite'
   steps:
     - name: Ensure apt packages (poppler/lcov/git-lfs)
       shell: bash
       run: |
-        set -eux
-        sudo apt-get update
-        if [ "${{ inputs.install_poppler }}" = 'true' ]; then
-          sudo apt-get install -y poppler-utils || true
+        set -euxo pipefail
+        # helper: retry commands a few times with backoff
+        retry() {
+          local n=0
+          local max=3
+          local delay=5
+          until [ "$n" -ge "$max" ]; do
+            "$@" && return 0
+            n=$((n+1))
+            echo "Command failed; retry $n/$max after ${delay}s..."
+            sleep $delay
+            delay=$((delay*2))
+          done
+          return 1
+        }
+
+        # Only attempt apt-based installs on Debian/Ubuntu runners
+        if command -v apt-get >/dev/null 2>&1; then
+          export DEBIAN_FRONTEND=noninteractive
+          packages=()
+          if [ "${{ inputs.install_poppler }}" = 'true' ]; then
+            packages+=(poppler-utils)
+          fi
+          if [ "${{ inputs.install_lcov }}" = 'true' ]; then
+            packages+=(lcov)
+          fi
+          if [ "${{ inputs.install_git_lfs }}" = 'true' ]; then
+            packages+=(git-lfs)
+          fi
+
+          if [ ${#packages[@]} -gt 0 ]; then
+            retry sudo apt-get update
+            retry sudo apt-get install -y --no-install-recommends "${packages[@]}"
+          else
+            echo "No apt packages requested; skipping install"
+          fi
+        else
+          echo "apt-get not found; skipping package installs on non-Debian runner"
         fi
-        if [ "${{ inputs.install_lcov }}" = 'true' ]; then
-          sudo apt-get install -y lcov || true
-        fi
+
+        # Handle git-lfs setup and pulls if requested
         if [ "${{ inputs.install_git_lfs }}" = 'true' ]; then
-          sudo apt-get install -y git-lfs || true
-          git lfs install --system || true
-          # Attempt to pull LFS assets if checkout already present
-          if [ -d "${GITHUB_WORKSPACE:-.}" ]; then
-            git -C "${GITHUB_WORKSPACE}" lfs pull --include="assets/fonts/*" || true
+          if command -v git >/dev/null 2>&1; then
+            # prefer non-system install where possible
+            git lfs install --skip-repo || git lfs install --local || true
+            if [ -d "${GITHUB_WORKSPACE:-.}/.git" ]; then
+              retry git -C "${GITHUB_WORKSPACE:-.}" lfs pull --include="assets/fonts/*"
+            else
+              echo "No repository checkout detected; skipping 'git lfs pull' (ensure actions/checkout runs before this action if LFS pulls are needed)"
+            fi
+          else
+            echo "git not available; cannot run git-lfs pull"
           fi
         fi
 
-    - name: Verify installed tools
+    - name: Verify installed tools and set outputs
+      id: verify
       shell: bash
       run: |
-        set -eux
-        if command -v pdftotext >/dev/null 2>&1; then pdftotext -v || true; else echo "pdftotext not present"; fi
-        if command -v lcov >/dev/null 2>&1; then lcov --version || true; else echo "lcov not present"; fi
-        if command -v git-lfs >/dev/null 2>&1; then git lfs --version || true; else echo "git-lfs not present"; fi
+        set -euxo pipefail
+        poppler_ok=false
+        lcov_ok=false
+        git_lfs_ok=false
+
+        if command -v pdftotext >/dev/null 2>&1; then
+          pdftotext -v || true
+          poppler_ok=true
+        else
+          echo "pdftotext not present"
+        fi
+
+        if command -v lcov >/dev/null 2>&1; then
+          lcov --version || true
+          lcov_ok=true
+        else
+          echo "lcov not present"
+        fi
+
+        if command -v git-lfs >/dev/null 2>&1; then
+          git lfs --version || true
+          git_lfs_ok=true
+        else
+          echo "git-lfs not present"
+        fi
+
+        # If an install was explicitly requested but tool is missing, fail fast
+        if [ "${{ inputs.install_poppler }}" = 'true' ] && [ "$poppler_ok" != 'true' ]; then
+          echo "ERROR: pdftotext was requested but is not available on runner"
+          echo "poppler_ok=$poppler_ok" >> "$GITHUB_OUTPUT"
+          echo "lcov_ok=$lcov_ok" >> "$GITHUB_OUTPUT"
+          echo "git_lfs_ok=$git_lfs_ok" >> "$GITHUB_OUTPUT"
+          exit 2
+        fi
+        if [ "${{ inputs.install_lcov }}" = 'true' ] && [ "$lcov_ok" != 'true' ]; then
+          echo "ERROR: lcov was requested but is not available on runner"
+          echo "poppler_ok=$poppler_ok" >> "$GITHUB_OUTPUT"
+          echo "lcov_ok=$lcov_ok" >> "$GITHUB_OUTPUT"
+          echo "git_lfs_ok=$git_lfs_ok" >> "$GITHUB_OUTPUT"
+          exit 2
+        fi
+        if [ "${{ inputs.install_git_lfs }}" = 'true' ] && [ "$git_lfs_ok" != 'true' ]; then
+          echo "ERROR: git-lfs was requested but is not available on runner"
+          echo "poppler_ok=$poppler_ok" >> "$GITHUB_OUTPUT"
+          echo "lcov_ok=$lcov_ok" >> "$GITHUB_OUTPUT"
+          echo "git_lfs_ok=$git_lfs_ok" >> "$GITHUB_OUTPUT"
+          exit 2
+        fi
+
+        # Export results for composite action outputs
+        echo "poppler_ok=$poppler_ok" >> "$GITHUB_OUTPUT"
+        echo "lcov_ok=$lcov_ok" >> "$GITHUB_OUTPUT"
+        echo "git_lfs_ok=$git_lfs_ok" >> "$GITHUB_OUTPUT"

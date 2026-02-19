@@ -83,13 +83,32 @@ jobs:
       - name: Run Flutter unit tests
         run: flutter test --coverage
 
-  coverage:
-    uses: ./.github/workflows/coverage.yml
+  coverage-controller:
+    name: Coverage Controller (dispatch & poll)
+    runs-on: ubuntu-latest
     needs: flutter-tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
 
-  coverage-web:
-    uses: ./.github/workflows/coverage-web.yml
-    needs: coverage
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Dispatch coverage workflows and poll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          REF: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          OWNER=${REPO%/*}
+          REPO_NAME=${REPO#*/}
+          # call the reusable script to dispatch and poll the workflows in parallel
+          chmod +x ./.github/scripts/dispatch_and_poll.sh
+          ./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO_NAME" "$REF" coverage.yml coverage-web.yml
 
   integration-tests:
     name: Integration Tests

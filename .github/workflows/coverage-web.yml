@@ -1,7 +1,11 @@
 name: coverage-web
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      merge_run:
+        description: 'Optional identifier from merge gate'
+        required: false
   workflow_call: {}
 
 jobs:

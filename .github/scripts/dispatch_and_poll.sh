@@ -33,14 +33,17 @@ for wf in "${WORKFLOWS[@]}"; do
   attempts=0
   while true; do
     attempts=$((attempts+1))
+    # Query runs for the specific workflow and branch for precise matching
     runs_json=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
       -H "Accept: application/vnd.github.v3+json" \
-      "https://api.github.com/repos/${OWNER}/${REPO}/actions/runs?event=workflow_dispatch&per_page=100")
-    # Prefer runs on the same branch/ref we dispatched
-    run_id=$(echo "$runs_json" | jq -r --arg wf "$wf" --arg ref "$REF" '.workflow_runs[] | select(.path != null and (.path|endswith($wf)) and (.head_branch == $ref)) | .id' | head -n1 || true)
-    # Fallback: any run for that workflow
+      "https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${wf}/runs?event=workflow_dispatch&per_page=50&branch=${REF}")
+    run_id=$(echo "$runs_json" | jq -r '.workflow_runs[0].id' || true)
+    # Fallback: query runs for the workflow without branch filtering
     if [ -z "$run_id" ] || [ "$run_id" = "null" ]; then
-      run_id=$(echo "$runs_json" | jq -r --arg wf "$wf" '.workflow_runs[] | select(.path != null and (.path|endswith($wf))) | .id' | head -n1 || true)
+      runs_json=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+        -H "Accept: application/vnd.github.v3+json" \
+        "https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${wf}/runs?event=workflow_dispatch&per_page=50")
+      run_id=$(echo "$runs_json" | jq -r '.workflow_runs[0].id' || true)
     fi
     if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
       echo "Found run for $wf -> $run_id"

@@ -1,3 +1,25 @@
+CI helper documentation
+
+This folder contains actions and scripts used by the repository CI workflows.
+
+Controller script
+- `.github/scripts/dispatch_and_poll.sh` — reusable controller script that dispatches `workflow_dispatch`-enabled workflows and polls their runs until completion. The merge-gate invokes this script to run the suite of tests in parallel.
+
+How to run locally
+
+```bash
+export GITHUB_TOKEN=<token-with-repo-scope-or-use-default>
+OWNER=hfcs
+REPO=simple_match
+REF=main
+./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO" "$REF" flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+```
+
+Adding a new test workflow
+
+1. Add a workflow file into `.github/workflows/`.
+2. Ensure it declares `workflow_call` and `workflow_dispatch` so it is callable by the controller and can still be run manually.
+3. Add the new workflow filename to the `files=(...)` list in `.github/workflows/merge-gate.yml` preflight check and to the controller dispatch list.
 **CI helpers and diagnostics**
 
 This folder documents small CI helpers and diagnostic scripts used by the repository.

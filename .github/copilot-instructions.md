@@ -84,6 +84,18 @@
    - Update `data_schema_history.md` and `docs/data_schema_versioning.md` with details of the change.
    - Add/Update integration tests to cover migration and backward compatibility.
 
+   ### CI controller
+
+   - The repository now uses a parallel test controller invoked by `merge-gate.yml`. It dispatches the per-test workflows:
+      - `flutter-tests.yml`, `integration-tests.yml`, `coverage.yml`, `coverage-web.yml`, and `check-settings-view-coverage.yml`.
+   - Each workflow must declare `workflow_call` and expose `workflow_dispatch` inputs to be dispatchable by the controller.
+   - To run the controller locally, export `GITHUB_TOKEN` (same-repo token or PAT) and run:
+
+   ```bash
+   ./.github/scripts/dispatch_and_poll.sh <owner> <repo> <ref> flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+   ```
+
+
 
 ## Project Conventions
 - **Test-Driven Development:** All new features and bug fixes must be implemented using a test-driven approach. Always generate or update tests in `test/` before writing or modifying any production code. No code should be added or changed without a corresponding test.

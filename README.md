@@ -70,6 +70,23 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 flutter test --coverage
 ```
 
+## Continuous Integration (CI)
+
+- The repository uses a parallel test controller to run long-running test workflows in parallel. The controller dispatches and polls these reusable workflows:
+  - `flutter-tests.yml` — unit tests (Flutter)
+  - `integration-tests.yml` — integration tests
+  - `coverage.yml` and `coverage-web.yml` — coverage collection (VM + Chrome)
+  - `check-settings-view-coverage.yml` — focused coverage check for `settings_view.dart`
+
+- The controller is implemented at `.github/scripts/dispatch_and_poll.sh` and is invoked by the top-level `merge-gate.yml` workflow. It uses `GITHUB_TOKEN` (same-repo) to dispatch workflows and poll runs. For cross-repo dispatch or broader permissions use a PAT with `repo` scope stored in a secret and referenced instead of `GITHUB_TOKEN`.
+
+- To run the controller locally (requires a token):
+
+```bash
+export GITHUB_TOKEN=<token>
+./.github/scripts/dispatch_and_poll.sh <owner> <repo> <ref> flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+```
+
 ## Web + VM Coverage (merged HTML)
 
 To collect merged VM+Chrome coverage and generate an HTML report locally run:

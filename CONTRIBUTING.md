@@ -25,12 +25,51 @@ flutter analyze
 
 ## CI / Merge Gate
 
-- The repository uses a merge-gate to dispatch parallel workflows. Reusable workflows must include `workflow_call: {}` and accept an optional `workflow_dispatch` input `merge_run` if they will be dispatched by the merge-gate.
-- To run the merge-gate controller locally (for debugging), set `GITHUB_TOKEN` and run:
 
 ```bash
 export GITHUB_TOKEN=<token>
 ./.github/scripts/dispatch_and_poll.sh <owner> <repo> <ref> flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+
+### Controller script & CI helpers
+
+- The controller script is `.github/scripts/dispatch_and_poll.sh`. It dispatches `workflow_dispatch`-enabled workflows and polls their runs until completion; the top-level `merge-gate.yml` invokes this script to run test suites in parallel.
+
+How to run locally (example):
+
+```bash
+export GITHUB_TOKEN=<token-with-repo-scope-or-use-default>
+OWNER=hfcs
+REPO=simple_match
+REF=main
+./.github/scripts/dispatch_and_poll.sh "$OWNER" "$REPO" "$REF" flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+```
+
+### Adding a new test workflow
+
+1. Add a workflow file into `.github/workflows/`.
+2. Ensure it declares `workflow_call` and `workflow_dispatch` so it is callable by the controller and can still be run manually.
+3. Add the new workflow filename to the `files=(...)` list in `.github/workflows/merge-gate.yml` preflight check and to the controller dispatch list.
+
+### CI helpers and diagnostics
+
+- Composite action: `.github/actions/ci-setup` centralizes common CI environment setup (install `poppler-utils`/`pdftotext`, `lcov`, and `git-lfs`, and performs `git lfs pull`).
+
+	Usage (call from a workflow):
+
+	```yaml
+	- name: Run common CI setup
+		uses: ./.github/actions/ci-setup
+		with:
+			install_poppler: 'true'
+			install_lcov: 'true'
+			install_git_lfs: 'true'
+	```
+
+- Diagnostic scripts are located in `.github/scripts/` and are intended for manual diagnostics only. Examples:
+	- `verify_required_workflows.sh` — verifies that specified workflow names have a successful run for a given commit SHA (requires `GITHUB_TOKEN`, `REPO`, `SHA`).
+	- `monitor_merge_gate.sh` — polls the GitHub Actions API for the `Merge Gate` run for a commit SHA, downloads logs, and extracts diagnostics (requires `GITHUB_TOKEN`).
+
+Keep these utilities for debugging; avoid running them in normal automated deploy paths to reduce duplicate work and race conditions.
 ```
 
 ## Releases

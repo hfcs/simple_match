@@ -2,7 +2,11 @@ name: Integration Tests
 # manual: ensure this workflow is refreshed so `workflow_dispatch` registers
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      merge_run:
+        description: 'Optional identifier from merge gate'
+        required: false
   workflow_call: {}
 
 jobs:

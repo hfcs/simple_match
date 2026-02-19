@@ -1,11 +1,6 @@
 name: Flutter Tests
 
 on:
-  workflow_dispatch:
-    inputs:
-      merge_run:
-        description: 'Optional identifier from merge gate'
-        required: false
   workflow_call: {}
 
 jobs:

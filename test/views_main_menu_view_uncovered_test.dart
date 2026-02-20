@@ -48,8 +48,10 @@ void main() {
       if (tileFinder.evaluate().isEmpty) return;
       final tile = tester.widget<ListTile>(tileFinder);
       if (tile.enabled == true) {
-        // Tap the ListTile itself to ensure the onTap is invoked in all environments
-        await tester.tap(tileFinder);
+        // Ensure the tile is visible and tappable, then tap it
+        await tester.ensureVisible(tileFinder);
+        await tester.pump(const Duration(milliseconds: 50));
+        await tester.tap(tileFinder, warnIfMissed: false);
         // Wait for navigation to complete by polling; avoid pumpAndSettle
         bool pageFound = false;
         for (var i = 0; i < 30; i++) {

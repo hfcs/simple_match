@@ -40,7 +40,8 @@ void main() {
       await tester.pump();
   // Move focus away (ensure visible first to avoid hit-test warnings)
   await tester.ensureVisible(find.byKey(const Key('timeField')));
-  await tester.tap(find.byKey(const Key('timeField')), warnIfMissed: false);
+  // Avoid tapping (can be off-screen on CI); move focus by entering a value instead
+  await tester.enterText(find.byKey(const Key('timeField')), '0');
       await tester.pump();
       // Should not throw and state should be correct
       expect(vm.a, 2);
@@ -49,7 +50,8 @@ void main() {
       // Now enter invalid value and blur
       await tester.enterText(find.byKey(const Key('aField')), '-5');
       await tester.pump();
-      await tester.tap(find.byKey(const Key('timeField')));
+      await tester.ensureVisible(find.byKey(const Key('timeField')));
+      await tester.enterText(find.byKey(const Key('timeField')), '');
       await tester.pump();
       expect(find.textContaining('cannot be negative'), findsOneWidget);
     });

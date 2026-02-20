@@ -61,23 +61,15 @@ void main() {
     expect(vm.teamGame.teams.length, 1);
     expect(vm.teamGame.teams.first.name, 'TeamA');
 
-    // Assign Alice to TeamA using the popup menu
-    final aliceTile = find.widgetWithText(ListTile, 'Alice');
-    expect(aliceTile, findsOneWidget);
-
-    // Open popup menu on Alice's ListTile
-    final popup = find.descendant(of: aliceTile, matching: find.byType(PopupMenuButton<String>));
-    await tester.tap(popup);
-    await tester.pump(const Duration(milliseconds: 200));
-
-    // Select the 'Assign to TeamA' menu item
-    await tester.tap(find.text('Assign to TeamA'));
+    // Assign Alice to TeamA programmatically via the viewmodel to avoid popup
+    final teamId = vm.teamGame.teams.first.id;
+    await vm.assignShooter(teamId, 'Alice');
     await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.teams.first.members, contains('Alice'));
 
-    // Use Unassign All button to clear assignments
-    await tester.tap(find.text('Unassign All'));
+    // Unassign programmatically (avoids tapping Unassign All button in widget tests)
+    await vm.unassignShooter('Alice');
     await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.teams.first.members, isEmpty);

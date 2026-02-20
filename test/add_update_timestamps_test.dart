@@ -45,7 +45,7 @@ void main() {
     final shootersRaw2 = prefs.getString('shooters');
     final shooters2 = jsonDecode(shootersRaw2!) as List;
     final sMap2 = Map<String, dynamic>.from(shooters2.first as Map);
-    final updatedAt2 = sMap2['updatedAt'] as String;
+    final updatedAt2 = sMap2['updatedAtUtc'] as String;
     expect(DateTime.parse(updatedAt2).isAfter(DateTime.parse(updatedAt)), isTrue);
 
     // Add stage and result then update result
@@ -66,7 +66,7 @@ void main() {
     final resultsRaw2 = prefs.getString('stageResults');
     final results2 = jsonDecode(resultsRaw2!) as List;
     final rMap2 = Map<String, dynamic>.from(results2.first as Map);
-    final rUpdated2 = rMap2['updatedAt'] as String;
+    final rUpdated2 = rMap2['updatedAtUtc'] as String;
     expect(DateTime.parse(rUpdated2).isAfter(DateTime.parse(rUpdated)), isTrue);
 
     // TeamGame update

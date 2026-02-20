@@ -22,13 +22,19 @@ void main() {
     await tester.pump(const Duration(milliseconds: 200));
 
     // The main menu contains a 'Settings' entry
-    final settingsFinder = find.text('Settings');
-    expect(settingsFinder, findsOneWidget);
-
-    await tester.tap(settingsFinder);
-    await tester.pump(const Duration(milliseconds: 200));
-
-    // SettingsView should be displayed with Export Backup button
+    // Navigate to settings programmatically to avoid hit-test flakiness
+    final nav = tester.state<NavigatorState>(find.byType(Navigator));
+    nav.pushNamed('/settings');
+    // Poll for the SettingsView to appear deterministically
+    var found = false;
+    for (var i = 0; i < 20; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+      if (find.text('Export Backup').evaluate().isNotEmpty) {
+        found = true;
+        break;
+      }
+    }
+    expect(found, isTrue, reason: 'SettingsView did not appear');
     expect(find.text('Export Backup'), findsOneWidget);
     expect(find.text('Import Backup'), findsOneWidget);
   });

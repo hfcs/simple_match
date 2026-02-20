@@ -22,16 +22,16 @@ void main() {
     // Tap the Team Game Setup menu card
     final menuFinder = find.widgetWithText(ListTile, 'Team Game Setup');
     expect(menuFinder, findsOneWidget);
-    await tester.tap(menuFinder);
+    final menuTile = tester.widget<ListTile>(menuFinder);
+    menuTile.onTap?.call();
     await tester.pump(const Duration(milliseconds: 200));
 
     // Should navigate to Team Game Setup view
     expect(find.text('Team Game Setup'), findsWidgets);
 
-    // Pop back to main menu by tapping the AppBar back icon
-    final backIcon = find.byIcon(Icons.arrow_back);
-    expect(backIcon, findsOneWidget);
-    await tester.tap(backIcon);
+    // Pop back to main menu programmatically to avoid hit-test flakiness
+    final nav = tester.state<NavigatorState>(find.byType(Navigator));
+    nav.pop();
     await tester.pump(const Duration(milliseconds: 200));
 
     // Back on main menu

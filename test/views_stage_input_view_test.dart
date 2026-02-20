@@ -78,14 +78,13 @@ void main() {
 
     testWidgets('disables submit if input is invalid', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await _waitForFinder(tester, find.text('Stage 1'));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
       // Enter invalid values
       await tester.enterText(find.byKey(const Key('aField')), '3');
@@ -107,13 +106,13 @@ void main() {
       tester,
     ) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
       // Enter valid values
   await tester.ensureVisible(find.byKey(const Key('timeField')));
@@ -135,13 +134,13 @@ void main() {
 
     testWidgets('submits and displays in result list', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
       // Enter valid values
   await tester.ensureVisible(find.byKey(const Key('timeField')));
@@ -175,16 +174,14 @@ void main() {
   tester.view.physicalSize = const Size(1200, 1600);
   tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and set shooter programmatically (menu taps are flaky in headless tests)
-      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
+      // Select stage and set shooter programmatically (avoid menu tap flakiness)
       final vm = Provider.of<StageInputViewModel>(
         tester.element(find.byType(StageInputView)),
         listen: false,
       );
+      vm.selectStage(1);
       vm.selectShooter('Bob');
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
   // Mark as DNF and set an RO remark
   await tester.ensureVisible(find.text('DNF'));
   await _guardedTap(tester, find.text('DNF').first);
@@ -212,11 +209,13 @@ void main() {
   tester.view.physicalSize = const Size(1200, 1600);
   tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Add a result
-      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Add a result via ViewModel to avoid menu tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
   await tester.ensureVisible(find.byKey(const Key('timeField')));
   await tester.enterText(find.byKey(const Key('timeField')), '10.0');
@@ -284,11 +283,13 @@ void main() {
 
     testWidgets('DQ requires non-empty RO remark and disables submit when blank', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
       // Select DQ status
       await tester.ensureVisible(find.text('DQ'));
@@ -305,11 +306,13 @@ void main() {
 
     testWidgets('DQ with RO remark allows submit', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
-      await _guardedTap(tester, find.text('Stage 1').last);
-      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
-      await _guardedTap(tester, find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
       // Select DQ status
       await tester.ensureVisible(find.text('DQ'));

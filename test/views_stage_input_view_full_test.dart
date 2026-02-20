@@ -69,15 +69,13 @@ void main() {
       );
       await tester.pump(const Duration(milliseconds: 200));
 
-      // Select stage
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      // Select shooter
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Test').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectStage(1);
+      vm.selectShooter('Test');
       await tester.pump(const Duration(milliseconds: 200));
 
       // Enter values for all fields

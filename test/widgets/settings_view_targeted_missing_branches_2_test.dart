@@ -29,16 +29,16 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Call the test wrapper that exercises the documents import path.
     final state = tester.state(find.byType(SettingsView)) as dynamic;
     await state.importFromDocumentsForTest(state.context, repo, persistence);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Exact message in code may vary slightly; use a contains-based matcher
     // and ensure UI settles before asserting.
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 
@@ -59,10 +59,10 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsOneWidget);
   });
@@ -86,10 +86,10 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // The code catches exceptions and shows a SnackBar with 'Export failed: '
   // The message may appear in multiple places (status label and SnackBar),

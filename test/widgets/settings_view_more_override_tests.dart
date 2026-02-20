@@ -54,10 +54,10 @@ void main() {
 
     // Tap import
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Since import dry-run fails validation, expect a validation failure SnackBar
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
@@ -79,14 +79,14 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Should see a confirmation dialog
   expect(find.text('Confirm restore'), findsOneWidget);
 
   // Cancel the dialog
   await tester.tap(find.text('Cancel'));
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
   // After cancelling, the status should remain empty
   expect(find.text('Status: '), findsOneWidget);
@@ -108,9 +108,9 @@ void main() {
     ));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   expect(find.textContaining('Export failed'), findsWidgets);
   });
 
@@ -136,9 +136,9 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   // The persistence implementation returns failure even on dry-run, so
   // we should see the backup validation failure path.
   expect(find.textContaining('Backup validation failed'), findsWidgets);
@@ -163,9 +163,9 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   expect(find.textContaining('Import succeeded but failed to reload repository'), findsWidgets);
   });
 
@@ -191,7 +191,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(calledPath, isNotNull);
     expect(calledContent, isNotNull);
@@ -218,7 +218,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(loadCalled, isTrue);
     expect(find.text('Import successful'), findsOneWidget);

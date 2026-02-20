@@ -38,7 +38,7 @@ void main() {
   await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
     // Allow any SnackBars to appear
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect the status text to update to 'Import successful' (state sets _lastMessage)
     expect(find.textContaining('Import successful'), findsWidgets);

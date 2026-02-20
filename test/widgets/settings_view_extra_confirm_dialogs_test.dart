@@ -46,11 +46,11 @@ void main() {
 
     // Trigger import flow which will show a confirmation dialog; press Restore
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Final result should show import failed status text in the Status line
   expect(find.textContaining('Status: Import failed'), findsOneWidget);
@@ -78,17 +78,17 @@ void main() {
 
     // Tap Import Backup -> choose file from SimpleDialog
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The file name should be shown in the SimpleDialog options
     expect(find.text('confirm_backup.json'), findsOneWidget);
     await tester.tap(find.text('confirm_backup.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // An AlertDialog confirm should appear; press Restore to proceed
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Because repo.loadAll throws, UI should show reload failed status
     expect(find.textContaining('reload failed'), findsOneWidget);
@@ -119,12 +119,12 @@ void main() {
     // Call the chosen-for-test variant which will show a confirmation dialog.
     // The widget test can then interact with the dialog by tapping 'Restore'.
     final call = (state as dynamic).importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Dialog should be visible; press Restore
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Status: Import failed'), findsOneWidget);
 

@@ -14,7 +14,7 @@ void main() {
     await repo.addShooter(Shooter(name: 'Alice'));
 
     await tester.pumpWidget(MiniIPSCMatchApp(repository: repo));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Ensure main menu is visible
     expect(find.text('Mini IPSC Match'), findsOneWidget);
@@ -23,7 +23,7 @@ void main() {
     final menuFinder = find.widgetWithText(ListTile, 'Team Game Setup');
     expect(menuFinder, findsOneWidget);
     await tester.tap(menuFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should navigate to Team Game Setup view
     expect(find.text('Team Game Setup'), findsWidgets);
@@ -32,7 +32,7 @@ void main() {
     final backIcon = find.byIcon(Icons.arrow_back);
     expect(backIcon, findsOneWidget);
     await tester.tap(backIcon);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Back on main menu
     expect(find.text('Mini IPSC Match'), findsOneWidget);

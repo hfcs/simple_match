@@ -26,21 +26,21 @@ void main() {
           child: const MaterialApp(home: StageInputView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(
         find.byKey(const Key('stageSelector')),
         warnIfMissed: false,
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(
         find.byKey(const Key('shooterSelector')),
         warnIfMissed: false,
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Edge').last, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Rapidly change A, C, D fields
       await tester.enterText(find.byKey(const Key('aField')), '2');
       await tester.pump();
@@ -81,21 +81,21 @@ void main() {
           child: const MaterialApp(home: StageInputView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(
         find.byKey(const Key('stageSelector')),
         warnIfMissed: false,
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(
         find.byKey(const Key('shooterSelector')),
         warnIfMissed: false,
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Err').last, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter negative for each field and check error
       final fields = [
         'aField',

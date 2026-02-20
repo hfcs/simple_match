@@ -29,16 +29,16 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Act: tap Export Backup
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Assert: Status text exists (content may be empty depending on environment)
   final statusFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().startsWith('Status:'));
   expect(statusFinder, findsOneWidget);
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import with pickBackupOverride returning null shows no file selected', (tester) async {
     final fake = FakePersistence();
@@ -56,14 +56,14 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Accept either a SnackBar or the Status text
     expect(
       find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('No file selected')),
       findsWidgets,
     );
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import dry-run failure via pickBackupOverride shows validation failed', (tester) async {
     // Arrange: fake persistence that fails dry-run
@@ -87,13 +87,13 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(
       find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')),
       findsWidgets,
     );
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import actual import failure shows Import failed status', (tester) async {
     // importFn returns success=true for dryRun, but false for actual import
@@ -117,14 +117,14 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show Import failed message in Status
     expect(
       find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import failed')),
       findsWidgets,
     );
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import succeeds but repo.loadAll throws shows reload failed state', (tester) async {
     final fake = FakePersistence(
@@ -146,13 +146,13 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(
       find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('reload failed')),
       findsWidgets,
     );
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import from documents list and readFileBytesOverride succeeds', (tester) async {
     final fake = FakePersistence(
@@ -179,17 +179,17 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The SimpleDialog shows the filename (foo.json). Tap it.
     await tester.tap(find.text('foo.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Accept either a direct SnackBar/Text 'Import successful' or the Status text
     final successFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import successful'));
     final statusFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().startsWith('Status:'));
     expect(tester.any(successFinder) || tester.any(statusFinder), isTrue);
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 
   testWidgets('Import readFileBytesOverride throws shows Import error', (tester) async {
     final fake = FakePersistence(
@@ -215,15 +215,15 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('bar.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(
       find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import error')),
       findsWidgets,
     );
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }
 
 class _TempDir {

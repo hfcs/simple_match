@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_match/services/persistence_service.dart';
 
 void main() {
-  test('migrate to v4 adds createdAt and updatedAt in ISO8601 UTC', () async {
+  test('migrate to v5 renames timestamps to UTC-suffixed keys', () async {
     // Prepare mock prefs with an older schema (v3) and records missing timestamps
     SharedPreferences.setMockInitialValues({
       'dataSchemaVersion': 3,
@@ -41,15 +41,15 @@ void main() {
     // Schema version updated
     expect(prefs.getInt(kDataSchemaVersionKey), equals(kDataSchemaVersion));
 
-    // Stages now include createdAt/updatedAt
+    // Stages now include createdAtUtc/updatedAtUtc
     final stagesRaw = prefs.getString('stages');
     expect(stagesRaw, isNotNull);
     final stages = jsonDecode(stagesRaw!) as List;
     for (final s in stages) {
       final map = Map<String, dynamic>.from(s as Map);
-      expect(map['createdAt'], isNotNull);
-      expect(map['updatedAt'], isNotNull);
-      final created = DateTime.parse(map['createdAt'] as String);
+      expect(map['createdAtUtc'], isNotNull);
+      expect(map['updatedAtUtc'], isNotNull);
+      final created = DateTime.parse(map['createdAtUtc'] as String);
       expect(created.isUtc, isTrue);
     }
 
@@ -58,15 +58,15 @@ void main() {
     expect(shootersRaw, isNotNull);
     final shooters = jsonDecode(shootersRaw!) as List;
     final shooterMap = Map<String, dynamic>.from(shooters.first as Map);
-    expect(shooterMap['createdAt'], isNotNull);
-    expect(shooterMap['updatedAt'], isNotNull);
+    expect(shooterMap['createdAtUtc'], isNotNull);
+    expect(shooterMap['updatedAtUtc'], isNotNull);
 
     // Stage results include createdAt/updatedAt
     final resultsRaw = prefs.getString('stageResults');
     expect(resultsRaw, isNotNull);
     final results = jsonDecode(resultsRaw!) as List;
     final resultMap = Map<String, dynamic>.from(results.first as Map);
-    expect(resultMap['createdAt'], isNotNull);
-    expect(resultMap['updatedAt'], isNotNull);
+    expect(resultMap['createdAtUtc'], isNotNull);
+    expect(resultMap['updatedAtUtc'], isNotNull);
   });
 }

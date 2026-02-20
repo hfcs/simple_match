@@ -36,14 +36,14 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     // Call the export path which (without documentsDirOverride) will invoke
     // getDocumentsDirectory() and then exportBackupToFile on the FakePersistence.
     await state.exportBackupForTest(state.context);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect an Exported to <path> SnackBar or status text to be present.
     expect(find.textContaining('Exported to'), findsWidgets);
@@ -70,14 +70,14 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     // Call the IO-facing export path which under a pickBackupOverride will
     // execute the import/dry-run flow and then repo.loadAll() which throws.
     await state.exportBackupForTest(state.context);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import succeeded but failed to reload repository'), findsWidgets);
   });

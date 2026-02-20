@@ -50,10 +50,10 @@ void main() {
       if (tile.enabled == true) {
         // Tap the ListTile itself to ensure the onTap is invoked in all environments
         await tester.tap(tileFinder);
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
         expect(find.text(expectedPage), findsOneWidget);
         await tester.pageBack();
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
       }
     }
     await tryTapNamed('Match Setup', 'Match Setup Page');
@@ -67,16 +67,16 @@ void main() {
     final clearBtn = find.text('Clear All Data');
     if (clearBtn.evaluate().isNotEmpty) {
       await tester.tap(clearBtn);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Cancel
       await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Mini IPSC Match'), findsOneWidget);
       // Confirm
       await tester.tap(clearBtn);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Confirm'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.pump(const Duration(milliseconds: 1500));
       // Instead of checking for SnackBar, assert main menu is still present
       expect(find.text('Mini IPSC Match'), findsOneWidget);

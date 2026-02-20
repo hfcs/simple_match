@@ -47,7 +47,7 @@ void main() {
 
     // Tap Export and ensure our fake exporter is invoked
     await tester.tap(exportFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(called, isTrue);
   }, timeout: Timeout(Duration(seconds: 20)));
 

@@ -25,14 +25,14 @@ void main() {
 
     // Tap 'Top shooters' radio and verify the top-count TextFormField is shown
     await tester.tap(find.textContaining('Top shooters'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show one TextFormField for entering top count
     expect(find.byType(TextFormField), findsOneWidget);
 
     // Enter a top count
     await tester.enterText(find.byType(TextFormField), '2');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.topCount, 2);
   });
@@ -51,12 +51,12 @@ void main() {
 
     // Add a new team via the dialog
     await tester.tap(find.text('Add Team'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Enter team name and press Add
     await tester.enterText(find.byType(TextField), 'TeamA');
     await tester.tap(find.text('Add'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.teams.length, 1);
     expect(vm.teamGame.teams.first.name, 'TeamA');
@@ -68,17 +68,17 @@ void main() {
     // Open popup menu on Alice's ListTile
     final popup = find.descendant(of: aliceTile, matching: find.byType(PopupMenuButton<String>));
     await tester.tap(popup);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Select the 'Assign to TeamA' menu item
     await tester.tap(find.text('Assign to TeamA'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.teams.first.members, contains('Alice'));
 
     // Use Unassign All button to clear assignments
     await tester.tap(find.text('Unassign All'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(vm.teamGame.teams.first.members, isEmpty);
   });

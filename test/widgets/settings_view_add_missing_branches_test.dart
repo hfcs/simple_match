@@ -51,7 +51,7 @@ void main() {
 
     // Call the web import wrapper directly; it should show the Import failed path
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // The SettingsView always renders the last status line in the UI
   // as "Status: <message>" so assert the status text contains the
@@ -83,7 +83,7 @@ void main() {
     final chosen = _FakeFileObj('/tmp/dummy.json');
 
     await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   expect(find.textContaining('Status: Import failed'), findsOneWidget);
   });
@@ -111,7 +111,7 @@ void main() {
   // (which would block the test). The Confirmed variant reads the bytes
   // and proceeds directly to the import step.
   await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Check the Status text specifically (SnackBar contains a similar
     // message so matching the Status avoids duplicate matches).

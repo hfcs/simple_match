@@ -43,7 +43,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final snackBar = find.byType(SnackBar);
     expect(snackBar, findsOneWidget);
@@ -67,7 +67,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final snackBar = find.byType(SnackBar);
     expect(snackBar, findsOneWidget);
@@ -93,7 +93,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final snackBar = find.byType(SnackBar);
     expect(snackBar, findsOneWidget);
@@ -130,7 +130,7 @@ void main() {
     // Dialog should be visible asking to confirm
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Repo should now contain the imported shooter
     await repo.loadAll();
@@ -170,7 +170,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The import flow differs on web vs IO. If the pick override/directory
     // path was used we will see a Confirm dialog immediately; otherwise a
@@ -180,7 +180,7 @@ void main() {
     } else if (find.byType(SimpleDialogOption).evaluate().isNotEmpty) {
       final option = find.byType(SimpleDialogOption).first;
       await tester.tap(option);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       if (find.text('Confirm restore').evaluate().isNotEmpty) {
         await tester.tap(find.text('Restore'));
       }
@@ -189,10 +189,10 @@ void main() {
       final fileFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('yara.json'));
       expect(fileFinder, findsOneWidget);
       await tester.tap(fileFinder);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       if (find.text('Confirm restore').evaluate().isNotEmpty) await tester.tap(find.text('Restore'));
     }
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await repo.loadAll();
     expect(repo.getShooter('Yara')?.name, equals('Yara'));

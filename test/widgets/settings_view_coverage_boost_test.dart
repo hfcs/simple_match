@@ -48,7 +48,7 @@ void main() {
     // call web-export helper
     final ts = DateTime.now().toIso8601String().replaceAll(':', '-');
   await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, dummyExporter, ts);
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   // Match the persistent status text to avoid matching the transient
   // SnackBar message which contains the same substring.
   expect(find.textContaining('Status: Exported to browser'), findsOneWidget);
@@ -63,7 +63,7 @@ void main() {
     await tester.pump();
     final st2 = tester.state(find.byType(SettingsView));
   await (st2 as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   // The web-import path displays a SnackBar when no file is selected. We
   // don't assert the SnackBar here to avoid a fragile overlay timing
   // dependency; successful return without throw is sufficient for coverage.
@@ -79,7 +79,7 @@ void main() {
     final st3 = tester.state(find.byType(SettingsView));
 
   await (st3 as dynamic).importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   // The no-backups path shows a transient SnackBar; avoid asserting the
   // overlay. Instead assert the persistent Status text is present so the
   // test remains deterministic and coverage-focused.
@@ -111,12 +111,12 @@ void main() {
     final fut = (st as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
     // Allow the dialog to appear
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should be visible; press the Restore button to proceed
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Wait for the import to finish
     await fut;
@@ -154,13 +154,13 @@ void main() {
   final ts = DateTime.now().toIso8601String().replaceAll(':', '-');
   Future<void> dummyExporter(String name, String content) async {}
   await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, dummyExporter, ts);
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   expect(find.textContaining('Status:'), findsOneWidget);
 
   // Call the import path via the web-import wrapper to exercise the
   // code path deterministically (the pick override includes autoConfirm).
   await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   expect(find.textContaining('Status: Import successful'), findsOneWidget);
 
   // Previously we called a private helper here. Instead, exercise the

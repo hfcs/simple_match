@@ -4,6 +4,7 @@ import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+// shared_preferences not needed in this widget test
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 
@@ -11,10 +12,16 @@ import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   testWidgets('export and importFromDocuments test exercises document import/export paths', (tester) async {
+    // Avoid touching platform SharedPreferences in widget tests; use FakePersistence
+    // and suppress SnackBars to prevent timers interfering with the VM test.
+    SettingsView.suppressSnackBarsInTests = true;
     // Prepare fake persistence that writes to a real temp file when asked
     final fake = FakePersistence(exportJsonValue: '{"hello":1}');
 
     final repo = MatchRepository(persistence: fake);
+    // Keep persistence calls short in import flows during tests
+    repo.importMode = true;
+    await repo.loadAll();
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
@@ -57,7 +64,7 @@ void main() {
     );
 
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
   // Call the export path via the test wrapper to exercise exporter->file path
   final stateFinder = find.byType(SettingsView);
@@ -84,11 +91,17 @@ void main() {
   print('TEST: importFromDocumentsConfirmedForTest returned');
 
   // Pump briefly to allow any setState updates (avoid waiting for SnackBar animations)
-  await tester.pump(const Duration(milliseconds: 100));
+  Future<void> waitForStatus(WidgetTester t, {int retries = 40}) async {
+    for (var i = 0; i < retries; i++) {
+      await t.pump(const Duration(milliseconds: 50));
+      if (find.textContaining('Status:').evaluate().isNotEmpty) return;
+    }
+  }
 
-    // Verify the status text updated at least once (non-empty)
-    print('TEST: verifying status text');
-    expect(find.textContaining('Status:'), findsOneWidget);
+  await waitForStatus(tester);
+  print('TEST: verifying status text');
+  expect(find.textContaining('Status:'), findsOneWidget);
+  SettingsView.suppressSnackBarsInTests = false;
     print('TEST: done');
   });
 }

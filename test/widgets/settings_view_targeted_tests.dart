@@ -56,17 +56,17 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // SimpleDialog should show the file name
     expect(find.text('simple_match_backup_1.json'), findsOneWidget);
     await tester.tap(find.text('simple_match_backup_1.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should appear; tap Restore
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
   });
@@ -94,10 +94,10 @@ void main() {
       ));
 
       await tester.tap(find.text('Import Backup'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       await tester.tap(find.text('bad_dry.json'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')), findsWidgets);
     });
@@ -125,15 +125,15 @@ void main() {
       ));
 
       await tester.tap(find.text('Import Backup'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       await tester.tap(find.text('final_fail.json'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Confirm and proceed
       expect(find.text('Confirm restore'), findsOneWidget);
       await tester.tap(find.text('Restore'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import failed')), findsWidgets);
     });
@@ -159,10 +159,10 @@ void main() {
       ));
 
       await tester.tap(find.text('Import Backup'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       await tester.tap(find.text('read_error.json'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import error')), findsWidgets);
     });
@@ -187,12 +187,12 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should appear; tap Restore (label used in UI)
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   expect(find.textContaining('Import successful'), findsWidgets);
   });
@@ -218,12 +218,12 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should appear; tap Cancel
     expect(find.text('Cancel'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsNothing);
   });
@@ -244,10 +244,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('reload failed')), findsOneWidget);
   });
@@ -272,10 +272,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(savedName, isNotNull);
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').startsWith('Status: Exported via override')), findsOneWidget);
@@ -302,10 +302,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(savedName, isNotNull);
     SettingsView.forceKIsWeb = false;
@@ -334,10 +334,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
 
@@ -365,13 +365,13 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // SimpleDialog displayed; press outside by tapping Cancel option not present
     // Instead, simulate user pressing back/cancel by tapping outside: use Navigator.pop
     // Find the option and press it (we used SimpleDialogOption which shows filename)
     await tester.tap(find.text('cancel_choose.json'), warnIfMissed: false);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // No Import successful message should be shown
     expect(find.textContaining('Import successful'), findsNothing);
@@ -393,7 +393,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsWidgets);
 
@@ -418,10 +418,10 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Export failed'), findsWidgets);
   });
@@ -447,11 +447,11 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Dismiss dialog by tapping outside the dialog area
   await tester.tapAt(const Offset(10, 10));
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsNothing);
   });

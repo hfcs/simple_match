@@ -60,7 +60,7 @@ void main() {
     // Tap Export Backup button (label text used in SettingsView)
     expect(find.text('Export Backup'), findsOneWidget);
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   expect(exportedPath, isNotNull);
   expect(exportedContent, isNotNull);
@@ -78,7 +78,7 @@ void main() {
     );
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // SnackBar with 'Export failed' should be shown
     expect(find.textContaining('Export failed'), findsOneWidget);
@@ -96,7 +96,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show success SnackBar
     expect(find.textContaining('Import successful'), findsOneWidget);
@@ -115,7 +115,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The import flow should either present the file list and allow selecting
     // 'fake.json' (IO path), or on web it may use the browser picker / override

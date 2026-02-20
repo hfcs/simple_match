@@ -38,7 +38,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show validation failed message
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
@@ -61,7 +61,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show the reload-failed SnackBar and setState message
     expect(find.textContaining('reload failed'), findsOneWidget);
@@ -89,15 +89,15 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Choose the file
     await tester.tap(find.text('b.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog
     await tester.tap(find.widgetWithText(TextButton, 'Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Could show both a SnackBar and the Status: text — accept one or more matches.
   expect(find.textContaining('Import failed:'), findsWidgets);
@@ -120,10 +120,10 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   await tester.tap(find.text('c.json'));
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
   // readFileBytesOverride throws, so no confirm dialog will appear — expect the catch(e) path
   expect(find.textContaining('Import error:'), findsWidgets);

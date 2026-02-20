@@ -21,7 +21,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('No file selected'), findsWidgets);
   });
@@ -38,7 +38,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('No backup files found'), findsWidgets);
   });
@@ -59,13 +59,13 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should appear; press Cancel
     final cancel = find.widgetWithText(TextButton, 'Cancel');
     expect(cancel, findsOneWidget);
     await tester.tap(cancel);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Since user canceled, no Import successful or failed messages should appear; check status hasn't changed to 'Import successful'
     expect(find.textContaining('Import successful'), findsNothing);

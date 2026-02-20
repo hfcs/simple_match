@@ -26,9 +26,9 @@ void main() {
     expect(find.text('Stage 2: 10 shoots'), findsOneWidget);
     // Remove it (confirm dialog)
     await tester.tap(find.byKey(const Key('removeStage-2')));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('Remove'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Stage 2: 10 shoots'), findsNothing);
   });
 

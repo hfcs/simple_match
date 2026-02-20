@@ -46,7 +46,7 @@ void main() {
     // Call the web-export wrapper directly with the dummy exporter.
     final ts = DateTime.now().toIso8601String().replaceAll(':', '-');
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, dummyExporter, ts);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // The SettingsView also shows the same message without the "Status: "
   // prefix; assert the persistent status text specifically to avoid
@@ -74,7 +74,7 @@ void main() {
     final state = tester.state(find.byType(SettingsView));
 
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsOneWidget);
   });
@@ -100,7 +100,7 @@ void main() {
   // Use the "Confirmed" helper to avoid showing the confirmation dialog
   // in VM tests (which can hang). The Confirmed variant skips the dialog.
   await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
   });
@@ -124,7 +124,7 @@ void main() {
     final chosen = _FakeFileObj('/tmp/ok.json');
 
     await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import succeeded, reload failed'), findsOneWidget);
   });
@@ -144,7 +144,7 @@ void main() {
     final state = tester.state(find.byType(SettingsView));
 
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Persistent status should reflect the export failure
     expect(find.textContaining('Status: Export failed'), findsOneWidget);
@@ -165,7 +165,7 @@ void main() {
     final state = tester.state(find.byType(SettingsView));
 
     await (state as dynamic).importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No backup files found in app documents directory'), findsOneWidget);
   });
@@ -191,7 +191,7 @@ void main() {
   // Use the Confirmed helper to avoid showing the confirmation dialog
   // in VM tests (which can hang). The Confirmed variant skips the dialog.
   await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Status: Import failed: final fail'), findsOneWidget);
   });

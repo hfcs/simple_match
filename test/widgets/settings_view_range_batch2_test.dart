@@ -28,7 +28,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import successful')), findsWidgets);
   });
@@ -49,7 +49,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')), findsWidgets);
   });
@@ -66,7 +66,7 @@ void main() {
     );
 
   await tester.tap(find.text('Import Backup'));
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
   // pickBackup returned null -> a SnackBar is shown with 'No file selected'
   expect(find.byType(SnackBar), findsOneWidget);
@@ -84,7 +84,7 @@ void main() {
     );
 
   await tester.tap(find.text('Export Backup'));
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
 
   expect(find.byType(SnackBar), findsOneWidget);
   });

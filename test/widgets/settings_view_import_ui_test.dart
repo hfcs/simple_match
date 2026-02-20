@@ -17,6 +17,9 @@ void main() {
 
   testWidgets('Import Backup UI flow (select file, dry-run, restore) updates repository', (tester) async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    // Avoid touching platform SharedPreferences in widget tests; use FakePersistence
+    // and suppress SnackBars to prevent timers from interfering with the VM test run.
+    SettingsView.suppressSnackBarsInTests = true;
 
     // Create a minimal valid backup JSON bytes in-memory
     final backup = {
@@ -30,6 +33,8 @@ void main() {
   // Use fake persistence (in-memory) for deterministic tests
   final persistence = FakePersistence();
   final repo = MatchRepository(persistence: persistence);
+  // Enable importMode to keep persistence calls short/timeboxed during import flows
+  repo.importMode = true;
   await repo.loadAll();
 
     // Provide pickBackupOverride so tests can simulate user picking a file.
@@ -44,18 +49,24 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Import Backup and let the override handle the rest (autoConfirm=true)
     final importFinder = find.text('Import Backup');
     expect(importFinder, findsOneWidget);
     await tester.tap(importFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
+    // Wait for status line to update (poll briefly instead of a single pump)
+    Future<void> waitForStatus(WidgetTester t, {int retries = 20}) async {
+      for (var i = 0; i < retries; i++) {
+        await t.pump(const Duration(milliseconds: 50));
+        if (find.text('Status: Import successful').evaluate().isNotEmpty) return;
+      }
+    }
 
-  // Allow async operations to complete (import, repo.loadAll()) and check UI status
-  await tester.pump(const Duration(milliseconds: 200));
-
-  // Verify import result: SettingsView displays success status line
-  expect(find.text('Status: Import successful'), findsOneWidget);
+    await waitForStatus(tester);
+    expect(find.text('Status: Import successful'), findsOneWidget);
+    // Reset test-only flags
+    SettingsView.suppressSnackBarsInTests = false;
   }, timeout: Timeout(Duration(seconds: 60)));
 }

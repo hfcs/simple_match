@@ -30,7 +30,7 @@ void main() {
 
     // Trigger export which should use the override and set status
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The status text should indicate an export via override
     expect(find.textContaining('Exported via override as'), findsWidgets);

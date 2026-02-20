@@ -45,14 +45,14 @@ void main() {
 
       // Open the import dialog
       await tester.tap(find.text('Import Backup'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Dialog should be visible
       expect(find.text('Select backup to import'), findsOneWidget);
 
       // Tap outside the dialog to dismiss (barrierDismissible true by default)
       await tester.tapAt(const Offset(10, 10));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // The dialog was dismissed and no SnackBar should be shown by the code
       // path that handles a null choice (it simply returns early).
@@ -80,7 +80,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.text('Export Backup'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
   expect(find.byType(SnackBar), findsOneWidget);
   expect(find.textContaining('Export failed'), findsWidgets);
@@ -101,7 +101,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show a No file selected SnackBar
     expect(find.byType(SnackBar), findsOneWidget);
@@ -134,7 +134,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byType(SnackBar), findsOneWidget);
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
@@ -170,7 +170,7 @@ void main() {
     // Trigger the import action (UI tap). The repository will throw on reloadAll(), which
     // should make the UI show a reload-failed status.
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import succeeded, reload failed'), findsOneWidget);
     expect(find.byType(SnackBar), findsOneWidget);
@@ -212,12 +212,12 @@ void main() {
       (String name, String json) async {},
       DateTime.now().toIso8601String(),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final repo2 = MatchRepository(persistence: persistence);
     await repo2.loadAll();
     await state.importViaWebForTest(tester.element(find.byType(SettingsView)), repo2, persistence);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
 

@@ -46,7 +46,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
@@ -57,7 +57,7 @@ void main() {
       // simple no-op exporter for tests
       print('TEST: dummy exporter called with name=$n contentLen=${c.length}');
     }, 'test-ts');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should display a SnackBar indicating a browser download style export
     expect(find.textContaining('Exported to browser download'), findsWidgets);
@@ -88,13 +88,13 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
     final chosen = _FakeFile('/tmp/simple_match_test_backup.json');
 
     await state.importFromDocumentsConfirmedForTest(state.context, repo, persistence, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
@@ -118,13 +118,13 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
     final chosen = _FakeFile('/tmp/simple_match_test_backup.json');
 
     await state.importFromDocumentsConfirmedForTest(state.context, repo, persistence, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The code shows a SnackBar when reload fails
     expect(find.textContaining('Import succeeded but failed to reload repository'), findsWidgets);

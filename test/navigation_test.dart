@@ -17,18 +17,18 @@ void main() {
     } else {
       await tester.tap(find.text('Match Setup'));
     }
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Match Setup'), findsOneWidget); // AppBar only
     // Navigate back using the visible back button instead of tester.pageBack()
     final backBtn = find.byType(BackButton);
     if (backBtn.evaluate().isNotEmpty) {
       await tester.tap(backBtn);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     } else {
       final backTooltip = find.byTooltip('Back');
       if (backTooltip.evaluate().isNotEmpty) {
         await tester.tap(backTooltip);
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
       }
     }
 
@@ -39,17 +39,17 @@ void main() {
     } else {
       await tester.tap(find.text('Shooter Setup'));
     }
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Shooter Setup'), findsOneWidget);
     final backBtn2 = find.byType(BackButton);
     if (backBtn2.evaluate().isNotEmpty) {
       await tester.tap(backBtn2);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     } else {
       final backTooltip2 = find.byTooltip('Back');
       if (backTooltip2.evaluate().isNotEmpty) {
         await tester.tap(backTooltip2);
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
       }
     }
 
@@ -60,17 +60,17 @@ void main() {
     } else {
       await tester.tap(find.text('Stage Input'));
     }
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Stage Input'), findsOneWidget);
     final backBtn3 = find.byType(BackButton);
     if (backBtn3.evaluate().isNotEmpty) {
       await tester.tap(backBtn3);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     } else {
       final backTooltip3 = find.byTooltip('Back');
       if (backTooltip3.evaluate().isNotEmpty) {
         await tester.tap(backTooltip3);
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
       }
     }
   });

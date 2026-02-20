@@ -26,32 +26,32 @@ void main() {
       await tester.enterText(find.byKey(const Key('stageField')), '1');
       await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
       await tester.tap(find.byKey(const Key('addStageButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Stage 1: 10 shoots'), findsOneWidget);
       // Edit the stage
       await tester.tap(find.byKey(const Key('editStage-1')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.enterText(find.byKey(const Key('scoringShootsField')), '12');
       await tester.tap(find.byKey(const Key('confirmEditButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Stage 1: 12 shoots'), findsOneWidget);
       // Enter edit mode and cancel
       await tester.tap(find.byKey(const Key('editStage-1')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.byKey(const Key('addStageButton')), findsOneWidget);
       // Remove the stage (confirm dialog)
       await tester.tap(find.byKey(const Key('removeStage-1')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Remove'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Stage 1: 12 shoots'), findsNothing);
       // Add invalid input to trigger error
       await tester.enterText(find.byKey(const Key('stageField')), '');
       await tester.enterText(find.byKey(const Key('scoringShootsField')), '');
       await tester.tap(find.byKey(const Key('addStageButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Invalid input.'), findsOneWidget);
     });
   });

@@ -22,7 +22,7 @@ void main() {
         child: const MaterialApp(home: MainMenuView()),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     debugDumpApp();
   });
 }

@@ -32,23 +32,23 @@ void main() {
       tester,
     ) async {
       await tester.pumpWidget(buildTestWidget());
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Find procedure errors field and ensure visible
       final procErrorsField = find.byKey(const Key('procErrorsField'));
       expect(procErrorsField, findsOneWidget);
       await tester.ensureVisible(procErrorsField);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.enterText(procErrorsField, '2');
       await tester.pump();
       expect(vm.procErrors, 2);
@@ -83,15 +83,15 @@ void main() {
       tester,
     ) async {
       await tester.pumpWidget(buildTestWidget());
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Enter negative value for A
       final aField = find.byKey(const Key('aField'));

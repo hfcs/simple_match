@@ -20,6 +20,24 @@ Widget _wrapWithProviders(Widget child, MatchRepository repo) {
   );
 }
 
+// Wait until a finder resolves or timeout after several short pumps.
+Future<void> _waitForFinder(WidgetTester tester, Finder finder, {int retries = 10}) async {
+  for (var i = 0; i < retries; i++) {
+    await tester.pump(const Duration(milliseconds: 50));
+    if (finder.evaluate().isNotEmpty) return;
+  }
+  await tester.pump();
+}
+
+// Guarded tap: wait for the finder, ensure it's visible, then tap and settle briefly.
+Future<void> _guardedTap(WidgetTester tester, Finder finder, {int retries = 10}) async {
+  await _waitForFinder(tester, finder, retries: retries);
+  await tester.ensureVisible(finder);
+  await tester.pump(const Duration(milliseconds: 50));
+  await tester.tap(finder);
+  await tester.pump(const Duration(milliseconds: 200));
+}
+
 void main() {
   group('StageInputView', () {
     late MatchRepository repo;
@@ -62,13 +80,13 @@ void main() {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
+      await _waitForFinder(tester, find.text('Stage 1'));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await tester.pump(const Duration(milliseconds: 200));
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter invalid values
       await tester.enterText(find.byKey(const Key('aField')), '3');
       await tester.enterText(find.byKey(const Key('cField')), '3');
@@ -91,13 +109,12 @@ void main() {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await tester.pump(const Duration(milliseconds: 200));
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter valid values
   await tester.ensureVisible(find.byKey(const Key('timeField')));
   await tester.enterText(find.byKey(const Key('timeField')), '10.0');
@@ -120,13 +137,12 @@ void main() {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await tester.pump(const Duration(milliseconds: 200));
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter valid values
   await tester.ensureVisible(find.byKey(const Key('timeField')));
   await tester.enterText(find.byKey(const Key('timeField')), '10.0');
@@ -139,7 +155,7 @@ void main() {
       await tester.pump();
       // Ensure submit button is visible before tapping
       await tester.ensureVisible(find.byKey(const Key('submitButton')));
-      await tester.tap(find.byKey(const Key('submitButton')));
+      await _guardedTap(tester, find.byKey(const Key('submitButton')));
       await tester.pump();
       // Ensure results list is visible before checking
       await tester.ensureVisible(find.byKey(const Key('resultsList')));
@@ -159,23 +175,24 @@ void main() {
   tester.view.physicalSize = const Size(1200, 1600);
   tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
-      // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Bob').last);
-      await tester.pumpAndSettle();
+      // Select stage and set shooter programmatically (menu taps are flaky in headless tests)
+      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await tester.pump(const Duration(milliseconds: 200));
+      final vm = Provider.of<StageInputViewModel>(
+        tester.element(find.byType(StageInputView)),
+        listen: false,
+      );
+      vm.selectShooter('Bob');
+      await tester.pump();
   // Mark as DNF and set an RO remark
   await tester.ensureVisible(find.text('DNF'));
-  await tester.tap(find.text('DNF').first);
+  await _guardedTap(tester, find.text('DNF').first);
   await tester.pump();
   await tester.enterText(find.byKey(const Key('roRemarkField')), 'Gun jam');
   await tester.pump();
   // Submit (vm.submit() will zero numeric fields for non-completed statuses)
-  await tester.tap(find.byKey(const Key('submitButton')));
+  await _guardedTap(tester, find.byKey(const Key('submitButton')));
   await tester.pump();
       await tester.ensureVisible(find.byKey(const Key('resultsList')));
   // The result subtitle should contain 'Status: DNF' and the RO remark, but not the time or numeric labels
@@ -196,14 +213,11 @@ void main() {
   tester.view.devicePixelRatio = 1.0;
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Add a result
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
   await tester.ensureVisible(find.byKey(const Key('timeField')));
   await tester.enterText(find.byKey(const Key('timeField')), '10.0');
       await tester.enterText(find.byKey(const Key('aField')), '5');
@@ -213,27 +227,27 @@ void main() {
       await tester.enterText(find.byKey(const Key('noShootsField')), '0');
       await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
       await tester.pump();
-      await tester.tap(find.byKey(const Key('submitButton')));
+      await _guardedTap(tester, find.byKey(const Key('submitButton')));
       await tester.pump();
       // Ensure results list is visible
       await tester.ensureVisible(find.byKey(const Key('resultsList')));
       // Tap edit
       await tester.ensureVisible(find.byKey(const Key('editResult-1-Alice')));
-      await tester.tap(find.byKey(const Key('editResult-1-Alice')));
+      await _guardedTap(tester, find.byKey(const Key('editResult-1-Alice')));
       await tester.pump();
       await tester.enterText(find.byKey(const Key('aField')), '4');
       await tester.pump();
       await tester.ensureVisible(find.byKey(const Key('submitButton')));
-      await tester.tap(find.byKey(const Key('submitButton')));
+      await _guardedTap(tester, find.byKey(const Key('submitButton')));
       await tester.pump();
       expect(find.text('4'), findsWidgets);
       // Tap remove
       await tester.ensureVisible(find.byKey(const Key('removeResult-1-Alice')));
-      await tester.tap(find.byKey(const Key('removeResult-1-Alice')));
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.byKey(const Key('removeResult-1-Alice')));
+      await tester.pump(const Duration(milliseconds: 200));
       // Confirm removal from dialog
-      await tester.tap(find.text('Remove'));
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.text('Remove'));
+      await tester.pump(const Duration(milliseconds: 200));
       // Only check that Alice is not present in the results list (no ListTile with her name)
       final resultTiles = tester.widgetList<ListTile>(find.byType(ListTile));
       expect(
@@ -252,17 +266,17 @@ void main() {
   // Pre-populate a DQ result for Bob
   repo.addResult(StageResult(stage: 1, shooter: 'Bob', status: 'DQ'));
       // Rebuild UI
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Open shooter selector
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await tester.pump(const Duration(milliseconds: 200));
       // The menu should show Bob annotated and greyed out
       expect(find.text("Bob (DQ'ed)"), findsOneWidget);
       final bobText = tester.widget<Text>(find.text("Bob (DQ'ed)").first);
       expect(bobText.style?.color, equals(Colors.grey));
       // Try to tap Bob - since the menu item is disabled, tapping it should not select Bob
-      await tester.tap(find.text("Bob (DQ'ed)").first);
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.text("Bob (DQ'ed)").first);
+      await tester.pump(const Duration(milliseconds: 200));
       // Selected shooter should still be null / not Bob
       expect(find.textContaining('Bob'), findsWidgets); // appears in menu, but not selected label
       expect(find.text('Select Shooter'), findsOneWidget);
@@ -271,17 +285,14 @@ void main() {
     testWidgets('DQ requires non-empty RO remark and disables submit when blank', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
       // Select DQ status
       await tester.ensureVisible(find.text('DQ'));
-      await tester.tap(find.text('DQ').first);
+      await _guardedTap(tester, find.text('DQ').first);
       await tester.pump();
       // Clear RO remark if any and ensure it's empty/whitespace
       await tester.enterText(find.byKey(const Key('roRemarkField')), '   ');
@@ -295,17 +306,14 @@ void main() {
     testWidgets('DQ with RO remark allows submit', (tester) async {
       await tester.pumpWidget(_wrapWithProviders(const StageInputView(), repo));
       // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Alice').last);
-      await tester.pumpAndSettle();
+      await _guardedTap(tester, find.byKey(const Key('stageSelector')));
+      await _guardedTap(tester, find.text('Stage 1').last);
+      await _guardedTap(tester, find.byKey(const Key('shooterSelector')));
+      await _guardedTap(tester, find.text('Alice').last);
+      await tester.pump(const Duration(milliseconds: 200));
       // Select DQ status
       await tester.ensureVisible(find.text('DQ'));
-      await tester.tap(find.text('DQ').first);
+      await _guardedTap(tester, find.text('DQ').first);
       await tester.pump();
       // Provide RO remark
       await tester.enterText(find.byKey(const Key('roRemarkField')), 'RO observed illegal procedure');

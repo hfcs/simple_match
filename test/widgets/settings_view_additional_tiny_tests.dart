@@ -48,7 +48,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
   });
@@ -79,12 +79,12 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Choose the only option (name generation uses toString() of the object)
   expect(find.text('simple_match_backup.json'), findsOneWidget);
   await tester.tap(find.text('simple_match_backup.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Both the Status text and a SnackBar may contain the message; accept either.
     expect(find.textContaining('Import error'), findsWidgets);
@@ -108,10 +108,10 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Ensure UI updates settle and use contains-based matcher for stability.
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 }

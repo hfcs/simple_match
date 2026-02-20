@@ -26,32 +26,32 @@ void main() {
       await tester.enterText(find.byKey(const Key('nameField')), 'Alice');
       await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
       await tester.tap(find.byKey(const Key('addShooterButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Alice'), findsOneWidget);
       // Edit the shooter
       await tester.tap(find.byKey(const Key('editShooter-Alice')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.enterText(find.byKey(const Key('scaleField')), '1.5');
       await tester.tap(find.byKey(const Key('confirmEditButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('1.500', skipOffstage: false), findsWidgets);
       // Enter edit mode and cancel
       await tester.tap(find.byKey(const Key('editShooter-Alice')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Cancel'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.byKey(const Key('addShooterButton')), findsOneWidget);
       // Remove the shooter (confirm dialog)
       await tester.tap(find.byKey(const Key('removeShooter-Alice')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Remove'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Alice'), findsNothing);
       // Add invalid input to trigger error
       await tester.enterText(find.byKey(const Key('nameField')), '');
       await tester.enterText(find.byKey(const Key('scaleField')), '');
       await tester.tap(find.byKey(const Key('addShooterButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Invalid scale.'), findsOneWidget);
     });
   });

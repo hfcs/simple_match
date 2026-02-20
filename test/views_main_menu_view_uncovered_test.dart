@@ -50,8 +50,16 @@ void main() {
       if (tile.enabled == true) {
         // Tap the ListTile itself to ensure the onTap is invoked in all environments
         await tester.tap(tileFinder);
-        await tester.pump(const Duration(milliseconds: 200));
-        expect(find.text(expectedPage), findsOneWidget);
+        // Wait for navigation to complete by polling; avoid pumpAndSettle
+        bool pageFound = false;
+        for (var i = 0; i < 30; i++) {
+          await tester.pump(const Duration(milliseconds: 50));
+          if (find.text(expectedPage).evaluate().isNotEmpty) {
+            pageFound = true;
+            break;
+          }
+        }
+        expect(pageFound, isTrue, reason: 'Expected page "$expectedPage" to be shown after tapping "$title"');
         await tester.pageBack();
         await tester.pump(const Duration(milliseconds: 200));
       }

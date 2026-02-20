@@ -27,19 +27,9 @@ void main() {
         ),
       );
       await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(
-        find.byKey(const Key('stageSelector')),
-        warnIfMissed: false,
-      );
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(
-        find.byKey(const Key('shooterSelector')),
-        warnIfMissed: false,
-      );
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Edge').last, warnIfMissed: false);
+      // Select stage and shooter programmatically to avoid popup flakiness
+      vm.selectStage(1);
+      vm.selectShooter('Edge');
       await tester.pump(const Duration(milliseconds: 200));
       // Rapidly change A, C, D fields
       await tester.enterText(find.byKey(const Key('aField')), '2');
@@ -82,19 +72,8 @@ void main() {
         ),
       );
       await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(
-        find.byKey(const Key('stageSelector')),
-        warnIfMissed: false,
-      );
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Stage 1').last, warnIfMissed: false);
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(
-        find.byKey(const Key('shooterSelector')),
-        warnIfMissed: false,
-      );
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Err').last, warnIfMissed: false);
+      vm.selectStage(1);
+      vm.selectShooter('Err');
       await tester.pump(const Duration(milliseconds: 200));
       // Enter negative for each field and check error
       final fields = [

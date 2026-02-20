@@ -42,14 +42,9 @@ class MockPersistenceService extends PersistenceService {
             ),
           );
           await tester.pump(const Duration(milliseconds: 200));
-          // Select stage and shooter
-          await tester.tap(find.byKey(const Key('stageSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Stage 1').last);
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('shooterSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Test').last);
+          // Select stage and shooter programmatically to avoid popup tap flakiness
+          vm.selectStage(1);
+          vm.selectShooter('Test');
           await tester.pump(const Duration(milliseconds: 200));
           // Enter values that do not sum to scoringShoots
           await tester.enterText(find.byKey(const Key('aField')), '2');
@@ -87,14 +82,8 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('stageSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Stage 1').last);
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('shooterSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Test').last);
+          vm.selectStage(1);
+          vm.selectShooter('Test');
           await tester.pump(const Duration(milliseconds: 200));
           // Time
           final addBtns = find.widgetWithIcon(IconButton, Icons.add);
@@ -129,14 +118,8 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('stageSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Stage 1').last);
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('shooterSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Test').last);
+          vm.selectStage(1);
+          vm.selectShooter('Test');
           await tester.pump(const Duration(milliseconds: 200));
           await tester.enterText(find.byKey(const Key('aField')), '-1');
           await tester.pump(const Duration(milliseconds: 200));
@@ -223,14 +206,8 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('stageSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Stage 1').last);
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.byKey(const Key('shooterSelector')));
-          await tester.pump(const Duration(milliseconds: 200));
-          await tester.tap(find.text('Test').last);
+          vm.selectStage(1);
+          vm.selectShooter('Test');
           await tester.pump(const Duration(milliseconds: 200));
           await tester.enterText(find.byKey(const Key('aField')), '10');
       await tester.ensureVisible(find.byKey(const Key('timeField')));

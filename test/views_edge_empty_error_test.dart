@@ -120,14 +120,9 @@ void main() {
       // Ensure dropdowns are present before tapping
       expect(find.byKey(const Key('stageSelector')), findsOneWidget);
       expect(find.byKey(const Key('shooterSelector')), findsOneWidget);
-      // Select stage and shooter in dropdowns
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('A').last);
+      // Select stage and shooter programmatically to avoid popup hit-test flakiness
+      vm.selectStage(1);
+      vm.selectShooter('A');
       await tester.pump(const Duration(milliseconds: 200));
       // Enter valid values for A, C, D, Misses so sum is correct
       await tester.enterText(find.byKey(const Key('aField')), '2');

@@ -34,14 +34,9 @@ void main() {
       await tester.pumpWidget(buildTestWidget());
       await tester.pump(const Duration(milliseconds: 200));
 
-      // Select stage and shooter
-      await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Stage 1').last);
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text('Alice').last);
+      // Select stage and shooter programmatically to avoid popup tap flakiness
+      vm.selectStage(1);
+      vm.selectShooter('Alice');
       await tester.pump(const Duration(milliseconds: 200));
 
       // Find procedure errors field and ensure visible

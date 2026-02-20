@@ -35,12 +35,12 @@ void main() {
         child: MaterialApp(home: SettingsView(saveExportOverride: saveExportOverride)),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Export Backup and ensure our override received JSON
     expect(find.text('Export Backup'), findsOneWidget);
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(savedContent, isNotNull);
     expect(savedContent!.contains('metadata'), isTrue);
 
@@ -59,12 +59,12 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'webtest.json', 'autoConfirm': true})),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Import Backup and confirm the repo contains the imported shooter afterwards
     expect(find.text('Import Backup'), findsOneWidget);
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await repo.loadAll();
     expect(repo.getShooter('WebTest')?.name, equals('WebTest'));

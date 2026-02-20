@@ -49,7 +49,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // get state and call wrapper
     final state = tester.state(find.byType(SettingsView)) as dynamic;
@@ -61,7 +61,7 @@ void main() {
       exportedContent = content;
     }, 'ts');
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(exportedName, isNotNull);
     expect(exportedContent, contains('ok'));
@@ -90,14 +90,14 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     final chosen = _DummyFile('/tmp/simple_match_test_backup.json');
     await state.importFromDocumentsConfirmedForTest(state.context, repo, persistence, chosen);
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // After import the status text is updated to 'Import successful' by code path
     expect(find.textContaining('Import'), findsWidgets);

@@ -39,7 +39,7 @@ void main() {
     // exportBackupForTest is a test-only wrapper on the state that performs the
     // export flow deterministically; call it to exercise the export error branch.
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Export failed'), findsWidgets);
   });
@@ -65,11 +65,11 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('foo_backup.json'), findsOneWidget);
     await tester.tap(find.text('foo_backup.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
   });

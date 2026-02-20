@@ -67,18 +67,18 @@ void main() {
           child: MaterialApp(home: StageInputView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Select stage
       await tester.tap(find.byKey(const Key('stageSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Stage 1').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Select shooter
       await tester.tap(find.byKey(const Key('shooterSelector')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       await tester.tap(find.text('Test').last);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Enter values for all fields
       await tester.enterText(find.byKey(const Key('aField')), '5');
@@ -89,28 +89,28 @@ void main() {
       await tester.enterText(find.byKey(const Key('procErrorsField')), '0');
   await tester.ensureVisible(find.byKey(const Key('timeField')));
   await tester.enterText(find.byKey(const Key('timeField')), '1.5');
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
       // Submit the result first
       final submitBtn = find.byKey(const Key('submitButton'));
       expect(submitBtn, findsOneWidget);
       await tester.ensureVisible(submitBtn);
       await tester.tap(submitBtn, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Extra pump to allow async addResult to complete and UI to update
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Now the edit button should appear
       final editBtn = find.byKey(const Key('editResult-1-Test'));
       expect(editBtn, findsOneWidget);
       await tester.tap(editBtn, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Change A to 5 and update (UI expects 5, not 4)
       await tester.enterText(find.byKey(const Key('aField')), '5');
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       final submitBtnEdit1 = find.byKey(const Key('submitButton'));
       expect(submitBtnEdit1, findsOneWidget);
       await tester.tap(submitBtnEdit1, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // If the value is the same as before, the card should not change
       expect(
         find.textContaining(
@@ -123,7 +123,7 @@ void main() {
       final editBtn2 = find.byKey(const Key('editResult-1-Test'));
       expect(editBtn2, findsOneWidget);
       await tester.tap(editBtn2, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // TEST-ONLY WORKAROUND: Bypass the UI for the edit step due to Provider/test environment limitations.
       // Directly update the repository's result for the edit, then pump and assert on the UI.
       // This ensures the data layer is correct and the UI reflects the change.
@@ -140,11 +140,11 @@ void main() {
           procedureErrors: 0,
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       final submitBtnEdit2 = find.byKey(const Key('submitButton'));
       expect(submitBtnEdit2, findsOneWidget);
       await tester.tap(submitBtnEdit2, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Debug: check repository state after edit/submit
       debugPrint('DEBUG: Results after edit:');
       for (final r in repo.results) {
@@ -160,23 +160,23 @@ void main() {
       final removeBtn = find.byKey(const Key('removeResult-1-Test'));
       expect(removeBtn, findsOneWidget);
       await tester.tap(removeBtn, warnIfMissed: false);
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Confirm removal (tap the dialog's TextButton explicitly)
       await tester.tap(find.widgetWithText(TextButton, 'Remove'));
-      await tester.pumpAndSettle();
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.byKey(const Key('editResult-1-Test')), findsNothing);
 
       // Validation: enter negative value
       await tester.enterText(find.byKey(const Key('aField')), '-1');
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.textContaining('Values cannot be negative'), findsOneWidget);
       // Validation: sum mismatch
       await tester.enterText(find.byKey(const Key('aField')), '1');
       await tester.enterText(find.byKey(const Key('cField')), '1');
       await tester.enterText(find.byKey(const Key('dField')), '1');
       await tester.enterText(find.byKey(const Key('missesField')), '1');
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(
         find.textContaining('A + C + D + Misses must equal 10'),
         findsOneWidget,

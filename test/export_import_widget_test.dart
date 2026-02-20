@@ -35,13 +35,13 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final exportBtn = find.text('Export Backup');
     expect(exportBtn, findsOneWidget);
 
     await tester.tap(exportBtn);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(captured, isNotEmpty);
 

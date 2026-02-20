@@ -1,6 +1,7 @@
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+// shared_preferences not required here; using MatchRepository persistence fakes
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,9 +24,11 @@ void main() {
   });
 
   testWidgets('Import Backup shows no-files SnackBar when documents dir empty', (tester) async {
+    // Avoid touching platform SharedPreferences in this unit test.
     // Use the listBackupsOverride to return an empty list so the import flow
     // displays the 'no backups' SnackBar without touching the filesystem.
   final repo = MatchRepository(persistence: FakePersistence());
+  repo.importMode = true;
   await repo.loadAll();
 
     await tester.pumpWidget(
@@ -40,10 +43,17 @@ void main() {
   final importFinder = find.text('Import Backup');
     expect(importFinder, findsOneWidget);
     await tester.tap(importFinder);
-    await tester.pumpAndSettle();
 
-    // SnackBar should appear indicating no backup files or that the user
-    // cancelled the file picker on web. Match either message.
+    // Wait briefly for SnackBar to appear
+    Future<void> waitForNoBackupMsg(WidgetTester t, {int retries = 20}) async {
+      for (var i = 0; i < retries; i++) {
+        await t.pump(const Duration(milliseconds: 50));
+        final msgFinder = find.byWidgetPredicate((w) => w is Text && ((w.data ?? '').contains('No backup') || (w.data ?? '').contains('No file')));
+        if (msgFinder.evaluate().isNotEmpty) return;
+      }
+    }
+
+    await waitForNoBackupMsg(tester);
     final msgFinder = find.byWidgetPredicate((w) => w is Text && ((w.data ?? '').contains('No backup') || (w.data ?? '').contains('No file')));
     expect(msgFinder, findsOneWidget);
   });

@@ -34,12 +34,12 @@ void main() {
           child: MaterialApp(home: ShooterSetupView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Try to add duplicate shooter
       await tester.enterText(find.byKey(const Key('nameField')), 'Test');
       await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
       await tester.tap(find.byKey(const Key('addShooterButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Shooter already exists.'), findsOneWidget);
     });
 
@@ -61,12 +61,12 @@ void main() {
           child: MaterialApp(home: ShooterSetupView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter invalid scale factor
       await tester.enterText(find.byKey(const Key('nameField')), 'NewShooter');
       await tester.enterText(find.byKey(const Key('scaleField')), 'abc');
       await tester.tap(find.byKey(const Key('addShooterButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Invalid scale.'), findsOneWidget);
     });
     testWidgets('shows error on invalid scale and empty state', (tester) async {

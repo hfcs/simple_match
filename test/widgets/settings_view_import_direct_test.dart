@@ -6,6 +6,7 @@ import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   test('Direct import flow (dry-run -> import) with FakePersistence', () async {
+    // Avoid touching platform SharedPreferences in this unit test.
     // Use in-memory bytes so this test can run on web as well as native
     final backup = {
       'metadata': {'schemaVersion': 2, 'exportedAt': DateTime.now().toIso8601String()},

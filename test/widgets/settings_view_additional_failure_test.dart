@@ -41,7 +41,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byType(SnackBar), findsOneWidget);
     final snack = tester.widget<SnackBar>(find.byType(SnackBar));
@@ -84,9 +84,9 @@ void main() {
     // Export path shows a confirm dialog (same as import); tap Restore if present
     if (find.text('Confirm restore').evaluate().isNotEmpty) {
       await tester.tap(find.text('Restore'));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     } else {
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     }
 
     // The import path should complete and update the status text to Import successful

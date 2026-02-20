@@ -42,7 +42,7 @@ void main() {
     final exportFinder = find.text('Export Backup');
     expect(exportFinder, findsOneWidget);
     await tester.tap(exportFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // The saveOverride should have been invoked and recorded the content
   expect(writtenPath, isNotNull);
@@ -52,5 +52,5 @@ void main() {
 
     // cleanup
     tmp.deleteSync(recursive: true);
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }

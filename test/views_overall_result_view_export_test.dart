@@ -41,7 +41,7 @@ void main() {
             child: const MaterialApp(home: OverallResultView()),
           ),
         );
-        await tester.pumpAndSettle();
+        await tester.pump(const Duration(milliseconds: 200));
 
         // PDF export button should be present
         final pdfButton = find.byIcon(Icons.picture_as_pdf);
@@ -68,7 +68,7 @@ void main() {
           child: const MaterialApp(home: OverallResultView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.byIcon(Icons.picture_as_pdf), findsNothing);
     });
   });

@@ -10,9 +10,11 @@ import '../models/shooter.dart';
 import '../models/match_stage.dart';
 import '../models/stage_result.dart';
 
+String _nowIso() => DateTime.now().toUtc().toIso8601String();
+
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 4; // Added per-record audit timestamps
+const int kDataSchemaVersion = 5; // v5: rename timestamp fields to UTC-suffixed keys
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -276,6 +278,94 @@ class PersistenceService {
       }
     }
 
+    // Migration for v5: rename timestamp keys to explicitly UTC suffixed fields
+    if (from < 5 && to >= 5) {
+      _logger.info('Migrating schema to v5: renaming timestamp keys to *Utc');
+      // stages
+      try {
+        final rawStages = prefs.getString('stages');
+        if (rawStages != null) {
+          final decoded = jsonDecode(rawStages) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            final created = (map['createdAtUtc'] as String?) ?? (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            final updatedAt = (map['updatedAtUtc'] as String?) ?? (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['createdAtUtc'] = created;
+            map['updatedAtUtc'] = updatedAt;
+            map.remove('createdAt');
+            map.remove('updatedAt');
+            updated.add(map);
+          }
+          await prefs.setString('stages', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate stages to utc keys: $e', e, st);
+      }
+
+      // shooters
+      try {
+        final rawShooters = prefs.getString('shooters');
+        if (rawShooters != null) {
+          final decoded = jsonDecode(rawShooters) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            final created = (map['createdAtUtc'] as String?) ?? (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            final updatedAt = (map['updatedAtUtc'] as String?) ?? (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['createdAtUtc'] = created;
+            map['updatedAtUtc'] = updatedAt;
+            map.remove('createdAt');
+            map.remove('updatedAt');
+            updated.add(map);
+          }
+          await prefs.setString('shooters', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate shooters to utc keys: $e', e, st);
+      }
+
+      // stageResults
+      try {
+        final rawResults = prefs.getString('stageResults');
+        if (rawResults != null) {
+          final decoded = jsonDecode(rawResults) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            final created = (map['createdAtUtc'] as String?) ?? (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            final updatedAt = (map['updatedAtUtc'] as String?) ?? (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+            map['createdAtUtc'] = created;
+            map['updatedAtUtc'] = updatedAt;
+            map.remove('createdAt');
+            map.remove('updatedAt');
+            updated.add(map);
+          }
+          await prefs.setString('stageResults', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate stageResults to utc keys: $e', e, st);
+      }
+
+      // teamGame
+      try {
+        final rawTG = prefs.getString('teamGame');
+        if (rawTG != null) {
+          final decoded = jsonDecode(rawTG) as Map<String, dynamic>;
+          final map = Map<String, dynamic>.from(decoded);
+          final created = (map['createdAtUtc'] as String?) ?? (map['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+          final updatedAt = (map['updatedAtUtc'] as String?) ?? (map['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String();
+          map['createdAtUtc'] = created;
+          map['updatedAtUtc'] = updatedAt;
+          map.remove('createdAt');
+          map.remove('updatedAt');
+          await prefs.setString('teamGame', jsonEncode(map));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to migrate teamGame to utc keys: $e', e, st);
+      }
+    }
+
     _logger.info('Migrating schema: Current data before migration:');
     _logger.info(
       'Adding default status field with value "Completed" to each record.',
@@ -341,18 +431,25 @@ class PersistenceService {
     // For metadata we include schema version and timestamp
     final meta = <String, dynamic>{
       'schemaVersion': prefs.getInt(kDataSchemaVersionKey) ?? kDataSchemaVersion,
-      'exportedAt': DateTime.now().toUtc().toIso8601String(),
+      'exportedAtUtc': DateTime.now().toUtc().toIso8601String(),
       'appVersion': 'unknown', // kept simple for MVP
       'platform': getPlatformName(),
     };
     final stages = await loadList('stages');
     final shooters = await loadList('shooters');
     final results = await loadList('stageResults');
+    // include audit logs in backups
+    final stagesLog = await loadList('stagesLog');
+    final shootersLog = await loadList('shootersLog');
+    final stageResultsLog = await loadList('stageResultsLog');
     return {
       'metadata': meta,
       'stages': stages,
       'shooters': shooters,
       'stageResults': results,
+      'stagesLog': stagesLog,
+      'shootersLog': shootersLog,
+      'stageResultsLog': stageResultsLog,
     };
   }
 
@@ -461,6 +558,165 @@ class PersistenceService {
       final stagesList = stages.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
       final shootersList = shooters.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
       final resultsList = results.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+
+      // Normalize incoming timestamp keys: prefer *_Utc keys, fall back to legacy keys.
+      final now = _nowIso();
+      for (final m in stagesList) {
+        m['createdAtUtc'] = (m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?) ?? now;
+        m['updatedAtUtc'] = (m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?) ?? now;
+      }
+      for (final m in shootersList) {
+        m['createdAtUtc'] = (m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?) ?? now;
+        m['updatedAtUtc'] = (m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?) ?? now;
+      }
+      for (final m in resultsList) {
+        m['createdAtUtc'] = (m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?) ?? now;
+        m['updatedAtUtc'] = (m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?) ?? now;
+      }
+
+      // Compute audit log entries for this import (machine channel)
+      try {
+        // existing lists from prefs (ensure migrations applied)
+        final existingStages = await loadList('stages');
+        final existingShooters = await loadList('shooters');
+        final existingResults = await loadList('stageResults');
+
+        // helper to build maps by key
+        final Map<String, Map<String, dynamic>> existingStagesByKey = {};
+        for (final e in existingStages) {
+          final key = (e['stage']?.toString() ?? '');
+          existingStagesByKey[key] = Map<String, dynamic>.from(e);
+        }
+        final Map<String, Map<String, dynamic>> existingShootersByKey = {};
+        for (final e in existingShooters) {
+          final key = (e['name']?.toString() ?? '');
+          existingShootersByKey[key] = Map<String, dynamic>.from(e);
+        }
+        final Map<String, Map<String, dynamic>> existingResultsByKey = {};
+        for (final e in existingResults) {
+          final key = '${e['stage']}-${e['shooter']}';
+          existingResultsByKey[key] = Map<String, dynamic>.from(e);
+        }
+
+        // stages: create/update
+        for (final incoming in stagesList) {
+          final key = (incoming['stage']?.toString() ?? '');
+          final now = _nowIso();
+          if (!existingStagesByKey.containsKey(key)) {
+            final entry = {
+              'timestampUtc': now,
+              'type': 'create',
+              'channel': 'machine',
+              'data': incoming,
+            };
+            await appendLog('stagesLog', entry);
+          } else {
+            final orig = existingStagesByKey[key]!;
+            if (jsonEncode(orig) != jsonEncode(incoming)) {
+              final entry = {
+                'timestampUtc': now,
+                'type': 'update',
+                'channel': 'machine',
+                'original': orig,
+                'updated': incoming,
+              };
+              await appendLog('stagesLog', entry);
+            }
+          }
+        }
+        // stages deleted
+        for (final k in existingStagesByKey.keys) {
+          if (!stagesList.any((e) => (e['stage']?.toString() ?? '') == k)) {
+            final entry = {
+              'timestampUtc': _nowIso(),
+              'type': 'delete',
+              'channel': 'machine',
+              'data': existingStagesByKey[k],
+            };
+            await appendLog('stagesLog', entry);
+          }
+        }
+
+        // shooters: create/update/delete
+        for (final incoming in shootersList) {
+          final key = (incoming['name']?.toString() ?? '');
+          final now = _nowIso();
+          if (!existingShootersByKey.containsKey(key)) {
+            final entry = {
+              'timestampUtc': now,
+              'type': 'create',
+              'channel': 'machine',
+              'data': incoming,
+            };
+            await appendLog('shootersLog', entry);
+          } else {
+            final orig = existingShootersByKey[key]!;
+            if (jsonEncode(orig) != jsonEncode(incoming)) {
+              final entry = {
+                'timestampUtc': now,
+                'type': 'update',
+                'channel': 'machine',
+                'original': orig,
+                'updated': incoming,
+              };
+              await appendLog('shootersLog', entry);
+            }
+          }
+        }
+        for (final k in existingShootersByKey.keys) {
+          if (!shootersList.any((e) => (e['name']?.toString() ?? '') == k)) {
+            final entry = {
+              'timestampUtc': _nowIso(),
+              'type': 'delete',
+              'channel': 'machine',
+              'data': existingShootersByKey[k],
+            };
+            await appendLog('shootersLog', entry);
+          }
+        }
+
+        // results: create/update/delete by composite key
+        for (final incoming in resultsList) {
+          final key = '${incoming['stage']}-${incoming['shooter']}';
+          final now = _nowIso();
+          if (!existingResultsByKey.containsKey(key)) {
+            final entry = {
+              'timestampUtc': now,
+              'type': 'create',
+              'channel': 'machine',
+              'data': incoming,
+            };
+            await appendLog('stageResultsLog', entry);
+          } else {
+            final orig = existingResultsByKey[key]!;
+            if (jsonEncode(orig) != jsonEncode(incoming)) {
+              final entry = {
+                'timestampUtc': now,
+                'type': 'update',
+                'channel': 'machine',
+                'original': orig,
+                'updated': incoming,
+              };
+              await appendLog('stageResultsLog', entry);
+            }
+          }
+        }
+        for (final k in existingResultsByKey.keys) {
+          if (!resultsList.any((e) => '${e['stage']}-${e['shooter']}' == k)) {
+            final entry = {
+              'timestampUtc': _nowIso(),
+              'type': 'delete',
+              'channel': 'machine',
+              'data': existingResultsByKey[k],
+            };
+            await appendLog('stageResultsLog', entry);
+          }
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to compute/import audit logs for import: $e', e, st);
+      }
+
+      // persist incoming lists
       await saveList('stages', stagesList);
       await saveList('shooters', shootersList);
       await saveList('stageResults', resultsList);
@@ -490,6 +746,15 @@ class PersistenceService {
       kDataSchemaVersion,
     ); // Always update version on save
     if (kDebugMode) print('TESTDBG: saveList completed key=$key');
+  }
+
+  /// Append a single audit log entry to a log list stored under `key`.
+  /// The entry should be a JSON-serializable map. This loads any existing
+  /// entries, appends, and persists the combined list.
+  Future<void> appendLog(String key, Map<String, dynamic> entry) async {
+    final existing = await loadList(key);
+    existing.add(entry);
+    await saveList(key, existing);
   }
 
   Future<List<Map<String, dynamic>>> loadList(String key) async {

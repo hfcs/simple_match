@@ -27,7 +27,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, fakeExporter, 'ts123');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(called['path'], isNotNull);
     expect(called['content'], contains('ok'));

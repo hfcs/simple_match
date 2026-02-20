@@ -19,14 +19,14 @@ void main() {
     await repo.loadAll();
 
     await tester.pumpWidget(app.MiniIPSCMatchApp(repository: repo));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The main menu contains a 'Settings' entry
     final settingsFinder = find.text('Settings');
     expect(settingsFinder, findsOneWidget);
 
     await tester.tap(settingsFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // SettingsView should be displayed with Export Backup button
     expect(find.text('Export Backup'), findsOneWidget);
@@ -56,7 +56,7 @@ void main() {
     );
 
     await tester.pumpWidget(testApp);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No shooters'), findsOneWidget);
 
@@ -74,7 +74,7 @@ void main() {
 
     // Reload repository which now notifies listeners
     await repo.loadAll();
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // UI should now show the restored shooter
     expect(find.text('Dana'), findsOneWidget);

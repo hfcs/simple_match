@@ -24,12 +24,12 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     final importButton = find.text('Import Backup');
     expect(importButton, findsOneWidget);
 
     await tester.tap(importButton);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect nothing catastrophic: no SnackBar for success or failure
     // but ensure the UI remains present (early return branch executed)

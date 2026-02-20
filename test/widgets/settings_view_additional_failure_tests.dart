@@ -41,7 +41,7 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byType(SnackBar), findsOneWidget);
     final snack = tester.widget<SnackBar>(find.byType(SnackBar));
@@ -79,7 +79,7 @@ void main() {
 
     // Trigger the Export Backup flow which contains an early-path using pickBackupOverride
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The import path should complete and show a success SnackBar and status
     expect(find.byType(SnackBar), findsOneWidget);

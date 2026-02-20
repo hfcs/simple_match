@@ -25,7 +25,7 @@ void main() {
         child: const MaterialApp(home: MainMenuView()),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Directly clear repository (avoid flaky UI tap/scroll in this test environment)
     await repo.clearAllData();

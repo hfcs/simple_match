@@ -28,7 +28,7 @@ void main() {
 
     // Tap Import; the pickBackupOverride will be used and autoConfirm will skip dialog
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect success status or SnackBar
     expect(find.textContaining('Import successful'), findsWidgets);

@@ -13,6 +13,13 @@ import 'test_helpers/fake_repo_and_persistence.dart';
 void main() {
   testWidgets('Import Backup (integration-like) using pickBackupOverride', (tester) async {
     TestWidgetsFlutterBinding.ensureInitialized();
+    // Suppress SnackBars in this test to avoid timer/animation async work
+    // preventing clean test shutdown.
+    SettingsView.suppressSnackBarsInTests = true;
+    try {
+
+    // Avoid calling SharedPreferences.getInstance() here; the test uses
+    // `FakePersistence` and doesn't need real SharedPreferences.
 
     final backup = {
       'metadata': {'schemaVersion': 2, 'exportedAt': DateTime.now().toIso8601String()},
@@ -27,6 +34,7 @@ void main() {
   final persistence = FakePersistence();
   final repo = MatchRepository(persistence: persistence);
   await repo.loadAll();
+  if (true) print('TESTDBG: repo.loadAll returned, repo persistence=${repo.persistence.runtimeType}');
 
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
@@ -43,19 +51,29 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    if (true) print('TESTDBG: after initial pumps');
 
     // Tap Import Backup to trigger the overridden picker + import flow.
     final importFinder = find.text('Import Backup');
     expect(importFinder, findsOneWidget);
     await tester.tap(importFinder);
-    // Allow framework to process the import flow
-    await tester.pumpAndSettle(const Duration(seconds: 1));
+    if (true) print('TESTDBG: tapped Import Backup');
+    // Allow framework to process the import flow briefly (don't wait for SnackBar)
+    await tester.pump(const Duration(milliseconds: 300));
+    if (true) print('TESTDBG: after short pump');
 
   // After import completes the UI should show a success status (persistence is faked)
   await tester.pump(const Duration(milliseconds: 200));
+  if (true) print('TESTDBG: before final expect');
   expect(find.text('Status: Import successful'), findsOneWidget);
+  if (true) print('TESTDBG: expect passed');
 
     // No filesystem cleanup needed since we used in-memory bytes
-  });
+    } finally {
+      // Ensure we reset the test-only flag even if the test fails.
+      SettingsView.suppressSnackBarsInTests = false;
+    }
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }

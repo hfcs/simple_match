@@ -42,7 +42,7 @@ void main() {
     );
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(savedPath, isNotNull);
     expect(savedContent, contains('"ok":true'));
@@ -64,7 +64,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('test.json'), findsOneWidget);
   });
@@ -89,16 +89,16 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('test.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Confirmation dialog should appear — press Cancel
   // SettingsView shows 'Confirm restore' as the dialog title
   expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(importCalled, isFalse, reason: 'Import should not be called when user cancels');
   });
@@ -125,7 +125,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should show status text updated after successful import
     expect(find.text('Status: Import successful'), findsOneWidget);
@@ -153,7 +153,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Dry-run failed — a SnackBar with validation message should be shown
     expect(find.text('Backup validation failed: corrupt'), findsOneWidget);
@@ -182,7 +182,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(importCalled, isTrue);
     // SettingsView sets a status indicating reload failed
@@ -211,12 +211,12 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Dialog should be shown; press Cancel
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(importCalled, isFalse);
   });
@@ -237,7 +237,7 @@ void main() {
     );
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should display both a status line and a SnackBar with the export-failed message
     expect(find.text('Status: Export failed: Exception: disk full'), findsOneWidget);

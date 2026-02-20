@@ -10,6 +10,7 @@ import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   testWidgets('Web import flow: autoConfirm true and false', (tester) async {
+    // Avoid touching platform SharedPreferences in widget tests.
     // This test is intended to run on the web device (flutter test -d chrome)
     final bytes = Uint8List.fromList([1, 2, 3]);
 
@@ -21,6 +22,8 @@ void main() {
     });
 
     final repo = MatchRepository(persistence: fakePersistence);
+    repo.importMode = true;
+    await repo.loadAll();
 
     // autoConfirm true -> should skip confirm dialog
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
@@ -40,7 +43,7 @@ void main() {
 
   // Tap Import Backup (tap the label text to avoid hit-test issues)
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect status updated to 'Import successful' via setState
     expect(find.textContaining('Import successful'), findsWidgets);
@@ -56,13 +59,13 @@ void main() {
     ));
 
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Dialog should appear; tap Restore
     final restoreFinder = find.widgetWithText(TextButton, 'Restore');
     expect(restoreFinder, findsOneWidget);
     await tester.tap(restoreFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
   });

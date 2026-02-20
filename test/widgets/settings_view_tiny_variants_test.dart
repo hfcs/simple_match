@@ -20,7 +20,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsWidgets);
   });
@@ -40,7 +40,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
@@ -61,7 +61,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(called, isTrue);
     expect(find.textContaining('Exported via override'), findsWidgets);

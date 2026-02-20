@@ -25,7 +25,7 @@ void main() {
 
     // Trigger export via tapping the button
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Export failed'), findsWidgets);
   });
@@ -50,7 +50,7 @@ void main() {
     // Call the web wrapper directly from state to avoid platform kIsWeb checks
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, exporter, 'ts');
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     expect(called, isTrue);
 
@@ -72,7 +72,7 @@ void main() {
 
     // Invoke import which will call the pick override
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('No file selected'), findsWidgets);
   });
@@ -93,7 +93,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsWidgets);
   });

@@ -48,7 +48,7 @@ void main() {
       ),
     );
     await tester.tap(find.text('Go'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Test Route'), findsOneWidget);
   });
 

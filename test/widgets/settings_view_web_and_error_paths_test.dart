@@ -31,7 +31,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Force web behavior and call the web export wrapper.
     SettingsView.forceKIsWeb = true;
@@ -39,7 +39,7 @@ void main() {
     final state = tester.state(stateFinder) as dynamic;
 
     await state.exportViaWebForTest(tester.element(stateFinder), fake, state.widget.saveExportOverride ?? (a,b) async {} , 'ts');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(exportedName, isNotNull);
     expect(find.textContaining('Status:'), findsOneWidget);
@@ -68,13 +68,13 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final stateFinder = find.byType(SettingsView);
     final state = tester.state(stateFinder) as dynamic;
 
     await state.importViaWebForTest(tester.element(stateFinder), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(pickCalled, isTrue);
     // Status text should still be present
@@ -103,14 +103,14 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     final stateFinder = find.byType(SettingsView);
     final state = tester.state(stateFinder) as dynamic;
 
     // Call the chosen-for-test wrapper with a fake chosen object
     final chosen = _SimplePath('/tmp/nonexistent.json');
     await state.importFromDocumentsConfirmedForTest(tester.element(stateFinder), repo, fake, chosen);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Status:'), findsOneWidget);
   });

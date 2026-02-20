@@ -31,7 +31,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import failed'), findsWidgets);
   });
@@ -52,7 +52,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Export failed'), findsWidgets);
   });
@@ -72,12 +72,12 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog should appear; tap Cancel
     expect(find.text('Cancel'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Should not show Import successful
     expect(find.textContaining('Import successful'), findsNothing);
@@ -95,10 +95,10 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => null)),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsOneWidget);
   });
@@ -122,10 +122,10 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'bad.json'})),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('Backup validation failed')), findsOneWidget);
   });
@@ -149,10 +149,10 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'bad2.json', 'autoConfirm': true})),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').startsWith('Status: Import failed')), findsOneWidget);
   });
@@ -169,14 +169,14 @@ void main() {
         child: MaterialApp(home: SettingsView(listBackupsOverride: () async => [])),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Allow any delayed UI updates (SnackBar/status label) to settle, then
     // assert using a contains-style matcher to avoid brittle exact-text checks.
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 }

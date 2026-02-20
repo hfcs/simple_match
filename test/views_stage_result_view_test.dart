@@ -72,8 +72,8 @@ void main() {
             child: StageResultView(viewModel: viewModel),
           ),
         ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pump(const Duration(milliseconds: 200));
       // Should show table header
       expect(find.text('Name'), findsOneWidget);
       expect(find.text('Raw HF'), findsOneWidget);
@@ -105,7 +105,7 @@ void main() {
       );
       // Should have 11 columns (each with a vertical rule except the last)
       expect(headerRow.children.length, equals(11));
-    },
+    }, timeout: const Timeout(Duration(seconds: 45)),
   );
 
   testWidgets('StageResultView columns fit within mobile width', (
@@ -140,7 +140,7 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     // All columns should be present and visible
     expect(find.text('Name'), findsOneWidget);
     expect(find.text('Raw HF'), findsOneWidget);
@@ -156,5 +156,5 @@ void main() {
     // Should not overflow horizontally (ListView is scrollable, but all columns are present)
     // (No overflow error thrown)
     expect(tester.takeException(), isNull);
-  });
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }

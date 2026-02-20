@@ -8,7 +8,7 @@ void main() {
     await tester.pumpWidget(
       app.MiniIPSCMatchApp(repository: MatchRepository()),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Mini IPSC Match'), findsOneWidget);
     expect(find.byType(ListTile), findsWidgets);
   });
@@ -17,9 +17,9 @@ void main() {
     await tester.pumpWidget(
       app.MiniIPSCMatchApp(repository: MatchRepository()),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('Match Setup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Match Setup'), findsWidgets);
   });
 
@@ -27,9 +27,9 @@ void main() {
     await tester.pumpWidget(
       app.MiniIPSCMatchApp(repository: MatchRepository()),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('Shooter Setup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Shooter Setup'), findsWidgets);
   });
 }

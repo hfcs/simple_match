@@ -28,8 +28,8 @@ void main() {
     expect(shootersRaw, isNotNull);
     final shooters = jsonDecode(shootersRaw!) as List;
     final sMap = Map<String, dynamic>.from(shooters.first as Map);
-    final createdAt = sMap['createdAt'] as String;
-    final updatedAt = sMap['updatedAt'] as String;
+    final createdAt = sMap['createdAtUtc'] as String;
+    final updatedAt = sMap['updatedAtUtc'] as String;
     expect(createdAt, isNotNull);
     expect(updatedAt, isNotNull);
     // createdAt should be <= updatedAt (constructors may call time twice)
@@ -39,7 +39,7 @@ void main() {
 
     // Wait and update shooter
     await Future.delayed(const Duration(milliseconds: 10));
-    final updatedShooter = Shooter(name: 'Bob', scaleFactor: 2.0, createdAt: createdAt, updatedAt: updatedAt);
+    final updatedShooter = Shooter(name: 'Bob', scaleFactor: 2.0, createdAtUtc: createdAt, updatedAtUtc: updatedAt);
     await repo.updateShooter(updatedShooter);
 
     final shootersRaw2 = prefs.getString('shooters');
@@ -58,10 +58,10 @@ void main() {
     expect(resultsRaw, isNotNull);
     final results = jsonDecode(resultsRaw!) as List;
     final rMap = Map<String, dynamic>.from(results.first as Map);
-    final rCreated = rMap['createdAt'] as String;
-    final rUpdated = rMap['updatedAt'] as String;
+    final rCreated = rMap['createdAtUtc'] as String;
+    final rUpdated = rMap['updatedAtUtc'] as String;
     await Future.delayed(const Duration(milliseconds: 10));
-    final updatedResult = StageResult(stage: 1, shooter: 'Bob', time: 11.0, a: 5, c: 0, d: 0, createdAt: rCreated, updatedAt: rUpdated);
+    final updatedResult = StageResult(stage: 1, shooter: 'Bob', time: 11.0, a: 5, c: 0, d: 0, createdAtUtc: rCreated, updatedAtUtc: rUpdated);
     await repo.updateResult(updatedResult);
     final resultsRaw2 = prefs.getString('stageResults');
     final results2 = jsonDecode(resultsRaw2!) as List;
@@ -75,15 +75,15 @@ void main() {
     final tgRaw = prefs.getString('teamGame');
     expect(tgRaw, isNotNull);
     final tgMap = jsonDecode(tgRaw!) as Map<String, dynamic>;
-    final tgCreated = tgMap['createdAt'] as String;
-    final tgUpdated = tgMap['updatedAt'] as String;
+    final tgCreated = tgMap['createdAtUtc'] as String;
+    final tgUpdated = tgMap['updatedAtUtc'] as String;
     expect(tgCreated, isNotNull);
     await Future.delayed(const Duration(milliseconds: 10));
     tg.mode = 'average';
     await repo.updateTeamGame(tg);
     final tgRaw2 = prefs.getString('teamGame');
     final tgMap2 = jsonDecode(tgRaw2!) as Map<String, dynamic>;
-    final tgUpdated2 = tgMap2['updatedAt'] as String;
+    final tgUpdated2 = tgMap2['updatedAtUtc'] as String;
     expect(DateTime.parse(tgUpdated2).isAfter(DateTime.parse(tgUpdated)), isTrue);
   });
 }

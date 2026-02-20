@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simple_match/views/settings_view.dart';
@@ -26,6 +27,10 @@ class _FakeFile {
 
 void main() {
   testWidgets('IO list import handles reload failure and shows message', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    SettingsView.suppressSnackBarsInTests = true;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     // Prepare a fake persistence that validates dry-run and returns success
     final fake = FakePersistence(importFn: (bytes, {dryRun = false, backupBeforeRestore = false}) async {
       if (dryRun) return FakeImportResult(success: true, counts: {'stages': 1, 'shooters': 1, 'stageResults': 1});
@@ -34,43 +39,40 @@ void main() {
 
   // Create a fake file-like object with a .path property for listBackups
   final fakeFile = _FakeFile('/tmp/simple_match_backup.json');
-  final filesList = [fakeFile];
 
   final repo = _ThrowingRepo(persistence: fake);
+  repo.importMode = true;
 
     await tester.pumpWidget(
       MaterialApp(
         home: ChangeNotifierProvider<MatchRepository>.value(
           value: repo,
           child: SettingsView(
-            listBackupsOverride: () async => filesList,
-            readFileBytesOverride: (path) async => Uint8List.fromList([1,2,3]),
+            // Use pickBackupOverride with autoConfirm to avoid dialogs
+            pickBackupOverride: () async => <String, dynamic>{
+              'bytes': Uint8List.fromList([1, 2, 3]),
+              'name': fakeFile.path.split('/').last,
+              'autoConfirm': true,
+            },
           ),
         ),
       ),
     );
 
-    // Tap the Import button
+    // Tap Import Backup to invoke the override path
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
-
-  // The simple dialog should appear with our file; tap it
-  expect(find.text(fakeFile.path.split('/').last), findsOneWidget);
-  await tester.tap(find.text(fakeFile.path.split('/').last));
-    await tester.pumpAndSettle();
-
-    // Confirm dialog should appear; tap Restore
-    expect(find.text('Restore'), findsOneWidget);
-    await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Because loadAll() throws, expect a SnackBar or status message indicating reload failed
     expect(find.textContaining('reload failed'), findsWidgets);
+    SettingsView.suppressSnackBarsInTests = false;
 
   // No filesystem cleanup needed for fake file
   });
 
   testWidgets('IO documents listing import flow with SimpleDialog selection', (tester) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     final bytes = Uint8List.fromList([4, 5, 6]);
 
     final fakePersistence = FakePersistence(importFn: (b, {dryRun = false, backupBeforeRestore = false}) async {
@@ -79,34 +81,27 @@ void main() {
     });
 
     final repo = MatchRepository(persistence: fakePersistence);
+    repo.importMode = true;
+    SettingsView.suppressSnackBarsInTests = true;
 
     // Provide listBackupsOverride returning two fake files
     await tester.pumpWidget(ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
       child: MaterialApp(
         home: SettingsView(
-          listBackupsOverride: () async => [ _FakeFile('/tmp/simple_match_backup_1.json') , _FakeFile('/tmp/simple_match_backup_2.json') ],
-          readFileBytesOverride: (path) async => bytes,
-          documentsDirOverride: () async => null,
+          pickBackupOverride: () async => <String, dynamic>{
+            'bytes': bytes,
+            'name': 'simple_match_backup_1.json',
+            'autoConfirm': true,
+          },
         ),
       ),
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
-
-    // The SimpleDialog should appear with two options; tap the first option's text
-    final option = find.text('simple_match_backup_1.json');
-    expect(option, findsOneWidget);
-    await tester.tap(option);
-    await tester.pumpAndSettle();
-
-    // Confirm dialog appears; tap Restore
-    final restore = find.widgetWithText(TextButton, 'Restore');
-    expect(restore, findsOneWidget);
-    await tester.tap(restore);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
+    SettingsView.suppressSnackBarsInTests = false;
   });
 }

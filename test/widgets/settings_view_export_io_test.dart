@@ -46,7 +46,7 @@ void main() {
     expect(exportFinder, findsOneWidget);
 
     await tester.tap(exportFinder);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(called, isTrue);
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(MethodChannel(channelName), null);
   }, timeout: Timeout(Duration(seconds: 20)));

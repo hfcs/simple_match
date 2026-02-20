@@ -52,7 +52,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, exporter, 'TESTTS');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(recordedName, isNotNull);
     expect(recordedContent, isNotNull);
@@ -82,7 +82,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
   });
@@ -104,7 +104,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('No file selected'), findsOneWidget);
   });
@@ -133,7 +133,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Backup validation failed'), findsOneWidget);
   });
@@ -171,12 +171,12 @@ void main() {
     final future = (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
     // Let the dialog appear
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Restore
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await future;
 
@@ -198,11 +198,11 @@ void main() {
         child: SettingsView(pickBackupOverride: () async => {'bytes': payload, 'name': 'webfail.json', 'autoConfirm': true}),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), throwingRepo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('reload failed')), findsOneWidget);
   });
@@ -218,10 +218,10 @@ void main() {
         child: SettingsView(listBackupsOverride: () async => []),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
@@ -248,7 +248,7 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(recordedName, isNotNull);
     expect(recordedContent, isNotNull);
@@ -277,21 +277,21 @@ void main() {
         ),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Import Backup to open the SimpleDialog
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The SimpleDialog options show the filename
     expect(find.text('simple_match_backup_test.json'), findsOneWidget);
     await tester.tap(find.text('simple_match_backup_test.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Now the AlertDialog confirm appears; tap Restore
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
   });
@@ -314,18 +314,18 @@ void main() {
         ),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await tester.tap(find.text('simple_match_backup_test.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm dialog
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('reload failed')), findsOneWidget);
   });
@@ -351,11 +351,11 @@ void main() {
         child: SettingsView(pickBackupOverride: pick),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import successful'), findsWidgets);
   });
@@ -375,11 +375,11 @@ void main() {
         child: SettingsView(saveExportOverride: throwingSaver),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Export failed'), findsWidgets);
   });

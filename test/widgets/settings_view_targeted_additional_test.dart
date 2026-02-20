@@ -29,9 +29,9 @@ void main() {
       ),
     );
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('No file selected'), findsWidgets);
   });
@@ -55,10 +55,10 @@ void main() {
       ),
     );
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   // Trigger import backup via button
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect validation failed snackbar
     expect(find.textContaining('Backup validation failed'), findsWidgets);
@@ -82,9 +82,9 @@ void main() {
       ),
     );
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect import succeeded but reload failed snackbar
     expect(find.textContaining('reload failed'), findsWidgets);
@@ -112,9 +112,9 @@ void main() {
       ),
     );
 
-  await tester.pumpAndSettle();
+  await tester.pump(const Duration(milliseconds: 200));
   await tester.tap(find.text('Export Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   expect(recordedName.isNotEmpty, isTrue);
   });

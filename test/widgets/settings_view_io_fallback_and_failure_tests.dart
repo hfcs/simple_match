@@ -19,13 +19,13 @@ void main() {
         child: const SettingsView(),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     // Call the IO export path which will call getDocumentsDirectory and
     // FakePersistence.exportBackupToFile to create a file.
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Either a SnackBar or the Status text may contain the path; accept either.
     expect(find.textContaining('Exported to'), findsWidgets);
@@ -42,13 +42,13 @@ void main() {
         child: const SettingsView(),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     // This exercises the branch where saveExportOverride == null and exporter
     // uses the default saveExport implementation.
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, (n, c) async {}, 'TS');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // We don't assert on exact text; ensure the export call path executed by
     // checking FakePersistence logged call via behavior (no exception thrown).
@@ -75,15 +75,15 @@ void main() {
         ),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Import Backup to start the documents-list flow
     await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Choose the file
     await tester.tap(find.text('x.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect validation failed message
     expect(find.textContaining('Backup validation failed'), findsWidgets);

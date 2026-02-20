@@ -39,7 +39,7 @@ void main() {
     // Call export via state wrapper to avoid tap hit-test issues
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Both the SnackBar and the Status text may contain the message; accept both.
     expect(find.textContaining('Export failed'), findsWidgets);
@@ -60,11 +60,11 @@ void main() {
         child: SettingsView(pickBackupOverride: pick),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Trigger the Import Backup button (this calls the internal import flow)
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // The page should show the import succeeded but reload failed message
     expect(find.textContaining('Import succeeded, reload failed'), findsOneWidget);
@@ -87,21 +87,21 @@ void main() {
         child: SettingsView(listBackupsOverride: listBackups, readFileBytesOverride: readBytes),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
   // Trigger Import Backup button which opens the documents selection dialog
   await tester.tap(find.text('Import Backup'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Select the listed backup (text is the filename 'x.json')
     expect(find.text('x.json'), findsOneWidget);
     await tester.tap(find.text('x.json'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Confirm the restore in the AlertDialog by tapping 'Restore'
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.textContaining('Import succeeded, reload failed'), findsOneWidget);
   });

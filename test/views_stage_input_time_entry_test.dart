@@ -23,18 +23,18 @@ void main() {
         ],
         child: const MaterialApp(home: StageInputView()),
       ),
-    );
-    await tester.pumpAndSettle();
+      );
+      await tester.pump(const Duration(milliseconds: 200));
 
     // Select stage and shooter
     await tester.tap(find.byKey(const Key('stageSelector')));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('Stage 1').last);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.byKey(const Key('shooterSelector')));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('T').last);
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Simulate typing digits one-by-one by entering cumulative strings
     await tester.enterText(find.byKey(const Key('timeField')), '9');
@@ -42,7 +42,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('timeField')), '93');
     await tester.pump();
     await tester.enterText(find.byKey(const Key('timeField')), '936');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Verify displayed controller text and viewmodel value
     final tf = tester.widget<TextField>(find.byKey(const Key('timeField')));

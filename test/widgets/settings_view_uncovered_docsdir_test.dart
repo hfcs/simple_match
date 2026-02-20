@@ -27,7 +27,7 @@ void main() {
     });
 
     // Let any SnackBar/showDialog complete
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Expect some status text to be present (either exported or export failed)
     expect(find.textContaining('Export'), findsWidgets);

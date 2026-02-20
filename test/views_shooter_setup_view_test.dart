@@ -68,9 +68,9 @@ void main() {
     await tester.tap(find.byKey(const Key('addShooterButton')));
     await tester.pump();
     await tester.tap(find.byKey(const Key('removeShooter-Dana')));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     await tester.tap(find.text('Remove'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Dana'), findsNothing);
   });
 

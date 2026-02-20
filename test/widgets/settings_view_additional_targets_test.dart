@@ -35,13 +35,13 @@ void main() {
         child: SettingsView(),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     // Call the test wrapper which will go into the kIsWeb branch and call
     // the web exporter (via the test-only exportViaWebForTest wrapper).
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, exporter, 'ZZZ');
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(recordedName, isNotNull);
 
@@ -66,18 +66,18 @@ void main() {
         child: SettingsView(pickBackupOverride: pick),
       ),
     ));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     final future = (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
     // Let dialog appear
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Tap Cancel instead of Restore
     expect(find.text('Cancel'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     await future;
 

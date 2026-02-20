@@ -48,7 +48,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     // Obtain the State object and call test-only wrappers directly
     final state = tester.state(find.byType(SettingsView)) as dynamic;
@@ -60,7 +60,7 @@ void main() {
     await state.importViaWebForTest(state.context, repo, persistence);
 
     // After importViaWebForTest completes the view will show SnackBars; ensure no exceptions
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.byType(SnackBar), findsWidgets);
   });
@@ -88,7 +88,7 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
@@ -96,7 +96,7 @@ void main() {
     final chosen = _FakeFile('/tmp/simple_match_test_backup.json');
     await state.importFromDocumentsConfirmedForTest(state.context, repo, persistence, chosen);
 
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.byType(SnackBar), findsWidgets);
   });
 }

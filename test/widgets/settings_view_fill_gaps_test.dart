@@ -38,11 +38,11 @@ void main() {
         child: SettingsView(documentsDirOverride: () async => _FakeDir('/tmp'), saveExportOverride: throwingSaver),
       ),
     ));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('Status:'), findsOneWidget);
 
     // 2) Export IO with a working saver -> exported via override
@@ -56,11 +56,11 @@ void main() {
         child: SettingsView(documentsDirOverride: () async => _FakeDir('/tmp'), saveExportOverride: saver),
       ),
     ));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     final state2 = tester.state(find.byType(SettingsView));
     await (state2 as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     expect(lastStatus, isNotNull);
 
     // 3) Force web branches and call export/import paths
@@ -72,17 +72,17 @@ void main() {
         child: SettingsView(pickBackupOverride: () async => null),
       ),
     ));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     final st3 = tester.state(find.byType(SettingsView));
     // export should hit web branch
     await (st3 as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('Status:'), findsWidgets);
 
   // import via web with null pick -> should return without throwing
   await (st3 as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
   expect(tester.takeException(), isNull);
 
     SettingsView.forceKIsWeb = prev;
@@ -94,10 +94,10 @@ void main() {
         child: SettingsView(listBackupsOverride: () async => []),
       ),
     ));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     final st4 = tester.state(find.byType(SettingsView));
   await (st4 as dynamic).importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
   // The no-backups path shows a transient SnackBar; avoid asserting the
   // overlay. Instead assert the presence of the persistent Status text
   // to keep the test deterministic across runner environments.
@@ -118,12 +118,12 @@ void main() {
         child: SettingsView(readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3])),
       ),
     ));
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
 
     final st5 = tester.state(find.byType(SettingsView));
   final chosen = File('/tmp/dummy.json');
     await (st5 as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo2, fakeFail, chosen);
-    await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
     expect(find.textContaining('Status: Import failed'), findsOneWidget);
   });
 }

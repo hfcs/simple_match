@@ -15,7 +15,7 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     expect(find.text('Match Setup'), findsOneWidget);
     expect(find.text('Shooter Setup'), findsOneWidget);
     expect(find.text('Stage Input'), findsOneWidget);

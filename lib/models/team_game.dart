@@ -23,13 +23,13 @@ class TeamGame {
   String mode;
   int topCount;
   List<Team> teams;
-  String createdAt;
-  String updatedAt;
+  String createdAtUtc;
+  String updatedAtUtc;
 
-  TeamGame({this.mode = 'off', this.topCount = 0, List<Team>? teams, String? createdAt, String? updatedAt})
+  TeamGame({this.mode = 'off', this.topCount = 0, List<Team>? teams, String? createdAtUtc, String? updatedAtUtc})
       : teams = teams ?? [],
-        createdAt = createdAt ?? DateTime.now().toUtc().toIso8601String(),
-        updatedAt = updatedAt ?? DateTime.now().toUtc().toIso8601String();
+        createdAtUtc = createdAtUtc ?? DateTime.now().toUtc().toIso8601String(),
+        updatedAtUtc = updatedAtUtc ?? DateTime.now().toUtc().toIso8601String();
 
   factory TeamGame.fromJson(Map<String, dynamic> m) => TeamGame(
         mode: (m['mode'] as String?) ?? 'off',
@@ -38,16 +38,16 @@ class TeamGame {
                 ?.map((e) => Team.fromJson(Map<String, dynamic>.from(e as Map)))
                 .toList() ??
             [],
-        createdAt: (m['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
-        updatedAt: (m['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
+        createdAtUtc: (m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
+        updatedAtUtc: (m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?) ?? DateTime.now().toUtc().toIso8601String(),
       );
 
   Map<String, dynamic> toJson() => {
         'mode': mode,
         'topCount': topCount,
         'teams': teams.map((t) => t.toJson()).toList(),
-        'createdAt': createdAt,
-        'updatedAt': updatedAt,
+        'createdAtUtc': createdAtUtc,
+        'updatedAtUtc': updatedAtUtc,
       };
 
   /// Compute the team score for [team] using provided shooter totals map.

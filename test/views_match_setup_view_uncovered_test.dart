@@ -32,12 +32,12 @@ void main() {
           child: MaterialApp(home: MatchSetupView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Try to add duplicate stage
       await tester.enterText(find.byKey(const Key('stageField')), '1');
       await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
       await tester.tap(find.byKey(const Key('addStageButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.textContaining('already exists'), findsOneWidget);
     });
 
@@ -59,11 +59,11 @@ void main() {
           child: MaterialApp(home: MatchSetupView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter invalid stage number
       await tester.enterText(find.byKey(const Key('stageField')), 'abc');
       await tester.tap(find.byKey(const Key('addStageButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Invalid input.'), findsOneWidget);
     });
 
@@ -85,7 +85,7 @@ void main() {
           child: MaterialApp(home: MatchSetupView()),
         ),
       );
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       // Enter invalid scoring shoots
       await tester.enterText(find.byKey(const Key('stageField')), '2');
       await tester.enterText(
@@ -93,7 +93,7 @@ void main() {
         'abc',
       );
       await tester.tap(find.byKey(const Key('addStageButton')));
-      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 200));
       expect(find.text('Invalid input.'), findsOneWidget);
     });
     testWidgets('shows error on invalid input and empty state', (tester) async {

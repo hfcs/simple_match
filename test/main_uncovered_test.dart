@@ -43,7 +43,7 @@ void main() {
         ),
       ),
     );
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     // Consume the framework warning about unknown initial route
     tester.takeException();
     // Should fallback to Home
@@ -54,6 +54,6 @@ void main() {
     // This covers the real main() entrypoint for coverage tools.
     // It does not assert UI, just that the app starts up without exceptions.
     app.main(); // main() returns void, so just call it.
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
   });
 }

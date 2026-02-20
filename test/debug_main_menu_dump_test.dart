@@ -6,7 +6,7 @@ import 'package:simple_match/repository/match_repository.dart';
 void main() {
   testWidgets('dump app tree', (tester) async {
     await tester.pumpWidget(app.MiniIPSCMatchApp(repository: MatchRepository()));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(milliseconds: 200));
     debugDumpApp();
   });
 }

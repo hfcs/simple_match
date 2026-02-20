@@ -33,8 +33,8 @@ class StageResult {
   // Optional arbitrary-length remark associated with the stage result (e.g. judge notes)
   final String roRemark;
   // Audit timestamps (ISO8601 UTC)
-  final String createdAt;
-  String updatedAt;
+  final String createdAtUtc;
+  String updatedAtUtc;
 
   StageResult({
     required this.stage,
@@ -48,10 +48,10 @@ class StageResult {
     this.procedureErrors = 0,
     this.status = "Completed", // Default value
     this.roRemark = '',
-    String? createdAt,
-    String? updatedAt,
-  }) : createdAt = createdAt ?? DateTime.now().toUtc().toIso8601String(),
-       updatedAt = updatedAt ?? DateTime.now().toUtc().toIso8601String();
+    String? createdAtUtc,
+    String? updatedAtUtc,
+    }) : createdAtUtc = createdAtUtc ?? DateTime.now().toUtc().toIso8601String(),
+      updatedAtUtc = updatedAtUtc ?? DateTime.now().toUtc().toIso8601String();
 
   StageResult copyWith({
     int? stage,
@@ -65,8 +65,8 @@ class StageResult {
     int? procedureErrors,
     String? status,
   String? roRemark,
-  String? createdAt,
-  String? updatedAt,
+  String? createdAtUtc,
+  String? updatedAtUtc,
   }) {
     return StageResult(
       stage: stage ?? this.stage,
@@ -80,8 +80,8 @@ class StageResult {
       procedureErrors: procedureErrors ?? this.procedureErrors,
       status: status ?? this.status,
   roRemark: roRemark ?? this.roRemark,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
+      createdAtUtc: createdAtUtc ?? this.createdAtUtc,
+      updatedAtUtc: updatedAtUtc ?? this.updatedAtUtc,
     );
   }
 
@@ -98,8 +98,8 @@ class StageResult {
       'procedureErrors': procedureErrors,
       'status': status,
   'roRemark': roRemark,
-  'createdAt': createdAt,
-  'updatedAt': updatedAt,
+  'createdAtUtc': createdAtUtc,
+  'updatedAtUtc': updatedAtUtc,
     };
   }
 }

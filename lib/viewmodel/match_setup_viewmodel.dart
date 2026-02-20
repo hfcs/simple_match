@@ -49,7 +49,7 @@ class MatchSetupViewModel {
     if (orig == null) return 'Stage not found.';
     try {
       repository.updateStage(
-        MatchStage(stage: stage, scoringShoots: scoringShoots, createdAt: orig.createdAt, updatedAt: orig.updatedAt),
+        MatchStage(stage: stage, scoringShoots: scoringShoots, createdAtUtc: orig.createdAtUtc, updatedAtUtc: orig.updatedAtUtc),
       ).catchError((e) {
         if (kDebugMode) {
           // ignore: avoid_print

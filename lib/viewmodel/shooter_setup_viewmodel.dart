@@ -43,8 +43,8 @@ class ShooterSetupViewModel {
         name: name,
         scaleFactor: scaleFactor,
         classificationScore: orig.classificationScore,
-        createdAt: orig.createdAt,
-        updatedAt: orig.updatedAt,
+        createdAtUtc: orig.createdAtUtc,
+        updatedAtUtc: orig.updatedAtUtc,
       )).catchError((e) {
         if (kDebugMode) {
           // ignore: avoid_print

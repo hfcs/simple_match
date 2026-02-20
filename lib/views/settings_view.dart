@@ -129,6 +129,11 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   String _lastMessage = '';
 
+  void _maybeShowSnackBar(BuildContext context, SnackBar sb) {
+    if (SettingsView.suppressSnackBarsInTests) return;
+    ScaffoldMessenger.of(context).showSnackBar(sb);
+  }
+
   // On IO platforms this returns a Directory, on web it returns null.
   Future<dynamic> _documentsDir() async {
     if (widget.documentsDirOverride != null) return await widget.documentsDirOverride!();
@@ -145,7 +150,7 @@ class _SettingsViewState extends State<SettingsView> {
       if (widget.pickBackupOverride != null) {
         final picked = await widget.pickBackupOverride!();
         if (picked == null) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
+          _maybeShowSnackBar(context, const SnackBar(content: Text('No file selected')));
           return;
         }
         final bytes = picked['bytes'] as Uint8List;
@@ -154,7 +159,7 @@ class _SettingsViewState extends State<SettingsView> {
         // Dry-run
         final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
         if (!dry.success) {
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+          if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
           return;
         }
 
@@ -177,17 +182,17 @@ class _SettingsViewState extends State<SettingsView> {
           try {
             await repo.loadAll();
           } catch (e) {
-            if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+            if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
             if (!mounted) return;
             setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
             return;
           }
 
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+          if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
           if (!mounted) return;
           setState(() => _lastMessage = 'Import successful');
         } else {
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+          if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
           if (!mounted) return;
           setState(() => _lastMessage = 'Import failed: ${res.message}');
         }
@@ -207,7 +212,7 @@ class _SettingsViewState extends State<SettingsView> {
   if (kDebugMode) {}
         if (!mounted) return;
         setState(() => _lastMessage = 'Exported via override as $syntheticName');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Exported via override as $syntheticName')));
+        _maybeShowSnackBar(context, SnackBar(content: Text('Exported via override as $syntheticName')));
         return;
       }
 
@@ -233,10 +238,10 @@ class _SettingsViewState extends State<SettingsView> {
       }
       if (!mounted) return;
       setState(() => _lastMessage = 'Exported to ${file.path}');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Exported to ${file.path}')));
+      _maybeShowSnackBar(context, SnackBar(content: Text('Exported to ${file.path}')));
     } catch (e) {
       setState(() => _lastMessage = 'Export failed: $e');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Export failed: $e')));
+      _maybeShowSnackBar(context, SnackBar(content: Text('Export failed: $e')));
     }
   }
 
@@ -247,7 +252,7 @@ class _SettingsViewState extends State<SettingsView> {
   if (kDebugMode) {}
     if (!mounted) return;
     setState(() => _lastMessage = 'Exported to browser download as $syntheticName');
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Exported to browser download as $syntheticName')));
+    _maybeShowSnackBar(context, SnackBar(content: Text('Exported to browser download as $syntheticName')));
   }
 
   /// Test-only wrapper for the web export flow so VM tests can call it directly.
@@ -278,7 +283,7 @@ class _SettingsViewState extends State<SettingsView> {
       if (widget.pickBackupOverride != null) {
         final picked = await widget.pickBackupOverride!();
         if (picked == null) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
+          _maybeShowSnackBar(context, const SnackBar(content: Text('No file selected')));
           return;
         }
         final bytes = picked['bytes'] as Uint8List;
@@ -288,7 +293,7 @@ class _SettingsViewState extends State<SettingsView> {
         final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
   if (kDebugMode) {}
         if (!dry.success) {
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+          if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
           return;
         }
 
@@ -313,17 +318,17 @@ class _SettingsViewState extends State<SettingsView> {
           try {
             await repo.loadAll();
           } catch (e) {
-            if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+            if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
             if (!mounted) return;
             setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
             return;
           }
 
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+          if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
           if (!mounted) return;
           setState(() => _lastMessage = 'Import successful');
         } else {
-          if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+          if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
           if (!mounted) return;
           setState(() => _lastMessage = 'Import failed: ${res.message}');
         }
@@ -337,7 +342,7 @@ class _SettingsViewState extends State<SettingsView> {
 
       await _importFromDocuments(context, repo, svc);
     } catch (e) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import error: $e')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import error: $e')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import error: $e');
     }
@@ -346,7 +351,7 @@ class _SettingsViewState extends State<SettingsView> {
   Future<void> _importFromDocuments(BuildContext context, MatchRepository repo, PersistenceService svc) async {
     final files = widget.listBackupsOverride != null ? await widget.listBackupsOverride!() : await _listBackups();
     if (files.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No backup files found in app documents directory')));
+      _maybeShowSnackBar(context, const SnackBar(content: Text('No backup files found in app documents directory')));
       return;
     }
 
@@ -373,7 +378,7 @@ class _SettingsViewState extends State<SettingsView> {
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
   if (kDebugMode) {}
     if (!dry.success) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
     }
 
@@ -398,17 +403,17 @@ class _SettingsViewState extends State<SettingsView> {
         await repo.loadAll();
       } catch (e) {
         // Non-fatal: show message but continue
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+        if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
         if (!mounted) return;
         setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
         return;
       }
 
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+      if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import successful');
     } else {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import failed: ${res.message}');
     }
@@ -419,7 +424,7 @@ class _SettingsViewState extends State<SettingsView> {
   Future<void> _importViaWeb(BuildContext context, MatchRepository repo, PersistenceService svc) async {
     final picked = widget.pickBackupOverride != null ? await widget.pickBackupOverride!() : await pickBackupFileViaBrowser();
     if (picked == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No file selected')));
+      _maybeShowSnackBar(context, const SnackBar(content: Text('No file selected')));
       return;
     }
     final bytes = picked['bytes'] as Uint8List;
@@ -429,7 +434,7 @@ class _SettingsViewState extends State<SettingsView> {
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
   if (kDebugMode) {}
     if (!dry.success) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
     }
     // If the picked map included an 'autoConfirm' flag, skip the dialog
@@ -455,17 +460,17 @@ class _SettingsViewState extends State<SettingsView> {
       try {
         await repo.loadAll();
       } catch (e) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+        if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
         if (!mounted) return;
         setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
         return;
       }
 
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+      if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import successful');
     } else {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import failed: ${res.message}');
     }
@@ -497,7 +502,7 @@ class _SettingsViewState extends State<SettingsView> {
     // Run a dry-run first
     final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
     if (!dry.success) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
     }
 
@@ -520,17 +525,17 @@ class _SettingsViewState extends State<SettingsView> {
       try {
         await repo.loadAll();
       } catch (e) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+        if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
         if (!mounted) return;
         setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
         return;
       }
 
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+      if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import successful');
     } else {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import failed: ${res.message}');
     }
@@ -551,7 +556,7 @@ class _SettingsViewState extends State<SettingsView> {
   final dry = await svc.importBackupFromBytes(bytes, dryRun: true);
   if (kDebugMode) print('TESTDBG: dry-run result success=${dry.success} counts=${dry.counts} message=${dry.message}');
     if (!dry.success) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Backup validation failed: ${dry.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Backup validation failed: ${dry.message}')));
       return;
     }
 
@@ -562,17 +567,17 @@ class _SettingsViewState extends State<SettingsView> {
         await repo.loadAll();
         if (kDebugMode) print('TESTDBG: repo.loadAll completed');
       } catch (e) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+        if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
         if (!mounted) return;
         setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
         return;
       }
 
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Import successful')));
+      if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import successful');
     } else {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Import failed: ${res.message}')));
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
       if (!mounted) return;
       setState(() => _lastMessage = 'Import failed: ${res.message}');
     }

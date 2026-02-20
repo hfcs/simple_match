@@ -37,7 +37,7 @@ class MatchRepository extends ChangeNotifier {
   // Persistence integration (stub)
   Future<void> saveAll() async {
     if (persistence == null) return;
-    // Use model `toJson()` so audit fields (`createdAt`, `updatedAt`) are persisted
+    // Use model `toJson()` so audit fields (`createdAtUtc`, `updatedAtUtc`) are persisted
     await persistence!.saveList('stages', _stages.map((e) => e.toJson()).toList());
     await persistence!.saveList('shooters', _shooters.map((e) => e.toJson()).toList());
     await persistence!.saveList('stageResults', _results.map((e) => e.toJson()).toList());
@@ -186,8 +186,8 @@ class MatchRepository extends ChangeNotifier {
     TeamGame? get teamGame => _teamGame;
 
     Future<void> updateTeamGame(TeamGame tg) async {
-        // update `updatedAt` before persisting
-        tg.updatedAt = DateTime.now().toUtc().toIso8601String();
+        // update `updatedAtUtc` before persisting
+        tg.updatedAtUtc = DateTime.now().toUtc().toIso8601String();
         _teamGame = tg;
       if (persistence != null) {
         try {
@@ -200,12 +200,25 @@ class MatchRepository extends ChangeNotifier {
   // Stages
   List<MatchStage> get stages => List.unmodifiable(_stages);
   Future<void> addStage(MatchStage stage) async {
+    final now = DateTime.now().toUtc().toIso8601String();
+    stage.updatedAtUtc = now;
     _stages.add(stage);
     if (kDebugMode) {
       // quick debug trace for widget tests
       // ignore: avoid_print
       print('DBG: repo.addStage called, _stages.len=${_stages.length}');
     }
+    // record audit log for create
+    try {
+      if (persistence != null) {
+        await persistence!.appendLog('stagesLog', {
+          'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+          'type': 'create',
+          'channel': 'UI',
+          'data': stage.toJson(),
+        });
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
     if (kDebugMode) {
@@ -215,7 +228,20 @@ class MatchRepository extends ChangeNotifier {
   }
 
   Future<void> removeStage(int stageNumber) async {
+    final removed = _stages.where((s) => s.stage == stageNumber).toList();
     _stages.removeWhere((s) => s.stage == stageNumber);
+    try {
+      if (persistence != null) {
+        for (final s in removed) {
+          await persistence!.appendLog('stagesLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'delete',
+            'channel': 'UI',
+            'data': s.toJson(),
+          });
+        }
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
   }
@@ -223,8 +249,20 @@ class MatchRepository extends ChangeNotifier {
   Future<void> updateStage(MatchStage updated) async {
     final idx = _stages.indexWhere((s) => s.stage == updated.stage);
     if (idx != -1) {
-      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      final orig = _stages[idx];
+      updated.updatedAtUtc = DateTime.now().toUtc().toIso8601String();
       _stages[idx] = updated;
+      try {
+        if (persistence != null) {
+          await persistence!.appendLog('stagesLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'update',
+            'channel': 'UI',
+            'original': orig.toJson(),
+            'updated': updated.toJson(),
+          });
+        }
+      } catch (_) {}
     }
     await saveAll();
     notifyListeners();
@@ -233,13 +271,38 @@ class MatchRepository extends ChangeNotifier {
   // Shooters
   List<Shooter> get shooters => List.unmodifiable(_shooters);
   Future<void> addShooter(Shooter shooter) async {
+    final now = DateTime.now().toUtc().toIso8601String();
+    shooter.updatedAtUtc = now;
     _shooters.add(shooter);
+    try {
+      if (persistence != null) {
+        await persistence!.appendLog('shootersLog', {
+          'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+          'type': 'create',
+          'channel': 'UI',
+          'data': shooter.toJson(),
+        });
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
   }
 
   Future<void> removeShooter(String name) async {
+    final removed = _shooters.where((s) => s.name == name).toList();
     _shooters.removeWhere((s) => s.name == name);
+    try {
+      if (persistence != null) {
+        for (final s in removed) {
+          await persistence!.appendLog('shootersLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'delete',
+            'channel': 'UI',
+            'data': s.toJson(),
+          });
+        }
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
   }
@@ -247,8 +310,20 @@ class MatchRepository extends ChangeNotifier {
   Future<void> updateShooter(Shooter updated) async {
     final idx = _shooters.indexWhere((s) => s.name == updated.name);
     if (idx != -1) {
-      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      final orig = _shooters[idx];
+      updated.updatedAtUtc = DateTime.now().toUtc().toIso8601String();
       _shooters[idx] = updated;
+      try {
+        if (persistence != null) {
+          await persistence!.appendLog('shootersLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'update',
+            'channel': 'UI',
+            'original': orig.toJson(),
+            'updated': updated.toJson(),
+          });
+        }
+      } catch (_) {}
     }
     await saveAll();
     notifyListeners();
@@ -257,13 +332,38 @@ class MatchRepository extends ChangeNotifier {
   // Results
   List<StageResult> get results => List.unmodifiable(_results);
   Future<void> addResult(StageResult result) async {
+    final now = DateTime.now().toUtc().toIso8601String();
+    result.updatedAtUtc = now;
     _results.add(result);
+    try {
+      if (persistence != null) {
+        await persistence!.appendLog('stageResultsLog', {
+          'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+          'type': 'create',
+          'channel': 'UI',
+          'data': result.toJson(),
+        });
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
   }
 
   Future<void> removeResult(int stage, String shooter) async {
+    final removed = _results.where((r) => r.stage == stage && r.shooter == shooter).toList();
     _results.removeWhere((r) => r.stage == stage && r.shooter == shooter);
+    try {
+      if (persistence != null) {
+        for (final r in removed) {
+          await persistence!.appendLog('stageResultsLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'delete',
+            'channel': 'UI',
+            'data': r.toJson(),
+          });
+        }
+      }
+    } catch (_) {}
     await saveAll();
     notifyListeners();
   }
@@ -273,8 +373,20 @@ class MatchRepository extends ChangeNotifier {
       (r) => r.stage == updated.stage && r.shooter == updated.shooter,
     );
     if (idx != -1) {
-      updated.updatedAt = DateTime.now().toUtc().toIso8601String();
+      final orig = _results[idx];
+      updated.updatedAtUtc = DateTime.now().toUtc().toIso8601String();
       _results[idx] = updated;
+      try {
+        if (persistence != null) {
+          await persistence!.appendLog('stageResultsLog', {
+            'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+            'type': 'update',
+            'channel': 'UI',
+            'original': orig.toJson(),
+            'updated': updated.toJson(),
+          });
+        }
+      } catch (_) {}
     }
     await saveAll();
     notifyListeners();

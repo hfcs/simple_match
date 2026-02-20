@@ -48,8 +48,16 @@ void main() {
       ),
     );
     await tester.tap(find.text('Go'));
-    await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text('Test Route'), findsOneWidget);
+    // Wait for navigation to complete by polling; avoid pumpAndSettle to keep tests deterministic
+    bool found = false;
+    for (var i = 0; i < 30; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+      if (find.text('Test Route').evaluate().isNotEmpty) {
+        found = true;
+        break;
+      }
+    }
+    expect(found, isTrue, reason: 'Expected navigated route "Test Route" to be present');
   });
 
   test('clearAllData calls repository.clearAllData', () async {

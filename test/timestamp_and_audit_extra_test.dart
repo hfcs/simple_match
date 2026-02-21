@@ -94,8 +94,8 @@ void main() {
 
     final shooters = await svc.loadList('shooters');
     final l = shooters.singleWhere((m) => m['name'] == 'Legacy');
-    expect(l['createdAtUtc'], equals(legacyCreated));
-    expect(l['updatedAtUtc'], equals(legacyUpdated));
+    expect(l['createdAtUtc'], equals(DateTime.parse(legacyCreated).toUtc().toIso8601String()));
+    expect(l['updatedAtUtc'], equals(DateTime.parse(legacyUpdated).toUtc().toIso8601String()));
   });
 
   test('audit logs are appended and timestamps are ordered', () async {

@@ -3,7 +3,7 @@ import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/models/shooter.dart';
-import 'package:simple_match/models/stage_result.dart';
+// removed unused import to satisfy analyzer
 
 void main() {
   test('StageInputViewModel validation and submit/remove flows', () async {

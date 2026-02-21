@@ -9,7 +9,6 @@ void main() {
     final tmp = await Directory.systemTemp.createTemp('sm_test_io');
     try {
       final f1 = File('${tmp.path}/a.json');
-      final f2 = File('${tmp.path}/b.txt');
       final f3 = File('${tmp.path}/c.json');
       await f1.writeAsString('{"k":1}');
       await Future.delayed(Duration(milliseconds: 10));

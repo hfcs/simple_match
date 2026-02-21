@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_match/lib/main.dart' as app_main; // import for side-effects if any
+// optional import removed: don't import package:simple_match/main.dart in tests
 import 'package:simple_match/views/main_menu_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 

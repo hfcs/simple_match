@@ -33,16 +33,8 @@ void main() {
     expect(find.text('Nothing to clear'), findsNothing);
     expect(find.text('Stage Input'), findsOneWidget);
   });
-}
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_match/views/main_menu_view.dart';
-import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/models/match_stage.dart';
-import 'package:simple_match/models/shooter.dart';
+ 
 
-void main() {
   testWidgets('Stage Input shows helper when no stages or shooters', (WidgetTester tester) async {
     final repo = MatchRepository(initialStages: [], initialShooters: [], initialResults: []);
 
@@ -63,9 +55,6 @@ void main() {
       initialShooters: [Shooter(name: 'Alice', scaleFactor: 1.0)],
       initialResults: [],
     );
-
-    // Because MatchRepository expects typed model instances in production, we only need the lists' lengths for MainMenuView.
-    // The repository constructor accepts maps via models in other code paths; for this widget test it's sufficient to provide non-empty lists.
 
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(

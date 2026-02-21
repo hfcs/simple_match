@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,8 +28,8 @@ void main() {
       'stageResults': []
     };
 
-    final bytes = utf8.encode(jsonEncode(backup));
-    final res = await svc.importBackupFromBytes(bytes as List<int>);
+    final bytes = Uint8List.fromList(utf8.encode(jsonEncode(backup)));
+    final res = await svc.importBackupFromBytes(bytes);
     expect(res.success, isTrue);
 
     final shooters = await svc.loadList('shooters');
@@ -63,7 +64,7 @@ void main() {
       'stageResults': []
     };
 
-    final res = await svc.importBackupFromBytes(utf8.encode(jsonEncode(backup)) as List<int>);
+    final res = await svc.importBackupFromBytes(Uint8List.fromList(utf8.encode(jsonEncode(backup))));
     expect(res.success, isTrue);
 
     final shooters = await svc.loadList('shooters');
@@ -88,7 +89,7 @@ void main() {
       'stageResults': []
     };
 
-    final res = await svc.importBackupFromBytes(utf8.encode(jsonEncode(backup)) as List<int>);
+    final res = await svc.importBackupFromBytes(Uint8List.fromList(utf8.encode(jsonEncode(backup))));
     expect(res.success, isTrue);
 
     final shooters = await svc.loadList('shooters');
@@ -109,7 +110,7 @@ void main() {
       ],
       'stageResults': []
     };
-    final r1 = await svc.importBackupFromBytes(utf8.encode(jsonEncode(backup1)) as List<int>);
+    final r1 = await svc.importBackupFromBytes(Uint8List.fromList(utf8.encode(jsonEncode(backup1))));
     expect(r1.success, isTrue);
 
     final logs1 = await svc.loadList('shootersLog');
@@ -124,7 +125,7 @@ void main() {
       ],
       'stageResults': []
     };
-    final r2 = await svc.importBackupFromBytes(utf8.encode(jsonEncode(backup2)) as List<int>);
+    final r2 = await svc.importBackupFromBytes(Uint8List.fromList(utf8.encode(jsonEncode(backup2))));
     expect(r2.success, isTrue);
 
     final logs2 = await svc.loadList('shootersLog');

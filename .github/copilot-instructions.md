@@ -77,6 +77,7 @@
 - **Run app:** `flutter run`
 - **Add dependency:** `flutter pub add <package>`
 - **Tests:** `flutter test`
+ - **Static analysis (pre-commit):** `flutter analyze` and `dart analyze` (run before committing tests or test-related code)
 - **Test coverage:** `flutter test --coverage` (requires `pdftotext` for PDF export test)
 - **Hot Reload:** Supported for rapid UI iteration
 - **Schema changes:**
@@ -132,6 +133,11 @@
 ### Testing overrides and CI guidance
 - `SettingsView` exposes deterministic testing overrides: `pickBackupOverride`, `listBackupsOverride`, and `readFileBytesOverride` to simulate file selection and IO in widget tests. Use these in generated tests to avoid flaky dialog/platform interactions.
 - Prefer deterministic direct tests (dry-run -> import -> repo.loadAll) for CI; keep full UI dialog tests locally for debugging but mark them skipped in CI if they are flaky.
+
+### Pre-commit checks required for tests
+
+- Always run `flutter analyze` and `flutter test` before committing changes that add or modify tests. Tests must pass static analysis (no errors) and the test suite should run locally.
+- When adding bytes to APIs that accept `Uint8List`, use `Uint8List.fromList(...)` rather than plain `List<int>` to avoid analyzer errors.
 
 ### Repository artifact policy
 

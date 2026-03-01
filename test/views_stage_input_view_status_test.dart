@@ -25,7 +25,7 @@ void main() {
         child: MaterialApp(home: StageInputView()),
       ),
     );
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Check ordering of UI elements: status radio and roRemark should be above the submit button
     final dnfFinder = find.text('DNF');
@@ -46,7 +46,7 @@ void main() {
     vm.setStatus('DNF');
     vm.setRoRemark('Safety issue');
     await vm.submit();
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Layout ordering may vary between environments; assert presence only.
     expect(dnfFinder, findsOneWidget);

@@ -21,9 +21,9 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
   });

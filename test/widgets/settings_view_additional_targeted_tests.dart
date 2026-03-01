@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -29,24 +30,27 @@ void main() {
     final repo = MatchRepository(persistence: persistence);
     await repo.loadAll();
 
+    final tmp = Directory.systemTemp.createTempSync('sm_test');
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
-        child: const MaterialApp(home: SettingsView()),
+        child: MaterialApp(home: SettingsView(documentsDirOverride: () async => tmp)),
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     // Call the export path which (without documentsDirOverride) will invoke
     // getDocumentsDirectory() and then exportBackupToFile on the FakePersistence.
     await state.exportBackupForTest(state.context);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle(const Duration(seconds: 2));
 
-    // Expect an Exported to <path> SnackBar or status text to be present.
-    expect(find.textContaining('Exported to'), findsWidgets);
+    tmp.deleteSync(recursive: true);
+
+    // Expect the persistent Status text to contain the export path.
+    expect(find.textContaining('Status: Exported to'), findsOneWidget);
   });
 
   testWidgets('export with pickBackupOverride handles repo.loadAll throwing (shows reload failed)', (tester) async {
@@ -70,14 +74,14 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     // Call the IO-facing export path which under a pickBackupOverride will
     // execute the import/dry-run flow and then repo.loadAll() which throws.
     await state.exportBackupForTest(state.context);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('Import succeeded but failed to reload repository'), findsWidgets);
   });

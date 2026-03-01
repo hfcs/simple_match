@@ -64,9 +64,9 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Should show 'Import succeeded but failed to reload repository' message via SnackBar or status text
     expect(find.textContaining('reload failed'), findsWidgets);
@@ -101,9 +101,9 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('Import failed'), findsWidgets);
   });
@@ -136,19 +136,19 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Dialog should list our file name
     expect(find.text('simple_backup.json'), findsOneWidget);
     await tester.tap(find.text('simple_backup.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Confirm and restore
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('Import successful'), findsWidgets);
   });

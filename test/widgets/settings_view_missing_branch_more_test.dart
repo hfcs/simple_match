@@ -39,11 +39,11 @@ void main() {
         child: SettingsView(pickBackupOverride: pick),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('Import failed'), findsWidgets);
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import failed')), findsWidgets);
@@ -67,16 +67,16 @@ void main() {
         child: SettingsView(pickBackupOverride: pick),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
     final future = (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     // Dialog should be present
     expect(find.text('Cancel'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     await future;
 
@@ -102,7 +102,7 @@ void main() {
         child: SettingsView(readFileBytesOverride: (p) async => payload),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   final state = tester.state(find.byType(SettingsView));
   // Start the import flow which will show a confirm dialog; interact with it
@@ -134,11 +134,11 @@ void main() {
         child: SettingsView(readFileBytesOverride: (p) async => payload),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
     await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), throwingRepo, fake, chosen);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('reload failed')), findsOneWidget);
   });
@@ -152,7 +152,7 @@ void main() {
 
     final throwingRepo = _LocalThrowingRepo(persistence: fake);
 
-    Future<Map<String, dynamic>?> pick() async => {'bytes': payload, 'name': 'exportfail.json', 'autoConfirm': true};
+    Future<Map<String, dynamic>?> pick() async => {'bytes': payload, 'name': 'exportfail.json', 'autoConfirm': false};
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
@@ -185,7 +185,7 @@ void main() {
     final repo = MatchRepository(persistence: fake);
     await repo.loadAll();
 
-    Future<Map<String, dynamic>?> pick() async => {'bytes': payload, 'name': 'exportfail2.json', 'autoConfirm': true};
+    Future<Map<String, dynamic>?> pick() async => {'bytes': payload, 'name': 'exportfail2.json', 'autoConfirm': false};
 
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(

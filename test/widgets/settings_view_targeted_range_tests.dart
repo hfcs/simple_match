@@ -41,12 +41,12 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // confirm dialog should appear
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import successful')), findsWidgets);
   });
@@ -66,7 +66,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')), findsWidgets);
   });
@@ -98,12 +98,12 @@ void main() {
 
     // choose
     await tester.tap(find.text('pick.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // confirm
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // should show reload failed status
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('reload failed')), findsWidgets);
@@ -127,9 +127,9 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('err.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import error')), findsWidgets);
   });
@@ -155,9 +155,9 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('baddry.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')), findsWidgets);
   });

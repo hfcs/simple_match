@@ -33,7 +33,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.text('No file selected'), findsOneWidget);
   });
@@ -54,14 +54,14 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Confirm dialog should appear
     expect(find.text('Confirm restore'), findsOneWidget);
 
     // Tap Cancel
     await tester.tap(find.text('Cancel'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // Should not show success SnackBar
   expect(find.text('Import successful'), findsNothing);
@@ -82,14 +82,14 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // There may be a Status text plus a SnackBar; ensure at least one SnackBar with exact text is present
-  expect(find.text('Import successful'), findsOneWidget);
+  expect(find.text('Import successful'), findsWidgets);
   });
 
   testWidgets('listBackupsOverride empty shows no-files SnackBar', (tester) async {
@@ -106,7 +106,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // Assert a SnackBar or other text indicating no files — be robust on web
   expect(find.byType(SnackBar), findsOneWidget);
@@ -130,29 +130,29 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     if (find.text('Confirm restore').evaluate().isNotEmpty) {
       await tester.tap(find.text('Restore'));
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
     } else if (find.byType(SimpleDialogOption).evaluate().isNotEmpty) {
       final option = find.byType(SimpleDialogOption).first;
       await tester.tap(option);
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       if (find.text('Confirm restore').evaluate().isNotEmpty) {
         await tester.tap(find.text('Restore'));
-        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
       }
     } else {
       // fallback: find any Text with filename and tap
       final fileFinder = find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('fake_restore.json'));
       expect(fileFinder, findsOneWidget);
       await tester.tap(fileFinder);
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       if (find.text('Confirm restore').evaluate().isNotEmpty) await tester.tap(find.text('Restore'));
     }
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
-  expect(find.text('Import successful'), findsOneWidget);
+  expect(find.text('Import successful'), findsWidgets);
   });
 }

@@ -45,13 +45,13 @@ void main() {
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
 
     // Call the web import wrapper directly; it should show the Import failed path
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // The SettingsView always renders the last status line in the UI
   // as "Status: <message>" so assert the status text contains the
@@ -76,14 +76,14 @@ void main() {
         ),
       ),
     ));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
 
     final chosen = _FakeFileObj('/tmp/dummy.json');
 
     await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   expect(find.textContaining('Status: Import failed'), findsOneWidget);
   });

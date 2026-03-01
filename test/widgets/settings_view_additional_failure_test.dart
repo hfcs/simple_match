@@ -38,10 +38,10 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'boom.json', 'autoConfirm': true})),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byType(SnackBar), findsOneWidget);
     final snack = tester.widget<SnackBar>(find.byType(SnackBar));
@@ -75,7 +75,7 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'from_export.json', 'autoConfirm': true})),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // Trigger the Export Backup flow which contains an early-path using pickBackupOverride
     await tester.tap(find.text('Export Backup'));
@@ -84,9 +84,9 @@ void main() {
     // Export path shows a confirm dialog (same as import); tap Restore if present
     if (find.text('Confirm restore').evaluate().isNotEmpty) {
       await tester.tap(find.text('Restore'));
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
     } else {
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
     }
 
     // The import path should complete and update the status text to Import successful

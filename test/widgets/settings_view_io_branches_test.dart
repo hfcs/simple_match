@@ -77,15 +77,15 @@ void main() {
   // Let async work run and UI settle; pump slices to ensure setState and
   // SnackBar animations complete in the test environment.
   await tester.pump();
-  await tester.pump(const Duration(milliseconds: 200));
-  await tester.pump(const Duration(seconds: 1));
+  await tester.pumpAndSettle();
+  await tester.pumpAndSettle();
 
       // UI update may vary in CI; assert by checking the tmp directory for the
       // exported file instead to make the test robust across environments.
       // Wait for persistence to be invoked (either exportBackupJson or exportBackupToFile).
       for (var i = 0; i < 10; i++) {
         if (persistence.exported) break;
-        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
       }
       expect(persistence.exported, isTrue);
 
@@ -116,12 +116,12 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Choose the file from the SimpleDialog
     final option = find.byType(SimpleDialogOption).first;
     await tester.tap(option);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Should show an Import error SnackBar due to thrown read
     expect(find.byType(SnackBar), findsOneWidget);
@@ -157,12 +157,12 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Choose the file
     final option = find.byType(SimpleDialogOption).first;
     await tester.tap(option);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Should display validation failure SnackBar
     expect(find.byType(SnackBar), findsOneWidget);
@@ -195,17 +195,17 @@ void main() {
     await tester.pump();
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Choose the file
     final option = find.byType(SimpleDialogOption).first;
     await tester.tap(option);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Dialog should appear; tap Cancel
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // No 'Import successful' status should be shown
     expect(find.textContaining('Import successful'), findsNothing);

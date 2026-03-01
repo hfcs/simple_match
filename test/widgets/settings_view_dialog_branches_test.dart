@@ -29,7 +29,7 @@ void main() {
       'bytes': Uint8List.fromList(utf8.encode(jsonEncode({'stages': [], 'shooters': [], 'stageResults': []}))),
     };
 
-    final widget = Provider<MatchRepository>.value(
+    final widget = ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
       child: MaterialApp(
         home: SettingsView(
@@ -45,7 +45,7 @@ void main() {
 
     // Call importViaWebForTest and then interact with the confirmation dialog
     final future = state.importViaWebForTest(tester.element(find.byType(SettingsView)), repo, svc);
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
     await tester.pumpAndSettle();
@@ -62,7 +62,7 @@ void main() {
 
     final fake = _FakeFile('/tmp/fake_backup.json');
 
-    final widget = Provider<MatchRepository>.value(
+    final widget = ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
       child: MaterialApp(
         home: SettingsView(
@@ -78,7 +78,7 @@ void main() {
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     final future = state.importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, svc);
-    await tester.pump();
+    await tester.pumpAndSettle();
     // The SimpleDialog lists the file name
     expect(find.text('fake_backup.json'), findsOneWidget);
     await tester.tap(find.text('fake_backup.json'));

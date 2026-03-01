@@ -13,9 +13,9 @@ import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 import 'package:simple_match/viewmodel/stage_result_viewmodel.dart';
 import 'package:simple_match/viewmodel/overall_result_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
-import 'package:simple_match/services/persistence_service.dart';
+import 'widgets/test_helpers/fake_repo_and_persistence.dart';
 
-class _MockPersistenceService extends PersistenceService {}
+class _MockPersistenceService extends FakePersistence {}
 
 void main() {
   group('Widget edge/empty/error coverage for all views', () {
@@ -27,7 +27,7 @@ void main() {
           child: const MaterialApp(home: MainMenuView()),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.byType(ListTile), findsWidgets);
     });
 
@@ -44,7 +44,7 @@ void main() {
           }),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.text('Match Setup'), findsOneWidget);
       // Empty state: section label present, no ListTile
       expect(find.text('Stages:'), findsOneWidget);
@@ -64,7 +64,7 @@ void main() {
           ),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.text('Shooter Setup'), findsOneWidget);
       // Empty state: section label present, no ListTile
       expect(find.text('Shooters:'), findsOneWidget);
@@ -84,7 +84,7 @@ void main() {
           child: const MaterialApp(home: StageInputView()),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.text('Stage Input'), findsOneWidget);
       // No stages/shooters: shows exact message
       expect(
@@ -108,7 +108,7 @@ void main() {
           ),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.text('Stage Result'), findsOneWidget);
       expect(find.text('No stages available.'), findsOneWidget);
     });
@@ -128,7 +128,7 @@ void main() {
           child: const MaterialApp(home: OverallResultView()),
         ),
       );
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
       expect(find.text('Overall Result'), findsOneWidget);
       expect(find.text('No results yet.'), findsOneWidget);
       expect(find.byIcon(Icons.picture_as_pdf), findsNothing);

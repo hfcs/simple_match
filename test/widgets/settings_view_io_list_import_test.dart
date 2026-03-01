@@ -61,7 +61,7 @@ void main() {
 
     // Tap Import Backup to invoke the override path
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Because loadAll() throws, expect a SnackBar or status message indicating reload failed
     expect(find.textContaining('reload failed'), findsWidgets);
@@ -99,7 +99,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.textContaining('Import successful'), findsWidgets);
     SettingsView.suppressSnackBarsInTests = false;

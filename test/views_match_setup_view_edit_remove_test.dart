@@ -18,17 +18,18 @@ Widget _wrap(Widget child) => MultiProvider(
 void main() {
   testWidgets('MatchSetupView can remove a stage', (tester) async {
     await tester.pumpWidget(_wrap(const MatchSetupView()));
+    await tester.pumpAndSettle();
     // Add a stage
     await tester.enterText(find.byKey(const Key('stageField')), '2');
     await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
     await tester.tap(find.byKey(const Key('addStageButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.text('Stage 2: 10 shoots'), findsOneWidget);
     // Remove it (confirm dialog)
     await tester.tap(find.byKey(const Key('removeStage-2')));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Remove'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     expect(find.text('Stage 2: 10 shoots'), findsNothing);
   });
 
@@ -38,10 +39,10 @@ void main() {
     await tester.enterText(find.byKey(const Key('stageField')), '2');
     await tester.enterText(find.byKey(const Key('scoringShootsField')), '10');
     await tester.tap(find.byKey(const Key('addStageButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     // Tap edit
     await tester.tap(find.byKey(const Key('editStage-2')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     // Change scoring shoots
     await tester.enterText(find.byKey(const Key('scoringShootsField')), '12');
     await tester.tap(find.byKey(const Key('confirmEditButton')));

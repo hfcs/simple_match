@@ -32,7 +32,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Export Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // The override should have been called and a status message shown.
     expect(exportedName, isNotNull);
@@ -54,7 +54,7 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.text('No file selected'), findsOneWidget);
   });
@@ -81,7 +81,7 @@ void main() {
       ));
 
       await tester.tap(find.text('Import Backup'));
-      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
 
       expect(find.textContaining('Import successful'), findsWidgets);
     } finally {
@@ -103,11 +103,11 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Wait again to ensure any SnackBar or status text is visible, then
     // assert using a contains matcher for robustness.
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 }

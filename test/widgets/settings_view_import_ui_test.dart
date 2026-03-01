@@ -49,17 +49,17 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Tap Import Backup and let the override handle the rest (autoConfirm=true)
     final importFinder = find.text('Import Backup');
     expect(importFinder, findsOneWidget);
     await tester.tap(importFinder);
-    await tester.pump(const Duration(milliseconds: 200));
-    // Wait for status line to update (poll briefly instead of a single pump)
+    await tester.pumpAndSettle();
+    // Wait for status line to update by pumping until settled or condition met
     Future<void> waitForStatus(WidgetTester t, {int retries = 20}) async {
       for (var i = 0; i < retries; i++) {
-        await t.pump(const Duration(milliseconds: 50));
+        await t.pumpAndSettle();
         if (find.text('Status: Import successful').evaluate().isNotEmpty) return;
       }
     }

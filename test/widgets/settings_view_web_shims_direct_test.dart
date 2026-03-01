@@ -27,7 +27,7 @@ void main() {
         child: const MaterialApp(home: SettingsView()),
       ),
     );
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Access the state and call the test shim directly.
     final state = tester.state(find.byType(SettingsView)) as dynamic;
@@ -39,7 +39,7 @@ void main() {
     }
 
   await state.exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, exporter, 'ts-test');
-  await tester.pump(const Duration(milliseconds: 200));
+  await tester.pumpAndSettle();
   expect(called, isTrue);
   // The public status text should contain the exported message.
   expect(find.textContaining('Status: Exported to browser download'), findsOneWidget);
@@ -68,13 +68,13 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: pick)),
       ),
     );
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
     // Call importViaWebForTest and expect the reload-failure message to be shown
   await state.importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-  await tester.pump(const Duration(milliseconds: 200));
+  await tester.pumpAndSettle();
   expect(find.textContaining('Status: Import succeeded, reload failed'), findsOneWidget);
   });
 }

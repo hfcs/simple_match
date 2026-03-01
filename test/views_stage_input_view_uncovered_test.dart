@@ -41,18 +41,18 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           // Select stage and shooter programmatically to avoid popup tap flakiness
           vm.selectStage(1);
           vm.selectShooter('Test');
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           // Enter values that do not sum to scoringShoots
           await tester.enterText(find.byKey(const Key('aField')), '2');
           await tester.enterText(find.byKey(const Key('cField')), '2');
           await tester.enterText(find.byKey(const Key('dField')), '2');
           await tester.enterText(find.byKey(const Key('missesField')), '2');
           // This sums to 8, not 10
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           // The error should be visible
           expect(
             find.textContaining('A + C + D + Misses must equal 10'),
@@ -84,7 +84,7 @@ class MockPersistenceService extends PersistenceService {
           );
           vm.selectStage(1);
           vm.selectShooter('Test');
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           // Time
           final addBtns = find.widgetWithIcon(IconButton, Icons.add);
           final removeBtns = find.widgetWithIcon(IconButton, Icons.remove);
@@ -120,9 +120,9 @@ class MockPersistenceService extends PersistenceService {
           );
           vm.selectStage(1);
           vm.selectShooter('Test');
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           await tester.enterText(find.byKey(const Key('aField')), '-1');
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           expect(find.textContaining('cannot be negative'), findsOneWidget);
         }, timeout: const Timeout(Duration(seconds: 45)));
 
@@ -140,7 +140,7 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           expect(
             find.textContaining('Please add at least one stage and one shooter'),
             findsOneWidget,
@@ -176,7 +176,7 @@ class MockPersistenceService extends PersistenceService {
               child: MaterialApp(home: StageInputView()),
             ),
           );
-          await tester.pump(const Duration(milliseconds: 200));
+          await tester.pumpAndSettle();
           // Edit
           await tester.tap(find.byKey(const Key('editResult-1-Test')));
           await tester.pump(const Duration(milliseconds: 200));

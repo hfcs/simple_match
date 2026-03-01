@@ -14,7 +14,7 @@ void main() {
     // don't rebuild the provider with different constructors later in the
     // same test (which can cause provider to throw during rebuilds).
     final vm = StageInputViewModel(repo);
-    await tester.pumpWidget(MaterialApp(home: Provider.value(value: repo, child: ChangeNotifierProvider.value(value: vm, child: const StageInputView()))));
+    await tester.pumpWidget(MaterialApp(home: ChangeNotifierProvider<MatchRepository>.value(value: repo, child: ChangeNotifierProvider.value(value: vm, child: const StageInputView()))));
     await tester.pumpAndSettle();
 
     // With no stages/shooters, prompt is shown
@@ -26,7 +26,7 @@ void main() {
 
     // Reuse the same `vm` instance created above so provider constructors
     // remain consistent across pumps.
-    await tester.pumpWidget(MaterialApp(home: Provider.value(value: repo, child: ChangeNotifierProvider.value(value: vm, child: const StageInputView()))));
+    await tester.pumpWidget(MaterialApp(home: ChangeNotifierProvider<MatchRepository>.value(value: repo, child: ChangeNotifierProvider.value(value: vm, child: const StageInputView()))));
     await tester.pumpAndSettle();
 
     // Select stage and shooter via the viewmodel
@@ -38,7 +38,7 @@ void main() {
     // (some earlier tests mutate globals/state that can cause small timing
     //  differences when the entire suite runs). A brief pump makes this
     //  assertion deterministic.
-    await tester.pump(const Duration(milliseconds: 50));
+    await tester.pumpAndSettle();
     // Now time field should exist and be enabled
     expect(find.byKey(const Key('timeField')), findsOneWidget);
   });

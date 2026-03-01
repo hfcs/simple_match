@@ -36,13 +36,13 @@ void main() {
       ),
     ));
 
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // Press Export Backup button
     final exportFinder = find.text('Export Backup');
     expect(exportFinder, findsOneWidget);
     await tester.tap(exportFinder);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // The saveOverride should have been invoked and recorded the content
   expect(writtenPath, isNotNull);

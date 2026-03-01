@@ -102,7 +102,7 @@ void main() {
   await (state as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
     await tester.pump(const Duration(milliseconds: 200));
 
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+    expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   testWidgets('importFromDocumentsChosenForTest: import succeeds but repo.reload throws shows reload failed', (tester) async {

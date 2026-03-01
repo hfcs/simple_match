@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -13,22 +14,23 @@ void main() {
     final repo = MatchRepository(persistence: fake);
     await repo.loadAll();
 
+    final tmp = Directory.systemTemp.createTempSync('sm_test');
     await tester.pumpWidget(MaterialApp(
       home: ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
-        child: const SettingsView(),
+        child: SettingsView(documentsDirOverride: () async => tmp),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
     // Call the IO export path which will call getDocumentsDirectory and
     // FakePersistence.exportBackupToFile to create a file.
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
-    // Either a SnackBar or the Status text may contain the path; accept either.
-    expect(find.textContaining('Exported to'), findsWidgets);
+    // Expect the persistent Status text to contain the export path.
+    expect(find.textContaining('Status: Exported to'), findsOneWidget);
   });
 
   testWidgets('export with saveExportOverride null still calls exporter path (no override)', (tester) async {
@@ -42,13 +44,13 @@ void main() {
         child: const SettingsView(),
       ),
     ));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final state = tester.state(find.byType(SettingsView));
     // This exercises the branch where saveExportOverride == null and exporter
     // uses the default saveExport implementation.
     await (state as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, (n, c) async {}, 'TS');
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // We don't assert on exact text; ensure the export call path executed by
     // checking FakePersistence logged call via behavior (no exception thrown).
@@ -79,11 +81,11 @@ void main() {
 
     // Tap Import Backup to start the documents-list flow
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Choose the file
     await tester.tap(find.text('x.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Expect validation failed message
     expect(find.textContaining('Backup validation failed'), findsWidgets);

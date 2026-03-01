@@ -73,7 +73,7 @@ void main() {
           ),
         ),
         );
-        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
       // Should show table header
       expect(find.text('Name'), findsOneWidget);
       expect(find.text('Raw HF'), findsOneWidget);
@@ -140,7 +140,7 @@ void main() {
         ),
       ),
     );
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     // All columns should be present and visible
     expect(find.text('Name'), findsOneWidget);
     expect(find.text('Raw HF'), findsOneWidget);

@@ -8,7 +8,7 @@ import 'package:simple_match/models/shooter.dart';
 
 void main() {
   testWidgets('MainMenu shows disabled items when empty and enables when data present', (tester) async {
-    final repo = MatchRepository();
+    final repo = MatchRepository(initialStages: [], initialShooters: [], initialResults: []);
     await tester.pumpWidget(
       MaterialApp(
         home: ChangeNotifierProvider<MatchRepository>.value(
@@ -18,8 +18,17 @@ void main() {
       ),
     );
 
-    // Empty repo -> 'Nothing to clear' should be visible
-    expect(find.text('Nothing to clear'), findsOneWidget);
+    // Allow animations and frames to settle before asserting
+    await tester.pumpAndSettle();
+    // Ensure the bottom item is visible (ListView builds lazily in tests)
+    await tester.scrollUntilVisible(find.text('Clear All Data'), 200.0, scrollable: find.byType(Scrollable));
+    await tester.pumpAndSettle();
+
+    // Empty repo -> the Clear All Data tile should be present and disabled
+    final clearFinder = find.widgetWithText(ListTile, 'Clear All Data');
+    expect(clearFinder, findsOneWidget);
+    final ListTile clearTile = tester.widget<ListTile>(clearFinder);
+    expect(clearTile.enabled, isFalse);
     // Stage Input subtitle should mention add stage and shooter
     expect(find.textContaining('Add at least one stage'), findsOneWidget);
 
@@ -27,10 +36,11 @@ void main() {
     await repo.addStage(MatchStage(stage: 1, scoringShoots: 5));
     await repo.addShooter(Shooter(name: 'T1'));
     // Rebuild UI
-    await tester.pumpAndSettle(const Duration(milliseconds: 50));
+    await tester.pumpAndSettle();
 
-    // Now 'Nothing to clear' should be gone and Stage Input enabled
-    expect(find.text('Nothing to clear'), findsNothing);
+    // Now the Clear All Data tile should be enabled and Stage Input visible
+    final ListTile clearTileAfter = tester.widget<ListTile>(clearFinder);
+    expect(clearTileAfter.enabled, isTrue);
     expect(find.text('Stage Input'), findsOneWidget);
   });
  
@@ -44,6 +54,8 @@ void main() {
         child: const MaterialApp(home: MainMenuView()),
       ),
     );
+
+    await tester.pumpAndSettle();
 
     // Expect helper subtitle for Stage Input when empty
     expect(find.text('Add at least one stage and one shooter'), findsOneWidget);
@@ -62,6 +74,8 @@ void main() {
         child: const MaterialApp(home: MainMenuView()),
       ),
     );
+
+    await tester.pumpAndSettle();
 
     // When repository has entries, the helper subtitle should not be present
     expect(find.text('Add at least one stage and one shooter'), findsNothing);

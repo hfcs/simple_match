@@ -561,7 +561,7 @@ class PersistenceService {
 
       // Normalize incoming timestamp keys: prefer *_Utc keys, fall back to legacy keys.
       final now = _nowIso();
-      String _toUtcIso(String? s) {
+      String toUtcIso(String? s) {
         if (s == null) return now;
         try {
           final dt = DateTime.parse(s);
@@ -573,16 +573,16 @@ class PersistenceService {
       }
 
       for (final m in stagesList) {
-        m['createdAtUtc'] = _toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
-        m['updatedAtUtc'] = _toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
+        m['createdAtUtc'] = toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
+        m['updatedAtUtc'] = toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
       }
       for (final m in shootersList) {
-        m['createdAtUtc'] = _toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
-        m['updatedAtUtc'] = _toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
+        m['createdAtUtc'] = toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
+        m['updatedAtUtc'] = toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
       }
       for (final m in resultsList) {
-        m['createdAtUtc'] = _toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
-        m['updatedAtUtc'] = _toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
+        m['createdAtUtc'] = toUtcIso((m['createdAtUtc'] as String?) ?? (m['createdAt'] as String?));
+        m['updatedAtUtc'] = toUtcIso((m['updatedAtUtc'] as String?) ?? (m['updatedAt'] as String?));
       }
 
       // Compute audit log entries for this import (machine channel)

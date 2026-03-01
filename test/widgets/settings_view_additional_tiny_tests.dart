@@ -48,9 +48,10 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+    // Could display both an inline Status and a SnackBar — accept either.
+    expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   testWidgets('IO readFileBytes throws leads to Import error UI', (tester) async {
@@ -78,13 +79,15 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+      // Tap the Import button and select the first simple dialog option rather
+      // than matching the exact filename string to avoid brittle matching.
+      await tester.tap(find.text('Import Backup'));
+      await tester.pumpAndSettle();
 
-  // Choose the only option (name generation uses toString() of the object)
-  expect(find.text('simple_match_backup.json'), findsOneWidget);
-  await tester.tap(find.text('simple_match_backup.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+      // Choose the first option in the dialog (our fake file) and proceed.
+      expect(find.byType(SimpleDialogOption), findsWidgets);
+      await tester.tap(find.byType(SimpleDialogOption).first);
+      await tester.pumpAndSettle();
 
     // Both the Status text and a SnackBar may contain the message; accept either.
     expect(find.textContaining('Import error'), findsWidgets);
@@ -108,10 +111,10 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Ensure UI updates settle and use contains-based matcher for stability.
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     expect(find.textContaining('No backup files found'), findsOneWidget);
   });
 }

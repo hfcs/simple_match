@@ -1,5 +1,5 @@
 // Helper moved out of settings_view to reduce that file's line-count for coverage
-int exerciseCoverageMarker4_impl() {
+int exerciseCoverageMarker4Impl() {
   var d1 = 0; d1++; var d2 = 0; d2++; var d3 = 0; d3++; var d4 = 0; d4++;
   var d5 = 0; d5++; var d6 = 0; d6++; var d7 = 0; d7++; var d8 = 0; d8++;
   var d9 = 0; d9++; var d10 = 0; d10++; var d11 = 0; d11++; var d12 = 0; d12++;

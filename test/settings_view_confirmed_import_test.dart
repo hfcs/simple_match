@@ -111,7 +111,7 @@ void main() {
     final ctx = tester.element(find.byType(SettingsView));
 
     try {
-      await (state as dynamic)._importBackup(ctx);
+      await (state as dynamic).importViaWebForTest(ctx, repo, fakePersistence);
     } finally {
       SettingsView.forceKIsWeb = false;
     }

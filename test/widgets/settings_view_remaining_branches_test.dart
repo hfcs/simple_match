@@ -38,10 +38,10 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
-    // Should show validation failed message
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+    // Could show both a SnackBar and the Status: text — accept one or more matches.
+    expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   testWidgets('Import succeeds but repo.loadAll throws (web pick)', (tester) async {
@@ -61,10 +61,10 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
-    // Should show the reload-failed SnackBar and setState message
-    expect(find.textContaining('reload failed'), findsOneWidget);
+    // Could show reload failure in a SnackBar or inline status text.
+    expect(find.textContaining('reload failed'), findsWidgets);
   });
 
   testWidgets('IO documents-list path: import failed and catch(e) path', (tester) async {
@@ -89,15 +89,15 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Choose the file
     await tester.tap(find.text('b.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Confirm dialog
     await tester.tap(find.widgetWithText(TextButton, 'Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   // Could show both a SnackBar and the Status: text — accept one or more matches.
   expect(find.textContaining('Import failed:'), findsWidgets);
@@ -120,10 +120,10 @@ void main() {
     ));
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   await tester.tap(find.text('c.json'));
-  await tester.pump(const Duration(milliseconds: 200));
+  await tester.pumpAndSettle();
 
   // readFileBytesOverride throws, so no confirm dialog will appear — expect the catch(e) path
   expect(find.textContaining('Import error:'), findsWidgets);

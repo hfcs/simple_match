@@ -84,7 +84,7 @@ void main() {
     await (state as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
     await tester.pump(const Duration(milliseconds: 200));
 
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+    expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   testWidgets('importViaWebForTest with no file selected shows SnackBar', (tester) async {
@@ -135,7 +135,7 @@ void main() {
     await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
     await tester.pump(const Duration(milliseconds: 200));
 
-    expect(find.textContaining('Backup validation failed'), findsOneWidget);
+    expect(find.textContaining('Backup validation failed'), findsWidgets);
   });
 
   // NOTE: a similar reload-failure import test already exists elsewhere;

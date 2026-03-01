@@ -24,7 +24,7 @@ void main() {
     final repo = MatchRepository(persistence: svc);
 
     var called = false;
-    final widget = Provider<MatchRepository>.value(
+    final widget = ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
       child: MaterialApp(
         home: SettingsView(
@@ -53,7 +53,7 @@ void main() {
 
     final fake = _FakeFile('/tmp/fake_backup.json');
 
-    final widget = Provider<MatchRepository>.value(
+    final widget = ChangeNotifierProvider<MatchRepository>.value(
       value: repo,
       child: MaterialApp(
         home: SettingsView(

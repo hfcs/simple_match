@@ -38,12 +38,12 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Confirm restore dialog appears
     expect(find.text('Confirm restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import successful')), findsWidgets);
   });
@@ -67,7 +67,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Backup validation failed')), findsWidgets);
   });
@@ -115,7 +115,7 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // dialog present
     expect(find.text('Select backup to import'), findsOneWidget);
@@ -152,9 +152,9 @@ void main() {
     );
 
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('fail.json'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Import error')), findsWidgets);
   });

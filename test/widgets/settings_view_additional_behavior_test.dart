@@ -33,12 +33,12 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => null)),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // Trigger the import action which should use the pickBackupOverride and
     // return null, causing a 'No file selected' SnackBar.
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byType(SnackBar), findsOneWidget);
     expect(find.text('No file selected'), findsOneWidget);
@@ -56,11 +56,11 @@ void main() {
         child: MaterialApp(home: SettingsView(listBackupsOverride: () async => [])),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     // Trigger the import which should detect no files in documents and show a SnackBar.
     await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     expect(find.byType(SnackBar), findsOneWidget);
     expect(find.textContaining('No backup files found'), findsOneWidget);
@@ -89,11 +89,11 @@ void main() {
         child: MaterialApp(home: SettingsView(pickBackupOverride: () async => {'bytes': bytes, 'name': 'bad.json', 'autoConfirm': true})),
       ),
     );
-    await tester.pump();
+    await tester.pumpAndSettle();
 
   // Trigger the import path via the Import button (pickBackupOverride supplies the bytes)
   await tester.tap(find.text('Import Backup'));
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
   expect(find.byType(SnackBar), findsOneWidget);
   // There may be a status text in the view and a SnackBar; allow multiple matches

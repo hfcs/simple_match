@@ -41,7 +41,7 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Expect two shooter rows
     expect(find.text('Alice'), findsOneWidget);
@@ -59,16 +59,16 @@ void main() {
     final aliceField = find.widgetWithText(TextField, 'Classification %').first;
     // There are two TextFields; enter Alice then Bob by index
     await tester.enterText(aliceField, '50');
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Enter Bob's field (second TextField)
     final bobField = find.widgetWithText(TextField, 'Classification %').at(1);
     await tester.enterText(bobField, '100');
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Press the button
     await tester.tap(alignButton);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // After alignment, repo should have updated scaleFactors
     final a = repo.getShooter('Alice');
@@ -109,12 +109,12 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     // Clear one field to simulate missing value
     final firstField = find.widgetWithText(TextField, 'Classification %').first;
     await tester.enterText(firstField, '');
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
 
     final button = find.widgetWithText(ElevatedButton, 'Align scaling to CS');
     expect(button, findsOneWidget);

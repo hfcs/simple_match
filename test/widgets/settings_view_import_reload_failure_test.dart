@@ -45,13 +45,13 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     final stateFinder = find.byType(SettingsView);
     expect(stateFinder, findsOneWidget);
     final state = tester.state(stateFinder) as dynamic;
     // Invoke the web import flow directly (test helper) to avoid hit-test tap flakiness
     await state.importViaWebForTest(tester.element(stateFinder), repo, fake);
-    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pumpAndSettle();
     // Expect the status line to mention reload failure
     expect(find.textContaining('Import succeeded, reload failed'), findsOneWidget);
     SettingsView.suppressSnackBarsInTests = false;

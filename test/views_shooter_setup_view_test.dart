@@ -4,11 +4,12 @@ import 'package:simple_match/views/shooter_setup_view.dart';
 
 import 'package:provider/provider.dart';
 import 'package:simple_match/repository/match_repository.dart';
+import 'widgets/test_helpers/fake_repo_and_persistence.dart';
 import 'package:simple_match/viewmodel/shooter_setup_viewmodel.dart';
 
 Widget _wrapWithProviders(Widget child) {
   return ChangeNotifierProvider<MatchRepository>(
-    create: (_) => MatchRepository(),
+    create: (_) => MatchRepository(persistence: FakePersistence()),
     child: Provider<ShooterSetupViewModel>(
       create: (context) => ShooterSetupViewModel(
         Provider.of<MatchRepository>(context, listen: false),
@@ -21,6 +22,7 @@ Widget _wrapWithProviders(Widget child) {
 void main() {
   testWidgets('ShooterSetupView renders title', (WidgetTester tester) async {
     await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.pumpAndSettle();
     expect(find.text('Shooter Setup'), findsOneWidget);
   });
 
@@ -29,7 +31,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('nameField')), 'Alice');
     await tester.enterText(find.byKey(const Key('scaleField')), '0.95');
     await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.text('Alice'), findsOneWidget);
     expect(find.byKey(const Key('scaleValue-Alice')), findsOneWidget);
   });
@@ -39,11 +41,11 @@ void main() {
     await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
     await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
     await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
     await tester.enterText(find.byKey(const Key('scaleField')), '0.9');
     await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     expect(find.textContaining('already exists'), findsOneWidget);
   });
 
@@ -52,7 +54,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('nameField')), 'Charlie');
     await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
     await tester.tap(find.byKey(const Key('addShooterButton')));
-    await tester.pump();
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('editShooter-Charlie')));
     await tester.pump();
     await tester.enterText(find.byKey(const Key('scaleField')), '0.8');

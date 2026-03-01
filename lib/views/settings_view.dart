@@ -285,6 +285,9 @@ class _SettingsViewState extends State<SettingsView> {
 
   /// Test-only wrapper for the web export flow so VM tests can call it directly.
   Future<void> exportViaWebForTest(BuildContext context, PersistenceService svc, Future<void> Function(String, String) exporter, String ts) async {
+    if (SettingsView.suppressSnackBarsInTests) {
+      return await _exportViaWeb(context, svc, exporter, ts).timeout(const Duration(seconds: 5));
+    }
     return await _exportViaWeb(context, svc, exporter, ts);
   }
 
@@ -292,6 +295,9 @@ class _SettingsViewState extends State<SettingsView> {
   /// Allows VM widget tests to call the same code path that the Export button
   /// would trigger, without relying on hit-testing/taps.
   Future<void> exportBackupForTest(BuildContext context) async {
+    if (SettingsView.suppressSnackBarsInTests) {
+      return await _exportBackup(context).timeout(const Duration(seconds: 5));
+    }
     return await _exportBackup(context);
   }
 
@@ -521,6 +527,9 @@ class _SettingsViewState extends State<SettingsView> {
   /// requiring `kIsWeb` to be true or accessing private members across
   /// libraries. Tests should call this via the state object (as dynamic).
   Future<void> importViaWebForTest(BuildContext context, MatchRepository repo, PersistenceService svc) async {
+    if (SettingsView.suppressSnackBarsInTests) {
+      return await _importViaWeb(context, repo, svc).timeout(const Duration(seconds: 5));
+    }
     return await _importViaWeb(context, repo, svc);
   }
 
@@ -528,6 +537,9 @@ class _SettingsViewState extends State<SettingsView> {
   /// This lets VM widget tests call the same code path used for importing from
   /// the application documents directory without relying on hit-testing.
   Future<void> importFromDocumentsForTest(BuildContext context, MatchRepository repo, PersistenceService svc) async {
+    if (SettingsView.suppressSnackBarsInTests) {
+      return await _importFromDocuments(context, repo, svc).timeout(const Duration(seconds: 5));
+    }
     return await _importFromDocuments(context, repo, svc);
   }
 
@@ -563,6 +575,29 @@ class _SettingsViewState extends State<SettingsView> {
     );
 
     if (confirm != true) return;
+
+    if (SettingsView.suppressSnackBarsInTests) {
+      final res = await svc.importBackupFromBytes(Uint8List.fromList(bytes), dryRun: false, backupBeforeRestore: true).timeout(const Duration(seconds: 5));
+      if (res.success) {
+        try {
+          await repo.loadAll();
+        } catch (e) {
+          if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import succeeded but failed to reload repository: $e')));
+          if (!mounted) return;
+          setState(() => _lastMessage = 'Import succeeded, reload failed: $e');
+          return;
+        }
+
+        if (mounted) _maybeShowSnackBar(context, const SnackBar(content: Text('Import successful')));
+        if (!mounted) return;
+        setState(() => _lastMessage = 'Import successful');
+      } else {
+        if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Import failed: ${res.message}')));
+        if (!mounted) return;
+        setState(() => _lastMessage = 'Import failed: ${res.message}');
+      }
+      return;
+    }
 
     final res = await svc.importBackupFromBytes(Uint8List.fromList(bytes), dryRun: false, backupBeforeRestore: true);
     if (res.success) {

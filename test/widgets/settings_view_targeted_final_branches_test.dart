@@ -45,8 +45,15 @@ void main() {
 
     final chosen = _ChosenFile('/tmp/simple_match_backup.json');
 
-    // Exercise the flow that shows confirmation dialog path (we'll bypass dialog by calling the chosen-for-test helper then cancelling via confirm override)
-    await state.importFromDocumentsChosenForTest(state.context, repo, persistence, chosen);
+    // Exercise the flow that shows confirmation dialog path. The helper shows
+    // a confirmation dialog — dismiss it programmatically to avoid blocking
+    // the test runner.
+    final importFuture = state.importFromDocumentsChosenForTest(state.context, repo, persistence, chosen);
+    // Let the dialog build
+    await tester.pump();
+    // Programmatically cancel the confirmation dialog
+    Navigator.of(state.context).pop(false);
+    await importFuture;
     await tester.pumpAndSettle();
 
     // Exercise the confirm-free import helper which directly proceeds

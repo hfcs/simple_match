@@ -8,10 +8,7 @@ import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
-class _FakeChosen {
-  final String path;
-  _FakeChosen(this.path);
-}
+// _Chosen-like helper not required; removed to satisfy analyzer
 
 void main() {
   setUp(() {

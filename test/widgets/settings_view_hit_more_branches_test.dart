@@ -57,7 +57,6 @@ void main() {
   });
 
   testWidgets('importFromDocuments handles readFileBytes throwing', (tester) async {
-    final bytes = Uint8List.fromList(utf8.encode(jsonEncode({'metadata': {'schemaVersion': 4}})));
     final persistence = FakePersistence(importFn: (Uint8List b, {bool dryRun = false, bool backupBeforeRestore = false}) async {
       if (dryRun) return FakeImportResult(success: true, counts: {'stages': 1, 'shooters': 1, 'stageResults': 1});
       return FakeImportResult(success: true);

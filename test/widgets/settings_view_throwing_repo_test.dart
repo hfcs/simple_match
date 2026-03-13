@@ -9,7 +9,7 @@ import 'package:simple_match/views/settings_view.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 class ThrowingRepo extends MatchRepository {
-  ThrowingRepo({super.persistence}) : super(persistence: persistence);
+  ThrowingRepo({super.persistence});
 
   @override
   Future<void> loadAll() async {

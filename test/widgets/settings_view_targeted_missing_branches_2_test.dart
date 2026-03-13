@@ -27,7 +27,7 @@ class _FakePersistenceToggle extends PersistenceService {
   Future<String> exportBackupJson() async => '{}';
 }
 
-class _FakeFile { final String path; _FakeFile(this.path); }
+// _FakeFile not referenced in tests here; removed to satisfy analyzer
 
 void main() {
   setUp(() {

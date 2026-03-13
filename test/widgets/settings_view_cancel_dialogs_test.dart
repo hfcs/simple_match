@@ -27,11 +27,11 @@ void main() {
       ),
     );
 
-    final state = tester.state(find.byType(SettingsView));
+    final _state = tester.state(find.byType(SettingsView));
 
     // Start the importFromDocumentsChosenForTest and cancel the AlertDialog
     await tester.runAsync(() async {
-      final future = (state as dynamic).importFromDocumentsChosenForTest(
+      final future = (_state as dynamic).importFromDocumentsChosenForTest(
         tester.element(find.byType(SettingsView)),
         repo,
         persistence,
@@ -62,8 +62,6 @@ void main() {
         child: MaterialApp(home: SettingsView(listBackupsOverride: () async => [fakeChosen], readFileBytesOverride: (String p) async => Uint8List.fromList([1,2,3]))),
       ),
     );
-
-    final state = tester.state(find.byType(SettingsView));
 
     await tester.tap(find.widgetWithIcon(ElevatedButton, Icons.upload_file));
     await tester.pump();

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +16,9 @@ void main() {
     final persistence = FakePersistence(exportJsonValue: '{"ok":true}');
     final repo = MatchRepository(persistence: persistence);
 
-    final throwingExporter = (String path, String content) async {
+    Future<void> throwingExporter(String path, String content) async {
       throw Exception('save failed');
-    };
+    }
 
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
@@ -29,10 +27,10 @@ void main() {
       ),
     );
 
-    final state = tester.state(find.byType(SettingsView));
+    final _state = tester.state(find.byType(SettingsView));
 
     await tester.runAsync(() async {
-      await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
+      await (_state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
     });
 
     await tester.pumpAndSettle();
@@ -60,8 +58,6 @@ void main() {
         ),
       ),
     );
-
-    final state = tester.state(find.byType(SettingsView));
 
     // Trigger the Import Backup button which calls the public _importBackup
     await tester.tap(find.widgetWithIcon(ElevatedButton, Icons.upload_file));

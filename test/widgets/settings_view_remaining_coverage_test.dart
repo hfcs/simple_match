@@ -78,9 +78,7 @@ void main() {
     final repo = MatchRepository(persistence: fake);
 
     // readFileBytesOverride returns a small JSON payload
-    final readBytes = (String path) async => Uint8List.fromList('{}'.codeUnits);
-
-    final chosen = Object();
+    Future<Uint8List> readBytes(String path) async => Uint8List.fromList('{}'.codeUnits);
     // Give the chosen object a `.path` property via a simple wrapper
     final chosenWithPath = _ChosenPath('/tmp/fake_backup.json');
 

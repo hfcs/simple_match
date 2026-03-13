@@ -67,8 +67,8 @@ void main() {
       ),
     ));
     await tester.pumpAndSettle();
-    final _st2 = tester.state(find.byType(SettingsView));
-  await (_st2 as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
+    final st2 = tester.state(find.byType(SettingsView));
+  await (st2 as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
   await tester.pumpAndSettle();
   // The web-import path displays a SnackBar when no file is selected. We
   // don't assert the SnackBar here to avoid a fragile overlay timing
@@ -111,10 +111,10 @@ void main() {
     ));
     await tester.pump();
 
-    final _st = tester.state(find.byType(SettingsView));
+    final st = tester.state(find.byType(SettingsView));
 
     // Act: start the import (do not await immediately so we can interact with the dialog)
-    final fut = (_st as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
+    final fut = (st as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
     // Allow the dialog to appear
     await tester.pumpAndSettle();
@@ -203,10 +203,10 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    final _st = tester.state(find.byType(SettingsView));
+    final st = tester.state(find.byType(SettingsView));
 
     // Call exportBackupForTest which should use the saveExportOverride
-    await (_st as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
+    await (st as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
     await tester.pumpAndSettle();
     expect(exportedName, isNotNull);
     expect(exportedContent, isNotNull);
@@ -215,7 +215,7 @@ void main() {
     final chosen = _F('/tmp/fake.json');
 
     // Start import but it will show a confirmation dialog; interact with it
-    final fut = (_st as dynamic).importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
+    final fut = (st as dynamic).importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
     await tester.pumpAndSettle();
     // Confirm dialog should be visible; press Restore
     if (find.text('Restore').evaluate().isNotEmpty) {
@@ -227,7 +227,7 @@ void main() {
 
     // Now exercise importFromDocumentsConfirmedForTest which skips dialogs
     final chosen2 = _F('/tmp/fake2.json');
-    await (_st as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen2);
+    await (st as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen2);
     await tester.pumpAndSettle();
     expect(find.textContaining('Status:'), findsOneWidget);
 
@@ -258,7 +258,7 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    final _st = tester.state(find.byType(SettingsView));
+    final st = tester.state(find.byType(SettingsView));
 
     // Call static helpers repeatedly
     for (var i = 0; i < 3; i++) {
@@ -271,19 +271,19 @@ void main() {
     }
 
     // Call wrappers that exercise web and import/export flows
-    await (_st as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, dummyExporter, DateTime.now().toIso8601String());
+    await (st as dynamic).exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, dummyExporter, DateTime.now().toIso8601String());
     await tester.pumpAndSettle();
 
-    await (_st as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
+    await (st as dynamic).importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
     await tester.pumpAndSettle();
 
-    await (_st as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
+    await (st as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
     await tester.pumpAndSettle();
 
     // list/import from documents path (force web flag ensures _importViaWeb used)
     // Use the dialog-free confirmed helper to avoid modal hangs in VM tests
     final chosen = _F('/tmp/fake.json');
-    await (_st as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
+    await (st as dynamic).importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, chosen);
     await tester.pumpAndSettle();
 
     SettingsView.forceKIsWeb = false;
@@ -330,12 +330,12 @@ void main() {
     ));
     await tester.pumpAndSettle();
 
-    final _st = tester.state(find.byType(SettingsView));
+    final st = tester.state(find.byType(SettingsView));
 
     // Call the private _documentsDir and ignore any plugin errors; the
     // purpose is to execute the fallback `getDocumentsDirectory()` line.
     try {
-      await (_st as dynamic)._documentsDir();
+      await (st as dynamic)._documentsDir();
     } catch (_) {
       // ignore - some test environments don't have platform channels
     }

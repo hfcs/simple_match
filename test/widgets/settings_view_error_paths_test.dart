@@ -27,10 +27,10 @@ void main() {
       ),
     );
 
-    final _state = tester.state(find.byType(SettingsView));
+    final state = tester.state(find.byType(SettingsView));
 
     await tester.runAsync(() async {
-      await (_state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
+      await (state as dynamic).exportBackupForTest(tester.element(find.byType(SettingsView)));
     });
 
     await tester.pumpAndSettle();

@@ -30,6 +30,7 @@ class TestPersistenceService extends PersistenceService {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('getStageRanks computes ordering and adjustedMatchPoint', () async {
     final svc = TestPersistenceService();
 

@@ -27,11 +27,11 @@ void main() {
       ),
     );
 
-    final _state = tester.state(find.byType(SettingsView));
+    final state = tester.state(find.byType(SettingsView));
 
     // Start the importFromDocumentsChosenForTest and cancel the AlertDialog
     await tester.runAsync(() async {
-      final future = (_state as dynamic).importFromDocumentsChosenForTest(
+      final future = (state as dynamic).importFromDocumentsChosenForTest(
         tester.element(find.byType(SettingsView)),
         repo,
         persistence,

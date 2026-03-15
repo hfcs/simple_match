@@ -25,13 +25,13 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView));
 
-    // Call the private method to show a SnackBar and ensure it appears
-    (state as dynamic)._maybeShowSnackBar(tester.element(find.byType(SettingsView)), const SnackBar(content: Text('test-snack')));
+    // Call the test-visible wrapper to show a SnackBar and ensure it appears
+    (state as dynamic).showSnackBarForTest(tester.element(find.byType(SettingsView)), const SnackBar(content: Text('test-snack')));
     await tester.pumpAndSettle();
     expect(find.text('test-snack'), findsOneWidget);
 
     // Call documentsDir() which should invoke our override and return an object with .path
-    final dir = await (state as dynamic)._documentsDir();
+    final dir = await (state as dynamic).documentsDirForTest();
     expect(dir.path, '/tmp');
   });
 }

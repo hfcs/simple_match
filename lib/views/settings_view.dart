@@ -173,6 +173,12 @@ class SettingsView extends StatefulWidget {
 class _SettingsViewState extends State<SettingsView> {
   String _lastMessage = '';
 
+  @visibleForTesting
+  void showSnackBarForTest(BuildContext context, SnackBar sb) => _maybeShowSnackBar(context, sb);
+
+  @visibleForTesting
+  Future<dynamic> documentsDirForTest() async => await _documentsDir();
+
   void _maybeShowSnackBar(BuildContext context, SnackBar sb) {
     if (SettingsView.suppressSnackBarsInTests) return;
     // In debug/test runs, clamp SnackBar durations so widget tests don't

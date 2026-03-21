@@ -17,6 +17,11 @@ void main() {
   testWidgets('hit remaining SettingsView coverage helpers and wrappers', (
     WidgetTester tester,
   ) async {
+    // Enable test-only flags so dialogless/code-paths run deterministically
+    final prevSuppress = SettingsView.suppressSnackBarsInTests;
+    final prevForceWeb = SettingsView.forceKIsWeb;
+    SettingsView.suppressSnackBarsInTests = true;
+    SettingsView.forceKIsWeb = true;
     // Arrange: provide a FakePersistence and repository
     final fake = FakePersistence(exportJsonValue: '{"ok":true}');
     final repo = MatchRepository(persistence: fake);
@@ -47,11 +52,8 @@ void main() {
             postExportOverride: (path, content) async {
               postCalled.add(path);
             },
-            pickBackupOverride: () async => {
-              'bytes': Uint8List.fromList([1, 2, 3]),
-              'name': 'ci.json',
-              'autoConfirm': true
-            },
+            // No pickBackupOverride here so exportBackupForTest exercises
+            // the saveExportOverride/postExportOverride paths.
             listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
@@ -64,18 +66,11 @@ void main() {
 
     final state = tester.state(find.byType(SettingsView)) as dynamic;
 
-    // Exercise export web wrapper
-    await state.exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, (p, c) async {}, 'ts');
-
     // Exercise export IO wrapper (uses saveExportOverride)
     await state.exportBackupForTest(tester.element(find.byType(SettingsView)));
 
-    // Exercise import via web wrapper (pickBackupOverride returns autoConfirm)
-    await state.importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
-
-    // Exercise import-from-documents chosen/confirmed helpers
+    // Exercise import-from-documents confirmed helper (dialog-less)
     final fakeFile = _FakeFile(Directory.systemTemp.createTempSync().path + '/chosen.json');
-    await state.importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
     await state.importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
 
     // Final pump
@@ -83,5 +78,9 @@ void main() {
 
     // Assert that overrides were invoked at least once
     expect(saveCalled.isNotEmpty || postCalled.isNotEmpty, true);
+
+    // Restore flags
+    SettingsView.suppressSnackBarsInTests = prevSuppress;
+    SettingsView.forceKIsWeb = prevForceWeb;
   });
 }

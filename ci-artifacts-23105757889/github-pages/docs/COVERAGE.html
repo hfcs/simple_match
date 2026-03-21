@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Coverage notes | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Coverage notes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/COVERAGE.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/COVERAGE.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Coverage notes" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Coverage notes","url":"https://hfcs.github.io/simple_match/docs/COVERAGE.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="coverage-notes">Coverage notes</h1>
+
+<h2 id="why-some-files-are-uncovered">Why some files are uncovered</h2>
+<p>This project targets multiple platforms (web + native). Some files under
+<code class="language-plaintext highlighter-rouge">lib/views/</code> are non-web, <code class="language-plaintext highlighter-rouge">dart:io</code>-based implementations (for example,
+<code class="language-plaintext highlighter-rouge">export_utils_io.dart</code>, <code class="language-plaintext highlighter-rouge">io_file_helpers_io.dart</code>, and
+<code class="language-plaintext highlighter-rouge">non_web_pdf_utils.dart</code>). The unit/integration tests run in host test
+environments that are primarily web-focused, so those IO-only files are
+not exercised by default and appear as low/no coverage in <code class="language-plaintext highlighter-rouge">coverage/lcov.info</code>.</p>
+
+<h2 id="what-we-changed">What we changed</h2>
+<ul>
+  <li>Added unit tests that exercise the IO helpers (in <code class="language-plaintext highlighter-rouge">test/</code>) so logic is
+validated. These tests pass locally and in CI.</li>
+  <li>To keep the public coverage report focused on code exercised by unit tests
+and avoid skew from platform-only files, we provide a small filtering
+script that removes specific IO-only file blocks from the generated
+LCOV before rendering HTML.</li>
+</ul>
+
+<h2 id="how-to-generate-a-filtered-coverage-html-report">How to generate a filtered coverage HTML report</h2>
+<ol>
+  <li>Run tests and generate LCOV using the existing test workflow:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter <span class="nb">test</span> <span class="nt">--coverage</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Filter the LCOV to remove IO-only files and regenerate HTML:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tools/filter_lcov.sh coverage/lcov.info coverage/lcov.filtered.info
+genhtml coverage/lcov.filtered.info <span class="nt">-o</span> coverage/html
+</code></pre></div></div>
+
+<h2 id="notes-for-reviewers">Notes for reviewers</h2>
+<ul>
+  <li>The filter is intentionally conservative and only removes the known
+IO-only files. If you later add other platform-only helpers, add them to
+the <code class="language-plaintext highlighter-rouge">FILTER_FILES</code> list in <code class="language-plaintext highlighter-rouge">tools/filter_lcov.sh</code>.</li>
+  <li>We still keep unit tests that exercise the IO helpers; the filter is only
+for the publicly-visible HTML coverage report to avoid misleading
+percentages when tests are primarily web/VM focused.</li>
+</ul>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/COVERAGE.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

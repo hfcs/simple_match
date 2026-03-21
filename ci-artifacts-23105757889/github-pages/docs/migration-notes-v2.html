@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Migration notes: schema v2 | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Migration notes: schema v2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/migration-notes-v2.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/migration-notes-v2.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Migration notes: schema v2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Migration notes: schema v2","url":"https://hfcs.github.io/simple_match/docs/migration-notes-v2.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="migration-notes-schema-v2">Migration notes: schema v2</h1>
+
+<p>Schema v2 introduces two new fields on saved <code class="language-plaintext highlighter-rouge">stageResults</code> records:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">status</code> (string) — one of “Completed”, “DNF”, or “DQ”. Defaults to “Completed”</li>
+  <li><code class="language-plaintext highlighter-rouge">roRemark</code> (string) — optional remark/note from the range officer (defaults to empty string)</li>
+</ul>
+
+<p>On startup <code class="language-plaintext highlighter-rouge">PersistenceService.ensureSchemaUpToDate()</code> will run <code class="language-plaintext highlighter-rouge">migrateSchema</code>
+to update older data. The migration is conservative: it reads the raw JSON saved
+under <code class="language-plaintext highlighter-rouge">stageResults</code>, adds missing fields with sensible defaults, writes back
+the JSON, and updates the <code class="language-plaintext highlighter-rouge">dataSchemaVersion</code> key.</p>
+
+<p>See <code class="language-plaintext highlighter-rouge">lib/services/persistence_service.dart</code> for the exact migration logic and
+<code class="language-plaintext highlighter-rouge">test/migration_v2_default_fields_test.dart</code> for an automated test that
+verifies behavior.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/migration-notes-v2.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

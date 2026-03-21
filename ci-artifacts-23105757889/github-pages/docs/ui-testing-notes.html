@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>UI testing notes and layout rationale | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="UI testing notes and layout rationale" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/ui-testing-notes.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/ui-testing-notes.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="UI testing notes and layout rationale" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"UI testing notes and layout rationale","url":"https://hfcs.github.io/simple_match/docs/ui-testing-notes.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="ui-testing-notes-and-layout-rationale">UI testing notes and layout rationale</h1>
+
+<p>This short note explains a small layout decision made in <code class="language-plaintext highlighter-rouge">lib/views/stage_input_view.dart</code>
+to improve widget-test stability across different screen sizes.</p>
+
+<h2 id="why-this-exists">Why this exists</h2>
+
+<p>Widget tests run in a headless environment and can be sensitive to layouts that
+force important interactive controls off-screen (for example: a very large
+ConstrainedBox or a tall minHeight). During development we observed hit-test
+failures and <code class="language-plaintext highlighter-rouge">Bad state: No element</code> errors when tests attempted to tap the
+Submit button or radio tiles because those controls were pushed out of the
+visible/testable area.</p>
+
+<h2 id="what-we-changed">What we changed</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">StageInput</code> view uses a responsive <code class="language-plaintext highlighter-rouge">LayoutBuilder</code> and <code class="language-plaintext highlighter-rouge">ConstrainedBox</code>
+to size the main content area.</li>
+  <li>To avoid the off-screen/tappable-widget problem, we cap the min-height used
+by the layout on very large screens. The cap is intentionally conservative
+(800 logical pixels) to keep controls visible in the test harness while
+still providing a pleasant layout on mobile and tablet devices.</li>
+</ul>
+
+<h2 id="notes-for-future-maintainers">Notes for future maintainers</h2>
+
+<ul>
+  <li>If you change the layout significantly (add large header images, add new
+stacked content, or make the view much taller), update this note and run the
+full test suite. If tests complain about hit-testing or tappable widgets,
+consider moving key actions (submit, validation controls) out of scrollable
+regions or increasing the cap slightly.</li>
+  <li>This change is intentionally low-risk and avoids hard-coding a single
+breakpoint for all platforms. The cap exists purely to make automated tests
+reliable; on real devices the view remains responsive and scrollable.</li>
+</ul>
+
+<p>See also: <code class="language-plaintext highlighter-rouge">docs/data_schema_versioning.md</code> and <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> for
+information about persisted data migration.</p>
+
+<p>Generated: minor note to justify a responsive minHeight cap used for test
+stability and to guide future layout changes.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/ui-testing-notes.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

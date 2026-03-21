@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>simple_match | A simple IPSC match scoring app, an exercise building app using GenAI</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="simple_match" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/data_schema_history.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/data_schema_history.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="simple_match" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"simple_match","url":"https://hfcs.github.io/simple_match/data_schema_history.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Data Schema History</span>
+<span class="gt">
+&gt; **Last updated:** 2026-02-19</span>
+
+<span class="gu">## Version History</span>
+<span class="p">
+-</span> <span class="gs">**v1 (Initial Release):**</span>
+<span class="p">  -</span> Initial schema for stages, shooters, and stage results.
+<span class="p">  -</span> All persisted data is versioned and migration-ready.
+<span class="p">  -</span> No breaking changes or migrations have occurred as of this date.
+<span class="p">
+-</span> <span class="gs">**v3 (2026-01-09):**</span>
+<span class="p">  -</span> Added <span class="sb">`classificationScore`</span> (percentage 0-100) to <span class="sb">`Shooter`</span> model. Default value for existing shooters is <span class="sb">`100.0`</span>.
+<span class="p">  -</span> Migration implemented to populate <span class="sb">`classificationScore`</span> with <span class="sb">`100.0`</span> for persisted shooters missing the field.
+<span class="p">  -</span> Updated persistence and export/import to include <span class="sb">`classificationScore`</span> on shooter objects.
+<span class="p">
+-</span> <span class="gs">**v4 (2026-02-19):**</span>
+<span class="p">  -</span> Added per-record audit timestamps: <span class="sb">`createdAt`</span> and <span class="sb">`updatedAt`</span> (ISO8601 UTC) to the following models: <span class="sb">`MatchStage`</span>, <span class="sb">`Shooter`</span>, <span class="sb">`StageResult`</span>, <span class="sb">`TeamGame`</span>.
+<span class="p">  -</span> Migration/backfill: existing persisted records missing audit fields are backfilled using the system UTC now (<span class="sb">`DateTime.now().toUtc().toIso8601String()`</span>). When <span class="sb">`createdAt`</span> is missing, it is set equal to the backfilled <span class="sb">`updatedAt`</span> value.
+<span class="p">  -</span> Repository change: <span class="sb">`MatchRepository`</span> now centralizes stamping <span class="sb">`updatedAt`</span> on updates before persisting.
+<span class="p">  -</span> Tests: added migration/backfill integration tests and updated widget/unit tests to seed <span class="sb">`MatchRepository`</span> deterministically and use <span class="sb">`ChangeNotifierProvider`</span> where appropriate.
+
+<span class="gu">## Notes</span>
+<span class="p">-</span> All schema changes must be documented here with version, date, and migration details.
+<span class="p">-</span> If you change any persisted data structure, increment the schema version and update this file.
+
+</code></pre></div></div>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/data_schema_history.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

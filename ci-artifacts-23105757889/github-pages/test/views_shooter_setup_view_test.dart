@@ -1,0 +1,88 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+import 'package:simple_match/views/shooter_setup_view.dart';
+
+import 'package:provider/provider.dart';
+import 'package:simple_match/repository/match_repository.dart';
+import 'widgets/test_helpers/fake_repo_and_persistence.dart';
+import 'package:simple_match/viewmodel/shooter_setup_viewmodel.dart';
+
+Widget _wrapWithProviders(Widget child) {
+  return ChangeNotifierProvider<MatchRepository>(
+    create: (_) => MatchRepository(persistence: FakePersistence()),
+    child: Provider<ShooterSetupViewModel>(
+      create: (context) => ShooterSetupViewModel(
+        Provider.of<MatchRepository>(context, listen: false),
+      ),
+      child: MaterialApp(home: child),
+    ),
+  );
+}
+
+void main() {
+  testWidgets('ShooterSetupView renders title', (WidgetTester tester) async {
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.pumpAndSettle();
+    expect(find.text('Shooter Setup'), findsOneWidget);
+  });
+
+  testWidgets('Can add a shooter', (tester) async {
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.enterText(find.byKey(const Key('nameField')), 'Alice');
+    await tester.enterText(find.byKey(const Key('scaleField')), '0.95');
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pumpAndSettle();
+    expect(find.text('Alice'), findsOneWidget);
+    expect(find.byKey(const Key('scaleValue-Alice')), findsOneWidget);
+  });
+
+  testWidgets('Cannot add duplicate shooter', (tester) async {
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
+    await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const Key('nameField')), 'Bob');
+    await tester.enterText(find.byKey(const Key('scaleField')), '0.9');
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('already exists'), findsOneWidget);
+  });
+
+  testWidgets('Can edit shooter scale', (tester) async {
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.enterText(find.byKey(const Key('nameField')), 'Charlie');
+    await tester.enterText(find.byKey(const Key('scaleField')), '1.0');
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('editShooter-Charlie')));
+    await tester.pump();
+    await tester.enterText(find.byKey(const Key('scaleField')), '0.8');
+    await tester.tap(find.byKey(const Key('confirmEditButton')));
+    await tester.pump();
+    expect(find.byKey(const Key('scaleValue-Charlie')), findsOneWidget);
+  });
+
+  testWidgets('Can remove shooter', (tester) async {
+    await tester.pumpWidget(_wrapWithProviders(const ShooterSetupView()));
+    await tester.enterText(find.byKey(const Key('nameField')), 'Dana');
+    await tester.enterText(find.byKey(const Key('scaleField')), '0.7');
+    await tester.tap(find.byKey(const Key('addShooterButton')));
+    await tester.pump();
+    await tester.tap(find.byKey(const Key('removeShooter-Dana')));
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.tap(find.text('Remove'));
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('Dana'), findsNothing);
+  });
+
+  testWidgets('Shows validation error for invalid scale', (tester) async {
+    // Validate via ViewModel directly to avoid fragile widget-level timing issues.
+    final repo = MatchRepository();
+    final vm = ShooterSetupViewModel(repo);
+    final tooLow = vm.addShooter('Eve', 0.05);
+    expect(tooLow, contains('Invalid scale'));
+    final tooHigh = vm.addShooter('Eve', 25.0);
+    expect(tooHigh, contains('Invalid scale'));
+  });
+}

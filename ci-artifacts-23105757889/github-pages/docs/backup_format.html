@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Backup format (MVP) | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Backup format (MVP)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/backup_format.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/backup_format.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Backup format (MVP)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Backup format (MVP)","url":"https://hfcs.github.io/simple_match/docs/backup_format.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="backup-format-mvp">Backup format (MVP)</h1>
+
+<p>This document describes the minimal JSON backup format produced/consumed by the app’s persistence service (MVP).</p>
+
+<p>Top-level object keys:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">metadata</code> — object with:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">schemaVersion</code> (int) — data schema version recorded in SharedPreferences at export time</li>
+      <li><code class="language-plaintext highlighter-rouge">exportedAt</code> (string, ISO-8601) — UTC timestamp when export was created</li>
+      <li><code class="language-plaintext highlighter-rouge">appVersion</code> (string) — optional, may be <code class="language-plaintext highlighter-rouge">'unknown'</code> in MVP</li>
+      <li><code class="language-plaintext highlighter-rouge">platform</code> (string) — platform where export occurred (e.g., <code class="language-plaintext highlighter-rouge">macos</code>, <code class="language-plaintext highlighter-rouge">linux</code>, <code class="language-plaintext highlighter-rouge">android</code>)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">stages</code> — array of stage objects. Each stage object has keys matching the <code class="language-plaintext highlighter-rouge">MatchStage</code> model:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">stage</code> (int)</li>
+      <li><code class="language-plaintext highlighter-rouge">scoringShoots</code> (int)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">shooters</code> — array of shooter objects. Each shooter object has keys matching the <code class="language-plaintext highlighter-rouge">Shooter</code> model:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">name</code> (string)</li>
+      <li><code class="language-plaintext highlighter-rouge">scaleFactor</code> (number)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">stageResults</code> — array of stage result objects. Each object includes the <code class="language-plaintext highlighter-rouge">StageResult</code> fields used by the app:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">stage</code> (int)</li>
+      <li><code class="language-plaintext highlighter-rouge">shooter</code> (string)</li>
+      <li><code class="language-plaintext highlighter-rouge">time</code> (number)</li>
+      <li><code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">c</code>, <code class="language-plaintext highlighter-rouge">d</code>, <code class="language-plaintext highlighter-rouge">misses</code>, <code class="language-plaintext highlighter-rouge">noShoots</code>, <code class="language-plaintext highlighter-rouge">procedureErrors</code> (ints)</li>
+      <li><code class="language-plaintext highlighter-rouge">status</code> (string) — one of <code class="language-plaintext highlighter-rouge">"Completed"</code>, <code class="language-plaintext highlighter-rouge">"DNF"</code>, <code class="language-plaintext highlighter-rouge">"DQ"</code></li>
+      <li><code class="language-plaintext highlighter-rouge">roRemark</code> (string) — referee remark; required (can be empty string)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Notes and behavior</p>
+<ul>
+  <li>The import routine performs a basic validation:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">stages</code>, <code class="language-plaintext highlighter-rouge">shooters</code>, and <code class="language-plaintext highlighter-rouge">stageResults</code> must exist and be arrays.</li>
+      <li>Individual objects are converted with <code class="language-plaintext highlighter-rouge">Map&lt;String, dynamic&gt;.from(...)</code> during import.</li>
+    </ul>
+  </li>
+  <li>The import function supports a <code class="language-plaintext highlighter-rouge">dryRun</code> mode which validates and returns counts without persisting.</li>
+  <li>The import function saves a <code class="language-plaintext highlighter-rouge">backup_before_restore</code> snapshot in SharedPreferences (MVP) when <code class="language-plaintext highlighter-rouge">backupBeforeRestore</code> is true.</li>
+  <li>Export is plain JSON, written atomically via a temporary file and rename.</li>
+</ul>
+
+<p>Security</p>
+<ul>
+  <li>Backups are not encrypted by the MVP; sensitive users should keep backups in secure storage.</li>
+</ul>
+
+<p>Compatibility and migration</p>
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">metadata.schemaVersion</code> indicates the data schema version at export time. On import, persisted data is saved using the app’s existing persistence APIs which will run migration logic on app startup or on next load.</li>
+</ul>
+
+<p>“MVP” limitation</p>
+<ul>
+  <li>No compression, encryption, or large-file streaming is implemented in the MVP. The UI uses the device’s application documents directory for saving and listing backups.</li>
+</ul>
+
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/backup_format.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

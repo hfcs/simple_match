@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Data Schema History | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Data Schema History" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/data_schema_history.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/data_schema_history.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Schema History" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Data Schema History","url":"https://hfcs.github.io/simple_match/docs/data_schema_history.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="data-schema-history">Data Schema History</h1>
+
+<h2 id="v2-2025-10-07">v2 (2025-10-07)</h2>
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">status</code> field to <code class="language-plaintext highlighter-rouge">StageResult</code> model to track completion status (Completed, DNF, DQ).</li>
+  <li>Migration: Default all existing records to “Completed”.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">roRemark</code> field to <code class="language-plaintext highlighter-rouge">StageResult</code> to store a referee/RO remark (string).</li>
+  <li>Migration: Ensure <code class="language-plaintext highlighter-rouge">roRemark</code> exists on migrated records and default to an empty string.</li>
+</ul>
+
+<h2 id="v1-initial-release">v1 (Initial Release)</h2>
+<ul>
+  <li>Initial schema for stages, shooters, and stage results.</li>
+  <li>No migrations have occurred as of this date.</li>
+</ul>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/data_schema_history.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

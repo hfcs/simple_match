@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>IPSC Match Management App | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="IPSC Match Management App" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="IPSC Match Management App" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"IPSC Match Management App","name":"simple_match","url":"https://hfcs.github.io/simple_match/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      
+<h1 id="ipsc-match-management-app">IPSC Match Management App</h1>
+
+<p>A robust, test-driven Flutter MVVM application for managing IPSC match stages, shooters, and scoring with scale factors. Modern UI, persistent storage, Unicode PDF export, and advanced test coverage.</p>
+
+<h2 id="purpose">Purpose</h2>
+
+<ul>
+  <li><strong>What:</strong> A cross-platform (mobile &amp; desktop) Flutter app to run IPSC-style matches — configure stages, manage shooters, record stage input, and produce ranked results.</li>
+  <li><strong>Who:</strong> Range officers, match directors, and competitors who need a compact, mobile-first scoring tool that preserves data locally and exports official-looking PDFs.</li>
+  <li><strong>Why:</strong> Provides a fast, validated, and auditable workflow for score capture and result calculation with backward-compatible persistence and reproducible tests.</li>
+  <li><strong>Core guarantees:</strong> mobile-optimized input, versioned persistence with migrations, Unicode PDF export using a bundled font, and test-driven development supported by CI.</li>
+</ul>
+
+<h2 id="features">Features</h2>
+<ul>
+  <li><strong>Match Setup:</strong> Configure stages (1-30) and scoring shoots (1-32)</li>
+  <li><strong>Shooter Management:</strong> Add shooters with unique names and scale factors (0.100–20.000)</li>
+  <li><strong>Stage Input:</strong> Record scores with mobile-friendly numeric input, validation, and error feedback
+    <ul>
+      <li>New: results can be marked with a Status (“Completed”, “DNF”, “DQ”). When a result is not “Completed” numeric inputs are disabled and submitted values are zeroed by the ViewModel. An RO remark field is available for match officials to record notes.</li>
+    </ul>
+  </li>
+  <li><strong>Results:</strong> Calculate and display hit factors, adjusted hit factors, and rank shooters</li>
+  <li><strong>Stage Result Table:</strong>
+    <ul>
+      <li>Rotated (vertical) header labels for all columns to maximize mobile readability</li>
+      <li>Fixed column widths (in characters): Name: 10, Raw HF: 5, Scaled HF: 5, Time: 5, A: 2, C: 2, D: 2, Misses: 2, No Shoots: 2, Procedure Errors: 2</li>
+      <li>Vertical rules (dividers) between columns for improved alignment and readability on mobile</li>
+    </ul>
+  </li>
+  <li><strong>Export:</strong> Export all stage results to PDF (Unicode support, including Traditional Chinese; uses bundled font for cross-platform reliability)</li>
+  <li><strong>Persistence:</strong> All data is auto-saved and restored using SharedPreferences
+    <ul>
+      <li>Note: The persisted schema was recently extended (schema v2) to include <code class="language-plaintext highlighter-rouge">status</code> and <code class="language-plaintext highlighter-rouge">roRemark</code> on <code class="language-plaintext highlighter-rouge">StageResult</code>. <code class="language-plaintext highlighter-rouge">PersistenceService</code> implements a migration path that upgrades older data to the new schema on app startup.</li>
+    </ul>
+  </li>
+  <li><strong>Clear All Data:</strong> One-tap clear with confirmation</li>
+  <li><strong>Modern UI:</strong> Card-based, mobile-optimized, visually appealing</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<ul>
+  <li><strong>MVVM Pattern:</strong>
+    <ul>
+      <li>Views: UI only (<code class="language-plaintext highlighter-rouge">lib/views/</code>)</li>
+      <li>ViewModels: Business logic (<code class="language-plaintext highlighter-rouge">lib/viewmodel/</code>)</li>
+      <li>Models: Data structures (<code class="language-plaintext highlighter-rouge">lib/models/</code>)</li>
+      <li>Services: Persistence (<code class="language-plaintext highlighter-rouge">lib/services/</code>)</li>
+    </ul>
+  </li>
+  <li><strong>State Management:</strong> Provider</li>
+  <li><strong>Persistence:</strong>
+    <ul>
+      <li>Uses <code class="language-plaintext highlighter-rouge">shared_preferences</code> for local storage</li>
+      <li><strong>Data schema is versioned and backward compatible</strong>
+        <ul>
+          <li>Schema version stored as <code class="language-plaintext highlighter-rouge">dataSchemaVersion</code> in SharedPreferences</li>
+          <li>Any schema change requires version bump, migration logic, and integration test</li>
+          <li>See <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> and <code class="language-plaintext highlighter-rouge">docs/data_schema_versioning.md</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="developer-workflow">Developer Workflow</h2>
+<ul>
+  <li><strong>Run app:</strong> <code class="language-plaintext highlighter-rouge">flutter run</code></li>
+  <li><strong>Add dependency:</strong> <code class="language-plaintext highlighter-rouge">flutter pub add &lt;package&gt;</code></li>
+  <li><strong>Test:</strong> <code class="language-plaintext highlighter-rouge">flutter test</code>
+    <ul>
+      <li>New/Updated tests: migration tests (schema v2), widget tests for DNF/DQ + RO remark behavior, and additional stability improvements to StageInput widget tests.</li>
+      <li>Note: Shooter <code class="language-plaintext highlighter-rouge">scaleFactor</code> validation now accepts values in the range 0.100–20.000. Validation is enforced in <code class="language-plaintext highlighter-rouge">lib/viewmodel/shooter_setup_viewmodel.dart</code> and reflected in <code class="language-plaintext highlighter-rouge">lib/views/shooter_setup_view.dart</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Hot Reload:</strong> Supported</li>
+  <li><strong>Schema changes:</strong>
+    <ul>
+      <li>Increment schema version in <code class="language-plaintext highlighter-rouge">PersistenceService</code> for breaking changes</li>
+      <li>Add migration logic and integration tests</li>
+      <li>Update <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> and <code class="language-plaintext highlighter-rouge">docs/data_schema_versioning.md</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="testing">Testing</h2>
+<ul>
+  <li>All features are covered by widget and logic tests (test-driven development)
+    <ul>
+      <li>Migration logic is covered by integration tests simulating older schema data being loaded and verified.</li>
+    </ul>
+  </li>
+  <li>Stage Result table tests verify:
+    <ul>
+      <li>All columns and headers are present and rotated</li>
+      <li>All columns are visible and correct on mobile-sized screens</li>
+      <li>Vertical rules are present between columns in both header and data rows</li>
+    </ul>
+  </li>
+  <li>Migration logic is covered by integration tests in <code class="language-plaintext highlighter-rouge">test/persistence_test.dart</code></li>
+</ul>
+
+<h2 id="test-coverage">Test Coverage</h2>
+<ul>
+  <li>All core features are covered by unit, widget, and integration tests in <code class="language-plaintext highlighter-rouge">test/</code></li>
+  <li>ViewModel logic is tested (e.g., <code class="language-plaintext highlighter-rouge">test/viewmodel_main_menu_test.dart</code>, <code class="language-plaintext highlighter-rouge">test/viewmodel_match_setup_test.dart</code>)</li>
+  <li>Persistence logic is tested (e.g., <code class="language-plaintext highlighter-rouge">test/services_test.dart</code>)</li>
+  <li>Widget navigation and UI are tested (e.g., <code class="language-plaintext highlighter-rouge">test/widget_test.dart</code>)</li>
+  <li>PDF export is tested for Unicode (Traditional Chinese) using <code class="language-plaintext highlighter-rouge">pdftotext</code> for robust extraction</li>
+  <li>All TODOs for tests have been implemented and committed</li>
+</ul>
+
+<h2 id="how-to-run-all-tests">How to Run All Tests</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter <span class="nb">test</span> <span class="nt">--coverage</span>
+</code></pre></div></div>
+
+<h2 id="continuous-integration-ci">Continuous Integration (CI)</h2>
+
+<ul>
+  <li>The repository uses a parallel test controller to run long-running test workflows in parallel. The controller dispatches and polls these reusable workflows:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">flutter-tests.yml</code> — unit tests (Flutter)</li>
+      <li><code class="language-plaintext highlighter-rouge">integration-tests.yml</code> — integration tests</li>
+      <li><code class="language-plaintext highlighter-rouge">coverage.yml</code> and <code class="language-plaintext highlighter-rouge">coverage-web.yml</code> — coverage collection (VM + Chrome)</li>
+      <li><code class="language-plaintext highlighter-rouge">check-settings-view-coverage.yml</code> — focused coverage check for <code class="language-plaintext highlighter-rouge">settings_view.dart</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>The controller is implemented at <code class="language-plaintext highlighter-rouge">.github/scripts/dispatch_and_poll.sh</code> and is invoked by the top-level <code class="language-plaintext highlighter-rouge">merge-gate.yml</code> workflow. It uses <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code> (same-repo) to dispatch workflows and poll runs. For cross-repo dispatch or broader permissions use a PAT with <code class="language-plaintext highlighter-rouge">repo</code> scope stored in a secret and referenced instead of <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code>.</p>
+  </li>
+  <li>To run the controller locally (requires a token):</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">GITHUB_TOKEN</span><span class="o">=</span>&lt;token&gt;
+./.github/scripts/dispatch_and_poll.sh &lt;owner&gt; &lt;repo&gt; &lt;ref&gt; flutter-tests.yml integration-tests.yml coverage.yml coverage-web.yml check-settings-view-coverage.yml
+</code></pre></div></div>
+
+<h2 id="web--vm-coverage-merged-html">Web + VM Coverage (merged HTML)</h2>
+
+<p>To collect merged VM+Chrome coverage and generate an HTML report locally run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x ./scripts/collect_coverage.sh
+./scripts/collect_coverage.sh
+</code></pre></div></div>
+
+<p>Notes:</p>
+<ul>
+  <li>The script tries <code class="language-plaintext highlighter-rouge">flutter test -d chrome --coverage</code> first (some Flutter versions write lcov that way).</li>
+  <li>If that fails it falls back to <code class="language-plaintext highlighter-rouge">--platform chrome</code> and finally attempts a VM-service based collection (requires <code class="language-plaintext highlighter-rouge">dart</code> and <code class="language-plaintext highlighter-rouge">dart pub global activate coverage</code>).</li>
+  <li>On CI, ensure Chrome is installed and <code class="language-plaintext highlighter-rouge">CHROME_EXECUTABLE</code> is set or Chrome is on PATH.</li>
+</ul>
+
+<p>Recent CI notes</p>
+<ul>
+  <li>The GitHub workflows were hardened after CI troubleshooting: the Flutter installer action is invoked with <code class="language-plaintext highlighter-rouge">channel: 'stable'</code>, the job now prints <code class="language-plaintext highlighter-rouge">flutter --version</code> to logs for easier debugging, and <code class="language-plaintext highlighter-rouge">actions/cache</code> is used to cache <code class="language-plaintext highlighter-rouge">~/.pub-cache</code>. An earlier <code class="language-plaintext highlighter-rouge">npm ci</code> step that caused failures was removed.</li>
+</ul>
+
+<h3 id="pdf-export-test-requirements">PDF Export Test Requirements</h3>
+<ul>
+  <li>The PDF export test requires <code class="language-plaintext highlighter-rouge">pdftotext</code> (from poppler-utils) to be installed for Unicode extraction verification.</li>
+  <li>On macOS: <code class="language-plaintext highlighter-rouge">brew install poppler</code></li>
+</ul>
+
+<h2 id="contributing">Contributing</h2>
+<ul>
+  <li>Follow MVVM and Provider patterns</li>
+  <li>Write or update tests for all new features and bug fixes</li>
+  <li>Keep the codebase warning- and lint-free (<code class="language-plaintext highlighter-rouge">flutter analyze</code>)</li>
+  <li>Document all schema changes and migrations</li>
+</ul>
+
+<h2 id="documentation">Documentation</h2>
+<ul>
+  <li>Data schema history: <code class="language-plaintext highlighter-rouge">data_schema_history.md</code></li>
+  <li>Schema versioning and migration: <code class="language-plaintext highlighter-rouge">docs/data_schema_versioning.md</code></li>
+  <li>Developer/contributor instructions: <code class="language-plaintext highlighter-rouge">.github/copilot-instructions.md</code></li>
+  <li>Unicode PDF export and font bundling: see <code class="language-plaintext highlighter-rouge">.github/copilot-instructions.md</code></li>
+</ul>
+
+<h2 id="recent-schema-update-v4">Recent Schema Update (v4)</h2>
+
+<ul>
+  <li>The persisted data schema was bumped to <strong>v4</strong> (2026-02-19): per-record audit timestamps <code class="language-plaintext highlighter-rouge">createdAt</code> and <code class="language-plaintext highlighter-rouge">updatedAt</code> (ISO8601 UTC) were added to <code class="language-plaintext highlighter-rouge">MatchStage</code>, <code class="language-plaintext highlighter-rouge">Shooter</code>, <code class="language-plaintext highlighter-rouge">StageResult</code>, and <code class="language-plaintext highlighter-rouge">TeamGame</code>.</li>
+  <li>Migration/backfill is performed on app startup by <code class="language-plaintext highlighter-rouge">PersistenceService</code>; missing timestamps are backfilled using the system UTC now. See <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> for the changelog and <code class="language-plaintext highlighter-rouge">docs/data_schema_versioning.md</code> for migration guidance.</li>
+</ul>
+
+<h2 id="release-tooling">Release tooling</h2>
+
+<ul>
+  <li>A helper script to recreate the GitHub release/tag <code class="language-plaintext highlighter-rouge">v2026-02-19</code> is available at <code class="language-plaintext highlighter-rouge">.github/scripts/recreate_release.py</code>. It deletes any existing release with that tag and recreates it to point at <code class="language-plaintext highlighter-rouge">main</code> (requires <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code> with repo access). Use with caution — this modifies releases and git refs.</li>
+</ul>
+
+<h2 id="ci--merge-gate-notes">CI &amp; Merge-Gate notes</h2>
+
+<ul>
+  <li>The repository uses a merge-gate controller <code class="language-plaintext highlighter-rouge">merge-gate.yml</code> that runs on pushes to <code class="language-plaintext highlighter-rouge">main</code>. It validates reusable workflows and dispatches parallel test workflows using <code class="language-plaintext highlighter-rouge">.github/scripts/dispatch_and_poll.sh</code>.</li>
+  <li>Reusable workflows must declare <code class="language-plaintext highlighter-rouge">workflow_call</code> and (when dispatched by the merge-gate) accept an optional <code class="language-plaintext highlighter-rouge">workflow_dispatch</code> input named <code class="language-plaintext highlighter-rouge">merge_run</code> so the controller can dispatch them via the API. See <code class="language-plaintext highlighter-rouge">.github/workflows/*.yml</code> for examples.</li>
+</ul>
+
+<h2 id="analyzer-regression-test">Analyzer Regression Test</h2>
+
+<ul>
+  <li>To prevent analyzer regressions from reaching CI we added <code class="language-plaintext highlighter-rouge">test/analyzer_regression_test.dart</code>. This test runs <code class="language-plaintext highlighter-rouge">flutter analyze</code> and fails if the analyzer reports issues — run <code class="language-plaintext highlighter-rouge">flutter test</code> locally to run it.</li>
+  <li>Before pushing, run:</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter analyze
+flutter <span class="nb">test</span>
+</code></pre></div></div>
+
+<p>The CI runs <code class="language-plaintext highlighter-rouge">flutter analyze</code> as part of the <code class="language-plaintext highlighter-rouge">flutter-tests.yml</code> workflow; the merge-gate will fail dispatch if the workflows are not callable or mismatch expected inputs.</p>
+
+<h2 id="getting-started-flutter">Getting Started (Flutter)</h2>
+<ul>
+  <li><a href="https://docs.flutter.dev/get-started/codelab">Flutter: Get Started</a></li>
+  <li><a href="https://docs.flutter.dev/cookbook">Flutter Cookbook</a></li>
+  <li><a href="https://docs.flutter.dev/">Flutter Docs</a></li>
+</ul>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/README.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

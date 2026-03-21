@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Requirements for Stage Result Table (Mobile-Friendly) | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Requirements for Stage Result Table (Mobile-Friendly)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/requirement.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/requirement.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Requirements for Stage Result Table (Mobile-Friendly)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Requirements for Stage Result Table (Mobile-Friendly)","url":"https://hfcs.github.io/simple_match/requirement.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      
+<h1 id="requirements-for-stage-result-table-mobile-friendly">Requirements for Stage Result Table (Mobile-Friendly)</h1>
+
+<h2 id="feature-mobile-optimized-table-with-rotated-headers-and-vertical-rules">Feature: Mobile-Optimized Table with Rotated Headers and Vertical Rules</h2>
+<ul>
+  <li>The Stage Result view must display a detailed table with columns:
+    <ul>
+      <li>Name</li>
+      <li>Raw Hit Factor</li>
+      <li>Scaled Hit Factor</li>
+      <li>Time</li>
+      <li>A</li>
+      <li>C</li>
+      <li>D</li>
+      <li>Misses</li>
+      <li>No Shoots</li>
+      <li>Procedure Errors</li>
+    </ul>
+  </li>
+  <li>Table header titles must be rotated 90 degrees (vertical) to maximize horizontal space and improve readability on mobile devices.</li>
+  <li>Each column (except the last) must have a visible vertical rule (divider) between columns to help users align data to headers.</li>
+  <li>Table must remain visually clear, modern, and mobile-optimized.</li>
+  <li>All columns must remain visible and readable on small screens.</li>
+  <li>Sorting: Table rows are sorted by scaled hit factor (descending).</li>
+</ul>
+
+<h2 id="test-coverage">Test Coverage</h2>
+<ul>
+  <li>Widget test must verify:
+    <ul>
+      <li>All headers are present and rotated</li>
+      <li>All columns are visible and correct on mobile-sized screens</li>
+      <li>Vertical rules are present between columns in both header and data rows</li>
+    </ul>
+  </li>
+  <li>PDF export must be tested for Unicode (Traditional Chinese) support using <code class="language-plaintext highlighter-rouge">pdftotext</code> for robust extraction</li>
+</ul>
+
+<h2 id="uiux">UI/UX</h2>
+<ul>
+  <li>Use Flutter’s <code class="language-plaintext highlighter-rouge">RotatedBox</code> or equivalent for header rotation.</li>
+  <li>Use a <code class="language-plaintext highlighter-rouge">Container</code> or similar for vertical rules between columns.</li>
+  <li>Maintain card-based, modern UI style.</li>
+  <li>Ensure accessibility and legibility of rotated headers and vertical rules.</li>
+</ul>
+
+<h1 id="result-display-rules-added">Result display rules (added)</h1>
+<ul>
+  <li>If a StageResult is marked DNF or DQ, the Stage Result table and Stage Input results list must display the status (DNF/DQ) instead of the numeric breakdown (Time, A/C/D, Misses, No Shoots, Procedure Errors).</li>
+  <li>The RO remark (if present) must always be shown alongside the status or numeric breakdown.</li>
+  <li>These display rules must be covered by widget tests.</li>
+</ul>
+
+<h2 id="documentation">Documentation</h2>
+<ul>
+  <li>This requirement supersedes any previous table header layout for the Stage Result view.</li>
+  <li>All documentation and instructions must reflect this mobile-friendly, rotated-header, vertical-rule design.</li>
+</ul>
+
+<h2 id="notes-for-tests-and-ai-agents">Notes for tests and AI agents</h2>
+<ul>
+  <li>The project provides deterministic testing overrides on <code class="language-plaintext highlighter-rouge">SettingsView</code> to make import/export UI behavior testable without platform plugins:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pickBackupOverride</code>: a callback returning a <code class="language-plaintext highlighter-rouge">Map</code> with keys <code class="language-plaintext highlighter-rouge">bytes</code> (Uint8List), <code class="language-plaintext highlighter-rouge">name</code> (String), and optionally <code class="language-plaintext highlighter-rouge">autoConfirm</code> (bool) to skip the confirmation dialog in tests.</li>
+      <li><code class="language-plaintext highlighter-rouge">listBackupsOverride</code>: a callback returning a <code class="language-plaintext highlighter-rouge">List</code> of objects that expose a <code class="language-plaintext highlighter-rouge">.path</code> string (e.g., <code class="language-plaintext highlighter-rouge">File</code>) to simulate documents directory listings.</li>
+      <li><code class="language-plaintext highlighter-rouge">readFileBytesOverride</code>: a callback accepting a path and returning <code class="language-plaintext highlighter-rouge">Uint8List</code> to simulate file reads.</li>
+    </ul>
+  </li>
+  <li>LLM-generated tests should prefer these overrides to make widget tests deterministic and CI-friendly. Avoid relying on platform method-channel mocks or running tests on the web platform unless specifically testing web-only behavior.</li>
+</ul>
+
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/requirement.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Self-hosted runner setup for core dumps and Flutter | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Self-hosted runner setup for core dumps and Flutter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/self_hosted_runner_setup.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/self_hosted_runner_setup.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Self-hosted runner setup for core dumps and Flutter" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Self-hosted runner setup for core dumps and Flutter","url":"https://hfcs.github.io/simple_match/docs/self_hosted_runner_setup.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="self-hosted-runner-setup-for-core-dumps-and-flutter">Self-hosted runner setup for core dumps and Flutter</h1>
+
+<p>This document describes how to prepare a Linux self-hosted runner to execute the <code class="language-plaintext highlighter-rouge">gdb-capture-self-hosted</code> workflow in this repository. The workflow assumes the runner has Flutter installed and is configured to produce core dumps (ulimit/core_pattern).</p>
+
+<p>Prerequisites</p>
+<ul>
+  <li>A Linux VM or host (Ubuntu 22.04/24.04 recommended).</li>
+  <li>Root or sudo access to configure kernel settings and systemd service settings.</li>
+</ul>
+
+<p>Steps</p>
+
+<ol>
+  <li>Install and register a GitHub Actions self-hosted runner</li>
+</ol>
+
+<ul>
+  <li>Follow GitHub docs to create and register a runner for your repository/org:
+    <ul>
+      <li>https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners</li>
+    </ul>
+  </li>
+</ul>
+
+<ol>
+  <li>Install Flutter for the runner user</li>
+</ol>
+
+<ul>
+  <li>Install Flutter (stable) and add it to PATH for the <code class="language-plaintext highlighter-rouge">runner</code> user or the account the actions runner uses.
+    <ul>
+      <li>Example (for <code class="language-plaintext highlighter-rouge">runner</code> user):</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> runner <span class="nt">-i</span> bash <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">B</span><span class="sh">'
+git clone https://github.com/flutter/flutter.git /home/runner/flutter
+echo 'export PATH="</span><span class="nv">$PATH</span><span class="sh">:/home/runner/flutter/bin"' &gt;&gt; /home/runner/.profile
+source /home/runner/.profile
+flutter --version
+</span><span class="no">B
+</span></code></pre></div></div>
+
+<ol>
+  <li>Configure core dump generation</li>
+</ol>
+
+<ul>
+  <li>Enable core dumps and set a useful core_pattern. As root:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># set core pattern (example: core.&lt;exe&gt;.&lt;pid&gt;.&lt;time&gt;)</span>
+<span class="nb">sudo </span>sysctl <span class="nt">-w</span> kernel.core_pattern<span class="o">=</span><span class="s1">'core.%e.%p.%t'</span>
+
+<span class="c"># make persistent across reboots (add to /etc/sysctl.d/99-core.conf)</span>
+<span class="nb">echo</span> <span class="s2">"kernel.core_pattern=core.%e.%p.%t"</span> | <span class="nb">sudo tee</span> /etc/sysctl.d/99-core.conf
+
+<span class="c"># Allow unlimited core size for the runner user. If the runner is managed by systemd, create a drop-in</span>
+<span class="nb">sudo mkdir</span> <span class="nt">-p</span> /etc/systemd/system/actions.runner.&lt;your_repo&gt;_service.service.d <span class="o">||</span> <span class="nb">true
+cat</span> <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">EOF</span><span class="sh">' | sudo tee /etc/systemd/system/actions.runner.service.d/limits.conf
+[Service]
+LimitCORE=infinity
+</span><span class="no">EOF
+
+</span><span class="c"># Or add to /etc/security/limits.d/99-runner-limits.conf for PAM sessions:</span>
+<span class="nb">echo</span> <span class="s2">"runner soft core unlimited"</span> | <span class="nb">sudo tee</span> /etc/security/limits.d/99-runner-limits.conf
+<span class="nb">echo</span> <span class="s2">"runner hard core unlimited"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/security/limits.d/99-runner-limits.conf
+
+<span class="nb">sudo </span>systemctl daemon-reload
+<span class="nb">sudo </span>systemctl restart actions.runner.<span class="k">*</span> <span class="o">||</span> <span class="nb">true</span>
+</code></pre></div></div>
+
+<p>Notes:</p>
+<ul>
+  <li>If your runner service runs as a specific user, ensure the <code class="language-plaintext highlighter-rouge">limits.conf</code> entries are for that user.</li>
+  <li><code class="language-plaintext highlighter-rouge">LimitCORE=infinity</code> is a systemd setting applied to the runner service unit; use a drop-in file to set it for the runner service.</li>
+</ul>
+
+<ol>
+  <li>Verify settings on the runner</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># On the runner host</span>
+<span class="nb">ulimit</span> <span class="nt">-c</span>
+sysctl kernel.core_pattern
+which flutter
+flutter <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ulimit -c</code> should print <code class="language-plaintext highlighter-rouge">unlimited</code> (or a large value) and <code class="language-plaintext highlighter-rouge">kernel.core_pattern</code> should show the pattern you configured.</p>
+
+<ol>
+  <li>(Optional) Allow non-root access to write cores to workspace</li>
+</ol>
+
+<p>By default, core files might be written to the working directory, /var/crash, or handled by apport. To ensure you can locate them from the workflow:</p>
+
+<ul>
+  <li>Create a directory under the runner workspace that is writable by the runner user and set <code class="language-plaintext highlighter-rouge">kernel.core_uses_pid</code> if needed.</li>
+</ul>
+
+<ol>
+  <li>Trigger the workflow</li>
+</ol>
+
+<p>Once the runner is registered and verified, trigger the <code class="language-plaintext highlighter-rouge">gdb-capture-self-hosted</code> workflow from the Actions UI (or via <code class="language-plaintext highlighter-rouge">gh workflow run</code>) and choose the test path. The workflow will verify <code class="language-plaintext highlighter-rouge">flutter</code> and core settings, run the test, then search for core files and upload diagnostics.</p>
+
+<p>If you want, I can dispatch the workflow for <code class="language-plaintext highlighter-rouge">test/debug_main_menu_with_data_test.dart</code> once you confirm the runner is online and ready.
+«««&lt; HEAD</p>
+
+<p>=======</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <blockquote>
+              <p>parent of 8f43644 (Add self-hosted runner setup scripts and update docs)</p>
+            </blockquote>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/self_hosted_runner_setup.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

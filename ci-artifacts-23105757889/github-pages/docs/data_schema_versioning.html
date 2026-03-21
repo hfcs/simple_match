@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Data Schema Versioning | simple_match</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Data Schema Versioning" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<meta property="og:description" content="A simple IPSC match scoring app, an exercise building app using GenAI" />
+<link rel="canonical" href="https://hfcs.github.io/simple_match/docs/data_schema_versioning.html" />
+<meta property="og:url" content="https://hfcs.github.io/simple_match/docs/data_schema_versioning.html" />
+<meta property="og:site_name" content="simple_match" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Schema Versioning" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A simple IPSC match scoring app, an exercise building app using GenAI","headline":"Data Schema Versioning","url":"https://hfcs.github.io/simple_match/docs/data_schema_versioning.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/simple_match/assets/css/style.css?v=c768b02721b38a7e7bc1e8376614d9d14ebacfcc">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/simple_match/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://hfcs.github.io/simple_match/">simple_match</a></h1>
+      
+
+      <h1 id="data-schema-versioning">Data Schema Versioning</h1>
+
+<blockquote>
+  <p><strong>Last updated:</strong> 2026-02-19</p>
+</blockquote>
+
+<p>This document describes the versioning and migration policy for all persisted data in the IPSC Match Management App.</p>
+
+<h2 id="versioning-policy">Versioning Policy</h2>
+<ul>
+  <li>All persisted data is versioned using a <code class="language-plaintext highlighter-rouge">dataSchemaVersion</code> key in SharedPreferences (managed by <code class="language-plaintext highlighter-rouge">PersistenceService</code>).</li>
+  <li>Any change to the structure, keys, or logic of persisted data requires incrementing the schema version constant in <code class="language-plaintext highlighter-rouge">PersistenceService</code> and adding migration logic.</li>
+  <li>On app startup the stored schema version is checked; if it is less than the current, migration logic must run before loading data.</li>
+  <li>Do not remove or rename keys without providing a migration path and tests.</li>
+</ul>
+
+<h2 id="migration-requirements">Migration Requirements</h2>
+<ul>
+  <li>Migration logic is implemented in <code class="language-plaintext highlighter-rouge">PersistenceService._migrateSchema()</code> (or equivalent migration helper).</li>
+  <li>All migration logic must be covered by integration tests that simulate older persisted data and validate the migrated result.</li>
+  <li>Document every schema change in <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> and reflect a concise summary here.</li>
+</ul>
+
+<h2 id="current-version">Current Version</h2>
+<ul>
+  <li><strong>v2 (2025-10-07):</strong>
+    <ul>
+      <li>Added <code class="language-plaintext highlighter-rouge">status</code> and <code class="language-plaintext highlighter-rouge">roRemark</code> to <code class="language-plaintext highlighter-rouge">StageResult</code>.</li>
+      <li>Migration: default <code class="language-plaintext highlighter-rouge">status</code> to “Completed” and ensure <code class="language-plaintext highlighter-rouge">roRemark</code> exists (empty string) for migrated records.</li>
+    </ul>
+  </li>
+  <li><strong>v4 (2026-02-19):</strong>
+    <ul>
+      <li>Purpose: Add per-record audit timestamps and ensure consistent updatedAt stamping.</li>
+      <li>Models changed:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">MatchStage</code> — added <code class="language-plaintext highlighter-rouge">createdAt</code> (final) and <code class="language-plaintext highlighter-rouge">updatedAt</code> (mutable) as ISO8601 UTC strings.</li>
+          <li><code class="language-plaintext highlighter-rouge">Shooter</code> — added <code class="language-plaintext highlighter-rouge">createdAt</code> and <code class="language-plaintext highlighter-rouge">updatedAt</code> as ISO8601 UTC strings.</li>
+          <li><code class="language-plaintext highlighter-rouge">StageResult</code> — added <code class="language-plaintext highlighter-rouge">createdAt</code> and <code class="language-plaintext highlighter-rouge">updatedAt</code> as ISO8601 UTC strings.</li>
+          <li><code class="language-plaintext highlighter-rouge">TeamGame</code> — added <code class="language-plaintext highlighter-rouge">createdAt</code> and <code class="language-plaintext highlighter-rouge">updatedAt</code> as ISO8601 UTC strings.</li>
+        </ul>
+      </li>
+      <li>Persistence changes:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">kDataSchemaVersion</code> in <code class="language-plaintext highlighter-rouge">PersistenceService</code> set to <code class="language-plaintext highlighter-rouge">4</code>.</li>
+          <li>Migration/backfill: when migrating from older versions, missing <code class="language-plaintext highlighter-rouge">createdAt</code> and <code class="language-plaintext highlighter-rouge">updatedAt</code> are populated using <code class="language-plaintext highlighter-rouge">DateTime.now().toUtc().toIso8601String()</code> for both fields. Existing records that lack <code class="language-plaintext highlighter-rouge">createdAt</code> receive the same timestamp as <code class="language-plaintext highlighter-rouge">updatedAt</code> during backfill.</li>
+          <li>All model <code class="language-plaintext highlighter-rouge">toJson()</code>/<code class="language-plaintext highlighter-rouge">fromJson()</code> implementations were updated to (de)serialize the new fields.</li>
+        </ul>
+      </li>
+      <li>Repository behavior:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">MatchRepository</code> centralizes <code class="language-plaintext highlighter-rouge">updatedAt</code> stamping: repository update/save methods now set <code class="language-plaintext highlighter-rouge">updatedAt = DateTime.now().toUtc().toIso8601String()</code> for records being modified before persisting.</li>
+          <li>The repository persists models via their <code class="language-plaintext highlighter-rouge">toJson()</code> so audit fields are stored alongside other fields.</li>
+        </ul>
+      </li>
+      <li>ViewModel / API notes:
+        <ul>
+          <li>ViewModels were adjusted to preserve existing synchronous validation return types (so UI and tests continue to receive immediate <code class="language-plaintext highlighter-rouge">String?</code> validation results) while performing persistence asynchronously to avoid UI jank.</li>
+          <li><code class="language-plaintext highlighter-rouge">StageResultViewModel</code> was made backwards-compatible for dependency injection (accepting either a <code class="language-plaintext highlighter-rouge">PersistenceService</code> or a <code class="language-plaintext highlighter-rouge">MatchRepository</code>) and its local caches are defensive mutable copies to avoid accidental mutation of unmodifiable repo lists in tests.</li>
+        </ul>
+      </li>
+      <li>Tests &amp; CI:
+        <ul>
+          <li>Add integration tests that simulate older schema payloads and verify the v4 migration produces valid records with <code class="language-plaintext highlighter-rouge">createdAt</code>/<code class="language-plaintext highlighter-rouge">updatedAt</code>.</li>
+          <li>Update widget/unit tests that rely on repository providers to use <code class="language-plaintext highlighter-rouge">ChangeNotifierProvider</code> for <code class="language-plaintext highlighter-rouge">MatchRepository</code> and to seed repositories deterministically where needed.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="how-to-implement-a-schema-change-checklist">How to Implement a Schema Change (Checklist)</h2>
+<ol>
+  <li>Increment <code class="language-plaintext highlighter-rouge">kDataSchemaVersion</code> in <code class="language-plaintext highlighter-rouge">lib/services/persistence_service.dart</code>.</li>
+  <li>Implement migration logic in <code class="language-plaintext highlighter-rouge">PersistenceService._migrateSchema()</code> to transform/backfill old keys to the new shape.</li>
+  <li>Update all affected model <code class="language-plaintext highlighter-rouge">fromJson()</code> / <code class="language-plaintext highlighter-rouge">toJson()</code> implementations.</li>
+  <li>Add or update unit/integration tests that:
+    <ul>
+      <li>Load a persisted payload at the old schema version and assert migration produces expected results.</li>
+      <li>Validate any behavioral changes (e.g., repository stamping of <code class="language-plaintext highlighter-rouge">updatedAt</code>).</li>
+    </ul>
+  </li>
+  <li>Run the full test-suite locally and in CI. Use deterministic seeding for repository-backed tests to avoid race conditions.</li>
+  <li>Document the change in <code class="language-plaintext highlighter-rouge">data_schema_history.md</code> with date, version, and migration notes.</li>
+</ol>
+
+<h2 id="example-migration-entry-format">Example Migration Entry (format)</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- v4 (2026-02-19):
+  - Added per-record `createdAt` and `updatedAt` (ISO8601 UTC) to MatchStage, Shooter, StageResult, TeamGame.
+  - Migration: backfill missing timestamps using the system UTC now; repository stamps `updatedAt` on updates.
+  - Tests: added migration/backfill integration tests and updated provider-based widget tests to seed `MatchRepository` deterministically.
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+<ul>
+  <li>Always ensure migrations are reversible where practical for test harnesses (e.g., provide dry-run import paths).</li>
+  <li>Keep migration logic small, well-tested, and documented in <code class="language-plaintext highlighter-rouge">data_schema_history.md</code>.</li>
+</ul>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/hfcs/simple_match/edit/main/docs/data_schema_versioning.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

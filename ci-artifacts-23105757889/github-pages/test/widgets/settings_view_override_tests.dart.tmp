@@ -1,0 +1,99 @@
+import 'dart:typed_data';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+
+import 'package:simple_match/views/settings_view.dart';
+import 'package:simple_match/repository/match_repository.dart';
+
+import 'test_helpers/fake_repo_and_persistence.dart';
+
+class _FakeFile {
+  final String path;
+  _FakeFile(this.path);
+}
+
+void main() {
+  testWidgets('export override called with expected content', (tester) async {
+    final fakePersistence = FakePersistence(exportJsonValue: '{"ok":true}');
+    final repo = MatchRepository(persistence: fakePersistence);
+
+    String? savedPath;
+    String? savedContent;
+    Future<void> saveExport(String path, String content) async {
+      savedPath = path;
+      savedContent = content;
+    }
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(saveExportOverride: saveExport)),
+      ),
+    );
+
+    await tester.tap(find.text('Export Backup'));
+    await tester.pumpAndSettle();
+
+    expect(savedPath, isNotNull);
+    expect(savedContent, contains('"ok":true'));
+  });
+
+  testWidgets('import list override shows file name', (tester) async {
+    final fakePersistence = FakePersistence();
+    final repo = MatchRepository(persistence: fakePersistence);
+
+    final fileObj = _FakeFile('/tmp/test.json');
+    Future<List<dynamic>> listOverride() async => [fileObj];
+    Future<Uint8List> readOverride(String path) async => Uint8List.fromList(utf8.encode('{}'));
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(listBackupsOverride: listOverride, readFileBytesOverride: readOverride)),
+      ),
+    );
+
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('test.json'), findsOneWidget);
+  });
+
+  testWidgets('cancelling import from list does not perform import', (tester) async {
+    final fakePersistence = FakePersistence();
+    final repo = MatchRepository(persistence: fakePersistence);
+
+    final fileObj = _FakeFile('/tmp/test.json');
+    Future<List<dynamic>> listOverride() async => [fileObj];
+    Future<Uint8List> readOverride(String path) async => Uint8List.fromList(utf8.encode('{}'));
+
+    bool importCalled = false;
+    fakePersistence.importFn = (Uint8List bytes, {bool dryRun = false, bool backupBeforeRestore = true}) async {
+      if (!dryRun) importCalled = true;
+      return FakeImportResult(success: true, message: 'ok', counts: {});
+    };
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(listBackupsOverride: listOverride, readFileBytesOverride: readOverride)),
+      ),
+    );
+
+    await tester.tap(find.text('Import Backup'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('test.json'));
+    await tester.pumpAndSettle();
+
+    // Confirmation dialog should appear — press Cancel
+    expect(find.text('Confirm Import'), findsOneWidget);
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+
+    expect(importCalled, isFalse, reason: 'Import should not be called when user cancels');
+  });
+}

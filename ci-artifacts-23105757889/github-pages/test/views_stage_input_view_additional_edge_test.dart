@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_match/views/stage_input_view.dart';
+import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
+import 'package:simple_match/repository/match_repository.dart';
+import 'package:simple_match/models/shooter.dart';
+import 'package:simple_match/models/match_stage.dart';
+
+void main() {
+  group('StageInputView additional edge cases', () {
+    testWidgets('Rapid field changes and focus loss do not break state', (
+      WidgetTester tester,
+    ) async {
+      final repo = MatchRepository(
+        initialStages: [MatchStage(stage: 1, scoringShoots: 5)],
+        initialShooters: [Shooter(name: 'Edge', scaleFactor: 1.0)],
+      );
+      final vm = StageInputViewModel(repo);
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(value: repo),
+            ChangeNotifierProvider<StageInputViewModel>.value(value: vm),
+          ],
+          child: const MaterialApp(home: StageInputView()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      // Select stage and shooter programmatically to avoid popup flakiness
+      vm.selectStage(1);
+      vm.selectShooter('Edge');
+      await tester.pump(const Duration(milliseconds: 200));
+      // Rapidly change A, C, D fields
+      await tester.enterText(find.byKey(const Key('aField')), '2');
+      await tester.pump();
+      await tester.enterText(find.byKey(const Key('cField')), '2');
+      await tester.pump();
+      await tester.enterText(find.byKey(const Key('dField')), '1');
+      await tester.pump();
+  // Move focus away (ensure visible first to avoid hit-test warnings)
+  await tester.ensureVisible(find.byKey(const Key('timeField')));
+  // Avoid tapping (can be off-screen on CI); move focus by entering a value instead
+  await tester.enterText(find.byKey(const Key('timeField')), '0');
+      await tester.pump();
+      // Should not throw and state should be correct
+      expect(vm.a, 2);
+      expect(vm.c, 2);
+      expect(vm.d, 1);
+      // Now enter invalid value and blur
+      await tester.enterText(find.byKey(const Key('aField')), '-5');
+      await tester.pump();
+      await tester.ensureVisible(find.byKey(const Key('timeField')));
+      await tester.enterText(find.byKey(const Key('timeField')), '');
+      await tester.pump();
+      expect(find.textContaining('cannot be negative'), findsOneWidget);
+    });
+
+    testWidgets('All error messages for each field are shown as expected', (
+      WidgetTester tester,
+    ) async {
+      final repo = MatchRepository(
+        initialStages: [MatchStage(stage: 1, scoringShoots: 2)],
+        initialShooters: [Shooter(name: 'Err', scaleFactor: 1.0)],
+      );
+      final vm = StageInputViewModel(repo);
+      await tester.pumpWidget(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(value: repo),
+            ChangeNotifierProvider<StageInputViewModel>.value(value: vm),
+          ],
+          child: const MaterialApp(home: StageInputView()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      vm.selectStage(1);
+      vm.selectShooter('Err');
+      await tester.pump(const Duration(milliseconds: 200));
+      // Enter negative for each field and check error
+      final fields = [
+        'aField',
+        'cField',
+        'dField',
+        'missesField',
+        'noShootsField',
+        'procErrorsField',
+        'timeField',
+      ];
+      for (final key in fields) {
+        await tester.ensureVisible(find.byKey(Key(key)));
+        await tester.enterText(find.byKey(Key(key)), '-1');
+        await tester.pump();
+        expect(find.textContaining('cannot be negative'), findsOneWidget);
+        // Reset to 0 for next field
+        await tester.enterText(find.byKey(Key(key)), '0');
+        await tester.pump();
+      }
+    });
+  });
+}

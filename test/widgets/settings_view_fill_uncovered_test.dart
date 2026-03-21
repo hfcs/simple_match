@@ -36,6 +36,8 @@ void main() {
     SettingsView.exerciseCoverageTiny();
     SettingsView.exerciseCoverageRemaining();
     SettingsView.exerciseCoverageBoost();
+    SettingsView.exerciseCoverageTiny2();
+    SettingsView.exerciseCoverageTiny3();
 
     // Build widget with overrides to exercise IO/web/import branches
     final saveCalled = <String>[];

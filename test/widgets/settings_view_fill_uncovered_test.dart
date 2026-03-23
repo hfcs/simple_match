@@ -149,4 +149,57 @@ void main() {
     SettingsView.suppressSnackBarsInTests = prevSuppress;
     SettingsView.forceKIsWeb = prevForceWeb;
   });
+
+  testWidgets('exercise dialog and exporter-timeout branches', (WidgetTester tester) async {
+    final fake = FakePersistence(exportJsonValue: '{"ok":true}');
+    final repo = MatchRepository(persistence: fake);
+
+    // 1) Trigger the confirm-restore dialog (autoConfirm=false) and press Restore
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(
+          home: SettingsView(
+            pickBackupOverride: () async => {'bytes': Uint8List.fromList([1,2,3]), 'name': 'dlg.json', 'autoConfirm': false},
+            readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
+            documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
+            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    final state = tester.state(find.byType(SettingsView)) as dynamic;
+    await state.exportBackupForTest(tester.element(find.byType(SettingsView)));
+    await tester.pump();
+    // Dialog should appear; tap 'Restore'
+    expect(find.text('Restore'), findsOneWidget);
+    await tester.tap(find.text('Restore'));
+    await tester.pumpAndSettle();
+
+    // 2) Exercise exporter timeout path by providing a slow postExportOverride
+    var exporterCalled = false;
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(
+          home: SettingsView(
+            postExportOverride: (p, c) async {
+              exporterCalled = true;
+              await Future.delayed(const Duration(seconds: 4));
+            },
+            readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
+            documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    final state2 = tester.state(find.byType(SettingsView)) as dynamic;
+    await state2.exportBackupForTest(tester.element(find.byType(SettingsView)));
+    await tester.pumpAndSettle();
+    expect(exporterCalled, true);
+  });
 }

@@ -171,12 +171,16 @@ void main() {
 
     await tester.pumpAndSettle();
     final state = tester.state(find.byType(SettingsView)) as dynamic;
-    await state.exportBackupForTest(tester.element(find.byType(SettingsView)));
+    // Call export but don't await it — it will await a dialog. This lets the
+    // test interact with the dialog (tap the Restore button) and then allow
+    // the method to complete.
+    final exportFuture = state.exportBackupForTest(tester.element(find.byType(SettingsView)));
     await tester.pump();
     // Dialog should appear; tap 'Restore'
     expect(find.text('Restore'), findsOneWidget);
     await tester.tap(find.text('Restore'));
     await tester.pumpAndSettle();
+    await exportFuture;
 
     // 2) Exercise exporter timeout path by providing a slow postExportOverride
     var exporterCalled = false;

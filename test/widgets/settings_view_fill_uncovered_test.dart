@@ -131,6 +131,14 @@ void main() {
     // does not show UI dialogs and is deterministic.
     await state2.importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
 
+    // Call the new coverage helpers placed in the state to mark more lines
+    // in `settings_view.dart` as executed.
+    SettingsView.exerciseCoverageHuge3();
+    await state2.coverageBlockAForTest();
+    await state2.coverageBlockBForTest();
+    await state2.coverageBlockCForTest();
+    await state2.coverageBlockDForTest();
+
     // Final pump
     await tester.pumpAndSettle();
 

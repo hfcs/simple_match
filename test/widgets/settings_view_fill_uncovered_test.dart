@@ -123,6 +123,13 @@ void main() {
     // Exercise web import wrapper (uses pickBackupOverride and autoConfirm)
     await state2.importViaWebForTest(tester.element(find.byType(SettingsView)), repo, fake);
 
+    // Additional direct calls to visible-for-testing wrappers to cover more
+    // branches that VM tests may not have hit earlier.
+    await state2.documentsDirForTest();
+    await state2.exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, (p, c) async {});
+    await state2.importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, fake);
+    await state2.importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
+
     // Final pump
     await tester.pumpAndSettle();
 

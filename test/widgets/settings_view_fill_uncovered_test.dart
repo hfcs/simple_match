@@ -127,8 +127,9 @@ void main() {
     // branches that VM tests may not have hit earlier.
     await state2.documentsDirForTest();
     await state2.exportViaWebForTest(tester.element(find.byType(SettingsView)), fake, (p, c) async {}, 'test-ts');
-    await state2.importFromDocumentsForTest(tester.element(find.byType(SettingsView)), repo, fake);
-    await state2.importFromDocumentsChosenForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
+    // Avoid dialog-driven path in VM tests; call the confirmed variant which
+    // does not show UI dialogs and is deterministic.
+    await state2.importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
 
     // Final pump
     await tester.pumpAndSettle();

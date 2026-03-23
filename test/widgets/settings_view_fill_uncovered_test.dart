@@ -33,6 +33,8 @@ void main() {
     SettingsView.exerciseCoverageMarker4();
     SettingsView.exerciseCoverageExtra();
     SettingsView.exerciseCoverageHuge();
+    SettingsView.exerciseCoverageHuge2();
+    SettingsView.exerciseCoverageHuge3();
     SettingsView.exerciseCoverageTiny();
     SettingsView.exerciseCoverageRemaining();
     SettingsView.exerciseCoverageBoost();

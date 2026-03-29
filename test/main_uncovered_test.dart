@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_match/views/stage_result_view.dart';
 import 'package:simple_match/viewmodel/stage_result_viewmodel.dart';
 import 'package:simple_match/main.dart' as app;
@@ -11,6 +12,7 @@ void main() {
   testWidgets('StageResultView route builds with injected ViewModel', (
     tester,
   ) async {
+    SharedPreferences.setMockInitialValues({});
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       MultiProvider(
@@ -33,6 +35,7 @@ void main() {
   });
 
   testWidgets('main.dart routes fallback to / if unknown', (tester) async {
+    SharedPreferences.setMockInitialValues({});
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       MultiProvider(

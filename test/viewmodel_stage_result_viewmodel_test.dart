@@ -27,6 +27,11 @@ class TestPersistenceService extends PersistenceService {
   Future<void> saveList(String key, List<Map<String, dynamic>> list) async {
     lastSaved = list;
   }
+
+  // Avoid touching SharedPreferences in VM tests by short-circuiting schema
+  // migration and any SharedPreferences access.
+  @override
+  Future<void> ensureSchemaUpToDate() async => Future.value();
 }
 
 void main() {

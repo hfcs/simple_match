@@ -6,6 +6,7 @@ import 'package:simple_match/viewmodel/match_setup_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/match_stage.dart';
 import 'package:simple_match/services/persistence_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
@@ -97,6 +98,7 @@ void main() {
       expect(find.text('Invalid input.'), findsOneWidget);
     });
     testWidgets('shows error on invalid input and empty state', (tester) async {
+      SharedPreferences.setMockInitialValues({});
       final repo = MatchRepository(persistence: PersistenceService());
       await tester.pumpWidget(
         MultiProvider(

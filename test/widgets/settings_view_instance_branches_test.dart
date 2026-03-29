@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ void main() {
           pickBackupOverride: () async => {'bytes': Uint8List.fromList('{}'.codeUnits), 'name': 'b.json', 'autoConfirm': true},
           listBackupsOverride: () async => [ {'path': '/tmp/b.json'} ],
           readFileBytesOverride: (String path) async => Uint8List.fromList('{}'.codeUnits),
-          documentsDirOverride: () async => {'path': '/tmp'},
+          documentsDirOverride: () async => Directory.systemTemp,
         ),
       ),
     );

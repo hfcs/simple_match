@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/services/persistence_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   testWidgets('MainMenuView navigation and edge cases', (
     WidgetTester tester,
   ) async {
+    SharedPreferences.setMockInitialValues({});
     final repo = MatchRepository(persistence: PersistenceService());
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(

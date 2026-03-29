@@ -68,7 +68,7 @@ void main() {
             },
             // No pickBackupOverride here so exportBackupForTest exercises
             // the saveExportOverride/postExportOverride paths.
-            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
+            listBackupsOverride: () async => [ _FakeFile('${Directory.systemTemp.createTempSync().path}/ci.json') ],
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
           ),
@@ -99,7 +99,7 @@ void main() {
     final repoFail = MatchRepository(persistence: fakeFail);
     // Exercise import-from-documents confirmed helper (dialog-less) with
     // a failing persistence to hit the validation-failed branch.
-    final fakeFile = _FakeFile(Directory.systemTemp.createTempSync().path + '/chosen.json');
+    final fakeFile = _FakeFile('${Directory.systemTemp.createTempSync().path}/chosen.json');
     await state.importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repoFail, fakeFail, fakeFile);
 
     // Now repump the widget with a configuration that will execute the
@@ -115,7 +115,7 @@ void main() {
               // quick no-op to ensure exporter completes
             },
             pickBackupOverride: () async => {'bytes': Uint8List.fromList([1, 2, 3]), 'name': 'web.json', 'autoConfirm': true},
-            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
+            listBackupsOverride: () async => [ _FakeFile('${Directory.systemTemp.createTempSync().path}/ci.json') ],
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
           ),
@@ -214,7 +214,7 @@ void main() {
           home: SettingsView(
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
-            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
+            listBackupsOverride: () async => [ _FakeFile('${Directory.systemTemp.createTempSync().path}/ci.json') ],
           ),
         ),
       ),
@@ -245,7 +245,7 @@ void main() {
             pickBackupOverride: () async => {'bytes': Uint8List.fromList([1,2,3]), 'name': 'dlg.json', 'autoConfirm': true},
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
-            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/ci.json') ],
+            listBackupsOverride: () async => [ _FakeFile('${Directory.systemTemp.createTempSync().path}/ci.json') ],
           ),
         ),
       ),
@@ -255,7 +255,7 @@ void main() {
     final state = tester.state(find.byType(SettingsView)) as dynamic;
     // Directly call the confirmed import helper which performs the restore
     // path deterministically without user interaction.
-    final fakeFile = _FakeFile(Directory.systemTemp.createTempSync().path + '/dlg.json');
+    final fakeFile = _FakeFile('${Directory.systemTemp.createTempSync().path}/dlg.json');
     await state.importFromDocumentsConfirmedForTest(tester.element(find.byType(SettingsView)), repo, fake, fakeFile);
 
     // 2) Exercise exporter timeout path by providing a slow postExportOverride
@@ -312,7 +312,7 @@ void main() {
     await importFuture;
 
     // 2) importFromDocumentsChosenForTest which shows a confirmation dialog
-    final chosen = _FakeFile(Directory.systemTemp.createTempSync().path + '/chosen-dlg.json');
+    final chosen = _FakeFile('${Directory.systemTemp.createTempSync().path}/chosen-dlg.json');
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
@@ -347,7 +347,7 @@ void main() {
             pickBackupOverride: () async => {'bytes': Uint8List.fromList([1,2,3]), 'name': 'web-dlg.json', 'autoConfirm': false},
             readFileBytesOverride: (p) async => Uint8List.fromList([1,2,3]),
             documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
-            listBackupsOverride: () async => [ _FakeFile(Directory.systemTemp.createTempSync().path + '/a.json') ],
+            listBackupsOverride: () async => [ _FakeFile('${Directory.systemTemp.createTempSync().path}/a.json') ],
           ),
         ),
       ),
@@ -362,7 +362,7 @@ void main() {
     await f1;
 
     // importFromDocumentsChosenForTest with Cancel
-    final chosen = _FakeFile(Directory.systemTemp.createTempSync().path + '/chosen-cancel.json');
+    final chosen = _FakeFile('${Directory.systemTemp.createTempSync().path}/chosen-cancel.json');
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
         value: repo,

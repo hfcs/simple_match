@@ -9,11 +9,6 @@ import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
-class _ChosenFile {
-  final String path;
-  _ChosenFile(this.path);
-}
-
 void main() {
   testWidgets('importFromDocumentsForTest: empty list shows no backups path', (WidgetTester tester) async {
     final fake = FakePersistence();

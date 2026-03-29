@@ -6,6 +6,7 @@ import 'package:simple_match/viewmodel/shooter_setup_viewmodel.dart';
 import 'package:simple_match/repository/match_repository.dart';
 import 'package:simple_match/models/shooter.dart';
 import 'package:simple_match/services/persistence_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MockPersistenceService extends PersistenceService {
   @override
@@ -70,6 +71,7 @@ void main() {
       expect(find.text('Invalid scale.'), findsOneWidget);
     });
     testWidgets('shows error on invalid scale and empty state', (tester) async {
+      SharedPreferences.setMockInitialValues({});
       final repo = MatchRepository(persistence: PersistenceService());
       await tester.pumpWidget(
         Provider<ShooterSetupViewModel>(

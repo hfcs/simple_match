@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class ThrowingPersistence extends FakePersistence {
 
 void main() {
   testWidgets('Export fallback shows Export failed when persistence throws', (tester) async {
+    SharedPreferences.setMockInitialValues({});
     final repo = MatchRepository(persistence: ThrowingPersistence());
     await repo.loadAll();
 
@@ -50,6 +52,7 @@ void main() {
       return FakeImportResult(success: true);
     });
 
+    SharedPreferences.setMockInitialValues({});
     final repo = MatchRepository(persistence: fake);
     await repo.loadAll();
 

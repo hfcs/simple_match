@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_match/views/settings_view.dart';
+import 'dart:io';
 import 'package:simple_match/repository/match_repository.dart';
 
 import 'test_helpers/fake_repo_and_persistence.dart';
@@ -14,7 +15,11 @@ void main() {
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
-        child: const MaterialApp(home: SettingsView()),
+        child: MaterialApp(
+          home: SettingsView(
+            documentsDirOverride: () async => Directory.systemTemp.createTempSync(),
+          ),
+        ),
       ),
     );
 

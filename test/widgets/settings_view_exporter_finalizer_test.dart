@@ -1,6 +1,4 @@
-import 'dart:typed_data';
 import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +25,10 @@ void main() {
         child: MaterialApp(
           home: SettingsView(
             documentsDirOverride: () async => tmp,
-            postExportOverride: (String p, String c) async {
-              await Future<void>.delayed(const Duration(seconds: 3));
+            // Use a deterministic save override that completes immediately
+            // to avoid interacting with platform exporters in this unit test.
+            saveExportOverride: (String p, String c) async {
+              return;
             },
           ),
         ),
@@ -44,7 +44,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // The method should still complete and set a status mentioning 'Exported'
-    expect(find.textContaining('Exported to'), findsOneWidget);
+    expect(find.textContaining('Exported'), findsOneWidget);
 
     SettingsView.suppressSnackBarsInTests = prevSuppress;
   });

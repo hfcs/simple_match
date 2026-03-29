@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
@@ -11,6 +12,7 @@ import 'test_helpers/fake_repo_and_persistence.dart';
 void main() {
   testWidgets('Export Backup via saveExportOverride writes to temp file', (tester) async {
     final tmp = Directory.systemTemp.createTempSync('simple_match_export_override');
+    SharedPreferences.setMockInitialValues({});
     final fake = FakePersistence(exportJsonValue: '{"exported":true}');
     final repo = MatchRepository(persistence: fake);
     await repo.loadAll();

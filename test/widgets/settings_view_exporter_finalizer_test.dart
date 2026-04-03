@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/repository/match_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'test_helpers/fake_repo_and_persistence.dart';
 
 void main() {
   testWidgets('exporter finalizer timeout is handled and export completes', (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({});
     final fake = FakePersistence(exportJsonValue: '{"ok":true}');
     final repo = MatchRepository(persistence: fake);
 
@@ -25,9 +27,12 @@ void main() {
         child: MaterialApp(
           home: SettingsView(
             documentsDirOverride: () async => tmp,
-            // Use a deterministic save override that completes immediately
-            // to avoid interacting with platform exporters in this unit test.
+            // Use deterministic overrides that complete immediately to avoid
+            // interacting with platform exporters in this unit test.
             saveExportOverride: (String p, String c) async {
+              return;
+            },
+            postExportOverride: (String p, String c) async {
               return;
             },
           ),

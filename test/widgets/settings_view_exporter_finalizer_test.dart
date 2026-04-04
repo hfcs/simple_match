@@ -19,8 +19,10 @@ void main() {
     final prevSuppress = SettingsView.suppressSnackBarsInTests;
     SettingsView.suppressSnackBarsInTests = true;
 
-    // Provide a postExportOverride that sleeps longer than the internal
-    // exporter timeout (2s) so the TimeoutException path is exercised.
+    // Ensure web-forcing is disabled for this IO-focused test and provide
+    // deterministic overrides that complete immediately to avoid platform
+    // interactions in CI/VM tests.
+    SettingsView.forceKIsWeb = false;
     await tester.pumpWidget(
       ChangeNotifierProvider<MatchRepository>.value(
         value: repo,
@@ -30,10 +32,10 @@ void main() {
             // Use deterministic overrides that complete immediately to avoid
             // interacting with platform exporters in this unit test.
             saveExportOverride: (String p, String c) async {
-              return;
+              return Future<void>.value();
             },
             postExportOverride: (String p, String c) async {
-              return;
+              return Future<void>.value();
             },
           ),
         ),
@@ -45,7 +47,9 @@ void main() {
 
     // Call the IO export path which will write a file then call our slow
     // postExportOverride; the internal timeout will fire and be caught.
-    await state.exportBackupForTest(tester.element(find.byType(SettingsView)));
+    // Add a safety timeout so the test fails fast if the exporter finalizer
+    // does not complete for any reason.
+    await state.exportBackupForTest(tester.element(find.byType(SettingsView))).timeout(const Duration(seconds: 30));
     await tester.pumpAndSettle();
 
     // The method should still complete and set a status mentioning 'Exported'

@@ -31,10 +31,11 @@ void main() {
             documentsDirOverride: () async => tmp,
             // Use deterministic overrides that complete immediately to avoid
             // interacting with platform exporters in this unit test.
-            saveExportOverride: (String p, String c) async {
+            saveExportOverride: (String p, String c) {
               return Future<void>.value();
             },
-            postExportOverride: (String p, String c) async {
+            postExportOverride: (String p, String c) {
+              // Ensure immediate completion (avoid async/await overhead)
               return Future<void>.value();
             },
           ),

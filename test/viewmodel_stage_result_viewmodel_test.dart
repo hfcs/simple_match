@@ -28,6 +28,12 @@ class TestPersistenceService extends PersistenceService {
     lastSaved = list;
   }
 
+  @override
+  Future<void> appendLog(String key, Map<String, dynamic> entry) async {
+    // No-op for tests: avoid touching SharedPreferences or base class loadList.
+    return Future.value();
+  }
+
   // Avoid touching SharedPreferences in VM tests by short-circuiting schema
   // migration and any SharedPreferences access.
   @override
@@ -69,6 +75,7 @@ void main() {
     final ranks = vm.getStageRanks();
     expect(ranks.containsKey(1), isTrue);
     final list = ranks[1]!;
+    expect(list, isNotEmpty, reason: 'Expected stage ranks to contain at least one entry for stage 1');
     // S2 should be first because adjustedHitFactor 8 > 5
     expect(list.first.name, equals('S2'));
     expect(list.last.name, equals('S1'));
@@ -88,7 +95,7 @@ void main() {
     ];
 
     final repo = MatchRepository(persistence: svc, initialResults: svc.stageResults, initialShooters: svc.shooters, initialStages: svc.stages);
-    final vm = StageResultViewModel(repo: repo);
+    final vm = StageResultViewModel(repo: repo, persistenceService: svc);
     // repository already populated with initialResults, ensure ViewModel loaded
     for (var i = 0; i < 50 && vm.results.isEmpty; i++) {
       await Future<void>.delayed(Duration(milliseconds: 10));
@@ -102,6 +109,7 @@ void main() {
     await vm.updateStatus(10, 'T', 'DNF');
 
     // Verify model updated
+    expect(vm.results, isNotEmpty, reason: 'Expected ViewModel results to be populated after updateStatus');
     expect(vm.results.first.status, equals('DNF'));
     // Verify saveList was called and contains the updated status
     expect(svc.lastSaved, isNotNull);

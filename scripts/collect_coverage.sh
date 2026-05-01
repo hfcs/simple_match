@@ -60,8 +60,14 @@ fi
 
 echo "Merging LCOV files..."
 if [ -f coverage/lcov.chrome.info ]; then
-  lcov -a coverage/lcov.vm.info -a coverage/lcov.chrome.info -o coverage/lcov.combined.info
-  LCOV_IN=coverage/lcov.combined.info
+  if command -v lcov >/dev/null 2>&1; then
+    lcov -a coverage/lcov.vm.info -a coverage/lcov.chrome.info -o coverage/lcov.combined.info
+    LCOV_IN=coverage/lcov.combined.info
+  else
+    echo "Warning: 'lcov' not found; skipping LCOV merge and HTML generation"
+    echo "Coverage files present at coverage/lcov.vm.info and coverage/lcov.chrome.info (if any)"
+    exit 0
+  fi
 else
   LCOV_IN=coverage/lcov.vm.info
 fi
@@ -75,6 +81,12 @@ else
 fi
 
 echo "Generating HTML..."
-genhtml -o coverage/html coverage/lcov.filtered.info
+if command -v genhtml >/dev/null 2>&1; then
+  genhtml -o coverage/html coverage/lcov.filtered.info
+else
+  echo "Warning: 'genhtml' not found; skipping HTML generation"
+  echo "Filtered LCOV available at coverage/lcov.filtered.info"
+  exit 0
+fi
 
 echo "Coverage generated at coverage/html/index.html"

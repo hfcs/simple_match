@@ -72,3 +72,6 @@ ci_archive/
 
 # Test output (generated during CI/test runs)
 test_results.json
+
+# CI artifacts downloaded during debugging
+ci-artifacts-*

@@ -40,15 +40,14 @@ dependencies:
   pdf: ^3.11.3
   printing: ^5.14.2
   logging: ^1.3.0
+  http: ^1.2.1
+  html: ^0.15.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-
-  # For font download automation
-  http: ^1.2.1
 
   # Test helper dependency used by some tests
   path: ^1.8.3

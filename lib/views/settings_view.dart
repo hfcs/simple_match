@@ -7,10 +7,14 @@ import 'export_utils_web.dart' if (dart.library.io) 'export_utils_io.dart';
 import 'io_file_helpers_web.dart' if (dart.library.io) 'io_file_helpers_io.dart';
 import 'package:provider/provider.dart';
 import '../services/persistence_service.dart';
+import '../services/portal_importer.dart';
 import 'settings_view_coverage_helpers.dart';
 import '../repository/match_repository.dart';
 
 class SettingsView extends StatefulWidget {
+  /// Optional URL to prefill the portal import field. This value is editable.
+  final String? initialPortalUrl;
+
   /// Test-only: force kIsWeb branches to run in unit tests.
   /// Set to true from tests to exercise web-only code paths when running
   /// on the VM test runtime. Default false.
@@ -51,6 +55,7 @@ class SettingsView extends StatefulWidget {
   final Future<dynamic> Function()? documentsDirOverride;
   const SettingsView({
     super.key,
+    this.initialPortalUrl,
     this.saveExportOverride,
     this.postExportOverride,
     this.pickBackupOverride,
@@ -238,6 +243,10 @@ class SettingsView extends StatefulWidget {
 
 
 class _SettingsViewState extends State<SettingsView> {
+  late final TextEditingController _portalUrlController;
+  final TextEditingController _portalShooterController = TextEditingController();
+  final TextEditingController _portalShooterNameController = TextEditingController();
+  final TextEditingController _portalScaleFactorController = TextEditingController(text: '1.0');
   String _lastMessage = '';
 
   @visibleForTesting
@@ -794,6 +803,72 @@ class _SettingsViewState extends State<SettingsView> {
     }
   }
 
+  Future<void> _importFromPortal(BuildContext context) async {
+    final repo = Provider.of<MatchRepository>(context, listen: false);
+    final portalUrl = _portalUrlController.text.trim();
+    final shooterText = _portalShooterController.text.trim();
+    final shooterName = _portalShooterNameController.text.trim();
+    final scaleFactorText = _portalScaleFactorController.text.trim();
+    final shooterId = int.tryParse(shooterText);
+    final scaleFactor = double.tryParse(scaleFactorText);
+
+    if (portalUrl.isEmpty || shooterId == null || shooterName.isEmpty || scaleFactor == null) {
+      _maybeShowSnackBar(context, const SnackBar(content: Text('Enter valid portal URL, shooter number, shooter name, and scale factor.')));
+      return;
+    }
+    if (scaleFactor <= 0) {
+      _maybeShowSnackBar(context, const SnackBar(content: Text('Scale factor must be positive.')));
+      return;
+    }
+
+    final importer = PortalImporter();
+    setState(() => _lastMessage = 'Fetching shooter data from portal...');
+    late PortalImportReport report;
+    try {
+      report = await importer.importShooterToRepository(
+        portalUrl,
+        shooterId,
+        repo,
+        shooterName,
+        scaleFactor,
+        overwriteExistingResults: true,
+      );
+    } catch (e) {
+      final message = 'Portal import failed: $e';
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text(message)));
+      if (!mounted) return;
+      setState(() => _lastMessage = message);
+      return;
+    }
+
+    if (report.success) {
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text('Imported ${report.shootersAdded} shooter and ${report.resultsAdded} results.')));
+      if (!mounted) return;
+      setState(() => _lastMessage = 'Portal import succeeded: ${report.message}');
+    } else {
+      if (mounted) _maybeShowSnackBar(context, SnackBar(content: Text(report.message)));
+      if (!mounted) return;
+      setState(() => _lastMessage = 'Portal import failed: ${report.message}');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final defaultUrl = widget.initialPortalUrl ?? 'https://hkg.as.ipscess.org/portal?match=35';
+    _portalUrlController = TextEditingController(text: defaultUrl)
+      ..selection = TextSelection.collapsed(offset: defaultUrl.length);
+  }
+
+  @override
+  void dispose() {
+    _portalUrlController.dispose();
+    _portalShooterController.dispose();
+    _portalShooterNameController.dispose();
+    _portalScaleFactorController.dispose();
+    super.dispose();
+  }
+
   /// Test-only helper that imports the chosen file without showing a confirmation
   /// dialog. Useful for VM tests that need to exercise the import logic but
   /// don't want to interact with modal dialogs.
@@ -870,6 +945,50 @@ class _SettingsViewState extends State<SettingsView> {
               icon: const Icon(Icons.upload_file),
               label: const Text('Import Backup'),
               onPressed: () => _importBackup(context),
+            ),
+            const SizedBox(height: 20),
+            const Text('Portal Import', style: TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _portalShooterNameController,
+              decoration: const InputDecoration(
+                labelText: 'Shooter name',
+                hintText: 'Exact name to store in app',
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _portalScaleFactorController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              decoration: const InputDecoration(
+                labelText: 'Scale factor',
+                hintText: '1.0',
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _portalUrlController,
+              keyboardType: TextInputType.url,
+              autocorrect: false,
+              enableSuggestions: false,
+              decoration: const InputDecoration(
+                labelText: 'Portal URL',
+                hintText: 'https://hkg.as.ipscess.org/portal?match=35',
+              ),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _portalShooterController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Shooter #',
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.public),
+              label: const Text('Import from IPSC Portal'),
+              onPressed: () => _importFromPortal(context),
             ),
             const SizedBox(height: 20),
             Text('Status: $_lastMessage'),

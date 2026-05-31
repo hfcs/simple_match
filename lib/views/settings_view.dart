@@ -53,6 +53,11 @@ class SettingsView extends StatefulWidget {
   /// If provided, this will be used instead of calling `getDocumentsDirectory()`
   /// so widget tests can inject a temporary directory.
   final Future<dynamic> Function()? documentsDirOverride;
+
+  /// Test-only override to provide a custom portal importer.
+  /// This is useful for exercising portal import success, failure, and exception
+  /// branches in widget tests without relying on network access.
+  final PortalImporter Function()? portalImporterFactory;
   const SettingsView({
     super.key,
     this.initialPortalUrl,
@@ -62,6 +67,7 @@ class SettingsView extends StatefulWidget {
     this.listBackupsOverride,
     this.readFileBytesOverride,
     this.documentsDirOverride,
+    this.portalImporterFactory,
   });
 
   @override
@@ -821,7 +827,7 @@ class _SettingsViewState extends State<SettingsView> {
       return;
     }
 
-    final importer = PortalImporter();
+    final importer = widget.portalImporterFactory?.call() ?? PortalImporter();
     setState(() => _lastMessage = 'Fetching shooter data from portal...');
     late PortalImportReport report;
     try {

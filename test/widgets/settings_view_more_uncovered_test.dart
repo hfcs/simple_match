@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simple_match/repository/match_repository.dart';
+import 'package:simple_match/services/portal_importer.dart';
 import 'package:simple_match/views/settings_view.dart';
 
 import 'test_helpers/fake_repo_and_persistence.dart';
@@ -224,11 +225,144 @@ void main() {
       findsWidgets,
     );
   }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal validation fails for missing fields', (tester) async {
+    final repo = MatchRepository();
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView()),
+      ),
+    );
+
+    // No shooter name has been entered; this should fail validation.
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Enter valid portal URL')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal shows failure when importer throws', (tester) async {
+    final repo = MatchRepository();
+    final importer = _FakePortalImporter(
+      importFn: (_, __, ___, ____, _____) async => throw Exception('boom'),
+    );
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(portalImporterFactory: () => importer)),
+      ),
+    );
+
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter name'), 'Test Shooter');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Scale factor'), '1.0');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Portal import failed')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal reports success and shows imported message', (tester) async {
+    final repo = MatchRepository();
+    final importer = _FakePortalImporter(
+      importFn: (_, __, ___, ____, _____) async => PortalImportReport(
+        success: true,
+        message: 'ok',
+        shootersAdded: 1,
+        resultsAdded: 2,
+      ),
+    );
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(portalImporterFactory: () => importer)),
+      ),
+    );
+
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter name'), 'Test Shooter');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Scale factor'), '1.0');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Imported 1 shooter and 2 results.')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal reports failure message when importer returns failure', (tester) async {
+    final repo = MatchRepository();
+    final importer = _FakePortalImporter(
+      importFn: (_, __, ___, ____, _____) async => PortalImportReport(
+        success: false,
+        message: 'fail reason',
+      ),
+    );
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView(portalImporterFactory: () => importer)),
+      ),
+    );
+
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter name'), 'Test Shooter');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Scale factor'), '1.0');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Portal import failed: fail reason')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }
 
 class _TempDir {
   final String path;
   _TempDir(this.path);
+}
+
+class _FakePortalImporter extends PortalImporter {
+  final Future<PortalImportReport> Function(
+    String portalUrl,
+    int shooterNumber,
+    MatchRepository repository,
+    String shooterName,
+    double scaleFactor,
+  ) importFn;
+
+  _FakePortalImporter({required this.importFn});
+
+  @override
+  Future<PortalImportReport> importShooterToRepository(
+    String portalUrl,
+    int shooterNumber,
+    MatchRepository repository,
+    String shooterName,
+    double scaleFactor, {
+    bool overwriteExistingResults = false,
+  }) {
+    return importFn(portalUrl, shooterNumber, repository, shooterName, scaleFactor);
+  }
 }
 
 class _ThrowingRepo extends MatchRepository {

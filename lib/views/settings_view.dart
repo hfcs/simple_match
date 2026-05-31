@@ -932,67 +932,69 @@ class _SettingsViewState extends State<SettingsView> {
       appBar: AppBar(title: const Text('Settings')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedButton.icon(
-              icon: const Icon(Icons.download),
-              label: const Text('Export Backup'),
-              onPressed: () => _exportBackup(context),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.upload_file),
-              label: const Text('Import Backup'),
-              onPressed: () => _importBackup(context),
-            ),
-            const SizedBox(height: 20),
-            const Text('Portal Import', style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _portalShooterNameController,
-              decoration: const InputDecoration(
-                labelText: 'Shooter name',
-                hintText: 'Exact name to store in app',
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton.icon(
+                icon: const Icon(Icons.download),
+                label: const Text('Export Backup'),
+                onPressed: () => _exportBackup(context),
               ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _portalScaleFactorController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(
-                labelText: 'Scale factor',
-                hintText: '1.0',
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.upload_file),
+                label: const Text('Import Backup'),
+                onPressed: () => _importBackup(context),
               ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _portalUrlController,
-              keyboardType: TextInputType.url,
-              autocorrect: false,
-              enableSuggestions: false,
-              decoration: const InputDecoration(
-                labelText: 'Portal URL',
-                hintText: 'https://hkg.as.ipscess.org/portal?match=35',
+              const SizedBox(height: 20),
+              const Text('Portal Import', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              TextField(
+                controller: _portalShooterNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Shooter name',
+                  hintText: 'Exact name to store in app',
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _portalShooterController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Shooter #',
+              const SizedBox(height: 12),
+              TextField(
+                controller: _portalScaleFactorController,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(
+                  labelText: 'Scale factor',
+                  hintText: '1.0',
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.public),
-              label: const Text('Import from IPSC Portal'),
-              onPressed: () => _importFromPortal(context),
-            ),
-            const SizedBox(height: 20),
-            Text('Status: $_lastMessage'),
-          ],
+              const SizedBox(height: 12),
+              TextField(
+                controller: _portalUrlController,
+                keyboardType: TextInputType.url,
+                autocorrect: false,
+                enableSuggestions: false,
+                decoration: const InputDecoration(
+                  labelText: 'Portal URL',
+                  hintText: 'https://hkg.as.ipscess.org/portal?match=35',
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: _portalShooterController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Shooter #',
+                ),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.public),
+                label: const Text('Import from IPSC Portal'),
+                onPressed: () => _importFromPortal(context),
+              ),
+              const SizedBox(height: 20),
+              Text('Status: $_lastMessage'),
+            ],
+          ),
         ),
       ),
     );

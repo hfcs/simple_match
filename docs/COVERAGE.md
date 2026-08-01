@@ -34,6 +34,16 @@ tools/filter_lcov.sh coverage/lcov.info coverage/lcov.filtered.info
 genhtml coverage/lcov.filtered.info -o coverage/html
 ```
 
+### Merge existing VM and Chrome coverage outputs
+
+If you already have separate coverage outputs from previous runs, merge them without rerunning tests:
+
+```bash
+MODE=merge ./scripts/collect_coverage.sh
+```
+
+This will combine `coverage/lcov.vm.info` and `coverage/lcov.chrome.info` into a merged report and generate HTML.
+
 Notes for reviewers
 -------------------
 - The filter is intentionally conservative and only removes the known

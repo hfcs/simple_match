@@ -105,6 +105,12 @@ chmod +x ./scripts/collect_coverage.sh
 ./scripts/collect_coverage.sh
 ```
 
+If you already have separate coverage outputs from previous runs, merge them without rerunning tests:
+
+```bash
+MODE=merge ./scripts/collect_coverage.sh
+```
+
 Notes:
 - The script tries `flutter test -d chrome --coverage` first (some Flutter versions write lcov that way).
 - If that fails it falls back to `--platform chrome` and finally attempts a VM-service based collection (requires `dart` and `dart pub global activate coverage`).

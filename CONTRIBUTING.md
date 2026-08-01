@@ -10,6 +10,8 @@ Thanks for helping improve simple_match. A few guidelines to make contributions 
 flutter test
 ```
 
+- Every change must pass `flutter analyze` and the relevant `flutter test` suite locally before merge. This is the core CI principle for the repository.
+
 - We added an analyzer regression test (`test/analyzer_regression_test.dart`) which runs `flutter analyze` as part of `flutter test`. Running `flutter test` locally will catch analyzer issues that CI enforces.
 
 - To run only static analysis:

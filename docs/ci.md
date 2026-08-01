@@ -1,5 +1,7 @@
 CI and preflight
 
+Core CI principle: every change must pass `flutter analyze` and the relevant test suite locally before it is merged. This should be verified before invoking the merge gate.
+
 Preflight check (what `merge-gate.yml` runs):
 
 ```bash

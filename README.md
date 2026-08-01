@@ -47,6 +47,7 @@ A robust, test-driven Flutter MVVM application for managing IPSC match stages, s
 - **Test:** `flutter test`
   - New/Updated tests: migration tests (schema v2), widget tests for DNF/DQ + RO remark behavior, and additional stability improvements to StageInput widget tests.
   - Note: Shooter `scaleFactor` validation now accepts values in the range 0.100–20.000. Validation is enforced in `lib/viewmodel/shooter_setup_viewmodel.dart` and reflected in `lib/views/shooter_setup_view.dart`.
+- **CI principle:** Every change must pass `flutter analyze` and the relevant tests locally before merge.
 - **Hot Reload:** Supported
 - **Schema changes:**
   - Increment schema version in `PersistenceService` for breaking changes

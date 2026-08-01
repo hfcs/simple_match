@@ -12,8 +12,6 @@ import 'package:simple_match/services/persistence_service.dart';
 import 'package:simple_match/viewmodel/stage_input_viewmodel.dart';
 import 'package:simple_match/views/settings_view.dart';
 import 'package:simple_match/views/stage_input_view.dart';
-import 'package:simple_match/models/match_stage.dart';
-import 'package:simple_match/models/shooter.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

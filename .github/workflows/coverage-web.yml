@@ -44,10 +44,13 @@ jobs:
           echo "git-lfs:" && git lfs --version || echo "git-lfs not present"
       - name: Get packages
         run: flutter pub get
-      - name: Run coverage script
+      - name: Run web coverage script
+        env:
+          CHROME_BIN: /usr/bin/google-chrome-stable
+          CHUNKS: 2
         run: |
           chmod +x ./scripts/collect_coverage.sh
-          ./scripts/collect_coverage.sh
+          MODE=web ./scripts/collect_coverage.sh
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v4
         with:

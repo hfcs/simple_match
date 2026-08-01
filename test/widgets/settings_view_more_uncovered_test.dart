@@ -334,6 +334,76 @@ void main() {
       findsWidgets,
     );
   }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal rejects non-positive scale factor', (tester) async {
+    final repo = MatchRepository();
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView()),
+      ),
+    );
+
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter name'), 'Test Shooter');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Scale factor'), '0');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Portal URL'), 'https://hkg.as.ipscess.org/portal?match=35');
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Scale factor must be positive')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('Import from portal rejects invalid portal URL and shooter number', (tester) async {
+    final repo = MatchRepository();
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: repo,
+        child: MaterialApp(home: SettingsView()),
+      ),
+    );
+
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter name'), 'Test Shooter');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Scale factor'), '1.0');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), 'abc');
+    await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Portal URL'), 'not-a-url');
+    await tester.pump(const Duration(milliseconds: 200));
+
+    await tester.tap(find.text('Import from IPSC Portal'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.byWidgetPredicate((w) => w is Text && (w.data ?? '').toString().contains('Enter valid portal URL, shooter number, shooter name, and scale factor.')),
+      findsWidgets,
+    );
+  }, timeout: const Timeout(Duration(seconds: 45)));
+
+  testWidgets('SettingsView renders in narrow viewport without overflow', (tester) async {
+    tester.binding.window.physicalSizeTestValue = const Size(360, 640);
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    addTearDown(() {
+      tester.binding.window.clearPhysicalSizeTestValue();
+      tester.binding.window.clearDevicePixelRatioTestValue();
+    });
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider<MatchRepository>.value(
+        value: MatchRepository(),
+        child: const MaterialApp(home: SettingsView()),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SettingsView), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  }, timeout: const Timeout(Duration(seconds: 45)));
 }
 
 class _TempDir {

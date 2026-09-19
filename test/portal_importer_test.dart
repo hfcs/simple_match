@@ -128,19 +128,105 @@ void main() {
     expect(report.message, contains('already exists'));
   });
 
-  test('PortalImporter rejects when imported stages do not match current setup', () async {
+  test('PortalImporter allows partial imported stages for in-progress multi-day matches', () async {
     final importer = PortalImporter();
     final repo = MatchRepository(initialStages: [
       MatchStage(stage: 1, scoringShoots: 24),
       MatchStage(stage: 2, scoringShoots: 12),
       MatchStage(stage: 3, scoringShoots: 10),
     ]);
-    final detail = importer.parseShooterVerifyHtml(sampleHtml, 35, 181);
+    const partialHtml = '''
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="row mt-6 p-2" style="font-weight: bold;">
+      <div class="col-4">181 Law, Tze Yeung</div>
+      <div class="col-8 text-right">DIV: Open CLASSE: B FATOR: Minor CAT:</div>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Stage 1</td>
+          <td>6.8069</td>
+          <td>110</td>
+          <td>20</td>
+          <td>3</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>&nbsp;</td>
+          <td>16.16</td>
+        </tr>
+        <tr>
+          <td>Stage 2</td>
+          <td>5.7199</td>
+          <td>58</td>
+          <td>11</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>&nbsp;</td>
+          <td>10.14</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+''';
+    final detail = importer.parseShooterVerifyHtml(partialHtml, 35, 181);
+
+    final report = await importer.importShooterDetail(detail, repo, shooterName: 'Law, Tze Yeung', scaleFactor: 1.0);
+
+    expect(report.success, isTrue);
+    expect(report.resultsAdded, 2);
+    expect(report.shootersAdded, 1);
+    expect(repo.getResult(1, 'Law, Tze Yeung'), isNotNull);
+    expect(repo.getResult(2, 'Law, Tze Yeung'), isNotNull);
+  });
+
+  test('PortalImporter rejects when imported stages are outside current setup', () async {
+    final importer = PortalImporter();
+    final repo = MatchRepository(initialStages: [
+      MatchStage(stage: 1, scoringShoots: 24),
+      MatchStage(stage: 2, scoringShoots: 12),
+    ]);
+    const badHtml = '''
+<!DOCTYPE html>
+<html>
+  <body>
+    <div class="row mt-6 p-2" style="font-weight: bold;">
+      <div class="col-4">181 Law, Tze Yeung</div>
+      <div class="col-8 text-right">DIV: Open CLASSE: B FATOR: Minor CAT:</div>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Stage 99</td>
+          <td>6.8069</td>
+          <td>110</td>
+          <td>20</td>
+          <td>3</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>&nbsp;</td>
+          <td>16.16</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+''';
+    final detail = importer.parseShooterVerifyHtml(badHtml, 35, 181);
 
     final report = await importer.importShooterDetail(detail, repo, shooterName: 'Law, Tze Yeung', scaleFactor: 1.0);
 
     expect(report.success, isFalse);
-    expect(report.message, contains('does not match current match setup'));
+    expect(report.message, contains('not in the current match setup'));
   });
 
   test('PortalImporter rejects when scoring shoots do not agree with stage setup', () async {

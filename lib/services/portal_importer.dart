@@ -242,11 +242,12 @@ class PortalImporter {
 
     final expectedStages = repository.stages.map((s) => s.stage).toSet();
     final importedStages = detail.stageRows.map((r) => r.stage).toSet();
-    if (expectedStages.length != importedStages.length || !expectedStages.containsAll(importedStages)) {
+    final unknownStages = importedStages.where((stage) => !expectedStages.contains(stage)).toList();
+    if (unknownStages.isNotEmpty) {
       return PortalImportReport(
         success: false,
         message:
-            'Imported stage set does not match current match setup. Expected stages: ${expectedStages.toList()}. Imported stages: ${importedStages.toList()}.',
+            'Imported stage set includes stages that are not in the current match setup: ${unknownStages.toList()}. Current match stages: ${expectedStages.toList()}.',
       );
     }
 

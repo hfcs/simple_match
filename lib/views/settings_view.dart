@@ -957,7 +957,12 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 12),
               // Ranking mode toggle (in-memory, runtime only)
               Builder(builder: (context) {
-                final settings = Provider.of<UISettings>(context);
+                UISettings settings;
+                try {
+                  settings = Provider.of<UISettings>(context);
+                } catch (_) {
+                  settings = UISettings();
+                }
                 return SwitchListTile(
                   title: const Text('Use Scaled Ranking'),
                   subtitle: const Text('When enabled, rankings and match points are computed using shooter scale factors.'),

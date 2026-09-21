@@ -8,7 +8,9 @@ class OverallResultViewModel {
   OverallResultViewModel(this.repository);
 
   /// Returns a list of shooter results sorted by total points descending.
-  List<OverallShooterResult> getOverallResults() {
+  /// If [useScaledRanking] is true the stage points are computed using the
+  /// scaled (adjusted) hit factors; otherwise raw hit factors are used.
+  List<OverallShooterResult> getOverallResults({bool useScaledRanking = true}) {
     final shooters = repository.shooters;
     final stages = repository.stages;
     final results = repository.results;
@@ -23,7 +25,8 @@ class OverallResultViewModel {
           .where((r) => r.stage == stage.stage)
           .toList();
       if (stageResults.isEmpty) continue;
-      // Compute adjusted hit factor for each shooter
+      // Compute hit factor (raw) and adjusted hit factor (scaled) for each shooter
+      final Map<String, double> rawHitFactors = {};
       final Map<String, double> adjHitFactors = {};
       for (final r in stageResults) {
         final shooter = shooters.firstWhere(
@@ -39,18 +42,19 @@ class OverallResultViewModel {
             r.noShoots * 10 -
             r.procedureErrors * 10);
         final hitFactor = r.time > 0 ? math.max(0.0, totalScore / r.time) : 0.0;
-        final adjHitFactor = hitFactor * shooter.scaleFactor;
-        adjHitFactors[r.shooter] = adjHitFactor;
+        rawHitFactors[r.shooter] = hitFactor;
+        adjHitFactors[r.shooter] = hitFactor * shooter.scaleFactor;
       }
-      // Find highest adjusted hit factor in this stage
-      final maxAdjHitFactor = adjHitFactors.values.isNotEmpty
-          ? adjHitFactors.values.reduce((a, b) => a > b ? a : b)
+      // Choose basis depending on runtime toggle
+      final basisMap = useScaledRanking ? adjHitFactors : rawHitFactors;
+      final maxBasis = basisMap.values.isNotEmpty
+          ? basisMap.values.reduce((a, b) => a > b ? a : b)
           : 0.0;
-      if (maxAdjHitFactor == 0.0) continue;
+      if (maxBasis == 0.0) continue;
       // Assign stage points
       for (final r in stageResults) {
-        final adjHit = adjHitFactors[r.shooter] ?? 0.0;
-        final stagePoint = (adjHit / maxAdjHitFactor) * stage.scoringShoots * 5;
+        final basisValue = basisMap[r.shooter] ?? 0.0;
+        final stagePoint = (basisValue / maxBasis) * stage.scoringShoots * 5;
         shooterPoints[r.shooter] = (shooterPoints[r.shooter] ?? 0) + stagePoint;
       }
     }

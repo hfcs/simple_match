@@ -20,6 +20,7 @@ import 'viewmodel/team_game_viewmodel.dart';
 import 'views/team_game_setup_view.dart';
 
 import 'services/persistence_service.dart';
+import 'services/ui_settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,7 @@ class MiniIPSCMatchApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<UISettings>(create: (_) => UISettings()),
         ChangeNotifierProvider<MatchRepository>.value(value: repository),
         ProxyProvider<MatchRepository, MainMenuViewModel>(
           update: (_, repo, __) => MainMenuViewModel(repo),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // PDF export removed; no longer needed here.
 import '../viewmodel/stage_result_viewmodel.dart';
+import '../services/ui_settings.dart';
 
 class StageResultView extends StatelessWidget {
   final StageResultViewModel viewModel;
@@ -55,7 +56,8 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<StageResultViewModel>(context);
-    final stageRanks = vm.getStageRanks();
+    final settings = Provider.of<UISettings>(context);
+    final stageRanks = vm.getStageRanks(useScaledRanking: settings.useScaledRanking);
     final stages = vm.stages;
     final selected = _selectedStage;
 
@@ -173,9 +175,11 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
                                           SizedBox(
                                             width: charWidth * 5,
                                             child: RotatedBox(
-                                              quarterTurns: 3,
-                                              child: Text(
-                                                'Match Pt (After Scaling)',
+                                                  quarterTurns: 3,
+                                                  child: Text(
+                                                    settings.useScaledRanking
+                                                        ? 'Match Pt (After Scaling)'
+                                                        : 'Match Pt (Raw)',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: fontSize,

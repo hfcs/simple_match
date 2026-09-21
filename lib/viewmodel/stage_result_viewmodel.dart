@@ -69,8 +69,11 @@ class StageResultViewModel extends ChangeNotifier {
   List<Shooter> get shooters => _shooters;
   List<MatchStage> get stages => _stages;
 
-  /// Returns a map of stage number to ranked list of StageResultFullRank (sorted by scaled hit factor)
-  Map<int, List<StageResultFullRank>> getStageRanks() {
+  /// Returns a map of stage number to ranked list of StageResultFullRank.
+  /// If [useScaledRanking] is true, ranking and match points are computed
+  /// using the shooter's scaled (adjusted) hit factor; otherwise raw hit
+  /// factor is used as the basis.
+  Map<int, List<StageResultFullRank>> getStageRanks({bool useScaledRanking = true}) {
     final Map<int, List<StageResultFullRank>> stageRanks = {};
     for (final stage in _stages) {
       final stageResults = _results
@@ -97,21 +100,26 @@ class StageResultViewModel extends ChangeNotifier {
 
       // Calculate adjusted match points for this stage
       if (ranks.isNotEmpty) {
-        final maxAdjHitFactor = ranks
-            .map((r) => r.adjustedHitFactor)
-            .reduce((a, b) => a > b ? a : b);
+        // Choose basis depending on runtime toggle: scaled or raw.
+        final double Function(StageResultFullRank) basisSelector = useScaledRanking
+            ? ((r) => r.adjustedHitFactor)
+            : ((r) => r.hitFactor);
+        final maxBasis = ranks.map(basisSelector).reduce((a, b) => a > b ? a : b);
         for (final rank in ranks) {
-          final adjustedMatchPoint = maxAdjHitFactor > 0
-              ? (rank.adjustedHitFactor / maxAdjHitFactor) *
-                    stage.scoringShoots *
-                    5
+          final basisValue = basisSelector(rank);
+          final adjustedMatchPoint = maxBasis > 0
+              ? (basisValue / maxBasis) * stage.scoringShoots * 5
               : 0.0;
           rank.adjustedMatchPoint = adjustedMatchPoint;
         }
       }
 
-      // Sort by scaled (adjusted) hit factor descending
-      ranks.sort((a, b) => b.adjustedHitFactor.compareTo(a.adjustedHitFactor));
+      // Sort by the chosen basis descending (so leader appears first).
+      if (useScaledRanking) {
+        ranks.sort((a, b) => b.adjustedHitFactor.compareTo(a.adjustedHitFactor));
+      } else {
+        ranks.sort((a, b) => b.hitFactor.compareTo(a.hitFactor));
+      }
       stageRanks[stage.stage] = ranks;
     }
     return stageRanks;

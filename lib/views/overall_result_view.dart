@@ -10,12 +10,14 @@ import '../models/team_game.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
 // Use the html conditional to ensure the web implementation is selected for web
 // builds. The previous conditional used `dart.library.io` which can cause the
 // non-web implementation (which throws UnsupportedError) to be chosen in some
 // build scenarios. Explicitly prefer the non-web default and swap in the
 // web-specific file when `dart.library.html` is available.
 import 'non_web_pdf_utils.dart' if (dart.library.html) 'web_pdf_utils.dart';
+import '../services/ui_settings.dart';
 
 class OverallResultView extends StatefulWidget {
   const OverallResultView({super.key});
@@ -29,10 +31,11 @@ class _OverallResultViewState extends State<OverallResultView> {
 
   @override
   Widget build(BuildContext context) {
-    // Get repository and viewmodel
+    // Get repository, settings and viewmodel
     final repo = Provider.of<MatchRepository>(context, listen: false);
+    final settings = Provider.of<UISettings>(context);
     final viewModel = OverallResultViewModel(repo);
-    final results = viewModel.getOverallResults();
+    final results = viewModel.getOverallResults(useScaledRanking: settings.useScaledRanking);
     final stages = repo.stages;
     final shooters = repo.shooters;
     final allResults = repo.results;
@@ -62,6 +65,7 @@ class _OverallResultViewState extends State<OverallResultView> {
                               shooters: shooters,
                               allResults: allResults,
                               teamGame: teamGame,
+                              useScaledRanking: settings.useScaledRanking,
                             );
 
                             if (kIsWeb) {
@@ -157,6 +161,7 @@ Future<pw.Document> buildOverallResultPdf({
   required List shooters,
   required List allResults,
   TeamGame? teamGame,
+  bool useScaledRanking = true,
 }) async {
   pw.Font font;
   try {
@@ -221,7 +226,7 @@ Future<pw.Document> buildOverallResultPdf({
                   pw.Padding(
                     padding: const pw.EdgeInsets.all(4),
                     child: pw.Text(
-                      'Match Points (after scaling)',
+                      useScaledRanking ? 'Match Points (after scaling)' : 'Match Points (raw)',
                       style: pw.TextStyle(
                         fontWeight: pw.FontWeight.bold,
                         font: font,
@@ -470,19 +475,20 @@ Future<pw.Document> buildOverallResultPdf({
                   final stageResults = allResults
                       .where((r) => r.stage == stage.stage)
                       .toList();
-                  // Calculate max adjusted hit factor for this stage to compute adjusted match points
-                  final Map<String, double> adjHitFactors = {};
+                  // Calculate basis (raw or scaled) depending on the requested ranking mode
+                  final Map<String, double> rawHF = {};
+                  final Map<String, double> scaledHF = {};
                   for (final r in stageResults) {
                     final shooter = shooters.firstWhere(
                       (s) => s.name == r.shooter,
                       orElse: () => Shooter(name: r.shooter, scaleFactor: 1.0),
                     );
-                    adjHitFactors[r.shooter] = r.adjustedHitFactor(
-                      shooter.scaleFactor,
-                    );
+                    rawHF[r.shooter] = r.hitFactor;
+                    scaledHF[r.shooter] = r.adjustedHitFactor(shooter.scaleFactor);
                   }
-                  final maxAdjHitFactor = adjHitFactors.values.isNotEmpty
-                      ? adjHitFactors.values.reduce((a, b) => a > b ? a : b)
+                  final basisMap = useScaledRanking ? scaledHF : rawHF;
+                  final maxBasis = basisMap.values.isNotEmpty
+                      ? basisMap.values.reduce((a, b) => a > b ? a : b)
                       : 0.0;
 
                   // Create list of results with calculated match points for sorting
@@ -491,21 +497,22 @@ Future<pw.Document> buildOverallResultPdf({
                       (s) => s.name == r.shooter,
                       orElse: () => Shooter(name: r.shooter, scaleFactor: 1.0),
                     );
-                    final rawHF = r.hitFactor;
-                    final scaledHF = r.adjustedHitFactor(shooter.scaleFactor);
-                    final adjustedMatchPoint = maxAdjHitFactor > 0
-                        ? (scaledHF / maxAdjHitFactor) * stage.scoringShoots * 5
+                    final raw = rawHF[r.shooter] ?? 0.0;
+                    final scaled = scaledHF[r.shooter] ?? 0.0;
+                    final basisValue = basisMap[r.shooter] ?? 0.0;
+                    final adjustedMatchPoint = maxBasis > 0
+                        ? (basisValue / maxBasis) * stage.scoringShoots * 5
                         : 0.0;
                     return {
                       'result': r,
                       'shooter': shooter,
-                      'rawHF': rawHF,
-                      'scaledHF': scaledHF,
+                      'rawHF': raw,
+                      'scaledHF': scaled,
                       'adjustedMatchPoint': adjustedMatchPoint,
                     };
                   }).toList();
 
-                  // Sort by adjusted match point (highest first)
+                  // Sort by chosen basis-derived match point (highest first)
                   resultRows.sort(
                     (a, b) => (b['adjustedMatchPoint'] as double).compareTo(
                       a['adjustedMatchPoint'] as double,

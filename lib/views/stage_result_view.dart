@@ -56,7 +56,12 @@ class StageResultViewBodyState extends State<StageResultViewBody> {
   @override
   Widget build(BuildContext context) {
     final vm = Provider.of<StageResultViewModel>(context);
-    final settings = Provider.of<UISettings>(context);
+    UISettings settings;
+    try {
+      settings = Provider.of<UISettings>(context);
+    } catch (_) {
+      settings = UISettings();
+    }
     final stageRanks = vm.getStageRanks(useScaledRanking: settings.useScaledRanking);
     final stages = vm.stages;
     final selected = _selectedStage;

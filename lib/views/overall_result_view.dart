@@ -33,7 +33,12 @@ class _OverallResultViewState extends State<OverallResultView> {
   Widget build(BuildContext context) {
     // Get repository, settings and viewmodel
     final repo = Provider.of<MatchRepository>(context, listen: false);
-    final settings = Provider.of<UISettings>(context);
+    UISettings settings;
+    try {
+      settings = Provider.of<UISettings>(context);
+    } catch (_) {
+      settings = UISettings();
+    }
     final viewModel = OverallResultViewModel(repo);
     final results = viewModel.getOverallResults(useScaledRanking: settings.useScaledRanking);
     final stages = repo.stages;

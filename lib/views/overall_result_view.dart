@@ -10,7 +10,6 @@ import '../models/team_game.dart';
 import '../models/shooter.dart';
 import 'package:printing/printing.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:provider/provider.dart';
 // Use the html conditional to ensure the web implementation is selected for web
 // builds. The previous conditional used `dart.library.io` which can cause the
 // non-web implementation (which throws UnsupportedError) to be chosen in some

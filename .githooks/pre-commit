@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Running pre-commit tests: flutter test (fast local check)"
+# Run tests; fail the commit if tests fail
+if ! flutter test --coverage; then
+  echo "\nPre-commit: Tests failed. Abort commit. Run 'flutter test' locally to inspect failures." >&2
+  exit 1
+fi
+
+echo "Pre-commit: tests passed. Proceeding."
+
+exit 0

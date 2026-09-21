@@ -10,6 +10,7 @@ import '../services/persistence_service.dart';
 import '../services/portal_importer.dart';
 import 'settings_view_coverage_helpers.dart';
 import '../repository/match_repository.dart';
+import '../services/ui_settings.dart';
 
 class SettingsView extends StatefulWidget {
   /// Optional URL to prefill the portal import field. This value is editable.
@@ -953,6 +954,17 @@ class _SettingsViewState extends State<SettingsView> {
                 label: const Text('Import Backup'),
                 onPressed: () => _importBackup(context),
               ),
+              const SizedBox(height: 12),
+              // Ranking mode toggle (in-memory, runtime only)
+              Builder(builder: (context) {
+                final settings = Provider.of<UISettings>(context);
+                return SwitchListTile(
+                  title: const Text('Use Scaled Ranking'),
+                  subtitle: const Text('When enabled, rankings and match points are computed using shooter scale factors.'),
+                  value: settings.useScaledRanking,
+                  onChanged: (v) => settings.setUseScaledRanking(v),
+                );
+              }),
               const SizedBox(height: 20),
               const Text('Portal Import', style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),

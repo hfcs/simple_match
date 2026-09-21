@@ -237,7 +237,10 @@ void main() {
     );
 
     // No shooter name has been entered; this should fail validation.
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pump(const Duration(milliseconds: 200));
 
     expect(
@@ -264,7 +267,10 @@ void main() {
     await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
     await tester.pump(const Duration(milliseconds: 200));
 
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pumpAndSettle();
 
     expect(
@@ -296,7 +302,10 @@ void main() {
     await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
     await tester.pump(const Duration(milliseconds: 200));
 
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pumpAndSettle();
 
     expect(
@@ -326,7 +335,10 @@ void main() {
     await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Shooter #'), '7');
     await tester.pump(const Duration(milliseconds: 200));
 
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pumpAndSettle();
 
     expect(
@@ -351,7 +363,10 @@ void main() {
     await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Portal URL'), 'https://hkg.as.ipscess.org/portal?match=35');
     await tester.pump(const Duration(milliseconds: 200));
 
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pumpAndSettle();
 
     expect(
@@ -376,7 +391,10 @@ void main() {
     await tester.enterText(find.byWidgetPredicate((w) => w is TextField && w.decoration?.labelText == 'Portal URL'), 'not-a-url');
     await tester.pump(const Duration(milliseconds: 200));
 
-    await tester.tap(find.text('Import from IPSC Portal'));
+    final portalBtn = find.text('Import from IPSC Portal');
+    await tester.ensureVisible(portalBtn);
+    await tester.pumpAndSettle();
+    await tester.tap(portalBtn);
     await tester.pumpAndSettle();
 
     expect(

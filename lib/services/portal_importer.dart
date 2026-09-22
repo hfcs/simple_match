@@ -195,8 +195,12 @@ class PortalImporter {
         misses: row.misses,
         noShoots: row.noShoots,
         procedureErrors: row.procedureErrors,
-        status: 'Completed',
-        roRemark: 'Imported from portal verify page',
+        status: (row.points == 0 && row.time == 0.0 && row.scoringShoots == 0)
+            ? 'DNF'
+            : 'Completed',
+        roRemark: row.points == 0 && row.time == 0.0 && row.scoringShoots == 0
+            ? 'Imported from portal verify page (DNF)'
+            : 'Imported from portal verify page',
       );
     }).toList();
   }
@@ -267,7 +271,11 @@ class PortalImporter {
 
       final scoringShoots = existingStage.scoringShoots;
       final importedScoringShoots = row.a + row.c + row.d + row.misses;
-      if (importedScoringShoots != scoringShoots) {
+      // Allow portal rows that represent a DNF (all-zero row) to bypass the
+      // scoring-shoots validation. These rows indicate the shooter did not
+      // complete the stage and therefore won't have scoring hits/time.
+      final isLikelyDnf = row.points == 0 && row.time == 0.0 && importedScoringShoots == 0 && row.noShoots == 0;
+      if (!isLikelyDnf && importedScoringShoots != scoringShoots) {
         return PortalImportReport(
           success: false,
           message:

@@ -301,6 +301,19 @@ class MatchRepository extends ChangeNotifier {
             'data': s.toJson(),
           });
         }
+        // Also remove any stage results belonging to this shooter and log them
+        final removedResults = _results.where((r) => r.shooter == name).toList();
+        _results.removeWhere((r) => r.shooter == name);
+        for (final r in removedResults) {
+          try {
+            await persistence!.appendLog('stageResultsLog', {
+              'timestampUtc': DateTime.now().toUtc().toIso8601String(),
+              'type': 'delete',
+              'channel': 'UI',
+              'data': r.toJson(),
+            });
+          } catch (_) {}
+        }
       }
     } catch (_) {}
     await saveAll();

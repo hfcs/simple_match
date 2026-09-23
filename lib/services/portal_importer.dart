@@ -17,6 +17,7 @@ class PortalStageRow {
   final int misses;
   final int noShoots;
   final int procedureErrors;
+  final String statusText;
   final double time;
 
   PortalStageRow({
@@ -29,6 +30,7 @@ class PortalStageRow {
     required this.misses,
     required this.noShoots,
     required this.procedureErrors,
+    this.statusText = '',
     required this.time,
   });
 
@@ -139,6 +141,7 @@ class PortalImporter {
       final misses = _parseInt(cells[6].text);
       final noShoots = _parseInt(cells[7].text);
       final procedureErrors = _parseInt(cells[8].text);
+      final statusText = cells.length > 9 ? cells[9].text.trim() : '';
       final time = _parseDouble(cells[10].text);
       rows.add(PortalStageRow(
         stage: stageNumber,
@@ -150,6 +153,7 @@ class PortalImporter {
         misses: misses,
         noShoots: noShoots,
         procedureErrors: procedureErrors,
+        statusText: statusText,
         time: time,
       ));
     }
@@ -185,6 +189,15 @@ class PortalImporter {
 
   List<StageResult> buildStageResultsFromShooter(PortalShooterDetail detail) {
     return detail.stageRows.map((row) {
+      final text = row.statusText.toUpperCase();
+      final isDq = text.contains('DQ');
+      final isDnf = isDq || text.contains('DNF') ||
+          (row.points == 0 && row.time == 0.0 && row.scoringShoots == 0);
+      final status = isDq ? 'DQ' : (isDnf ? 'DNF' : 'Completed');
+      final ro = isDq
+          ? 'Imported from portal verify page (DQ)'
+          : (isDnf ? 'Imported from portal verify page (DNF)' : 'Imported from portal verify page');
+
       return StageResult(
         stage: row.stage,
         shooter: detail.name,
@@ -195,12 +208,8 @@ class PortalImporter {
         misses: row.misses,
         noShoots: row.noShoots,
         procedureErrors: row.procedureErrors,
-        status: (row.points == 0 && row.time == 0.0 && row.scoringShoots == 0)
-            ? 'DNF'
-            : 'Completed',
-        roRemark: row.points == 0 && row.time == 0.0 && row.scoringShoots == 0
-            ? 'Imported from portal verify page (DNF)'
-            : 'Imported from portal verify page',
+        status: status,
+        roRemark: ro,
       );
     }).toList();
   }

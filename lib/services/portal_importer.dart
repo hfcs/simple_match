@@ -68,6 +68,9 @@ class PortalImportReport {
   final int shootersAdded;
   final int resultsAdded;
   final int resultsUpdated;
+  final int totalProcessed;
+  final int? lastShooterNumber;
+  final Duration elapsedDuration;
 
   PortalImportReport({
     required this.success,
@@ -76,6 +79,9 @@ class PortalImportReport {
     this.shootersAdded = 0,
     this.resultsAdded = 0,
     this.resultsUpdated = 0,
+    this.totalProcessed = 0,
+    this.lastShooterNumber,
+    this.elapsedDuration = Duration.zero,
   });
 }
 
@@ -83,10 +89,22 @@ class PortalImportReport {
 /// it into the app's model objects.
 class PortalImporter {
   final http.Client _client;
+  final bool _debugEnabled;
+  final void Function(String message)? _logger;
 
   PortalImporter({
     http.Client? httpClient,
-  }) : _client = httpClient ?? http.Client();
+    bool debugEnabled = false,
+    void Function(String message)? logger,
+  }) : _client = httpClient ?? http.Client(),
+       _debugEnabled = debugEnabled,
+       _logger = logger ?? (debugEnabled ? print : null);
+
+  void _debugLog(String message) {
+    if (_debugEnabled) {
+      (_logger ?? print)(message);
+    }
+  }
 
   Uri _buildVerifyUriFromPortalUrl(String portalUrl, int shooterNumber) {
     final parsed = Uri.parse(portalUrl);
@@ -105,16 +123,139 @@ class PortalImporter {
 
   Future<PortalShooterDetail> fetchShooterDetailFromUrl(String portalUrl, int shooterNumber) async {
     final uri = _buildVerifyUriFromPortalUrl(portalUrl, shooterNumber);
+    _debugLog('[ESS_DEBUG] fetching shooter $shooterNumber from $uri');
     final response = await _client.get(uri).timeout(const Duration(seconds: 15));
+    _debugLog('[ESS_DEBUG] shooter $shooterNumber response status=${response.statusCode} reason=${response.reasonPhrase} bytes=${response.body.length}');
     if (response.statusCode != 200) {
       throw Exception('Failed to fetch portal page: ${response.statusCode} ${response.reasonPhrase}');
     }
     final matchId = int.parse(Uri.parse(portalUrl).queryParameters['match']!);
-    return parseShooterVerifyHtml(response.body, matchId, shooterNumber);
+    final detail = parseShooterVerifyHtml(response.body, matchId, shooterNumber);
+    _debugLog('[ESS_DEBUG] parsed shooter $shooterNumber name=${detail.name} stages=${detail.stageRows.length}');
+    return detail;
+  }
+
+  String buildEssStageCsvFromRepository(MatchRepository repository) {
+    final lines = <String>[
+      'shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
+    ];
+
+    final allResults = <StageResult>[];
+    for (final shooter in repository.shooters) {
+      final shooterResults = repository.results.where((result) => result.shooter == shooter.name).toList()
+        ..sort((a, b) => a.stage.compareTo(b.stage));
+      allResults.addAll(shooterResults);
+    }
+
+    allResults.sort((a, b) {
+      final byShooter = a.shooter.compareTo(b.shooter);
+      if (byShooter != 0) return byShooter;
+      return a.stage.compareTo(b.stage);
+    });
+
+    for (final result in allResults) {
+      final safeName = result.shooter.replaceAll('"', '""');
+      final escapedName = safeName.contains(',') || safeName.contains('"') || safeName.contains('\n')
+          ? '"$safeName"'
+          : safeName;
+
+      final hitFactor = result.time <= 0 ? 0.0 : result.totalScore / result.time;
+      lines.add([
+        escapedName,
+        result.stage,
+        hitFactor,
+        result.totalScore,
+        result.a,
+        result.c,
+        result.d,
+        result.misses,
+        result.noShoots,
+        result.procedureErrors,
+        result.time,
+      ].map((value) => value.toString()).join(','));
+    }
+
+    return lines.join('\n');
+  }
+
+  String buildEssStageCsvFromDetails(List<PortalShooterDetail> details) {
+    final lines = <String>[
+      'shooterNumber,shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
+    ];
+
+    for (final detail in details) {
+      for (final row in detail.stageRows) {
+        final safeName = detail.name.replaceAll('"', '""');
+        final escapedName = safeName.contains(',') || safeName.contains('"') || safeName.contains('\n')
+            ? '"$safeName"'
+            : safeName;
+        lines.add([
+          detail.shooterNumber,
+          escapedName,
+          row.stage,
+          row.factor,
+          row.points,
+          row.a,
+          row.c,
+          row.d,
+          row.misses,
+          row.noShoots,
+          row.procedureErrors,
+          row.time,
+        ].map((value) => value.toString()).join(','));
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  Future<List<PortalShooterDetail>> extractShooterDetailsFromPortal({
+    required String portalUrl,
+    required int startShooterNumber,
+    int? endShooterNumber,
+    void Function(int currentShooterNumber, int totalRange, String status)? onProgress,
+  }) async {
+    if (startShooterNumber < 1) {
+      throw ArgumentError.value(startShooterNumber, 'startShooterNumber', 'must be positive');
+    }
+
+    final totalRange = endShooterNumber == null ? null : endShooterNumber - startShooterNumber + 1;
+    final details = <PortalShooterDetail>[];
+    var shooterNumber = startShooterNumber;
+
+    while (endShooterNumber == null || shooterNumber <= endShooterNumber) {
+      try {
+        onProgress?.call(shooterNumber, totalRange ?? 0, 'Fetching shooter $shooterNumber');
+        final detail = await fetchShooterDetailFromUrl(portalUrl, shooterNumber);
+        details.add(detail);
+        onProgress?.call(shooterNumber, totalRange ?? 0, detail.name);
+
+        if (endShooterNumber != null && shooterNumber >= endShooterNumber) {
+          break;
+        }
+
+        final delay = computeNextQueryDelay(
+          responseTime: const Duration(milliseconds: 200),
+          hadResponse: true,
+        );
+        await delayBeforeNextRequest(delay);
+        shooterNumber++;
+      } catch (_) {
+        break;
+      }
+    }
+
+    return details;
   }
 
   PortalShooterDetail parseShooterVerifyHtml(String html, int matchId, int shooterNumber) {
     final document = parse(html);
+    final textContent = document.body?.text ?? html;
+    final normalizedText = textContent.replaceAll(RegExp(r'\s+'), ' ').trim();
+    if (normalizedText.contains('Shooter not found') || normalizedText.contains('not found')) {
+      throw Exception('Shooter $shooterNumber not found on ESS portal.');
+    }
+
     final nameElement = document.querySelector('div.row.mt-6 .col-4');
     final headerElement = document.querySelector('div.row.mt-6 .col-8');
     final rawName = nameElement?.text.trim().replaceAll(RegExp(r'\s+'), ' ') ?? '';
@@ -158,8 +299,8 @@ class PortalImporter {
       ));
     }
 
-    if (rows.isEmpty) {
-      throw Exception('Unable to parse any stage rows from verify page.');
+    if (name.isEmpty && headerText.isEmpty && rows.isEmpty) {
+      throw Exception('Unable to parse any shooter data from verify page.');
     }
 
     return PortalShooterDetail(
@@ -214,6 +355,22 @@ class PortalImporter {
     }).toList();
   }
 
+  Duration computeNextQueryDelay({
+    required Duration responseTime,
+    required bool hadResponse,
+  }) {
+    if (!hadResponse || responseTime > const Duration(seconds: 2)) {
+      return const Duration(seconds: 5);
+    }
+    return const Duration(seconds: 2);
+  }
+
+  Future<void> delayBeforeNextRequest(Duration delay) async {
+    if (delay > Duration.zero) {
+      await Future<void>.delayed(delay);
+    }
+  }
+
   Future<PortalImportReport> importShooterToRepository(
     String portalUrl,
     int shooterNumber,
@@ -232,6 +389,196 @@ class PortalImporter {
     );
   }
 
+  Future<int> detectLastShooterNumber(
+    String portalUrl, {
+    int startShooterNumber = 1,
+    int maxAttempts = 1000,
+    Duration delayBetweenChecks = Duration.zero,
+    void Function(int currentShooterNumber, int? lastValidShooter, String status)? onProgress,
+  }) async {
+    if (startShooterNumber < 1) {
+      return 0;
+    }
+
+    var low = startShooterNumber;
+    var high = (startShooterNumber + maxAttempts).clamp(500, 1000000);
+    var lastValidShooter = 0;
+
+    while (low <= high) {
+      final mid = low + ((high - low) ~/ 2);
+      try {
+        onProgress?.call(mid, lastValidShooter, 'Checking shooter $mid');
+        final detail = await fetchShooterDetailFromUrl(portalUrl, mid);
+        lastValidShooter = detail.shooterNumber;
+        onProgress?.call(mid, lastValidShooter, detail.name);
+        low = mid + 1;
+      } catch (_) {
+        onProgress?.call(mid, lastValidShooter, 'Shooter $mid not found');
+        high = mid - 1;
+      }
+
+      if (delayBetweenChecks > Duration.zero) {
+        await delayBeforeNextRequest(delayBetweenChecks);
+      }
+    }
+
+    return lastValidShooter;
+  }
+
+  String formatDuration(Duration duration) {
+    if (duration.inMilliseconds < 1000) {
+      return '${duration.inMilliseconds}ms';
+    }
+
+    final seconds = duration.inSeconds;
+    if (seconds < 60) {
+      return '${(duration.inMilliseconds / 1000).toStringAsFixed(1)}s';
+    }
+
+    final minutes = duration.inMinutes;
+    final remainingSeconds = seconds % 60;
+    return '${minutes}m ${remainingSeconds}s';
+  }
+
+  Future<PortalImportReport> importAllShootersFromPortal({
+    required String portalUrl,
+    required int startShooterNumber,
+    int? endShooterNumber,
+    required MatchRepository repository,
+    double scaleFactor = 1.0,
+    bool overwriteExistingResults = true,
+    bool autoDetectEndShooter = false,
+    void Function(int current, int total, String shooterName)? onProgress,
+  }) async {
+    final overallStopwatch = Stopwatch()..start();
+
+    if (startShooterNumber < 1) {
+      return PortalImportReport(
+        success: false,
+        message: 'Shooter numbers must be positive.',
+      );
+    }
+
+    if (!autoDetectEndShooter) {
+      if (endShooterNumber == null || endShooterNumber < 1) {
+        return PortalImportReport(
+          success: false,
+          message: 'End shooter number must be provided when auto-detect is disabled.',
+        );
+      }
+      if (startShooterNumber > endShooterNumber) {
+        return PortalImportReport(
+          success: false,
+          message: 'Start shooter number must be less than or equal to the end shooter number.',
+        );
+      }
+    }
+
+    final totalShooters = autoDetectEndShooter ? 0 : endShooterNumber! - startShooterNumber + 1;
+    var totalProcessed = 0;
+    var shootersAdded = 0;
+    var resultsAdded = 0;
+    var resultsUpdated = 0;
+    var skipped = 0;
+    var lastResponseTime = Duration.zero;
+    var lastValidShooter = startShooterNumber - 1;
+    var shooterNumber = startShooterNumber;
+
+    while (true) {
+      final stopwatch = Stopwatch()..start();
+      try {
+        final currentIndex = shooterNumber - startShooterNumber + 1;
+        final total = autoDetectEndShooter ? (currentIndex + 1) : totalShooters;
+        onProgress?.call(currentIndex, total, 'Fetching shooter $shooterNumber');
+
+        final detail = await fetchShooterDetailFromUrl(portalUrl, shooterNumber);
+        lastResponseTime = stopwatch.elapsed;
+        lastValidShooter = shooterNumber;
+        onProgress?.call(currentIndex, total, detail.name);
+
+        _debugLog('[ESS_DEBUG] bulk import: fetched shooter $shooterNumber ${detail.name}, stageRows=${detail.stageRows.length}, repositoryStages=${repository.stages.length}');
+
+        final report = await importShooterDetail(
+          detail,
+          repository,
+          shooterName: detail.name,
+          scaleFactor: scaleFactor,
+          overwriteExistingResults: overwriteExistingResults,
+        );
+
+        _debugLog('[ESS_DEBUG] bulk import: shooter $shooterNumber result success=${report.success} message=${report.message} resultsAdded=${report.resultsAdded} shootersAdded=${report.shootersAdded}');
+
+        totalProcessed++;
+        if (report.success) {
+          shootersAdded += report.shootersAdded;
+          resultsAdded += report.resultsAdded;
+          resultsUpdated += report.resultsUpdated;
+        } else {
+          skipped++;
+        }
+      } catch (error, stackTrace) {
+        lastResponseTime = stopwatch.elapsed;
+        _debugLog('[ESS_DEBUG] bulk import catch: shooter $shooterNumber failed with $error');
+        _debugLog('[ESS_DEBUG] bulk import stackTrace: $stackTrace');
+
+        if (autoDetectEndShooter) {
+          break;
+        }
+
+        skipped++;
+        _debugLog('[ESS_DEBUG] bulk import: skipping missing shooter $shooterNumber and continuing range scan');
+      }
+
+      if (autoDetectEndShooter) {
+        final delay = computeNextQueryDelay(
+          responseTime: lastResponseTime,
+          hadResponse: lastResponseTime > Duration.zero,
+        );
+        await delayBeforeNextRequest(delay);
+        shooterNumber++;
+        continue;
+      }
+
+      if (shooterNumber >= endShooterNumber!) {
+        break;
+      }
+
+      final delay = computeNextQueryDelay(
+        responseTime: lastResponseTime,
+        hadResponse: lastResponseTime > Duration.zero,
+      );
+      await delayBeforeNextRequest(delay);
+      shooterNumber++;
+    }
+
+    final importedAnyData = totalProcessed > 0 || shootersAdded > 0 || resultsAdded > 0;
+    final elapsed = overallStopwatch.elapsed;
+    final elapsedText = formatDuration(elapsed);
+
+    final effectiveMessage = autoDetectEndShooter
+        ? (lastValidShooter >= startShooterNumber
+            ? 'Imported shooters from $startShooterNumber to $lastValidShooter. (took $elapsedText)'
+            : 'No valid shooters found starting at $startShooterNumber. (took $elapsedText)')
+        : (importedAnyData
+            ? (skipped == 0
+                ? 'Imported all shooters from $startShooterNumber to $endShooterNumber. (took $elapsedText)'
+                : 'Imported ${totalProcessed - skipped} shooters from ESS match; skipped $skipped requests. (took $elapsedText)')
+            : 'No valid shooter data was imported from $startShooterNumber to $endShooterNumber. (took $elapsedText)');
+
+    return PortalImportReport(
+      success: autoDetectEndShooter
+          ? (lastValidShooter >= startShooterNumber && importedAnyData)
+          : importedAnyData,
+      message: effectiveMessage,
+      shootersAdded: shootersAdded,
+      resultsAdded: resultsAdded,
+      resultsUpdated: resultsUpdated,
+      totalProcessed: totalProcessed,
+      lastShooterNumber: autoDetectEndShooter ? lastValidShooter : endShooterNumber,
+      elapsedDuration: elapsed,
+    );
+  }
+
   Future<PortalImportReport> importShooterDetail(
     PortalShooterDetail detail,
     MatchRepository repository, {
@@ -239,30 +586,51 @@ class PortalImporter {
     required double scaleFactor,
     bool overwriteExistingResults = false,
   }) async {
+    _debugLog('[ESS_DEBUG] importShooterDetail begin shooterName=$shooterName shooterNumber=${detail.shooterNumber} rows=${detail.stageRows.length}');
     if (repository.getShooter(shooterName) != null) {
+      _debugLog('[ESS_DEBUG] importShooterDetail bail: shooter already exists name=$shooterName');
       return PortalImportReport(
         success: false,
         message: 'Shooter name "$shooterName" already exists in current match.',
       );
     }
 
+    final importedStages = detail.stageRows.map((r) => r.stage).toSet();
+    _debugLog('[ESS_DEBUG] match-setup check: importedStages=${importedStages.toList()} currentStages=${repository.stages.map((s) => s.stage).toList()}');
     if (repository.stages.isEmpty) {
-      return PortalImportReport(
-        success: false,
-        message: 'No stage setup exists in current match. Please configure stages before importing.',
-      );
+      final stageMap = <int, int>{};
+      for (final row in detail.stageRows) {
+        final scoringShoots = row.a + row.c + row.d + row.misses;
+        final current = stageMap[row.stage];
+        if (current == null || scoringShoots > current) {
+          stageMap[row.stage] = scoringShoots;
+        }
+      }
+      _debugLog('[ESS_DEBUG] auto-creating stages from ESS rows: ${stageMap.entries.map((e) => '${e.key}:${e.value}').join(', ')}');
+      for (final entry in stageMap.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
+        await repository.addStage(MatchStage(stage: entry.key, scoringShoots: entry.value));
+      }
     }
 
     final expectedStages = repository.stages.map((s) => s.stage).toSet();
-    final importedStages = detail.stageRows.map((r) => r.stage).toSet();
-    final unknownStages = importedStages.where((stage) => !expectedStages.contains(stage)).toList();
-    if (unknownStages.isNotEmpty) {
-      return PortalImportReport(
-        success: false,
-        message:
-            'Imported stage set includes stages that are not in the current match setup: ${unknownStages.toList()}. Current match stages: ${expectedStages.toList()}.',
-      );
+    final missingStages = importedStages.where((stage) => !expectedStages.contains(stage)).toList();
+    if (missingStages.isNotEmpty) {
+      final stageMap = <int, int>{};
+      for (final row in detail.stageRows) {
+        if (!missingStages.contains(row.stage)) continue;
+        final scoringShoots = row.a + row.c + row.d + row.misses;
+        final current = stageMap[row.stage];
+        if (current == null || scoringShoots > current) {
+          stageMap[row.stage] = scoringShoots;
+        }
+      }
+      _debugLog('[ESS_DEBUG] auto-creating missing stages from ESS rows: ${stageMap.entries.map((e) => '${e.key}:${e.value}').join(', ')}');
+      for (final entry in stageMap.entries.toList()..sort((a, b) => a.key.compareTo(b.key))) {
+        await repository.addStage(MatchStage(stage: entry.key, scoringShoots: entry.value));
+      }
     }
+
+    _debugLog('[ESS_DEBUG] match-setup check complete: importedStages=${importedStages.toList()} expectedStages=${expectedStages.toList()} missingStages=$missingStages');
 
     var stagesAdded = 0;
     var shootersAdded = 0;
@@ -270,28 +638,34 @@ class PortalImporter {
     var resultsUpdated = 0;
 
     for (final row in detail.stageRows) {
-      final existingStage = repository.getStage(row.stage);
+      var existingStage = repository.getStage(row.stage);
+      final importedScoringShoots = row.a + row.c + row.d + row.misses;
       if (existingStage == null) {
-        return PortalImportReport(
-          success: false,
-          message: 'Stage ${row.stage} is missing from current match setup.',
-        );
+        _debugLog('[ESS_DEBUG] creating stage ${row.stage} from ESS row because it was missing');
+        existingStage = MatchStage(stage: row.stage, scoringShoots: importedScoringShoots);
+        await repository.addStage(existingStage);
+        stagesAdded++;
+      } else if (existingStage.scoringShoots != importedScoringShoots) {
+        final reconciled = MatchStage(stage: row.stage, scoringShoots: importedScoringShoots);
+        _debugLog('[ESS_DEBUG] reconciling stage ${row.stage} from ${existingStage.scoringShoots} to $importedScoringShoots');
+        await repository.updateStage(reconciled);
       }
 
-      final scoringShoots = existingStage.scoringShoots;
-      final importedScoringShoots = row.a + row.c + row.d + row.misses;
-      // Allow portal rows that represent a DNF (all-zero row) to bypass the
-      // scoring-shoots validation. These rows indicate the shooter did not
-      // complete the stage and therefore won't have scoring hits/time.
+      final scoringShoots = repository.getStage(row.stage)!.scoringShoots;
       final isLikelyDnf = row.points == 0 && row.time == 0.0 && importedScoringShoots == 0 && row.noShoots == 0;
       if (!isLikelyDnf && importedScoringShoots != scoringShoots) {
+        _debugLog('[ESS_DEBUG] importShooterDetail bail: stage ${row.stage} invalid imported=$importedScoringShoots expected=$scoringShoots stageRows=${detail.stageRows.length}');
         return PortalImportReport(
           success: false,
           message:
               'Stage ${row.stage} is invalid: A+C+D+MI = $importedScoringShoots but expected $scoringShoots scoring shoots.',
         );
+      } else {
+        _debugLog('[ESS_DEBUG] stage ${row.stage} validation passed: imported=$importedScoringShoots expected=$scoringShoots isLikelyDnf=$isLikelyDnf');
       }
     }
+
+    _debugLog('[ESS_DEBUG] stage validation passed for shooter $shooterName; proceeding to repository write');
 
     for (final row in detail.stageRows) {
       final result = StageResult(
@@ -317,8 +691,11 @@ class PortalImporter {
       }
     }
 
+    _debugLog('[ESS_DEBUG] writing shooter $shooterName to repository with ${detail.stageRows.length} rows');
     await repository.addShooter(Shooter(name: shooterName, scaleFactor: scaleFactor));
     shootersAdded++;
+
+    _debugLog('[ESS_DEBUG] repository now has shooters=${repository.shooters.length} results=${repository.results.length} stages=${repository.stages.length}');
 
     return PortalImportReport(
       success: true,

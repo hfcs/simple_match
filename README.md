@@ -137,10 +137,10 @@ Recent CI notes
 - Developer/contributor instructions: `.github/copilot-instructions.md`
 - Unicode PDF export and font bundling: see `.github/copilot-instructions.md`
 
-## Recent Schema Update (v4)
+## Recent Schema Update (v6)
 
-- The persisted data schema was bumped to **v4** (2026-02-19): per-record audit timestamps `createdAt` and `updatedAt` (ISO8601 UTC) were added to `MatchStage`, `Shooter`, `StageResult`, and `TeamGame`.
-- Migration/backfill is performed on app startup by `PersistenceService`; missing timestamps are backfilled using the system UTC now. See `data_schema_history.md` for the changelog and `docs/data_schema_versioning.md` for migration guidance.
+- The persisted data schema was bumped to **v6** (2026-09-27): ESS verification metadata (`division`, `shooterClass`, and `category`) was added to each persisted `Shooter` record.
+- Migration/backfill is performed on app startup by `PersistenceService`; legacy shooter records missing the metadata are backfilled with empty strings so they remain loadable and exportable. See `data_schema_history.md` for the changelog and `docs/data_schema_versioning.md` for migration guidance.
 
 ## Release tooling
 

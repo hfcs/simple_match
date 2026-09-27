@@ -14,7 +14,7 @@ String _nowIso() => DateTime.now().toUtc().toIso8601String();
 
 /// Service for data persistence using SharedPreferences.
 /// Data schema version. Increment this when making breaking changes to persisted data.
-const int kDataSchemaVersion = 5; // v5: rename timestamp fields to UTC-suffixed keys
+const int kDataSchemaVersion = 6; // v6: add ESS verification metadata to shooters (division, shooterClass, category)
 const String kDataSchemaVersionKey = 'dataSchemaVersion';
 
 final _logger = Logger('PersistenceService');
@@ -363,6 +363,28 @@ class PersistenceService {
         }
       } catch (e, st) {
         _logger.warning('Failed to migrate teamGame to utc keys: $e', e, st);
+      }
+    }
+
+    // Migration for v6: add ESS verification metadata to each shooter with empty defaults.
+    if (from < 6 && to >= 6) {
+      _logger.info('Migrating shooters to include ESS verification metadata (v6)');
+      try {
+        final rawShooters = prefs.getString('shooters');
+        if (rawShooters != null) {
+          final decoded = jsonDecode(rawShooters) as List;
+          final updated = <Map<String, dynamic>>[];
+          for (final item in decoded) {
+            final map = item is Map<String, dynamic> ? Map<String, dynamic>.from(item) : Map<String, dynamic>.from(item as Map);
+            map['division'] = (map['division'] as String?) ?? '';
+            map['shooterClass'] = (map['shooterClass'] as String?) ?? '';
+            map['category'] = (map['category'] as String?) ?? '';
+            updated.add(map);
+          }
+          await prefs.setString('shooters', jsonEncode(updated));
+        }
+      } catch (e, st) {
+        _logger.warning('Failed to add ESS verification metadata to shooters: $e', e, st);
       }
     }
 

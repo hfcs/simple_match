@@ -210,7 +210,7 @@ void main() {
     ]);
 
     final csv = importer.buildEssStageCsvFromRepository(repo);
-    expect(csv, contains('shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time'));
+    expect(csv, contains('shooterName,division,shooterClass,category,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time'));
     expect(csv, contains('Alpha'));
     expect(csv, contains('Bravo'));
     expect(csv, isNot(contains('shooterNumber,')));
@@ -242,8 +242,8 @@ void main() {
       ),
     ]);
 
-    expect(csv, contains('shooterNumber,shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time'));
-    expect(csv, contains('181,Sample Shooter 181,1,6.8069,110,20,3,1,0,0,0,16.16'));
+    expect(csv, contains('shooterNumber,shooterName,division,shooterClass,category,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time'));
+    expect(csv, contains('181,Sample Shooter 181,,,,1,6.8069,110,20,3,1,0,0,0,16.16'));
     expect(csv, isNot(contains('status')));
   });
 

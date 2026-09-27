@@ -137,7 +137,7 @@ class PortalImporter {
 
   String buildEssStageCsvFromRepository(MatchRepository repository) {
     final lines = <String>[
-      'shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
+      'shooterName,division,shooterClass,category,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
     ];
 
     final allResults = <StageResult>[];
@@ -154,6 +154,10 @@ class PortalImporter {
     });
 
     for (final result in allResults) {
+      final shooter = repository.shooters.firstWhere(
+        (candidate) => candidate.name == result.shooter,
+        orElse: () => Shooter(name: result.shooter),
+      );
       final safeName = result.shooter.replaceAll('"', '""');
       final escapedName = safeName.contains(',') || safeName.contains('"') || safeName.contains('\n')
           ? '"$safeName"'
@@ -162,6 +166,9 @@ class PortalImporter {
       final hitFactor = result.time <= 0 ? 0.0 : result.totalScore / result.time;
       lines.add([
         escapedName,
+        shooter.division,
+        shooter.shooterClass,
+        shooter.category,
         result.stage,
         hitFactor,
         result.totalScore,
@@ -180,7 +187,7 @@ class PortalImporter {
 
   String buildEssStageCsvFromDetails(List<PortalShooterDetail> details) {
     final lines = <String>[
-      'shooterNumber,shooterName,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
+      'shooterNumber,shooterName,division,shooterClass,category,stageNumber,rawHitFactor,points,a,c,d,misses,noShoots,procedureErrors,time',
     ];
 
     for (final detail in details) {
@@ -192,6 +199,9 @@ class PortalImporter {
         lines.add([
           detail.shooterNumber,
           escapedName,
+          detail.division,
+          detail.shooterClass,
+          detail.category,
           row.stage,
           row.factor,
           row.points,
@@ -692,7 +702,15 @@ class PortalImporter {
     }
 
     _debugLog('[ESS_DEBUG] writing shooter $shooterName to repository with ${detail.stageRows.length} rows');
-    await repository.addShooter(Shooter(name: shooterName, scaleFactor: scaleFactor));
+    await repository.addShooter(
+      Shooter(
+        name: shooterName,
+        scaleFactor: scaleFactor,
+        division: detail.division,
+        shooterClass: detail.shooterClass,
+        category: detail.category,
+      ),
+    );
     shootersAdded++;
 
     _debugLog('[ESS_DEBUG] repository now has shooters=${repository.shooters.length} results=${repository.results.length} stages=${repository.stages.length}');

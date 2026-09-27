@@ -69,4 +69,32 @@ void main() {
     expect(resultMap['createdAtUtc'], isNotNull);
     expect(resultMap['updatedAtUtc'], isNotNull);
   });
+
+  test('migrate to v6 adds ESS verification metadata fields to shooters', () async {
+    SharedPreferences.setMockInitialValues({
+      'dataSchemaVersion': 5,
+      'shooters': jsonEncode([
+        {'name': 'Alice', 'scaleFactor': 1.0, 'classificationScore': 100.0},
+        {'name': 'Bob', 'scaleFactor': 0.9, 'classificationScore': 98.0, 'division': 'Classic', 'shooterClass': 'U', 'category': 'Senior'},
+      ]),
+    });
+
+    final prefs = await SharedPreferences.getInstance();
+    final svc = PersistenceService(prefs: prefs);
+
+    await svc.ensureSchemaUpToDate();
+
+    final shootersRaw = prefs.getString('shooters');
+    expect(shootersRaw, isNotNull);
+    final shooters = jsonDecode(shootersRaw!) as List;
+    final alice = Map<String, dynamic>.from(shooters.first as Map);
+    final bob = Map<String, dynamic>.from(shooters.last as Map);
+
+    expect(alice['division'], isEmpty);
+    expect(alice['shooterClass'], isEmpty);
+    expect(alice['category'], isEmpty);
+    expect(bob['division'], 'Classic');
+    expect(bob['shooterClass'], 'U');
+    expect(bob['category'], 'Senior');
+  });
 }
